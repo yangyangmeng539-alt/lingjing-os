@@ -306,6 +306,42 @@ int module_has_broken_dependencies(void) {
     return 0;
 }
 
+const char* module_get_depends(const char* name) {
+    for (int i = 0; i < module_count; i++) {
+        if (str_equal_local(modules[i].name, name)) {
+            return modules[i].depends;
+        }
+    }
+
+    if (str_equal_local(name, "gui")) {
+        return "screen";
+    }
+
+    if (str_equal_local(name, "net")) {
+        return "timer";
+    }
+
+    if (str_equal_local(name, "ai")) {
+        return "core";
+    }
+
+    return "unknown";
+}
+
+int module_dependency_ok(const char* name) {
+    const char* depends = module_get_depends(name);
+
+    if (str_equal_local(depends, "none")) {
+        return 1;
+    }
+
+    if (str_equal_local(depends, "unknown")) {
+        return 0;
+    }
+
+    return module_exists(depends);
+}
+
 void module_break_dependency(const char* name) {
     for (int i = 0; i < module_count; i++) {
         if (str_equal_local(modules[i].name, name)) {

@@ -179,6 +179,58 @@ static void intent_policy(void) {
     screen_print(intent_locked ? "locked\n" : "unlocked\n");
 }
 
+static void intent_doctor(void) {
+    int deps_broken = module_has_broken_dependencies();
+
+    screen_print("Intent doctor:\n");
+
+    screen_print("  policy:       ok\n");
+
+    screen_print("  lock:         ");
+    screen_print(intent_locked ? "locked\n" : "unlocked\n");
+
+    screen_print("  dependencies: ");
+    screen_print(deps_broken ? "broken\n" : "ok\n");
+
+    screen_print("  current:      ");
+
+    if (current_intent_running == 0) {
+        screen_print("none\n");
+    } else {
+        screen_print(current_intent);
+        screen_print("\n");
+    }
+
+    if (intent_locked) {
+        screen_print("  result:       blocked\n");
+        screen_print("  reason:       intent system locked\n");
+        return;
+    }
+
+    if (deps_broken) {
+        screen_print("  result:       blocked\n");
+        screen_print("  reason:       module dependency broken\n");
+        return;
+    }
+
+    screen_print("  result:       ready\n");
+}
+
+static int intent_can_execute(void) {
+    if (intent_locked) {
+        screen_print("intent blocked: intent system locked.\n");
+        return 0;
+    }
+
+    if (module_has_broken_dependencies()) {
+        screen_print("intent blocked: module dependency broken.\n");
+        screen_print("run modulecheck first.\n");
+        return 0;
+    }
+
+    return 1;
+}
+
 static void intent_lock(void) {
     intent_locked = 1;
     screen_print("intent system locked.\n");
@@ -374,6 +426,7 @@ void intent_list(void) {
     screen_print("  clear-history\n");
     screen_print("  audit\n");
     screen_print("  policy\n");
+    screen_print("  doctor\n");
     screen_print("  lock\n");
     screen_print("  unlock\n");
     screen_print("  reset\n");
@@ -468,20 +521,32 @@ static void intent_plan(const intent_entry_t* intent) {
         screen_print("\n");
     }
 
+    screen_print("  dependencies:\n");
+
+    for (int i = 0; i < intent->require_count; i++) {
+        const char* module_name = intent->requires[i].module;
+        const char* depends = module_get_depends(module_name);
+
+        screen_print("    ");
+        screen_print(module_name);
+        screen_print(" -> ");
+        screen_print(depends);
+        screen_print(" : ");
+
+        if (module_dependency_ok(module_name)) {
+            screen_print("ok\n");
+        } else {
+            screen_print("broken\n");
+        }
+    }
+
     screen_print("  lifecycle:\n");
     screen_print("    load on start\n");
     screen_print("    unload on stop\n");
 }
 
 static void intent_run_entry(const intent_entry_t* intent) {
-    if (intent_locked) {
-        screen_print("intent system locked.\n");
-        return;
-    }
-
-    if (module_has_broken_dependencies()) {
-        screen_print("intent blocked: module dependency broken.\n");
-        screen_print("run modulecheck first.\n");
+    if (!intent_can_execute()) {
         return;
     }
 
@@ -589,10 +654,10 @@ static void intent_stop_current(void) {
 }
 
 static void intent_restart_current(void) {
-    if (intent_locked) {
-        screen_print("intent system locked.\n");
+    if (!intent_can_execute()) {
         return;
     }
+
     if (current_intent_running == 0) {
         screen_print("no intent running.\n");
         return;
@@ -619,11 +684,10 @@ static void intent_restart_current(void) {
 }
 
 static void intent_switch_to(const char* name) {
+    if (!intent_can_execute()) {
+        return;
+    }
 
-        if (intent_locked) {
-            screen_print("intent system locked.\n");
-            return;
-        }
     const intent_entry_t* target = intent_find(name);
 
     if (target == 0) {
@@ -705,6 +769,10 @@ void intent_run(const char* name) {
     }
     if (str_equal_local(name, "policy")) {
         intent_policy();
+        return;
+    }
+    if (str_equal_local(name, "doctor")) {
+        intent_doctor();
         return;
     }
     if (str_equal_local(name, "lock")) {
