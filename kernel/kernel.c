@@ -7,6 +7,7 @@
 #include "memory.h"
 #include "timer.h"
 #include "module.h"
+#include "scheduler.h"
 
 unsigned int kernel_stack_marker = 0;
 
@@ -37,6 +38,10 @@ void kernel_main(void) {
     timer_init();
     module_register("timer", "loaded", "driver", "time", "idt");
     screen_print("Timer IRQ initialized.\n");
+
+    scheduler_init();
+    module_register("scheduler", "loaded", "kernel", "task", "timer");
+    screen_print("Scheduler initialized.\n");
 
     memory_init();
     module_register("memory", "loaded", "kernel", "memory", "core");

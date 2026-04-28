@@ -320,16 +320,81 @@ static void shell_handle_dashboard(void) {
         screen_print("ok\n");
     }
 
-    screen_print("\n");
+    screen_print("task health:    ");
+    if (scheduler_has_broken_tasks()) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
+
+    screen_print("tasks:          ");
+    print_uint((unsigned int)scheduler_task_count());
+    screen_print("\n\n");
 
     intent_status();
+    screen_print("\n");
+
+    scheduler_list_tasks();
     screen_print("\n");
 
     module_list();
 }
 
+static void shell_handle_doctor(void) {
+    int module_broken = module_has_broken_dependencies();
+    int task_broken = scheduler_has_broken_tasks();
+
+    screen_print("System doctor:\n");
+
+    screen_print("  module dependencies: ");
+    if (module_broken) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
+
+    screen_print("  task health:         ");
+    if (task_broken) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
+
+    screen_print("  intent system:       ");
+    if (module_broken || task_broken) {
+        screen_print("blocked\n");
+    } else {
+        screen_print("ready\n");
+    }
+
+    screen_print("  result:              ");
+    if (module_broken || task_broken) {
+        screen_print("blocked\n");
+    } else {
+        screen_print("ready\n");
+    }
+}
+
+static void shell_handle_tasks(void) {
+    scheduler_list_tasks();
+}
+
+static void shell_handle_taskcheck(void) {
+    scheduler_check_tasks();
+}
+
+static void shell_handle_taskinfo(const char* cmd) {
+    const char* id_text = cmd + 9;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_task_info(id);
+}
+
 static void shell_handle_status(void) {
-    screen_print("Lingjing OS | uptime ");
+    int module_broken = module_has_broken_dependencies();
+    int task_broken = scheduler_has_broken_tasks();
+
+    screen_print("LJ | up ");
     print_uint(timer_get_seconds());
     screen_print("s | intent ");
 
@@ -339,16 +404,17 @@ static void shell_handle_status(void) {
         screen_print("none");
     }
 
-    screen_print(" | modules ");
+    screen_print(" | mod ");
     print_uint((unsigned int)module_count_loaded());
 
-    screen_print(" | deps ");
+    screen_print(" | task ");
+    print_uint((unsigned int)scheduler_task_count());
 
-    if (module_has_broken_dependencies()) {
-        screen_print("broken");
-    } else {
-        screen_print("ok");
-    }
+    screen_print(" | deps ");
+    screen_print(module_broken ? "bad" : "ok");
+
+    screen_print(" | doc ");
+    screen_print((module_broken || task_broken) ? "bad" : "ok");
 
     screen_print(" | next ");
     print_hex32(memory_get_placement_address());
@@ -556,7 +622,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskcheck, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -569,6 +635,14 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_dashboard();
     } else if (str_equal(cmd, "status")) {
         shell_handle_status();
+    } else if (str_equal(cmd, "doctor")) {
+        shell_handle_doctor();
+    } else if (str_equal(cmd, "tasks")) {
+        shell_handle_tasks();
+    } else if (str_starts_with(cmd, "taskinfo ")) {
+        shell_handle_taskinfo(cmd);
+    } else if (str_equal(cmd, "taskcheck")) {
+        shell_handle_taskcheck();
     } else if (str_equal(cmd, "modules")) {
         module_list();
     } else if (str_starts_with(cmd, "moduleinfo ")) {
