@@ -20,6 +20,7 @@ void kernel_main(void) {
 
     module_init();
     module_register("core", "loaded", "kernel", "system", "none");
+    module_register("screen", "loaded", "driver", "display", "core");
 
     gdt_init();
     module_register("gdt", "loaded", "arch", "system", "core");

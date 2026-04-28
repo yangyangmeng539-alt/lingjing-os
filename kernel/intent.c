@@ -479,6 +479,12 @@ static void intent_run_entry(const intent_entry_t* intent) {
         return;
     }
 
+    if (module_has_broken_dependencies()) {
+        screen_print("intent blocked: module dependency broken.\n");
+        screen_print("run modulecheck first.\n");
+        return;
+    }
+
     if (!intent_is_allowed(intent->name)) {
         screen_print("intent denied: ");
         screen_print(intent->name);

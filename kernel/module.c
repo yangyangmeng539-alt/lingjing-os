@@ -3,6 +3,26 @@
 
 #define MAX_MODULES 16
 
+static void module_print_uint(unsigned int value) {
+    char buffer[16];
+    int index = 0;
+
+    if (value == 0) {
+        screen_put_char('0');
+        return;
+    }
+
+    while (value > 0 && index < 16) {
+        buffer[index] = (char)('0' + (value % 10));
+        value /= 10;
+        index++;
+    }
+
+    for (int i = index - 1; i >= 0; i--) {
+        screen_put_char(buffer[i]);
+    }
+}
+
 typedef struct module_entry {
     const char* name;
     const char* status;
@@ -228,4 +248,120 @@ void module_tree(void) {
             module_tree_print_children(modules[i].depends, 2);
         }
     }
+}
+
+void module_check(void) {
+    int ok_count = 0;
+    int broken_count = 0;
+
+    screen_print("Module dependency check:\n");
+
+    for (int i = 0; i < module_count; i++) {
+        screen_print("  ");
+        screen_print(modules[i].name);
+        screen_print("    ");
+
+        if (str_equal_local(modules[i].depends, "none")) {
+            screen_print("ok");
+            ok_count++;
+        } else if (module_exists(modules[i].depends)) {
+            screen_print("ok depends ");
+            screen_print(modules[i].depends);
+            ok_count++;
+        } else {
+            screen_print("broken depends ");
+            screen_print(modules[i].depends);
+            broken_count++;
+        }
+
+        screen_print("\n");
+    }
+
+    screen_print("summary:\n");
+
+    screen_print("  total:  ");
+    module_print_uint((unsigned int)module_count);
+    screen_print("\n");
+
+    screen_print("  ok:     ");
+    module_print_uint((unsigned int)ok_count);
+    screen_print("\n");
+
+    screen_print("  broken: ");
+    module_print_uint((unsigned int)broken_count);
+    screen_print("\n");
+}
+
+int module_has_broken_dependencies(void) {
+    for (int i = 0; i < module_count; i++) {
+        if (str_equal_local(modules[i].depends, "none")) {
+            continue;
+        }
+
+        if (!module_exists(modules[i].depends)) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void module_break_dependency(const char* name) {
+    for (int i = 0; i < module_count; i++) {
+        if (str_equal_local(modules[i].name, name)) {
+            modules[i].depends = "missing";
+            screen_print("module dependency broken: ");
+            screen_print(name);
+            screen_print("\n");
+            return;
+        }
+    }
+
+    screen_print("module not found: ");
+    screen_print(name);
+    screen_print("\n");
+}
+
+void module_fix_dependency(const char* name) {
+    for (int i = 0; i < module_count; i++) {
+        if (str_equal_local(modules[i].name, name)) {
+            if (str_equal_local(name, "core")) {
+                modules[i].depends = "none";
+            } else if (str_equal_local(name, "screen")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "gdt")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "idt")) {
+                modules[i].depends = "gdt";
+            } else if (str_equal_local(name, "keyboard")) {
+                modules[i].depends = "idt";
+            } else if (str_equal_local(name, "timer")) {
+                modules[i].depends = "idt";
+            } else if (str_equal_local(name, "memory")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "shell")) {
+                modules[i].depends = "keyboard";
+            } else if (str_equal_local(name, "gui")) {
+                modules[i].depends = "screen";
+            } else if (str_equal_local(name, "net")) {
+                modules[i].depends = "timer";
+            } else if (str_equal_local(name, "ai")) {
+                modules[i].depends = "core";
+            } else {
+                screen_print("no default dependency for module: ");
+                screen_print(name);
+                screen_print("\n");
+                return;
+            }
+
+            screen_print("module dependency fixed: ");
+            screen_print(name);
+            screen_print("\n");
+            return;
+        }
+    }
+
+    screen_print("module not found: ");
+    screen_print(name);
+    screen_print("\n");
 }

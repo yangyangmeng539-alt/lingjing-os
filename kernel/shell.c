@@ -230,8 +230,34 @@ static void shell_handle_moduledeps(const char* cmd) {
     module_deps(name);
 }
 
+static void shell_handle_modulebreak(const char* cmd) {
+    const char* name = cmd + 12;
+
+    if (name[0] == '\0') {
+        screen_print("usage: modulebreak <name>\n");
+        return;
+    }
+
+    module_break_dependency(name);
+}
+
+static void shell_handle_modulefix(const char* cmd) {
+    const char* name = cmd + 10;
+
+    if (name[0] == '\0') {
+        screen_print("usage: modulefix <name>\n");
+        return;
+    }
+
+    module_fix_dependency(name);
+}
+
 static void shell_handle_moduletree(void) {
     module_tree();
+}
+
+static void shell_handle_modulecheck(void) {
+    module_check();
 }
 
 static void shell_handle_sysinfo(void) {
@@ -283,9 +309,18 @@ static void shell_handle_dashboard(void) {
 
     screen_print("next alloc:     ");
     print_hex32(memory_get_placement_address());
-    screen_print("\n\n");
+    screen_print("\n");
 
-    screen_print("intent layer:   enabled\n\n");
+    screen_print("intent layer:   enabled\n");
+
+    screen_print("dependency:     ");
+    if (module_has_broken_dependencies()) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
+
+    screen_print("\n");
 
     intent_status();
     screen_print("\n");
@@ -306,6 +341,14 @@ static void shell_handle_status(void) {
 
     screen_print(" | modules ");
     print_uint((unsigned int)module_count_loaded());
+
+    screen_print(" | deps ");
+
+    if (module_has_broken_dependencies()) {
+        screen_print("broken");
+    } else {
+        screen_print("ok");
+    }
 
     screen_print(" | next ");
     print_hex32(memory_get_placement_address());
@@ -513,7 +556,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, modules, moduleinfo, moduledeps, moduletree, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -534,6 +577,12 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_moduledeps(cmd);
     } else if (str_equal(cmd, "moduletree")) {
         shell_handle_moduletree();
+    } else if (str_equal(cmd, "modulecheck")) {
+        shell_handle_modulecheck();
+    } else if (str_starts_with(cmd, "modulebreak ")) {
+        shell_handle_modulebreak(cmd);
+    } else if (str_starts_with(cmd, "modulefix ")) {
+        shell_handle_modulefix(cmd);
     } else if (str_starts_with(cmd, "load ")) {
         shell_handle_load(cmd);
     } else if (str_starts_with(cmd, "unload ")) {
