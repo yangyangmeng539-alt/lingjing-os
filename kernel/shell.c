@@ -403,12 +403,20 @@ static void shell_handle_taskcheck(void) {
     scheduler_check_tasks();
 }
 
+static void shell_handle_taskdoctor(void) {
+    scheduler_doctor();
+}
+
 static void shell_handle_schedinfo(void) {
     scheduler_info();
 }
 
 static void shell_handle_schedlog(void) {
     scheduler_log();
+}
+
+static void shell_handle_runqueue(void) {
+    scheduler_runqueue();
 }
 
 static void shell_handle_schedclear(void) {
@@ -428,6 +436,33 @@ static void shell_handle_taskinfo(const char* cmd) {
     unsigned int id = parse_uint(id_text);
 
     scheduler_task_info(id);
+}
+
+static const char* shell_skip_token(const char* text) {
+    int i = 0;
+
+    while (text[i] != '\0' && text[i] != ' ') {
+        i++;
+    }
+
+    while (text[i] == ' ') {
+        i++;
+    }
+
+    return text + i;
+}
+
+static void shell_handle_taskstate(const char* cmd) {
+    const char* id_text = cmd + 10;
+    unsigned int id = parse_uint(id_text);
+    const char* state = shell_skip_token(id_text);
+
+    if (state[0] == '\0') {
+        screen_print("usage: taskstate <id> <state>\n");
+        return;
+    }
+
+    scheduler_set_task_state(id, state);
 }
 
 static void shell_handle_status(void) {
@@ -667,7 +702,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskcheck, schedinfo, schedlog, schedclear, schedreset, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -686,14 +721,19 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_tasks();
     } else if (str_starts_with(cmd, "taskinfo ")) {
         shell_handle_taskinfo(cmd);
+    } else if (str_starts_with(cmd, "taskstate ")) {
+        shell_handle_taskstate(cmd);
     } else if (str_equal(cmd, "taskcheck")) {
         shell_handle_taskcheck();
+    } else if (str_equal(cmd, "taskdoctor")) {
+        shell_handle_taskdoctor();
     } else if (str_equal(cmd, "schedinfo")) {
         shell_handle_schedinfo();
     } else if (str_equal(cmd, "schedlog")) {
         shell_handle_schedlog();
+    } else if (str_equal(cmd, "runqueue")) {
+        shell_handle_runqueue();
     } else if (str_equal(cmd, "schedclear")) {
-        shell_handle_schedclear();
     } else if (str_equal(cmd, "schedreset")) {
         shell_handle_schedreset();
     } else if (str_equal(cmd, "yield")) {

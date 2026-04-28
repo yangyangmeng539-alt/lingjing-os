@@ -56,6 +56,124 @@ static void scheduler_add_task(unsigned int id, const char* name, const char* st
     task_count++;
 }
 
+static int scheduler_task_is_runnable(int index) {
+    if (index < 0 || index >= task_count) {
+        return 0;
+    }
+
+    if (tasks[index].status == 0) {
+        return 0;
+    }
+
+    if (index == 0) {
+        return 1;
+    }
+
+    if (tasks[index].status[0] == 'b' &&
+        tasks[index].status[1] == 'l' &&
+        tasks[index].status[2] == 'o' &&
+        tasks[index].status[3] == 'c' &&
+        tasks[index].status[4] == 'k' &&
+        tasks[index].status[5] == 'e' &&
+        tasks[index].status[6] == 'd' &&
+        tasks[index].status[7] == '\0') {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int scheduler_state_is_valid(const char* state) {
+    if (state == 0) {
+        return 0;
+    }
+
+    if (state[0] == 'r' &&
+        state[1] == 'e' &&
+        state[2] == 'a' &&
+        state[3] == 'd' &&
+        state[4] == 'y' &&
+        state[5] == '\0') {
+        return 1;
+    }
+
+    if (state[0] == 'r' &&
+        state[1] == 'u' &&
+        state[2] == 'n' &&
+        state[3] == 'n' &&
+        state[4] == 'i' &&
+        state[5] == 'n' &&
+        state[6] == 'g' &&
+        state[7] == '\0') {
+        return 1;
+    }
+
+    if (state[0] == 'b' &&
+        state[1] == 'l' &&
+        state[2] == 'o' &&
+        state[3] == 'c' &&
+        state[4] == 'k' &&
+        state[5] == 'e' &&
+        state[6] == 'd' &&
+        state[7] == '\0') {
+        return 1;
+    }
+
+    return 0;
+}
+
+static int scheduler_state_is_blocked(const char* state) {
+    if (state == 0) {
+        return 0;
+    }
+
+    return state[0] == 'b' &&
+           state[1] == 'l' &&
+           state[2] == 'o' &&
+           state[3] == 'c' &&
+           state[4] == 'k' &&
+           state[5] == 'e' &&
+           state[6] == 'd' &&
+           state[7] == '\0';
+}
+
+static void scheduler_switch_to_next_runnable(void) {
+    if (task_count <= 0) {
+        active_task_index = 0;
+        return;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        active_task_index++;
+
+        if (active_task_index >= task_count) {
+            active_task_index = 0;
+        }
+
+        if (scheduler_task_is_runnable(active_task_index)) {
+            for (int j = 0; j < task_count; j++) {
+                if (j == active_task_index) {
+                    tasks[j].status = "running";
+                } else if (scheduler_task_is_runnable(j)) {
+                    tasks[j].status = "ready";
+                }
+            }
+
+            return;
+        }
+    }
+
+    active_task_index = 0;
+
+    for (int j = 0; j < task_count; j++) {
+        if (j == 0) {
+            tasks[j].status = "running";
+        } else if (!scheduler_state_is_blocked(tasks[j].status)) {
+            tasks[j].status = "ready";
+        }
+    }
+}
+
 static void scheduler_log_switch(const char* from, const char* to) {
     if (sched_log_count < SCHED_LOG_MAX) {
         sched_log_from[sched_log_count] = from;
@@ -100,14 +218,41 @@ void scheduler_tick(void) {
 }
 
 void scheduler_yield(void) {
+    int old_index = active_task_index;
     const char* from = scheduler_get_active_task();
 
     scheduler_yield_count++;
 
     if (task_count > 0) {
-        active_task_index++;
-        if (active_task_index >= task_count) {
-            active_task_index = 0;
+        int found = 0;
+
+        for (int i = 0; i < task_count; i++) {
+            active_task_index++;
+
+            if (active_task_index >= task_count) {
+                active_task_index = 0;
+            }
+
+            if (scheduler_task_is_runnable(active_task_index)) {
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found) {
+            active_task_index = old_index;
+        }
+    }
+
+    if (old_index >= 0 && old_index < task_count) {
+        if (scheduler_task_is_runnable(old_index)) {
+            tasks[old_index].status = "ready";
+        }
+    }
+
+    if (active_task_index >= 0 && active_task_index < task_count) {
+        if (scheduler_task_is_runnable(active_task_index)) {
+            tasks[active_task_index].status = "running";
         }
     }
 
@@ -188,6 +333,94 @@ void scheduler_log(void) {
     }
 }
 
+void scheduler_runqueue(void) {
+    screen_print("Run queue:\n");
+
+    for (int i = 0; i < task_count; i++) {
+        screen_print("  [");
+        scheduler_print_uint((unsigned int)i);
+        screen_print("] ");
+        screen_print(tasks[i].name);
+
+        if (i == active_task_index) {
+            screen_print("  <active>");
+        }
+
+        screen_print("\n");
+    }
+
+    screen_print("active index: ");
+    scheduler_print_uint((unsigned int)active_task_index);
+    screen_print("\n");
+
+    screen_print("active task: ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
+}
+
+void scheduler_set_task_state(unsigned int id, const char* state) {
+    if (!scheduler_state_is_valid(state)) {
+        screen_print("invalid task state: ");
+        screen_print(state);
+        screen_print("\n");
+        screen_print("allowed: ready, running, blocked\n");
+        return;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].id == id) {
+            int was_active = (i == active_task_index);
+
+            tasks[i].status = state;
+
+            if (scheduler_state_is_blocked(state) && was_active) {
+                scheduler_switch_to_next_runnable();
+            } else if (state[0] == 'r' &&
+                state[1] == 'u' &&
+                state[2] == 'n' &&
+                state[3] == 'n' &&
+                state[4] == 'i' &&
+                state[5] == 'n' &&
+                state[6] == 'g' &&
+                state[7] == '\0') {
+                active_task_index = i;
+
+                for (int j = 0; j < task_count; j++) {
+                    if (j != i && scheduler_task_is_runnable(j)) {
+                        tasks[j].status = "ready";
+                    }
+                }
+            }
+
+            screen_print("task state changed:\n");
+
+            screen_print("  id:     ");
+            scheduler_print_uint(id);
+            screen_print("\n");
+
+            screen_print("  name:   ");
+            screen_print(tasks[i].name);
+            screen_print("\n");
+
+            screen_print("  state:  ");
+            screen_print(tasks[i].status);
+            screen_print("\n");
+
+            if (scheduler_state_is_blocked(state) && was_active) {
+                screen_print("active switched to: ");
+                screen_print(scheduler_get_active_task());
+                screen_print("\n");
+            }
+
+            return;
+        }
+    }
+
+    screen_print("task not found: ");
+    scheduler_print_uint(id);
+    screen_print("\n");
+}
+
 void scheduler_clear_log(void) {
     for (int i = 0; i < SCHED_LOG_MAX; i++) {
         sched_log_from[i] = 0;
@@ -212,6 +445,12 @@ void scheduler_reset(void) {
 
     for (int i = 0; i < task_count; i++) {
         tasks[i].runtime_ticks = 0;
+
+        if (i == active_task_index) {
+            tasks[i].status = "running";
+        } else {
+            tasks[i].status = "ready";
+        }
     }
 
     screen_print("Scheduler reset.\n");
@@ -273,7 +512,9 @@ void scheduler_task_info(unsigned int id) {
 }
 
 void scheduler_check_tasks(void) {
-    int active_count = 0;
+    int running_count = 0;
+    int ready_count = 0;
+    int blocked_count = 0;
     int broken_count = 0;
 
     screen_print("Task check:\n");
@@ -286,29 +527,121 @@ void scheduler_check_tasks(void) {
         if (tasks[i].status == 0 || tasks[i].name == 0 || tasks[i].type == 0) {
             screen_print("broken\n");
             broken_count++;
+        } else if (scheduler_state_is_blocked(tasks[i].status)) {
+            screen_print("blocked\n");
+            blocked_count++;
+        } else if (tasks[i].status[0] == 'r' &&
+                   tasks[i].status[1] == 'u' &&
+                   tasks[i].status[2] == 'n' &&
+                   tasks[i].status[3] == 'n' &&
+                   tasks[i].status[4] == 'i' &&
+                   tasks[i].status[5] == 'n' &&
+                   tasks[i].status[6] == 'g' &&
+                   tasks[i].status[7] == '\0') {
+            screen_print("running\n");
+            running_count++;
+        } else if (tasks[i].status[0] == 'r' &&
+                   tasks[i].status[1] == 'e' &&
+                   tasks[i].status[2] == 'a' &&
+                   tasks[i].status[3] == 'd' &&
+                   tasks[i].status[4] == 'y' &&
+                   tasks[i].status[5] == '\0') {
+            screen_print("ready\n");
+            ready_count++;
         } else {
-            screen_print("ok\n");
-            active_count++;
+            screen_print("broken\n");
+            broken_count++;
         }
     }
 
     screen_print("summary:\n");
 
-    screen_print("  total:  ");
+    screen_print("  total:   ");
     scheduler_print_uint((unsigned int)task_count);
     screen_print("\n");
 
-    screen_print("  active: ");
-    scheduler_print_uint((unsigned int)active_count);
+    screen_print("  running: ");
+    scheduler_print_uint((unsigned int)running_count);
     screen_print("\n");
 
-    screen_print("  broken: ");
+    screen_print("  ready:   ");
+    scheduler_print_uint((unsigned int)ready_count);
+    screen_print("\n");
+
+    screen_print("  blocked: ");
+    scheduler_print_uint((unsigned int)blocked_count);
+    screen_print("\n");
+
+    screen_print("  broken:  ");
     scheduler_print_uint((unsigned int)broken_count);
     screen_print("\n");
 
-    screen_print("  ticks:  ");
+    screen_print("  ticks:   ");
     scheduler_print_uint(scheduler_ticks);
     screen_print("\n");
+}
+
+void scheduler_doctor(void) {
+    int running_count = 0;
+    int ready_count = 0;
+    int blocked_count = 0;
+    int broken_count = 0;
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].status == 0 || tasks[i].name == 0 || tasks[i].type == 0) {
+            broken_count++;
+        } else if (scheduler_state_is_blocked(tasks[i].status)) {
+            blocked_count++;
+        } else if (tasks[i].status[0] == 'r' &&
+                   tasks[i].status[1] == 'u' &&
+                   tasks[i].status[2] == 'n' &&
+                   tasks[i].status[3] == 'n' &&
+                   tasks[i].status[4] == 'i' &&
+                   tasks[i].status[5] == 'n' &&
+                   tasks[i].status[6] == 'g' &&
+                   tasks[i].status[7] == '\0') {
+            running_count++;
+        } else if (tasks[i].status[0] == 'r' &&
+                   tasks[i].status[1] == 'e' &&
+                   tasks[i].status[2] == 'a' &&
+                   tasks[i].status[3] == 'd' &&
+                   tasks[i].status[4] == 'y' &&
+                   tasks[i].status[5] == '\0') {
+            ready_count++;
+        } else {
+            broken_count++;
+        }
+    }
+
+    screen_print("Task doctor:\n");
+
+    screen_print("  total:   ");
+    scheduler_print_uint((unsigned int)task_count);
+    screen_print("\n");
+
+    screen_print("  running: ");
+    scheduler_print_uint((unsigned int)running_count);
+    screen_print("\n");
+
+    screen_print("  ready:   ");
+    scheduler_print_uint((unsigned int)ready_count);
+    screen_print("\n");
+
+    screen_print("  blocked: ");
+    scheduler_print_uint((unsigned int)blocked_count);
+    screen_print("\n");
+
+    screen_print("  broken:  ");
+    scheduler_print_uint((unsigned int)broken_count);
+    screen_print("\n");
+
+    screen_print("  result:  ");
+
+    if (broken_count > 0) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
 }
 
 int scheduler_has_broken_tasks(void) {
