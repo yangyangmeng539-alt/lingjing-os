@@ -10,8 +10,8 @@ static volatile unsigned int timer_ticks = 0;
 static void timer_interrupt_handler(registers_t* regs) {
     (void)regs;
     timer_ticks++;
+    scheduler_tick();
 }
-
 void timer_init(void) {
     unsigned int divisor = PIT_FREQUENCY / TIMER_HZ;
 

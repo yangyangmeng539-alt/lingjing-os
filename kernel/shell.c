@@ -307,6 +307,18 @@ static void shell_handle_dashboard(void) {
     print_uint(timer_get_seconds());
     screen_print("\n");
 
+    screen_print("scheduler ticks:");
+    print_uint(scheduler_get_ticks());
+    screen_print("\n");
+
+    screen_print("scheduler mode: ");
+    screen_print(scheduler_get_mode());
+    screen_print("\n");
+
+    screen_print("active task:    ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
+
     screen_print("next alloc:     ");
     print_hex32(memory_get_placement_address());
     screen_print("\n");
@@ -383,6 +395,10 @@ static void shell_handle_taskcheck(void) {
     scheduler_check_tasks();
 }
 
+static void shell_handle_schedinfo(void) {
+    scheduler_info();
+}
+
 static void shell_handle_taskinfo(const char* cmd) {
     const char* id_text = cmd + 9;
     unsigned int id = parse_uint(id_text);
@@ -396,7 +412,7 @@ static void shell_handle_status(void) {
 
     screen_print("LJ | up ");
     print_uint(timer_get_seconds());
-    screen_print("s | intent ");
+    screen_print("s | in ");
 
     if (intent_is_running()) {
         screen_print(intent_get_current_name());
@@ -404,20 +420,22 @@ static void shell_handle_status(void) {
         screen_print("none");
     }
 
-    screen_print(" | mod ");
+    screen_print(" | m");
     print_uint((unsigned int)module_count_loaded());
 
-    screen_print(" | task ");
+    screen_print(" t");
     print_uint((unsigned int)scheduler_task_count());
+
+    screen_print(" | s");
+    print_uint(scheduler_get_ticks());
+
+    screen_print(" | coop");
 
     screen_print(" | deps ");
     screen_print(module_broken ? "bad" : "ok");
 
     screen_print(" | doc ");
     screen_print((module_broken || task_broken) ? "bad" : "ok");
-
-    screen_print(" | next ");
-    print_hex32(memory_get_placement_address());
 
     screen_print("\n");
 }
@@ -622,7 +640,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskcheck, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskcheck, schedinfo, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -643,6 +661,8 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_taskinfo(cmd);
     } else if (str_equal(cmd, "taskcheck")) {
         shell_handle_taskcheck();
+    } else if (str_equal(cmd, "schedinfo")) {
+        shell_handle_schedinfo();
     } else if (str_equal(cmd, "modules")) {
         module_list();
     } else if (str_starts_with(cmd, "moduleinfo ")) {

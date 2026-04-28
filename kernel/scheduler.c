@@ -8,10 +8,12 @@ typedef struct task_entry {
     const char* name;
     const char* status;
     const char* type;
+    unsigned int runtime_ticks;
 } task_entry_t;
 
 static task_entry_t tasks[MAX_TASKS];
 static int task_count = 0;
+static unsigned int scheduler_ticks = 0;
 
 static void scheduler_print_uint(unsigned int value) {
     char buffer[16];
@@ -42,15 +44,57 @@ static void scheduler_add_task(unsigned int id, const char* name, const char* st
     tasks[task_count].name = name;
     tasks[task_count].status = status;
     tasks[task_count].type = type;
+    tasks[task_count].runtime_ticks = 0;
     task_count++;
 }
 
 void scheduler_init(void) {
     task_count = 0;
+    scheduler_ticks = 0;
 
     scheduler_add_task(0, "idle", "running", "kernel");
     scheduler_add_task(1, "shell", "ready", "system");
     scheduler_add_task(2, "intent", "ready", "system");
+}
+
+void scheduler_tick(void) {
+    scheduler_ticks++;
+
+    if (task_count > 0) {
+        tasks[0].runtime_ticks++;
+    }
+}
+
+unsigned int scheduler_get_ticks(void) {
+    return scheduler_ticks;
+}
+
+const char* scheduler_get_mode(void) {
+    return "cooperative";
+}
+
+const char* scheduler_get_active_task(void) {
+    return "idle";
+}
+
+void scheduler_info(void) {
+    screen_print("Scheduler:\n");
+
+    screen_print("  ticks:  ");
+    scheduler_print_uint(scheduler_ticks);
+    screen_print("\n");
+
+    screen_print("  tasks:  ");
+    scheduler_print_uint((unsigned int)task_count);
+    screen_print("\n");
+
+    screen_print("  mode:   ");
+    screen_print(scheduler_get_mode());
+    screen_print(" prototype\n");
+
+    screen_print("  active: ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
 }
 
 void scheduler_list_tasks(void) {
@@ -65,6 +109,8 @@ void scheduler_list_tasks(void) {
         screen_print(tasks[i].status);
         screen_print("    ");
         screen_print(tasks[i].type);
+        screen_print("    ticks ");
+        scheduler_print_uint(tasks[i].runtime_ticks);
         screen_print("\n");
     }
 }
@@ -90,6 +136,10 @@ void scheduler_task_info(unsigned int id) {
             screen_print(tasks[i].type);
             screen_print("\n");
 
+            screen_print("  ticks:  ");
+            scheduler_print_uint(tasks[i].runtime_ticks);
+            screen_print("\n");
+
             return;
         }
     }
@@ -97,10 +147,6 @@ void scheduler_task_info(unsigned int id) {
     screen_print("task not found: ");
     scheduler_print_uint(id);
     screen_print("\n");
-}
-
-int scheduler_task_count(void) {
-    return task_count;
 }
 
 void scheduler_check_tasks(void) {
@@ -136,6 +182,10 @@ void scheduler_check_tasks(void) {
     screen_print("  broken: ");
     scheduler_print_uint((unsigned int)broken_count);
     screen_print("\n");
+
+    screen_print("  ticks:  ");
+    scheduler_print_uint(scheduler_ticks);
+    screen_print("\n");
 }
 
 int scheduler_has_broken_tasks(void) {
@@ -146,4 +196,8 @@ int scheduler_has_broken_tasks(void) {
     }
 
     return 0;
+}
+
+int scheduler_task_count(void) {
+    return task_count;
 }
