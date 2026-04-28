@@ -126,6 +126,10 @@ unsigned int scheduler_get_ticks(void) {
     return scheduler_ticks;
 }
 
+unsigned int scheduler_get_yields(void) {
+    return scheduler_yield_count;
+}
+
 const char* scheduler_get_mode(void) {
     return "cooperative";
 }
@@ -192,6 +196,27 @@ void scheduler_clear_log(void) {
     sched_log_count = 0;
 
     screen_print("Scheduler log cleared.\n");
+}
+
+void scheduler_reset(void) {
+    scheduler_yield_count = 0;
+    active_task_index = 0;
+
+    for (int i = 0; i < SCHED_LOG_MAX; i++) {
+        sched_log_from[i] = 0;
+        sched_log_to[i] = 0;
+    }
+
+    sched_log_count = 0;
+
+    for (int i = 0; i < task_count; i++) {
+        tasks[i].runtime_ticks = 0;
+    }
+
+    screen_print("Scheduler reset.\n");
+    screen_print("active task: ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
 }
 
 void scheduler_list_tasks(void) {
