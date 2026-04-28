@@ -355,7 +355,6 @@ static void shell_handle_dashboard(void) {
 static void shell_handle_doctor(void) {
     int module_broken = module_has_broken_dependencies();
     int task_broken = scheduler_has_broken_tasks();
-    int scheduler_broken = task_broken;
 
     screen_print("System doctor:\n");
 
@@ -374,21 +373,28 @@ static void shell_handle_doctor(void) {
     }
 
     screen_print("  scheduler:           ");
-    if (scheduler_broken) {
+    if (task_broken) {
+        screen_print("broken\n");
+    } else {
+        screen_print("ok\n");
+    }
+
+    screen_print("  scheduler active:    ");
+    if (scheduler_has_broken_tasks()) {
         screen_print("broken\n");
     } else {
         screen_print("ok\n");
     }
 
     screen_print("  intent system:       ");
-    if (module_broken || task_broken || scheduler_broken) {
+    if (module_broken || task_broken) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
     }
 
     screen_print("  result:              ");
-    if (module_broken || task_broken || scheduler_broken) {
+    if (module_broken || task_broken) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
@@ -405,6 +411,14 @@ static void shell_handle_taskcheck(void) {
 
 static void shell_handle_taskdoctor(void) {
     scheduler_doctor();
+}
+
+static void shell_handle_schedvalidate(void) {
+    scheduler_validate();
+}
+
+static void shell_handle_schedfix(void) {
+    scheduler_fix();
 }
 
 static void shell_handle_schedinfo(void) {
@@ -702,7 +716,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -731,11 +745,16 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_schedinfo();
     } else if (str_equal(cmd, "schedlog")) {
         shell_handle_schedlog();
-    } else if (str_equal(cmd, "runqueue")) {
-        shell_handle_runqueue();
     } else if (str_equal(cmd, "schedclear")) {
+        shell_handle_schedclear();
     } else if (str_equal(cmd, "schedreset")) {
         shell_handle_schedreset();
+    } else if (str_equal(cmd, "schedvalidate")) {
+        shell_handle_schedvalidate();
+    } else if (str_equal(cmd, "schedfix")) {
+        shell_handle_schedfix();
+    } else if (str_equal(cmd, "runqueue")) {
+        shell_handle_runqueue();
     } else if (str_equal(cmd, "yield")) {
         shell_handle_yield();
     } else if (str_equal(cmd, "modules")) {

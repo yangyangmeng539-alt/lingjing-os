@@ -644,6 +644,61 @@ void scheduler_doctor(void) {
     }
 }
 
+void scheduler_validate(void) {
+    screen_print("Scheduler validation:\n");
+
+    screen_print("  active index: ");
+    scheduler_print_uint((unsigned int)active_task_index);
+    screen_print("\n");
+
+    screen_print("  active task:  ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
+
+    screen_print("  active state: ");
+
+    if (active_task_index < 0 || active_task_index >= task_count) {
+        screen_print("invalid\n");
+        screen_print("  result:       broken\n");
+        return;
+    }
+
+    screen_print(tasks[active_task_index].status);
+    screen_print("\n");
+
+    screen_print("  result:       ");
+
+    if (scheduler_task_is_runnable(active_task_index)) {
+        screen_print("ok\n");
+    } else {
+        screen_print("broken\n");
+    }
+}
+
+void scheduler_fix(void) {
+    screen_print("Scheduler fix:\n");
+
+    if (task_count <= 0) {
+        active_task_index = 0;
+        screen_print("  no tasks.\n");
+        return;
+    }
+
+    if (active_task_index < 0 || active_task_index >= task_count) {
+        active_task_index = 0;
+    }
+
+    if (!scheduler_task_is_runnable(active_task_index)) {
+        scheduler_switch_to_next_runnable();
+    }
+
+    screen_print("  active task: ");
+    screen_print(scheduler_get_active_task());
+    screen_print("\n");
+
+    screen_print("  result: ok\n");
+}
+
 int scheduler_has_broken_tasks(void) {
     for (int i = 0; i < task_count; i++) {
         if (tasks[i].status == 0 || tasks[i].name == 0 || tasks[i].type == 0) {
