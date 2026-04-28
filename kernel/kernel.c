@@ -8,6 +8,7 @@
 #include "timer.h"
 #include "module.h"
 #include "scheduler.h"
+#include "security.h"
 
 unsigned int kernel_stack_marker = 0;
 
@@ -42,6 +43,10 @@ void kernel_main(void) {
     scheduler_init();
     module_register("scheduler", "loaded", "kernel", "task", "timer");
     screen_print("Scheduler initialized.\n");
+
+    security_init();
+    module_register("security", "loaded", "kernel", "security", "core");
+    screen_print("Security initialized.\n");
 
     memory_init();
     module_register("memory", "loaded", "kernel", "memory", "core");

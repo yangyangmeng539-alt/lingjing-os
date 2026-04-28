@@ -9,6 +9,7 @@
 #include "module.h"
 #include "intent.h"
 #include "version.h"
+#include "security.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -352,9 +353,22 @@ static void shell_handle_dashboard(void) {
     module_list();
 }
 
+static void shell_handle_security(void) {
+    security_status();
+}
+
+static void shell_handle_securitylog(void) {
+    security_log();
+}
+
+static void shell_handle_securityclear(void) {
+    security_clear_log();
+}
+
 static void shell_handle_doctor(void) {
     int module_broken = module_has_broken_dependencies();
     int task_broken = scheduler_has_broken_tasks();
+    int security_ok = security_doctor_ok();
 
     screen_print("System doctor:\n");
 
@@ -386,15 +400,22 @@ static void shell_handle_doctor(void) {
         screen_print("ok\n");
     }
 
+    screen_print("  security:            ");
+    if (security_ok) {
+        screen_print("ok\n");
+    } else {
+        screen_print("broken\n");
+    }
+
     screen_print("  intent system:       ");
-    if (module_broken || task_broken) {
+    if (module_broken || task_broken || !security_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
     }
 
     screen_print("  result:              ");
-    if (module_broken || task_broken) {
+    if (module_broken || task_broken || !security_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
@@ -716,7 +737,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, security, securitylog, securityclear, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -731,6 +752,12 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_status();
     } else if (str_equal(cmd, "doctor")) {
         shell_handle_doctor();
+    } else if (str_equal(cmd, "security")) {
+        shell_handle_security();
+    } else if (str_equal(cmd, "securitylog")) {
+        shell_handle_securitylog();
+    } else if (str_equal(cmd, "securityclear")) {
+        shell_handle_securityclear();
     } else if (str_equal(cmd, "tasks")) {
         shell_handle_tasks();
     } else if (str_starts_with(cmd, "taskinfo ")) {

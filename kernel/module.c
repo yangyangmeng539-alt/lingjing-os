@@ -1,5 +1,6 @@
 #include "module.h"
 #include "screen.h"
+#include "security.h"
 
 #define MAX_MODULES 16
 
@@ -83,6 +84,13 @@ void module_register(const char* name, const char* status, const char* type, con
 }
 
 void module_load_mock(const char* name) {
+    if (!security_check_module_load(name)) {
+        screen_print("module load blocked by security: ");
+        screen_print(name);
+        screen_print("\n");
+        return;
+    }
+
     if (module_exists(name)) {
         screen_print("module already loaded: ");
         screen_print(name);
@@ -128,6 +136,13 @@ void module_unload_mock(const char* name) {
 
     if (found_index < 0) {
         screen_print("module not loaded: ");
+        screen_print(name);
+        screen_print("\n");
+        return;
+    }
+
+    if (!security_check_module_unload(name, modules[found_index].type)) {
+        screen_print("module unload blocked by security: ");
         screen_print(name);
         screen_print("\n");
         return;

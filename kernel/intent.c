@@ -1,6 +1,7 @@
 #include "intent.h"
 #include "screen.h"
 #include "module.h"
+#include "security.h"
 
 #define MAX_INTENT_MODULES 4
 
@@ -547,6 +548,13 @@ static void intent_plan(const intent_entry_t* intent) {
 
 static void intent_run_entry(const intent_entry_t* intent) {
     if (!intent_can_execute()) {
+        return;
+    }
+
+    if (!security_check_intent(intent->name)) {
+        screen_print("intent blocked by security: ");
+        screen_print(intent->name);
+        screen_print("\n");
         return;
     }
 
