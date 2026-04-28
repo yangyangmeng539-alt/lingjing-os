@@ -88,6 +88,7 @@ void scheduler_init(void) {
     scheduler_add_task(0, "idle", "running", "kernel");
     scheduler_add_task(1, "shell", "ready", "system");
     scheduler_add_task(2, "intent", "ready", "system");
+    scheduler_add_task(3, "timer", "ready", "kernel");
 }
 
 void scheduler_tick(void) {
