@@ -1,0 +1,26 @@
+# Build output
+build/
+iso/boot/kernel.bin
+
+# Object / binary files
+*.o
+*.bin
+*.iso
+*.elf
+*.img
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
