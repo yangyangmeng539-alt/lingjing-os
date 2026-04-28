@@ -13,7 +13,15 @@ typedef struct task_entry {
 
 static task_entry_t tasks[MAX_TASKS];
 static int task_count = 0;
+static int active_task_index = 0;
 static unsigned int scheduler_ticks = 0;
+static unsigned int scheduler_yield_count = 0;
+
+#define SCHED_LOG_MAX 8
+
+static const char* sched_log_from[SCHED_LOG_MAX];
+static const char* sched_log_to[SCHED_LOG_MAX];
+static int sched_log_count = 0;
 
 static void scheduler_print_uint(unsigned int value) {
     char buffer[16];
@@ -48,9 +56,34 @@ static void scheduler_add_task(unsigned int id, const char* name, const char* st
     task_count++;
 }
 
+static void scheduler_log_switch(const char* from, const char* to) {
+    if (sched_log_count < SCHED_LOG_MAX) {
+        sched_log_from[sched_log_count] = from;
+        sched_log_to[sched_log_count] = to;
+        sched_log_count++;
+        return;
+    }
+
+    for (int i = 1; i < SCHED_LOG_MAX; i++) {
+        sched_log_from[i - 1] = sched_log_from[i];
+        sched_log_to[i - 1] = sched_log_to[i];
+    }
+
+    sched_log_from[SCHED_LOG_MAX - 1] = from;
+    sched_log_to[SCHED_LOG_MAX - 1] = to;
+}
+
 void scheduler_init(void) {
     task_count = 0;
+    active_task_index = 0;
     scheduler_ticks = 0;
+    scheduler_yield_count = 0;
+    sched_log_count = 0;
+
+    for (int i = 0; i < SCHED_LOG_MAX; i++) {
+        sched_log_from[i] = 0;
+        sched_log_to[i] = 0;
+    }
 
     scheduler_add_task(0, "idle", "running", "kernel");
     scheduler_add_task(1, "shell", "ready", "system");
@@ -60,9 +93,33 @@ void scheduler_init(void) {
 void scheduler_tick(void) {
     scheduler_ticks++;
 
-    if (task_count > 0) {
-        tasks[0].runtime_ticks++;
+    if (task_count > 0 && active_task_index >= 0 && active_task_index < task_count) {
+        tasks[active_task_index].runtime_ticks++;
     }
+}
+
+void scheduler_yield(void) {
+    const char* from = scheduler_get_active_task();
+
+    scheduler_yield_count++;
+
+    if (task_count > 0) {
+        active_task_index++;
+        if (active_task_index >= task_count) {
+            active_task_index = 0;
+        }
+    }
+
+    const char* to = scheduler_get_active_task();
+
+    scheduler_log_switch(from, to);
+
+    screen_print("scheduler yield.\n");
+    screen_print("switch ");
+    screen_print(from);
+    screen_print(" -> ");
+    screen_print(to);
+    screen_print("\n");
 }
 
 unsigned int scheduler_get_ticks(void) {
@@ -74,7 +131,15 @@ const char* scheduler_get_mode(void) {
 }
 
 const char* scheduler_get_active_task(void) {
-    return "idle";
+    if (task_count == 0) {
+        return "none";
+    }
+
+    if (active_task_index < 0 || active_task_index >= task_count) {
+        return "invalid";
+    }
+
+    return tasks[active_task_index].name;
 }
 
 void scheduler_info(void) {
@@ -82,6 +147,10 @@ void scheduler_info(void) {
 
     screen_print("  ticks:  ");
     scheduler_print_uint(scheduler_ticks);
+    screen_print("\n");
+
+    screen_print("  yields: ");
+    scheduler_print_uint(scheduler_yield_count);
     screen_print("\n");
 
     screen_print("  tasks:  ");
@@ -95,6 +164,34 @@ void scheduler_info(void) {
     screen_print("  active: ");
     screen_print(scheduler_get_active_task());
     screen_print("\n");
+}
+
+void scheduler_log(void) {
+    screen_print("Scheduler log:\n");
+
+    if (sched_log_count == 0) {
+        screen_print("  empty\n");
+        return;
+    }
+
+    for (int i = 0; i < sched_log_count; i++) {
+        screen_print("  switch ");
+        screen_print(sched_log_from[i]);
+        screen_print(" -> ");
+        screen_print(sched_log_to[i]);
+        screen_print("\n");
+    }
+}
+
+void scheduler_clear_log(void) {
+    for (int i = 0; i < SCHED_LOG_MAX; i++) {
+        sched_log_from[i] = 0;
+        sched_log_to[i] = 0;
+    }
+
+    sched_log_count = 0;
+
+    screen_print("Scheduler log cleared.\n");
 }
 
 void scheduler_list_tasks(void) {
