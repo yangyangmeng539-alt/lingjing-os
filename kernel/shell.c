@@ -446,6 +446,34 @@ static void shell_handle_platformsummary(void) {
     platform_summary();
 }
 
+static void shell_handle_platformcaps(void) {
+    platform_caps();
+}
+
+static void shell_handle_platformbreak(const char* cmd) {
+    const char* capability = cmd + 14;
+
+    if (capability[0] == '\0') {
+        platform_print("usage: platformbreak <capability>\n");
+        platform_print("allowed: output, input, timer, power, all\n");
+        return;
+    }
+
+    platform_break(capability);
+}
+
+static void shell_handle_platformfix(const char* cmd) {
+    const char* capability = cmd + 12;
+
+    if (capability[0] == '\0') {
+        platform_print("usage: platformfix <capability>\n");
+        platform_print("allowed: output, input, timer, power, all\n");
+        return;
+    }
+
+    platform_fix(capability);
+}
+
 static void shell_handle_lang(const char* cmd) {
     if (str_equal(cmd, "lang")) {
         platform_print(lang_get(MSG_LANGUAGE_CURRENT));
@@ -873,7 +901,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, platformdeps, platformboot, platformsummary, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -902,6 +930,18 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_platformboot();
     } else if (str_equal(cmd, "platformsummary")) {
         shell_handle_platformsummary();
+    } else if (str_equal(cmd, "platformcaps")) {
+        shell_handle_platformcaps();
+    } else if (str_starts_with(cmd, "platformbreak ")) {
+        shell_handle_platformbreak(cmd);
+    } else if (str_equal(cmd, "platformbreak")) {
+        platform_print("usage: platformbreak <capability>\n");
+        platform_print("allowed: output, input, timer, power, all\n");
+    } else if (str_starts_with(cmd, "platformfix ")) {
+        shell_handle_platformfix(cmd);
+    } else if (str_equal(cmd, "platformfix")) {
+        platform_print("usage: platformfix <capability>\n");
+        platform_print("allowed: output, input, timer, power, all\n");
     } else if (str_equal(cmd, "lang") || str_starts_with(cmd, "lang ")) {
         shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {

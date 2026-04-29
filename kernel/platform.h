@@ -23,6 +23,9 @@ void platform_check(void);
 void platform_deps(void);
 void platform_boot_info(void);
 void platform_summary(void);
+void platform_caps(void);
+void platform_break(const char* capability);
+void platform_fix(const char* capability);
 int platform_doctor_ok(void);
 
 const char* platform_get_name(void);
