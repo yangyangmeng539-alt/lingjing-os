@@ -133,11 +133,11 @@ static void shell_handle_uptime(void) {
     platform_print("Uptime:\n");
 
     platform_print("  ticks:   ");
-    platform_print_uint(timer_get_ticks());
+    platform_print_uint(platform_ticks());
     platform_print("\n");
 
     platform_print("  seconds: ");
-    platform_print_uint(timer_get_seconds());
+    platform_print_uint(platform_seconds());
     platform_print("\n");
 }
 
@@ -272,7 +272,7 @@ static void shell_handle_sysinfo(void) {
     platform_print("  memory:         bump allocator\n");
 
     platform_print("  uptime seconds: ");
-    platform_print_uint(timer_get_seconds());
+    platform_print_uint(platform_seconds());
     platform_print("\n");
 
     platform_print("  next alloc:     ");
@@ -285,7 +285,7 @@ static void shell_handle_dashboard(void) {
     platform_print("------------------\n");
 
     platform_print("uptime seconds: ");
-    platform_print_uint(timer_get_seconds());
+    platform_print_uint(platform_seconds());
     platform_print("\n");
 
     platform_print("scheduler ticks:");
@@ -363,7 +363,7 @@ static void shell_handle_dash(void) {
     platform_print("-------------\n");
 
     platform_print("up:       ");
-    platform_print_uint(timer_get_seconds());
+    platform_print_uint(platform_seconds());
     platform_print("s\n");
 
     platform_print("next:     ");
@@ -665,7 +665,7 @@ static void shell_handle_status(void) {
     int task_broken = scheduler_has_broken_tasks();
 
     platform_print("LJ | up ");
-    platform_print_uint(timer_get_seconds());
+    platform_print_uint(platform_seconds());
     platform_print("s | in ");
 
     if (intent_is_running()) {
@@ -735,7 +735,7 @@ static void shell_handle_sleep(const char* cmd) {
     platform_print_uint(seconds);
     platform_print(" seconds...\n");
 
-    timer_sleep(seconds);
+    platform_sleep(seconds);
 
     platform_print("wake.\n");
 }
@@ -993,7 +993,7 @@ void shell_init(void) {
 }
 
 void shell_update(void) {
-    char c = keyboard_read_char();
+    char c = platform_read_char();
 
     if (c == 0) {
         return;

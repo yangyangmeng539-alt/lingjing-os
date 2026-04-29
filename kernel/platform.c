@@ -1,6 +1,7 @@
 #include "platform.h"
 #include "screen.h"
 #include "timer.h"
+#include "keyboard.h"
 
 static int platform_ready = 0;
 
@@ -18,6 +19,10 @@ void platform_put_char(char c) {
 
 void platform_clear(void) {
     screen_clear();
+}
+
+char platform_read_char(void) {
+    return keyboard_read_char();
 }
 
 void platform_print_uint(unsigned int value) {
@@ -58,6 +63,10 @@ unsigned int platform_ticks(void) {
 
 unsigned int platform_seconds(void) {
     return timer_get_seconds();
+}
+
+void platform_sleep(unsigned int seconds) {
+    timer_sleep(seconds);
 }
 
 const char* platform_get_name(void) {

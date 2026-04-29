@@ -9,8 +9,11 @@ void platform_print_uint(unsigned int value);
 void platform_print_hex32(unsigned int value);
 void platform_clear(void);
 
+char platform_read_char(void);
+
 unsigned int platform_ticks(void);
 unsigned int platform_seconds(void);
+void platform_sleep(unsigned int seconds);
 
 void platform_status(void);
 void platform_check(void);
