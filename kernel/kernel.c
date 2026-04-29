@@ -10,6 +10,7 @@
 #include "scheduler.h"
 #include "security.h"
 #include "lang.h"
+#include "platform.h"
 
 unsigned int kernel_stack_marker = 0;
 
@@ -48,6 +49,10 @@ void kernel_main(void) {
     security_init();
     module_register("security", "loaded", "kernel", "security", "core");
     screen_print("Security initialized.\n");
+
+    platform_init();
+    module_register("platform", "loaded", "kernel", "platform", "core");
+    screen_print("Platform initialized.\n");
 
     lang_init();
     module_register("lang", "loaded", "kernel", "language", "core");

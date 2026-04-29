@@ -11,6 +11,7 @@
 #include "version.h"
 #include "security.h"
 #include "lang.h"
+#include "platform.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -321,6 +322,14 @@ static void shell_handle_dashboard(void) {
     screen_print(scheduler_get_active_task());
     screen_print("\n");
 
+    screen_print("platform:       ");
+    screen_print(platform_get_name());
+    screen_print("\n");
+
+    screen_print("display:        ");
+    screen_print(platform_get_display());
+    screen_print("\n");
+
     screen_print("next alloc:     ");
     print_hex32(memory_get_placement_address());
     screen_print("\n");
@@ -377,6 +386,14 @@ static void shell_handle_securityclear(void) {
     security_clear_log();
 }
 
+static void shell_handle_platform(void) {
+    platform_status();
+}
+
+static void shell_handle_platformcheck(void) {
+    platform_check();
+}
+
 static void shell_handle_lang(const char* cmd) {
     if (str_equal(cmd, "lang")) {
         screen_print(lang_get(MSG_LANGUAGE_CURRENT));
@@ -408,6 +425,7 @@ static void shell_handle_doctor(void) {
     int task_broken = scheduler_has_broken_tasks();
     int security_ok = security_doctor_ok();
     int language_ok = 1;
+    int platform_ok = 1;
 
     screen_print("System doctor:\n");
 
@@ -453,19 +471,30 @@ static void shell_handle_doctor(void) {
         screen_print("broken\n");
     }
 
+    screen_print("  platform layer:      ");
+    if (platform_ok) {
+        screen_print("ok\n");
+    } else {
+        screen_print("broken\n");
+    }
+
+    screen_print("  current platform:    ");
+    screen_print(platform_get_name());
+    screen_print("\n");
+
     screen_print("  current language:    ");
     screen_print(lang_get_current_name());
     screen_print("\n");
 
     screen_print("  intent system:       ");
-    if (module_broken || task_broken || !security_ok || !language_ok) {
+    if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
     }
 
     screen_print("  result:              ");
-    if (module_broken || task_broken || !security_ok || !language_ok) {
+    if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
@@ -802,6 +831,10 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_status();
     } else if (str_equal(cmd, "doctor")) {
         shell_handle_doctor();
+    } else if (str_equal(cmd, "platform")) {
+        shell_handle_platform();
+    } else if (str_equal(cmd, "platformcheck")) {
+        shell_handle_platformcheck();
     } else if (str_equal(cmd, "lang") || str_starts_with(cmd, "lang ")) {
         shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {

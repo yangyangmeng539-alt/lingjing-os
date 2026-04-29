@@ -23,9 +23,10 @@ OBJS = \
 	$(BUILD_DIR)/system.o \
 	$(BUILD_DIR)/module.o \
 	$(BUILD_DIR)/security.o \
+	$(BUILD_DIR)/platform.o \
 	$(BUILD_DIR)/lang.o \
 	$(BUILD_DIR)/intent.o \
-	$(BUILD_DIR)/scheduler.o \
+	$(BUILD_DIR)/scheduler.o
 
 all: $(BUILD_DIR)/lingjing.iso
 
@@ -73,6 +74,9 @@ $(BUILD_DIR)/intent.o: kernel/intent.c
 
 $(BUILD_DIR)/scheduler.o: kernel/scheduler.c
 	$(CC) $(CFLAGS) -c kernel/scheduler.c -o $(BUILD_DIR)/scheduler.o
+
+$(BUILD_DIR)/platform.o: kernel/platform.c
+	$(CC) $(CFLAGS) -c kernel/platform.c -o $(BUILD_DIR)/platform.o
 
 $(BUILD_DIR)/lang.o: kernel/lang.c
 	$(CC) $(CFLAGS) -c kernel/lang.c -o $(BUILD_DIR)/lang.o
