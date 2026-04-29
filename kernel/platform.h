@@ -15,8 +15,14 @@ unsigned int platform_ticks(void);
 unsigned int platform_seconds(void);
 void platform_sleep(unsigned int seconds);
 
+void platform_reboot(void);
+void platform_halt(void);
+
 void platform_status(void);
 void platform_check(void);
+void platform_deps(void);
+void platform_boot_info(void);
+void platform_summary(void);
 int platform_doctor_ok(void);
 
 const char* platform_get_name(void);

@@ -184,3 +184,5 @@ irq_common_stub:
     add esp, 8
     sti
     iret
+
+    section .note.GNU-stack noalloc noexec nowrite progbits

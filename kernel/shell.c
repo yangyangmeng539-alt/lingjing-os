@@ -103,18 +103,6 @@ static const char* skip_token(const char* text) {
     return text + i;
 }
 
-static void print_hex_digit(unsigned int value) {
-    char digit = 0;
-
-    if (value < 10) {
-        digit = (char)('0' + value);
-    } else {
-        digit = (char)('A' + (value - 10));
-    }
-
-    platform_put_char(digit);
-}
-
 static void shell_prompt(void) {
     platform_print("> ");
 }
@@ -265,6 +253,9 @@ static void shell_handle_sysinfo(void) {
     platform_print(platform_get_input());
     platform_print("\n");
 
+    platform_print("  platform init:  ");
+    platform_print(platform_doctor_ok() ? "ok\n" : "broken\n");
+
     platform_print("  gdt:            ok\n");
     platform_print("  idt:            ok\n");
     platform_print("  keyboard irq:   ok\n");
@@ -372,9 +363,7 @@ static void shell_handle_dash(void) {
 
     platform_print("platform: ");
     platform_print(platform_get_name());
-    platform_print("\n");
-
-    platform_print("display:  ");
+    platform_print(" | ");
     platform_print(platform_get_display());
     platform_print("\n");
 
@@ -406,6 +395,9 @@ static void shell_handle_dash(void) {
     platform_print("lang:     ");
     platform_print(lang_get_current_name());
     platform_print("\n");
+
+    platform_print("platform init: ");
+    platform_print(platform_ok ? "ok\n" : "bad\n");
 
     platform_print("platform health: ");
     platform_print(platform_ok ? "ok\n" : "bad\n");
@@ -440,6 +432,18 @@ static void shell_handle_platform(void) {
 
 static void shell_handle_platformcheck(void) {
     platform_check();
+}
+
+static void shell_handle_platformdeps(void) {
+    platform_deps();
+}
+
+static void shell_handle_platformboot(void) {
+    platform_boot_info();
+}
+
+static void shell_handle_platformsummary(void) {
+    platform_summary();
 }
 
 static void shell_handle_lang(const char* cmd) {
@@ -749,12 +753,12 @@ static void shell_handle_kmalloc(const char* cmd) {
         return;
     }
 
-    void* ptr = kmalloc(size);
+    unsigned int ptr = kmalloc(size);
 
     platform_print("allocated ");
     platform_print_uint(size);
     platform_print(" bytes at ");
-    platform_print_hex32((unsigned int)ptr);
+    platform_print_hex32(ptr);
     platform_print("\n");
 
     platform_print("next alloc: ");
@@ -771,12 +775,12 @@ static void shell_handle_kcalloc(const char* cmd) {
         return;
     }
 
-    void* ptr = kcalloc(size);
+    unsigned int ptr = kcalloc(size);
 
     platform_print("allocated zeroed ");
     platform_print_uint(size);
     platform_print(" bytes at ");
-    platform_print_hex32((unsigned int)ptr);
+    platform_print_hex32(ptr);
     platform_print("\n");
 
     platform_print("next alloc: ");
@@ -869,7 +873,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, platformdeps, platformboot, platformsummary, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -892,6 +896,12 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_platform();
     } else if (str_equal(cmd, "platformcheck")) {
         shell_handle_platformcheck();
+    } else if (str_equal(cmd, "platformdeps")) {
+        shell_handle_platformdeps();
+    } else if (str_equal(cmd, "platformboot")) {
+        shell_handle_platformboot();
+    } else if (str_equal(cmd, "platformsummary")) {
+        shell_handle_platformsummary();
     } else if (str_equal(cmd, "lang") || str_starts_with(cmd, "lang ")) {
         shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {
@@ -956,10 +966,10 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_sleep(cmd);
     } else if (str_equal(cmd, "reboot")) {
         platform_print("rebooting...\n");
-        system_reboot();
+        platform_reboot();
     } else if (str_equal(cmd, "halt")) {
         platform_print("system halted.\n");
-        system_halt();
+        platform_halt();
     } else if (str_equal(cmd, "lingjing")) {
         platform_print("Lingjing core awakened.\n");
         platform_print("My machine, my rules.\n");
