@@ -303,79 +303,149 @@ static void shell_handle_sysinfo(void) {
 }
 
 static void shell_handle_dashboard(void) {
-    screen_print("Lingjing Dashboard\n");
-    screen_print("------------------\n");
+    platform_print("Lingjing Dashboard\n");
+    platform_print("------------------\n");
 
-    screen_print("uptime seconds: ");
-    print_uint(timer_get_seconds());
-    screen_print("\n");
+    platform_print("uptime seconds: ");
+    platform_print_uint(timer_get_seconds());
+    platform_print("\n");
 
-    screen_print("scheduler ticks:");
-    print_uint(scheduler_get_ticks());
-    screen_print("\n");
+    platform_print("scheduler ticks:");
+    platform_print_uint(scheduler_get_ticks());
+    platform_print("\n");
 
-    screen_print("scheduler mode: ");
-    screen_print(scheduler_get_mode());
-    screen_print("\n");
+    platform_print("scheduler mode: ");
+    platform_print(scheduler_get_mode());
+    platform_print("\n");
 
-    screen_print("active task:    ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("active task:    ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 
-    screen_print("platform:       ");
-    screen_print(platform_get_name());
-    screen_print("\n");
+    platform_print("platform:       ");
+    platform_print(platform_get_name());
+    platform_print("\n");
 
-    screen_print("display:        ");
-    screen_print(platform_get_display());
-    screen_print("\n");
+    platform_print("display:        ");
+    platform_print(platform_get_display());
+    platform_print("\n");
 
-    screen_print("next alloc:     ");
-    print_hex32(memory_get_placement_address());
-    screen_print("\n");
+    platform_print("next alloc:     ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
 
-    screen_print("intent layer:   enabled\n");
+    platform_print("intent layer:   enabled\n");
 
-    screen_print("security:       ");
+    platform_print("security:       ");
     if (security_doctor_ok()) {
-        screen_print("ok\n");
+        platform_print("ok\n");
     } else {
-        screen_print("broken\n");
+        platform_print("broken\n");
     }
 
-    screen_print("language:       ");
-    screen_print(lang_get_current_name());
-    screen_print("\n");
+    platform_print("language:       ");
+    platform_print(lang_get_current_name());
+    platform_print("\n");
 
-    screen_print("dependency:     ");
+    platform_print("dependency:     ");
     if (module_has_broken_dependencies()) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("task health:    ");
+    platform_print("task health:    ");
     if (scheduler_has_broken_tasks()) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("tasks:          ");
-    print_uint((unsigned int)scheduler_task_count());
-    screen_print("\n\n");
+    platform_print("tasks:          ");
+    platform_print_uint((unsigned int)scheduler_task_count());
+    platform_print("\n\n");
 
     intent_status();
-    screen_print("\n");
+    platform_print("\n");
 
     scheduler_list_tasks();
-    screen_print("\n");
+    platform_print("\n");
 
     module_list();
 }
 
+static void shell_handle_dash(void) {
+    int module_broken = module_has_broken_dependencies();
+    int task_broken = scheduler_has_broken_tasks();
+    int security_ok = security_doctor_ok();
+    int lang_ok = lang_doctor_ok();
+    int platform_ok = platform_doctor_ok();
+
+    platform_print("Lingjing Dash\n");
+    platform_print("-------------\n");
+
+    platform_print("up:       ");
+    platform_print_uint(timer_get_seconds());
+    platform_print("s\n");
+
+    platform_print("next:     ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
+
+    platform_print("platform: ");
+    platform_print(platform_get_name());
+    platform_print("\n");
+
+    platform_print("display:  ");
+    platform_print(platform_get_display());
+    platform_print("\n");
+
+    platform_print("intent:   ");
+    if (intent_is_running()) {
+        platform_print(intent_get_current_name());
+    } else {
+        platform_print("none");
+    }
+    platform_print("\n");
+
+    platform_print("modules:  ");
+    platform_print_uint((unsigned int)module_count_loaded());
+    platform_print("\n");
+
+    platform_print("tasks:    ");
+    platform_print_uint((unsigned int)scheduler_task_count());
+    platform_print("\n");
+
+    platform_print("deps:     ");
+    platform_print(module_broken ? "bad\n" : "ok\n");
+
+    platform_print("task:     ");
+    platform_print(task_broken ? "bad\n" : "ok\n");
+
+    platform_print("security: ");
+    platform_print(security_ok ? "ok\n" : "bad\n");
+
+    platform_print("lang:     ");
+    platform_print(lang_get_current_name());
+    platform_print("\n");
+
+    platform_print("platform health: ");
+    platform_print(platform_ok ? "ok\n" : "bad\n");
+
+    platform_print("doc:      ");
+    if (module_broken || task_broken || !security_ok || !lang_ok || !platform_ok) {
+        platform_print("bad\n");
+    } else {
+        platform_print("ready\n");
+    }
+}
+
 static void shell_handle_security(void) {
     security_status();
+}
+
+static void shell_handle_securitycheck(void) {
+    security_check();
 }
 
 static void shell_handle_securitylog(void) {
@@ -396,108 +466,141 @@ static void shell_handle_platformcheck(void) {
 
 static void shell_handle_lang(const char* cmd) {
     if (str_equal(cmd, "lang")) {
-        screen_print(lang_get(MSG_LANGUAGE_CURRENT));
-        screen_print(": ");
-        screen_print(lang_get_current_name());
-        screen_print("\n");
+        platform_print(lang_get(MSG_LANGUAGE_CURRENT));
+        platform_print(": ");
+        platform_print(lang_get_current_name());
+        platform_print("\n");
         return;
     }
 
     if (str_equal(cmd, "lang en")) {
         lang_set(LANG_EN);
-        screen_print(lang_get(MSG_LANGUAGE_SET_EN));
-        screen_print("\n");
+        platform_print(lang_get(MSG_LANGUAGE_SET_EN));
+        platform_print("\n");
         return;
     }
 
     if (str_equal(cmd, "lang zh")) {
         lang_set(LANG_ZH);
-        screen_print(lang_get(MSG_LANGUAGE_SET_ZH));
-        screen_print("\n");
+        platform_print(lang_get(MSG_LANGUAGE_SET_ZH));
+        platform_print("\n");
         return;
     }
 
-    screen_print("usage: lang | lang en | lang zh\n");
+    platform_print("usage: lang | lang en | lang zh\n");
 }
 
 static void shell_handle_doctor(void) {
     int module_broken = module_has_broken_dependencies();
     int task_broken = scheduler_has_broken_tasks();
     int security_ok = security_doctor_ok();
-    int language_ok = 1;
-    int platform_ok = 1;
+    int language_ok = lang_doctor_ok();
+    int platform_ok = platform_doctor_ok();
 
-    screen_print("System doctor:\n");
+    platform_print("System doctor:\n");
 
-    screen_print("  module dependencies: ");
+    platform_print("  module dependencies: ");
     if (module_broken) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("  task health:         ");
+    platform_print("  task health:         ");
     if (task_broken) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("  scheduler:           ");
+    platform_print("  scheduler:           ");
     if (task_broken) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("  scheduler active:    ");
+    platform_print("  scheduler active:    ");
     if (scheduler_has_broken_tasks()) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 
-    screen_print("  security:            ");
+    platform_print("  security:            ");
     if (security_ok) {
-        screen_print("ok\n");
+        platform_print("ok\n");
     } else {
-        screen_print("broken\n");
+        platform_print("broken\n");
     }
 
-    screen_print("  language layer:      ");
+    platform_print("  language layer:      ");
     if (language_ok) {
-        screen_print("ok\n");
+        platform_print("ok\n");
     } else {
-        screen_print("broken\n");
+        platform_print("broken\n");
     }
 
-    screen_print("  platform layer:      ");
+    platform_print("  platform layer:      ");
     if (platform_ok) {
-        screen_print("ok\n");
+        platform_print("ok\n");
     } else {
-        screen_print("broken\n");
+        platform_print("broken\n");
     }
 
-    screen_print("  current platform:    ");
-    screen_print(platform_get_name());
-    screen_print("\n");
+    platform_print("  current platform:    ");
+    platform_print(platform_get_name());
+    platform_print("\n");
 
-    screen_print("  current language:    ");
-    screen_print(lang_get_current_name());
-    screen_print("\n");
+    platform_print("  current language:    ");
+    platform_print(lang_get_current_name());
+    platform_print("\n");
 
-    screen_print("  intent system:       ");
+    platform_print("  intent system:       ");
     if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
-        screen_print("blocked\n");
+        platform_print("blocked\n");
     } else {
-        screen_print("ready\n");
+        platform_print("ready\n");
     }
 
-    screen_print("  result:              ");
+    platform_print("  result:              ");
     if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
-        screen_print("blocked\n");
+        platform_print("blocked\n");
     } else {
-        screen_print("ready\n");
+        platform_print("ready\n");
+    }
+}
+
+static void shell_handle_health(void) {
+    int module_broken = module_has_broken_dependencies();
+    int task_broken = scheduler_has_broken_tasks();
+    int security_ok = security_doctor_ok();
+    int lang_ok = lang_doctor_ok();
+    int platform_ok = platform_doctor_ok();
+
+    platform_print("System health:\n");
+
+    platform_print("  deps:     ");
+    platform_print(module_broken ? "bad\n" : "ok\n");
+
+    platform_print("  security: ");
+    platform_print(security_ok ? "ok\n" : "bad\n");
+
+    platform_print("  task:     ");
+    platform_print(task_broken ? "bad\n" : "ok\n");
+
+    platform_print("  lang:     ");
+    platform_print(lang_ok ? "ok\n" : "bad\n");
+
+    platform_print("  platform: ");
+    platform_print(platform_ok ? "ok\n" : "bad\n");
+
+    platform_print("  result:   ");
+
+    if (module_broken || task_broken || !security_ok || !lang_ok || !platform_ok) {
+        platform_print("bad\n");
+    } else {
+        platform_print("ok\n");
     }
 }
 
@@ -583,37 +686,37 @@ static void shell_handle_status(void) {
     int module_broken = module_has_broken_dependencies();
     int task_broken = scheduler_has_broken_tasks();
 
-    screen_print("LJ | up ");
-    print_uint(timer_get_seconds());
-    screen_print("s | in ");
+    platform_print("LJ | up ");
+    platform_print_uint(timer_get_seconds());
+    platform_print("s | in ");
 
     if (intent_is_running()) {
-        screen_print(intent_get_current_name());
+        platform_print(intent_get_current_name());
     } else {
-        screen_print("none");
+        platform_print("none");
     }
 
-    screen_print(" | m");
-    print_uint((unsigned int)module_count_loaded());
+    platform_print(" | m");
+    platform_print_uint((unsigned int)module_count_loaded());
 
-    screen_print(" t");
-    print_uint((unsigned int)scheduler_task_count());
+    platform_print(" t");
+    platform_print_uint((unsigned int)scheduler_task_count());
 
-    screen_print(" | s");
-    print_uint(scheduler_get_ticks());
+    platform_print(" | s");
+    platform_print_uint(scheduler_get_ticks());
 
-    screen_print(" y");
-    print_uint(scheduler_get_yields());
+    platform_print(" y");
+    platform_print_uint(scheduler_get_yields());
 
-    screen_print(" | coop");
+    platform_print(" | coop");
 
-    screen_print(" | deps ");
-    screen_print(module_broken ? "bad" : "ok");
+    platform_print(" | deps ");
+    platform_print(module_broken ? "bad" : "ok");
 
-    screen_print(" | doc ");
-    screen_print((module_broken || task_broken) ? "bad" : "ok");
+    platform_print(" | doc ");
+    platform_print((module_broken || task_broken) ? "bad" : "ok");
 
-    screen_print("\n");
+    platform_print("\n");
 }
 
 static void shell_handle_version(void) {
@@ -816,7 +919,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, security, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -827,10 +930,14 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_sysinfo();
     } else if (str_equal(cmd, "dashboard")) {
         shell_handle_dashboard();
+    } else if (str_equal(cmd, "dash")) {
+        shell_handle_dash();
     } else if (str_equal(cmd, "status")) {
         shell_handle_status();
     } else if (str_equal(cmd, "doctor")) {
         shell_handle_doctor();
+    } else if (str_equal(cmd, "health")) {
+        shell_handle_health();
     } else if (str_equal(cmd, "platform")) {
         shell_handle_platform();
     } else if (str_equal(cmd, "platformcheck")) {
@@ -839,6 +946,8 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {
         shell_handle_security();
+    } else if (str_equal(cmd, "securitycheck")) {
+        shell_handle_securitycheck();
     } else if (str_equal(cmd, "securitylog")) {
         shell_handle_securitylog();
     } else if (str_equal(cmd, "securityclear")) {

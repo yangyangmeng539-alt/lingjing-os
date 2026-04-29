@@ -1,5 +1,6 @@
 #include "security.h"
 #include "screen.h"
+#include "platform.h"
 
 #define SECURITY_LOG_MAX 8
 
@@ -59,35 +60,54 @@ void security_audit(const char* event) {
 }
 
 void security_status(void) {
-    screen_print("Security:\n");
+    platform_print("Security:\n");
 
-    screen_print("  policy:            ");
-    screen_print(security_policy_enabled ? "enabled\n" : "disabled\n");
+    platform_print("  policy:            ");
+    platform_print(security_policy_enabled ? "enabled\n" : "disabled\n");
 
-    screen_print("  module protection: ");
-    screen_print(security_module_protection_enabled ? "enabled\n" : "disabled\n");
+    platform_print("  module protection: ");
+    platform_print(security_module_protection_enabled ? "enabled\n" : "disabled\n");
 
-    screen_print("  intent permission: ");
-    screen_print(security_intent_permission_enabled ? "enabled\n" : "disabled\n");
+    platform_print("  intent permission: ");
+    platform_print(security_intent_permission_enabled ? "enabled\n" : "disabled\n");
 
-    screen_print("  audit:             ");
-    screen_print(security_audit_enabled ? "enabled\n" : "disabled\n");
+    platform_print("  audit:             ");
+    platform_print(security_audit_enabled ? "enabled\n" : "disabled\n");
 
-    screen_print("  trust level:       prototype\n");
+    platform_print("  trust level:       prototype\n");
+}
+
+void security_check(void) {
+    platform_print("Security check:\n");
+
+    platform_print("  policy:            ");
+    platform_print(security_policy_enabled ? "ok\n" : "broken\n");
+
+    platform_print("  module protection: ");
+    platform_print(security_module_protection_enabled ? "ok\n" : "broken\n");
+
+    platform_print("  intent permission: ");
+    platform_print(security_intent_permission_enabled ? "ok\n" : "broken\n");
+
+    platform_print("  audit:             ");
+    platform_print(security_audit_enabled ? "ok\n" : "broken\n");
+
+    platform_print("  result:            ");
+    platform_print(security_doctor_ok() ? "ok\n" : "broken\n");
 }
 
 void security_log(void) {
-    screen_print("Security log:\n");
+    platform_print("Security log:\n");
 
     if (security_log_count == 0) {
-        screen_print("  empty\n");
+        platform_print("  empty\n");
         return;
     }
 
     for (int i = 0; i < security_log_count; i++) {
-        screen_print("  ");
-        screen_print(security_logs[i]);
-        screen_print("\n");
+        platform_print("  ");
+        platform_print(security_logs[i]);
+        platform_print("\n");
     }
 }
 
@@ -98,7 +118,7 @@ void security_clear_log(void) {
 
     security_log_count = 0;
 
-    screen_print("Security log cleared.\n");
+    platform_print("Security log cleared.\n");
 }
 
 int security_check_intent(const char* intent_name) {

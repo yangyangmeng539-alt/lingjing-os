@@ -23,5 +23,6 @@ void lang_set(language_t lang);
 language_t lang_get_current(void);
 const char* lang_get(message_id_t id);
 const char* lang_get_current_name(void);
+int lang_doctor_ok(void);
 
 #endif

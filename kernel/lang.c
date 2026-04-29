@@ -60,3 +60,35 @@ const char* lang_get_current_name(void) {
 
     return "en";
 }
+
+int lang_doctor_ok(void) {
+    if (current_lang != LANG_EN && current_lang != LANG_ZH) {
+        return 0;
+    }
+
+    if (lang_get(MSG_SYSTEM_READY) == 0) {
+        return 0;
+    }
+
+    if (lang_get(MSG_PERMISSION_DENIED) == 0) {
+        return 0;
+    }
+
+    if (lang_get(MSG_MODULE_NOT_FOUND) == 0) {
+        return 0;
+    }
+
+    if (lang_get(MSG_INTENT_RUNNING) == 0) {
+        return 0;
+    }
+
+    if (lang_get(MSG_DOCTOR_OK) == 0) {
+        return 0;
+    }
+
+    if (lang_get_current_name() == 0) {
+        return 0;
+    }
+
+    return 1;
+}
