@@ -327,6 +327,17 @@ static void shell_handle_dashboard(void) {
 
     screen_print("intent layer:   enabled\n");
 
+    screen_print("security:       ");
+    if (security_doctor_ok()) {
+        screen_print("ok\n");
+    } else {
+        screen_print("broken\n");
+    }
+
+    screen_print("language:       ");
+    screen_print(lang_get_current_name());
+    screen_print("\n");
+
     screen_print("dependency:     ");
     if (module_has_broken_dependencies()) {
         screen_print("broken\n");
@@ -396,6 +407,7 @@ static void shell_handle_doctor(void) {
     int module_broken = module_has_broken_dependencies();
     int task_broken = scheduler_has_broken_tasks();
     int security_ok = security_doctor_ok();
+    int language_ok = 1;
 
     screen_print("System doctor:\n");
 
@@ -434,15 +446,26 @@ static void shell_handle_doctor(void) {
         screen_print("broken\n");
     }
 
+    screen_print("  language layer:      ");
+    if (language_ok) {
+        screen_print("ok\n");
+    } else {
+        screen_print("broken\n");
+    }
+
+    screen_print("  current language:    ");
+    screen_print(lang_get_current_name());
+    screen_print("\n");
+
     screen_print("  intent system:       ");
-    if (module_broken || task_broken || !security_ok) {
+    if (module_broken || task_broken || !security_ok || !language_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
     }
 
     screen_print("  result:              ");
-    if (module_broken || task_broken || !security_ok) {
+    if (module_broken || task_broken || !security_ok || !language_ok) {
         screen_print("blocked\n");
     } else {
         screen_print("ready\n");
