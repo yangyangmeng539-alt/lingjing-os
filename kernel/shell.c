@@ -112,7 +112,7 @@ static void print_hex_digit(unsigned int value) {
         digit = (char)('A' + (value - 10));
     }
 
-    screen_put_char(digit);
+    platform_put_char(digit);
 }
 
 static void shell_prompt(void) {
@@ -871,7 +871,7 @@ static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
         platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
-        screen_clear();
+        platform_clear();
     } else if (str_equal(cmd, "about")) {
         platform_print("Lingjing OS experimental kernel.\n");
     } else if (str_equal(cmd, "version")) {
@@ -1000,7 +1000,7 @@ void shell_update(void) {
     }
 
     if (c == '\n') {
-        screen_put_char('\n');
+        platform_put_char('\n');
         input[input_len] = '\0';
         shell_handle_command(input);
         input_len = 0;
@@ -1008,13 +1008,13 @@ void shell_update(void) {
     } else if (c == '\b') {
         if (input_len > 0) {
             input_len--;
-            screen_put_char('\b');
+            platform_put_char('\b');
         }
     } else {
         if (input_len < 127) {
             input[input_len] = c;
             input_len++;
-            screen_put_char(c);
+            platform_put_char(c);
         }
     }
 }

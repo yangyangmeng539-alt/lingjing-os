@@ -16,6 +16,10 @@ void platform_put_char(char c) {
     screen_put_char(c);
 }
 
+void platform_clear(void) {
+    screen_clear();
+}
+
 void platform_print_uint(unsigned int value) {
     char buffer[16];
     int index = 0;

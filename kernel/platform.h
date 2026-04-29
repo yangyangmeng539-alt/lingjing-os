@@ -7,6 +7,7 @@ void platform_print(const char* text);
 void platform_put_char(char c);
 void platform_print_uint(unsigned int value);
 void platform_print_hex32(unsigned int value);
+void platform_clear(void);
 
 unsigned int platform_ticks(void);
 unsigned int platform_seconds(void);

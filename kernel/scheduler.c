@@ -1,5 +1,6 @@
 #include "scheduler.h"
 #include "screen.h"
+#include "platform.h"
 
 #define MAX_TASKS 8
 
@@ -22,26 +23,6 @@ static unsigned int scheduler_yield_count = 0;
 static const char* sched_log_from[SCHED_LOG_MAX];
 static const char* sched_log_to[SCHED_LOG_MAX];
 static int sched_log_count = 0;
-
-static void scheduler_print_uint(unsigned int value) {
-    char buffer[16];
-    int index = 0;
-
-    if (value == 0) {
-        screen_put_char('0');
-        return;
-    }
-
-    while (value > 0 && index < 16) {
-        buffer[index] = (char)('0' + (value % 10));
-        value /= 10;
-        index++;
-    }
-
-    for (int i = index - 1; i >= 0; i--) {
-        screen_put_char(buffer[i]);
-    }
-}
 
 static void scheduler_add_task(unsigned int id, const char* name, const char* status, const char* type) {
     if (task_count >= MAX_TASKS) {

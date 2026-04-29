@@ -18,7 +18,7 @@ void kernel_main(void) {
     unsigned int local_stack_marker = 0;
     kernel_stack_marker = (unsigned int)&local_stack_marker;
 
-    screen_clear();
+    platform_clear();
 
     platform_print("Lingjing OS booted.\n");
 

@@ -127,8 +127,8 @@ void isr_handler(registers_t* regs) {
     char tens = (char)('0' + ((regs->int_no / 10) % 10));
     char ones = (char)('0' + (regs->int_no % 10));
 
-    screen_put_char(tens);
-    screen_put_char(ones);
+    platform_put_char(tens);
+    platform_put_char(ones);
     platform_print("\n");
 }
 

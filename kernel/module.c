@@ -2,28 +2,9 @@
 #include "screen.h"
 #include "security.h"
 #include "scheduler.h"
+#include "platform.h"
 
 #define MAX_MODULES 16
-
-static void module_print_uint(unsigned int value) {
-    char buffer[16];
-    int index = 0;
-
-    if (value == 0) {
-        screen_put_char('0');
-        return;
-    }
-
-    while (value > 0 && index < 16) {
-        buffer[index] = (char)('0' + (value % 10));
-        value /= 10;
-        index++;
-    }
-
-    for (int i = index - 1; i >= 0; i--) {
-        screen_put_char(buffer[i]);
-    }
-}
 
 typedef struct module_entry {
     const char* name;
