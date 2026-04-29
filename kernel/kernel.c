@@ -20,7 +20,7 @@ void kernel_main(void) {
 
     screen_clear();
 
-    screen_print("Lingjing OS booted.\n");
+    platform_print("Lingjing OS booted.\n");
 
     module_init();
     module_register("core", "loaded", "kernel", "system", "none");
@@ -28,45 +28,45 @@ void kernel_main(void) {
 
     gdt_init();
     module_register("gdt", "loaded", "arch", "system", "core");
-    screen_print("GDT initialized.\n");
+    platform_print("GDT initialized.\n");
 
     idt_init();
     module_register("idt", "loaded", "arch", "system", "gdt");
-    screen_print("IDT initialized.\n");
+    platform_print("IDT initialized.\n");
 
     keyboard_init();
     module_register("keyboard", "loaded", "driver", "input", "idt");
-    screen_print("Keyboard IRQ initialized.\n");
+    platform_print("Keyboard IRQ initialized.\n");
 
     timer_init();
     module_register("timer", "loaded", "driver", "time", "idt");
-    screen_print("Timer IRQ initialized.\n");
+    platform_print("Timer IRQ initialized.\n");
 
     scheduler_init();
     module_register("scheduler", "loaded", "kernel", "task", "timer");
-    screen_print("Scheduler initialized.\n");
+    platform_print("Scheduler initialized.\n");
 
     security_init();
     module_register("security", "loaded", "kernel", "security", "core");
-    screen_print("Security initialized.\n");
+    platform_print("Security initialized.\n");
 
     platform_init();
     module_register("platform", "loaded", "kernel", "platform", "core");
-    screen_print("Platform initialized.\n");
+    platform_print("Platform initialized.\n");
 
     lang_init();
     module_register("lang", "loaded", "kernel", "language", "core");
-    screen_print("Language initialized.\n");
+    platform_print("Language initialized.\n");
 
     memory_init();
     module_register("memory", "loaded", "kernel", "memory", "core");
-    screen_print("Memory initialized.\n");
+    platform_print("Memory initialized.\n");
 
     enable_interrupts();
-    screen_print("Interrupts enabled.\n");
+    platform_print("Interrupts enabled.\n");
 
     module_register("shell", "loaded", "userland", "command", "keyboard");
-    screen_print("Shell ready.\n");
+    platform_print("Shell ready.\n");
 
     shell_init();
 

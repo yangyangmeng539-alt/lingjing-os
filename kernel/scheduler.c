@@ -260,12 +260,12 @@ void scheduler_yield(void) {
 
     scheduler_log_switch(from, to);
 
-    screen_print("scheduler yield.\n");
-    screen_print("switch ");
-    screen_print(from);
-    screen_print(" -> ");
-    screen_print(to);
-    screen_print("\n");
+    platform_print("scheduler yield.\n");
+    platform_print("switch ");
+    platform_print(from);
+    platform_print(" -> ");
+    platform_print(to);
+    platform_print("\n");
 }
 
 unsigned int scheduler_get_ticks(void) {
@@ -293,77 +293,77 @@ const char* scheduler_get_active_task(void) {
 }
 
 void scheduler_info(void) {
-    screen_print("Scheduler:\n");
+    platform_print("Scheduler:\n");
 
-    screen_print("  ticks:  ");
-    scheduler_print_uint(scheduler_ticks);
-    screen_print("\n");
+    platform_print("  ticks:  ");
+    platform_print_uint(scheduler_ticks);
+    platform_print("\n");
 
-    screen_print("  yields: ");
-    scheduler_print_uint(scheduler_yield_count);
-    screen_print("\n");
+    platform_print("  yields: ");
+    platform_print_uint(scheduler_yield_count);
+    platform_print("\n");
 
-    screen_print("  tasks:  ");
-    scheduler_print_uint((unsigned int)task_count);
-    screen_print("\n");
+    platform_print("  tasks:  ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
 
-    screen_print("  mode:   ");
-    screen_print(scheduler_get_mode());
-    screen_print(" prototype\n");
+    platform_print("  mode:   ");
+    platform_print(scheduler_get_mode());
+    platform_print(" prototype\n");
 
-    screen_print("  active: ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("  active: ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 }
 
 void scheduler_log(void) {
-    screen_print("Scheduler log:\n");
+    platform_print("Scheduler log:\n");
 
     if (sched_log_count == 0) {
-        screen_print("  empty\n");
+        platform_print("  empty\n");
         return;
     }
 
     for (int i = 0; i < sched_log_count; i++) {
-        screen_print("  switch ");
-        screen_print(sched_log_from[i]);
-        screen_print(" -> ");
-        screen_print(sched_log_to[i]);
-        screen_print("\n");
+        platform_print("  switch ");
+        platform_print(sched_log_from[i]);
+        platform_print(" -> ");
+        platform_print(sched_log_to[i]);
+        platform_print("\n");
     }
 }
 
 void scheduler_runqueue(void) {
-    screen_print("Run queue:\n");
+    platform_print("Run queue:\n");
 
     for (int i = 0; i < task_count; i++) {
-        screen_print("  [");
-        scheduler_print_uint((unsigned int)i);
-        screen_print("] ");
-        screen_print(tasks[i].name);
+        platform_print("  [");
+        platform_print_uint((unsigned int)i);
+        platform_print("] ");
+        platform_print(tasks[i].name);
 
         if (i == active_task_index) {
-            screen_print("  <active>");
+            platform_print("  <active>");
         }
 
-        screen_print("\n");
+        platform_print("\n");
     }
 
-    screen_print("active index: ");
-    scheduler_print_uint((unsigned int)active_task_index);
-    screen_print("\n");
+    platform_print("active index: ");
+    platform_print_uint((unsigned int)active_task_index);
+    platform_print("\n");
 
-    screen_print("active task: ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("active task: ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 }
 
 void scheduler_set_task_state(unsigned int id, const char* state) {
     if (!scheduler_state_is_valid(state)) {
-        screen_print("invalid task state: ");
-        screen_print(state);
-        screen_print("\n");
-        screen_print("allowed: ready, running, blocked\n");
+        platform_print("invalid task state: ");
+        platform_print(state);
+        platform_print("\n");
+        platform_print("allowed: ready, running, blocked\n");
         return;
     }
 
@@ -392,33 +392,33 @@ void scheduler_set_task_state(unsigned int id, const char* state) {
                 }
             }
 
-            screen_print("task state changed:\n");
+            platform_print("task state changed:\n");
 
-            screen_print("  id:     ");
-            scheduler_print_uint(id);
-            screen_print("\n");
+            platform_print("  id:     ");
+            platform_print_uint(id);
+            platform_print("\n");
 
-            screen_print("  name:   ");
-            screen_print(tasks[i].name);
-            screen_print("\n");
+            platform_print("  name:   ");
+            platform_print(tasks[i].name);
+            platform_print("\n");
 
-            screen_print("  state:  ");
-            screen_print(tasks[i].status);
-            screen_print("\n");
+            platform_print("  state:  ");
+            platform_print(tasks[i].status);
+            platform_print("\n");
 
             if (scheduler_state_is_blocked(state) && was_active) {
-                screen_print("active switched to: ");
-                screen_print(scheduler_get_active_task());
-                screen_print("\n");
+                platform_print("active switched to: ");
+                platform_print(scheduler_get_active_task());
+                platform_print("\n");
             }
 
             return;
         }
     }
 
-    screen_print("task not found: ");
-    scheduler_print_uint(id);
-    screen_print("\n");
+    platform_print("task not found: ");
+    platform_print_uint(id);
+    platform_print("\n");
 }
 
 void scheduler_clear_log(void) {
@@ -429,7 +429,7 @@ void scheduler_clear_log(void) {
 
     sched_log_count = 0;
 
-    screen_print("Scheduler log cleared.\n");
+    platform_print("Scheduler log cleared.\n");
 }
 
 void scheduler_reset(void) {
@@ -453,62 +453,62 @@ void scheduler_reset(void) {
         }
     }
 
-    screen_print("Scheduler reset.\n");
-    screen_print("active task: ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("Scheduler reset.\n");
+    platform_print("active task: ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 }
 
 void scheduler_list_tasks(void) {
-    screen_print("Tasks:\n");
+    platform_print("Tasks:\n");
 
     for (int i = 0; i < task_count; i++) {
-        screen_print("  ");
-        scheduler_print_uint(tasks[i].id);
-        screen_print("    ");
-        screen_print(tasks[i].name);
-        screen_print("    ");
-        screen_print(tasks[i].status);
-        screen_print("    ");
-        screen_print(tasks[i].type);
-        screen_print("    ticks ");
-        scheduler_print_uint(tasks[i].runtime_ticks);
-        screen_print("\n");
+        platform_print("  ");
+        platform_print_uint(tasks[i].id);
+        platform_print("    ");
+        platform_print(tasks[i].name);
+        platform_print("    ");
+        platform_print(tasks[i].status);
+        platform_print("    ");
+        platform_print(tasks[i].type);
+        platform_print("    ticks ");
+        platform_print_uint(tasks[i].runtime_ticks);
+        platform_print("\n");
     }
 }
 
 void scheduler_task_info(unsigned int id) {
     for (int i = 0; i < task_count; i++) {
         if (tasks[i].id == id) {
-            screen_print("Task:\n");
+            platform_print("Task:\n");
 
-            screen_print("  id:     ");
-            scheduler_print_uint(tasks[i].id);
-            screen_print("\n");
+            platform_print("  id:     ");
+            platform_print_uint(tasks[i].id);
+            platform_print("\n");
 
-            screen_print("  name:   ");
-            screen_print(tasks[i].name);
-            screen_print("\n");
+            platform_print("  name:   ");
+            platform_print(tasks[i].name);
+            platform_print("\n");
 
-            screen_print("  status: ");
-            screen_print(tasks[i].status);
-            screen_print("\n");
+            platform_print("  status: ");
+            platform_print(tasks[i].status);
+            platform_print("\n");
 
-            screen_print("  type:   ");
-            screen_print(tasks[i].type);
-            screen_print("\n");
+            platform_print("  type:   ");
+            platform_print(tasks[i].type);
+            platform_print("\n");
 
-            screen_print("  ticks:  ");
-            scheduler_print_uint(tasks[i].runtime_ticks);
-            screen_print("\n");
+            platform_print("  ticks:  ");
+            platform_print_uint(tasks[i].runtime_ticks);
+            platform_print("\n");
 
             return;
         }
     }
 
-    screen_print("task not found: ");
-    scheduler_print_uint(id);
-    screen_print("\n");
+    platform_print("task not found: ");
+    platform_print_uint(id);
+    platform_print("\n");
 }
 
 void scheduler_check_tasks(void) {
@@ -517,18 +517,18 @@ void scheduler_check_tasks(void) {
     int blocked_count = 0;
     int broken_count = 0;
 
-    screen_print("Task check:\n");
+    platform_print("Task check:\n");
 
     for (int i = 0; i < task_count; i++) {
-        screen_print("  ");
-        screen_print(tasks[i].name);
-        screen_print("    ");
+        platform_print("  ");
+        platform_print(tasks[i].name);
+        platform_print("    ");
 
         if (tasks[i].status == 0 || tasks[i].name == 0 || tasks[i].type == 0) {
-            screen_print("broken\n");
+            platform_print("broken\n");
             broken_count++;
         } else if (scheduler_state_is_blocked(tasks[i].status)) {
-            screen_print("blocked\n");
+            platform_print("blocked\n");
             blocked_count++;
         } else if (tasks[i].status[0] == 'r' &&
                    tasks[i].status[1] == 'u' &&
@@ -538,7 +538,7 @@ void scheduler_check_tasks(void) {
                    tasks[i].status[5] == 'n' &&
                    tasks[i].status[6] == 'g' &&
                    tasks[i].status[7] == '\0') {
-            screen_print("running\n");
+            platform_print("running\n");
             running_count++;
         } else if (tasks[i].status[0] == 'r' &&
                    tasks[i].status[1] == 'e' &&
@@ -546,39 +546,39 @@ void scheduler_check_tasks(void) {
                    tasks[i].status[3] == 'd' &&
                    tasks[i].status[4] == 'y' &&
                    tasks[i].status[5] == '\0') {
-            screen_print("ready\n");
+            platform_print("ready\n");
             ready_count++;
         } else {
-            screen_print("broken\n");
+            platform_print("broken\n");
             broken_count++;
         }
     }
 
-    screen_print("summary:\n");
+    platform_print("summary:\n");
 
-    screen_print("  total:   ");
-    scheduler_print_uint((unsigned int)task_count);
-    screen_print("\n");
+    platform_print("  total:   ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
 
-    screen_print("  running: ");
-    scheduler_print_uint((unsigned int)running_count);
-    screen_print("\n");
+    platform_print("  running: ");
+    platform_print_uint((unsigned int)running_count);
+    platform_print("\n");
 
-    screen_print("  ready:   ");
-    scheduler_print_uint((unsigned int)ready_count);
-    screen_print("\n");
+    platform_print("  ready:   ");
+    platform_print_uint((unsigned int)ready_count);
+    platform_print("\n");
 
-    screen_print("  blocked: ");
-    scheduler_print_uint((unsigned int)blocked_count);
-    screen_print("\n");
+    platform_print("  blocked: ");
+    platform_print_uint((unsigned int)blocked_count);
+    platform_print("\n");
 
-    screen_print("  broken:  ");
-    scheduler_print_uint((unsigned int)broken_count);
-    screen_print("\n");
+    platform_print("  broken:  ");
+    platform_print_uint((unsigned int)broken_count);
+    platform_print("\n");
 
-    screen_print("  ticks:   ");
-    scheduler_print_uint(scheduler_ticks);
-    screen_print("\n");
+    platform_print("  ticks:   ");
+    platform_print_uint(scheduler_ticks);
+    platform_print("\n");
 }
 
 void scheduler_doctor(void) {
@@ -613,74 +613,74 @@ void scheduler_doctor(void) {
         }
     }
 
-    screen_print("Task doctor:\n");
+    platform_print("Task doctor:\n");
 
-    screen_print("  total:   ");
-    scheduler_print_uint((unsigned int)task_count);
-    screen_print("\n");
+    platform_print("  total:   ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
 
-    screen_print("  running: ");
-    scheduler_print_uint((unsigned int)running_count);
-    screen_print("\n");
+    platform_print("  running: ");
+    platform_print_uint((unsigned int)running_count);
+    platform_print("\n");
 
-    screen_print("  ready:   ");
-    scheduler_print_uint((unsigned int)ready_count);
-    screen_print("\n");
+    platform_print("  ready:   ");
+    platform_print_uint((unsigned int)ready_count);
+    platform_print("\n");
 
-    screen_print("  blocked: ");
-    scheduler_print_uint((unsigned int)blocked_count);
-    screen_print("\n");
+    platform_print("  blocked: ");
+    platform_print_uint((unsigned int)blocked_count);
+    platform_print("\n");
 
-    screen_print("  broken:  ");
-    scheduler_print_uint((unsigned int)broken_count);
-    screen_print("\n");
+    platform_print("  broken:  ");
+    platform_print_uint((unsigned int)broken_count);
+    platform_print("\n");
 
-    screen_print("  result:  ");
+    platform_print("  result:  ");
 
     if (broken_count > 0) {
-        screen_print("broken\n");
+        platform_print("broken\n");
     } else {
-        screen_print("ok\n");
+        platform_print("ok\n");
     }
 }
 
 void scheduler_validate(void) {
-    screen_print("Scheduler validation:\n");
+    platform_print("Scheduler validation:\n");
 
-    screen_print("  active index: ");
-    scheduler_print_uint((unsigned int)active_task_index);
-    screen_print("\n");
+    platform_print("  active index: ");
+    platform_print_uint((unsigned int)active_task_index);
+    platform_print("\n");
 
-    screen_print("  active task:  ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("  active task:  ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 
-    screen_print("  active state: ");
+    platform_print("  active state: ");
 
     if (active_task_index < 0 || active_task_index >= task_count) {
-        screen_print("invalid\n");
-        screen_print("  result:       broken\n");
+        platform_print("invalid\n");
+        platform_print("  result:       broken\n");
         return;
     }
 
-    screen_print(tasks[active_task_index].status);
-    screen_print("\n");
+    platform_print(tasks[active_task_index].status);
+    platform_print("\n");
 
-    screen_print("  result:       ");
+    platform_print("  result:       ");
 
     if (scheduler_task_is_runnable(active_task_index)) {
-        screen_print("ok\n");
+        platform_print("ok\n");
     } else {
-        screen_print("broken\n");
+        platform_print("broken\n");
     }
 }
 
 void scheduler_fix(void) {
-    screen_print("Scheduler fix:\n");
+    platform_print("Scheduler fix:\n");
 
     if (task_count <= 0) {
         active_task_index = 0;
-        screen_print("  no tasks.\n");
+        platform_print("  no tasks.\n");
         return;
     }
 
@@ -692,11 +692,11 @@ void scheduler_fix(void) {
         scheduler_switch_to_next_runnable();
     }
 
-    screen_print("  active task: ");
-    screen_print(scheduler_get_active_task());
-    screen_print("\n");
+    platform_print("  active task: ");
+    platform_print(scheduler_get_active_task());
+    platform_print("\n");
 
-    screen_print("  result: ok\n");
+    platform_print("  result: ok\n");
 }
 
 int scheduler_has_broken_tasks(void) {

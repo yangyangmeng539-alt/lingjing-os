@@ -12,6 +12,7 @@
 #include "security.h"
 #include "lang.h"
 #include "platform.h"
+#include "scheduler.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -114,75 +115,37 @@ static void print_hex_digit(unsigned int value) {
     screen_put_char(digit);
 }
 
-static void print_hex32(unsigned int value) {
-    screen_print("0x");
-
-    for (int shift = 28; shift >= 0; shift -= 4) {
-        print_hex_digit((value >> shift) & 0xF);
-    }
-}
-
-static void print_uint(unsigned int value) {
-    char buffer[16];
-    int index = 0;
-
-    if (value == 0) {
-        screen_put_char('0');
-        return;
-    }
-
-    while (value > 0 && index < 16) {
-        buffer[index] = (char)('0' + (value % 10));
-        value /= 10;
-        index++;
-    }
-
-    for (int i = index - 1; i >= 0; i--) {
-        screen_put_char(buffer[i]);
-    }
-}
-
 static void shell_prompt(void) {
-    screen_print("> ");
+    platform_print("> ");
 }
 
 static void shell_handle_mem(void) {
-    screen_print("Memory info:\n");
+    platform_print("Memory:\n");
 
-    screen_print("  kernel start: ");
-    print_hex32((unsigned int)&start);
-    screen_print("\n");
+    platform_print("  next alloc: ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
 
-    screen_print("  kernel end:   ");
-    print_hex32((unsigned int)&end);
-    screen_print("\n");
-
-    screen_print("  stack near:   ");
-    print_hex32(kernel_stack_marker);
-    screen_print("\n");
-
-    screen_print("  next alloc:   ");
-    print_hex32(memory_get_placement_address());
-    screen_print("\n");
+    platform_print("  allocator:  bump\n");
 }
 
 static void shell_handle_uptime(void) {
-    screen_print("Uptime:\n");
+    platform_print("Uptime:\n");
 
-    screen_print("  ticks:   ");
-    print_uint(timer_get_ticks());
-    screen_print("\n");
+    platform_print("  ticks:   ");
+    platform_print_uint(timer_get_ticks());
+    platform_print("\n");
 
-    screen_print("  seconds: ");
-    print_uint(timer_get_seconds());
-    screen_print("\n");
+    platform_print("  seconds: ");
+    platform_print_uint(timer_get_seconds());
+    platform_print("\n");
 }
 
 static void shell_handle_intent(const char* cmd) {
     const char* name = cmd + 7;
 
     if (name[0] == '\0') {
-        screen_print("usage: intent <name>\n");
+        platform_print("usage: intent <name>\n");
         return;
     }
 
@@ -193,7 +156,7 @@ static void shell_handle_unload(const char* cmd) {
     const char* name = cmd + 7;
 
     if (name[0] == '\0') {
-        screen_print("usage: unload <module>\n");
+        platform_print("usage: unload <module>\n");
         return;
     }
 
@@ -204,7 +167,7 @@ static void shell_handle_load(const char* cmd) {
     const char* name = cmd + 5;
 
     if (name[0] == '\0') {
-        screen_print("usage: load <module>\n");
+        platform_print("usage: load <module>\n");
         return;
     }
 
@@ -215,7 +178,7 @@ static void shell_handle_moduleinfo(const char* cmd) {
     const char* name = cmd + 11;
 
     if (name[0] == '\0') {
-        screen_print("usage: moduleinfo <name>\n");
+        platform_print("usage: moduleinfo <name>\n");
         return;
     }
 
@@ -226,7 +189,7 @@ static void shell_handle_moduledeps(const char* cmd) {
     const char* name = cmd + 11;
 
     if (name[0] == '\0') {
-        screen_print("usage: moduledeps <name>\n");
+        platform_print("usage: moduledeps <name>\n");
         return;
     }
 
@@ -237,7 +200,7 @@ static void shell_handle_modulebreak(const char* cmd) {
     const char* name = cmd + 12;
 
     if (name[0] == '\0') {
-        screen_print("usage: modulebreak <name>\n");
+        platform_print("usage: modulebreak <name>\n");
         return;
     }
 
@@ -248,7 +211,7 @@ static void shell_handle_modulefix(const char* cmd) {
     const char* name = cmd + 10;
 
     if (name[0] == '\0') {
-        screen_print("usage: modulefix <name>\n");
+        platform_print("usage: modulefix <name>\n");
         return;
     }
 
@@ -264,42 +227,57 @@ static void shell_handle_modulecheck(void) {
 }
 
 static void shell_handle_sysinfo(void) {
-    screen_print("Lingjing OS System Info\n");
+    platform_print("Lingjing OS System Info\n");
 
-    screen_print("  version:        ");
-    screen_print(LINGJING_VERSION);
-    screen_print("\n");
+    platform_print("  version:        ");
+    platform_print(LINGJING_VERSION);
+    platform_print("\n");
 
-    screen_print("  stage:          ");
-    screen_print(LINGJING_STAGE);
-    screen_print("\n");
+    platform_print("  stage:          ");
+    platform_print(LINGJING_STAGE);
+    platform_print("\n");
 
-    screen_print("  arch:           ");
-    screen_print(LINGJING_ARCH);
-    screen_print("\n");
+    platform_print("  arch:           ");
+    platform_print(LINGJING_ARCH);
+    platform_print("\n");
 
-    screen_print("  boot:           ");
-    screen_print(LINGJING_BOOT);
-    screen_print("\n");
+    platform_print("  boot:           ");
+    platform_print(LINGJING_BOOT);
+    platform_print("\n");
 
-    screen_print("  intent layer:   ");
-    screen_print(LINGJING_INTENT_LAYER);
-    screen_print("\n");
+    platform_print("  intent layer:   ");
+    platform_print(LINGJING_INTENT_LAYER);
+    platform_print("\n");
 
-    screen_print("  gdt:            ok\n");
-    screen_print("  idt:            ok\n");
-    screen_print("  keyboard irq:   ok\n");
-    screen_print("  timer irq:      ok\n");
+    platform_print("  platform:       ");
+    platform_print(platform_get_name());
+    platform_print("\n");
 
-    screen_print("  memory:         bump allocator\n");
+    platform_print("  display:        ");
+    platform_print(platform_get_display());
+    platform_print("\n");
 
-    screen_print("  uptime seconds: ");
-    print_uint(timer_get_seconds());
-    screen_print("\n");
+    platform_print("  timer:          ");
+    platform_print(platform_get_timer());
+    platform_print("\n");
 
-    screen_print("  next alloc:     ");
-    print_hex32(memory_get_placement_address());
-    screen_print("\n");
+    platform_print("  input:          ");
+    platform_print(platform_get_input());
+    platform_print("\n");
+
+    platform_print("  gdt:            ok\n");
+    platform_print("  idt:            ok\n");
+    platform_print("  keyboard irq:   ok\n");
+    platform_print("  timer irq:      ok\n");
+    platform_print("  memory:         bump allocator\n");
+
+    platform_print("  uptime seconds: ");
+    platform_print_uint(timer_get_seconds());
+    platform_print("\n");
+
+    platform_print("  next alloc:     ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
 }
 
 static void shell_handle_dashboard(void) {
@@ -675,7 +653,7 @@ static void shell_handle_taskstate(const char* cmd) {
     const char* state = shell_skip_token(id_text);
 
     if (state[0] == '\0') {
-        screen_print("usage: taskstate <id> <state>\n");
+        platform_print("usage: taskstate <id> <state>\n");
         return;
     }
 
@@ -720,24 +698,28 @@ static void shell_handle_status(void) {
 }
 
 static void shell_handle_version(void) {
-    screen_print(LINGJING_NAME);
-    screen_print("\n");
+    platform_print(LINGJING_NAME);
+    platform_print("\n");
 
-    screen_print("  version: ");
-    screen_print(LINGJING_VERSION);
-    screen_print("\n");
+    platform_print("  version: ");
+    platform_print(LINGJING_VERSION);
+    platform_print("\n");
 
-    screen_print("  stage: ");
-    screen_print(LINGJING_STAGE);
-    screen_print("\n");
+    platform_print("  stage: ");
+    platform_print(LINGJING_STAGE);
+    platform_print("\n");
 
-    screen_print("  arch: ");
-    screen_print(LINGJING_ARCH);
-    screen_print("\n");
+    platform_print("  arch: ");
+    platform_print(LINGJING_ARCH);
+    platform_print("\n");
 
-    screen_print("  boot: ");
-    screen_print(LINGJING_BOOT);
-    screen_print("\n");
+    platform_print("  boot: ");
+    platform_print(LINGJING_BOOT);
+    platform_print("\n");
+
+    platform_print("  platform: ");
+    platform_print(platform_get_name());
+    platform_print("\n");
 }
 
 static void shell_handle_sleep(const char* cmd) {
@@ -745,17 +727,17 @@ static void shell_handle_sleep(const char* cmd) {
     unsigned int seconds = parse_uint(seconds_text);
 
     if (seconds == 0) {
-        screen_print("usage: sleep <seconds>\n");
+        platform_print("usage: sleep <seconds>\n");
         return;
     }
 
-    screen_print("sleeping ");
-    print_uint(seconds);
-    screen_print(" seconds...\n");
+    platform_print("sleeping ");
+    platform_print_uint(seconds);
+    platform_print(" seconds...\n");
 
     timer_sleep(seconds);
 
-    screen_print("wake.\n");
+    platform_print("wake.\n");
 }
 
 static void shell_handle_kmalloc(const char* cmd) {
@@ -763,21 +745,21 @@ static void shell_handle_kmalloc(const char* cmd) {
     unsigned int size = parse_uint(size_text);
 
     if (size == 0) {
-        screen_print("usage: kmalloc <bytes>\n");
+        platform_print("usage: kmalloc <bytes>\n");
         return;
     }
 
-    unsigned int address = kmalloc(size);
+    void* ptr = kmalloc(size);
 
-    screen_print("allocated ");
-    print_uint(size);
-    screen_print(" bytes at ");
-    print_hex32(address);
-    screen_print("\n");
+    platform_print("allocated ");
+    platform_print_uint(size);
+    platform_print(" bytes at ");
+    platform_print_hex32((unsigned int)ptr);
+    platform_print("\n");
 
-    screen_print("next alloc: ");
-    print_hex32(memory_get_placement_address());
-    screen_print("\n");
+    platform_print("next alloc: ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
 }
 
 static void shell_handle_kcalloc(const char* cmd) {
@@ -785,145 +767,113 @@ static void shell_handle_kcalloc(const char* cmd) {
     unsigned int size = parse_uint(size_text);
 
     if (size == 0) {
-        screen_print("usage: kcalloc <bytes>\n");
+        platform_print("usage: kcalloc <bytes>\n");
         return;
     }
 
-    unsigned int address = kcalloc(size);
+    void* ptr = kcalloc(size);
 
-    screen_print("allocated and zeroed ");
-    print_uint(size);
-    screen_print(" bytes at ");
-    print_hex32(address);
-    screen_print("\n");
+    platform_print("allocated zeroed ");
+    platform_print_uint(size);
+    platform_print(" bytes at ");
+    platform_print_hex32((unsigned int)ptr);
+    platform_print("\n");
 
-    screen_print("next alloc: ");
-    print_hex32(memory_get_placement_address());
-    screen_print("\n");
+    platform_print("next alloc: ");
+    platform_print_hex32(memory_get_placement_address());
+    platform_print("\n");
 }
 
 static void shell_handle_peek(const char* cmd) {
     const char* addr_text = cmd + 5;
-    unsigned int address = parse_hex_or_uint(addr_text);
+    unsigned int addr = parse_hex_or_uint(addr_text);
 
-    if (address == 0) {
-        screen_print("usage: peek <addr>\n");
-        return;
-    }
+    unsigned char value = *((unsigned char*)addr);
 
-    volatile unsigned char* ptr = (volatile unsigned char*)address;
-    unsigned int value = (unsigned int)(*ptr);
-
-    screen_print("addr: ");
-    print_hex32(address);
-    screen_print("\n");
-
-    screen_print("value: ");
-    print_uint(value);
-    screen_print(" / ");
-    print_hex32(value);
-    screen_print("\n");
-
-    if (value >= 32 && value <= 126) {
-        screen_print("char: ");
-        screen_put_char((char)value);
-        screen_print("\n");
-    }
+    platform_print("peek ");
+    platform_print_hex32(addr);
+    platform_print(" = ");
+    platform_print_hex32((unsigned int)value);
+    platform_print("\n");
 }
 
 static void shell_handle_poke(const char* cmd) {
-    const char* addr_text = cmd + 5;
-    const char* value_text = skip_token(addr_text);
-
-    unsigned int address = parse_hex_or_uint(addr_text);
+    const char* args = cmd + 5;
+    unsigned int addr = parse_hex_or_uint(args);
+    const char* value_text = skip_token(args);
     unsigned int value = parse_hex_or_uint(value_text);
 
-    if (address == 0) {
-        screen_print("usage: poke <addr> <value>\n");
-        return;
-    }
+    *((unsigned char*)addr) = (unsigned char)(value & 0xFF);
 
-    if (value > 255) {
-        screen_print("value must be 0-255\n");
-        return;
-    }
-
-    volatile unsigned char* ptr = (volatile unsigned char*)address;
-    *ptr = (unsigned char)value;
-
-    screen_print("wrote ");
-    print_uint(value);
-    screen_print(" to ");
-    print_hex32(address);
-    screen_print("\n");
+    platform_print("poke ");
+    platform_print_hex32(addr);
+    platform_print(" = ");
+    platform_print_hex32((unsigned int)(value & 0xFF));
+    platform_print("\n");
 }
 
 static void shell_handle_hexdump(const char* cmd) {
-    const char* addr_text = cmd + 8;
-    const char* len_text = skip_token(addr_text);
+    const char* args = cmd + 8;
+    unsigned int addr = parse_hex_or_uint(args);
+    const char* len_text = shell_skip_token(args);
+    unsigned int len = parse_uint(len_text);
 
-    unsigned int address = parse_hex_or_uint(addr_text);
-    unsigned int length = parse_hex_or_uint(len_text);
-
-    if (address == 0 || length == 0) {
-        screen_print("usage: hexdump <addr> <len>\n");
+    if (len == 0) {
+        platform_print("usage: hexdump <addr> <len>\n");
         return;
     }
 
-    volatile unsigned char* ptr = (volatile unsigned char*)address;
+    unsigned char* ptr = (unsigned char*)addr;
 
-    for (unsigned int i = 0; i < length; i++) {
-        if ((i % 16) == 0) {
-            if (i != 0) {
-                screen_print("\n");
-            }
+    platform_print_hex32(addr);
+    platform_print(": ");
 
-            print_hex32(address + i);
-            screen_print(": ");
-        }
-
+    for (unsigned int i = 0; i < len; i++) {
         unsigned int value = (unsigned int)ptr[i];
+        const char* hex = "0123456789ABCDEF";
 
-        print_hex_digit((value >> 4) & 0xF);
-        print_hex_digit(value & 0xF);
-        screen_put_char(' ');
+        platform_put_char(hex[(value >> 4) & 0xF]);
+        platform_put_char(hex[value & 0xF]);
+
+        if (i + 1 < len) {
+            platform_put_char(' ');
+        }
     }
 
-    screen_print("\n");
+    platform_print("\n");
 }
 
 static void shell_handle_kzero(const char* cmd) {
-    const char* addr_text = cmd + 6;
-    const char* len_text = skip_token(addr_text);
+    const char* args = cmd + 6;
+    unsigned int addr = parse_hex_or_uint(args);
+    const char* len_text = shell_skip_token(args);
+    unsigned int len = parse_uint(len_text);
 
-    unsigned int address = parse_hex_or_uint(addr_text);
-    unsigned int length = parse_hex_or_uint(len_text);
-
-    if (address == 0 || length == 0) {
-        screen_print("usage: kzero <addr> <len>\n");
+    if (len == 0) {
+        platform_print("usage: kzero <addr> <len>\n");
         return;
     }
 
-    volatile unsigned char* ptr = (volatile unsigned char*)address;
+    unsigned char* ptr = (unsigned char*)addr;
 
-    for (unsigned int i = 0; i < length; i++) {
+    for (unsigned int i = 0; i < len; i++) {
         ptr[i] = 0;
     }
 
-    screen_print("zeroed ");
-    print_uint(length);
-    screen_print(" bytes at ");
-    print_hex32(address);
-    screen_print("\n");
+    platform_print("zeroed ");
+    platform_print_uint(len);
+    platform_print(" bytes at ");
+    platform_print_hex32(addr);
+    platform_print("\n");
 }
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
-        screen_print("Lingjing OS experimental kernel.\n");
+        platform_print("Lingjing OS experimental kernel.\n");
     } else if (str_equal(cmd, "version")) {
         shell_handle_version();
     } else if (str_equal(cmd, "sysinfo")) {
@@ -1005,14 +955,14 @@ static void shell_handle_command(const char* cmd) {
     } else if (str_starts_with(cmd, "sleep ")) {
         shell_handle_sleep(cmd);
     } else if (str_equal(cmd, "reboot")) {
-        screen_print("rebooting...\n");
+        platform_print("rebooting...\n");
         system_reboot();
     } else if (str_equal(cmd, "halt")) {
-        screen_print("system halted.\n");
+        platform_print("system halted.\n");
         system_halt();
     } else if (str_equal(cmd, "lingjing")) {
-        screen_print("Lingjing core awakened.\n");
-        screen_print("My machine, my rules.\n");
+        platform_print("Lingjing core awakened.\n");
+        platform_print("My machine, my rules.\n");
     } else if (str_starts_with(cmd, "kmalloc ")) {
         shell_handle_kmalloc(cmd);
     } else if (str_starts_with(cmd, "kcalloc ")) {
@@ -1026,14 +976,14 @@ static void shell_handle_command(const char* cmd) {
     } else if (str_starts_with(cmd, "kzero ")) {
         shell_handle_kzero(cmd);
     } else if (cmd[0] == 'e' && cmd[1] == 'c' && cmd[2] == 'h' && cmd[3] == 'o' && cmd[4] == ' ') {
-        screen_print(cmd + 5);
-        screen_print("\n");
+        platform_print(cmd + 5);
+        platform_print("\n");
     } else if (cmd[0] == '\0') {
         return;
     } else {
-        screen_print("unknown command: ");
-        screen_print(cmd);
-        screen_print("\n");
+        platform_print("unknown command: ");
+        platform_print(cmd);
+        platform_print("\n");
     }
 }
 

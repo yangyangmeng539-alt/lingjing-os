@@ -2,6 +2,7 @@
 #include "screen.h"
 #include "module.h"
 #include "security.h"
+#include "platform.h"
 
 #define MAX_INTENT_MODULES 4
 
@@ -109,17 +110,17 @@ static void intent_history_push(const char* text) {
 }
 
 static void intent_history_show(void) {
-    screen_print("Intent history:\n");
+    platform_print("Intent history:\n");
 
     if (intent_history_count == 0) {
-        screen_print("  empty\n");
+        platform_print("  empty\n");
         return;
     }
 
     for (int i = 0; i < intent_history_count; i++) {
-        screen_print("  ");
-        screen_print(intent_history[i]);
-        screen_print("\n");
+        platform_print("  ");
+        platform_print(intent_history[i]);
+        platform_print("\n");
     }
 }
 
@@ -130,102 +131,105 @@ static void intent_history_clear(void) {
 
     intent_history_count = 0;
 
-    screen_print("Intent history cleared.\n");
+    platform_print("Intent history cleared.\n");
 }
 
 static void intent_audit(void) {
-    screen_print("Intent audit:\n");
+    platform_print("Intent audit:\n");
 
-    screen_print("  single intent guard: enabled\n");
-    screen_print("  permission check:    mock\n");
-    screen_print("  module lifecycle:    load/unload\n");
-    screen_print("  history:             enabled\n");
-    screen_print("  lock:                ");
-    screen_print(intent_locked ? "locked\n" : "unlocked\n");
+    platform_print("  single intent guard: enabled\n");
+    platform_print("  permission check:    mock\n");
+    platform_print("  module lifecycle:    load/unload\n");
+    platform_print("  history:             enabled\n");
+    platform_print("  lock:                ");
+    platform_print(intent_locked ? "locked\n" : "unlocked\n");
 
-    screen_print("  allow video:         ");
-    screen_print(allow_video ? "yes\n" : "no\n");
+    platform_print("  allow video:         ");
+    platform_print(allow_video ? "yes\n" : "no\n");
 
-    screen_print("  allow ai:            ");
-    screen_print(allow_ai ? "yes\n" : "no\n");
+    platform_print("  allow ai:            ");
+    platform_print(allow_ai ? "yes\n" : "no\n");
 
-    screen_print("  allow network:       ");
-    screen_print(allow_network ? "yes\n" : "no\n");
+    platform_print("  allow network:       ");
+    platform_print(allow_network ? "yes\n" : "no\n");
 
-    screen_print("  current intent:      ");
+    platform_print("  current intent:      ");
 
     if (current_intent_running == 0) {
-        screen_print("none\n");
+        platform_print("none\n");
     } else {
-        screen_print(current_intent);
-        screen_print("\n");
+        platform_print(current_intent);
+        platform_print("\n");
     }
 }
 
-static void intent_policy(void) {
-    screen_print("Intent policy:\n");
+static int intent_is_allowed(const char* name);
 
-    screen_print("  video:     ");
-    screen_print(allow_video ? "allowed\n" : "denied\n");
+void intent_policy(void) {
+    platform_print("Intent policy:\n");
 
-    screen_print("  ai:        ");
-    screen_print(allow_ai ? "allowed\n" : "denied\n");
+    platform_print("  video:     ");
+    platform_print(intent_is_allowed("video") ? "allowed\n" : "denied\n");
 
-    screen_print("  network:   ");
-    screen_print(allow_network ? "allowed\n" : "denied\n");
+    platform_print("  ai:        ");
+    platform_print(intent_is_allowed("ai") ? "allowed\n" : "denied\n");
 
-    screen_print("  guard:     single-intent\n");
-    screen_print("  lifecycle: load/unload\n");
-    screen_print("  lock:      ");
-    screen_print(intent_locked ? "locked\n" : "unlocked\n");
+    platform_print("  network:   ");
+    platform_print(intent_is_allowed("network") ? "allowed\n" : "denied\n");
+
+    platform_print("  guard:     single-intent\n");
+    platform_print("  lifecycle: load/unload\n");
+
+    platform_print("  lock:      ");
+    platform_print(intent_locked ? "locked\n" : "unlocked\n");
 }
 
-static void intent_doctor(void) {
+void intent_doctor(void) {
     int deps_broken = module_has_broken_dependencies();
 
-    screen_print("Intent doctor:\n");
+    platform_print("Intent doctor:\n");
 
-    screen_print("  policy:       ok\n");
+    platform_print("  policy:       ok\n");
 
-    screen_print("  lock:         ");
-    screen_print(intent_locked ? "locked\n" : "unlocked\n");
+    platform_print("  lock:         ");
+    platform_print(intent_locked ? "locked\n" : "unlocked\n");
 
-    screen_print("  dependencies: ");
-    screen_print(deps_broken ? "broken\n" : "ok\n");
+    platform_print("  dependencies: ");
+    platform_print(deps_broken ? "broken\n" : "ok\n");
 
-    screen_print("  current:      ");
+    platform_print("  current:      ");
 
     if (current_intent_running == 0) {
-        screen_print("none\n");
+        platform_print("none\n");
     } else {
-        screen_print(current_intent);
-        screen_print("\n");
+        platform_print(current_intent);
+        platform_print("\n");
     }
 
     if (intent_locked) {
-        screen_print("  result:       blocked\n");
-        screen_print("  reason:       intent system locked\n");
+        platform_print("  result:       blocked\n");
+        platform_print("  reason:       intent system locked\n");
         return;
     }
 
     if (deps_broken) {
-        screen_print("  result:       blocked\n");
-        screen_print("  reason:       module dependency broken\n");
+        platform_print("  result:       blocked\n");
+        platform_print("  reason:       module dependency broken\n");
         return;
     }
 
-    screen_print("  result:       ready\n");
+    platform_print("  result:       ready\n");
 }
 
 static int intent_can_execute(void) {
     if (intent_locked) {
-        screen_print("intent blocked: intent system locked.\n");
+        platform_print("intent blocked: intent system locked.\n");
         return 0;
     }
 
     if (module_has_broken_dependencies()) {
-        screen_print("intent blocked: module dependency broken.\n");
-        screen_print("run modulecheck first.\n");
+        platform_print("intent blocked: module dependency broken.\n");
+        platform_print("run modulecheck first.\n");
         return 0;
     }
 
@@ -234,16 +238,16 @@ static int intent_can_execute(void) {
 
 static void intent_lock(void) {
     intent_locked = 1;
-    screen_print("intent system locked.\n");
+    platform_print("intent system locked.\n");
 }
 
 static void intent_unlock(void) {
     intent_locked = 0;
-    screen_print("intent system unlocked.\n");
+    platform_print("intent system unlocked.\n");
 }
 
 static void intent_reset(void) {
-    screen_print("Intent reset:\n");
+    platform_print("Intent reset:\n");
 
     if (current_intent_running != 0) {
         const intent_entry_t* intent = intent_find(current_intent);
@@ -267,10 +271,10 @@ static void intent_reset(void) {
 
     intent_history_count = 0;
 
-    screen_print("  permissions restored.\n");
-    screen_print("  lock cleared.\n");
-    screen_print("  history cleared.\n");
-    screen_print("intent system reset.\n");
+    platform_print("  permissions restored.\n");
+    platform_print("  lock cleared.\n");
+    platform_print("  history cleared.\n");
+    platform_print("intent system reset.\n");
 }
 
 static const intent_entry_t* intent_find(const char* name) {
@@ -320,42 +324,42 @@ static void intent_allow_command(const char* name) {
     const intent_entry_t* intent = intent_find(name);
 
     if (intent == 0) {
-        screen_print("intent not found: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("intent not found: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     intent_set_allowed(name, 1);
 
-    screen_print("intent allowed: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("intent allowed: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 static void intent_deny_command(const char* name) {
     const intent_entry_t* intent = intent_find(name);
 
     if (intent == 0) {
-        screen_print("intent not found: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("intent not found: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (current_intent_running != 0 && str_equal_local(current_intent, name)) {
-        screen_print("cannot deny running intent: ");
-        screen_print(name);
-        screen_print("\n");
-        screen_print("stop it first.\n");
+        platform_print("cannot deny running intent: ");
+        platform_print(name);
+        platform_print("\n");
+        platform_print("stop it first.\n");
         return;
     }
 
     intent_set_allowed(name, 0);
 
-    screen_print("intent denied: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("intent denied: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 static const char* skip_token_local(const char* text) {
@@ -374,9 +378,9 @@ static const char* skip_token_local(const char* text) {
 
 static void intent_require_module(const char* name) {
     if (module_exists(name)) {
-        screen_print("module already ready: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("module already ready: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
@@ -389,74 +393,78 @@ static int intent_can_start(const char* name) {
     }
 
     if (str_equal_local(current_intent, name)) {
-        screen_print("intent already running: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("intent already running: ");
+        platform_print(name);
+        platform_print("\n");
         return 0;
     }
 
-    screen_print("intent already running: ");
-    screen_print(current_intent);
-    screen_print("\n");
-    screen_print("stop it first.\n");
+    platform_print("intent already running: ");
+    platform_print(current_intent);
+    platform_print("\n");
+    platform_print("stop it first.\n");
 
     return 0;
 }
 
 void intent_list(void) {
-    screen_print("Available intents:\n");
+    platform_print("Available intents:\n");
 
     for (int i = 0; i < intent_count; i++) {
-        screen_print("  ");
-        screen_print(intent_table[i].name);
-        screen_print("    requires: ");
+        platform_print("  ");
+        platform_print(intent_table[i].name);
+        platform_print("    requires: ");
 
         for (int j = 0; j < intent_table[i].require_count; j++) {
-            screen_print(intent_table[i].requires[j].module);
+            platform_print(intent_table[i].requires[j].module);
 
             if (j < intent_table[i].require_count - 1) {
-                screen_print(", ");
+                platform_print(", ");
             }
         }
 
-        screen_print("\n");
+        platform_print("\n");
     }
 
-    screen_print("  status\n");
-    screen_print("  history\n");
-    screen_print("  clear-history\n");
-    screen_print("  audit\n");
-    screen_print("  policy\n");
-    screen_print("  doctor\n");
-    screen_print("  lock\n");
-    screen_print("  unlock\n");
-    screen_print("  reset\n");
-    screen_print("  allow <intent>\n");
-    screen_print("  deny <intent>\n");
-    screen_print("  permissions\n");
-    screen_print("  plan <intent>\n");
-    screen_print("  run <intent>\n");
-    screen_print("  stop           stops current intent\n");
-    screen_print("  stop <intent>  stops selected intent\n");
-    screen_print("  restart        restarts current intent\n");
-    screen_print("  switch <intent> switches current intent\n");
+    platform_print("  status\n");
+    platform_print("  history\n");
+    platform_print("  clear-history\n");
+    platform_print("  audit\n");
+    platform_print("  policy\n");
+    platform_print("  doctor\n");
+    platform_print("  lock\n");
+    platform_print("  unlock\n");
+    platform_print("  reset\n");
+    platform_print("  allow <intent>\n");
+    platform_print("  deny <intent>\n");
+    platform_print("  permissions\n");
+    platform_print("  plan <intent>\n");
+    platform_print("  run <intent>\n");
+    platform_print("  stop           stops current intent\n");
+    platform_print("  stop <intent>  stops selected intent\n");
+    platform_print("  restart        restarts current intent\n");
+    platform_print("  switch <intent> switches current intent\n");
 }
 
 void intent_permissions(void) {
-    screen_print("Intent permissions:\n");
+    platform_print("Intent permissions:\n");
 
     for (int i = 0; i < intent_count; i++) {
-        screen_print("  ");
-        screen_print(intent_table[i].name);
-        screen_print(":\n");
+        platform_print("  ");
+        platform_print(intent_table[i].name);
+        platform_print(": ");
 
         for (int j = 0; j < intent_table[i].require_count; j++) {
-            screen_print("    ");
-            screen_print(intent_table[i].requires[j].module);
-            screen_print(": ");
-            screen_print(intent_table[i].requires[j].permission);
-            screen_print("\n");
+            platform_print(intent_table[i].requires[j].module);
+            platform_print("=");
+            platform_print(intent_table[i].requires[j].permission);
+
+            if (j < intent_table[i].require_count - 1) {
+                platform_print(", ");
+            }
         }
+
+        platform_print("\n");
     }
 }
 
@@ -469,16 +477,16 @@ int intent_is_running(void) {
 }
 
 void intent_status(void) {
-    screen_print("Current intent:\n");
+    platform_print("Current intent:\n");
 
     if (current_intent_running == 0) {
-        screen_print("  none\n");
+        platform_print("  none\n");
         return;
     }
 
-    screen_print("  ");
-    screen_print(current_intent);
-    screen_print(" running\n");
+    platform_print("  ");
+    platform_print(current_intent);
+    platform_print(" running\n");
 
     const intent_entry_t* intent = intent_find(current_intent);
 
@@ -486,64 +494,64 @@ void intent_status(void) {
         return;
     }
 
-    screen_print("  modules: ");
+    platform_print("  modules: ");
 
     for (int i = 0; i < intent->require_count; i++) {
-        screen_print(intent->requires[i].module);
+        platform_print(intent->requires[i].module);
 
         if (i < intent->require_count - 1) {
-            screen_print(", ");
+            platform_print(", ");
         }
     }
 
-    screen_print("\n");
+    platform_print("\n");
 }
 
 static void intent_plan(const intent_entry_t* intent) {
-    screen_print("Intent plan: ");
-    screen_print(intent->name);
-    screen_print("\n");
+    platform_print("Intent plan: ");
+    platform_print(intent->name);
+    platform_print("\n");
 
-    screen_print("  requires:\n");
-
-    for (int i = 0; i < intent->require_count; i++) {
-        screen_print("    ");
-        screen_print(intent->requires[i].module);
-        screen_print("\n");
-    }
-
-    screen_print("  permissions:\n");
+    platform_print("  requires:\n");
 
     for (int i = 0; i < intent->require_count; i++) {
-        screen_print("    ");
-        screen_print(intent->requires[i].module);
-        screen_print(": ");
-        screen_print(intent->requires[i].permission);
-        screen_print("\n");
+        platform_print("    ");
+        platform_print(intent->requires[i].module);
+        platform_print("\n");
     }
 
-    screen_print("  dependencies:\n");
+    platform_print("  permissions:\n");
+
+    for (int i = 0; i < intent->require_count; i++) {
+        platform_print("    ");
+        platform_print(intent->requires[i].module);
+        platform_print(": ");
+        platform_print(intent->requires[i].permission);
+        platform_print("\n");
+    }
+
+    platform_print("  dependencies:\n");
 
     for (int i = 0; i < intent->require_count; i++) {
         const char* module_name = intent->requires[i].module;
         const char* depends = module_get_depends(module_name);
 
-        screen_print("    ");
-        screen_print(module_name);
-        screen_print(" -> ");
-        screen_print(depends);
-        screen_print(" : ");
+        platform_print("    ");
+        platform_print(module_name);
+        platform_print(" -> ");
+        platform_print(depends);
+        platform_print(" : ");
 
         if (module_dependency_ok(module_name)) {
-            screen_print("ok\n");
+            platform_print("ok\n");
         } else {
-            screen_print("broken\n");
+            platform_print("broken\n");
         }
     }
 
-    screen_print("  lifecycle:\n");
-    screen_print("    load on start\n");
-    screen_print("    unload on stop\n");
+    platform_print("  lifecycle:\n");
+    platform_print("    load on start\n");
+    platform_print("    unload on stop\n");
 }
 
 static void intent_run_entry(const intent_entry_t* intent) {
@@ -552,16 +560,16 @@ static void intent_run_entry(const intent_entry_t* intent) {
     }
 
     if (!security_check_intent(intent->name)) {
-        screen_print("intent blocked by security: ");
-        screen_print(intent->name);
-        screen_print("\n");
+        platform_print("intent blocked by security: ");
+        platform_print(intent->name);
+        platform_print("\n");
         return;
     }
 
     if (!intent_is_allowed(intent->name)) {
-        screen_print("intent denied: ");
-        screen_print(intent->name);
-        screen_print("\n");
+        platform_print("intent denied: ");
+        platform_print(intent->name);
+        platform_print("\n");
         return;
     }
 
@@ -569,33 +577,33 @@ static void intent_run_entry(const intent_entry_t* intent) {
         return;
     }
 
-    screen_print("Intent run: ");
-    screen_print(intent->name);
-    screen_print("\n");
+    platform_print("Intent run: ");
+    platform_print(intent->name);
+    platform_print("\n");
 
-    screen_print("using plan: ");
-    screen_print(intent->name);
-    screen_print("\n");
+    platform_print("using plan: ");
+    platform_print(intent->name);
+    platform_print("\n");
 
-    screen_print("requires: ");
+    platform_print("requires: ");
 
     for (int i = 0; i < intent->require_count; i++) {
-        screen_print(intent->requires[i].module);
+        platform_print(intent->requires[i].module);
 
         if (i < intent->require_count - 1) {
-            screen_print(", ");
+            platform_print(", ");
         }
     }
 
-    screen_print("\n");
-    screen_print("checking permissions...\n");
+    platform_print("\n");
+    platform_print("checking permissions...\n");
 
     for (int i = 0; i < intent->require_count; i++) {
-        screen_print("permission ");
-        screen_print(intent->requires[i].module);
-        screen_print(": ");
-        screen_print(intent->requires[i].permission);
-        screen_print(" allowed\n");
+        platform_print("permission ");
+        platform_print(intent->requires[i].module);
+        platform_print(": ");
+        platform_print(intent->requires[i].permission);
+        platform_print(" allowed\n");
     }
 
     for (int i = 0; i < intent->require_count; i++) {
@@ -613,13 +621,13 @@ static void intent_run_entry(const intent_entry_t* intent) {
         intent_history_push("run network");
     }
 
-    screen_print("intent ready.\n");
+    platform_print("intent ready.\n");
 }
 
 static void intent_stop_entry(const intent_entry_t* intent) {
-    screen_print("Intent stop: ");
-    screen_print(intent->name);
-    screen_print("\n");
+    platform_print("Intent stop: ");
+    platform_print(intent->name);
+    platform_print("\n");
 
     for (int i = 0; i < intent->require_count; i++) {
         module_unload_mock(intent->requires[i].module);
@@ -638,21 +646,21 @@ static void intent_stop_entry(const intent_entry_t* intent) {
         current_intent_running = 0;
     }
 
-    screen_print("intent stopped.\n");
+    platform_print("intent stopped.\n");
 }
 
 static void intent_stop_current(void) {
     if (current_intent_running == 0) {
-        screen_print("no intent running.\n");
+        platform_print("no intent running.\n");
         return;
     }
 
     const intent_entry_t* intent = intent_find(current_intent);
 
     if (intent == 0) {
-        screen_print("current intent not found: ");
-        screen_print(current_intent);
-        screen_print("\n");
+        platform_print("current intent not found: ");
+        platform_print(current_intent);
+        platform_print("\n");
         current_intent = "none";
         current_intent_running = 0;
         return;
@@ -667,7 +675,7 @@ static void intent_restart_current(void) {
     }
 
     if (current_intent_running == 0) {
-        screen_print("no intent running.\n");
+        platform_print("no intent running.\n");
         return;
     }
 
@@ -675,17 +683,17 @@ static void intent_restart_current(void) {
     const intent_entry_t* intent = intent_find(restart_name);
 
     if (intent == 0) {
-        screen_print("current intent not found: ");
-        screen_print(restart_name);
-        screen_print("\n");
+        platform_print("current intent not found: ");
+        platform_print(restart_name);
+        platform_print("\n");
         current_intent = "none";
         current_intent_running = 0;
         return;
     }
 
-    screen_print("Intent restart: ");
-    screen_print(restart_name);
-    screen_print("\n");
+    platform_print("Intent restart: ");
+    platform_print(restart_name);
+    platform_print("\n");
 
     intent_stop_entry(intent);
     intent_run_entry(intent);
@@ -699,16 +707,16 @@ static void intent_switch_to(const char* name) {
     const intent_entry_t* target = intent_find(name);
 
     if (target == 0) {
-        screen_print("intent switch not supported: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("intent switch not supported: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (current_intent_running != 0 && str_equal_local(current_intent, name)) {
-        screen_print("intent already running: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("intent already running: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
@@ -727,17 +735,18 @@ static void intent_switch_to(const char* name) {
             intent_history_push("switch ai -> network");
         }
     }
-    screen_print("Intent switch: ");
+
+    platform_print("Intent switch: ");
 
     if (current_intent_running != 0) {
-        screen_print(current_intent);
+        platform_print(current_intent);
     } else {
-        screen_print("none");
+        platform_print("none");
     }
 
-    screen_print(" -> ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print(" -> ");
+    platform_print(name);
+    platform_print("\n");
 
     if (current_intent_running != 0) {
         const intent_entry_t* current = intent_find(current_intent);
@@ -825,9 +834,9 @@ void intent_run(const char* name) {
         const intent_entry_t* intent = intent_find(intent_name);
 
         if (intent == 0) {
-            screen_print("intent plan not supported: ");
-            screen_print(intent_name);
-            screen_print("\n");
+            platform_print("intent plan not supported: ");
+            platform_print(intent_name);
+            platform_print("\n");
             return;
         }
 
@@ -846,9 +855,9 @@ void intent_run(const char* name) {
         const intent_entry_t* intent = intent_find(intent_name);
 
         if (intent == 0) {
-            screen_print("intent run not supported: ");
-            screen_print(intent_name);
-            screen_print("\n");
+            platform_print("intent run not supported: ");
+            platform_print(intent_name);
+            platform_print("\n");
             return;
         }
 
@@ -861,9 +870,9 @@ void intent_run(const char* name) {
         const intent_entry_t* intent = intent_find(intent_name);
 
         if (intent == 0) {
-            screen_print("intent stop not supported: ");
-            screen_print(intent_name);
-            screen_print("\n");
+            platform_print("intent stop not supported: ");
+            platform_print(intent_name);
+            platform_print("\n");
             return;
         }
 
@@ -874,14 +883,14 @@ void intent_run(const char* name) {
     const intent_entry_t* legacy_intent = intent_find(name);
 
     if (legacy_intent != 0) {
-        screen_print("deprecated: use intent run ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("deprecated: use intent run ");
+        platform_print(name);
+        platform_print("\n");
         intent_run_entry(legacy_intent);
         return;
     }
 
-    screen_print("intent not found: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("intent not found: ");
+    platform_print(name);
+    platform_print("\n");
 }

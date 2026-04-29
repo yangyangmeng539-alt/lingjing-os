@@ -1,6 +1,7 @@
 #include "idt.h"
 #include "screen.h"
 #include "io.h"
+#include "platform.h"
 
 struct idt_entry {
     unsigned short base_low;
@@ -121,14 +122,14 @@ void isr_handler(registers_t* regs) {
         return;
     }
 
-    screen_print("Exception: ");
+    platform_print("Exception: ");
 
     char tens = (char)('0' + ((regs->int_no / 10) % 10));
     char ones = (char)('0' + (regs->int_no % 10));
 
     screen_put_char(tens);
     screen_put_char(ones);
-    screen_print("\n");
+    platform_print("\n");
 }
 
 void irq_handler(registers_t* regs) {

@@ -1,6 +1,7 @@
 #include "timer.h"
 #include "idt.h"
 #include "io.h"
+#include "scheduler.h"
 
 #define PIT_FREQUENCY 1193180
 #define TIMER_HZ 100

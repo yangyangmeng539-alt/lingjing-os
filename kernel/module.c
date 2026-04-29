@@ -1,6 +1,7 @@
 #include "module.h"
 #include "screen.h"
 #include "security.h"
+#include "scheduler.h"
 
 #define MAX_MODULES 16
 
@@ -85,43 +86,43 @@ void module_register(const char* name, const char* status, const char* type, con
 
 void module_load_mock(const char* name) {
     if (!security_check_module_load(name)) {
-        screen_print("module load blocked by security: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("module load blocked by security: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (module_exists(name)) {
-        screen_print("module already loaded: ");
-        screen_print(name);
-        screen_print("\n");
-        return;
-    }
-
-    if (str_equal_local(name, "ai")) {
-        screen_print("loading module: ai\n");
-        module_register("ai", "loaded", "external", "intent", "core");
-        screen_print("module loaded.\n");
-        return;
-    }
-
-    if (str_equal_local(name, "net")) {
-        screen_print("loading module: net\n");
-        module_register("net", "loaded", "external", "network", "timer");
-        screen_print("module loaded.\n");
+        platform_print("module already loaded: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (str_equal_local(name, "gui")) {
-        screen_print("loading module: gui\n");
+        platform_print("loading module: gui\n");
         module_register("gui", "loaded", "external", "display", "screen");
-        screen_print("module loaded.\n");
+        platform_print("module loaded.\n");
         return;
     }
 
-    screen_print("module source not found: ");
-    screen_print(name);
-    screen_print("\n");
+    if (str_equal_local(name, "net")) {
+        platform_print("loading module: net\n");
+        module_register("net", "loaded", "external", "network", "timer");
+        platform_print("module loaded.\n");
+        return;
+    }
+
+    if (str_equal_local(name, "ai")) {
+        platform_print("loading module: ai\n");
+        module_register("ai", "loaded", "external", "intent", "core");
+        platform_print("module loaded.\n");
+        return;
+    }
+
+    platform_print("unknown module: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 void module_unload_mock(const char* name) {
@@ -135,29 +136,29 @@ void module_unload_mock(const char* name) {
     }
 
     if (found_index < 0) {
-        screen_print("module not loaded: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("module not loaded: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (!security_check_module_unload(name, modules[found_index].type)) {
-        screen_print("module unload blocked by security: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("module unload blocked by security: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
     if (!str_equal_local(modules[found_index].type, "external")) {
-        screen_print("cannot unload core module: ");
-        screen_print(name);
-        screen_print("\n");
+        platform_print("cannot unload core module: ");
+        platform_print(name);
+        platform_print("\n");
         return;
     }
 
-    screen_print("unloading module: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("unloading module: ");
+    platform_print(name);
+    platform_print("\n");
 
     for (int i = found_index; i < module_count - 1; i++) {
         modules[i] = modules[i + 1];
@@ -165,82 +166,84 @@ void module_unload_mock(const char* name) {
 
     module_count--;
 
-    screen_print("module unloaded.\n");
+    platform_print("module unloaded.\n");
 }
 
 void module_list(void) {
-    screen_print("Registered modules:\n");
+    platform_print("Registered modules:\n");
 
     for (int i = 0; i < module_count; i++) {
-        screen_print("  ");
-        screen_print(modules[i].name);
-        screen_print("    ");
-        screen_print(modules[i].status);
-        screen_print("\n");
+        platform_print("  ");
+        platform_print(modules[i].name);
+        platform_print("    ");
+        platform_print(modules[i].status);
+        platform_print("\n");
     }
 }
 
 void module_info(const char* name) {
     for (int i = 0; i < module_count; i++) {
         if (str_equal_local(modules[i].name, name)) {
-            screen_print("Module:\n");
+            platform_print("Module:\n");
 
-            screen_print("  name:       ");
-            screen_print(modules[i].name);
-            screen_print("\n");
+            platform_print("  name:       ");
+            platform_print(modules[i].name);
+            platform_print("\n");
 
-            screen_print("  status:     ");
-            screen_print(modules[i].status);
-            screen_print("\n");
+            platform_print("  status:     ");
+            platform_print(modules[i].status);
+            platform_print("\n");
 
-            screen_print("  type:       ");
-            screen_print(modules[i].type);
-            screen_print("\n");
+            platform_print("  type:       ");
+            platform_print(modules[i].type);
+            platform_print("\n");
 
-            screen_print("  permission: ");
-            screen_print(modules[i].permission);
-            screen_print("\n");
+            platform_print("  permission: ");
+            platform_print(modules[i].permission);
+            platform_print("\n");
 
-            screen_print("  depends:    ");
-            screen_print(modules[i].depends);
-            screen_print("\n");
+            platform_print("  depends:    ");
+            platform_print(modules[i].depends);
+            platform_print("\n");
 
             return;
         }
     }
 
-    screen_print("module not found: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("module not found: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 void module_deps(const char* name) {
     for (int i = 0; i < module_count; i++) {
         if (str_equal_local(modules[i].name, name)) {
-            screen_print("Module dependency:\n");
-            screen_print("  ");
-            screen_print(modules[i].name);
-            screen_print(" -> ");
-            screen_print(modules[i].depends);
-            screen_print("\n");
+            platform_print("Module dependency:\n");
+
+            platform_print("  ");
+            platform_print(modules[i].name);
+            platform_print(" -> ");
+            platform_print(modules[i].depends);
+            platform_print("\n");
+
             return;
         }
     }
 
-    screen_print("module not found: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("module not found: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 static void module_tree_print_children(const char* parent, int depth) {
     for (int i = 0; i < module_count; i++) {
         if (str_equal_local(modules[i].depends, parent)) {
             for (int s = 0; s < depth; s++) {
-                screen_print("  ");
+                platform_print("  ");
             }
 
-            screen_print(modules[i].name);
-            screen_print("\n");
+            platform_print(modules[i].name);
+            platform_print("\n");
 
             module_tree_print_children(modules[i].name, depth + 1);
         }
@@ -248,17 +251,17 @@ static void module_tree_print_children(const char* parent, int depth) {
 }
 
 void module_tree(void) {
-    screen_print("Module tree:\n");
+    platform_print("Module tree:\n");
 
-    screen_print("  core\n");
+    platform_print("  core\n");
     module_tree_print_children("core", 2);
 
     for (int i = 0; i < module_count; i++) {
         if (!str_equal_local(modules[i].depends, "none") &&
             !module_exists(modules[i].depends)) {
-            screen_print("  ");
-            screen_print(modules[i].depends);
-            screen_print("\n");
+            platform_print("  ");
+            platform_print(modules[i].depends);
+            platform_print("\n");
 
             module_tree_print_children(modules[i].depends, 2);
         }
@@ -269,42 +272,42 @@ void module_check(void) {
     int ok_count = 0;
     int broken_count = 0;
 
-    screen_print("Module dependency check:\n");
+    platform_print("Module dependency check:\n");
 
     for (int i = 0; i < module_count; i++) {
-        screen_print("  ");
-        screen_print(modules[i].name);
-        screen_print("    ");
+        platform_print("  ");
+        platform_print(modules[i].name);
+        platform_print("    ");
 
         if (str_equal_local(modules[i].depends, "none")) {
-            screen_print("ok");
+            platform_print("ok");
             ok_count++;
         } else if (module_exists(modules[i].depends)) {
-            screen_print("ok depends ");
-            screen_print(modules[i].depends);
+            platform_print("ok depends ");
+            platform_print(modules[i].depends);
             ok_count++;
         } else {
-            screen_print("broken depends ");
-            screen_print(modules[i].depends);
+            platform_print("broken depends ");
+            platform_print(modules[i].depends);
             broken_count++;
         }
 
-        screen_print("\n");
+        platform_print("\n");
     }
 
-    screen_print("summary:\n");
+    platform_print("summary:\n");
 
-    screen_print("  total:  ");
-    module_print_uint((unsigned int)module_count);
-    screen_print("\n");
+    platform_print("  total:  ");
+    platform_print_uint((unsigned int)module_count);
+    platform_print("\n");
 
-    screen_print("  ok:     ");
-    module_print_uint((unsigned int)ok_count);
-    screen_print("\n");
+    platform_print("  ok:     ");
+    platform_print_uint((unsigned int)ok_count);
+    platform_print("\n");
 
-    screen_print("  broken: ");
-    module_print_uint((unsigned int)broken_count);
-    screen_print("\n");
+    platform_print("  broken: ");
+    platform_print_uint((unsigned int)broken_count);
+    platform_print("\n");
 }
 
 int module_has_broken_dependencies(void) {
@@ -361,16 +364,16 @@ void module_break_dependency(const char* name) {
     for (int i = 0; i < module_count; i++) {
         if (str_equal_local(modules[i].name, name)) {
             modules[i].depends = "missing";
-            screen_print("module dependency broken: ");
-            screen_print(name);
-            screen_print("\n");
+            platform_print("module dependency broken: ");
+            platform_print(name);
+            platform_print("\n");
             return;
         }
     }
 
-    screen_print("module not found: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("module not found: ");
+    platform_print(name);
+    platform_print("\n");
 }
 
 void module_fix_dependency(const char* name) {
@@ -388,6 +391,14 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "idt";
             } else if (str_equal_local(name, "timer")) {
                 modules[i].depends = "idt";
+            } else if (str_equal_local(name, "scheduler")) {
+                modules[i].depends = "timer";
+            } else if (str_equal_local(name, "security")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "platform")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "lang")) {
+                modules[i].depends = "core";
             } else if (str_equal_local(name, "memory")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "shell")) {
@@ -399,20 +410,20 @@ void module_fix_dependency(const char* name) {
             } else if (str_equal_local(name, "ai")) {
                 modules[i].depends = "core";
             } else {
-                screen_print("no default dependency for module: ");
-                screen_print(name);
-                screen_print("\n");
+                platform_print("no default dependency for module: ");
+                platform_print(name);
+                platform_print("\n");
                 return;
             }
 
-            screen_print("module dependency fixed: ");
-            screen_print(name);
-            screen_print("\n");
+            platform_print("module dependency fixed: ");
+            platform_print(name);
+            platform_print("\n");
             return;
         }
     }
 
-    screen_print("module not found: ");
-    screen_print(name);
-    screen_print("\n");
+    platform_print("module not found: ");
+    platform_print(name);
+    platform_print("\n");
 }
