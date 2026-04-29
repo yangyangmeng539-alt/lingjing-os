@@ -11,6 +11,7 @@
 #include "security.h"
 #include "lang.h"
 #include "platform.h"
+#include "health.h"
 
 unsigned int kernel_stack_marker = 0;
 
@@ -57,6 +58,10 @@ void kernel_main(void) {
     lang_init();
     module_register("lang", "loaded", "kernel", "language", "core");
     platform_print("Language initialized.\n");
+
+    health_init();
+    module_register("health", "loaded", "kernel", "diagnostic", "core");
+    platform_print("Health initialized.\n");
 
     memory_init();
     module_register("memory", "loaded", "kernel", "memory", "core");

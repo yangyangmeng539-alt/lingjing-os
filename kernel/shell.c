@@ -13,6 +13,7 @@
 #include "lang.h"
 #include "platform.h"
 #include "scheduler.h"
+#include "health.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -344,12 +345,6 @@ static void shell_handle_dashboard(void) {
 }
 
 static void shell_handle_dash(void) {
-    int module_broken = module_has_broken_dependencies();
-    int task_broken = scheduler_has_broken_tasks();
-    int security_ok = security_doctor_ok();
-    int lang_ok = lang_doctor_ok();
-    int platform_ok = platform_doctor_ok();
-
     platform_print("Lingjing Dash\n");
     platform_print("-------------\n");
 
@@ -384,30 +379,26 @@ static void shell_handle_dash(void) {
     platform_print("\n");
 
     platform_print("deps:     ");
-    platform_print(module_broken ? "bad\n" : "ok\n");
+    platform_print(health_deps_ok() ? "ok\n" : "bad\n");
 
     platform_print("task:     ");
-    platform_print(task_broken ? "bad\n" : "ok\n");
+    platform_print(health_task_ok() ? "ok\n" : "bad\n");
 
     platform_print("security: ");
-    platform_print(security_ok ? "ok\n" : "bad\n");
+    platform_print(health_security_ok() ? "ok\n" : "bad\n");
 
     platform_print("lang:     ");
     platform_print(lang_get_current_name());
     platform_print("\n");
 
     platform_print("platform init: ");
-    platform_print(platform_ok ? "ok\n" : "bad\n");
+    platform_print(health_platform_ok() ? "ok\n" : "bad\n");
 
     platform_print("platform health: ");
-    platform_print(platform_ok ? "ok\n" : "bad\n");
+    platform_print(health_platform_ok() ? "ok\n" : "bad\n");
 
     platform_print("doc:      ");
-    if (module_broken || task_broken || !security_ok || !lang_ok || !platform_ok) {
-        platform_print("bad\n");
-    } else {
-        platform_print("ready\n");
-    }
+    platform_print(health_result_ok() ? "ready\n" : "bad\n");
 }
 
 static void shell_handle_security(void) {
@@ -501,62 +492,28 @@ static void shell_handle_lang(const char* cmd) {
 }
 
 static void shell_handle_doctor(void) {
-    int module_broken = module_has_broken_dependencies();
-    int task_broken = scheduler_has_broken_tasks();
-    int security_ok = security_doctor_ok();
-    int language_ok = lang_doctor_ok();
-    int platform_ok = platform_doctor_ok();
-
     platform_print("System doctor:\n");
 
     platform_print("  module dependencies: ");
-    if (module_broken) {
-        platform_print("broken\n");
-    } else {
-        platform_print("ok\n");
-    }
+    platform_print(health_deps_ok() ? "ok\n" : "broken\n");
 
     platform_print("  task health:         ");
-    if (task_broken) {
-        platform_print("broken\n");
-    } else {
-        platform_print("ok\n");
-    }
+    platform_print(health_task_ok() ? "ok\n" : "broken\n");
 
     platform_print("  scheduler:           ");
-    if (task_broken) {
-        platform_print("broken\n");
-    } else {
-        platform_print("ok\n");
-    }
+    platform_print(health_task_ok() ? "ok\n" : "broken\n");
 
     platform_print("  scheduler active:    ");
-    if (scheduler_has_broken_tasks()) {
-        platform_print("broken\n");
-    } else {
-        platform_print("ok\n");
-    }
+    platform_print(health_task_ok() ? "ok\n" : "broken\n");
 
     platform_print("  security:            ");
-    if (security_ok) {
-        platform_print("ok\n");
-    } else {
-        platform_print("broken\n");
-    }
+    platform_print(health_security_ok() ? "ok\n" : "broken\n");
 
     platform_print("  language layer:      ");
-    if (language_ok) {
-        platform_print("ok\n");
-    } else {
-        platform_print("broken\n");
-    }
+    platform_print(health_lang_ok() ? "ok\n" : "broken\n");
 
     platform_print("  platform layer:      ");
-    if (platform_ok) {
-        platform_print("ok\n");
-    } else {
-        platform_print("broken\n");
-    }
+    platform_print(health_platform_ok() ? "ok\n" : "broken\n");
 
     platform_print("  current platform:    ");
     platform_print(platform_get_name());
@@ -567,51 +524,14 @@ static void shell_handle_doctor(void) {
     platform_print("\n");
 
     platform_print("  intent system:       ");
-    if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
-        platform_print("blocked\n");
-    } else {
-        platform_print("ready\n");
-    }
+    platform_print(health_result_ok() ? "ready\n" : "blocked\n");
 
     platform_print("  result:              ");
-    if (module_broken || task_broken || !security_ok || !language_ok || !platform_ok) {
-        platform_print("blocked\n");
-    } else {
-        platform_print("ready\n");
-    }
+    platform_print(health_result_ok() ? "ready\n" : "blocked\n");
 }
 
 static void shell_handle_health(void) {
-    int module_broken = module_has_broken_dependencies();
-    int task_broken = scheduler_has_broken_tasks();
-    int security_ok = security_doctor_ok();
-    int lang_ok = lang_doctor_ok();
-    int platform_ok = platform_doctor_ok();
-
-    platform_print("System health:\n");
-
-    platform_print("  deps:     ");
-    platform_print(module_broken ? "bad\n" : "ok\n");
-
-    platform_print("  security: ");
-    platform_print(security_ok ? "ok\n" : "bad\n");
-
-    platform_print("  task:     ");
-    platform_print(task_broken ? "bad\n" : "ok\n");
-
-    platform_print("  lang:     ");
-    platform_print(lang_ok ? "ok\n" : "bad\n");
-
-    platform_print("  platform: ");
-    platform_print(platform_ok ? "ok\n" : "bad\n");
-
-    platform_print("  result:   ");
-
-    if (module_broken || task_broken || !security_ok || !lang_ok || !platform_ok) {
-        platform_print("bad\n");
-    } else {
-        platform_print("ok\n");
-    }
+    health_print();
 }
 
 static void shell_handle_tasks(void) {
@@ -693,9 +613,6 @@ static void shell_handle_taskstate(const char* cmd) {
 }
 
 static void shell_handle_status(void) {
-    int module_broken = module_has_broken_dependencies();
-    int task_broken = scheduler_has_broken_tasks();
-
     platform_print("LJ | up ");
     platform_print_uint(platform_seconds());
     platform_print("s | in ");
@@ -721,10 +638,10 @@ static void shell_handle_status(void) {
     platform_print(" | coop");
 
     platform_print(" | deps ");
-    platform_print(module_broken ? "bad" : "ok");
+    platform_print(health_deps_ok() ? "ok" : "bad");
 
     platform_print(" | doc ");
-    platform_print((module_broken || task_broken) ? "bad" : "ok");
+    platform_print(health_result_ok() ? "ok" : "bad");
 
     platform_print("\n");
 }

@@ -380,6 +380,8 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "lang")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "health")) {
+                modules[i].depends = "core";
             } else if (str_equal_local(name, "memory")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "shell")) {
