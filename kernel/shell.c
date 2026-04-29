@@ -10,6 +10,7 @@
 #include "intent.h"
 #include "version.h"
 #include "security.h"
+#include "lang.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -363,6 +364,32 @@ static void shell_handle_securitylog(void) {
 
 static void shell_handle_securityclear(void) {
     security_clear_log();
+}
+
+static void shell_handle_lang(const char* cmd) {
+    if (str_equal(cmd, "lang")) {
+        screen_print(lang_get(MSG_LANGUAGE_CURRENT));
+        screen_print(": ");
+        screen_print(lang_get_current_name());
+        screen_print("\n");
+        return;
+    }
+
+    if (str_equal(cmd, "lang en")) {
+        lang_set(LANG_EN);
+        screen_print(lang_get(MSG_LANGUAGE_SET_EN));
+        screen_print("\n");
+        return;
+    }
+
+    if (str_equal(cmd, "lang zh")) {
+        lang_set(LANG_ZH);
+        screen_print(lang_get(MSG_LANGUAGE_SET_ZH));
+        screen_print("\n");
+        return;
+    }
+
+    screen_print("usage: lang | lang en | lang zh\n");
 }
 
 static void shell_handle_doctor(void) {
@@ -737,7 +764,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, security, securitylog, securityclear, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        screen_print("commands: help, clear, about, version, sysinfo, dashboard, status, doctor, security, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         screen_clear();
     } else if (str_equal(cmd, "about")) {
@@ -752,6 +779,8 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_status();
     } else if (str_equal(cmd, "doctor")) {
         shell_handle_doctor();
+    } else if (str_equal(cmd, "lang") || str_starts_with(cmd, "lang ")) {
+        shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {
         shell_handle_security();
     } else if (str_equal(cmd, "securitylog")) {
