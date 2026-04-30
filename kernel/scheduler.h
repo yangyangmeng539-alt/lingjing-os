@@ -20,6 +20,13 @@ void scheduler_check_tasks(void);
 void scheduler_doctor(void);
 void scheduler_validate(void);
 void scheduler_fix(void);
+void scheduler_task_switch(void);
+void scheduler_task_switch_check(void);
+void scheduler_task_switch_doctor(void);
+void scheduler_task_switch_break(void);
+void scheduler_task_switch_fix(void);
+
+int scheduler_task_switch_doctor_ok(void);
 
 void scheduler_info(void);
 void scheduler_log(void);

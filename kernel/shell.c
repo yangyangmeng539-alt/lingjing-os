@@ -586,6 +586,9 @@ static void shell_handle_doctor(void) {
     platform_print("  scheduler active:    ");
     platform_print(health_task_ok() ? "ok\n" : "broken\n");
 
+    platform_print("  task switch layer:   ");
+    platform_print(health_task_switch_ok() ? "ok\n" : "broken\n");
+
     platform_print("  security:            ");
     platform_print(health_security_ok() ? "ok\n" : "broken\n");
 
@@ -637,6 +640,26 @@ static void shell_handle_taskdoctor(void) {
 
 static void shell_handle_schedvalidate(void) {
     scheduler_validate();
+}
+
+static void shell_handle_taskswitch(void) {
+    scheduler_task_switch();
+}
+
+static void shell_handle_taskswitchcheck(void) {
+    scheduler_task_switch_check();
+}
+
+static void shell_handle_taskswitchdoctor(void) {
+    scheduler_task_switch_doctor();
+}
+
+static void shell_handle_taskswitchbreak(void) {
+    scheduler_task_switch_break();
+}
+
+static void shell_handle_taskswitchfix(void) {
+    scheduler_task_switch_fix();
 }
 
 static void shell_handle_schedfix(void) {
@@ -989,7 +1012,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1084,6 +1107,16 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_schedvalidate();
     } else if (str_equal(cmd, "schedfix")) {
         shell_handle_schedfix();
+    } else if (str_equal(cmd, "taskswitch")) {
+        shell_handle_taskswitch();
+    } else if (str_equal(cmd, "taskswitchcheck")) {
+        shell_handle_taskswitchcheck();
+    } else if (str_equal(cmd, "taskswitchdoctor")) {
+        shell_handle_taskswitchdoctor();
+    } else if (str_equal(cmd, "taskswitchbreak")) {
+        shell_handle_taskswitchbreak();
+    } else if (str_equal(cmd, "taskswitchfix")) {
+        shell_handle_taskswitchfix();
     } else if (str_equal(cmd, "runqueue")) {
         shell_handle_runqueue();
     } else if (str_equal(cmd, "yield")) {

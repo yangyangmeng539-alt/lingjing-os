@@ -4,6 +4,7 @@
 
 #define MAX_TASKS 16
 #define TASK_NAME_MAX 32
+#define TASK_STACK_SIZE 4096
 
 typedef struct task_entry {
     unsigned int id;
@@ -12,15 +13,22 @@ typedef struct task_entry {
     const char* type;
     unsigned int runtime_ticks;
     unsigned int priority;
+    unsigned int stack_base;
+    unsigned int stack_size;
+    unsigned int context_ready;
+    unsigned int context_switches;
 } task_entry_t;
 
 static task_entry_t tasks[MAX_TASKS];
 static char task_names[MAX_TASKS][TASK_NAME_MAX];
+static unsigned char task_stacks[MAX_TASKS][TASK_STACK_SIZE];
 static int task_count = 0;
 static int active_task_index = 0;
 static unsigned int scheduler_ticks = 0;
 static unsigned int scheduler_yield_count = 0;
 static unsigned int next_task_id = 4;
+static unsigned int task_switch_count = 0;
+static int task_switch_broken = 0;
 static int scheduler_state_is_ready(const char* state);
 static int scheduler_state_is_running(const char* state);
 static int scheduler_state_is_blocked(const char* state);
@@ -68,6 +76,10 @@ static void scheduler_add_task(unsigned int id, const char* name, const char* st
     tasks[index].type = type;
     tasks[index].runtime_ticks = 0;
     tasks[index].priority = 1;
+    tasks[index].stack_base = (unsigned int)&task_stacks[index][0];
+    tasks[index].stack_size = TASK_STACK_SIZE;
+    tasks[index].context_ready = 1;
+    tasks[index].context_switches = 0;
 
     task_count++;
 }
@@ -324,6 +336,12 @@ void scheduler_yield(void) {
 
     const char* to = scheduler_get_active_task();
 
+    if (active_task_index >= 0 && active_task_index < task_count) {
+        tasks[active_task_index].context_switches++;
+    }
+
+    task_switch_count++;
+
     scheduler_log_switch(from, to);
 
     platform_print("scheduler yield.\n");
@@ -371,6 +389,10 @@ void scheduler_info(void) {
 
     platform_print("  tasks:  ");
     platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
+
+    platform_print("  switches: ");
+    platform_print_uint(task_switch_count);
     platform_print("\n");
 
     platform_print("  mode:   ");
@@ -642,6 +664,8 @@ void scheduler_reset(void) {
     scheduler_yield_count = 0;
     active_task_index = 0;
     next_task_id = 4;
+    task_switch_count = 0;
+    task_switch_broken = 0;
 
     for (int i = 0; i < SCHED_LOG_MAX; i++) {
         sched_log_from[i] = 0;
@@ -679,6 +703,8 @@ void scheduler_list_tasks(void) {
         platform_print_uint(tasks[i].priority);
         platform_print("    ticks ");
         platform_print_uint(tasks[i].runtime_ticks);
+        platform_print("    ctx ");
+        platform_print_uint(tasks[i].context_switches);
         platform_print("\n");
     }
 }
@@ -710,6 +736,21 @@ void scheduler_task_info(unsigned int id) {
 
             platform_print("  ticks:  ");
             platform_print_uint(tasks[i].runtime_ticks);
+            platform_print("\n");
+
+            platform_print("  stack:  ");
+            platform_print_hex32(tasks[i].stack_base);
+            platform_print("\n");
+
+            platform_print("  size:   ");
+            platform_print_uint(tasks[i].stack_size);
+            platform_print("\n");
+
+            platform_print("  ctx:    ");
+            platform_print(tasks[i].context_ready ? "ready\n" : "bad\n");
+
+            platform_print("  switch: ");
+            platform_print_uint(tasks[i].context_switches);
             platform_print("\n");
 
             return;
@@ -879,6 +920,104 @@ void scheduler_validate(void) {
     } else {
         platform_print("broken\n");
     }
+}
+
+int scheduler_task_switch_doctor_ok(void) {
+    if (task_switch_broken) {
+        return 0;
+    }
+
+    if (task_count <= 0) {
+        return 0;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].stack_base == 0) {
+            return 0;
+        }
+
+        if (tasks[i].stack_size == 0) {
+            return 0;
+        }
+
+        if (tasks[i].context_ready == 0) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+void scheduler_task_switch(void) {
+    scheduler_yield();
+}
+
+void scheduler_task_switch_check(void) {
+    platform_print("Task switch check:\n");
+
+    platform_print("  tasks:    ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
+
+    platform_print("  switches: ");
+    platform_print_uint(task_switch_count);
+    platform_print("\n");
+
+    platform_print("  broken:   ");
+    platform_print(task_switch_broken ? "yes\n" : "no\n");
+
+    platform_print("  result:   ");
+    platform_print(scheduler_task_switch_doctor_ok() ? "ok\n" : "broken\n");
+}
+
+void scheduler_task_switch_doctor(void) {
+    int bad_context_count = 0;
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].stack_base == 0 || tasks[i].stack_size == 0 || tasks[i].context_ready == 0) {
+            bad_context_count++;
+        }
+    }
+
+    platform_print("Task switch doctor:\n");
+
+    platform_print("  mode:        metadata prototype\n");
+
+    platform_print("  tasks:       ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
+
+    platform_print("  switches:    ");
+    platform_print_uint(task_switch_count);
+    platform_print("\n");
+
+    platform_print("  bad context: ");
+    platform_print_uint((unsigned int)bad_context_count);
+    platform_print("\n");
+
+    platform_print("  broken:      ");
+    platform_print(task_switch_broken ? "yes\n" : "no\n");
+
+    platform_print("  result:      ");
+    platform_print(scheduler_task_switch_doctor_ok() ? "ok\n" : "broken\n");
+}
+
+void scheduler_task_switch_break(void) {
+    task_switch_broken = 1;
+
+    platform_print("task switch layer broken.\n");
+}
+
+void scheduler_task_switch_fix(void) {
+    task_switch_broken = 0;
+
+    for (int i = 0; i < task_count; i++) {
+        tasks[i].stack_base = (unsigned int)&task_stacks[i][0];
+        tasks[i].stack_size = TASK_STACK_SIZE;
+        tasks[i].context_ready = 1;
+    }
+
+    platform_print("task switch layer fixed.\n");
 }
 
 void scheduler_fix(void) {

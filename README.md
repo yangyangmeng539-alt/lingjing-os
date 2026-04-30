@@ -18,8 +18,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.0.8
-stage: paging prototype
+version: dev-0.0.9
+stage: task switch prototype
 arch: i386
 boot: multiboot + grub
 ```
@@ -1013,7 +1013,7 @@ Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.0.8 paging prototype` 已完成 paging 原型验收。
+当前版本 `dev-0.0.9 task switch prototype` 已完成 task switch 元数据原型验收。
 
 当前重点是验证：
 
@@ -1062,29 +1062,17 @@ v0.0.6-task-lifecycle-prototype
 
 ## 下一阶段计划
 
-### dev-0.0.9 task switch prototype
+### dev-0.1.0 syscall + user mode prototype
 
-- 保存 / 恢复任务上下文
-- task stack prototype
-- context switch entry
-- scheduler switch hook
-- task switch doctor
-- 保持 idle / shell / intent / timer 基础任务可诊断
+- syscall table
+- syscall dispatcher
+- user mode entry prototype
+- ring3 transition preparation
+- user/kernel boundary check
+- syscall doctor
+- user mode doctor
 
 ### 后续路线
-
-- dev-0.0.7 heap prototype
-  - kfree
-  - free list
-  - heapcheck
-  - heapdoctor
-
-- dev-0.0.8 paging prototype
-  - page directory
-  - page table
-  - identity mapping
-  - enable paging
-  - page fault handler
 
 - dev-0.0.9 task switch prototype
 
