@@ -1,6 +1,3 @@
-是，需要大改。你现在 README 里很多内容还停在旧阶段，尤其 `Memory / Scheduler / Paging / Syscall / User / 当前版本标签` 都落后了。我按你上传的 README 内容整体更新。
-
-下面直接**整体替换 `README.md`**：
 
 ````markdown
 # Lingjing OS
