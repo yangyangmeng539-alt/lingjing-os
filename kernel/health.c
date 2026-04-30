@@ -9,6 +9,7 @@
 #include "paging.h"
 #include "syscall.h"
 #include "user.h"
+#include "ring3.h"
 
 static int health_ready = 0;
 
@@ -60,6 +61,10 @@ int health_user_ok(void) {
     return user_doctor_ok();
 }
 
+int health_ring3_ok(void) {
+    return ring3_doctor_ok();
+}
+
 int health_result_ok(void) {
     if (!health_ready) {
         return 0;
@@ -109,6 +114,10 @@ int health_result_ok(void) {
         return 0;
     }
 
+    if (!health_ring3_ok()) {
+        return 0;
+    }
+
     return 1;
 }
 
@@ -147,6 +156,9 @@ void health_print(void) {
 
     platform_print("  user:     ");
     platform_print(health_user_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  ring3:    ");
+    platform_print(health_ring3_ok() ? "ok\n" : "bad\n");
 
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");

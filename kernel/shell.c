@@ -13,6 +13,7 @@
 #include "security.h"
 #include "syscall.h"
 #include "user.h"
+#include "ring3.h"
 #include "lang.h"
 #include "platform.h"
 #include "scheduler.h"
@@ -702,6 +703,188 @@ static void shell_handle_userfix(void) {
     user_fix();
 }
 
+static void shell_handle_ring3(const char* cmd) {
+    if (str_equal(cmd, "ring3")) {
+        ring3_status();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 status")) {
+        ring3_status();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 check")) {
+        ring3_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 doctor")) {
+        ring3_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 tss")) {
+        ring3_tss();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 tsscheck")) {
+        ring3_tss_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 tssload")) {
+        ring3_tss_load();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 tssinstall")) {
+        ring3_tss_install();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 tssclear")) {
+        ring3_tss_clear();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 stack")) {
+        ring3_stack();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 frame")) {
+        ring3_frame();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 gdt")) {
+        ring3_gdt();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 gdtcheck")) {
+        ring3_gdt_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 gdtprepare")) {
+        ring3_gdt_prepare();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 gdtinstall")) {
+        ring3_gdt_install();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 gdtclear")) {
+        ring3_gdt_clear();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 page")) {
+        ring3_page();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 pagecheck")) {
+        ring3_page_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 pageprepare")) {
+        ring3_page_prepare();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 pageclear")) {
+        ring3_page_clear();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 hw")) {
+        ring3_hw();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 hwcheck")) {
+        ring3_hw_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 hwinstall")) {
+        ring3_hw_install();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 hwclear")) {
+        ring3_hw_clear();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 stub")) {
+        ring3_stub();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 stubcheck")) {
+        ring3_stub_check();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 guard")) {
+        ring3_guard();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 enter")) {
+        ring3_enter();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 dryrun")) {
+        ring3_dryrun();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 realenter")) {
+        ring3_realenter();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 arm")) {
+        ring3_arm();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 disarm")) {
+        ring3_disarm();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 enableswitch")) {
+        ring3_enable_switch();
+        return;
+    }
+
+    if (str_equal(cmd, "ring3 disableswitch")) {
+        ring3_disable_switch();
+        return;
+    }
+
+    platform_print("usage: ring3 | ring3 status | ring3 check | ring3 doctor | ring3 tss | ring3 tsscheck | ring3 tssload | ring3 tssinstall | ring3 tssclear | ring3 stack | ring3 frame | ring3 gdt | ring3 gdtcheck | ring3 gdtprepare | ring3 gdtinstall | ring3 gdtclear | ring3 page | ring3 pagecheck | ring3 pageprepare | ring3 pageclear | ring3 hw | ring3 hwcheck | ring3 hwinstall | ring3 hwclear | ring3 stub | ring3 stubcheck | ring3 guard | ring3 enter | ring3 dryrun | ring3 realenter | ring3 arm | ring3 disarm | ring3 enableswitch | ring3 disableswitch\n");
+}
+
+static void shell_handle_ring3break(void) {
+    ring3_break();
+}
+
+static void shell_handle_ring3fix(void) {
+    ring3_fix();
+}
+
 static void shell_handle_syscallbreak(void) {
     syscall_break();
 }
@@ -853,6 +1036,9 @@ static void shell_handle_doctor(void) {
 
     platform_print("  user mode layer:     ");
     platform_print(health_user_ok() ? "ok\n" : "broken\n");
+
+    platform_print("  ring3 layer:         ");
+    platform_print(health_ring3_ok() ? "ok\n" : "broken\n");
 
     platform_print("  security:            ");
     platform_print(health_security_ok() ? "ok\n" : "broken\n");
@@ -1313,7 +1499,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, ring3, ring3 check, ring3 doctor, ring3 tss, ring3 tsscheck, ring3 tssload, ring3 tssinstall, ring3 tssclear, ring3 stack, ring3 frame, ring3 gdt, ring3 gdtcheck, ring3 gdtprepare, ring3 gdtinstall, ring3 gdtclear, ring3 page, ring3 pagecheck, ring3 pageprepare, ring3 pageclear, ring3 hw, ring3 hwcheck, ring3 hwinstall, ring3 hwclear, ring3 stub, ring3 stubcheck, ring3 guard, ring3 enter, ring3 dryrun, ring3 realenter, ring3 arm, ring3 disarm, ring3 enableswitch, ring3 disableswitch, ring3break, ring3fix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1372,6 +1558,12 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_userbreak();
     } else if (str_equal(cmd, "userfix")) {
         shell_handle_userfix();
+    } else if (str_equal(cmd, "ring3") || str_starts_with(cmd, "ring3 ")) {
+        shell_handle_ring3(cmd);
+    } else if (str_equal(cmd, "ring3break")) {
+        shell_handle_ring3break();
+    } else if (str_equal(cmd, "ring3fix")) {
+        shell_handle_ring3fix();
     } else if (str_equal(cmd, "securitycheck")) {
         shell_handle_securitycheck();
     } else if (str_equal(cmd, "securitylog")) {

@@ -1,4 +1,5 @@
 global gdt_flush
+global gdt_load_tss
 
 gdt_flush:
     mov eax, [esp + 4]
@@ -14,6 +15,11 @@ gdt_flush:
     jmp 0x08:.flush
 
 .flush:
+    ret
+
+gdt_load_tss:
+    mov ax, [esp + 4]
+    ltr ax
     ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits

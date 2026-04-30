@@ -26,6 +26,8 @@ OBJS = \
 	$(BUILD_DIR)/security.o \
 	$(BUILD_DIR)/syscall.o \
 	$(BUILD_DIR)/user.o \
+	$(BUILD_DIR)/ring3.o \
+	$(BUILD_DIR)/ring3_asm.o \
 	$(BUILD_DIR)/platform.o \
 	$(BUILD_DIR)/lang.o \
 	$(BUILD_DIR)/identity.o \
@@ -103,6 +105,12 @@ $(BUILD_DIR)/syscall.o: kernel/syscall.c
 
 $(BUILD_DIR)/user.o: kernel/user.c
 	$(CC) $(CFLAGS) -c kernel/user.c -o $(BUILD_DIR)/user.o
+
+$(BUILD_DIR)/ring3.o: kernel/ring3.c
+	$(CC) $(CFLAGS) -c kernel/ring3.c -o $(BUILD_DIR)/ring3.o
+
+$(BUILD_DIR)/ring3_asm.o: kernel/ring3.asm
+	$(ASM) -f elf32 kernel/ring3.asm -o $(BUILD_DIR)/ring3_asm.o
 
 $(BUILD_DIR)/kernel.bin: $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(BUILD_DIR)/kernel.bin

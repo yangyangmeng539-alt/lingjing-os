@@ -14,6 +14,7 @@ int health_paging_ok(void);
 int health_task_switch_ok(void);
 int health_syscall_ok(void);
 int health_user_ok(void);
+int health_ring3_ok(void);
 int health_result_ok(void);
 
 void health_print(void);

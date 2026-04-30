@@ -1,0 +1,53 @@
+global ring3_enter_user_mode
+global ring3_user_stub_asm
+
+; void ring3_enter_user_mode(unsigned int eip,
+;                            unsigned int user_cs,
+;                            unsigned int eflags,
+;                            unsigned int user_esp,
+;                            unsigned int user_ds);
+;
+; cdecl stack:
+; [esp + 4]  = eip
+; [esp + 8]  = user_cs
+; [esp + 12] = eflags
+; [esp + 16] = user_esp
+; [esp + 20] = user_ds
+
+ring3_enter_user_mode:
+    cli
+
+    ; 先保存所有参数，避免 push 后 esp 偏移变化
+    mov eax, [esp + 4]      ; eip
+    mov ebx, [esp + 8]      ; user_cs
+    mov ecx, [esp + 12]     ; eflags
+    mov edx, [esp + 16]     ; user_esp
+    mov esi, [esp + 20]     ; user_ds / user_ss
+
+    ; 先不要在 ring0 里提前切 ds/es/fs/gs 到 0x23
+    ; 只通过 iretd 切换 cs/ss/esp/eip
+    ; 真正 ring3 数据段后面再单独做
+
+    push esi                ; ss
+    push edx                ; esp
+    push ecx                ; eflags
+    push ebx                ; cs
+    push eax                ; eip
+
+    iretd
+
+.hang:
+    jmp .hang
+
+
+; 纯 asm ring3 用户态 stub
+; 不 hlt
+; 不访问栈
+; 不访问内存
+; 不调用函数
+; 不触发 int
+ring3_user_stub_asm:
+.user_loop:
+    jmp .user_loop
+
+section .note.GNU-stack noalloc noexec nowrite progbits

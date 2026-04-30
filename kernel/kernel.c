@@ -12,6 +12,7 @@
 #include "security.h"
 #include "syscall.h"
 #include "user.h"
+#include "ring3.h"
 #include "lang.h"
 #include "platform.h"
 #include "health.h"
@@ -64,6 +65,10 @@ void kernel_main(void) {
     user_init();
     module_register("user", "loaded", "kernel", "user", "syscall");
     platform_print("User mode initialized.\n");
+
+    ring3_init();
+    module_register("ring3", "loaded", "kernel", "ring3", "user");
+    platform_print("Ring3 metadata initialized.\n");
 
     platform_init();
     module_register("platform", "loaded", "kernel", "platform", "core");
