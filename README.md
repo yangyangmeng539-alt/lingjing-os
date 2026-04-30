@@ -12,6 +12,8 @@ Lingjing OS 是一个实验性操作系统项目。
 - 调度器以可验证、可诊断、可恢复为核心方向
 - 安全层以策略检查、模块保护、审计日志为基础
 - 语言层预留系统显示语言接口
+- platform 层预留硬件能力抽象接口
+- identity 层预留系统身份占位接口
 
 当前版本：
 
@@ -75,7 +77,10 @@ core
       timer
         scheduler
   security
+  platform
   lang
+  identity
+  health
   memory
 ```
 
@@ -93,7 +98,10 @@ core
         scheduler
         net
   security
+  platform
   lang
+  identity
+  health
   memory
   ai
 ```
@@ -135,6 +143,8 @@ intent lock
 intent allow / deny
 module dependency health
 security policy
+platform health
+identity health
 ```
 
 ### Scheduler Prototype
@@ -226,6 +236,7 @@ schedfix 可以手动修复 active task
 
 ```text
 security
+securitycheck
 securitylog
 securityclear
 ```
@@ -296,6 +307,99 @@ Current language: en
 [ZH] Current language: zh
 ```
 
+### Platform Layer
+
+当前 platform 层是硬件能力抽象骨架。
+
+当前平台：
+
+```text
+baremetal
+```
+
+当前能力状态：
+
+```text
+output
+input
+timer
+power
+```
+
+已支持：
+
+- platform 初始化状态检查
+- platform capability check
+- platform break / fix
+- system doctor 集成
+- health 集成
+- platform broken 时阻塞 intent system
+
+相关命令：
+
+```text
+platform
+platformcheck
+platformdeps
+platformboot
+platformsummary
+platformcaps
+platformbreak <capability>
+platformfix <capability>
+```
+
+示例：
+
+```text
+platformbreak timer
+platformfix timer
+platformbreak all
+platformfix all
+```
+
+### Identity Layer
+
+当前 identity 层是系统身份占位层，不是真实身份系统。
+
+当前状态：
+
+```text
+state: ready
+mode: local-placeholder
+public key: not-generated
+```
+
+已支持：
+
+- identity 初始化状态检查
+- identity doctor
+- identity break / fix
+- system doctor 集成
+- health 集成
+- identity broken 时阻塞 intent system
+
+相关命令：
+
+```text
+identity
+identity status
+identity doctor
+identity check
+identity break
+identity fix
+```
+
+当前阶段不实现：
+
+```text
+identity generate
+identity export
+identity import
+identity reset
+```
+
+这些属于后续操作层 / 身份管理层。
+
 ---
 
 ## 系统诊断
@@ -309,7 +413,7 @@ status
 示例：
 
 ```text
-LJ | up 6s | in none | m11 t4 | s690 y2 | coop | deps ok | doc ok
+LJ | up 50s | in none | m14 t4 | s5067 y0 | coop | deps ok | doc ok
 ```
 
 含义：
@@ -339,14 +443,35 @@ dashboard
 - scheduler mode
 - active task
 - next alloc
+- platform status
 - intent layer
 - security status
 - language status
 - dependency health
 - task health
+- identity health
 - current intent
 - tasks
 - registered modules
+
+### 全局健康
+
+```text
+health
+```
+
+示例：
+
+```text
+System health:
+  deps:     ok
+  security: ok
+  task:     ok
+  lang:     ok
+  platform: ok
+  identity: ok
+  result:   ok
+```
 
 ### 全局诊断
 
@@ -364,6 +489,9 @@ System doctor:
   scheduler active:    ok
   security:            ok
   language layer:      ok
+  platform layer:      ok
+  identity layer:      ok
+  current platform:    baremetal
   current language:    en
   intent system:       ready
   result:              ready
@@ -401,6 +529,10 @@ intent stop
 ↓
 模块依赖检查
 ↓
+platform 状态检查
+↓
+identity 状态检查
+↓
 按需加载模块
 ↓
 运行 intent
@@ -427,6 +559,24 @@ intent stop
 权限可查
 行为留痕
 核心不可被普通模块破坏
+```
+
+platform 层方向：
+
+```text
+硬件能力抽象
+平台状态可检查
+平台故障可诊断
+平台修复可恢复
+上层逐步脱离硬件细节
+```
+
+identity 层方向：
+
+```text
+系统身份能力预留
+当前只做占位
+不在架构原型阶段实现真实身份策略
 ```
 
 语言层方向：
@@ -468,6 +618,7 @@ cd ~/osdev/lingjing
 
 ```bash
 make clean
+make
 make run
 ```
 
@@ -480,16 +631,35 @@ help
 version
 sysinfo
 dashboard
+dash
 status
 doctor
+health
 
 security
+securitycheck
 securitylog
 securityclear
 
 lang
 lang en
 lang zh
+
+platform
+platformcheck
+platformdeps
+platformboot
+platformsummary
+platformcaps
+platformbreak <capability>
+platformfix <capability>
+
+identity
+identity status
+identity doctor
+identity check
+identity break
+identity fix
 
 modules
 moduleinfo <name>
@@ -524,6 +694,10 @@ intent status
 intent stop
 intent history
 intent reset
+intent allow <name>
+intent deny <name>
+intent lock
+intent unlock
 
 mem
 kmalloc <bytes>
@@ -577,6 +751,129 @@ securitylog
 
 ```text
 intent stop
+```
+
+查看历史：
+
+```text
+intent history
+```
+
+---
+
+## 示例：Module 依赖检查
+
+检查模块依赖：
+
+```text
+modulecheck
+```
+
+模拟破坏模块：
+
+```text
+modulebreak screen
+```
+
+查看系统诊断：
+
+```text
+doctor
+```
+
+修复模块：
+
+```text
+modulefix screen
+```
+
+预期：
+
+```text
+modulebreak screen 后 doctor blocked
+modulefix screen 后 doctor ready
+```
+
+---
+
+## 示例：Platform 平台层
+
+查看平台状态：
+
+```text
+platform
+```
+
+查看平台能力：
+
+```text
+platformcaps
+```
+
+模拟破坏 timer 能力：
+
+```text
+platformbreak timer
+```
+
+修复 timer 能力：
+
+```text
+platformfix timer
+```
+
+模拟破坏全部 platform 能力：
+
+```text
+platformbreak all
+```
+
+修复全部 platform 能力：
+
+```text
+platformfix all
+```
+
+预期：
+
+```text
+platformbreak timer/all 后 doctor blocked
+platformfix timer/all 后 doctor ready
+```
+
+---
+
+## 示例：Identity 占位层
+
+查看 identity 状态：
+
+```text
+identity
+```
+
+查看 identity doctor：
+
+```text
+identity doctor
+```
+
+模拟破坏 identity 层：
+
+```text
+identity break
+```
+
+修复 identity 层：
+
+```text
+identity fix
+```
+
+预期：
+
+```text
+identity break 后 doctor blocked
+identity fix 后 doctor ready
 ```
 
 ---
@@ -641,6 +938,12 @@ schedreset
 security
 ```
 
+执行安全检查：
+
+```text
+securitycheck
+```
+
 查看安全审计日志：
 
 ```text
@@ -693,9 +996,11 @@ lang en
 
 ## 当前阶段
 
-Lingjing OS 目前是一个早期裸机内核原型。
+Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
+
+当前版本 `dev-0.0.5 architecture prototype` 已完成主链验收。
 
 当前重点是验证：
 
@@ -706,24 +1011,80 @@ Lingjing OS 目前是一个早期裸机内核原型。
 任务调度雏形
 安全规则骨架
 系统显示语言骨架
+platform 抽象骨架
+identity 占位层
 用户规则控制
 系统状态可诊断
+blocked / ready 可恢复闭环
+```
+
+当前已验收：
+
+```text
+dash / health / doctor / status / modulecheck 初始健康
+intent plan video
+intent run video
+gui / net / ai 按需加载
+intent stop 后 gui / net / ai 卸载
+intent history 记录 run / stop
+modulebreak screen 后 doctor blocked
+modulefix screen 后 doctor ready
+platformbreak timer/all 后 doctor blocked
+platformfix timer/all 后 doctor ready
+identity break 后 doctor blocked
+identity fix 后 doctor ready
+intent doctor ready
+securitycheck ok
+taskdoctor ok
+schedvalidate ok
+```
+
+当前版本标签：
+
+```text
+v0.0.5-architecture-prototype
 ```
 
 ---
 
 ## 下一阶段计划
 
-- 继续整理 core / platform 分层
-- 将 intent / module / scheduler / security 从硬件细节中逐步解耦
-- 增加 platform.h / platform_baremetal.c
-- 将 screen_print / timer ticks 逐步替换为 platform 接口
-- 将 scheduler 从模拟轮转推进到更真实的任务抽象
+### dev-0.0.6 task lifecycle prototype
+
 - 增加更正式的 task control block
 - 增加简单任务创建 / 删除
-- 加强 module dependency 约束
-- 增加 heap free list
-- 增加 paging
+- 增加 taskcreate
+- 增加 taskkill
+- 增加 tasksleep
+- 增加 taskwake
+- 增加 task priority
+- 增加 task lifecycle doctor
+- 将 scheduler 从模拟轮转推进到更真实的任务抽象
+
+### 后续路线
+
+- dev-0.0.7 heap prototype
+  - kfree
+  - free list
+  - heapcheck
+  - heapdoctor
+
+- dev-0.0.8 paging prototype
+  - page directory
+  - page table
+  - identity mapping
+  - enable paging
+  - page fault handler
+
+- dev-0.0.9 task switch prototype
+
+- dev-0.1.0 syscall + user mode prototype
+
+长期方向：
+
+- 继续整理 core / platform 分层
+- 将 intent / module / scheduler / security 从硬件细节中逐步解耦
+- 将 screen_print / timer ticks 逐步替换为 platform 接口
 - 进入 framebuffer 图形模式
 - 实现第一版文本 / 图形系统面板
 
