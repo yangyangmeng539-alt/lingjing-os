@@ -35,6 +35,7 @@ global isr28
 global isr29
 global isr30
 global isr31
+global isr128
 
 global irq0
 global irq1
@@ -113,6 +114,11 @@ ISR_NOERRCODE 28
 ISR_NOERRCODE 29
 ISR_ERRCODE 30
 ISR_NOERRCODE 31
+isr128:
+    cli
+    push dword 0
+    push dword 128
+    jmp isr_common_stub
 
 IRQ 0, 32
 IRQ 1, 33

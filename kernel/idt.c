@@ -54,6 +54,7 @@ extern void isr28(void);
 extern void isr29(void);
 extern void isr30(void);
 extern void isr31(void);
+extern void isr128(void);
 
 extern void irq0(void);
 extern void irq1(void);
@@ -202,5 +203,10 @@ void idt_init(void) {
     idt_set_gate(46, (unsigned int)irq14, 0x08, 0x8E);
     idt_set_gate(47, (unsigned int)irq15, 0x08, 0x8E);
 
+    idt_flush((unsigned int)&idt_pointer);
+}
+
+void idt_install_syscall_gate(void) {
+    idt_set_gate(128, (unsigned int)isr128, 0x08, 0xEE);
     idt_flush((unsigned int)&idt_pointer);
 }

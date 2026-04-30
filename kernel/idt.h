@@ -23,6 +23,7 @@ typedef struct registers {
 typedef void (*interrupt_handler_t)(registers_t* regs);
 
 void idt_init(void);
+void idt_install_syscall_gate(void);
 void register_interrupt_handler(unsigned char index, interrupt_handler_t handler);
 
 #endif

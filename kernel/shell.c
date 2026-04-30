@@ -27,6 +27,8 @@ extern unsigned int end;
 static char input[128];
 static int input_len = 0;
 
+static const char* shell_skip_token(const char* text);
+
 static int str_equal(const char* a, const char* b) {
     int i = 0;
 
@@ -502,6 +504,71 @@ static void shell_handle_syscall(const char* cmd) {
         return;
     }
 
+    if (str_equal(cmd, "syscall interrupt")) {
+        syscall_interrupt_status();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall frame")) {
+        syscall_frame();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall ret")) {
+        syscall_return_status();
+        return;
+    }
+
+    if (str_starts_with(cmd, "syscall realargs ")) {
+        const char* id_text = cmd + 17;
+        unsigned int id = parse_uint(id_text);
+        const char* arg1_text = shell_skip_token(id_text);
+        unsigned int arg1 = parse_uint(arg1_text);
+        const char* arg2_text = shell_skip_token(arg1_text);
+        unsigned int arg2 = parse_uint(arg2_text);
+        const char* arg3_text = shell_skip_token(arg2_text);
+        unsigned int arg3 = parse_uint(arg3_text);
+
+        if (arg1_text[0] == '\0' || arg2_text[0] == '\0' || arg3_text[0] == '\0') {
+            platform_print("usage: syscall realargs <id> <a> <b> <c>\n");
+            return;
+        }
+
+        syscall_trigger_int80_args(id, arg1, arg2, arg3);
+        return;
+    }
+
+    if (str_equal(cmd, "syscall realargs")) {
+        platform_print("usage: syscall realargs <id> <a> <b> <c>\n");
+        return;
+    }
+
+    if (str_starts_with(cmd, "syscall real ")) {
+        const char* id_text = cmd + 13;
+        unsigned int id = parse_uint(id_text);
+
+        syscall_trigger_int80(id);
+        return;
+    }
+
+    if (str_equal(cmd, "syscall real")) {
+        platform_print("usage: syscall real <id>\n");
+        return;
+    }
+
+    if (str_starts_with(cmd, "syscall int ")) {
+        const char* id_text = cmd + 12;
+        unsigned int id = parse_uint(id_text);
+
+        syscall_interrupt_dispatch(id);
+        return;
+    }
+
+    if (str_equal(cmd, "syscall int")) {
+        platform_print("usage: syscall int <id>\n");
+        return;
+    }
+
     if (str_starts_with(cmd, "syscall call ")) {
         const char* id_text = cmd + 13;
         unsigned int id = parse_uint(id_text);
@@ -515,7 +582,7 @@ static void shell_handle_syscall(const char* cmd) {
         return;
     }
 
-    platform_print("usage: syscall | syscall status | syscall check | syscall doctor | syscall table | syscall stats | syscall call <id>\n");
+    platform_print("usage: syscall | syscall status | syscall check | syscall doctor | syscall table | syscall stats | syscall interrupt | syscall frame | syscall ret | syscall realargs <id> <a> <b> <c> | syscall real <id> | syscall int <id> | syscall call <id>\n");
 }
 
 static void shell_handle_user(const char* cmd) {
@@ -1176,7 +1243,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
