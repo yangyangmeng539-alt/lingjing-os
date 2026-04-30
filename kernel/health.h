@@ -8,6 +8,7 @@ int health_task_ok(void);
 int health_security_ok(void);
 int health_lang_ok(void);
 int health_platform_ok(void);
+int health_identity_ok(void);
 int health_result_ok(void);
 
 void health_print(void);

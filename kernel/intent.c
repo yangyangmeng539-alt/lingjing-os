@@ -255,10 +255,14 @@ static void intent_reset(void) {
         if (intent != 0) {
             intent_stop_entry(intent);
         } else {
-            current_intent = "none";
-            current_intent_running = 0;
+            platform_print("current intent not found: ");
+            platform_print(current_intent);
+            platform_print("\n");
         }
     }
+
+    current_intent = "none";
+    current_intent_running = 0;
 
     allow_video = 1;
     allow_ai = 1;
@@ -271,6 +275,7 @@ static void intent_reset(void) {
 
     intent_history_count = 0;
 
+    platform_print("  runtime cleared.\n");
     platform_print("  permissions restored.\n");
     platform_print("  lock cleared.\n");
     platform_print("  history cleared.\n");
@@ -700,11 +705,15 @@ static void intent_restart_current(void) {
 }
 
 static void intent_switch_to(const char* name) {
+    const intent_entry_t* target = 0;
+    const intent_entry_t* current = 0;
+    const char* old_intent_name = current_intent;
+
     if (!intent_can_execute()) {
         return;
     }
 
-    const intent_entry_t* target = intent_find(name);
+    target = intent_find(name);
 
     if (target == 0) {
         platform_print("intent switch not supported: ");
@@ -719,6 +728,32 @@ static void intent_switch_to(const char* name) {
         platform_print("\n");
         return;
     }
+
+    if (!security_check_intent(target->name)) {
+        platform_print("intent blocked by security: ");
+        platform_print(target->name);
+        platform_print("\n");
+        return;
+    }
+
+    if (!intent_is_allowed(target->name)) {
+        platform_print("intent denied: ");
+        platform_print(target->name);
+        platform_print("\n");
+        return;
+    }
+
+    platform_print("Intent switch: ");
+
+    if (current_intent_running != 0) {
+        platform_print(current_intent);
+    } else {
+        platform_print("none");
+    }
+
+    platform_print(" -> ");
+    platform_print(name);
+    platform_print("\n");
 
     if (current_intent_running != 0) {
         if (str_equal_local(current_intent, "network") && str_equal_local(name, "video")) {
@@ -736,20 +771,8 @@ static void intent_switch_to(const char* name) {
         }
     }
 
-    platform_print("Intent switch: ");
-
     if (current_intent_running != 0) {
-        platform_print(current_intent);
-    } else {
-        platform_print("none");
-    }
-
-    platform_print(" -> ");
-    platform_print(name);
-    platform_print("\n");
-
-    if (current_intent_running != 0) {
-        const intent_entry_t* current = intent_find(current_intent);
+        current = intent_find(old_intent_name);
 
         if (current != 0) {
             intent_stop_entry(current);
@@ -759,7 +782,51 @@ static void intent_switch_to(const char* name) {
         }
     }
 
-    intent_run_entry(target);
+    platform_print("Intent run: ");
+    platform_print(target->name);
+    platform_print("\n");
+
+    platform_print("using plan: ");
+    platform_print(target->name);
+    platform_print("\n");
+
+    platform_print("requires: ");
+
+    for (int i = 0; i < target->require_count; i++) {
+        platform_print(target->requires[i].module);
+
+        if (i < target->require_count - 1) {
+            platform_print(", ");
+        }
+    }
+
+    platform_print("\n");
+    platform_print("checking permissions...\n");
+
+    for (int i = 0; i < target->require_count; i++) {
+        platform_print("permission ");
+        platform_print(target->requires[i].module);
+        platform_print(": ");
+        platform_print(target->requires[i].permission);
+        platform_print(" allowed\n");
+    }
+
+    for (int i = 0; i < target->require_count; i++) {
+        intent_require_module(target->requires[i].module);
+    }
+
+    current_intent = target->name;
+    current_intent_running = 1;
+
+    if (str_equal_local(target->name, "video")) {
+        intent_history_push("run video");
+    } else if (str_equal_local(target->name, "ai")) {
+        intent_history_push("run ai");
+    } else if (str_equal_local(target->name, "network")) {
+        intent_history_push("run network");
+    }
+
+    platform_print("intent ready.\n");
 }
 
 void intent_run(const char* name) {

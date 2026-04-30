@@ -4,6 +4,7 @@
 #include "security.h"
 #include "lang.h"
 #include "platform.h"
+#include "identity.h"
 
 static int health_ready = 0;
 
@@ -31,6 +32,10 @@ int health_platform_ok(void) {
     return platform_doctor_ok();
 }
 
+int health_identity_ok(void) {
+    return identity_doctor_ok();
+}
+
 int health_result_ok(void) {
     if (!health_ready) {
         return 0;
@@ -56,6 +61,10 @@ int health_result_ok(void) {
         return 0;
     }
 
+     if (!health_identity_ok()) {
+        return 0;
+    }
+
     return 1;
 }
 
@@ -76,6 +85,9 @@ void health_print(void) {
 
     platform_print("  platform: ");
     platform_print(health_platform_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  identity: ");
+    platform_print(health_identity_ok() ? "ok\n" : "bad\n");
 
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");

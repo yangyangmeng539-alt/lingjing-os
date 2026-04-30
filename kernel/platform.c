@@ -30,14 +30,44 @@ static int platform_str_equal(const char* a, const char* b) {
     return a[i] == '\0' && b[i] == '\0';
 }
 
+static void platform_refresh_ready_state(void) {
+    if (!platform_init_done) {
+        platform_ready = 0;
+        return;
+    }
+
+    if (!platform_output_ready) {
+        platform_ready = 0;
+        return;
+    }
+
+    if (!platform_input_ready) {
+        platform_ready = 0;
+        return;
+    }
+
+    if (!platform_timer_ready) {
+        platform_ready = 0;
+        return;
+    }
+
+    if (!platform_power_ready) {
+        platform_ready = 0;
+        return;
+    }
+
+    platform_ready = 1;
+}
+
 void platform_init(void) {
+    platform_init_done = 1;
+
     platform_output_ready = 1;
     platform_input_ready = 1;
     platform_timer_ready = 1;
     platform_power_ready = 1;
 
-    platform_ready = 1;
-    platform_init_done = 1;
+    platform_refresh_ready_state();
 }
 
 void platform_print(const char* text) {
@@ -273,24 +303,28 @@ void platform_caps(void) {
 void platform_break(const char* capability) {
     if (platform_str_equal(capability, "output")) {
         platform_output_ready = 0;
+        platform_refresh_ready_state();
         platform_print("platform capability broken: output\n");
         return;
     }
 
     if (platform_str_equal(capability, "input")) {
         platform_input_ready = 0;
+        platform_refresh_ready_state();
         platform_print("platform capability broken: input\n");
         return;
     }
 
     if (platform_str_equal(capability, "timer")) {
         platform_timer_ready = 0;
+        platform_refresh_ready_state();
         platform_print("platform capability broken: timer\n");
         return;
     }
 
     if (platform_str_equal(capability, "power")) {
         platform_power_ready = 0;
+        platform_refresh_ready_state();
         platform_print("platform capability broken: power\n");
         return;
     }
@@ -300,6 +334,7 @@ void platform_break(const char* capability) {
         platform_input_ready = 0;
         platform_timer_ready = 0;
         platform_power_ready = 0;
+        platform_refresh_ready_state();
         platform_print("platform capability broken: all\n");
         return;
     }
@@ -312,34 +347,44 @@ void platform_break(const char* capability) {
 
 void platform_fix(const char* capability) {
     if (platform_str_equal(capability, "output")) {
+        platform_init_done = 1;
         platform_output_ready = 1;
+        platform_refresh_ready_state();
         platform_print("platform capability fixed: output\n");
         return;
     }
 
     if (platform_str_equal(capability, "input")) {
+        platform_init_done = 1;
         platform_input_ready = 1;
+        platform_refresh_ready_state();
         platform_print("platform capability fixed: input\n");
         return;
     }
 
     if (platform_str_equal(capability, "timer")) {
+        platform_init_done = 1;
         platform_timer_ready = 1;
+        platform_refresh_ready_state();
         platform_print("platform capability fixed: timer\n");
         return;
     }
 
     if (platform_str_equal(capability, "power")) {
+        platform_init_done = 1;
         platform_power_ready = 1;
+        platform_refresh_ready_state();
         platform_print("platform capability fixed: power\n");
         return;
     }
 
     if (platform_str_equal(capability, "all")) {
+        platform_init_done = 1;
         platform_output_ready = 1;
         platform_input_ready = 1;
         platform_timer_ready = 1;
         platform_power_ready = 1;
+        platform_refresh_ready_state();
         platform_print("platform capability fixed: all\n");
         return;
     }

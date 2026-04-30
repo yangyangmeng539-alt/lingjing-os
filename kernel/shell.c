@@ -14,6 +14,7 @@
 #include "platform.h"
 #include "scheduler.h"
 #include "health.h"
+#include "identity.h"
 
 extern unsigned int kernel_stack_marker;
 
@@ -465,6 +466,40 @@ static void shell_handle_platformfix(const char* cmd) {
     platform_fix(capability);
 }
 
+static void shell_handle_identity(const char* cmd) {
+    if (str_equal(cmd, "identity")) {
+        identity_status();
+        return;
+    }
+
+    if (str_equal(cmd, "identity status")) {
+        identity_status();
+        return;
+    }
+
+    if (str_equal(cmd, "identity doctor")) {
+        identity_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "identity check")) {
+        identity_check();
+        return;
+    }
+
+    if (str_equal(cmd, "identity break")) {
+        identity_break();
+        return;
+    }
+
+    if (str_equal(cmd, "identity fix")) {
+        identity_fix();
+        return;
+    }
+
+    platform_print("usage: identity | identity status | identity doctor | identity check | identity break | identity fix\n");
+}
+
 static void shell_handle_lang(const char* cmd) {
     if (str_equal(cmd, "lang")) {
         platform_print(lang_get(MSG_LANGUAGE_CURRENT));
@@ -514,6 +549,9 @@ static void shell_handle_doctor(void) {
 
     platform_print("  platform layer:      ");
     platform_print(health_platform_ok() ? "ok\n" : "broken\n");
+
+    platform_print("  identity layer:      ");
+    platform_print(health_identity_ok() ? "ok\n" : "broken\n");
 
     platform_print("  current platform:    ");
     platform_print(platform_get_name());
@@ -818,7 +856,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -837,6 +875,8 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_doctor();
     } else if (str_equal(cmd, "health")) {
         shell_handle_health();
+    } else if (str_equal(cmd, "identity") || str_starts_with(cmd, "identity ")) {
+        shell_handle_identity(cmd);
     } else if (str_equal(cmd, "platform")) {
         shell_handle_platform();
     } else if (str_equal(cmd, "platformcheck")) {

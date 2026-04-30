@@ -4,7 +4,7 @@
 #include "scheduler.h"
 #include "platform.h"
 
-#define MAX_MODULES 16
+#define MAX_MODULES 32
 
 typedef struct module_entry {
     const char* name;

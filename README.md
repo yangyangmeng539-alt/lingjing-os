@@ -16,8 +16,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.0.4
-stage: security-language prototype
+version: dev-0.0.5
+stage: architecture prototype
 arch: i386
 boot: multiboot + grub
 ```

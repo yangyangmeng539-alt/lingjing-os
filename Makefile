@@ -25,6 +25,7 @@ OBJS = \
 	$(BUILD_DIR)/security.o \
 	$(BUILD_DIR)/platform.o \
 	$(BUILD_DIR)/lang.o \
+	$(BUILD_DIR)/identity.o \
 	$(BUILD_DIR)/health.o \
 	$(BUILD_DIR)/intent.o \
 	$(BUILD_DIR)/scheduler.o
@@ -84,6 +85,9 @@ $(BUILD_DIR)/platform.o: kernel/platform.c
 
 $(BUILD_DIR)/lang.o: kernel/lang.c
 	$(CC) $(CFLAGS) -c kernel/lang.c -o $(BUILD_DIR)/lang.o
+
+$(BUILD_DIR)/identity.o: kernel/identity.c
+	$(CC) $(CFLAGS) -c kernel/identity.c -o $(BUILD_DIR)/identity.o
 
 $(BUILD_DIR)/security.o: kernel/security.c
 	$(CC) $(CFLAGS) -c kernel/security.c -o $(BUILD_DIR)/security.o
