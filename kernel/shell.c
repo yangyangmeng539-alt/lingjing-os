@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "system.h"
 #include "memory.h"
+#include "paging.h"
 #include "timer.h"
 #include "module.h"
 #include "intent.h"
@@ -111,6 +112,56 @@ static void shell_prompt(void) {
 
 static void shell_handle_mem(void) {
     memory_print_status();
+}
+
+static void shell_handle_paging(const char* cmd) {
+    if (str_equal(cmd, "paging")) {
+        paging_status();
+        return;
+    }
+
+    if (str_equal(cmd, "paging status")) {
+        paging_status();
+        return;
+    }
+
+    if (str_equal(cmd, "paging check")) {
+        paging_check();
+        return;
+    }
+
+    if (str_equal(cmd, "paging doctor")) {
+        paging_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "paging enable")) {
+        paging_enable();
+        return;
+    }
+
+    if (str_starts_with(cmd, "paging map ")) {
+        const char* addr_text = cmd + 11;
+        unsigned int addr = parse_hex_or_uint(addr_text);
+
+        paging_map_check(addr);
+        return;
+    }
+
+    if (str_equal(cmd, "paging map")) {
+        platform_print("usage: paging map <addr>\n");
+        return;
+    }
+
+    platform_print("usage: paging | paging status | paging check | paging doctor | paging map <addr> | paging enable\n");
+}
+
+static void shell_handle_pagingbreak(void) {
+    paging_break();
+}
+
+static void shell_handle_pagingfix(void) {
+    paging_fix();
 }
 
 static void shell_handle_uptime(void) {
@@ -550,6 +601,9 @@ static void shell_handle_doctor(void) {
     platform_print("  memory layer:        ");
     platform_print(health_memory_ok() ? "ok\n" : "broken\n");
 
+    platform_print("  paging layer:        ");
+    platform_print(health_paging_ok() ? "ok\n" : "broken\n");
+
     platform_print("  current platform:    ");
     platform_print(platform_get_name());
     platform_print("\n");
@@ -935,7 +989,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1056,6 +1110,12 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_intent(cmd);
     } else if (str_equal(cmd, "mem")) {
         shell_handle_mem();
+    } else if (str_equal(cmd, "paging") || str_starts_with(cmd, "paging ")) {
+        shell_handle_paging(cmd);
+    } else if (str_equal(cmd, "pagingbreak")) {
+        shell_handle_pagingbreak();
+    } else if (str_equal(cmd, "pagingfix")) {
+        shell_handle_pagingfix();
     } else if (str_equal(cmd, "uptime")) {
         shell_handle_uptime();
     } else if (str_starts_with(cmd, "sleep ")) {

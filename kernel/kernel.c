@@ -5,6 +5,7 @@
 #include "keyboard.h"
 #include "io.h"
 #include "memory.h"
+#include "paging.h"
 #include "timer.h"
 #include "module.h"
 #include "scheduler.h"
@@ -13,6 +14,7 @@
 #include "platform.h"
 #include "health.h"
 #include "identity.h"
+
 
 unsigned int kernel_stack_marker = 0;
 
@@ -71,6 +73,10 @@ void kernel_main(void) {
     memory_init();
     module_register("memory", "loaded", "kernel", "memory", "core");
     platform_print("Memory initialized.\n");
+
+    paging_init();
+    module_register("paging", "loaded", "kernel", "paging", "memory");
+    platform_print("Paging initialized.\n");
 
     enable_interrupts();
     platform_print("Interrupts enabled.\n");

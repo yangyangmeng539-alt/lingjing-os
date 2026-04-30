@@ -6,6 +6,7 @@
 #include "platform.h"
 #include "identity.h"
 #include "memory.h"
+#include "paging.h"
 
 static int health_ready = 0;
 
@@ -41,6 +42,10 @@ int health_memory_ok(void) {
     return memory_doctor_ok();
 }
 
+int health_paging_ok(void) {
+    return paging_doctor_ok();
+}
+
 int health_result_ok(void) {
     if (!health_ready) {
         return 0;
@@ -74,6 +79,10 @@ int health_result_ok(void) {
         return 0;
     }
 
+     if (!health_paging_ok()) {
+        return 0;
+    }
+
     return 1;
 }
 
@@ -100,6 +109,9 @@ void health_print(void) {
 
     platform_print("  memory:   ");
     platform_print(health_memory_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  paging:   ");
+    platform_print(health_paging_ok() ? "ok\n" : "bad\n");
 
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");

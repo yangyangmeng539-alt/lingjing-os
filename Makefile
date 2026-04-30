@@ -19,6 +19,7 @@ OBJS = \
 	$(BUILD_DIR)/idt.o \
 	$(BUILD_DIR)/idt_asm.o \
 	$(BUILD_DIR)/memory.o \
+	$(BUILD_DIR)/paging.o \
 	$(BUILD_DIR)/timer.o \
 	$(BUILD_DIR)/system.o \
 	$(BUILD_DIR)/module.o \
@@ -61,6 +62,9 @@ $(BUILD_DIR)/idt.o: kernel/idt.c
 
 $(BUILD_DIR)/memory.o: kernel/memory.c
 	$(CC) $(CFLAGS) -c kernel/memory.c -o $(BUILD_DIR)/memory.o
+
+$(BUILD_DIR)/paging.o: kernel/paging.c
+	$(CC) $(CFLAGS) -c kernel/paging.c -o $(BUILD_DIR)/paging.o
 
 $(BUILD_DIR)/timer.o: kernel/timer.c
 	$(CC) $(CFLAGS) -c kernel/timer.c -o $(BUILD_DIR)/timer.o
