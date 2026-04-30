@@ -15,6 +15,8 @@ unsigned int paging_get_mapped_pages(void);
 int paging_is_identity_mapped(unsigned int address);
 void paging_map_check(unsigned int address);
 void paging_enable(void);
+void paging_stats(void);
+void paging_flags(unsigned int address);
 
 void paging_status(void);
 void paging_check(void);

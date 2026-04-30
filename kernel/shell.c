@@ -142,6 +142,24 @@ static void shell_handle_paging(const char* cmd) {
         return;
     }
 
+    if (str_equal(cmd, "paging stats")) {
+        paging_stats();
+        return;
+    }
+
+    if (str_starts_with(cmd, "paging flags ")) {
+        const char* addr_text = cmd + 13;
+        unsigned int addr = parse_hex_or_uint(addr_text);
+
+        paging_flags(addr);
+        return;
+    }
+
+    if (str_equal(cmd, "paging flags")) {
+        platform_print("usage: paging flags <addr>\n");
+        return;
+    }
+
     if (str_starts_with(cmd, "paging map ")) {
         const char* addr_text = cmd + 11;
         unsigned int addr = parse_hex_or_uint(addr_text);
@@ -155,7 +173,7 @@ static void shell_handle_paging(const char* cmd) {
         return;
     }
 
-    platform_print("usage: paging | paging status | paging check | paging doctor | paging map <addr> | paging enable\n");
+    platform_print("usage: paging | paging status | paging check | paging doctor | paging map <addr> | paging flags <addr> | paging stats | paging enable\n");
 }
 
 static void shell_handle_pagingbreak(void) {
@@ -474,6 +492,16 @@ static void shell_handle_syscall(const char* cmd) {
         return;
     }
 
+    if (str_equal(cmd, "syscall table")) {
+        syscall_table();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall stats")) {
+        syscall_stats();
+        return;
+    }
+
     if (str_starts_with(cmd, "syscall call ")) {
         const char* id_text = cmd + 13;
         unsigned int id = parse_uint(id_text);
@@ -487,7 +515,7 @@ static void shell_handle_syscall(const char* cmd) {
         return;
     }
 
-    platform_print("usage: syscall | syscall status | syscall check | syscall doctor | syscall call <id>\n");
+    platform_print("usage: syscall | syscall status | syscall check | syscall doctor | syscall table | syscall stats | syscall call <id>\n");
 }
 
 static void shell_handle_user(const char* cmd) {
@@ -511,7 +539,22 @@ static void shell_handle_user(const char* cmd) {
         return;
     }
 
-    platform_print("usage: user | user status | user check | user doctor\n");
+    if (str_equal(cmd, "user programs")) {
+        user_programs();
+        return;
+    }
+
+    if (str_equal(cmd, "user entries")) {
+        user_entries();
+        return;
+    }
+
+    if (str_equal(cmd, "user stats")) {
+        user_stats();
+        return;
+    }
+
+    platform_print("usage: user | user status | user check | user doctor | user programs | user entries | user stats\n");
 }
 
 static void shell_handle_userbreak(void) {
@@ -855,6 +898,38 @@ static void shell_handle_taskprio(const char* cmd) {
     scheduler_set_task_priority(id, priority);
 }
 
+static void shell_handle_taskexit(const char* cmd) {
+    const char* id_text = cmd + 9;
+    unsigned int id = parse_uint(id_text);
+    const char* code_text = shell_skip_token(id_text);
+    unsigned int exit_code = parse_uint(code_text);
+
+    if (code_text[0] == '\0') {
+        platform_print("usage: taskexit <id> <code>\n");
+        return;
+    }
+
+    scheduler_exit_task(id, exit_code);
+}
+
+static void shell_handle_taskbreak(const char* cmd) {
+    const char* id_text = cmd + 10;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_break_task(id);
+}
+
+static void shell_handle_taskfix(const char* cmd) {
+    const char* id_text = cmd + 8;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_fix_task(id);
+}
+
+static void shell_handle_taskstats(void) {
+    scheduler_task_stats();
+}
+
 static void shell_handle_status(void) {
     platform_print("LJ | up ");
     platform_print_uint(platform_seconds());
@@ -1004,6 +1079,10 @@ static void shell_handle_heapdoctor(void) {
     memory_doctor();
 }
 
+static void shell_handle_heapstats(void) {
+    memory_stats();
+}
+
 static void shell_handle_heapbreak(void) {
     memory_break();
 }
@@ -1097,7 +1176,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall call, syscallbreak, syscallfix, user, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1188,6 +1267,20 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_taskprio(cmd);
     } else if (str_equal(cmd, "taskprio")) {
         platform_print("usage: taskprio <id> <priority>\n");
+    } else if (str_starts_with(cmd, "taskexit ")) {
+        shell_handle_taskexit(cmd);
+    } else if (str_equal(cmd, "taskexit")) {
+        platform_print("usage: taskexit <id> <code>\n");
+    } else if (str_starts_with(cmd, "taskbreak ")) {
+        shell_handle_taskbreak(cmd);
+    } else if (str_equal(cmd, "taskbreak")) {
+        platform_print("usage: taskbreak <id>\n");
+    } else if (str_starts_with(cmd, "taskfix ")) {
+        shell_handle_taskfix(cmd);
+    } else if (str_equal(cmd, "taskfix")) {
+        platform_print("usage: taskfix <id>\n");
+    } else if (str_equal(cmd, "taskstats")) {
+        shell_handle_taskstats();
     } else if (str_equal(cmd, "taskcheck")) {
         shell_handle_taskcheck();
     } else if (str_equal(cmd, "taskdoctor")) {
@@ -1271,6 +1364,8 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_heapcheck();
     } else if (str_equal(cmd, "heapdoctor")) {
         shell_handle_heapdoctor();
+    } else if (str_equal(cmd, "heapstats")) {
+        shell_handle_heapstats();
     } else if (str_equal(cmd, "heapbreak")) {
         shell_handle_heapbreak();
     } else if (str_equal(cmd, "heapfix")) {

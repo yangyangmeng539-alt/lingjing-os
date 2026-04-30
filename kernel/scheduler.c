@@ -17,6 +17,8 @@ typedef struct task_entry {
     unsigned int stack_size;
     unsigned int context_ready;
     unsigned int context_switches;
+    unsigned int exit_code;
+    unsigned int lifecycle_events;
 } task_entry_t;
 
 static task_entry_t tasks[MAX_TASKS];
@@ -32,6 +34,9 @@ static int task_switch_broken = 0;
 static int scheduler_state_is_ready(const char* state);
 static int scheduler_state_is_running(const char* state);
 static int scheduler_state_is_blocked(const char* state);
+static int scheduler_state_is_created(const char* state);
+static int scheduler_state_is_sleeping(const char* state);
+static int scheduler_state_is_broken(const char* state);
 static int scheduler_state_is_killed(const char* state);
 static int scheduler_state_is_valid(const char* state);
 
@@ -80,6 +85,8 @@ static void scheduler_add_task(unsigned int id, const char* name, const char* st
     tasks[index].stack_size = TASK_STACK_SIZE;
     tasks[index].context_ready = 1;
     tasks[index].context_switches = 0;
+    tasks[index].exit_code = 0;
+    tasks[index].lifecycle_events = 1;
 
     task_count++;
 }
@@ -97,11 +104,23 @@ static int scheduler_task_is_runnable(int index) {
         return 1;
     }
 
+    if (scheduler_state_is_created(tasks[index].status)) {
+        return 0;
+    }
+
     if (scheduler_state_is_blocked(tasks[index].status)) {
         return 0;
     }
 
+    if (scheduler_state_is_sleeping(tasks[index].status)) {
+        return 0;
+    }
+
     if (scheduler_state_is_killed(tasks[index].status)) {
+        return 0;
+    }
+
+    if (scheduler_state_is_broken(tasks[index].status)) {
         return 0;
     }
 
@@ -133,6 +152,21 @@ static int scheduler_state_is_running(const char* state) {
            state[4] == 'i' &&
            state[5] == 'n' &&
            state[6] == 'g' &&
+           state[7] == '\0';
+}
+
+static int scheduler_state_is_created(const char* state) {
+    if (state == 0) {
+        return 0;
+    }
+
+    return state[0] == 'c' &&
+           state[1] == 'r' &&
+           state[2] == 'e' &&
+           state[3] == 'a' &&
+           state[4] == 't' &&
+           state[5] == 'e' &&
+           state[6] == 'd' &&
            state[7] == '\0';
 }
 
@@ -172,6 +206,39 @@ static int scheduler_state_is_valid(const char* state) {
         return 1;
     }
 
+    if (state[0] == 'c' &&
+        state[1] == 'r' &&
+        state[2] == 'e' &&
+        state[3] == 'a' &&
+        state[4] == 't' &&
+        state[5] == 'e' &&
+        state[6] == 'd' &&
+        state[7] == '\0') {
+        return 1;
+    }
+
+    if (state[0] == 's' &&
+        state[1] == 'l' &&
+        state[2] == 'e' &&
+        state[3] == 'e' &&
+        state[4] == 'p' &&
+        state[5] == 'i' &&
+        state[6] == 'n' &&
+        state[7] == 'g' &&
+        state[8] == '\0') {
+        return 1;
+    }
+
+    if (state[0] == 'b' &&
+        state[1] == 'r' &&
+        state[2] == 'o' &&
+        state[3] == 'k' &&
+        state[4] == 'e' &&
+        state[5] == 'n' &&
+        state[6] == '\0') {
+        return 1;
+    }
+
     if (state[0] == 'k' &&
         state[1] == 'i' &&
         state[2] == 'l' &&
@@ -198,6 +265,36 @@ static int scheduler_state_is_blocked(const char* state) {
            state[5] == 'e' &&
            state[6] == 'd' &&
            state[7] == '\0';
+}
+
+static int scheduler_state_is_sleeping(const char* state) {
+    if (state == 0) {
+        return 0;
+    }
+
+    return state[0] == 's' &&
+           state[1] == 'l' &&
+           state[2] == 'e' &&
+           state[3] == 'e' &&
+           state[4] == 'p' &&
+           state[5] == 'i' &&
+           state[6] == 'n' &&
+           state[7] == 'g' &&
+           state[8] == '\0';
+}
+
+static int scheduler_state_is_broken(const char* state) {
+    if (state == 0) {
+        return 0;
+    }
+
+    return state[0] == 'b' &&
+           state[1] == 'r' &&
+           state[2] == 'o' &&
+           state[3] == 'k' &&
+           state[4] == 'e' &&
+           state[5] == 'n' &&
+           state[6] == '\0';
 }
 
 static int scheduler_state_is_killed(const char* state) {
@@ -245,8 +342,11 @@ static void scheduler_switch_to_next_runnable(void) {
     for (int j = 0; j < task_count; j++) {
         if (j == 0) {
             tasks[j].status = "running";
-        } else if (!scheduler_state_is_blocked(tasks[j].status) &&
-                   !scheduler_state_is_killed(tasks[j].status)) {
+            } else if (!scheduler_state_is_created(tasks[j].status) &&
+                   !scheduler_state_is_blocked(tasks[j].status) &&
+                   !scheduler_state_is_sleeping(tasks[j].status) &&
+                   !scheduler_state_is_killed(tasks[j].status) &&
+                   !scheduler_state_is_broken(tasks[j].status)) {
             tasks[j].status = "ready";
         }
     }
@@ -438,6 +538,18 @@ void scheduler_runqueue(void) {
             platform_print(" skipped");
         }
 
+        if (scheduler_state_is_sleeping(tasks[i].status)) {
+            platform_print(" reason=sleeping");
+        } else if (scheduler_state_is_blocked(tasks[i].status)) {
+            platform_print(" reason=blocked");
+        } else if (scheduler_state_is_created(tasks[i].status)) {
+            platform_print(" reason=created");
+        } else if (scheduler_state_is_killed(tasks[i].status)) {
+            platform_print(" reason=killed");
+        } else if (scheduler_state_is_broken(tasks[i].status)) {
+            platform_print(" reason=broken");
+        }
+
         platform_print("\n");
     }
 }
@@ -447,7 +559,7 @@ void scheduler_set_task_state(unsigned int id, const char* state) {
         platform_print("invalid task state: ");
         platform_print(state);
         platform_print("\n");
-        platform_print("allowed: ready, running, blocked, killed\n");
+        platform_print("allowed: created, ready, running, blocked, sleeping, killed, broken\n");
         return;
     }
 
@@ -456,8 +568,12 @@ void scheduler_set_task_state(unsigned int id, const char* state) {
             int was_active = (i == active_task_index);
 
             tasks[i].status = state;
+            tasks[i].lifecycle_events++;
 
-            if (scheduler_state_is_blocked(state) && was_active) {
+                if ((scheduler_state_is_blocked(state) ||
+                 scheduler_state_is_sleeping(state) ||
+                 scheduler_state_is_killed(state) ||
+                 scheduler_state_is_broken(state)) && was_active) {
                 scheduler_switch_to_next_runnable();
             } else if (state[0] == 'r' &&
                 state[1] == 'u' &&
@@ -490,7 +606,10 @@ void scheduler_set_task_state(unsigned int id, const char* state) {
             platform_print(tasks[i].status);
             platform_print("\n");
 
-            if (scheduler_state_is_blocked(state) && was_active) {
+            if ((scheduler_state_is_blocked(state) ||
+                 scheduler_state_is_sleeping(state) ||
+                 scheduler_state_is_killed(state) ||
+                 scheduler_state_is_broken(state)) && was_active) {
                 platform_print("active switched to: ");
                 platform_print(scheduler_get_active_task());
                 platform_print("\n");
@@ -516,7 +635,7 @@ void scheduler_create_task(const char* name) {
         return;
     }
 
-    scheduler_add_task(next_task_id, name, "ready", "user");
+    scheduler_add_task(next_task_id, name, "created", "user");
 
     platform_print("task created:\n");
     platform_print("  id:   ");
@@ -527,7 +646,7 @@ void scheduler_create_task(const char* name) {
     platform_print(name);
     platform_print("\n");
 
-    platform_print("  state: ready\n");
+    platform_print("  state: created\n");
 
     next_task_id++;
 }
@@ -550,6 +669,8 @@ void scheduler_kill_task(unsigned int id) {
             }
 
             tasks[i].status = "killed";
+            tasks[i].exit_code = 0;
+            tasks[i].lifecycle_events++;
 
             platform_print("task killed:\n");
             platform_print("  id:   ");
@@ -590,7 +711,14 @@ void scheduler_sleep_task(unsigned int id) {
                 return;
             }
 
-            scheduler_set_task_state(id, "blocked");
+            if (scheduler_state_is_broken(tasks[i].status)) {
+                platform_print("cannot sleep broken task: ");
+                platform_print_uint(id);
+                platform_print("\n");
+                return;
+            }
+
+            scheduler_set_task_state(id, "sleeping");
             return;
         }
     }
@@ -610,6 +738,13 @@ void scheduler_wake_task(unsigned int id) {
         if (tasks[i].id == id) {
             if (scheduler_state_is_killed(tasks[i].status)) {
                 platform_print("cannot wake killed task: ");
+                platform_print_uint(id);
+                platform_print("\n");
+                return;
+            }
+
+            if (scheduler_state_is_broken(tasks[i].status)) {
+                platform_print("cannot wake broken task: ");
                 platform_print_uint(id);
                 platform_print("\n");
                 return;
@@ -640,6 +775,138 @@ void scheduler_set_task_priority(unsigned int id, unsigned int priority) {
             platform_print("  prio: ");
             platform_print_uint(priority);
             platform_print("\n");
+            return;
+        }
+    }
+
+    platform_print("task not found: ");
+    platform_print_uint(id);
+    platform_print("\n");
+}
+
+void scheduler_exit_task(unsigned int id, unsigned int exit_code) {
+    if (id == 0) {
+        platform_print("cannot exit idle task.\n");
+        return;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].id == id) {
+            int was_active = (i == active_task_index);
+
+            if (scheduler_state_is_killed(tasks[i].status)) {
+                platform_print("task already killed: ");
+                platform_print_uint(id);
+                platform_print("\n");
+                return;
+            }
+
+            tasks[i].status = "killed";
+            tasks[i].exit_code = exit_code;
+            tasks[i].lifecycle_events++;
+
+            platform_print("task exited:\n");
+
+            platform_print("  id:   ");
+            platform_print_uint(id);
+            platform_print("\n");
+
+            platform_print("  name: ");
+            platform_print(tasks[i].name);
+            platform_print("\n");
+
+            platform_print("  code: ");
+            platform_print_uint(exit_code);
+            platform_print("\n");
+
+            if (was_active) {
+                scheduler_switch_to_next_runnable();
+                platform_print("active switched to: ");
+                platform_print(scheduler_get_active_task());
+                platform_print("\n");
+            }
+
+            return;
+        }
+    }
+
+    platform_print("task not found: ");
+    platform_print_uint(id);
+    platform_print("\n");
+}
+
+void scheduler_break_task(unsigned int id) {
+    if (id == 0) {
+        platform_print("cannot break idle task.\n");
+        return;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].id == id) {
+            int was_active = (i == active_task_index);
+
+            if (scheduler_state_is_killed(tasks[i].status)) {
+                platform_print("cannot break killed task: ");
+                platform_print_uint(id);
+                platform_print("\n");
+                return;
+            }
+
+            tasks[i].status = "broken";
+            tasks[i].context_ready = 0;
+            tasks[i].lifecycle_events++;
+
+            platform_print("task broken:\n");
+            platform_print("  id:   ");
+            platform_print_uint(id);
+            platform_print("\n");
+            platform_print("  name: ");
+            platform_print(tasks[i].name);
+            platform_print("\n");
+
+            if (was_active) {
+                scheduler_switch_to_next_runnable();
+                platform_print("active switched to: ");
+                platform_print(scheduler_get_active_task());
+                platform_print("\n");
+            }
+
+            return;
+        }
+    }
+
+    platform_print("task not found: ");
+    platform_print_uint(id);
+    platform_print("\n");
+}
+
+void scheduler_fix_task(unsigned int id) {
+    if (id == 0) {
+        platform_print("idle task does not need taskfix.\n");
+        return;
+    }
+
+    for (int i = 0; i < task_count; i++) {
+        if (tasks[i].id == id) {
+            if (scheduler_state_is_killed(tasks[i].status)) {
+                platform_print("cannot fix killed task: ");
+                platform_print_uint(id);
+                platform_print("\n");
+                return;
+            }
+
+            tasks[i].status = "ready";
+            tasks[i].context_ready = 1;
+            tasks[i].lifecycle_events++;
+
+            platform_print("task fixed:\n");
+            platform_print("  id:   ");
+            platform_print_uint(id);
+            platform_print("\n");
+            platform_print("  name: ");
+            platform_print(tasks[i].name);
+            platform_print("\n");
+            platform_print("  state: ready\n");
             return;
         }
     }
@@ -705,6 +972,10 @@ void scheduler_list_tasks(void) {
         platform_print_uint(tasks[i].runtime_ticks);
         platform_print("    ctx ");
         platform_print_uint(tasks[i].context_switches);
+        platform_print("    exit ");
+        platform_print_uint(tasks[i].exit_code);
+        platform_print("    life ");
+        platform_print_uint(tasks[i].lifecycle_events);
         platform_print("\n");
     }
 }
@@ -749,8 +1020,12 @@ void scheduler_task_info(unsigned int id) {
             platform_print("  ctx:    ");
             platform_print(tasks[i].context_ready ? "ready\n" : "bad\n");
 
-            platform_print("  switch: ");
-            platform_print_uint(tasks[i].context_switches);
+            platform_print("  exit:   ");
+            platform_print_uint(tasks[i].exit_code);
+            platform_print("\n");
+
+            platform_print("  life:   ");
+            platform_print_uint(tasks[i].lifecycle_events);
             platform_print("\n");
 
             return;
@@ -764,9 +1039,11 @@ void scheduler_task_info(unsigned int id) {
 
 void scheduler_check_tasks(void) {
     int broken_count = 0;
+    int created_count = 0;
     int running_count = 0;
     int ready_count = 0;
     int blocked_count = 0;
+    int sleeping_count = 0;
     int killed_count = 0;
 
     platform_print("Task check:\n");
@@ -790,7 +1067,10 @@ void scheduler_check_tasks(void) {
             continue;
         }
 
-        if (scheduler_state_is_running(tasks[i].status)) {
+        if (scheduler_state_is_created(tasks[i].status)) {
+            platform_print("created\n");
+            created_count++;
+        } else if (scheduler_state_is_running(tasks[i].status)) {
             platform_print("running\n");
             running_count++;
         } else if (scheduler_state_is_ready(tasks[i].status)) {
@@ -799,43 +1079,59 @@ void scheduler_check_tasks(void) {
         } else if (scheduler_state_is_blocked(tasks[i].status)) {
             platform_print("blocked\n");
             blocked_count++;
+        } else if (scheduler_state_is_sleeping(tasks[i].status)) {
+            platform_print("sleeping\n");
+            sleeping_count++;
         } else if (scheduler_state_is_killed(tasks[i].status)) {
             platform_print("killed\n");
             killed_count++;
+        } else if (scheduler_state_is_broken(tasks[i].status)) {
+            platform_print("broken\n");
+            broken_count++;
         }
     }
 
     platform_print("summary:\n");
 
-    platform_print("  running: ");
+    platform_print("  created:  ");
+    platform_print_uint((unsigned int)created_count);
+    platform_print("\n");
+
+    platform_print("  running:  ");
     platform_print_uint((unsigned int)running_count);
     platform_print("\n");
 
-    platform_print("  ready:   ");
+    platform_print("  ready:    ");
     platform_print_uint((unsigned int)ready_count);
     platform_print("\n");
 
-    platform_print("  blocked: ");
+    platform_print("  blocked:  ");
     platform_print_uint((unsigned int)blocked_count);
     platform_print("\n");
 
-    platform_print("  killed:  ");
+    platform_print("  sleeping: ");
+    platform_print_uint((unsigned int)sleeping_count);
+    platform_print("\n");
+
+    platform_print("  killed:   ");
     platform_print_uint((unsigned int)killed_count);
     platform_print("\n");
 
-    platform_print("  broken:  ");
+    platform_print("  broken:   ");
     platform_print_uint((unsigned int)broken_count);
     platform_print("\n");
 
-    platform_print("  result:  ");
+    platform_print("  result:   ");
     platform_print(broken_count == 0 ? "ok\n" : "broken\n");
 }
 
 void scheduler_doctor(void) {
     int broken_count = 0;
+    int created_count = 0;
     int running_count = 0;
     int ready_count = 0;
     int blocked_count = 0;
+    int sleeping_count = 0;
     int killed_count = 0;
 
     for (int i = 0; i < task_count; i++) {
@@ -849,44 +1145,58 @@ void scheduler_doctor(void) {
             continue;
         }
 
-        if (scheduler_state_is_running(tasks[i].status)) {
+        if (scheduler_state_is_created(tasks[i].status)) {
+            created_count++;
+        } else if (scheduler_state_is_running(tasks[i].status)) {
             running_count++;
         } else if (scheduler_state_is_ready(tasks[i].status)) {
             ready_count++;
         } else if (scheduler_state_is_blocked(tasks[i].status)) {
             blocked_count++;
+        } else if (scheduler_state_is_sleeping(tasks[i].status)) {
+            sleeping_count++;
         } else if (scheduler_state_is_killed(tasks[i].status)) {
             killed_count++;
+        } else if (scheduler_state_is_broken(tasks[i].status)) {
+            broken_count++;
         }
     }
 
     platform_print("Task doctor:\n");
 
-    platform_print("  total:   ");
+    platform_print("  total:    ");
     platform_print_uint((unsigned int)task_count);
     platform_print("\n");
 
-    platform_print("  running: ");
+    platform_print("  created:  ");
+    platform_print_uint((unsigned int)created_count);
+    platform_print("\n");
+
+    platform_print("  running:  ");
     platform_print_uint((unsigned int)running_count);
     platform_print("\n");
 
-    platform_print("  ready:   ");
+    platform_print("  ready:    ");
     platform_print_uint((unsigned int)ready_count);
     platform_print("\n");
 
-    platform_print("  blocked: ");
+    platform_print("  blocked:  ");
     platform_print_uint((unsigned int)blocked_count);
     platform_print("\n");
 
-    platform_print("  killed:  ");
+    platform_print("  sleeping: ");
+    platform_print_uint((unsigned int)sleeping_count);
+    platform_print("\n");
+
+    platform_print("  killed:   ");
     platform_print_uint((unsigned int)killed_count);
     platform_print("\n");
 
-    platform_print("  broken:  ");
+    platform_print("  broken:   ");
     platform_print_uint((unsigned int)broken_count);
     platform_print("\n");
 
-    platform_print("  result:  ");
+    platform_print("  result:   ");
     platform_print(broken_count == 0 ? "ok\n" : "broken\n");
 }
 
@@ -1044,6 +1354,39 @@ void scheduler_fix(void) {
     platform_print("  result: ok\n");
 }
 
+void scheduler_task_stats(void) {
+    unsigned int total_lifecycle_events = 0;
+    unsigned int total_context_switches = 0;
+    unsigned int exited_count = 0;
+
+    for (int i = 0; i < task_count; i++) {
+        total_lifecycle_events += tasks[i].lifecycle_events;
+        total_context_switches += tasks[i].context_switches;
+
+        if (scheduler_state_is_killed(tasks[i].status)) {
+            exited_count++;
+        }
+    }
+
+    platform_print("Task stats:\n");
+
+    platform_print("  tasks:      ");
+    platform_print_uint((unsigned int)task_count);
+    platform_print("\n");
+
+    platform_print("  lifecycle:  ");
+    platform_print_uint(total_lifecycle_events);
+    platform_print("\n");
+
+    platform_print("  ctx switch: ");
+    platform_print_uint(total_context_switches);
+    platform_print("\n");
+
+    platform_print("  exited:     ");
+    platform_print_uint(exited_count);
+    platform_print("\n");
+}
+
 int scheduler_has_broken_tasks(void) {
     if (task_count <= 0) {
         return 1;
@@ -1055,6 +1398,10 @@ int scheduler_has_broken_tasks(void) {
         }
 
         if (!scheduler_state_is_valid(tasks[i].status)) {
+            return 1;
+        }
+
+        if (scheduler_state_is_broken(tasks[i].status)) {
             return 1;
         }
     }

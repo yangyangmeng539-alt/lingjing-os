@@ -13,12 +13,19 @@ unsigned int memory_get_alloc_count(void);
 unsigned int memory_get_free_count(void);
 unsigned int memory_get_reuse_count(void);
 unsigned int memory_get_free_list_count(void);
+unsigned int memory_get_failed_free_count(void);
+unsigned int memory_get_double_free_count(void);
+unsigned int memory_get_live_alloc_count(void);
+unsigned int memory_get_allocated_bytes(void);
+unsigned int memory_get_freed_bytes(void);
+unsigned int memory_get_live_bytes(void);
 
 int memory_doctor_ok(void);
 
 void memory_print_status(void);
 void memory_check(void);
 void memory_doctor(void);
+void memory_stats(void);
 void memory_break(void);
 void memory_fix(void);
 

@@ -15,6 +15,9 @@ unsigned int user_get_entry_count(void);
 void user_status(void);
 void user_check(void);
 void user_doctor(void);
+void user_programs(void);
+void user_entries(void);
+void user_stats(void);
 
 void user_break(void);
 void user_fix(void);

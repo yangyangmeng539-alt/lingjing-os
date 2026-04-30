@@ -50,6 +50,14 @@ static void paging_write_cr3(unsigned int value) {
     __asm__ volatile ("mov %0, %%cr3" : : "r"(value) : "memory");
 }
 
+static unsigned int paging_read_cr3(void) {
+    unsigned int value = 0;
+
+    __asm__ volatile ("mov %%cr3, %0" : "=r"(value));
+
+    return value;
+}
+
 static int paging_cpu_enabled(void) {
     unsigned int cr0 = paging_read_cr0();
 
@@ -122,6 +130,28 @@ unsigned int paging_get_mapped_pages(void) {
     return paging_mapped_pages;
 }
 
+static unsigned int paging_get_mapped_bytes(void) {
+    return paging_mapped_pages * PAGE_SIZE;
+}
+
+static unsigned int paging_get_mapped_end(void) {
+    if (paging_mapped_pages == 0) {
+        return 0;
+    }
+
+    return paging_get_mapped_bytes() - 1;
+}
+
+static unsigned int paging_get_entry_for_address(unsigned int address) {
+    unsigned int page_index = address / PAGE_SIZE;
+
+    if (page_index >= PAGE_ENTRIES) {
+        return 0;
+    }
+
+    return first_page_table[page_index];
+}
+
 int paging_is_identity_mapped(unsigned int address) {
     unsigned int page_index = address / PAGE_SIZE;
     unsigned int expected_base = 0;
@@ -188,6 +218,87 @@ void paging_map_check(unsigned int address) {
     } else {
         platform_print("unmapped\n");
     }
+}
+
+void paging_flags(unsigned int address) {
+    unsigned int entry = paging_get_entry_for_address(address);
+
+    platform_print("Paging flags:\n");
+
+    platform_print("  address:  ");
+    platform_print_hex32(address);
+    platform_print("\n");
+
+    platform_print("  entry:    ");
+
+    if (entry == 0) {
+        platform_print("none\n");
+        platform_print("  result:   unmapped\n");
+        return;
+    }
+
+    platform_print_hex32(entry);
+    platform_print("\n");
+
+    platform_print("  present:  ");
+    platform_print((entry & 0x1) ? "yes\n" : "no\n");
+
+    platform_print("  writable: ");
+    platform_print((entry & 0x2) ? "yes\n" : "no\n");
+
+    platform_print("  user:     ");
+    platform_print((entry & 0x4) ? "yes\n" : "no\n");
+
+    platform_print("  accessed: ");
+    platform_print((entry & 0x20) ? "yes\n" : "no\n");
+
+    platform_print("  dirty:    ");
+    platform_print((entry & 0x40) ? "yes\n" : "no\n");
+
+    platform_print("  base:     ");
+    platform_print_hex32(entry & 0xFFFFF000);
+    platform_print("\n");
+
+    platform_print("  result:   ");
+    platform_print(paging_is_identity_mapped(address) ? "identity mapped\n" : "unmapped\n");
+}
+
+void paging_stats(void) {
+    unsigned int cr0 = paging_read_cr0();
+    unsigned int cr3 = paging_read_cr3();
+
+    platform_print("Paging stats:\n");
+
+    platform_print("  cr0:        ");
+    platform_print_hex32(cr0);
+    platform_print("\n");
+
+    platform_print("  cr3:        ");
+    platform_print_hex32(cr3);
+    platform_print("\n");
+
+    platform_print("  pg bit:     ");
+    platform_print((cr0 & 0x80000000) ? "on\n" : "off\n");
+
+    platform_print("  directory:  ");
+    platform_print_hex32((unsigned int)page_directory);
+    platform_print("\n");
+
+    platform_print("  table:      ");
+    platform_print_hex32((unsigned int)first_page_table);
+    platform_print("\n");
+
+    platform_print("  pages:      ");
+    platform_print_uint(paging_mapped_pages);
+    platform_print("\n");
+
+    platform_print("  bytes:      ");
+    platform_print_uint(paging_get_mapped_bytes());
+    platform_print("\n");
+
+    platform_print("  range:      0x00000000 - ");
+    platform_print_hex32(paging_get_mapped_end());
+    platform_print("\n");
 }
 
 void paging_enable(void) {
@@ -271,6 +382,10 @@ void paging_status(void) {
     platform_print("  pages:       ");
     platform_print_uint(paging_get_mapped_pages());
     platform_print("\n");
+
+    platform_print("  range:       0x00000000 - ");
+    platform_print_hex32(paging_get_mapped_end());
+    platform_print("\n");
 }
 
 void paging_check(void) {
@@ -310,11 +425,22 @@ void paging_doctor(void) {
 
     platform_print("  enabled:   ");
     platform_print(paging_enabled ? "yes\n" : "no\n");
+    platform_print("  cr0:         ");
+    platform_print_hex32(paging_read_cr0());
+    platform_print("\n");
+
+    platform_print("  cr3:         ");
+    platform_print_hex32(paging_read_cr3());
+    platform_print("\n");
     platform_print("  directory:   ");
     platform_print(page_directory[0] != 0 ? "ok\n" : "missing\n");
 
     platform_print("  mapped pages:");
     platform_print_uint(paging_mapped_pages);
+    platform_print("\n");
+
+    platform_print("  mapped range:0x00000000 - ");
+    platform_print_hex32(paging_get_mapped_end());
     platform_print("\n");
 
     platform_print("  result:      ");

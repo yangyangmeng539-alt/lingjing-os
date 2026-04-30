@@ -18,8 +18,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.1.0
-stage: syscall-user prototype
+version: dev-0.1.1
+stage: core hardening prototype
 arch: i386
 boot: multiboot + grub
 ```
@@ -1013,7 +1013,7 @@ Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.1.0 syscall-user prototype` 已完成 syscall/user mode 元数据原型验收。
+当前版本 `dev-0.1.1 core hardening prototype` 已完成 core hardening 原型验收。
 
 当前重点是验证：
 

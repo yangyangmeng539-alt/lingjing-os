@@ -15,6 +15,10 @@ void scheduler_kill_task(unsigned int id);
 void scheduler_sleep_task(unsigned int id);
 void scheduler_wake_task(unsigned int id);
 void scheduler_set_task_priority(unsigned int id, unsigned int priority);
+void scheduler_exit_task(unsigned int id, unsigned int exit_code);
+void scheduler_break_task(unsigned int id);
+void scheduler_fix_task(unsigned int id);
+void scheduler_task_stats(void);
 
 void scheduler_check_tasks(void);
 void scheduler_doctor(void);
