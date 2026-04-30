@@ -7,6 +7,8 @@
 #include "identity.h"
 #include "memory.h"
 #include "paging.h"
+#include "syscall.h"
+#include "user.h"
 
 static int health_ready = 0;
 
@@ -50,6 +52,14 @@ int health_task_switch_ok(void) {
     return scheduler_task_switch_doctor_ok();
 }
 
+int health_syscall_ok(void) {
+    return syscall_doctor_ok();
+}
+
+int health_user_ok(void) {
+    return user_doctor_ok();
+}
+
 int health_result_ok(void) {
     if (!health_ready) {
         return 0;
@@ -91,6 +101,14 @@ int health_result_ok(void) {
         return 0;
     }
 
+    if (!health_syscall_ok()) {
+        return 0;
+    }
+
+    if (!health_user_ok()) {
+        return 0;
+    }
+
     return 1;
 }
 
@@ -123,6 +141,12 @@ void health_print(void) {
 
     platform_print("  switch:   ");
     platform_print(health_task_switch_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  syscall:  ");
+    platform_print(health_syscall_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  user:     ");
+    platform_print(health_user_ok() ? "ok\n" : "bad\n");
 
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");

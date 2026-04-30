@@ -10,10 +10,13 @@
 #include "module.h"
 #include "scheduler.h"
 #include "security.h"
+#include "syscall.h"
+#include "user.h"
 #include "lang.h"
 #include "platform.h"
 #include "health.h"
 #include "identity.h"
+
 
 
 unsigned int kernel_stack_marker = 0;
@@ -53,6 +56,14 @@ void kernel_main(void) {
     security_init();
     module_register("security", "loaded", "kernel", "security", "core");
     platform_print("Security initialized.\n");
+
+    syscall_init();
+    module_register("syscall", "loaded", "kernel", "syscall", "security");
+    platform_print("Syscall initialized.\n");
+
+    user_init();
+    module_register("user", "loaded", "kernel", "user", "syscall");
+    platform_print("User mode initialized.\n");
 
     platform_init();
     module_register("platform", "loaded", "kernel", "platform", "core");

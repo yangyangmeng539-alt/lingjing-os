@@ -24,6 +24,8 @@ OBJS = \
 	$(BUILD_DIR)/system.o \
 	$(BUILD_DIR)/module.o \
 	$(BUILD_DIR)/security.o \
+	$(BUILD_DIR)/syscall.o \
+	$(BUILD_DIR)/user.o \
 	$(BUILD_DIR)/platform.o \
 	$(BUILD_DIR)/lang.o \
 	$(BUILD_DIR)/identity.o \
@@ -95,6 +97,12 @@ $(BUILD_DIR)/identity.o: kernel/identity.c
 
 $(BUILD_DIR)/security.o: kernel/security.c
 	$(CC) $(CFLAGS) -c kernel/security.c -o $(BUILD_DIR)/security.o
+
+$(BUILD_DIR)/syscall.o: kernel/syscall.c
+	$(CC) $(CFLAGS) -c kernel/syscall.c -o $(BUILD_DIR)/syscall.o
+
+$(BUILD_DIR)/user.o: kernel/user.c
+	$(CC) $(CFLAGS) -c kernel/user.c -o $(BUILD_DIR)/user.o
 
 $(BUILD_DIR)/kernel.bin: $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(BUILD_DIR)/kernel.bin

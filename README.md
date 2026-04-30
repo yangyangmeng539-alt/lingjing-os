@@ -18,8 +18,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.0.9
-stage: task switch prototype
+version: dev-0.1.0
+stage: syscall-user prototype
 arch: i386
 boot: multiboot + grub
 ```
@@ -1013,7 +1013,7 @@ Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.0.9 task switch prototype` 已完成 task switch 元数据原型验收。
+当前版本 `dev-0.1.0 syscall-user prototype` 已完成 syscall/user mode 元数据原型验收。
 
 当前重点是验证：
 
@@ -1062,15 +1062,14 @@ v0.0.6-task-lifecycle-prototype
 
 ## 下一阶段计划
 
-### dev-0.1.0 syscall + user mode prototype
+### dev-0.1.1 syscall interrupt prototype
 
-- syscall table
-- syscall dispatcher
-- user mode entry prototype
-- ring3 transition preparation
-- user/kernel boundary check
-- syscall doctor
-- user mode doctor
+- 接入 int 0x80 中断入口
+- syscall interrupt handler
+- syscall register frame prototype
+- syscall call path check
+- syscall interrupt doctor
+- 保持 user mode 仍为 metadata-only
 
 ### 后续路线
 

@@ -11,6 +11,8 @@
 #include "intent.h"
 #include "version.h"
 #include "security.h"
+#include "syscall.h"
+#include "user.h"
 #include "lang.h"
 #include "platform.h"
 #include "scheduler.h"
@@ -451,6 +453,83 @@ static void shell_handle_security(void) {
     security_status();
 }
 
+static void shell_handle_syscall(const char* cmd) {
+    if (str_equal(cmd, "syscall")) {
+        syscall_status();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall status")) {
+        syscall_status();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall check")) {
+        syscall_check();
+        return;
+    }
+
+    if (str_equal(cmd, "syscall doctor")) {
+        syscall_doctor();
+        return;
+    }
+
+    if (str_starts_with(cmd, "syscall call ")) {
+        const char* id_text = cmd + 13;
+        unsigned int id = parse_uint(id_text);
+
+        syscall_dispatch(id);
+        return;
+    }
+
+    if (str_equal(cmd, "syscall call")) {
+        platform_print("usage: syscall call <id>\n");
+        return;
+    }
+
+    platform_print("usage: syscall | syscall status | syscall check | syscall doctor | syscall call <id>\n");
+}
+
+static void shell_handle_user(const char* cmd) {
+    if (str_equal(cmd, "user")) {
+        user_status();
+        return;
+    }
+
+    if (str_equal(cmd, "user status")) {
+        user_status();
+        return;
+    }
+
+    if (str_equal(cmd, "user check")) {
+        user_check();
+        return;
+    }
+
+    if (str_equal(cmd, "user doctor")) {
+        user_doctor();
+        return;
+    }
+
+    platform_print("usage: user | user status | user check | user doctor\n");
+}
+
+static void shell_handle_userbreak(void) {
+    user_break();
+}
+
+static void shell_handle_userfix(void) {
+    user_fix();
+}
+
+static void shell_handle_syscallbreak(void) {
+    syscall_break();
+}
+
+static void shell_handle_syscallfix(void) {
+    syscall_fix();
+}
+
 static void shell_handle_securitycheck(void) {
     security_check();
 }
@@ -588,6 +667,12 @@ static void shell_handle_doctor(void) {
 
     platform_print("  task switch layer:   ");
     platform_print(health_task_switch_ok() ? "ok\n" : "broken\n");
+
+    platform_print("  syscall layer:       ");
+    platform_print(health_syscall_ok() ? "ok\n" : "broken\n");
+
+    platform_print("  user mode layer:     ");
+    platform_print(health_user_ok() ? "ok\n" : "broken\n");
 
     platform_print("  security:            ");
     platform_print(health_security_ok() ? "ok\n" : "broken\n");
@@ -1012,7 +1097,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall call, syscallbreak, syscallfix, user, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1059,6 +1144,18 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_lang(cmd);
     } else if (str_equal(cmd, "security")) {
         shell_handle_security();
+    } else if (str_equal(cmd, "syscall") || str_starts_with(cmd, "syscall ")) {
+        shell_handle_syscall(cmd);
+    } else if (str_equal(cmd, "syscallbreak")) {
+        shell_handle_syscallbreak();
+    } else if (str_equal(cmd, "syscallfix")) {
+        shell_handle_syscallfix();
+    } else if (str_equal(cmd, "user") || str_starts_with(cmd, "user ")) {
+        shell_handle_user(cmd);
+    } else if (str_equal(cmd, "userbreak")) {
+        shell_handle_userbreak();
+    } else if (str_equal(cmd, "userfix")) {
+        shell_handle_userfix();
     } else if (str_equal(cmd, "securitycheck")) {
         shell_handle_securitycheck();
     } else if (str_equal(cmd, "securitylog")) {
