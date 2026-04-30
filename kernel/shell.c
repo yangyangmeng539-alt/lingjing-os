@@ -616,12 +616,82 @@ static void shell_handle_user(const char* cmd) {
         return;
     }
 
+    if (str_equal(cmd, "user segments")) {
+        user_segments();
+        return;
+    }
+
+    if (str_equal(cmd, "user stack")) {
+        user_stack();
+        return;
+    }
+
+    if (str_equal(cmd, "user stackcheck")) {
+        user_stack_check();
+        return;
+    }
+
+    if (str_equal(cmd, "user stackbreak")) {
+        user_stack_break();
+        return;
+    }
+
+    if (str_equal(cmd, "user stackfix")) {
+        user_stack_fix();
+        return;
+    }
+
+    if (str_equal(cmd, "user frame")) {
+        user_frame();
+        return;
+    }
+
+    if (str_equal(cmd, "user framecheck")) {
+        user_frame_check();
+        return;
+    }
+
+    if (str_equal(cmd, "user framebreak")) {
+        user_frame_break();
+        return;
+    }
+
+    if (str_equal(cmd, "user framefix")) {
+        user_frame_fix();
+        return;
+    }
+
+    if (str_equal(cmd, "user boundary")) {
+        user_boundary();
+        return;
+    }
+
+    if (str_equal(cmd, "user boundarycheck")) {
+        user_boundary_check();
+        return;
+    }
+
+    if (str_equal(cmd, "user boundarybreak")) {
+        user_boundary_break();
+        return;
+    }
+
+    if (str_equal(cmd, "user boundaryfix")) {
+        user_boundary_fix();
+        return;
+    }
+
+    if (str_equal(cmd, "user prepare")) {
+        user_prepare();
+        return;
+    }
+
     if (str_equal(cmd, "user stats")) {
         user_stats();
         return;
     }
 
-    platform_print("usage: user | user status | user check | user doctor | user programs | user entries | user stats\n");
+    platform_print("usage: user | user status | user check | user doctor | user programs | user entries | user segments | user stack | user stackcheck | user stackbreak | user stackfix | user frame | user framecheck | user framebreak | user framefix | user boundary | user boundarycheck | user boundarybreak | user boundaryfix | user prepare | user stats\n");
 }
 
 static void shell_handle_userbreak(void) {
@@ -1243,7 +1313,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {

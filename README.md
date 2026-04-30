@@ -24,8 +24,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.1.2
-stage: syscall interrupt prototype
+version: dev-0.1.3
+stage: user mode preparation prototype
 arch: i386
 boot: multiboot + grub
 platform: baremetal
@@ -1648,7 +1648,7 @@ Lingjing OS 目前是一个早期裸机实验性内核原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.1.2 syscall interrupt prototype` 已完成：
+当前版本 `dev-0.1.3 user mode preparation prototype` 已完成 user segment / stack / entry frame / boundary hardening 原型验收。
 
 ```text
 int 0x80 gate
@@ -1736,14 +1736,14 @@ v0.1.2-syscall-interrupt-prototype
 
 ## 下一阶段计划
 
-### dev-0.1.3 user mode preparation prototype
+### dev-0.1.4 ring3 entry prototype
 
-* user segment metadata
-* ring3 transition preparation
-* user stack metadata
-* user entry frame prototype
-* user/kernel boundary doctor
-* 保持真实 ring3 仍 disabled
+- TSS metadata
+- kernel stack for privilege transition
+- GDT user segment verification
+- ring3 entry frame preparation
+- iret transition prototype
+- ring3 entry doctor
 
 ### 后续方向
 

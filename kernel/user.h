@@ -19,6 +19,21 @@ void user_programs(void);
 void user_entries(void);
 void user_stats(void);
 
+void user_segments(void);
+void user_stack(void);
+void user_stack_check(void);
+void user_stack_break(void);
+void user_stack_fix(void);
+void user_frame(void);
+void user_frame_check(void);
+void user_frame_break(void);
+void user_frame_fix(void);
+void user_boundary(void);
+void user_boundary_check(void);
+void user_boundary_break(void);
+void user_boundary_fix(void);
+void user_prepare(void);
+
 void user_break(void);
 void user_fix(void);
 
