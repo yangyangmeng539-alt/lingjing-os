@@ -18,8 +18,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.0.5
-stage: architecture prototype
+version: dev-0.0.6
+stage: task lifecycle prototype
 arch: i386
 boot: multiboot + grub
 ```
@@ -170,7 +170,14 @@ identity health
 - scheduler fix
 - task doctor
 - system doctor 集成
-
+- task lifecycle prototype
+- dynamic task create
+- task kill
+- task sleep / wake
+- task priority
+- killed task 跳过
+- idle task 保护
+- scheduler reset 恢复基础任务表
 相关命令：
 
 ```text
@@ -204,6 +211,7 @@ yield
 ready
 running
 blocked
+killed
 ```
 
 调度器当前规则：
@@ -672,6 +680,11 @@ modulefix <name>
 tasks
 taskinfo <id>
 taskstate <id> <state>
+taskcreate <name>
+taskkill <id>
+tasksleep <id>
+taskwake <id>
+taskprio <id> <priority>
 taskcheck
 taskdoctor
 schedinfo
@@ -1000,7 +1013,7 @@ Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.0.5 architecture prototype` 已完成主链验收。
+当前版本 `dev-0.0.6 task lifecycle prototype` 已完成任务生命周期原型验收。
 
 当前重点是验证：
 
@@ -1042,7 +1055,7 @@ schedvalidate ok
 当前版本标签：
 
 ```text
-v0.0.5-architecture-prototype
+v0.0.6-task-lifecycle-prototype
 ```
 
 ---

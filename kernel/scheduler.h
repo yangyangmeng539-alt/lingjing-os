@@ -10,6 +10,12 @@ void scheduler_list_tasks(void);
 void scheduler_task_info(unsigned int id);
 void scheduler_set_task_state(unsigned int id, const char* state);
 
+void scheduler_create_task(const char* name);
+void scheduler_kill_task(unsigned int id);
+void scheduler_sleep_task(unsigned int id);
+void scheduler_wake_task(unsigned int id);
+void scheduler_set_task_priority(unsigned int id, unsigned int priority);
+
 void scheduler_check_tasks(void);
 void scheduler_doctor(void);
 void scheduler_validate(void);

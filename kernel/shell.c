@@ -650,6 +650,52 @@ static void shell_handle_taskstate(const char* cmd) {
     scheduler_set_task_state(id, state);
 }
 
+static void shell_handle_taskcreate(const char* cmd) {
+    const char* name = cmd + 11;
+
+    if (name[0] == '\0') {
+        platform_print("usage: taskcreate <name>\n");
+        return;
+    }
+
+    scheduler_create_task(name);
+}
+
+static void shell_handle_taskkill(const char* cmd) {
+    const char* id_text = cmd + 9;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_kill_task(id);
+}
+
+static void shell_handle_tasksleep(const char* cmd) {
+    const char* id_text = cmd + 10;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_sleep_task(id);
+}
+
+static void shell_handle_taskwake(const char* cmd) {
+    const char* id_text = cmd + 9;
+    unsigned int id = parse_uint(id_text);
+
+    scheduler_wake_task(id);
+}
+
+static void shell_handle_taskprio(const char* cmd) {
+    const char* id_text = cmd + 9;
+    unsigned int id = parse_uint(id_text);
+    const char* prio_text = shell_skip_token(id_text);
+    unsigned int priority = parse_uint(prio_text);
+
+    if (prio_text[0] == '\0') {
+        platform_print("usage: taskprio <id> <priority>\n");
+        return;
+    }
+
+    scheduler_set_task_priority(id, priority);
+}
+
 static void shell_handle_status(void) {
     platform_print("LJ | up ");
     platform_print_uint(platform_seconds());
@@ -856,7 +902,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -915,6 +961,26 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_taskinfo(cmd);
     } else if (str_starts_with(cmd, "taskstate ")) {
         shell_handle_taskstate(cmd);
+    } else if (str_starts_with(cmd, "taskcreate ")) {
+        shell_handle_taskcreate(cmd);
+    } else if (str_equal(cmd, "taskcreate")) {
+        platform_print("usage: taskcreate <name>\n");
+    } else if (str_starts_with(cmd, "taskkill ")) {
+        shell_handle_taskkill(cmd);
+    } else if (str_equal(cmd, "taskkill")) {
+        platform_print("usage: taskkill <id>\n");
+    } else if (str_starts_with(cmd, "tasksleep ")) {
+        shell_handle_tasksleep(cmd);
+    } else if (str_equal(cmd, "tasksleep")) {
+        platform_print("usage: tasksleep <id>\n");
+    } else if (str_starts_with(cmd, "taskwake ")) {
+        shell_handle_taskwake(cmd);
+    } else if (str_equal(cmd, "taskwake")) {
+        platform_print("usage: taskwake <id>\n");
+    } else if (str_starts_with(cmd, "taskprio ")) {
+        shell_handle_taskprio(cmd);
+    } else if (str_equal(cmd, "taskprio")) {
+        platform_print("usage: taskprio <id> <priority>\n");
     } else if (str_equal(cmd, "taskcheck")) {
         shell_handle_taskcheck();
     } else if (str_equal(cmd, "taskdoctor")) {
