@@ -110,13 +110,7 @@ static void shell_prompt(void) {
 }
 
 static void shell_handle_mem(void) {
-    platform_print("Memory:\n");
-
-    platform_print("  next alloc: ");
-    platform_print_hex32(memory_get_placement_address());
-    platform_print("\n");
-
-    platform_print("  allocator:  bump\n");
+    memory_print_status();
 }
 
 static void shell_handle_uptime(void) {
@@ -553,6 +547,9 @@ static void shell_handle_doctor(void) {
     platform_print("  identity layer:      ");
     platform_print(health_identity_ok() ? "ok\n" : "broken\n");
 
+    platform_print("  memory layer:        ");
+    platform_print(health_memory_ok() ? "ok\n" : "broken\n");
+
     platform_print("  current platform:    ");
     platform_print(platform_get_name());
     platform_print("\n");
@@ -817,6 +814,42 @@ static void shell_handle_kcalloc(const char* cmd) {
     platform_print("\n");
 }
 
+static void shell_handle_kfree(const char* cmd) {
+    const char* addr_text = cmd + 6;
+    unsigned int addr = parse_hex_or_uint(addr_text);
+
+    if (addr == 0) {
+        platform_print("usage: kfree <addr>\n");
+        return;
+    }
+
+    kfree(addr);
+
+    platform_print("freed ");
+    platform_print_hex32(addr);
+    platform_print("\n");
+
+    platform_print("free list: ");
+    platform_print_uint(memory_get_free_list_count());
+    platform_print("\n");
+}
+
+static void shell_handle_heapcheck(void) {
+    memory_check();
+}
+
+static void shell_handle_heapdoctor(void) {
+    memory_doctor();
+}
+
+static void shell_handle_heapbreak(void) {
+    memory_break();
+}
+
+static void shell_handle_heapfix(void) {
+    memory_fix();
+}
+
 static void shell_handle_peek(const char* cmd) {
     const char* addr_text = cmd + 5;
     unsigned int addr = parse_hex_or_uint(addr_text);
@@ -902,7 +935,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1040,6 +1073,18 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_kmalloc(cmd);
     } else if (str_starts_with(cmd, "kcalloc ")) {
         shell_handle_kcalloc(cmd);
+    } else if (str_starts_with(cmd, "kfree ")) {
+        shell_handle_kfree(cmd);
+    } else if (str_equal(cmd, "kfree")) {
+        platform_print("usage: kfree <addr>\n");
+    } else if (str_equal(cmd, "heapcheck")) {
+        shell_handle_heapcheck();
+    } else if (str_equal(cmd, "heapdoctor")) {
+        shell_handle_heapdoctor();
+    } else if (str_equal(cmd, "heapbreak")) {
+        shell_handle_heapbreak();
+    } else if (str_equal(cmd, "heapfix")) {
+        shell_handle_heapfix();
     } else if (str_starts_with(cmd, "peek ")) {
         shell_handle_peek(cmd);
     } else if (str_starts_with(cmd, "poke ")) {

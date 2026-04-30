@@ -5,6 +5,7 @@
 #include "lang.h"
 #include "platform.h"
 #include "identity.h"
+#include "memory.h"
 
 static int health_ready = 0;
 
@@ -36,6 +37,10 @@ int health_identity_ok(void) {
     return identity_doctor_ok();
 }
 
+int health_memory_ok(void) {
+    return memory_doctor_ok();
+}
+
 int health_result_ok(void) {
     if (!health_ready) {
         return 0;
@@ -65,6 +70,10 @@ int health_result_ok(void) {
         return 0;
     }
 
+    if (!health_memory_ok()) {
+        return 0;
+    }
+
     return 1;
 }
 
@@ -88,6 +97,9 @@ void health_print(void) {
 
     platform_print("  identity: ");
     platform_print(health_identity_ok() ? "ok\n" : "bad\n");
+
+    platform_print("  memory:   ");
+    platform_print(health_memory_ok() ? "ok\n" : "bad\n");
 
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");

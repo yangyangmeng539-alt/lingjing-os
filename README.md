@@ -18,8 +18,8 @@ Lingjing OS 是一个实验性操作系统项目。
 当前版本：
 
 ```text
-version: dev-0.0.6
-stage: task lifecycle prototype
+version: dev-0.0.7
+stage: heap prototype
 arch: i386
 boot: multiboot + grub
 ```
@@ -1013,7 +1013,7 @@ Lingjing OS 目前是一个早期裸机内核架构原型。
 
 它还不是完整操作系统。
 
-当前版本 `dev-0.0.6 task lifecycle prototype` 已完成任务生命周期原型验收。
+当前版本 `dev-0.0.7 heap prototype` 已完成 heap/free-list 原型验收。
 
 当前重点是验证：
 
@@ -1062,17 +1062,15 @@ v0.0.6-task-lifecycle-prototype
 
 ## 下一阶段计划
 
-### dev-0.0.6 task lifecycle prototype
+### dev-0.0.8 paging prototype
 
-- 增加更正式的 task control block
-- 增加简单任务创建 / 删除
-- 增加 taskcreate
-- 增加 taskkill
-- 增加 tasksleep
-- 增加 taskwake
-- 增加 task priority
-- 增加 task lifecycle doctor
-- 将 scheduler 从模拟轮转推进到更真实的任务抽象
+- page directory
+- page table
+- identity mapping
+- enable paging
+- page fault handler
+- paging doctor
+- paging health check
 
 ### 后续路线
 
