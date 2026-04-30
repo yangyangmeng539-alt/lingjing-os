@@ -1,6 +1,7 @@
 #include "ring3.h"
 #include "platform.h"
 #include "gdt.h"
+#include "idt.h"
 
 #define RING3_KERNEL_CODE_SELECTOR 0x08
 #define RING3_KERNEL_DATA_SELECTOR 0x10
@@ -22,6 +23,7 @@ extern void ring3_enter_user_mode(unsigned int eip,
                                   unsigned int user_ds);
 
 extern void ring3_user_stub_asm(void);
+extern void ring3_user_syscall_stub_asm(void);
 
 typedef struct ring3_tss_metadata {
     unsigned int selector;
@@ -75,6 +77,57 @@ typedef struct ring3_page_metadata {
     unsigned int clear_count;
 } ring3_page_metadata_t;
 
+typedef struct ring3_syscall_metadata {
+    unsigned int vector;
+    unsigned int syscall_id;
+    unsigned int arg1;
+    unsigned int arg2;
+    unsigned int arg3;
+    unsigned int prepared;
+    unsigned int prepare_count;
+    unsigned int clear_count;
+} ring3_syscall_metadata_t;
+
+typedef struct ring3_syscall_frame {
+    unsigned int vector;
+    unsigned int eax;
+    unsigned int ebx;
+    unsigned int ecx;
+    unsigned int edx;
+    unsigned int valid;
+    unsigned int dryrun_count;
+} ring3_syscall_frame_t;
+
+typedef struct ring3_syscall_stub_metadata {
+    unsigned int entry;
+    unsigned int vector;
+    unsigned int syscall_id;
+    unsigned int arg1;
+    unsigned int arg2;
+    unsigned int arg3;
+    unsigned int prepared;
+    unsigned int prepare_count;
+    unsigned int clear_count;
+} ring3_syscall_stub_metadata_t;
+
+typedef struct ring3_syscall_exec_metadata {
+    unsigned int armed;
+    unsigned int attempts;
+    unsigned int blocked;
+    unsigned int staged;
+    unsigned int executed;
+    unsigned int disarmed_count;
+
+    unsigned int real_armed;
+    unsigned int real_attempts;
+    unsigned int real_blocked;
+    unsigned int real_disarmed_count;
+
+    unsigned int gate_installed;
+    unsigned int gate_install_count;
+    unsigned int gate_clear_count;
+} ring3_syscall_exec_metadata_t;
+
 typedef struct ring3_iret_frame {
     unsigned int ss;
     unsigned int esp;
@@ -116,6 +169,12 @@ static ring3_stack_metadata_t ring3_stack_meta;
 static ring3_entry_frame_t ring3_frame_meta;
 static ring3_gdt_metadata_t ring3_gdt_meta;
 static ring3_page_metadata_t ring3_page_meta;
+static ring3_syscall_metadata_t ring3_syscall_meta;
+static ring3_syscall_frame_t ring3_syscall_frame;
+static ring3_syscall_stub_metadata_t ring3_syscall_stub_meta;
+static ring3_syscall_exec_metadata_t ring3_syscall_exec_meta;
+static unsigned int ring3_selected_stub_entry = 0;
+static unsigned int ring3_syscall_stub_selected = 0;
 
 static const char* ring3_mode = "metadata prototype";
 
@@ -130,7 +189,19 @@ static int ring3_selector_is_ring3(unsigned int selector) {
 }
 
 static unsigned int ring3_get_stub_address(void) {
+    if (ring3_selected_stub_entry != 0) {
+        return ring3_selected_stub_entry;
+    }
+
     return (unsigned int)ring3_user_stub_asm;
+}
+
+static unsigned int ring3_get_safe_stub_address(void) {
+    return (unsigned int)ring3_user_stub_asm;
+}
+
+static unsigned int ring3_get_syscall_stub_address(void) {
+    return (unsigned int)ring3_user_syscall_stub_asm;
 }
 
 static int ring3_stub_ok(void) {
@@ -278,6 +349,149 @@ static int ring3_page_ok(void) {
     }
 
     if (!ring3_page_meta.user) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int ring3_syscall_ok(void) {
+    if (!ring3_syscall_meta.prepared) {
+        return 0;
+    }
+
+    if (ring3_syscall_meta.vector != 0x80) {
+        return 0;
+    }
+
+    if (ring3_syscall_meta.syscall_id != 0) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static void ring3_clear_syscall_frame(void) {
+    ring3_syscall_frame.vector = 0;
+    ring3_syscall_frame.eax = 0;
+    ring3_syscall_frame.ebx = 0;
+    ring3_syscall_frame.ecx = 0;
+    ring3_syscall_frame.edx = 0;
+    ring3_syscall_frame.valid = 0;
+    ring3_syscall_frame.dryrun_count = 0;
+}
+
+static void ring3_build_syscall_frame(void) {
+    ring3_syscall_frame.vector = ring3_syscall_meta.vector;
+    ring3_syscall_frame.eax = ring3_syscall_meta.syscall_id;
+    ring3_syscall_frame.ebx = ring3_syscall_meta.arg1;
+    ring3_syscall_frame.ecx = ring3_syscall_meta.arg2;
+    ring3_syscall_frame.edx = ring3_syscall_meta.arg3;
+    ring3_syscall_frame.valid = 1;
+}
+
+static int ring3_syscall_frame_ok(void) {
+    if (!ring3_syscall_frame.valid) {
+        return 0;
+    }
+
+    if (ring3_syscall_frame.vector != 0x80) {
+        return 0;
+    }
+
+    if (ring3_syscall_frame.eax != ring3_syscall_meta.syscall_id) {
+        return 0;
+    }
+
+    if (ring3_syscall_frame.ebx != ring3_syscall_meta.arg1) {
+        return 0;
+    }
+
+    if (ring3_syscall_frame.ecx != ring3_syscall_meta.arg2) {
+        return 0;
+    }
+
+    if (ring3_syscall_frame.edx != ring3_syscall_meta.arg3) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int ring3_syscall_stub_ok(void) {
+    if (!ring3_syscall_stub_meta.prepared) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.entry != ring3_get_syscall_stub_address()) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.vector != 0x80) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.syscall_id != ring3_syscall_meta.syscall_id) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.arg1 != ring3_syscall_meta.arg1) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.arg2 != ring3_syscall_meta.arg2) {
+        return 0;
+    }
+
+    if (ring3_syscall_stub_meta.arg3 != ring3_syscall_meta.arg3) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int ring3_syscall_exec_gate_ok(void) {
+    if (!ring3_syscall_ok()) {
+        return 0;
+    }
+
+    if (!ring3_syscall_frame_ok()) {
+        return 0;
+    }
+
+    if (!ring3_syscall_stub_ok()) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int ring3_syscall_gate_ok(void) {
+    if (!ring3_syscall_exec_meta.gate_installed) {
+        return 0;
+    }
+
+    return 1;
+}
+
+static int ring3_syscall_real_gate_ok(void) {
+    if (!ring3_syscall_exec_gate_ok()) {
+        return 0;
+    }
+
+    if (!ring3_syscall_stub_selected) {
+        return 0;
+    }
+
+    if (!ring3_syscall_exec_meta.armed) {
+        return 0;
+    }
+
+    if (!ring3_syscall_exec_meta.real_armed) {
+        return 0;
+    }
+
+    if (!ring3_syscall_gate_ok()) {
         return 0;
     }
 
@@ -543,6 +757,46 @@ void ring3_init(void) {
     ring3_page_meta.prepare_count = 0;
     ring3_page_meta.clear_count = 0;
 
+    ring3_syscall_meta.vector = 0;
+    ring3_syscall_meta.syscall_id = 0;
+    ring3_syscall_meta.arg1 = 0;
+    ring3_syscall_meta.arg2 = 0;
+    ring3_syscall_meta.arg3 = 0;
+    ring3_syscall_meta.prepared = 0;
+    ring3_syscall_meta.prepare_count = 0;
+    ring3_syscall_meta.clear_count = 0;
+
+    ring3_clear_syscall_frame();
+
+    ring3_syscall_stub_meta.entry = 0;
+    ring3_syscall_stub_meta.vector = 0;
+    ring3_syscall_stub_meta.syscall_id = 0;
+    ring3_syscall_stub_meta.arg1 = 0;
+    ring3_syscall_stub_meta.arg2 = 0;
+    ring3_syscall_stub_meta.arg3 = 0;
+    ring3_syscall_stub_meta.prepared = 0;
+    ring3_syscall_stub_meta.prepare_count = 0;
+    ring3_syscall_stub_meta.clear_count = 0;
+
+    ring3_syscall_exec_meta.armed = 0;
+    ring3_syscall_exec_meta.attempts = 0;
+    ring3_syscall_exec_meta.blocked = 0;
+    ring3_syscall_exec_meta.staged = 0;
+    ring3_syscall_exec_meta.executed = 0;
+    ring3_syscall_exec_meta.disarmed_count = 0;
+
+    ring3_syscall_exec_meta.real_armed = 0;
+    ring3_syscall_exec_meta.real_attempts = 0;
+    ring3_syscall_exec_meta.real_blocked = 0;
+    ring3_syscall_exec_meta.real_disarmed_count = 0;
+
+    ring3_syscall_exec_meta.gate_installed = 0;
+    ring3_syscall_exec_meta.gate_install_count = 0;
+    ring3_syscall_exec_meta.gate_clear_count = 0;
+
+    ring3_selected_stub_entry = 0;
+    ring3_syscall_stub_selected = 0;
+
     ring3_clear_iret_frame();
 
     ring3_prepare_tss();
@@ -673,6 +927,24 @@ void ring3_status(void) {
     platform_print("  executed:    ");
     platform_print_uint(ring3_realenter_executed);
     platform_print("\n");
+
+    platform_print("  syscall:    ");
+    platform_print(ring3_syscall_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  syscallstub:");
+    platform_print(ring3_syscall_stub_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  stub mode:  ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
+
+    platform_print("  sys armed:  ");
+    platform_print(ring3_syscall_exec_meta.armed ? "yes\n" : "no\n");
+
+    platform_print("  sys real:   ");
+    platform_print(ring3_syscall_exec_meta.real_armed ? "yes\n" : "no\n");
+
+    platform_print("  sys gate:   ");
+    platform_print(ring3_syscall_gate_ok() ? "installed\n" : "missing\n");
 }
 
 void ring3_tss(void) {
@@ -1138,6 +1410,515 @@ void ring3_hw_clear(void) {
     platform_print("ring3 real hardware gate cleared.\n");
 }
 
+void ring3_syscall(void) {
+    platform_print("Ring3 syscall metadata:\n");
+
+    platform_print("  vector:    ");
+    platform_print_hex32(ring3_syscall_meta.vector);
+    platform_print("\n");
+
+    platform_print("  syscall:   ");
+    platform_print_uint(ring3_syscall_meta.syscall_id);
+    platform_print("\n");
+
+    platform_print("  arg1:      ");
+    platform_print_uint(ring3_syscall_meta.arg1);
+    platform_print("\n");
+
+    platform_print("  arg2:      ");
+    platform_print_uint(ring3_syscall_meta.arg2);
+    platform_print("\n");
+
+    platform_print("  arg3:      ");
+    platform_print_uint(ring3_syscall_meta.arg3);
+    platform_print("\n");
+
+    platform_print("  prepared:  ");
+    platform_print(ring3_syscall_meta.prepared ? "yes\n" : "no\n");
+
+    platform_print("  execute:   no\n");
+
+    platform_print("  dryrun:    ");
+    platform_print(ring3_syscall_frame_ok() ? "ready\n" : "empty\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_ok() ? "ok\n" : "missing\n");
+}
+
+void ring3_syscall_check(void) {
+    platform_print("Ring3 syscall check:\n");
+
+    platform_print("  vector:    ");
+    platform_print(ring3_syscall_meta.vector == 0x80 ? "ok\n" : "bad\n");
+
+    platform_print("  syscall:   ");
+    platform_print(ring3_syscall_meta.syscall_id == 0 ? "SYS_PING\n" : "bad\n");
+
+    platform_print("  prepared:  ");
+    platform_print(ring3_syscall_meta.prepared ? "yes\n" : "no\n");
+
+    platform_print("  prepares:  ");
+    platform_print_uint(ring3_syscall_meta.prepare_count);
+    platform_print("\n");
+
+    platform_print("  clears:    ");
+    platform_print_uint(ring3_syscall_meta.clear_count);
+    platform_print("\n");
+
+    platform_print("  execute:   no\n");
+
+    platform_print("  dryrun:    ");
+    platform_print(ring3_syscall_frame_ok() ? "ready\n" : "empty\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_ok() ? "ok\n" : "missing\n");
+}
+
+void ring3_syscall_prepare(void) {
+    ring3_syscall_meta.vector = 0x80;
+    ring3_syscall_meta.syscall_id = 0;
+    ring3_syscall_meta.arg1 = 11;
+    ring3_syscall_meta.arg2 = 22;
+    ring3_syscall_meta.arg3 = 33;
+    ring3_syscall_meta.prepared = 1;
+    ring3_syscall_meta.prepare_count++;
+
+    platform_print("ring3 syscall metadata prepared.\n");
+}
+
+void ring3_syscall_clear(void) {
+    ring3_syscall_meta.vector = 0;
+    ring3_syscall_meta.syscall_id = 0;
+    ring3_syscall_meta.arg1 = 0;
+    ring3_syscall_meta.arg2 = 0;
+    ring3_syscall_meta.arg3 = 0;
+    ring3_syscall_meta.prepared = 0;
+    ring3_syscall_meta.clear_count++;
+
+    platform_print("ring3 syscall metadata cleared.\n");
+}
+
+void ring3_syscall_dryrun(void) {
+    ring3_syscall_frame.dryrun_count++;
+
+    platform_print("Ring3 syscall dryrun:\n");
+
+    platform_print("  dryrun:  ");
+    platform_print_uint(ring3_syscall_frame.dryrun_count);
+    platform_print("\n");
+
+    platform_print("  syscall: ");
+    platform_print(ring3_syscall_ok() ? "prepared\n" : "missing\n");
+
+    if (!ring3_syscall_ok()) {
+        platform_print("  result:  blocked\n");
+        platform_print("  reason:  ring3 syscall metadata not ready\n");
+        return;
+    }
+
+    ring3_build_syscall_frame();
+
+    platform_print("  int:     ");
+    platform_print_hex32(ring3_syscall_frame.vector);
+    platform_print("\n");
+
+    platform_print("  eax:     ");
+    platform_print_uint(ring3_syscall_frame.eax);
+    platform_print("\n");
+
+    platform_print("  ebx:     ");
+    platform_print_uint(ring3_syscall_frame.ebx);
+    platform_print("\n");
+
+    platform_print("  ecx:     ");
+    platform_print_uint(ring3_syscall_frame.ecx);
+    platform_print("\n");
+
+    platform_print("  edx:     ");
+    platform_print_uint(ring3_syscall_frame.edx);
+    platform_print("\n");
+
+    platform_print("  execute: no\n");
+
+    platform_print("  result:  ");
+    platform_print(ring3_syscall_frame_ok() ? "staged\n" : "broken\n");
+}
+
+void ring3_syscall_stub(void) {
+    platform_print("Ring3 syscall stub metadata:\n");
+
+    platform_print("  entry:     ");
+    platform_print_hex32(ring3_syscall_stub_meta.entry);
+    platform_print("\n");
+
+    platform_print("  safe:      ");
+    platform_print_hex32(ring3_get_safe_stub_address());
+    platform_print("\n");
+
+    platform_print("  syscall stub:");
+    platform_print_hex32(ring3_get_syscall_stub_address());
+    platform_print("\n");
+
+    platform_print("  selected:  ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
+
+    platform_print("  vector:    ");
+    platform_print_hex32(ring3_syscall_stub_meta.vector);
+    platform_print("\n");
+
+    platform_print("  syscall:   ");
+    platform_print_uint(ring3_syscall_stub_meta.syscall_id);
+    platform_print("\n");
+
+    platform_print("  arg1:      ");
+    platform_print_uint(ring3_syscall_stub_meta.arg1);
+    platform_print("\n");
+
+    platform_print("  arg2:      ");
+    platform_print_uint(ring3_syscall_stub_meta.arg2);
+    platform_print("\n");
+
+    platform_print("  arg3:      ");
+    platform_print_uint(ring3_syscall_stub_meta.arg3);
+    platform_print("\n");
+
+    platform_print("  prepared:  ");
+    platform_print(ring3_syscall_stub_meta.prepared ? "yes\n" : "no\n");
+
+    platform_print("  execute:   no\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_stub_ok() ? "ok\n" : "missing\n");
+}
+
+void ring3_syscall_stub_check(void) {
+    platform_print("Ring3 syscall stub check:\n");
+
+    platform_print("  entry:     ");
+    platform_print(ring3_syscall_stub_meta.entry == ring3_get_syscall_stub_address() ? "ok\n" : "bad\n");
+
+    platform_print("  vector:    ");
+    platform_print(ring3_syscall_stub_meta.vector == 0x80 ? "ok\n" : "bad\n");
+
+    platform_print("  syscall:   ");
+    platform_print(ring3_syscall_stub_meta.syscall_id == ring3_syscall_meta.syscall_id ? "ok\n" : "bad\n");
+
+    platform_print("  arg1:      ");
+    platform_print(ring3_syscall_stub_meta.arg1 == ring3_syscall_meta.arg1 ? "ok\n" : "bad\n");
+
+    platform_print("  arg2:      ");
+    platform_print(ring3_syscall_stub_meta.arg2 == ring3_syscall_meta.arg2 ? "ok\n" : "bad\n");
+
+    platform_print("  arg3:      ");
+    platform_print(ring3_syscall_stub_meta.arg3 == ring3_syscall_meta.arg3 ? "ok\n" : "bad\n");
+
+    platform_print("  prepared:  ");
+    platform_print(ring3_syscall_stub_meta.prepared ? "yes\n" : "no\n");
+
+    platform_print("  prepares:  ");
+    platform_print_uint(ring3_syscall_stub_meta.prepare_count);
+    platform_print("\n");
+
+    platform_print("  clears:    ");
+    platform_print_uint(ring3_syscall_stub_meta.clear_count);
+    platform_print("\n");
+
+    platform_print("  execute:   no\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_stub_ok() ? "ok\n" : "missing\n");
+}
+
+void ring3_syscall_stub_prepare(void) {
+    platform_print("Ring3 syscall stub prepare:\n");
+
+    if (!ring3_syscall_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: ring3 syscall metadata not ready\n");
+        return;
+    }
+
+    if (!ring3_syscall_frame_ok()) {
+        ring3_build_syscall_frame();
+    }
+
+    if (!ring3_syscall_frame_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: ring3 syscall frame not ready\n");
+        return;
+    }
+
+    ring3_syscall_stub_meta.entry = ring3_get_syscall_stub_address();
+    ring3_syscall_stub_meta.vector = ring3_syscall_frame.vector;
+    ring3_syscall_stub_meta.syscall_id = ring3_syscall_frame.eax;
+    ring3_syscall_stub_meta.arg1 = ring3_syscall_frame.ebx;
+    ring3_syscall_stub_meta.arg2 = ring3_syscall_frame.ecx;
+    ring3_syscall_stub_meta.arg3 = ring3_syscall_frame.edx;
+    ring3_syscall_stub_meta.prepared = 1;
+    ring3_syscall_stub_meta.prepare_count++;
+
+    platform_print("  entry:  ");
+    platform_print_hex32(ring3_syscall_stub_meta.entry);
+    platform_print("\n");
+
+    platform_print("  int:    ");
+    platform_print_hex32(ring3_syscall_stub_meta.vector);
+    platform_print("\n");
+
+    platform_print("  syscall:");
+    platform_print_uint(ring3_syscall_stub_meta.syscall_id);
+    platform_print("\n");
+
+    platform_print("  execute:no\n");
+    platform_print("  result: ready\n");
+}
+
+void ring3_syscall_stub_clear(void) {
+    ring3_syscall_stub_meta.entry = 0;
+    ring3_syscall_stub_meta.vector = 0;
+    ring3_syscall_stub_meta.syscall_id = 0;
+    ring3_syscall_stub_meta.arg1 = 0;
+    ring3_syscall_stub_meta.arg2 = 0;
+    ring3_syscall_stub_meta.arg3 = 0;
+    ring3_syscall_stub_meta.prepared = 0;
+    ring3_syscall_stub_meta.clear_count++;
+
+    platform_print("ring3 syscall stub metadata cleared.\n");
+}
+
+void ring3_syscall_stub_select(void) {
+    platform_print("Ring3 syscall stub select:\n");
+
+    if (!ring3_syscall_stub_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: syscall stub metadata not ready\n");
+        return;
+    }
+
+    ring3_selected_stub_entry = ring3_get_syscall_stub_address();
+    ring3_syscall_stub_selected = 1;
+
+    ring3_prepare_frame();
+    ring3_clear_iret_frame();
+
+    platform_print("  selected: syscall\n");
+
+    platform_print("  entry:    ");
+    platform_print_hex32(ring3_selected_stub_entry);
+    platform_print("\n");
+
+    platform_print("  result:   ready\n");
+}
+
+void ring3_syscall_stub_unselect(void) {
+    ring3_selected_stub_entry = 0;
+    ring3_syscall_stub_selected = 0;
+    ring3_syscall_exec_meta.real_armed = 0;
+
+    ring3_prepare_frame();
+    ring3_clear_iret_frame();
+
+    platform_print("ring3 syscall stub unselected.\n");
+}
+
+void ring3_syscall_arm(void) {
+    platform_print("Ring3 syscall arm:\n");
+
+    if (!ring3_syscall_exec_gate_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: ring3 syscall execution gate not ready\n");
+        return;
+    }
+
+    ring3_syscall_exec_meta.armed = 1;
+
+    platform_print("  armed:  yes\n");
+    platform_print("  result: ready\n");
+}
+
+void ring3_syscall_disarm(void) {
+    ring3_syscall_exec_meta.armed = 0;
+    ring3_syscall_exec_meta.real_armed = 0;
+    ring3_syscall_exec_meta.disarmed_count++;
+    ring3_syscall_exec_meta.real_disarmed_count++;
+
+    platform_print("ring3 syscall execution disarmed.\n");
+}
+
+void ring3_syscall_exec(void) {
+    ring3_syscall_exec_meta.attempts++;
+
+    platform_print("Ring3 syscall exec:\n");
+
+    platform_print("  attempt: ");
+    platform_print_uint(ring3_syscall_exec_meta.attempts);
+    platform_print("\n");
+
+    platform_print("  armed:   ");
+    platform_print(ring3_syscall_exec_meta.armed ? "yes\n" : "no\n");
+
+    platform_print("  syscall: ");
+    platform_print(ring3_syscall_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  dryrun:  ");
+    platform_print(ring3_syscall_frame_ok() ? "ready\n" : "empty\n");
+
+    platform_print("  stub:    ");
+    platform_print(ring3_syscall_stub_ok() ? "prepared\n" : "missing\n");
+
+    if (!ring3_syscall_exec_gate_ok()) {
+        ring3_syscall_exec_meta.blocked++;
+
+        platform_print("  result:  blocked\n");
+        platform_print("  reason:  ring3 syscall execution gate not ready\n");
+        return;
+    }
+
+    if (!ring3_syscall_exec_meta.armed) {
+        ring3_syscall_exec_meta.blocked++;
+
+        platform_print("  result:  blocked\n");
+        platform_print("  reason:  ring3 syscall execution disarmed\n");
+        return;
+    }
+
+    ring3_syscall_exec_meta.staged++;
+
+    platform_print("  int:     ");
+    platform_print_hex32(ring3_syscall_frame.vector);
+    platform_print("\n");
+
+    platform_print("  eax:     ");
+    platform_print_uint(ring3_syscall_frame.eax);
+    platform_print("\n");
+
+    platform_print("  ebx:     ");
+    platform_print_uint(ring3_syscall_frame.ebx);
+    platform_print("\n");
+
+    platform_print("  ecx:     ");
+    platform_print_uint(ring3_syscall_frame.ecx);
+    platform_print("\n");
+
+    platform_print("  edx:     ");
+    platform_print_uint(ring3_syscall_frame.edx);
+    platform_print("\n");
+
+    platform_print("  execute: no\n");
+    platform_print("  result:  staged\n");
+}
+
+void ring3_syscall_real(void) {
+    platform_print("Ring3 syscall real gate:\n");
+
+    platform_print("  syscall:   ");
+    platform_print(ring3_syscall_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  dryrun:    ");
+    platform_print(ring3_syscall_frame_ok() ? "ready\n" : "empty\n");
+
+    platform_print("  stub:      ");
+    platform_print(ring3_syscall_stub_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  selected:  ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
+
+    platform_print("  exec arm:  ");
+    platform_print(ring3_syscall_exec_meta.armed ? "yes\n" : "no\n");
+
+    platform_print("  real arm:  ");
+    platform_print(ring3_syscall_exec_meta.real_armed ? "yes\n" : "no\n");
+
+    platform_print("  idt gate:  ");
+    platform_print(ring3_syscall_gate_ok() ? "installed\n" : "missing\n");
+
+    platform_print("  attempts:  ");
+    platform_print_uint(ring3_syscall_exec_meta.real_attempts);
+    platform_print("\n");
+
+    platform_print("  blocked:   ");
+    platform_print_uint(ring3_syscall_exec_meta.real_blocked);
+    platform_print("\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_real_gate_ok() ? "ready\n" : "blocked\n");
+}
+
+void ring3_syscall_real_arm(void) {
+    platform_print("Ring3 syscall real arm:\n");
+
+    if (!ring3_syscall_exec_gate_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: ring3 syscall execution gate not ready\n");
+        return;
+    }
+
+    if (!ring3_syscall_stub_selected) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: syscall stub not selected\n");
+        return;
+    }
+
+    if (!ring3_syscall_gate_ok()) {
+        platform_print("  result: blocked\n");
+        platform_print("  reason: ring3 syscall IDT gate not installed\n");
+        return;
+    }
+
+    ring3_syscall_exec_meta.real_armed = 1;
+
+    platform_print("  real armed: yes\n");
+    platform_print("  result:     ready\n");
+}
+
+void ring3_syscall_real_disarm(void) {
+    ring3_syscall_exec_meta.real_armed = 0;
+    ring3_syscall_exec_meta.real_disarmed_count++;
+
+    platform_print("ring3 syscall real gate disarmed.\n");
+}
+
+void ring3_syscall_gate(void) {
+    platform_print("Ring3 syscall IDT gate:\n");
+
+    platform_print("  vector:    ");
+    platform_print_hex32(0x80);
+    platform_print("\n");
+
+    platform_print("  dpl:       ring3\n");
+    platform_print("  flags:     0xEE\n");
+
+    platform_print("  installed: ");
+    platform_print(ring3_syscall_exec_meta.gate_installed ? "yes\n" : "no\n");
+
+    platform_print("  installs:  ");
+    platform_print_uint(ring3_syscall_exec_meta.gate_install_count);
+    platform_print("\n");
+
+    platform_print("  clears:    ");
+    platform_print_uint(ring3_syscall_exec_meta.gate_clear_count);
+    platform_print("\n");
+
+    platform_print("  result:    ");
+    platform_print(ring3_syscall_gate_ok() ? "ok\n" : "missing\n");
+}
+
+void ring3_syscall_gate_install(void) {
+    idt_install_syscall_gate();
+
+    ring3_syscall_exec_meta.gate_installed = 1;
+    ring3_syscall_exec_meta.gate_install_count++;
+
+    platform_print("ring3 syscall IDT gate installed.\n");
+}
+
+void ring3_syscall_gate_clear(void) {
+    ring3_syscall_exec_meta.gate_installed = 0;
+    ring3_syscall_exec_meta.gate_clear_count++;
+
+    platform_print("ring3 syscall IDT gate readiness cleared.\n");
+}
+
 void ring3_stack(void) {
     platform_print("Ring3 kernel stack:\n");
 
@@ -1171,6 +1952,17 @@ void ring3_frame(void) {
     platform_print_hex32(ring3_get_stub_address());
     platform_print("\n");
 
+    platform_print("  safe:     ");
+    platform_print_hex32(ring3_get_safe_stub_address());
+    platform_print("\n");
+
+    platform_print("  syscall:  ");
+    platform_print_hex32(ring3_get_syscall_stub_address());
+    platform_print("\n");
+
+    platform_print("  selected: ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
+
     platform_print("  stack:    ");
     platform_print_hex32(ring3_frame_meta.user_stack);
     platform_print("\n");
@@ -1200,6 +1992,17 @@ void ring3_stub(void) {
     platform_print("  address:  ");
     platform_print_hex32(ring3_get_stub_address());
     platform_print("\n");
+
+    platform_print("  safe:     ");
+    platform_print_hex32(ring3_get_safe_stub_address());
+    platform_print("\n");
+
+    platform_print("  syscall:  ");
+    platform_print_hex32(ring3_get_syscall_stub_address());
+    platform_print("\n");
+
+    platform_print("  selected: ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
 
     platform_print("  frame eip:");
     platform_print_hex32(ring3_frame_meta.user_entry);
@@ -1314,6 +2117,55 @@ void ring3_realenter(void) {
         platform_print("  result:     blocked\n");
         platform_print("  reason:     ring3 realenter disarmed\n");
         return;
+    }
+
+    if (ring3_syscall_stub_selected) {
+        ring3_syscall_exec_meta.real_attempts++;
+
+        platform_print("  syscall:    selected\n");
+        platform_print("  sys arm:    ");
+        platform_print(ring3_syscall_exec_meta.armed ? "yes\n" : "no\n");
+
+        platform_print("  sys real:   ");
+        platform_print(ring3_syscall_exec_meta.real_armed ? "yes\n" : "no\n");
+
+        if (!ring3_syscall_exec_gate_ok()) {
+            ring3_syscall_exec_meta.real_blocked++;
+            ring3_realenter_blocked++;
+
+            platform_print("  result:     blocked\n");
+            platform_print("  reason:     ring3 syscall execution gate not ready\n");
+            return;
+        }
+
+        if (!ring3_syscall_exec_meta.armed) {
+            ring3_syscall_exec_meta.real_blocked++;
+            ring3_realenter_blocked++;
+
+            platform_print("  result:     blocked\n");
+            platform_print("  reason:     ring3 syscall execution disarmed\n");
+            return;
+        }
+
+        if (!ring3_syscall_exec_meta.real_armed) {
+            ring3_syscall_exec_meta.real_blocked++;
+            ring3_realenter_blocked++;
+
+            platform_print("  result:     blocked\n");
+            platform_print("  reason:     ring3 syscall real gate disarmed\n");
+            return;
+        }
+
+        if (!ring3_syscall_gate_ok()) {
+            ring3_syscall_exec_meta.real_blocked++;
+            ring3_realenter_blocked++;
+
+            platform_print("  result:     blocked\n");
+            platform_print("  reason:     ring3 syscall IDT gate not installed\n");
+            return;
+        }
+
+        ring3_syscall_exec_meta.executed++;
     }
 
     platform_print("  eip:        ");
@@ -1609,6 +2461,83 @@ void ring3_doctor(void) {
     platform_print("  real hw:     ");
     platform_print(ring3_real_hardware_installed ? "installed\n" : "missing\n");
 
+    platform_print("  syscall:    ");
+    platform_print(ring3_syscall_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  syscall dry:");
+    platform_print(ring3_syscall_frame_ok() ? "ready\n" : "empty\n");
+
+    platform_print("  syscallstub:");
+    platform_print(ring3_syscall_stub_ok() ? "prepared\n" : "missing\n");
+
+    platform_print("  stub mode:  ");
+    platform_print(ring3_syscall_stub_selected ? "syscall\n" : "safe\n");
+
+    platform_print("  sys prep:   ");
+    platform_print_uint(ring3_syscall_meta.prepare_count);
+    platform_print("\n");
+
+    platform_print("  sys clear:  ");
+    platform_print_uint(ring3_syscall_meta.clear_count);
+    platform_print("\n");
+
+    platform_print("  sys dryrun: ");
+    platform_print_uint(ring3_syscall_frame.dryrun_count);
+    platform_print("\n");
+
+    platform_print("  stub prep:  ");
+    platform_print_uint(ring3_syscall_stub_meta.prepare_count);
+    platform_print("\n");
+
+    platform_print("  sys armed:  ");
+    platform_print(ring3_syscall_exec_meta.armed ? "yes\n" : "no\n");
+
+    platform_print("  sys attempts:");
+    platform_print_uint(ring3_syscall_exec_meta.attempts);
+    platform_print("\n");
+
+    platform_print("  sys blocked:");
+    platform_print_uint(ring3_syscall_exec_meta.blocked);
+    platform_print("\n");
+
+    platform_print("  sys staged: ");
+    platform_print_uint(ring3_syscall_exec_meta.staged);
+    platform_print("\n");
+
+    platform_print("  sys exec:   ");
+    platform_print_uint(ring3_syscall_exec_meta.executed);
+    platform_print("\n");
+
+    platform_print("  sys disarm: ");
+    platform_print_uint(ring3_syscall_exec_meta.disarmed_count);
+    platform_print("\n");
+
+    platform_print("  sys real:   ");
+    platform_print(ring3_syscall_exec_meta.real_armed ? "yes\n" : "no\n");
+
+    platform_print("  real tries: ");
+    platform_print_uint(ring3_syscall_exec_meta.real_attempts);
+    platform_print("\n");
+
+    platform_print("  real blocks:");
+    platform_print_uint(ring3_syscall_exec_meta.real_blocked);
+    platform_print("\n");
+
+    platform_print("  real disarm:");
+    platform_print_uint(ring3_syscall_exec_meta.real_disarmed_count);
+    platform_print("\n");
+
+    platform_print("  sys gate:   ");
+    platform_print(ring3_syscall_gate_ok() ? "installed\n" : "missing\n");
+
+    platform_print("  gate inst:  ");
+    platform_print_uint(ring3_syscall_exec_meta.gate_install_count);
+    platform_print("\n");
+
+    platform_print("  gate clear: ");
+    platform_print_uint(ring3_syscall_exec_meta.gate_clear_count);
+    platform_print("\n");
+
     platform_print("  hw installs: ");
     platform_print_uint(ring3_hw_install_count);
     platform_print("\n");
@@ -1681,6 +2610,46 @@ void ring3_fix(void) {
     ring3_page_meta.prepared = 0;
     ring3_page_meta.prepare_count = 0;
     ring3_page_meta.clear_count = 0;
+
+    ring3_syscall_meta.vector = 0;
+    ring3_syscall_meta.syscall_id = 0;
+    ring3_syscall_meta.arg1 = 0;
+    ring3_syscall_meta.arg2 = 0;
+    ring3_syscall_meta.arg3 = 0;
+    ring3_syscall_meta.prepared = 0;
+    ring3_syscall_meta.prepare_count = 0;
+    ring3_syscall_meta.clear_count = 0;
+
+    ring3_clear_syscall_frame();
+
+    ring3_syscall_stub_meta.entry = 0;
+    ring3_syscall_stub_meta.vector = 0;
+    ring3_syscall_stub_meta.syscall_id = 0;
+    ring3_syscall_stub_meta.arg1 = 0;
+    ring3_syscall_stub_meta.arg2 = 0;
+    ring3_syscall_stub_meta.arg3 = 0;
+    ring3_syscall_stub_meta.prepared = 0;
+    ring3_syscall_stub_meta.prepare_count = 0;
+    ring3_syscall_stub_meta.clear_count = 0;
+
+    ring3_syscall_exec_meta.armed = 0;
+    ring3_syscall_exec_meta.attempts = 0;
+    ring3_syscall_exec_meta.blocked = 0;
+    ring3_syscall_exec_meta.staged = 0;
+    ring3_syscall_exec_meta.executed = 0;
+    ring3_syscall_exec_meta.disarmed_count = 0;
+
+    ring3_syscall_exec_meta.real_armed = 0;
+    ring3_syscall_exec_meta.real_attempts = 0;
+    ring3_syscall_exec_meta.real_blocked = 0;
+    ring3_syscall_exec_meta.real_disarmed_count = 0;
+
+    ring3_syscall_exec_meta.gate_installed = 0;
+    ring3_syscall_exec_meta.gate_install_count = 0;
+    ring3_syscall_exec_meta.gate_clear_count = 0;
+
+    ring3_selected_stub_entry = 0;
+    ring3_syscall_stub_selected = 0;
 
     ring3_clear_iret_frame();
 
