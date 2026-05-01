@@ -52,7 +52,15 @@ ring3_user_syscall_stub_asm:
 
     int 0x80
 
-.syscall_loop:
-    jmp .syscall_loop
+    ; controlled user loop after syscall return
+    ; eax now contains kernel syscall return value
+    cmp eax, 0
+    je .syscall_return_ok
+
+.syscall_return_bad:
+    jmp .syscall_return_bad
+
+.syscall_return_ok:
+    jmp .syscall_return_ok
 
 section .note.GNU-stack noalloc noexec nowrite progbits

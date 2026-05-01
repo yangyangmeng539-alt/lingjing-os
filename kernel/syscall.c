@@ -240,6 +240,46 @@ unsigned int syscall_get_interrupt_count(void) {
     return syscall_interrupt_count;
 }
 
+unsigned int syscall_get_last_frame_valid(void) {
+    return syscall_last_frame.valid;
+}
+
+unsigned int syscall_get_last_frame_vector(void) {
+    return syscall_last_frame.vector;
+}
+
+unsigned int syscall_get_last_frame_eax(void) {
+    return syscall_last_frame.eax;
+}
+
+unsigned int syscall_get_last_frame_ebx(void) {
+    return syscall_last_frame.ebx;
+}
+
+unsigned int syscall_get_last_frame_ecx(void) {
+    return syscall_last_frame.ecx;
+}
+
+unsigned int syscall_get_last_frame_edx(void) {
+    return syscall_last_frame.edx;
+}
+
+unsigned int syscall_get_last_return_valid(void) {
+    return syscall_last_return.valid;
+}
+
+unsigned int syscall_get_last_return_id(void) {
+    return syscall_last_return.id;
+}
+
+unsigned int syscall_get_last_return_value(void) {
+    return syscall_last_return.value;
+}
+
+const char* syscall_get_last_return_status(void) {
+    return syscall_last_return.status;
+}
+
 void syscall_dispatch(unsigned int id) {
     platform_print("Syscall dispatch:\n");
 
@@ -423,6 +463,10 @@ void syscall_trigger_int80_args(unsigned int id, unsigned int arg1, unsigned int
         : "m"(id), "m"(arg1), "m"(arg2), "m"(arg3)
         : "eax", "ecx", "edx", "memory"
     );
+
+    platform_print("  retv:    ");
+    platform_print_uint(ret);
+    platform_print("\n");
 
     platform_print("  result:  returned from int 0x80\n");
 }

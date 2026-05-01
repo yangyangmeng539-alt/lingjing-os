@@ -62,6 +62,7 @@ void ring3_syscall_real_disarm(void);
 void ring3_syscall_gate(void);
 void ring3_syscall_gate_install(void);
 void ring3_syscall_gate_clear(void);
+void ring3_syscall_result(void);
 
 void ring3_guard(void);
 void ring3_enter(void);

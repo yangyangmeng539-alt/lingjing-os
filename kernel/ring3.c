@@ -2,6 +2,7 @@
 #include "platform.h"
 #include "gdt.h"
 #include "idt.h"
+#include "syscall.h"
 
 #define RING3_KERNEL_CODE_SELECTOR 0x08
 #define RING3_KERNEL_DATA_SELECTOR 0x10
@@ -1917,6 +1918,79 @@ void ring3_syscall_gate_clear(void) {
     ring3_syscall_exec_meta.gate_clear_count++;
 
     platform_print("ring3 syscall IDT gate readiness cleared.\n");
+}
+
+void ring3_syscall_result(void) {
+    unsigned int frame_valid = syscall_get_last_frame_valid();
+    unsigned int frame_vector = syscall_get_last_frame_vector();
+    unsigned int frame_eax = syscall_get_last_frame_eax();
+    unsigned int frame_ebx = syscall_get_last_frame_ebx();
+    unsigned int frame_ecx = syscall_get_last_frame_ecx();
+    unsigned int frame_edx = syscall_get_last_frame_edx();
+
+    unsigned int return_valid = syscall_get_last_return_valid();
+    unsigned int return_id = syscall_get_last_return_id();
+    unsigned int return_value = syscall_get_last_return_value();
+    const char* return_status = syscall_get_last_return_status();
+
+    platform_print("Ring3 syscall roundtrip result:\n");
+
+    platform_print("  frame:     ");
+    platform_print(frame_valid ? "valid\n" : "empty\n");
+
+    platform_print("  vector:    ");
+    platform_print_hex32(frame_vector);
+    platform_print("\n");
+
+    platform_print("  eax/id:    ");
+    platform_print_uint(frame_eax);
+    platform_print("\n");
+
+    platform_print("  ebx/arg1:  ");
+    platform_print_uint(frame_ebx);
+    platform_print("\n");
+
+    platform_print("  ecx/arg2:  ");
+    platform_print_uint(frame_ecx);
+    platform_print("\n");
+
+    platform_print("  edx/arg3:  ");
+    platform_print_uint(frame_edx);
+    platform_print("\n");
+
+    platform_print("  ret valid: ");
+    platform_print(return_valid ? "yes\n" : "no\n");
+
+    platform_print("  ret id:    ");
+    platform_print_uint(return_id);
+    platform_print("\n");
+
+    platform_print("  ret value: ");
+    platform_print_uint(return_value);
+    platform_print("\n");
+
+    platform_print("  ret status:");
+    platform_print(return_status);
+    platform_print("\n");
+
+    platform_print("  result:    ");
+
+    if (!frame_valid) {
+        platform_print("empty\n");
+        return;
+    }
+
+    if (!return_valid) {
+        platform_print("no return\n");
+        return;
+    }
+
+    if (frame_vector != 0x80) {
+        platform_print("bad vector\n");
+        return;
+    }
+
+    platform_print("ok\n");
 }
 
 void ring3_stack(void) {
