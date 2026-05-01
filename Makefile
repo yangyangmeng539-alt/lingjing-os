@@ -23,6 +23,7 @@ OBJS = \
 	$(BUILD_DIR)/timer.o \
 	$(BUILD_DIR)/system.o \
 	$(BUILD_DIR)/module.o \
+	$(BUILD_DIR)/capability.o \
 	$(BUILD_DIR)/security.o \
 	$(BUILD_DIR)/syscall.o \
 	$(BUILD_DIR)/user.o \
@@ -78,6 +79,9 @@ $(BUILD_DIR)/system.o: kernel/system.c
 
 $(BUILD_DIR)/module.o: kernel/module.c
 	$(CC) $(CFLAGS) -c kernel/module.c -o $(BUILD_DIR)/module.o
+
+$(BUILD_DIR)/capability.o: kernel/capability.c
+	$(CC) $(CFLAGS) -c kernel/capability.c -o $(BUILD_DIR)/capability.o
 
 $(BUILD_DIR)/health.o: kernel/health.c
 	$(CC) $(CFLAGS) -c kernel/health.c -o $(BUILD_DIR)/health.o

@@ -8,6 +8,7 @@
 #include "paging.h"
 #include "timer.h"
 #include "module.h"
+#include "capability.h"
 #include "intent.h"
 #include "version.h"
 #include "security.h"
@@ -282,6 +283,28 @@ static void shell_handle_moduletree(void) {
 
 static void shell_handle_modulecheck(void) {
     module_check();
+}
+
+static void shell_handle_capinfo(const char* cmd) {
+    const char* name = cmd + 8;
+
+    if (name[0] == '\0') {
+        platform_print("usage: capinfo <capability>\n");
+        return;
+    }
+
+    capability_info(name);
+}
+
+static void shell_handle_capcheck(const char* cmd) {
+    const char* name = cmd + 9;
+
+    if (name[0] == '\0') {
+        platform_print("usage: capcheck <capability>\n");
+        return;
+    }
+
+    capability_check(name);
 }
 
 static void shell_handle_sysinfo(void) {
@@ -1604,7 +1627,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, ring3, ring3 check, ring3 doctor, ring3 tss, ring3 tsscheck, ring3 tssload, ring3 tssinstall, ring3 tssclear, ring3 stack, ring3 frame, ring3 gdt, ring3 gdtcheck, ring3 gdtprepare, ring3 gdtinstall, ring3 gdtclear, ring3 page, ring3 pagecheck, ring3 pageprepare, ring3 pageclear, ring3 hw, ring3 hwcheck, ring3 hwinstall, ring3 hwclear, ring3 syscall, ring3 syscallcheck, ring3 syscallprepare, ring3 syscallclear, ring3 syscalldryrun, ring3 syscallstub, ring3 syscallstubcheck, ring3 syscallstubprepare, ring3 syscallstubclear, ring3 syscallstubselect, ring3 syscallstubunselect, ring3 syscallarm, ring3 syscalldisarm, ring3 syscallexec, ring3 syscallreal, ring3 syscallrealarm, ring3 syscallrealdisarm, ring3 syscallgate, ring3 syscallgateinstall, ring3 syscallgateclear, ring3 syscallresult, ring3 stub, ring3 stubcheck, ring3 guard, ring3 enter, ring3 dryrun, ring3 realenter, ring3 arm, ring3 disarm, ring3 enableswitch, ring3 disableswitch, ring3break, ring3fix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, ring3, ring3 check, ring3 doctor, ring3 tss, ring3 tsscheck, ring3 tssload, ring3 tssinstall, ring3 tssclear, ring3 stack, ring3 frame, ring3 gdt, ring3 gdtcheck, ring3 gdtprepare, ring3 gdtinstall, ring3 gdtclear, ring3 page, ring3 pagecheck, ring3 pageprepare, ring3 pageclear, ring3 hw, ring3 hwcheck, ring3 hwinstall, ring3 hwclear, ring3 syscall, ring3 syscallcheck, ring3 syscallprepare, ring3 syscallclear, ring3 syscalldryrun, ring3 syscallstub, ring3 syscallstubcheck, ring3 syscallstubprepare, ring3 syscallstubclear, ring3 syscallstubselect, ring3 syscallstubunselect, ring3 syscallarm, ring3 syscalldisarm, ring3 syscallexec, ring3 syscallreal, ring3 syscallrealarm, ring3 syscallrealdisarm, ring3 syscallgate, ring3 syscallgateinstall, ring3 syscallgateclear, ring3 syscallresult, ring3 stub, ring3 stubcheck, ring3 guard, ring3 enter, ring3 dryrun, ring3 realenter, ring3 arm, ring3 disarm, ring3 enableswitch, ring3 disableswitch, ring3break, ring3fix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield,capabilities, capinfo, capcheck, capdoctor, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1745,6 +1768,18 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_runqueue();
     } else if (str_equal(cmd, "yield")) {
         shell_handle_yield();
+    } else if (str_equal(cmd, "capabilities")) {
+        capability_list();
+    } else if (str_starts_with(cmd, "capinfo ")) {
+        shell_handle_capinfo(cmd);
+    } else if (str_equal(cmd, "capinfo")) {
+        platform_print("usage: capinfo <capability>\n");
+    } else if (str_starts_with(cmd, "capcheck ")) {
+        shell_handle_capcheck(cmd);
+    } else if (str_equal(cmd, "capcheck")) {
+        platform_print("usage: capcheck <capability>\n");
+    } else if (str_equal(cmd, "capdoctor")) {
+        capability_doctor();
     } else if (str_equal(cmd, "modules")) {
         module_list();
     } else if (str_starts_with(cmd, "moduleinfo ")) {

@@ -324,6 +324,10 @@ const char* module_get_depends(const char* name) {
         return "core";
     }
 
+    if (str_equal_local(name, "capability")) {
+        return "core";
+    }
+
     return "unknown";
 }
 
@@ -376,13 +380,25 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "timer";
             } else if (str_equal_local(name, "security")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "syscall")) {
+                modules[i].depends = "security";
+            } else if (str_equal_local(name, "user")) {
+                modules[i].depends = "syscall";
+            } else if (str_equal_local(name, "ring3")) {
+                modules[i].depends = "user";
             } else if (str_equal_local(name, "platform")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "lang")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "identity")) {
+                modules[i].depends = "security";
             } else if (str_equal_local(name, "health")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "memory")) {
+                modules[i].depends = "core";
+            } else if (str_equal_local(name, "paging")) {
+                modules[i].depends = "memory";
+            } else if (str_equal_local(name, "capability")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "shell")) {
                 modules[i].depends = "keyboard";
@@ -392,6 +408,8 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "timer";
             } else if (str_equal_local(name, "ai")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "fs")) {
+                modules[i].depends = "paging";
             } else {
                 platform_print("no default dependency for module: ");
                 platform_print(name);

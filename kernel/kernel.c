@@ -8,6 +8,7 @@
 #include "paging.h"
 #include "timer.h"
 #include "module.h"
+#include "capability.h"
 #include "scheduler.h"
 #include "security.h"
 #include "syscall.h"
@@ -69,6 +70,10 @@ void kernel_main(void) {
     ring3_init();
     module_register("ring3", "loaded", "kernel", "ring3", "user");
     platform_print("Ring3 metadata initialized.\n");
+
+    capability_init();
+    module_register("capability", "loaded", "kernel", "capability", "core");
+    platform_print("Capability registry initialized.\n");
 
     platform_init();
     module_register("platform", "loaded", "kernel", "platform", "core");

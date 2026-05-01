@@ -2,106 +2,187 @@
 ````markdown
 # Lingjing OS
 
-Lingjing OS 是一个实验性操作系统项目。
+```text
+Lingjing OS / 灵境 OS
+````
 
-当前目标不是替代现有桌面系统，而是探索一种更轻的系统结构：
+Lingjing OS 是一个实验性裸机操作系统项目。
 
-- 极小核心启动
-- 模块按需加载
-- 意图驱动调度
-- 用户拥有最终控制权
-- 外部生态必须受系统规则约束
-- 调度器以可验证、可诊断、可恢复为核心方向
-- 内存层以可分配、可释放、可复用、可诊断为核心方向
-- 分页层以 identity mapping、CR0/CR3 可观测、可诊断为核心方向
-- syscall 层以 int 0x80、寄存器帧、返回值为核心原型
-- user 层当前为 metadata-only，为后续 ring3 做准备
-- 安全层以策略检查、模块保护、审计日志为基础
-- 语言层预留系统显示语言接口
-- platform 层预留硬件能力抽象接口
-- identity 层预留系统身份占位接口
-
-当前版本：
+当前定位不是普通玩具内核，也不是现阶段要替代 Windows / Linux 的完整桌面系统，而是在验证一套新的系统结构：
 
 ```text
-version: dev-0.1.3
-stage: user mode preparation prototype
-arch: i386
-boot: multiboot + grub
-platform: baremetal
-````
+内核基础能力
++ 自检 / 医生 / 修复系统
++ 模块依赖系统
++ Capability 能力注册系统
++ Intent 意图驱动执行层
++ 用户态 / syscall / ring3 原型
+```
+
+核心方向：
+
+```text
+用户不直接操作底层资源，而是表达 intent；
+系统根据 intent 自动检查 capability、module、permission、health、platform、identity、memory、paging、syscall、user、ring3 等状态；
+如果系统健康，则执行；
+如果系统不健康，则阻断并报告。
+```
+
+核心理念：
+
+```text
+My machine, my rules.
+```
 
 ---
 
-## 项目定位
-
-Lingjing OS 当前不是完整桌面操作系统。
-
-当前阶段定位：
+## 当前版本
 
 ```text
-意图驱动的实验性内核原型
+version: dev-0.1.7
+stage: capability registry prototype
+arch: i386
+boot: multiboot + grub
+platform: baremetal
 ```
 
-它现在重点验证：
+当前目录：
+
+```bash
+cd ~/osdev/lingjing
+```
+
+构建运行：
+
+```bash
+make clean
+make
+make run
+```
+
+---
+
+## 当前阶段定位
+
+Lingjing OS 当前是：
+
+```text
+意图驱动的实验性裸机内核原型
+```
+
+不是完整桌面操作系统。
+
+当前重点验证：
 
 ```text
 boot
 shell
-module
-intent
-scheduler
+module registry
+module dependency
+capability registry
+intent plan / run / stop
+scheduler metadata
 task lifecycle
-heap
-paging
-task switch metadata
-syscall interrupt
-user metadata
+heap allocator
+paging metadata
+syscall int 0x80
+user mode metadata
+ring3 entry
+ring3 -> syscall -> kernel roundtrip
 health / doctor / blocked-ready 闭环
 ```
 
-当前系统已经从早期“架构原型”推进到“实验性内核骨架”阶段。
+当前已经完成关键裸机链路：
+
+```text
+ring0 -> ring3
+ring3 -> int 0x80
+int 0x80 -> kernel syscall handler
+kernel syscall dispatch -> SYS_PING
+kernel 写回返回值
+返回 ring3 controlled user loop
+```
+
+这说明：
+
+```text
+用户态代码已经能主动打进内核 syscall 层。
+```
 
 ---
 
-## 当前能力总览
-
-### Kernel 基础
-
-* GRUB / Multiboot 启动
-* i386 32 位内核
-* VGA 文本输出
-* GDT 初始化
-* IDT 初始化
-* PIC 重映射
-* IRQ0 系统时钟
-* IRQ1 键盘中断
-* Shell 命令行
-* Reboot / Halt
-
-### Module Layer
-
-* 模块注册
-* 模块依赖声明
-* 模块依赖检查
-* 模块依赖树
-* 模块 break / fix
-* 外部模块模拟 load / unload
-* 核心模块卸载保护
-* modulecheck 集成 health / doctor 主链
-
-相关命令：
+## 总体架构
 
 ```text
-modules
-moduleinfo <name>
-moduledeps <name>
-moduletree
-modulecheck
-modulebreak <name>
-modulefix <name>
-load <module>
-unload <module>
+Lingjing OS Runtime
+│
+├─ Intent Layer
+│  ├─ intent registry
+│  ├─ intent plan
+│  ├─ intent run / stop
+│  └─ intent -> required capabilities
+│
+├─ Capability Layer
+│  ├─ capability registry
+│  ├─ capability check
+│  ├─ capability doctor
+│  └─ capability -> provider module
+│
+├─ Module Layer
+│  ├─ module registry
+│  ├─ module dependency check
+│  ├─ module break / fix
+│  ├─ load / unload
+│  └─ module -> provides capabilities
+│
+├─ Task / Scheduler Layer
+│  ├─ task table
+│  ├─ task lifecycle
+│  ├─ scheduler ticks
+│  ├─ cooperative yield
+│  └─ task switch metadata
+│
+├─ Kernel Core Layers
+│  ├─ memory / heap
+│  ├─ paging
+│  ├─ syscall
+│  ├─ user metadata
+│  ├─ ring3
+│  ├─ security
+│  ├─ platform
+│  ├─ identity
+│  └─ health / doctor
+│
+└─ Shell
+   ├─ system commands
+   ├─ intent commands
+   ├─ capability commands
+   ├─ module commands
+   ├─ diagnostic commands
+   └─ later GUI shell
+```
+
+关键设计原则：
+
+```text
+Intent 不直接找 module
+Intent 先声明 capability
+Capability 再匹配 provider module
+Module 受依赖系统管理
+Task Runtime 后续绑定执行上下文
+Health / Doctor 统一决定系统是否 ready
+```
+
+---
+
+## 当前模块
+
+当前 `modulecheck`：
+
+```text
+total:  19
+ok:     19
+broken: 0
 ```
 
 当前核心模块：
@@ -117,6 +198,8 @@ scheduler
 security
 syscall
 user
+ring3
+capability
 platform
 lang
 identity
@@ -126,7 +209,31 @@ paging
 shell
 ```
 
-运行 `intent run video` 后，外部模块会按需加载：
+当前模块依赖关系：
+
+```text
+core          ok
+screen        depends core
+gdt           depends core
+idt           depends gdt
+keyboard      depends idt
+timer         depends idt
+scheduler     depends timer
+security      depends core
+syscall       depends security
+user          depends syscall
+ring3         depends user
+capability    depends core
+platform      depends core
+lang          depends core
+identity      depends security
+health        depends core
+memory        depends core
+paging        depends memory
+shell         depends keyboard
+```
+
+外部能力模块会在需要时加载：
 
 ```text
 gui
@@ -136,16 +243,84 @@ ai
 
 ---
 
+## Capability Layer
+
+当前版本 `dev-0.1.7` 新增 capability registry。
+
+当前能力表：
+
+```text
+gui.display    provider: gui      permission: display     status: available
+net.http       provider: net      permission: network     status: available
+ai.assist      provider: ai       permission: intent      status: available
+file.read      provider: fs       permission: file        status: planned
+sys.health     provider: health   permission: diagnostic  status: ready
+sys.syscall    provider: syscall  permission: syscall     status: ready
+user.ring3     provider: ring3    permission: ring3       status: ready
+```
+
+相关命令：
+
+```text
+capabilities
+capinfo <capability>
+capcheck <capability>
+capdoctor
+```
+
+示例：
+
+```text
+capabilities
+capcheck sys.syscall
+capcheck gui.display
+load gui
+capcheck gui.display
+capdoctor
+```
+
+当前设计：
+
+```text
+capability 存在，不代表 ready；
+capability ready 需要 provider module 已加载，并且 module dependency ok。
+```
+
+例如：
+
+```text
+gui.display provider 是 gui
+gui 未加载时 result blocked
+load gui 后 result ready
+```
+
+---
+
 ## Intent Layer
 
 Intent 层负责把用户意图转成系统执行计划。
 
-当前支持的 intent：
+当前支持：
 
 ```text
-video    requires: gui, net, ai
-ai       requires: ai
-network  requires: net
+video
+ai
+network
+```
+
+当前 intent 示例：
+
+```text
+video requires gui / net / ai
+```
+
+下一阶段将升级为：
+
+```text
+video requires capabilities:
+  gui.display
+  net.http
+  ai.assist
 ```
 
 相关命令：
@@ -172,7 +347,7 @@ intent lock
 intent unlock
 ```
 
-Intent 执行前会检查：
+当前 intent 执行前会检查：
 
 ```text
 intent lock
@@ -185,6 +360,7 @@ memory health
 paging health
 syscall health
 user health
+ring3 health
 ```
 
 执行流程：
@@ -204,7 +380,7 @@ platform 状态检查
 ↓
 identity 状态检查
 ↓
-health / doctor 主链检查
+memory / paging / syscall / user / ring3 健康检查
 ↓
 按需加载模块
 ↓
@@ -217,312 +393,185 @@ health / doctor 主链检查
 
 ---
 
-## Scheduler / Task Layer
-
-当前调度器仍是原型，不是真正硬件级上下文切换。
+## Module Layer
 
 已支持：
 
-* IRQ0 tick 接入 scheduler
-* scheduler ticks 统计
-* yield count 统计
-* task runtime ticks 统计
-* 静态基础任务表
-* dynamic task create
-* active task 轮转
-* cooperative yield
-* run queue 查看
-* scheduler log
-* scheduler reset
-* scheduler validate
-* scheduler fix
-* task doctor
-* task lifecycle hardening
-* task create / wake / sleep / kill / exit
-* task priority
-* task broken / fix
-* exit code
-* lifecycle event count
-* context switch metadata
-* runqueue reason 显示
-* system doctor 集成
-
-当前基础任务表：
-
 ```text
-0    idle     kernel
-1    shell    system
-2    intent   system
-3    timer    kernel
-```
-
-合法任务状态：
-
-```text
-created
-ready
-running
-blocked
-sleeping
-killed
-broken
+module registry
+module dependency declaration
+module dependency check
+module dependency tree
+module break / fix
+external module load / unload
+core module unload protection
+modulecheck integrated with health / doctor
 ```
 
 相关命令：
 
 ```text
-tasks
-taskinfo <id>
-taskstate <id> <state>
-taskcreate <name>
-taskkill <id>
-tasksleep <id>
-taskwake <id>
-taskprio <id> <priority>
-taskexit <id> <code>
-taskbreak <id>
-taskfix <id>
-taskstats
-taskcheck
-taskdoctor
-schedinfo
-schedlog
-schedclear
-schedreset
-schedvalidate
-schedfix
-runqueue
-yield
+modules
+moduleinfo <name>
+moduledeps <name>
+moduletree
+modulecheck
+modulebreak <name>
+modulefix <name>
+load <module>
+unload <module>
 ```
 
-当前调度规则：
+示例：
 
 ```text
-yield 会切换 active task
-created task 默认不进入 runnable
-sleeping task 会被跳过
-blocked task 会被跳过
-killed task 会被跳过
-broken task 会被跳过并影响 health
-idle task 不可 kill / sleep / break
-如果所有非 idle 任务不可运行，则回到 idle
-当前 active 被 blocked / sleeping / killed / broken，会自动切到下一个 runnable task
+modulecheck
+modulebreak screen
+doctor
+modulefix screen
+doctor
+```
+
+预期：
+
+```text
+modulebreak screen 后 doctor blocked
+modulefix screen 后 doctor ready
 ```
 
 ---
 
-## Task Switch Metadata Layer
+## Health / Doctor
 
-当前 task switch 仍是 metadata prototype，不做真实 ESP/EIP 切换。
-
-已支持：
-
-* task stack metadata
-* stack base
-* stack size
-* context ready
-* context switch count
-* task switch doctor
-* task switch break / fix
-* health switch 集成
-* doctor task switch layer 集成
-
-相关命令：
+Lingjing OS 的核心机制之一是：
 
 ```text
-taskswitch
-taskswitchcheck
-taskswitchdoctor
-taskswitchbreak
-taskswitchfix
+发现异常 -> 标记 broken -> health bad -> doctor blocked -> intent system blocked
+修复异常 -> health ok -> doctor ready -> intent system ready
 ```
 
-当前定位：
+### health
 
 ```text
-不是完整上下文切换
-不是真实进程切换
-不是 ring3 task switch
-
-它是后续真实 task switch 的诊断骨架
+health
 ```
 
----
-
-## Memory / Heap Layer
-
-当前 memory 层已经从 bump allocator 推进到 header + free-list prototype。
-
-已支持：
-
-* placement address
-* kmalloc
-* kcalloc
-* kfree
-* block header
-* real size 记录
-* free list
-* block reuse
-* allocated bytes
-* freed bytes
-* live bytes
-* live alloc count
-* failed free count
-* double free 检测
-* heapstats
-* heapcheck
-* heapdoctor
-* heapbreak / heapfix
-* health memory 集成
-* doctor memory layer 集成
-
-相关命令：
+当前健康项：
 
 ```text
-mem
-kmalloc <bytes>
-kcalloc <bytes>
-kfree <addr>
-heapcheck
-heapdoctor
-heapstats
-heapbreak
-heapfix
-peek <addr>
-poke <addr> <value>
-hexdump <addr> <len>
-kzero <addr> <len>
-```
-
-当前 allocator：
-
-```text
-header + free-list prototype
-```
-
-当前支持的诊断项：
-
-```text
-placement
-allocator
-alloc count
-free count
-live count
-reuse count
-free list count
-failed free
-double free
-allocated bytes
-freed bytes
-live bytes
-```
-
-当前定位：
-
-```text
-不是完整通用 heap allocator
-暂不做 coalescing
-暂不做复杂碎片整理
-当前目标是内核动态内存生命周期可诊断
-```
-
----
-
-## Paging Layer
-
-当前 paging 层已经完成 4MB identity paging 原型。
-
-已支持：
-
-* page directory
-* first page table
-* identity mapping
-* CR3 load
-* CR0.PG enable
-* paging enable
-* paging map check
-* paging flags
-* paging stats
-* paging doctor
-* CR0 显示
-* CR3 显示
-* PG bit 显示
-* mapped range 显示
-* page flags 显示
-* accessed bit 识别
-* unmapped 地址识别
-* health paging 集成
-* doctor paging layer 集成
-
-相关命令：
-
-```text
+deps
+security
+task
+lang
+platform
+identity
+memory
 paging
-paging status
-paging check
-paging doctor
-paging map <addr>
-paging flags <addr>
-paging stats
-paging enable
-pagingbreak
-pagingfix
+switch
+syscall
+user
+ring3
+result
 ```
 
-当前映射范围：
+正常输出：
 
 ```text
-0x00000000 - 0x003FFFFF
+System health:
+  deps:     ok
+  security: ok
+  task:     ok
+  lang:     ok
+  platform: ok
+  identity: ok
+  memory:   ok
+  paging:   ok
+  switch:   ok
+  syscall:  ok
+  user:     ok
+  ring3:    ok
+  result:   ok
 ```
 
-当前页数：
+### doctor
 
 ```text
-1024 pages
+doctor
 ```
 
-当前大小：
+当前诊断项：
 
 ```text
-4MB
+module dependencies
+task health
+scheduler
+scheduler active
+task switch layer
+syscall layer
+user mode layer
+ring3 layer
+security
+language layer
+platform layer
+identity layer
+memory layer
+paging layer
+current platform
+current language
+intent system
+result
 ```
 
-当前定位：
+正常输出：
 
 ```text
-已经能开启 paging 并回到 shell
-当前仍是 identity mapping
-暂不做 page allocator
-暂不做 map / unmap
-暂不做用户态地址空间隔离
+System doctor:
+  module dependencies: ok
+  task health:         ok
+  scheduler:           ok
+  scheduler active:    ok
+  task switch layer:   ok
+  syscall layer:       ok
+  user mode layer:     ok
+  ring3 layer:         ok
+  security:            ok
+  language layer:      ok
+  platform layer:      ok
+  identity layer:      ok
+  memory layer:        ok
+  paging layer:        ok
+  current platform:    baremetal
+  current language:    en
+  intent system:       ready
+  result:              ready
 ```
 
 ---
 
 ## Syscall Layer
 
-当前 syscall 层已经接入真实 `int 0x80` 中断路径。
+当前 syscall 层已经完成真实 `int 0x80` 路径。
 
 已支持：
 
-* syscall table
-* syscall metadata
-* syscall dispatch
-* unsupported syscall count
-* syscall interrupt metadata path
-* IDT vector 0x80
-* isr128
-* syscall int 0x80 handler
-* 从 EAX 读取 syscall id
-* EBX / ECX / EDX 参数捕获
-* register frame 捕获
-* syscall return value
-* syscall frame
-* syscall ret
-* syscall stats
-* syscall doctor
-* health syscall 集成
-* doctor syscall layer 集成
+```text
+syscall table
+syscall dispatch
+unsupported syscall count
+IDT vector 0x80
+isr128
+syscall interrupt handler
+EAX syscall id
+EBX / ECX / EDX args
+register frame capture
+syscall return value
+syscall frame
+syscall ret
+syscall stats
+syscall doctor
+health syscall integration
+doctor syscall layer integration
+```
 
 当前 syscall table：
 
@@ -570,7 +619,7 @@ syscall real <id>
   真实 int 0x80，从内核态触发
 
 syscall realargs <id> <a> <b> <c>
-  真实 int 0x80，并通过 eax/ebx/ecx/edx 传参
+  真实 int 0x80，并通过 eax / ebx / ecx / edx 传参
 ```
 
 当前 syscall 返回值：
@@ -583,32 +632,27 @@ SYS_USER        -> 3
 unsupported     -> 4294967295
 ```
 
-当前定位：
-
-```text
-已经完成真实 int 0x80 内核态触发
-已经完成寄存器帧捕获
-已经完成返回值原型
-当前还没有 ring3 用户态触发 syscall
-```
-
 ---
 
-## User Mode Metadata Layer
+## User / Ring3 Layer
 
-当前 user 层是 metadata-only，不是真实 ring3。
+### User Metadata Layer
+
+当前 user 层提供用户态元数据，不是完整进程加载器。
 
 已支持：
 
-* user mode layer
-* user programs metadata
-* user entries metadata
-* user stats
-* user doctor
-* user break / fix
-* health user 集成
-* doctor user mode layer 集成
-* modulecheck user depends syscall
+```text
+user mode layer
+user programs metadata
+user entries metadata
+user stats
+user doctor
+user break / fix
+health user integration
+doctor user mode layer integration
+modulecheck user depends syscall
+```
 
 相关命令：
 
@@ -633,32 +677,400 @@ userfix
 3    reserved     reserved
 ```
 
+### Ring3 Layer
+
+当前 ring3 层已经完成真实 ring0 -> ring3 跳转，并完成 ring3 syscall roundtrip。
+
+已支持：
+
+```text
+ring3 metadata layer
+ring3 transition guard
+ring3 iret frame
+ring3 asm stub
+ring3 syscall asm stub
+GDT user descriptors
+TSS descriptor
+ltr
+user page metadata gate
+hardware install gate
+realenter gate
+ring3 -> int 0x80 -> kernel syscall handler
+syscall return / controlled user loop
+```
+
+相关命令：
+
+```text
+ring3
+ring3 status
+ring3 check
+ring3 doctor
+ring3 guard
+ring3 dryrun
+ring3 stub
+ring3 stubcheck
+ring3 gdt
+ring3 gdtinstall
+ring3 tss
+ring3 tssinstall
+ring3 pageprepare
+ring3 enableswitch
+ring3 hwcheck
+ring3 hwinstall
+ring3 arm
+ring3 disarm
+ring3 realenter
+
+ring3 syscallprepare
+ring3 syscalldryrun
+ring3 syscallstubprepare
+ring3 syscallstubselect
+ring3 syscallgate
+ring3 syscallgateinstall
+ring3 syscallgateclear
+ring3 syscallarm
+ring3 syscallrealarm
+ring3 syscallresult
+```
+
+危险命令：
+
+```text
+ring3 realenter
+```
+
+说明：
+
+```text
+ring3 realenter 会真实进入 ring3。
+如果 syscall stub 已选中，会执行 ring3 -> int 0x80 -> kernel syscall handler。
+随后返回 ring3 controlled user loop。
+这一步通常会停住，这是正常现象。
+```
+
+完整 ring3 syscall 测试链：
+
+```text
+ring3 syscallprepare
+ring3 syscalldryrun
+ring3 syscallstubprepare
+ring3 syscallstubselect
+ring3 syscallgateinstall
+ring3 syscallarm
+ring3 syscallrealarm
+
+ring3 gdtinstall
+ring3 tssinstall
+ring3 pageprepare
+
+ring3 enableswitch
+ring3 dryrun
+ring3 hwcheck
+ring3 hwinstall
+ring3 arm
+ring3 realenter
+```
+
+成功关键输出：
+
+```text
+Ring3 real enter:
+  result: executing iretd
+
+Syscall int 0x80 handler:
+  vector:  0x80
+  eax:     0
+  ebx:     11
+  ecx:     22
+  edx:     33
+
+Syscall dispatch:
+  id:     0
+  name:   SYS_PING
+  status: ready
+  return: pong
+  retv:   0
+  result: ok
+```
+
+---
+
+## Scheduler / Task Layer
+
+当前调度器仍是原型，不是真实硬件级上下文切换。
+
+已支持：
+
+```text
+IRQ0 tick
+scheduler ticks
+yield count
+task runtime ticks
+static base task table
+dynamic task create
+active task rotation
+cooperative yield
+run queue
+scheduler log
+scheduler reset
+scheduler validate
+scheduler fix
+task doctor
+task lifecycle hardening
+task create / wake / sleep / kill / exit
+task priority
+task broken / fix
+exit code
+lifecycle event count
+context switch metadata
+runqueue reason
+system doctor integration
+```
+
+基础任务表：
+
+```text
+0    idle     kernel
+1    shell    system
+2    intent   system
+3    timer    kernel
+```
+
+合法任务状态：
+
+```text
+created
+ready
+running
+blocked
+sleeping
+killed
+broken
+```
+
+相关命令：
+
+```text
+tasks
+taskinfo <id>
+taskstate <id> <state>
+taskcreate <name>
+taskkill <id>
+tasksleep <id>
+taskwake <id>
+taskprio <id> <priority>
+taskexit <id> <code>
+taskbreak <id>
+taskfix <id>
+taskstats
+taskcheck
+taskdoctor
+schedinfo
+schedlog
+schedclear
+schedreset
+schedvalidate
+schedfix
+runqueue
+yield
+```
+
+---
+
+## Task Switch Metadata Layer
+
+当前 task switch 仍是 metadata prototype，不做真实 ESP / EIP 切换。
+
+已支持：
+
+```text
+task stack metadata
+stack base
+stack size
+context ready
+context switch count
+task switch doctor
+task switch break / fix
+health switch integration
+doctor task switch layer integration
+```
+
+相关命令：
+
+```text
+taskswitch
+taskswitchcheck
+taskswitchdoctor
+taskswitchbreak
+taskswitchfix
+```
+
 当前定位：
 
 ```text
-不是真实用户态
-不是 ring3
-不是进程加载器
-当前只做 user mode metadata，为后续 ring3 entry 做准备
+不是完整上下文切换
+不是真实进程切换
+不是 ring3 task switch
+当前是后续真实 task switch 的诊断骨架
+```
+
+---
+
+## Memory / Heap Layer
+
+当前 memory 层是 header + free-list prototype。
+
+已支持：
+
+```text
+placement address
+kmalloc
+kcalloc
+kfree
+block header
+real size
+free list
+block reuse
+allocated bytes
+freed bytes
+live bytes
+live alloc count
+failed free count
+double free detection
+heapstats
+heapcheck
+heapdoctor
+heapbreak / heapfix
+health memory integration
+doctor memory layer integration
+```
+
+相关命令：
+
+```text
+mem
+kmalloc <bytes>
+kcalloc <bytes>
+kfree <addr>
+heapcheck
+heapdoctor
+heapstats
+heapbreak
+heapfix
+peek <addr>
+poke <addr> <value>
+hexdump <addr> <len>
+kzero <addr> <len>
+```
+
+当前 allocator：
+
+```text
+header + free-list prototype
+```
+
+当前定位：
+
+```text
+不是完整通用 heap allocator
+暂不做 coalescing
+暂不做复杂碎片整理
+当前目标是内核动态内存生命周期可诊断
+```
+
+---
+
+## Paging Layer
+
+当前 paging 层是 4MB identity paging prototype。
+
+已支持：
+
+```text
+page directory
+first page table
+identity mapping
+CR3 load
+CR0.PG enable
+paging enable
+paging map check
+paging flags
+paging stats
+paging doctor
+CR0 display
+CR3 display
+PG bit display
+mapped range display
+page flags display
+accessed bit recognition
+unmapped address recognition
+health paging integration
+doctor paging layer integration
+```
+
+相关命令：
+
+```text
+paging
+paging status
+paging check
+paging doctor
+paging map <addr>
+paging flags <addr>
+paging stats
+paging enable
+pagingbreak
+pagingfix
+```
+
+当前映射范围：
+
+```text
+0x00000000 - 0x003FFFFF
+```
+
+当前页数：
+
+```text
+1024 pages
+```
+
+当前大小：
+
+```text
+4MB
+```
+
+当前定位：
+
+```text
+已经能开启 paging 并回到 shell
+当前仍是 identity mapping
+暂不做 page allocator
+暂不做 map / unmap
+暂不做用户态地址空间隔离
 ```
 
 ---
 
 ## Security Layer
 
-当前安全层是规则骨架，不是完整防病毒系统。
+当前安全层是策略骨架，不是完整防病毒系统。
 
 已支持：
 
-* security policy 开关骨架
-* module protection
-* intent permission check
-* security audit log
-* security doctor check
-* intent run 前安全检查
-* module load 前安全检查
-* module unload 前安全检查
-* 核心模块卸载保护
+```text
+security policy switch
+module protection
+intent permission check
+security audit log
+security doctor check
+intent run security check
+module load security check
+module unload security check
+core module unload protection
+```
 
 相关命令：
 
@@ -669,44 +1081,14 @@ securitylog
 securityclear
 ```
 
-当前安全层定位：
+当前定位：
 
 ```text
 不是杀毒系统
 不是病毒库
 不是沙箱
 不是完整证书体系
-
-它是系统安全策略入口
-```
-
----
-
-## Language Layer
-
-当前语言层是系统显示语言骨架。
-
-默认语言：
-
-```text
-en
-```
-
-已预留：
-
-```text
-zh
-```
-
-由于当前仍使用 VGA 文本模式，暂不支持真正 UTF-8 中文显示。
-中文通道目前使用 `[ZH]` ASCII 占位，避免乱码。
-
-相关命令：
-
-```text
-lang
-lang en
-lang zh
+当前是系统安全策略入口
 ```
 
 ---
@@ -730,15 +1112,6 @@ timer
 power
 ```
 
-已支持：
-
-* platform 初始化状态检查
-* platform capability check
-* platform break / fix
-* system doctor 集成
-* health 集成
-* platform broken 时阻塞 intent system
-
 相关命令：
 
 ```text
@@ -750,6 +1123,16 @@ platformsummary
 platformcaps
 platformbreak <capability>
 platformfix <capability>
+```
+
+当前定位：
+
+```text
+硬件能力抽象
+平台状态可检查
+平台故障可诊断
+平台修复可恢复
+上层逐步脱离硬件细节
 ```
 
 ---
@@ -765,15 +1148,6 @@ state: ready
 mode: local-placeholder
 public key: not-generated
 ```
-
-已支持：
-
-* identity 初始化状态检查
-* identity doctor
-* identity break / fix
-* system doctor 集成
-* health 集成
-* identity broken 时阻塞 intent system
 
 相关命令：
 
@@ -795,13 +1169,44 @@ identity import
 identity reset
 ```
 
-这些属于后续操作层 / 身份管理层。
+---
+
+## Language Layer
+
+当前语言层是系统显示语言骨架。
+
+默认语言：
+
+```text
+en
+```
+
+预留：
+
+```text
+zh
+```
+
+说明：
+
+```text
+当前仍使用 VGA 文本模式，暂不支持真正 UTF-8 中文显示。
+中文通道目前使用 [ZH] ASCII 占位，避免乱码。
+```
+
+相关命令：
+
+```text
+lang
+lang en
+lang zh
+```
 
 ---
 
-## 系统诊断
+## 系统状态命令
 
-### 单行状态栏
+### status
 
 ```text
 status
@@ -810,7 +1215,7 @@ status
 示例：
 
 ```text
-LJ | up 50s | in none | m17 t4 | s5067 y0 | coop | deps ok | doc ok
+LJ | up 50s | in none | m19 t4 | s5067 y0 | coop | deps ok | doc ok
 ```
 
 含义：
@@ -827,7 +1232,7 @@ deps    module dependency health
 doc     system doctor result
 ```
 
-### 多行面板
+### dashboard / dash
 
 ```text
 dashboard
@@ -836,240 +1241,40 @@ dash
 
 显示：
 
-* uptime
-* scheduler ticks
-* scheduler mode
-* active task
-* next alloc
-* platform status
-* intent layer
-* security status
-* language status
-* dependency health
-* task health
-* memory health
-* paging health
-* syscall health
-* user health
-* identity health
-* current intent
-* tasks
-* registered modules
-
-### 全局健康
-
 ```text
-health
-```
-
-当前健康项：
-
-```text
-deps
-security
-task
-lang
-platform
-identity
-memory
-paging
-switch
-syscall
-user
-result
-```
-
-示例：
-
-```text
-System health:
-  deps:     ok
-  security: ok
-  task:     ok
-  lang:     ok
-  platform: ok
-  identity: ok
-  memory:   ok
-  paging:   ok
-  switch:   ok
-  syscall:  ok
-  user:     ok
-  result:   ok
-```
-
-### 全局诊断
-
-```text
-doctor
-```
-
-当前诊断项：
-
-```text
-module dependencies
+uptime
+scheduler ticks
+scheduler mode
+active task
+next alloc
+platform status
+intent layer
+security status
+language status
+dependency health
 task health
-scheduler
-scheduler active
-task switch layer
-syscall layer
-user mode layer
-security
-language layer
-platform layer
-identity layer
-memory layer
-paging layer
-current platform
-current language
-intent system
-result
-```
-
-示例：
-
-```text
-System doctor:
-  module dependencies: ok
-  task health:         ok
-  scheduler:           ok
-  scheduler active:    ok
-  task switch layer:   ok
-  syscall layer:       ok
-  user mode layer:     ok
-  security:            ok
-  language layer:      ok
-  platform layer:      ok
-  identity layer:      ok
-  memory layer:        ok
-  paging layer:        ok
-  current platform:    baremetal
-  current language:    en
-  intent system:       ready
-  result:              ready
-```
-
----
-
-## 核心理念
-
-```text
-My machine, my rules.
-```
-
-系统默认只加载核心能力。
-
-生态模块不会默认常驻，而是由用户意图触发加载：
-
-```text
-intent plan video
-intent run video
-intent status
-intent stop
-```
-
-对应流程：
-
-```text
-用户意图
-↓
-查看执行计划
-↓
-权限检查
-↓
-安全策略检查
-↓
-模块依赖检查
-↓
-platform 状态检查
-↓
-identity 状态检查
-↓
-memory / paging / syscall / user 健康检查
-↓
-按需加载模块
-↓
-运行 intent
-↓
-停止 intent
-↓
-释放外部模块
-```
-
-调度器方向：
-
-```text
-任务可见
-状态可控
-异常可诊断
-调度可恢复
-```
-
-内存层方向：
-
-```text
-分配可查
-释放可控
-复用可见
-错误可诊断
-```
-
-分页层方向：
-
-```text
-地址映射可见
-CR0 / CR3 可查
-页表 flags 可诊断
-分页开启可验证
-```
-
-syscall 层方向：
-
-```text
-调用入口明确
-寄存器帧可见
-返回值可查
-用户态边界逐步建立
-```
-
-安全层方向：
-
-```text
-策略先行
-模块受控
-权限可查
-行为留痕
-核心不可被普通模块破坏
-```
-
-platform 层方向：
-
-```text
-硬件能力抽象
-平台状态可检查
-平台故障可诊断
-平台修复可恢复
-上层逐步脱离硬件细节
-```
-
-identity 层方向：
-
-```text
-系统身份能力预留
-当前只做占位
-不在架构原型阶段实现真实身份策略
+memory health
+paging health
+syscall health
+user health
+ring3 health
+identity health
+current intent
+tasks
+registered modules
 ```
 
 ---
 
 ## 构建环境
 
-当前推荐环境：
+推荐环境：
 
 ```text
 Windows + WSL2 Ubuntu + QEMU
 ```
 
-需要安装：
+依赖：
 
 ```bash
 sudo apt install -y build-essential gcc make nasm qemu-system-x86 grub-pc-bin grub-common xorriso mtools gdb git curl wget
@@ -1079,27 +1284,30 @@ sudo apt install -y build-essential gcc make nasm qemu-system-x86 grub-pc-bin gr
 
 ## 构建与运行
 
-进入项目目录：
+进入项目：
 
 ```bash
 cd ~/osdev/lingjing
 ```
 
-清理并运行：
+清理并编译：
 
 ```bash
 make clean
 make
+```
+
+运行：
+
+```bash
 make run
 ```
 
-QEMU 退出方式：
+退出：
 
 ```text
 halt
 ```
-
-或者在 QEMU curses 模式下使用对应终端退出快捷键。
 
 ---
 
@@ -1114,6 +1322,37 @@ dash
 status
 doctor
 health
+
+capabilities
+capinfo <capability>
+capcheck <capability>
+capdoctor
+
+modules
+moduleinfo <name>
+moduledeps <name>
+moduletree
+modulecheck
+modulebreak <name>
+modulefix <name>
+load <module>
+unload <module>
+
+intent list
+intent permissions
+intent policy
+intent audit
+intent doctor
+intent plan video
+intent run video
+intent status
+intent stop
+intent history
+intent reset
+intent allow <name>
+intent deny <name>
+intent lock
+intent unlock
 
 security
 securitycheck
@@ -1139,14 +1378,6 @@ identity doctor
 identity check
 identity break
 identity fix
-
-modules
-moduleinfo <name>
-moduledeps <name>
-moduletree
-modulecheck
-modulebreak <name>
-modulefix <name>
 
 tasks
 taskinfo <id>
@@ -1176,22 +1407,6 @@ taskswitchcheck
 taskswitchdoctor
 taskswitchbreak
 taskswitchfix
-
-intent list
-intent permissions
-intent policy
-intent audit
-intent doctor
-intent plan video
-intent run video
-intent status
-intent stop
-intent history
-intent reset
-intent allow <name>
-intent deny <name>
-intent lock
-intent unlock
 
 mem
 kmalloc <bytes>
@@ -1239,6 +1454,36 @@ user stats
 userbreak
 userfix
 
+ring3
+ring3 status
+ring3 check
+ring3 doctor
+ring3 guard
+ring3 dryrun
+ring3 stub
+ring3 stubcheck
+ring3 gdt
+ring3 gdtinstall
+ring3 tss
+ring3 tssinstall
+ring3 pageprepare
+ring3 enableswitch
+ring3 hwcheck
+ring3 hwinstall
+ring3 arm
+ring3 disarm
+ring3 realenter
+ring3 syscallprepare
+ring3 syscalldryrun
+ring3 syscallstubprepare
+ring3 syscallstubselect
+ring3 syscallgate
+ring3 syscallgateinstall
+ring3 syscallgateclear
+ring3 syscallarm
+ring3 syscallrealarm
+ring3 syscallresult
+
 uptime
 sleep <seconds>
 reboot
@@ -1247,7 +1492,62 @@ halt
 
 ---
 
-## 示例：Intent 调度
+## 示例：Capability
+
+查看能力表：
+
+```text
+capabilities
+```
+
+检查 syscall 能力：
+
+```text
+capcheck sys.syscall
+```
+
+预期：
+
+```text
+result: ready
+```
+
+检查 GUI 能力：
+
+```text
+capcheck gui.display
+```
+
+如果 `gui` 未加载：
+
+```text
+module: not loaded
+result: blocked
+```
+
+加载 GUI 模块：
+
+```text
+load gui
+capcheck gui.display
+```
+
+预期：
+
+```text
+module: loaded
+result: ready
+```
+
+查看 capability doctor：
+
+```text
+capdoctor
+```
+
+---
+
+## 示例：Intent
 
 查看计划：
 
@@ -1325,6 +1625,124 @@ modulefix screen
 ```text
 modulebreak screen 后 doctor blocked
 modulefix screen 后 doctor ready
+```
+
+---
+
+## 示例：Syscall
+
+查看 syscall 表：
+
+```text
+syscall table
+```
+
+模拟调用：
+
+```text
+syscall call 0
+```
+
+模拟 interrupt path：
+
+```text
+syscall int 0
+```
+
+真实 int 0x80：
+
+```text
+syscall real 0
+```
+
+带参数真实 int 0x80：
+
+```text
+syscall realargs 0 11 22 33
+```
+
+查看寄存器帧：
+
+```text
+syscall frame
+```
+
+查看返回值：
+
+```text
+syscall ret
+```
+
+预期：
+
+```text
+eax = syscall id
+ebx / ecx / edx = syscall args
+SYS_PING return value = 0
+```
+
+---
+
+## 示例：Ring3 Syscall Roundtrip
+
+先准备 ring3 syscall：
+
+```text
+ring3 syscallprepare
+ring3 syscalldryrun
+ring3 syscallstubprepare
+ring3 syscallstubselect
+ring3 syscallgateinstall
+ring3 syscallarm
+ring3 syscallrealarm
+```
+
+准备 ring3 进入条件：
+
+```text
+ring3 gdtinstall
+ring3 tssinstall
+ring3 pageprepare
+ring3 enableswitch
+ring3 dryrun
+ring3 hwcheck
+ring3 hwinstall
+ring3 arm
+```
+
+真实进入 ring3：
+
+```text
+ring3 realenter
+```
+
+预期：
+
+```text
+Ring3 real enter:
+  result: executing iretd
+
+Syscall int 0x80 handler:
+  vector:  0x80
+  eax:     0
+  ebx:     11
+  ecx:     22
+  edx:     33
+
+Syscall dispatch:
+  id:     0
+  name:   SYS_PING
+  status: ready
+  return: pong
+  retv:   0
+  result: ok
+```
+
+说明：
+
+```text
+此时系统会停在 ring3 controlled user loop。
+这是 dev-0.1.6 / dev-0.1.7 当前阶段的正常结果。
 ```
 
 ---
@@ -1472,7 +1890,7 @@ paging enable
 预期：
 
 ```text
-paging enable 后 pg bit on
+paging enable 后 PG bit on
 CR3 指向 page directory
 0x00000000 - 0x003FFFFF identity mapped
 0x00400000 unmapped
@@ -1481,98 +1899,7 @@ doctor ready
 
 ---
 
-## 示例：Syscall
-
-查看 syscall 表：
-
-```text
-syscall table
-```
-
-模拟调用：
-
-```text
-syscall call 0
-```
-
-模拟 interrupt path：
-
-```text
-syscall int 0
-```
-
-真实 int 0x80：
-
-```text
-syscall real 0
-```
-
-带参数真实 int 0x80：
-
-```text
-syscall realargs 3 100 200 300
-```
-
-查看寄存器帧：
-
-```text
-syscall frame
-```
-
-查看返回值：
-
-```text
-syscall ret
-```
-
-预期：
-
-```text
-eax = syscall id
-ebx / ecx / edx = syscall args
-SYS_USER return value = 3
-unsupported return value = 4294967295
-```
-
----
-
-## 示例：User Metadata
-
-查看 user 层：
-
-```text
-user
-```
-
-查看 user programs：
-
-```text
-user programs
-```
-
-查看 user entries：
-
-```text
-user entries
-```
-
-查看 user doctor：
-
-```text
-user doctor
-```
-
-预期：
-
-```text
-user mode layer ok
-ring3 disabled
-metadata-only
-```
-
----
-
-## 示例：Platform 平台层
+## 示例：Platform
 
 查看平台状态：
 
@@ -1613,7 +1940,7 @@ platformfix timer/all 后 doctor ready
 
 ---
 
-## 示例：Identity 占位层
+## 示例：Identity
 
 查看 identity 状态：
 
@@ -1642,76 +1969,62 @@ identity fix 后 doctor ready
 
 ---
 
-## 当前阶段
-
-Lingjing OS 目前是一个早期裸机实验性内核原型。
-
-它还不是完整操作系统。
-
-当前版本 `dev-0.1.3 user mode preparation prototype` 已完成 user segment / stack / entry frame / boundary hardening 原型验收。
-
-```text
-int 0x80 gate
-isr128
-syscall interrupt handler
-syscall register frame
-eax / ebx / ecx / edx 参数捕获
-syscall return value
-syscall frame / ret / stats / doctor
-```
-
-当前重点已经从“架构能跑”推进到：
-
-```text
-内核关键机制逐步接入
-每一层都可诊断
-每一层都可 break / fix
-全局 health / doctor 统一 blocked / ready
-```
+## 当前已验收
 
 当前已验收：
 
 ```text
-dash / health / doctor / status / modulecheck 初始健康
-intent plan video
-intent run video
-gui / net / ai 按需加载
-intent stop 后 gui / net / ai 卸载
-intent history 记录 run / stop
+version dev-0.1.7
+modulecheck total 19 / ok 19 / broken 0
+health result ok
+doctor result ready
 
-modulebreak screen 后 doctor blocked
-modulefix screen 后 doctor ready
+capabilities 正常
+capcheck sys.syscall ready
+capcheck gui.display 在 gui 未加载时 blocked
+load gui 后 capcheck gui.display ready
+capdoctor 正常
 
-platformbreak timer/all 后 doctor blocked
-platformfix timer/all 后 doctor ready
+syscall realargs 0 11 22 33 正常
+syscall frame 正常
+syscall ret 正常
+ring3 syscallresult 正常
 
-identity break 后 doctor blocked
-identity fix 后 doctor ready
-
-heap block header / kfree / reuse / double free 检测
-heapfix 后 doctor ready
-
-task created / sleeping / killed / broken / exit code
-taskfix 后 doctor ready
-
-paging enable 后 shell 正常
-paging stats / flags / doctor 正常
-
-syscall real int 0x80 正常
-syscall frame / ret 正常
-
-user metadata layer 正常
-
-securitycheck ok
-taskdoctor ok
-taskswitchdoctor ok
-schedvalidate ok
+ring3 -> int 0x80 -> kernel syscall handler -> SYS_PING dispatch 成功
+ring3 syscall return / controlled user loop 成功
 ```
 
-当前版本标签：
+---
+
+## 当前阶段限制
+
+当前还不是完整 OS。
+
+暂未实现：
 
 ```text
-v0.1.2-syscall-interrupt-prototype
+完整文件系统
+真实用户态进程模型
+真实进程地址空间隔离
+真实 task context switch
+完整 page allocator
+完整 GUI
+窗口系统
+网络协议栈
+驱动模型
+动态 ELF 加载
+权限弹窗
+完整身份系统
+```
+
+当前重点是：
+
+```text
+每一层先可观察
+每一层先可诊断
+每一层先可阻断
+每一层先可修复
+再逐步变成真实功能
 ```
 
 ---
@@ -1730,40 +2043,87 @@ v0.0.9-task-switch-prototype
 v0.1.0-syscall-user-prototype
 v0.1.1-core-hardening-prototype
 v0.1.2-syscall-interrupt-prototype
+v0.1.3-user-mode-preparation-prototype
+v0.1.4-ring3-entry-prototype
+v0.1.5-user-syscall-roundtrip-prototype
+v0.1.6-user-syscall-return-controlled-loop
+v0.1.7-capability-registry-prototype
 ```
 
 ---
 
 ## 下一阶段计划
 
-### dev-0.1.4 ring3 entry prototype
+### dev-0.1.8 intent capability check prototype
 
-- TSS metadata
-- kernel stack for privilege transition
-- GDT user segment verification
-- ring3 entry frame preparation
-- iret transition prototype
-- ring3 entry doctor
-
-### 后续方向
+目标：
 
 ```text
-dev-0.1.4 ring3 entry prototype
-dev-0.1.5 user syscall roundtrip prototype
-dev-0.1.6 basic process/task isolation prototype
-dev-0.1.7 framebuffer / graphics mode preparation
-dev-0.1.8 basic graphics output prototype
-dev-0.1.9 window/compositor metadata prototype
-dev-0.2.0 GUI shell prototype
+intent plan video
+不再只展示 required modules
+而是展示 required capabilities:
+
+gui.display
+net.http
+ai.assist
 ```
 
-长期方向：
+执行前检查：
 
-* 继续整理 core / platform 分层
-* 将 intent / module / scheduler / security 从硬件细节中逐步解耦
-* 将 screen_print / timer ticks 逐步替换为 platform 接口
-* 进入 framebuffer 图形模式
-* 实现第一版文本 / 图形系统面板
+```text
+capability exists
+provider module exists
+provider module loaded
+provider dependency ok
+```
+
+预期效果：
+
+```text
+intent run video
+先检查 capability
+capability 不 ready -> blocked
+capability ready -> continue
+```
+
+### 后续路线
+
+```text
+dev-0.1.8 intent capability check prototype
+dev-0.1.9 module provides capability / task context prototype
+dev-0.2.0 framebuffer / graphics preparation
+dev-0.2.1 basic graphics output
+dev-0.2.2 graphical shell prototype
+dev-0.2.3 intent panel / status panel prototype
+```
+
+---
+
+## 长期方向
+
+```text
+Intent-driven OS
+Capability-based runtime
+User-controlled system policy
+Self-diagnosing kernel
+Recoverable module ecosystem
+Graphical shell based on intent / capability / task state
+```
+
+最终目标不是复制传统桌面，而是让系统围绕：
+
+```text
+intent
+capability
+module
+task
+health
+doctor
+permission
+identity
+```
+
+形成自己的交互方式。
 
 ---
 
@@ -1771,5 +2131,3 @@ dev-0.2.0 GUI shell prototype
 
 当前为实验阶段，许可证暂未确定。
 
-```
-```
