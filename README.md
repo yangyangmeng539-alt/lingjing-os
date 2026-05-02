@@ -1,10 +1,7 @@
-
-````markdown
 # Lingjing OS
 
-```text
 Lingjing OS / 灵境 OS
-````
+
 
 Lingjing OS 是一个实验性裸机操作系统项目。
 

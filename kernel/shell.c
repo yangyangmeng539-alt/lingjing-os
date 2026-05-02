@@ -9,6 +9,10 @@
 #include "timer.h"
 #include "module.h"
 #include "capability.h"
+#include "framebuffer.h"
+#include "bootinfo.h"
+#include "graphics.h"
+#include "gshell.h"
 #include "intent.h"
 #include "version.h"
 #include "security.h"
@@ -305,6 +309,407 @@ static void shell_handle_capcheck(const char* cmd) {
     }
 
     capability_check(name);
+}
+
+static void shell_handle_bootinfo(const char* cmd) {
+    if (str_equal(cmd, "bootinfo")) {
+        bootinfo_status();
+        return;
+    }
+
+    if (str_equal(cmd, "bootinfo status")) {
+        bootinfo_status();
+        return;
+    }
+
+    if (str_equal(cmd, "bootinfo framebuffer")) {
+        bootinfo_framebuffer();
+        return;
+    }
+
+    if (str_equal(cmd, "bootinfo check")) {
+        bootinfo_check();
+        return;
+    }
+
+    if (str_equal(cmd, "bootinfo doctor")) {
+        bootinfo_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "bootinfo probe")) {
+        bootinfo_probe();
+        return;
+    }
+
+    platform_print("usage: bootinfo | bootinfo status | bootinfo framebuffer | bootinfo check | bootinfo doctor | bootinfo probe\n");
+}
+
+static void shell_handle_framebuffer(const char* cmd) {
+    if (str_equal(cmd, "framebuffer") || str_equal(cmd, "fb")) {
+        framebuffer_status();
+        return;
+    }
+
+    if (str_equal(cmd, "framebuffer status") || str_equal(cmd, "fb status")) {
+        framebuffer_status();
+        return;
+    }
+
+    if (str_equal(cmd, "framebuffer prepare") || str_equal(cmd, "fb prepare")) {
+        framebuffer_prepare();
+        return;
+    }
+
+    if (str_equal(cmd, "framebuffer check") || str_equal(cmd, "fb check")) {
+        framebuffer_check();
+        return;
+    }
+
+    if (str_equal(cmd, "framebuffer doctor") || str_equal(cmd, "fb doctor")) {
+        framebuffer_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "framebufferbreak") || str_equal(cmd, "fbbreak")) {
+        framebuffer_break();
+        return;
+    }
+
+    if (str_equal(cmd, "framebufferfix") || str_equal(cmd, "fbfix")) {
+        framebuffer_fix();
+        return;
+    }
+
+    platform_print("usage: framebuffer | framebuffer status | framebuffer prepare | framebuffer check | framebuffer doctor | framebufferbreak | framebufferfix\n");
+    platform_print("alias: fb | fb status | fb prepare | fb check | fb doctor | fbbreak | fbfix\n");
+}
+
+static unsigned int shell_parse_uint_local(const char* text) {
+    unsigned int value = 0;
+    int i = 0;
+
+    if (text[0] == '0' && (text[1] == 'x' || text[1] == 'X')) {
+        i = 2;
+
+        while (text[i] != '\0' && text[i] != ' ') {
+            char c = text[i];
+            unsigned int digit = 0;
+
+            if (c >= '0' && c <= '9') {
+                digit = (unsigned int)(c - '0');
+            } else if (c >= 'a' && c <= 'f') {
+                digit = (unsigned int)(c - 'a' + 10);
+            } else if (c >= 'A' && c <= 'F') {
+                digit = (unsigned int)(c - 'A' + 10);
+            } else {
+                break;
+            }
+
+            value = (value * 16) + digit;
+            i++;
+        }
+
+        return value;
+    }
+
+    while (text[i] != '\0' && text[i] != ' ') {
+        if (text[i] < '0' || text[i] > '9') {
+            break;
+        }
+
+        value = (value * 10) + (unsigned int)(text[i] - '0');
+        i++;
+    }
+
+    return value;
+}
+
+static const char* shell_skip_arg_local(const char* text) {
+    int i = 0;
+
+    while (text[i] != '\0' && text[i] != ' ') {
+        i++;
+    }
+
+    while (text[i] == ' ') {
+        i++;
+    }
+
+    return text + i;
+}
+
+static void shell_handle_graphics(const char* cmd) {
+    const char* args = 0;
+    unsigned int x = 0;
+    unsigned int y = 0;
+    unsigned int w = 0;
+    unsigned int h = 0;
+    unsigned int color = 0;
+
+    if (str_equal(cmd, "graphics") || str_equal(cmd, "gfx")) {
+        graphics_status();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics status") || str_equal(cmd, "gfx status")) {
+        graphics_status();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics check") || str_equal(cmd, "gfx check")) {
+        graphics_check();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics doctor") || str_equal(cmd, "gfx doctor")) {
+        graphics_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics backend") || str_equal(cmd, "gfx backend")) {
+        graphics_backend();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics backendcheck") || str_equal(cmd, "gfx backendcheck")) {
+        graphics_backend_check();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics backenddoctor") || str_equal(cmd, "gfx backenddoctor")) {
+        graphics_backend_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics realarm") || str_equal(cmd, "gfx realarm")) {
+        graphics_real_arm();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics realdisarm") || str_equal(cmd, "gfx realdisarm")) {
+        graphics_real_disarm();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics realgate") || str_equal(cmd, "gfx realgate")) {
+        graphics_real_gate();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics font") || str_equal(cmd, "gfx font")) {
+        graphics_font();
+        return;
+    }
+
+    if (str_starts_with(cmd, "graphics textmetrics ")) {
+        args = cmd + 21;
+        graphics_text_metrics(args);
+        return;
+    }
+
+    if (str_starts_with(cmd, "gfx textmetrics ")) {
+        args = cmd + 16;
+        graphics_text_metrics(args);
+        return;
+    }
+
+    if (str_equal(cmd, "graphics clear") || str_equal(cmd, "gfx clear")) {
+        graphics_clear();
+        return;
+    }
+
+    if (str_equal(cmd, "graphics panel") || str_equal(cmd, "gfx panel")) {
+        graphics_panel();
+        return;
+    }
+
+    if (str_equal(cmd, "graphicsbreak") || str_equal(cmd, "gfxbreak")) {
+        graphics_break();
+        return;
+    }
+
+    if (str_equal(cmd, "graphicsfix") || str_equal(cmd, "gfxfix")) {
+        graphics_fix();
+        return;
+    }
+
+    if (str_starts_with(cmd, "graphics pixel ")) {
+        args = cmd + 15;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        color = shell_parse_uint_local(args);
+
+        graphics_pixel(x, y, color);
+        return;
+    }
+
+    if (str_starts_with(cmd, "gfx pixel ")) {
+        args = cmd + 10;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        color = shell_parse_uint_local(args);
+
+        graphics_pixel(x, y, color);
+        return;
+    }
+
+    if (str_starts_with(cmd, "graphics rect ")) {
+        args = cmd + 14;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        w = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        h = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        color = shell_parse_uint_local(args);
+
+        graphics_rect(x, y, w, h, color);
+        return;
+    }
+
+    if (str_starts_with(cmd, "gfx rect ")) {
+        args = cmd + 9;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        w = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        h = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        color = shell_parse_uint_local(args);
+
+        graphics_rect(x, y, w, h, color);
+        return;
+    }
+
+    if (str_starts_with(cmd, "graphics text ")) {
+        args = cmd + 14;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        graphics_text(x, y, args);
+        return;
+    }
+
+    if (str_starts_with(cmd, "gfx text ")) {
+        args = cmd + 9;
+
+        x = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        y = shell_parse_uint_local(args);
+        args = shell_skip_arg_local(args);
+
+        graphics_text(x, y, args);
+        return;
+    }
+
+    platform_print("usage: graphics | graphics status | graphics check | graphics doctor | graphics backend | graphics backendcheck | graphics backenddoctor\n");
+    platform_print("usage: graphics realarm | graphics realdisarm | graphics realgate | graphics font | graphics textmetrics <text>\n");
+    platform_print("usage: graphics clear | graphics panel | graphics pixel <x> <y> <color> | graphics rect <x> <y> <w> <h> <color> | graphics text <x> <y> <text>\n");
+    platform_print("alias: gfx | gfx backend | gfx font | gfx textmetrics | gfx realarm | gfx realdisarm | gfx realgate | gfx pixel | gfx rect | gfx text | gfx clear | gfx panel | gfxbreak | gfxfix\n");
+}
+
+static void shell_handle_gshell(const char* cmd) {
+    if (str_equal(cmd, "gshell")) {
+        gshell_status();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell status")) {
+        gshell_status();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell check")) {
+        gshell_check();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell doctor")) {
+        gshell_doctor();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell panel")) {
+        gshell_panel();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell runtime")) {
+        gshell_runtime();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell intent")) {
+        gshell_intent();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell system")) {
+        gshell_system();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell dashboard")) {
+        gshell_dashboard();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell textpanel")) {
+        gshell_text_panel();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell textdash")) {
+        gshell_text_dashboard();
+        return;
+    }
+
+    if (str_equal(cmd, "gshell runtimecheck")) {
+        gshell_runtime_check();
+        return;
+    }
+
+    if (str_equal(cmd, "gshellbreak")) {
+        gshell_break();
+        return;
+    }
+
+    if (str_equal(cmd, "gshellfix")) {
+        gshell_fix();
+        return;
+    }
+
+    platform_print("usage: gshell | gshell status | gshell check | gshell doctor | gshell panel | gshell runtime | gshell intent | gshell system | gshell dashboard | gshell textpanel | gshell textdash | gshell runtimecheck | gshellbreak | gshellfix\n");
 }
 
 static void shell_handle_sysinfo(void) {
@@ -1627,7 +2032,7 @@ static void shell_handle_kzero(const char* cmd) {
 
 static void shell_handle_command(const char* cmd) {
     if (str_equal(cmd, "help")) {
-        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, ring3, ring3 check, ring3 doctor, ring3 tss, ring3 tsscheck, ring3 tssload, ring3 tssinstall, ring3 tssclear, ring3 stack, ring3 frame, ring3 gdt, ring3 gdtcheck, ring3 gdtprepare, ring3 gdtinstall, ring3 gdtclear, ring3 page, ring3 pagecheck, ring3 pageprepare, ring3 pageclear, ring3 hw, ring3 hwcheck, ring3 hwinstall, ring3 hwclear, ring3 syscall, ring3 syscallcheck, ring3 syscallprepare, ring3 syscallclear, ring3 syscalldryrun, ring3 syscallstub, ring3 syscallstubcheck, ring3 syscallstubprepare, ring3 syscallstubclear, ring3 syscallstubselect, ring3 syscallstubunselect, ring3 syscallarm, ring3 syscalldisarm, ring3 syscallexec, ring3 syscallreal, ring3 syscallrealarm, ring3 syscallrealdisarm, ring3 syscallgate, ring3 syscallgateinstall, ring3 syscallgateclear, ring3 syscallresult, ring3 stub, ring3 stubcheck, ring3 guard, ring3 enter, ring3 dryrun, ring3 realenter, ring3 arm, ring3 disarm, ring3 enableswitch, ring3 disableswitch, ring3break, ring3fix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield,capabilities, capinfo, capcheck, capdoctor, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
+        platform_print("commands: help, clear, about, version, sysinfo, dashboard, dash, status, doctor, health, bootinfo, bootinfo framebuffer, bootinfo check, bootinfo doctor, bootinfo probe, framebuffer, fb, fb prepare, fb check, fb doctor, fbbreak, fbfix, graphics, gfx, gfx backend, gfx backendcheck, gfx backenddoctor, gfx realarm, gfx realdisarm, gfx realgate, gfx font, gfx textmetrics, gfx clear, gfx pixel, gfx rect, gfx text, gfx panel, gfxbreak, gfxfix, gshell, gshell panel, gshell runtime, gshell intent, gshell system, gshell dashboard, gshell textpanel, gshell textdash, gshell runtimecheck, gshellbreak, gshellfix, identity, platform, platformcheck, platformdeps, platformboot, platformsummary, platformcaps, platformbreak, platformfix, security, securitycheck, syscall, syscall table, syscall stats, syscall interrupt, syscall frame, syscall ret, syscall realargs, syscall real, syscall int, syscall call, syscallbreak, syscallfix, user, user programs, user entries, user segments, user stack, user stackcheck, user stackbreak, user stackfix, user frame, user framecheck, user framebreak, user framefix, user boundary, user boundarycheck, user boundarybreak, user boundaryfix, user prepare, user stats, userbreak, userfix, ring3, ring3 check, ring3 doctor, ring3 tss, ring3 tsscheck, ring3 tssload, ring3 tssinstall, ring3 tssclear, ring3 stack, ring3 frame, ring3 gdt, ring3 gdtcheck, ring3 gdtprepare, ring3 gdtinstall, ring3 gdtclear, ring3 page, ring3 pagecheck, ring3 pageprepare, ring3 pageclear, ring3 hw, ring3 hwcheck, ring3 hwinstall, ring3 hwclear, ring3 syscall, ring3 syscallcheck, ring3 syscallprepare, ring3 syscallclear, ring3 syscalldryrun, ring3 syscallstub, ring3 syscallstubcheck, ring3 syscallstubprepare, ring3 syscallstubclear, ring3 syscallstubselect, ring3 syscallstubunselect, ring3 syscallarm, ring3 syscalldisarm, ring3 syscallexec, ring3 syscallreal, ring3 syscallrealarm, ring3 syscallrealdisarm, ring3 syscallgate, ring3 syscallgateinstall, ring3 syscallgateclear, ring3 syscallresult, ring3 stub, ring3 stubcheck, ring3 guard, ring3 enter, ring3 dryrun, ring3 realenter, ring3 arm, ring3 disarm, ring3 enableswitch, ring3 disableswitch, ring3break, ring3fix, securitylog, securityclear, lang, tasks, taskinfo, taskstate, taskcreate, taskkill, tasksleep, taskwake, taskprio, taskexit, taskbreak, taskfix, taskstats, taskcheck, taskdoctor, schedinfo, schedlog, schedclear, schedreset, schedvalidate, schedfix, taskswitch, taskswitchcheck, taskswitchdoctor, taskswitchbreak, taskswitchfix, runqueue, yield,capabilities, capinfo, capcheck, capdoctor, modules, moduleinfo, moduledeps, moduletree, modulecheck, modulebreak, modulefix, load, unload, intent, echo, mem, paging, paging map, paging flags, paging stats, paging enable, pagingbreak, pagingfix, uptime, sleep, reboot, halt, kmalloc, kcalloc, kfree, heapcheck, heapdoctor, heapstats, heapbreak, heapfix, peek, poke, hexdump, kzero\n");
     } else if (str_equal(cmd, "clear")) {
         platform_clear();
     } else if (str_equal(cmd, "about")) {
@@ -1768,6 +2173,90 @@ static void shell_handle_command(const char* cmd) {
         shell_handle_runqueue();
     } else if (str_equal(cmd, "yield")) {
         shell_handle_yield();
+    } else if (
+        str_equal(cmd, "bootinfo") ||
+        str_equal(cmd, "bootinfo status") ||
+        str_equal(cmd, "bootinfo framebuffer") ||
+        str_equal(cmd, "bootinfo check") ||
+        str_equal(cmd, "bootinfo doctor") ||
+        str_equal(cmd, "bootinfo probe")
+    ) {
+        shell_handle_bootinfo(cmd);
+    } else if (
+        str_equal(cmd, "framebuffer") ||
+        str_equal(cmd, "fb") ||
+        str_equal(cmd, "framebuffer status") ||
+        str_equal(cmd, "fb status") ||
+        str_equal(cmd, "framebuffer prepare") ||
+        str_equal(cmd, "fb prepare") ||
+        str_equal(cmd, "framebuffer check") ||
+        str_equal(cmd, "fb check") ||
+        str_equal(cmd, "framebuffer doctor") ||
+        str_equal(cmd, "fb doctor") ||
+        str_equal(cmd, "framebufferbreak") ||
+        str_equal(cmd, "fbbreak") ||
+        str_equal(cmd, "framebufferfix") ||
+        str_equal(cmd, "fbfix")
+    ) {
+        shell_handle_framebuffer(cmd);
+    } else if (
+        str_equal(cmd, "graphics") ||
+        str_equal(cmd, "gfx") ||
+        str_equal(cmd, "graphics status") ||
+        str_equal(cmd, "gfx status") ||
+        str_equal(cmd, "graphics check") ||
+        str_equal(cmd, "gfx check") ||
+        str_equal(cmd, "graphics doctor") ||
+        str_equal(cmd, "gfx doctor") ||
+        str_equal(cmd, "graphics backend") ||
+        str_equal(cmd, "gfx backend") ||
+        str_equal(cmd, "graphics backendcheck") ||
+        str_equal(cmd, "gfx backendcheck") ||
+        str_equal(cmd, "graphics backenddoctor") ||
+        str_equal(cmd, "gfx backenddoctor") ||
+        str_equal(cmd, "graphics realarm") ||
+        str_equal(cmd, "gfx realarm") ||
+        str_equal(cmd, "graphics realdisarm") ||
+        str_equal(cmd, "gfx realdisarm") ||
+        str_equal(cmd, "graphics realgate") ||
+        str_equal(cmd, "gfx realgate") ||
+        str_equal(cmd, "graphics font") ||
+        str_equal(cmd, "gfx font") ||
+        str_equal(cmd, "graphics clear") ||
+        str_equal(cmd, "gfx clear") ||
+        str_equal(cmd, "graphics panel") ||
+        str_equal(cmd, "gfx panel") ||
+        str_equal(cmd, "graphicsbreak") ||
+        str_equal(cmd, "gfxbreak") ||
+        str_equal(cmd, "graphicsfix") ||
+        str_equal(cmd, "gfxfix") ||
+        str_starts_with(cmd, "graphics textmetrics ") ||
+        str_starts_with(cmd, "gfx textmetrics ") ||
+        str_starts_with(cmd, "graphics pixel ") ||
+        str_starts_with(cmd, "gfx pixel ") ||
+        str_starts_with(cmd, "graphics rect ") ||
+        str_starts_with(cmd, "gfx rect ") ||
+        str_starts_with(cmd, "graphics text ") ||
+        str_starts_with(cmd, "gfx text ")
+    ) {
+        shell_handle_graphics(cmd);
+    } else if (
+        str_equal(cmd, "gshell") ||
+        str_equal(cmd, "gshell status") ||
+        str_equal(cmd, "gshell check") ||
+        str_equal(cmd, "gshell doctor") ||
+        str_equal(cmd, "gshell panel") ||
+        str_equal(cmd, "gshell runtime") ||
+        str_equal(cmd, "gshell intent") ||
+        str_equal(cmd, "gshell system") ||
+        str_equal(cmd, "gshell dashboard") ||
+        str_equal(cmd, "gshell textpanel") ||
+        str_equal(cmd, "gshell textdash") ||
+        str_equal(cmd, "gshell runtimecheck") ||
+        str_equal(cmd, "gshellbreak") ||
+        str_equal(cmd, "gshellfix")
+    ) {
+        shell_handle_gshell(cmd);
     } else if (str_equal(cmd, "capabilities")) {
         capability_list();
     } else if (str_starts_with(cmd, "capinfo ")) {

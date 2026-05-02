@@ -12,6 +12,8 @@ int module_has_broken_dependencies(void);
 void module_break_dependency(const char* name);
 void module_fix_dependency(const char* name);
 const char* module_get_depends(const char* name);
+const char* module_get_provides(const char* name);
+void module_provides(const char* name);
 int module_dependency_ok(const char* name);
 int module_exists(const char* name);
 int module_count_loaded(void);

@@ -24,6 +24,10 @@ OBJS = \
 	$(BUILD_DIR)/system.o \
 	$(BUILD_DIR)/module.o \
 	$(BUILD_DIR)/capability.o \
+	$(BUILD_DIR)/bootinfo.o \
+	$(BUILD_DIR)/framebuffer.o \
+	$(BUILD_DIR)/graphics.o \
+	$(BUILD_DIR)/gshell.o \
 	$(BUILD_DIR)/security.o \
 	$(BUILD_DIR)/syscall.o \
 	$(BUILD_DIR)/user.o \
@@ -83,6 +87,18 @@ $(BUILD_DIR)/module.o: kernel/module.c
 $(BUILD_DIR)/capability.o: kernel/capability.c
 	$(CC) $(CFLAGS) -c kernel/capability.c -o $(BUILD_DIR)/capability.o
 
+$(BUILD_DIR)/bootinfo.o: kernel/bootinfo.c
+	$(CC) $(CFLAGS) -c kernel/bootinfo.c -o $(BUILD_DIR)/bootinfo.o
+
+$(BUILD_DIR)/framebuffer.o: kernel/framebuffer.c
+	$(CC) $(CFLAGS) -c kernel/framebuffer.c -o $(BUILD_DIR)/framebuffer.o
+
+$(BUILD_DIR)/graphics.o: kernel/graphics.c
+	$(CC) $(CFLAGS) -c kernel/graphics.c -o $(BUILD_DIR)/graphics.o
+
+$(BUILD_DIR)/gshell.o: kernel/gshell.c
+	$(CC) $(CFLAGS) -c kernel/gshell.c -o $(BUILD_DIR)/gshell.o
+
 $(BUILD_DIR)/health.o: kernel/health.c
 	$(CC) $(CFLAGS) -c kernel/health.c -o $(BUILD_DIR)/health.o
 
@@ -123,8 +139,13 @@ $(BUILD_DIR)/lingjing.iso: $(BUILD_DIR)/kernel.bin
 	cp $(BUILD_DIR)/kernel.bin $(ISO_DIR)/boot/kernel.bin
 	grub-mkrescue -o $(BUILD_DIR)/lingjing.iso $(ISO_DIR)
 
-run: all
+run: run-gfx
+
+run-text: all
 	qemu-system-i386 -cdrom $(BUILD_DIR)/lingjing.iso -boot d -display curses
+
+run-gfx: all
+	qemu-system-i386 -cdrom $(BUILD_DIR)/lingjing.iso -boot d -vga std
 
 clean:
 	rm -f $(BUILD_DIR)/*.o

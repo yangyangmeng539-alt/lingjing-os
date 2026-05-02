@@ -46,6 +46,10 @@ void capability_init(void) {
     capability_initialized = 1;
 
     capability_register("gui.display", "gui", "display", "available");
+    capability_register("gui.framebuffer", "framebuffer", "display", "ready");
+    capability_register("gui.graphics", "graphics", "display", "ready");
+    capability_register("gui.shell", "gshell", "display", "ready");
+        capability_register("boot.multiboot", "bootinfo", "boot", "ready");
     capability_register("net.http", "net", "network", "available");
     capability_register("ai.assist", "ai", "intent", "available");
     capability_register("file.read", "fs", "file", "planned");

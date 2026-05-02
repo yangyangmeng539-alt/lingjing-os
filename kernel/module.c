@@ -158,6 +158,8 @@ void module_list(void) {
         platform_print(modules[i].name);
         platform_print("    ");
         platform_print(modules[i].status);
+        platform_print("    provides: ");
+        platform_print(module_get_provides(modules[i].name));
         platform_print("\n");
     }
 }
@@ -185,6 +187,10 @@ void module_info(const char* name) {
 
             platform_print("  depends:    ");
             platform_print(modules[i].depends);
+            platform_print("\n");
+
+            platform_print("  provides:   ");
+            platform_print(module_get_provides(modules[i].name));
             platform_print("\n");
 
             return;
@@ -324,11 +330,98 @@ const char* module_get_depends(const char* name) {
         return "core";
     }
 
+    if (str_equal_local(name, "fs")) {
+        return "paging";
+    }
+
     if (str_equal_local(name, "capability")) {
         return "core";
     }
 
+    if (str_equal_local(name, "bootinfo")) {
+        return "core";
+    }
+
+    if (str_equal_local(name, "framebuffer")) {
+        return "screen";
+    }
+
+    if (str_equal_local(name, "graphics")) {
+        return "framebuffer";
+    }
+
+    if (str_equal_local(name, "gshell")) {
+        return "graphics";
+    }
+
     return "unknown";
+}
+
+const char* module_get_provides(const char* name) {
+    if (str_equal_local(name, "gui")) {
+        return "gui.display";
+    }
+
+    if (str_equal_local(name, "net")) {
+        return "net.http";
+    }
+
+    if (str_equal_local(name, "ai")) {
+        return "ai.assist";
+    }
+
+    if (str_equal_local(name, "fs")) {
+        return "file.read";
+    }
+
+    if (str_equal_local(name, "health")) {
+        return "sys.health";
+    }
+
+    if (str_equal_local(name, "syscall")) {
+        return "sys.syscall";
+    }
+
+    if (str_equal_local(name, "ring3")) {
+        return "user.ring3";
+    }
+
+    if (str_equal_local(name, "capability")) {
+        return "capability.registry";
+    }
+
+    if (str_equal_local(name, "bootinfo")) {
+        return "boot.multiboot";
+    }
+
+    if (str_equal_local(name, "framebuffer")) {
+        return "gui.framebuffer";
+    }
+
+    if (str_equal_local(name, "graphics")) {
+        return "gui.graphics";
+    }
+
+    if (str_equal_local(name, "gshell")) {
+        return "gui.shell";
+    }
+
+    return "none";
+}
+
+void module_provides(const char* name) {
+    platform_print("Module provides:\n");
+
+    platform_print("  module:   ");
+    platform_print(name);
+    platform_print("\n");
+
+    platform_print("  provides: ");
+    platform_print(module_get_provides(name));
+    platform_print("\n");
+
+    platform_print("  loaded:   ");
+    platform_print(module_exists(name) ? "yes\n" : "no\n");
 }
 
 int module_dependency_ok(const char* name) {
@@ -368,6 +461,8 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "none";
             } else if (str_equal_local(name, "screen")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "bootinfo")) {
+                modules[i].depends = "core";
             } else if (str_equal_local(name, "gdt")) {
                 modules[i].depends = "core";
             } else if (str_equal_local(name, "idt")) {
@@ -400,6 +495,12 @@ void module_fix_dependency(const char* name) {
                 modules[i].depends = "memory";
             } else if (str_equal_local(name, "capability")) {
                 modules[i].depends = "core";
+            } else if (str_equal_local(name, "framebuffer")) {
+                modules[i].depends = "screen";
+            } else if (str_equal_local(name, "graphics")) {
+                modules[i].depends = "framebuffer";
+            } else if (str_equal_local(name, "gshell")) {
+                modules[i].depends = "graphics";
             } else if (str_equal_local(name, "shell")) {
                 modules[i].depends = "keyboard";
             } else if (str_equal_local(name, "gui")) {

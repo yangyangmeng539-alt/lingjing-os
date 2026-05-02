@@ -9,6 +9,10 @@
 #include "timer.h"
 #include "module.h"
 #include "capability.h"
+#include "bootinfo.h"
+#include "framebuffer.h"
+#include "graphics.h"
+#include "gshell.h"
 #include "scheduler.h"
 #include "security.h"
 #include "syscall.h"
@@ -19,7 +23,8 @@
 #include "health.h"
 #include "identity.h"
 
-
+extern unsigned int boot_multiboot_magic;
+extern unsigned int boot_multiboot_info_addr;
 
 unsigned int kernel_stack_marker = 0;
 
@@ -31,9 +36,13 @@ void kernel_main(void) {
 
     platform_print("Lingjing OS booted.\n");
 
+    bootinfo_init(boot_multiboot_magic, boot_multiboot_info_addr);
+
     module_init();
     module_register("core", "loaded", "kernel", "system", "none");
     module_register("screen", "loaded", "driver", "display", "core");
+    module_register("bootinfo", "loaded", "kernel", "boot", "core");
+    platform_print("Bootinfo initialized.\n");
 
     gdt_init();
     module_register("gdt", "loaded", "arch", "system", "core");
@@ -74,6 +83,18 @@ void kernel_main(void) {
     capability_init();
     module_register("capability", "loaded", "kernel", "capability", "core");
     platform_print("Capability registry initialized.\n");
+
+    framebuffer_init();
+    module_register("framebuffer", "loaded", "kernel", "display", "screen");
+    platform_print("Framebuffer metadata initialized.\n");
+
+    graphics_init();
+    module_register("graphics", "loaded", "kernel", "display", "framebuffer");
+    platform_print("Graphics metadata initialized.\n");
+
+    gshell_init();
+    module_register("gshell", "loaded", "kernel", "display", "graphics");
+    platform_print("Graphical shell metadata initialized.\n");
 
     platform_init();
     module_register("platform", "loaded", "kernel", "platform", "core");
