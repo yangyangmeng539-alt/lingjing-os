@@ -1,6 +1,7 @@
 #include "capability.h"
 #include "platform.h"
 #include "module.h"
+#include "security.h"
 
 #define MAX_CAPABILITIES 16
 
@@ -114,6 +115,10 @@ int capability_is_ready(const char* name) {
     }
 
     if (!module_dependency_ok(provider)) {
+        return 0;
+    }
+
+    if (!security_check_capability(name, capability_get_permission(name))) {
         return 0;
     }
 
