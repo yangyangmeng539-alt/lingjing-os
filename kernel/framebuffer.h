@@ -5,8 +5,10 @@ void framebuffer_init(void);
 void framebuffer_status(void);
 void framebuffer_prepare(void);
 void framebuffer_prepare_from_bootinfo(void);
+void framebuffer_prepare_silent(void);
 void framebuffer_check(void);
 void framebuffer_doctor(void);
+void framebuffer_profile(void);
 void framebuffer_break(void);
 void framebuffer_fix(void);
 
@@ -19,6 +21,8 @@ unsigned int framebuffer_get_bpp(void);
 unsigned int framebuffer_get_pitch(void);
 unsigned int framebuffer_get_address(void);
 unsigned int framebuffer_get_type(void);
+
+const char* framebuffer_get_profile(void);
 
 
 #endif

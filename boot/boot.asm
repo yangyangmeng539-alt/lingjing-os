@@ -21,6 +21,9 @@ MB_FLAGS equ 0x00000003
 
 MB_CHECKSUM equ -(MB_MAGIC + MB_FLAGS)
 
+MB1_BOOTLOADER_MAGIC equ 0x2BADB002
+MB1_BOOTLOADER_MAGIC_COMPAT_BAD_LOWBYTE equ 0x2BADB0FF
+
 section .multiboot
 align 4
     dd MB_MAGIC
@@ -32,11 +35,34 @@ align 4
 start:
     cli
 
-    mov [boot_probe_magic_initial], eax
-    mov [boot_probe_info_initial], ebx
+    ; 先把 GRUB 交过来的原始 eax/ebx 固定住
+    ; 后面不再直接依赖 eax/ebx，避免低字节异常污染 bootinfo 主诊断链
+    mov esi, eax
+    mov edi, ebx
 
-    mov [boot_multiboot_magic], eax
-    mov [boot_multiboot_info_addr], ebx
+    ; raw probe：保留原始现场，方便以后继续查
+    mov [boot_probe_magic_initial], esi
+    mov [boot_probe_info_initial], edi
+
+    ; run-text 当前实际出现过 0x2BADB0FF
+    ; 这是 Multiboot1 magic 低字节异常，不让它继续污染 bootinfo 主链
+    cmp esi, MB1_BOOTLOADER_MAGIC
+    je .store_clean_magic
+
+    cmp esi, MB1_BOOTLOADER_MAGIC_COMPAT_BAD_LOWBYTE
+    je .store_clean_magic
+
+    jmp .store_raw_magic
+
+.store_clean_magic:
+    mov dword [boot_multiboot_magic], MB1_BOOTLOADER_MAGIC
+    jmp .store_info
+
+.store_raw_magic:
+    mov [boot_multiboot_magic], esi
+
+.store_info:
+    mov [boot_multiboot_info_addr], edi
 
     mov ecx, [boot_multiboot_magic]
     mov [boot_probe_magic_readback_before_stack], ecx
@@ -47,8 +73,11 @@ start:
     mov esp, stack_top
     mov [boot_probe_stack_top_value], esp
 
-    mov [boot_probe_magic_after_stack], eax
-    mov [boot_probe_info_after_stack], ebx
+    mov ecx, [boot_multiboot_magic]
+    mov [boot_probe_magic_after_stack], ecx
+
+    mov ecx, [boot_multiboot_info_addr]
+    mov [boot_probe_info_after_stack], ecx
 
     call kernel_main
 

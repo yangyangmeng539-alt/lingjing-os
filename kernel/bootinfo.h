@@ -4,6 +4,7 @@
 void bootinfo_init(unsigned int magic, unsigned int info_addr);
 void bootinfo_status(void);
 void bootinfo_framebuffer(void);
+void bootinfo_raw(void);
 void bootinfo_check(void);
 void bootinfo_doctor(void);
 void bootinfo_probe(void);

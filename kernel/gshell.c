@@ -335,17 +335,678 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_INPUTDEMO   261
 #define GSHELL_CMD_INPUTCHECK  262
 #define GSHELL_CMD_INPUTRESET  263
+#define GSHELL_CMD_CURSORSTATUS 264
+#define GSHELL_CMD_POINTERSTATUS 265
+#define GSHELL_CMD_CURSORCENTER 266
+#define GSHELL_CMD_CURSORMOVE  267
+#define GSHELL_CMD_LEFTCLICK   268
+#define GSHELL_CMD_RIGHTCLICK  269
+#define GSHELL_CMD_WHEELSTEP   270
+#define GSHELL_CMD_CURSORRESET 271
+#define GSHELL_CMD_HITSTATUS   272
+#define GSHELL_CMD_PANELHIT    273
+#define GSHELL_CMD_COMMANDHIT  274
+#define GSHELL_CMD_CLICKCMD    275
+#define GSHELL_CMD_RIGHTMENU   276
+#define GSHELL_CMD_WHEELPICK   277
+#define GSHELL_CMD_HITCHECK    278
+#define GSHELL_CMD_HITRESET    279
+#define GSHELL_CMD_BUTTONSTATUS 280
+#define GSHELL_CMD_BUTTONHOVER 281
+#define GSHELL_CMD_BUTTONPRESS 282
+#define GSHELL_CMD_BUTTONFOCUS 283
+#define GSHELL_CMD_BUTTONACTIVE 284
+#define GSHELL_CMD_BUTTONCHECK 285
+#define GSHELL_CMD_BUTTONRESET 286
+#define GSHELL_CMD_WINDOWSTATUS 287
+#define GSHELL_CMD_WINDOWCREATE 288
+#define GSHELL_CMD_WINDOWFOCUS 289
+#define GSHELL_CMD_WINDOWMOVE  290
+#define GSHELL_CMD_WINDOWMIN   291
+#define GSHELL_CMD_WINDOWCLOSE 292
+#define GSHELL_CMD_WINDOWCHECK 293
+#define GSHELL_CMD_WINDOWRESET 294
+#define GSHELL_CMD_DESKTOPSTATUS 295
+#define GSHELL_CMD_WORKSPACE   296
+#define GSHELL_CMD_ICONSTATUS  297
+#define GSHELL_CMD_ICONSELECT  298
+#define GSHELL_CMD_DOCKSTATUS  299
+#define GSHELL_CMD_DESKTOPCHECK 300
+#define GSHELL_CMD_DESKTOPRESET 301
+#define GSHELL_CMD_INTERACTIONFINAL 302
+#define GSHELL_CMD_INPUTSUMMARY 303
+#define GSHELL_CMD_POINTERSUMMARY 304
+#define GSHELL_CMD_HITSUMMARY  305
+#define GSHELL_CMD_BUTTONSUMMARY 306
+#define GSHELL_CMD_WINDOWSUMMARY 307
+#define GSHELL_CMD_DESKTOPSUMMARY 308
+#define GSHELL_CMD_NEXTPHASE   309
+#define GSHELL_CMD_SHELLSTATUS 310
+#define GSHELL_CMD_SHELLPANEL  311
+#define GSHELL_CMD_TASKBAR     312
+#define GSHELL_CMD_LAUNCHER    313
+#define GSHELL_CMD_SHELLOPENAPP 314
+#define GSHELL_CMD_SHELLCHECK  315
+#define GSHELL_CMD_SHELLRESET  316
+#define GSHELL_CMD_LAUNCHERSTATUS 317
+#define GSHELL_CMD_LAUNCHERGRID 318
+#define GSHELL_CMD_APPSELECT   319
+#define GSHELL_CMD_APPPIN      320
+#define GSHELL_CMD_LAUNCHEROPEN 321
+#define GSHELL_CMD_LAUNCHERCHECK 322
+#define GSHELL_CMD_LAUNCHERRESET 323
+#define GSHELL_CMD_TASKBARSTATUS 324
+#define GSHELL_CMD_TASKITEM    325
+#define GSHELL_CMD_TASKFOCUS   326
+#define GSHELL_CMD_TASKSWITCH  327
+#define GSHELL_CMD_TASKMIN     328
+#define GSHELL_CMD_TASKRESTORE 329
+#define GSHELL_CMD_TASKCHECK   330
+#define GSHELL_CMD_TASKRESET   331
+#define GSHELL_CMD_LAYOUTSTATUS 332
+#define GSHELL_CMD_LAYOUTGRID  333
+#define GSHELL_CMD_WINDOWSNAP  334
+#define GSHELL_CMD_WINDOWMAX   335
+#define GSHELL_CMD_ZORDER      336
+#define GSHELL_CMD_WINLAYOUTCHECK 337
+#define GSHELL_CMD_LAYOUTRESET 338
+#define GSHELL_CMD_DESKTOPSHELL 339
+#define GSHELL_CMD_SHELLHOME  340
+#define GSHELL_CMD_SHELLAPPS  341
+#define GSHELL_CMD_SHELLWINDOWS 342
+#define GSHELL_CMD_SHELLLAYOUT 343
+#define GSHELL_CMD_SHELLDOCK  344
+#define GSHELL_CMD_SHELLFLOW  345
+#define GSHELL_CMD_SHELLHOMECHECK 346
+#define GSHELL_CMD_SHELLHOMERESET 347
+#define GSHELL_CMD_SHELLFINAL 348
+#define GSHELL_CMD_SHELLHEALTH 349
+#define GSHELL_CMD_SHELLSUMMARY 350
+#define GSHELL_CMD_LAUNCHERSUM 351
+#define GSHELL_CMD_TASKBARSUM  352
+#define GSHELL_CMD_LAYOUTSUMB  353
+#define GSHELL_CMD_HOMESUMMARY 354
+#define GSHELL_CMD_SHELLNEXT   355
+#define GSHELL_CMD_APPSHELLSTATUS 356
+#define GSHELL_CMD_APPCATALOG  357
+#define GSHELL_CMD_APPCARD     358
+#define GSHELL_CMD_APPDETAILS  359
+#define GSHELL_CMD_APPSHELLLAUNCH 360
+#define GSHELL_CMD_APPSHELLCHECK 361
+#define GSHELL_CMD_APPSHELLRESET 362
+#define GSHELL_CMD_CATALOGSTATUS 363
+#define GSHELL_CMD_CATALOGLIST 364
+#define GSHELL_CMD_CATALOGSEARCH 365
+#define GSHELL_CMD_CATALOGPIN 366
+#define GSHELL_CMD_CATALOGENABLE 367
+#define GSHELL_CMD_CATALOGDISABLE 368
+#define GSHELL_CMD_CATALOGCHECK 369
+#define GSHELL_CMD_CATALOGRESET 370
+#define GSHELL_CMD_DETAILSTATUS 371
+#define GSHELL_CMD_DETAILOPEN  372
+#define GSHELL_CMD_DETAILMANIFEST 373
+#define GSHELL_CMD_DETAILCAPS  374
+#define GSHELL_CMD_DETAILPERMS 375
+#define GSHELL_CMD_DETAILLAUNCH 376
+#define GSHELL_CMD_DETAILCHECK 377
+#define GSHELL_CMD_DETAILRESET 378
+#define GSHELL_CMD_ACTIONSTATUS 379
+#define GSHELL_CMD_ACTIONPREPARE 380
+#define GSHELL_CMD_ACTIONALLOW 381
+#define GSHELL_CMD_ACTIONOPEN  382
+#define GSHELL_CMD_ACTIONRUN   383
+#define GSHELL_CMD_ACTIONSTOP  384
+#define GSHELL_CMD_ACTIONCHECK 385
+#define GSHELL_CMD_ACTIONRESET 386
+#define GSHELL_CMD_APPMGMTSTATUS 387
+#define GSHELL_CMD_APPINVENTORY 388
+#define GSHELL_CMD_APPSCAN    389
+#define GSHELL_CMD_APPREGISTER 390
+#define GSHELL_CMD_APPUNREGISTER 391
+#define GSHELL_CMD_APPENABLE  392
+#define GSHELL_CMD_APPDISABLE 393
+#define GSHELL_CMD_APPTRUST   394
+#define GSHELL_CMD_APPUNTRUST 395
+#define GSHELL_CMD_APPFAVORITE 396
+#define GSHELL_CMD_APPUNFAVORITE 397
+#define GSHELL_CMD_APPUPDATECHECK 398
+#define GSHELL_CMD_APPUPDATEMARK 399
+#define GSHELL_CMD_APPROLLBACK 400
+#define GSHELL_CMD_APPREPAIR  401
+#define GSHELL_CMD_APPCLEARCACHE 402
+#define GSHELL_CMD_APPSTATS   403
+#define GSHELL_CMD_APPHEALTH  404
+#define GSHELL_CMD_APPMGMTCHECK 405
+#define GSHELL_CMD_APPMGMTRESET 406
+#define GSHELL_CMD_APPFINAL   407
+#define GSHELL_CMD_APPHEALTHSUM 408
+#define GSHELL_CMD_APPSHELLSUM 409
+#define GSHELL_CMD_CATALOGSUM 410
+#define GSHELL_CMD_DETAILSUM  411
+#define GSHELL_CMD_ACTIONSUM  412
+#define GSHELL_CMD_MGMTSUM    413
+#define GSHELL_CMD_APPREADINESS 414
+#define GSHELL_CMD_APPFLOWFULL 415
+#define GSHELL_CMD_APPDEMOALL 416
+#define GSHELL_CMD_APPSECURITYSUM 417
+#define GSHELL_CMD_APPPERMISSIONSUM 418
+#define GSHELL_CMD_APPRUNTIMESUM 419
+#define GSHELL_CMD_APPWINDOWSUM 420
+#define GSHELL_CMD_APPLAUNCHSUM 421
+#define GSHELL_CMD_APPSTATESUM 422
+#define GSHELL_CMD_APPFINALCHECK 423
+#define GSHELL_CMD_APPFINALRESET 424
+#define GSHELL_CMD_APPNEXT    425
+#define GSHELL_CMD_APPROADMAP 426
+#define GSHELL_CMD_VISUALSTATUS 427
+#define GSHELL_CMD_VISUALBOOT 428
+#define GSHELL_CMD_VISUALDESKTOP 429
+#define GSHELL_CMD_VISUALPANEL 430
+#define GSHELL_CMD_VISUALCARDS 431
+#define GSHELL_CMD_VISUALWINDOW 432
+#define GSHELL_CMD_VISUALLAUNCHER 433
+#define GSHELL_CMD_VISUALTASKBAR 434
+#define GSHELL_CMD_VISUALDOCK 435
+#define GSHELL_CMD_VISUALFOCUS 436
+#define GSHELL_CMD_VISUALGRID 437
+#define GSHELL_CMD_VISUALTHEME 438
+#define GSHELL_CMD_VISUALGLOW 439
+#define GSHELL_CMD_VISUALBORDER 440
+#define GSHELL_CMD_VISUALMETRICS 441
+#define GSHELL_CMD_VISUALDEMO 442
+#define GSHELL_CMD_VISUALFLOW 443
+#define GSHELL_CMD_VISUALCHECK 444
+#define GSHELL_CMD_VISUALRESET 445
+#define GSHELL_CMD_VISUALNEXT 446
+#define GSHELL_CMD_CARDSTATUS 447
+#define GSHELL_CMD_CARDGRID   448
+#define GSHELL_CMD_CARDSELECT 449
+#define GSHELL_CMD_CARDOPEN   450
+#define GSHELL_CMD_CARDEXPAND 451
+#define GSHELL_CMD_CARDPIN    452
+#define GSHELL_CMD_CARDBADGE  453
+#define GSHELL_CMD_CARDPREVIEW 454
+#define GSHELL_CMD_WINDOWVISUAL 455
+#define GSHELL_CMD_WINDOWTITLE 456
+#define GSHELL_CMD_WINDOWBODY 457
+#define GSHELL_CMD_WINDOWSHADOW 458
+#define GSHELL_CMD_WINDOWACTIVE 459
+#define GSHELL_CMD_WINDOWPREVIEW 460
+#define GSHELL_CMD_VISUALCOMPOSE 461
+#define GSHELL_CMD_VISUALSYNC 462
+#define GSHELL_CMD_CARDFLOW   463
+#define GSHELL_CMD_CARDCHECK  464
+#define GSHELL_CMD_CARDRESET  465
+#define GSHELL_CMD_CARDNEXT   466
+#define GSHELL_CMD_UIMOCKSTATUS 467
+#define GSHELL_CMD_UIMOCKDESKTOP 468
+#define GSHELL_CMD_UIMOCKGRID 469
+#define GSHELL_CMD_UIMOCKCARD1 470
+#define GSHELL_CMD_UIMOCKCARD2 471
+#define GSHELL_CMD_UIMOCKCARD3 472
+#define GSHELL_CMD_UIMOCKWINDOW 473
+#define GSHELL_CMD_UIMOCKTITLE 474
+#define GSHELL_CMD_UIMOCKBODY 475
+#define GSHELL_CMD_UIMOCKTASKBAR 476
+#define GSHELL_CMD_UIMOCKDOCK 477
+#define GSHELL_CMD_UIMOCKFOCUS 478
+#define GSHELL_CMD_UIMOCKSELECT 479
+#define GSHELL_CMD_UIMOCKOPEN 480
+#define GSHELL_CMD_UIMOCKLAYOUT 481
+#define GSHELL_CMD_UIMOCKMETRICS 482
+#define GSHELL_CMD_UIMOCKDEMO 483
+#define GSHELL_CMD_UIMOCKCHECK 484
+#define GSHELL_CMD_UIMOCKRESET 485
+#define GSHELL_CMD_UIMOCKNEXT 486
+#define GSHELL_CMD_LAUNCHMOCKSTATUS 487
+#define GSHELL_CMD_LAUNCHMOCKPANEL 488
+#define GSHELL_CMD_LAUNCHMOCKSEARCH 489
+#define GSHELL_CMD_LAUNCHMOCKAPPS 490
+#define GSHELL_CMD_LAUNCHMOCKRECENT 491
+#define GSHELL_CMD_LAUNCHMOCKPIN 492
+#define GSHELL_CMD_LAUNCHMOCKRUN 493
+#define GSHELL_CMD_TASKMOCKSTATUS 494
+#define GSHELL_CMD_TASKMOCKSTART 495
+#define GSHELL_CMD_TASKMOCKAPP 496
+#define GSHELL_CMD_TASKMOCKACTIVE 497
+#define GSHELL_CMD_TASKMOCKTRAY 498
+#define GSHELL_CMD_TASKMOCKCLOCK 499
+#define GSHELL_CMD_TASKMOCKNET 500
+#define GSHELL_CMD_TASKMOCKSTATE 501
+#define GSHELL_CMD_MOCKCOMPOSE 502
+#define GSHELL_CMD_MOCKDEMO 503
+#define GSHELL_CMD_MOCKCHECK 504
+#define GSHELL_CMD_MOCKRESET 505
+#define GSHELL_CMD_MOCKNEXT 506
+#define GSHELL_CMD_POLISHSTATUS 507
+#define GSHELL_CMD_POLISHBASE 508
+#define GSHELL_CMD_POLISHGLASS 509
+#define GSHELL_CMD_POLISHTITLE 510
+#define GSHELL_CMD_POLISHCARDS 511
+#define GSHELL_CMD_POLISHWINDOW 512
+#define GSHELL_CMD_POLISHTASKBAR 513
+#define GSHELL_CMD_POLISHTRAY 514
+#define GSHELL_CMD_POLISHBADGE 515
+#define GSHELL_CMD_POLISHFOCUS 516
+#define GSHELL_CMD_POLISHSHADOW 517
+#define GSHELL_CMD_POLISHCOMPACT 518
+#define GSHELL_CMD_POLISHALIGN 519
+#define GSHELL_CMD_POLISHMETRICS 520
+#define GSHELL_CMD_POLISHSAFE 521
+#define GSHELL_CMD_POLISHDEMO 522
+#define GSHELL_CMD_POLISHFLOW 523
+#define GSHELL_CMD_POLISHCHECK 524
+#define GSHELL_CMD_POLISHRESET 525
+#define GSHELL_CMD_POLISHNEXT 526
+#define GSHELL_CMD_SCENESTATUS 527
+#define GSHELL_CMD_SCENEBOOT 528
+#define GSHELL_CMD_SCENEBACKGROUND 529
+#define GSHELL_CMD_SCENETOPBAR 530
+#define GSHELL_CMD_SCENELAUNCHER 531
+#define GSHELL_CMD_SCENECARDS 532
+#define GSHELL_CMD_SCENEWINDOW 533
+#define GSHELL_CMD_SCENETASKBAR 534
+#define GSHELL_CMD_SCENEDOCK 535
+#define GSHELL_CMD_SCENETRAY 536
+#define GSHELL_CMD_SCENEBADGE 537
+#define GSHELL_CMD_SCENEFOCUS 538
+#define GSHELL_CMD_SCENEWIDGETS 539
+#define GSHELL_CMD_SCENEACTIVE 540
+#define GSHELL_CMD_SCENEMETRICS 541
+#define GSHELL_CMD_SCENEDEMO 542
+#define GSHELL_CMD_SCENEFLOW 543
+#define GSHELL_CMD_SCENECHECK 544
+#define GSHELL_CMD_SCENERESET 545
+#define GSHELL_CMD_SCENENEXT 546
+#define GSHELL_CMD_VISUALFINAL 547
+#define GSHELL_CMD_VISUALHEALTHSUM 548
+#define GSHELL_CMD_VISUALSCENESUM 549
+#define GSHELL_CMD_VISUALMOCKSUM 550
+#define GSHELL_CMD_VISUALCARDSUM 551
+#define GSHELL_CMD_VISUALLAUNCHSUM 552
+#define GSHELL_CMD_VISUALPOLISHSUM 553
+#define GSHELL_CMD_VISUALREADINESS 554
+#define GSHELL_CMD_VISUALDEMOALL 555
+#define GSHELL_CMD_VISUALREGRESSION 556
+#define GSHELL_CMD_VISUALBOUNDS 557
+#define GSHELL_CMD_VISUALDENSITY 558
+#define GSHELL_CMD_VISUALDEFAULT 559
+#define GSHELL_CMD_VISUALHANDOFF 560
+#define GSHELL_CMD_VISUALNEXTPHASE 561
+#define GSHELL_CMD_VISUALFINALCHECK 562
+#define GSHELL_CMD_VISUALFINALRESET 563
+#define GSHELL_CMD_VISUALROADMAP 564
+#define GSHELL_CMD_VISUALINPUTNEXT 565
+#define GSHELL_CMD_VISUALCLOSEOUT 566
+#define GSHELL_CMD_INTERACTSTATUS 567
+#define GSHELL_CMD_POINTERMOCK 568
+#define GSHELL_CMD_POINTERMOVE 569
+#define GSHELL_CMD_POINTERHOVER 570
+#define GSHELL_CMD_POINTERCLICK 571
+#define GSHELL_CMD_FOCUSMOCK 572
+#define GSHELL_CMD_FOCUSNEXT 573
+#define GSHELL_CMD_FOCUSCARD 574
+#define GSHELL_CMD_FOCUSWINDOW 575
+#define GSHELL_CMD_FOCUSTASKBAR 576
+#define GSHELL_CMD_SELECTMOCK 577
+#define GSHELL_CMD_OPENMOCK 578
+#define GSHELL_CMD_CLOSEMOCK 579
+#define GSHELL_CMD_MENUMOCK 580
+#define GSHELL_CMD_SHORTCUTMOCK 581
+#define GSHELL_CMD_ROUTEMOCK 582
+#define GSHELL_CMD_INTERACTDEMO 583
+#define GSHELL_CMD_INTERACTCHECK 584
+#define GSHELL_CMD_INTERACTRESET 585
+#define GSHELL_CMD_INTERACTNEXT 586
+#define GSHELL_CMD_ROUTESTATUS 587
+#define GSHELL_CMD_HITDESKTOP 588
+#define GSHELL_CMD_HITCARD 589
+#define GSHELL_CMD_HITWINDOW 590
+#define GSHELL_CMD_HITTASKBAR 591
+#define GSHELL_CMD_HITLAUNCHER 592
+#define GSHELL_CMD_HOVERROUTE 593
+#define GSHELL_CMD_CLICKROUTE 594
+#define GSHELL_CMD_DOUBLECLICKROUTE 595
+#define GSHELL_CMD_RIGHTCLICKROUTE 596
+#define GSHELL_CMD_MENUROUTE 597
+#define GSHELL_CMD_OPENROUTE 598
+#define GSHELL_CMD_SELECTROUTE 599
+#define GSHELL_CMD_FOCUSROUTE 600
+#define GSHELL_CMD_DRAGROUTE 601
+#define GSHELL_CMD_DROPROUTE 602
+#define GSHELL_CMD_ROUTEDEMO 603
+#define GSHELL_CMD_ROUTECHECK 604
+#define GSHELL_CMD_ROUTERESET 605
+#define GSHELL_CMD_ROUTENEXT 606
 #define GSHELL_CMD_UNKNOWN     999
 
 static unsigned int gshell_input_layer_enabled = 1;
 static unsigned int gshell_mouse_layer_ready = 0;
 static unsigned int gshell_click_layer_ready = 0;
 static unsigned int gshell_focus_layer_ready = 1;
-static unsigned int gshell_input_events = 0;
+static unsigned int gshell_interaction_events = 0;
 static unsigned int gshell_focus_changes = 0;
 static const char* gshell_input_state = "keyboard";
 static const char* gshell_focus_target = "terminal";
 static const char* gshell_input_last = "none";
+
+static int gshell_cursor_x = 400;
+static int gshell_cursor_y = 300;
+static unsigned int gshell_cursor_visible = 1;
+static unsigned int gshell_cursor_moves = 0;
+static unsigned int gshell_cursor_clicks = 0;
+static unsigned int gshell_cursor_wheel = 0;
+static const char* gshell_cursor_state = "center";
+static const char* gshell_cursor_last = "none";
+
+static unsigned int gshell_hit_tests = 0;
+static unsigned int gshell_hit_clicks = 0;
+static unsigned int gshell_hit_commands = 0;
+static unsigned int gshell_hit_context = 0;
+static unsigned int gshell_hit_wheel = 0;
+static const char* gshell_hit_zone = "none";
+static const char* gshell_hit_target = "none";
+static const char* gshell_hit_action = "none";
+static const char* gshell_hit_last = "none";
+
+static unsigned int gshell_button_hovered = 0;
+static unsigned int gshell_button_pressed = 0;
+static unsigned int gshell_button_active = 0;
+static unsigned int gshell_button_focus = 0;
+static unsigned int gshell_button_events = 0;
+static unsigned int gshell_button_activations = 0;
+static const char* gshell_button_target = "none";
+static const char* gshell_button_state = "idle";
+static const char* gshell_button_last = "none";
+
+static unsigned int gshell_window_exists = 0;
+static unsigned int gshell_window_focused = 0;
+static unsigned int gshell_window_minimized = 0;
+static unsigned int gshell_window_moves = 0;
+static unsigned int gshell_window_events = 0;
+static unsigned int gshell_window_x = 120;
+static unsigned int gshell_window_y = 92;
+static const char* gshell_window_title = "none";
+static const char* gshell_window_state = "closed";
+static const char* gshell_window_last = "none";
+
+static unsigned int gshell_desktop_enabled = 1;
+static unsigned int gshell_workspace_ready = 0;
+static unsigned int gshell_icon_selected = 0;
+static unsigned int gshell_dock_ready = 0;
+static unsigned int gshell_desktop_events = 0;
+static unsigned int gshell_workspace_id = 0;
+static const char* gshell_desktop_state = "idle";
+static const char* gshell_desktop_focus = "terminal";
+static const char* gshell_desktop_last = "none";
+
+static unsigned int gshell_shell_enabled = 1;
+static unsigned int gshell_shell_panel_ready = 0;
+static unsigned int gshell_shell_taskbar_ready = 0;
+static unsigned int gshell_shell_launcher_ready = 0;
+static unsigned int gshell_shell_open_apps = 0;
+static unsigned int gshell_shell_events = 0;
+static const char* gshell_shell_state = "idle";
+static const char* gshell_shell_focus = "terminal";
+static const char* gshell_shell_last = "none";
+
+static unsigned int gshell_launcher_grid_ready = 0;
+static unsigned int gshell_launcher_app_selected = 0;
+static unsigned int gshell_launcher_app_pinned = 0;
+static unsigned int gshell_launcher_open_count = 0;
+static unsigned int gshell_launcher_events = 0;
+static const char* gshell_launcher_state = "idle";
+static const char* gshell_launcher_selected_app = "none";
+static const char* gshell_launcher_last = "none";
+
+static unsigned int gshell_taskbar_enabled = 1;
+static unsigned int gshell_taskbar_item_ready = 0;
+static unsigned int gshell_taskbar_focused = 0;
+static unsigned int gshell_taskbar_minimized = 0;
+static unsigned int gshell_taskbar_switches = 0;
+static unsigned int gshell_taskbar_events = 0;
+static const char* gshell_taskbar_state = "idle";
+static const char* gshell_taskbar_item = "none";
+static const char* gshell_taskbar_last = "none";
+
+static unsigned int gshell_layout_enabled = 1;
+static unsigned int gshell_layout_grid_ready = 0;
+static unsigned int gshell_layout_snapped = 0;
+static unsigned int gshell_layout_maximized = 0;
+static unsigned int gshell_layout_z_index = 0;
+static unsigned int gshell_layout_events = 0;
+static const char* gshell_layout_state = "idle";
+static const char* gshell_layout_mode = "free";
+static const char* gshell_layout_last = "none";
+
+static unsigned int gshell_home_ready = 0;
+static unsigned int gshell_home_apps_ready = 0;
+static unsigned int gshell_home_windows_ready = 0;
+static unsigned int gshell_home_layout_ready = 0;
+static unsigned int gshell_home_dock_ready = 0;
+static unsigned int gshell_home_events = 0;
+static const char* gshell_home_state = "idle";
+static const char* gshell_home_focus = "terminal";
+static const char* gshell_home_last = "none";
+
+static unsigned int gshell_app_shell_enabled = 1;
+static unsigned int gshell_app_catalog_ready = 0;
+static unsigned int gshell_app_card_ready = 0;
+static unsigned int gshell_app_details_ready = 0;
+static unsigned int gshell_app_shell_launch_ready = 0;
+static unsigned int gshell_app_shell_events = 0;
+static const char* gshell_app_shell_state = "idle";
+static const char* gshell_app_shell_selected = "none";
+static const char* gshell_app_shell_last = "none";
+
+static unsigned int gshell_catalog_ready = 0;
+static unsigned int gshell_catalog_items = 0;
+static unsigned int gshell_catalog_search_hits = 0;
+static unsigned int gshell_catalog_pinned = 0;
+static unsigned int gshell_catalog_enabled = 1;
+static unsigned int gshell_catalog_events = 0;
+static const char* gshell_catalog_state = "idle";
+static const char* gshell_catalog_selected = "none";
+static const char* gshell_catalog_last = "none";
+
+static unsigned int gshell_detail_ready = 0;
+static unsigned int gshell_detail_manifest_ready = 0;
+static unsigned int gshell_detail_caps_ready = 0;
+static unsigned int gshell_detail_perms_ready = 0;
+static unsigned int gshell_detail_launch_ready = 0;
+static unsigned int gshell_detail_events = 0;
+static const char* gshell_detail_state = "idle";
+static const char* gshell_detail_app = "none";
+static const char* gshell_detail_last = "none";
+
+static unsigned int gshell_action_prepared = 0;
+static unsigned int gshell_action_allowed = 0;
+static unsigned int gshell_action_opened = 0;
+static unsigned int gshell_action_running = 0;
+static unsigned int gshell_action_events = 0;
+static const char* gshell_action_state = "idle";
+static const char* gshell_action_app = "none";
+static const char* gshell_action_last = "none";
+
+static unsigned int gshell_app_mgmt_inventory_ready = 0;
+static unsigned int gshell_app_mgmt_scanned = 0;
+static unsigned int gshell_app_mgmt_registered = 0;
+static unsigned int gshell_app_mgmt_enabled = 1;
+static unsigned int gshell_app_mgmt_trusted = 0;
+static unsigned int gshell_app_mgmt_favorite = 0;
+static unsigned int gshell_app_mgmt_update_ready = 0;
+static unsigned int gshell_app_mgmt_rollback_ready = 0;
+static unsigned int gshell_app_mgmt_cache_cleared = 0;
+static unsigned int gshell_app_mgmt_healthy = 1;
+static unsigned int gshell_app_mgmt_events = 0;
+static const char* gshell_app_mgmt_state = "idle";
+static const char* gshell_app_mgmt_app = "none";
+static const char* gshell_app_mgmt_last = "none";
+
+static unsigned int gshell_app_final_ready = 0;
+static unsigned int gshell_app_final_flow_ready = 0;
+static unsigned int gshell_app_final_demo_ready = 0;
+static unsigned int gshell_app_final_events = 0;
+static const char* gshell_app_final_state = "idle";
+static const char* gshell_app_final_focus = "terminal";
+static const char* gshell_app_final_last = "none";
+
+static unsigned int gshell_visual_enabled = 1;
+static unsigned int gshell_visual_desktop_ready = 0;
+static unsigned int gshell_visual_panel_ready = 0;
+static unsigned int gshell_visual_cards_ready = 0;
+static unsigned int gshell_visual_window_ready = 0;
+static unsigned int gshell_visual_launcher_ready = 0;
+static unsigned int gshell_visual_taskbar_ready = 0;
+static unsigned int gshell_visual_dock_ready = 0;
+static unsigned int gshell_visual_grid_ready = 0;
+static unsigned int gshell_visual_theme_ready = 0;
+static unsigned int gshell_visual_glow_ready = 0;
+static unsigned int gshell_visual_border_ready = 0;
+static unsigned int gshell_visual_metrics = 0;
+static unsigned int gshell_visual_events = 0;
+static const char* gshell_visual_state = "idle";
+static const char* gshell_visual_focus = "terminal";
+static const char* gshell_visual_last = "none";
+
+static unsigned int gshell_card_grid_ready = 0;
+static unsigned int gshell_card_selected = 0;
+static unsigned int gshell_card_opened = 0;
+static unsigned int gshell_card_expanded = 0;
+static unsigned int gshell_card_pinned = 0;
+static unsigned int gshell_card_badge_ready = 0;
+static unsigned int gshell_card_preview_ready = 0;
+static unsigned int gshell_window_visual_ready = 0;
+static unsigned int gshell_window_title_ready = 0;
+static unsigned int gshell_window_body_ready = 0;
+static unsigned int gshell_window_shadow_ready = 0;
+static unsigned int gshell_window_active_ready = 0;
+static unsigned int gshell_window_preview_ready = 0;
+static unsigned int gshell_card_events = 0;
+static const char* gshell_card_state = "idle";
+static const char* gshell_card_app = "none";
+static const char* gshell_card_last = "none";
+
+static unsigned int gshell_ui_mock_desktop_ready = 0;
+static unsigned int gshell_ui_mock_grid_ready = 0;
+static unsigned int gshell_ui_mock_card1_ready = 0;
+static unsigned int gshell_ui_mock_card2_ready = 0;
+static unsigned int gshell_ui_mock_card3_ready = 0;
+static unsigned int gshell_ui_mock_window_ready = 0;
+static unsigned int gshell_ui_mock_title_ready = 0;
+static unsigned int gshell_ui_mock_body_ready = 0;
+static unsigned int gshell_ui_mock_taskbar_ready = 0;
+static unsigned int gshell_ui_mock_dock_ready = 0;
+static unsigned int gshell_ui_mock_focus_ready = 0;
+static unsigned int gshell_ui_mock_selected_card = 0;
+static unsigned int gshell_ui_mock_events = 0;
+static const char* gshell_ui_mock_state = "idle";
+static const char* gshell_ui_mock_focus = "terminal";
+static const char* gshell_ui_mock_last = "none";
+
+static unsigned int gshell_launch_mock_panel_ready = 0;
+static unsigned int gshell_launch_mock_search_ready = 0;
+static unsigned int gshell_launch_mock_apps_ready = 0;
+static unsigned int gshell_launch_mock_recent_ready = 0;
+static unsigned int gshell_launch_mock_pin_ready = 0;
+static unsigned int gshell_launch_mock_run_ready = 0;
+static unsigned int gshell_task_mock_start_ready = 0;
+static unsigned int gshell_task_mock_app_ready = 0;
+static unsigned int gshell_task_mock_active_ready = 0;
+static unsigned int gshell_task_mock_tray_ready = 0;
+static unsigned int gshell_task_mock_clock_ready = 0;
+static unsigned int gshell_task_mock_net_ready = 0;
+static unsigned int gshell_mock_events = 0;
+static const char* gshell_mock_state = "idle";
+static const char* gshell_mock_focus = "terminal";
+static const char* gshell_mock_last = "none";
+
+static unsigned int gshell_polish_base_ready = 0;
+static unsigned int gshell_polish_glass_ready = 0;
+static unsigned int gshell_polish_title_ready = 0;
+static unsigned int gshell_polish_cards_ready = 0;
+static unsigned int gshell_polish_window_ready = 0;
+static unsigned int gshell_polish_taskbar_ready = 0;
+static unsigned int gshell_polish_tray_ready = 0;
+static unsigned int gshell_polish_badge_ready = 0;
+static unsigned int gshell_polish_focus_ready = 0;
+static unsigned int gshell_polish_shadow_ready = 0;
+static unsigned int gshell_polish_compact_ready = 0;
+static unsigned int gshell_polish_align_ready = 0;
+static unsigned int gshell_polish_metrics_ready = 0;
+static unsigned int gshell_polish_safe_ready = 0;
+static unsigned int gshell_polish_events = 0;
+static const char* gshell_polish_state = "idle";
+static const char* gshell_polish_focus = "terminal";
+static const char* gshell_polish_last = "none";
+
+static unsigned int gshell_scene_background_ready = 1;
+static unsigned int gshell_scene_topbar_ready = 1;
+static unsigned int gshell_scene_launcher_ready = 1;
+static unsigned int gshell_scene_cards_ready = 1;
+static unsigned int gshell_scene_window_ready = 1;
+static unsigned int gshell_scene_taskbar_ready = 1;
+static unsigned int gshell_scene_dock_ready = 1;
+static unsigned int gshell_scene_tray_ready = 1;
+static unsigned int gshell_scene_badge_ready = 1;
+static unsigned int gshell_scene_focus_ready = 1;
+static unsigned int gshell_scene_widgets_ready = 1;
+static unsigned int gshell_scene_active_ready = 1;
+static unsigned int gshell_scene_metrics = 0;
+static unsigned int gshell_scene_events = 0;
+static const char* gshell_scene_state = "default";
+static const char* gshell_scene_focus = "desktop";
+static const char* gshell_scene_last = "boot-default";
+
+static unsigned int gshell_visual_final_ready = 0;
+static unsigned int gshell_visual_final_scene_ready = 0;
+static unsigned int gshell_visual_final_mock_ready = 0;
+static unsigned int gshell_visual_final_cards_ready = 0;
+static unsigned int gshell_visual_final_launcher_ready = 0;
+static unsigned int gshell_visual_final_polish_ready = 0;
+static unsigned int gshell_visual_final_bounds_ready = 0;
+static unsigned int gshell_visual_final_density_ready = 0;
+static unsigned int gshell_visual_final_default_ready = 1;
+static unsigned int gshell_visual_final_events = 0;
+static const char* gshell_visual_final_state = "idle";
+static const char* gshell_visual_final_focus = "desktop";
+static const char* gshell_visual_final_last = "none";
+
+static unsigned int gshell_interact_pointer_ready = 0;
+static unsigned int gshell_interact_pointer_x = 120;
+static unsigned int gshell_interact_pointer_y = 80;
+static unsigned int gshell_interact_hover_ready = 0;
+static unsigned int gshell_interact_click_ready = 0;
+static unsigned int gshell_interact_focus_ready = 0;
+static unsigned int gshell_interact_select_ready = 0;
+static unsigned int gshell_interact_open_ready = 0;
+static unsigned int gshell_interact_menu_ready = 0;
+static unsigned int gshell_interact_shortcut_ready = 0;
+static unsigned int gshell_interact_route_ready = 0;
+static unsigned int gshell_interact_events = 0;
+static const char* gshell_interact_state = "idle";
+static const char* gshell_interact_target = "desktop";
+static const char* gshell_interact_last = "none";
+
+static unsigned int gshell_route_desktop_ready = 0;
+static unsigned int gshell_route_card_ready = 0;
+static unsigned int gshell_route_window_ready = 0;
+static unsigned int gshell_route_taskbar_ready = 0;
+static unsigned int gshell_route_launcher_ready = 0;
+static unsigned int gshell_route_hover_ready = 0;
+static unsigned int gshell_route_click_ready = 0;
+static unsigned int gshell_route_double_click_ready = 0;
+static unsigned int gshell_route_right_click_ready = 0;
+static unsigned int gshell_route_menu_ready = 0;
+static unsigned int gshell_route_open_ready = 0;
+static unsigned int gshell_route_select_ready = 0;
+static unsigned int gshell_route_focus_ready = 0;
+static unsigned int gshell_route_drag_ready = 0;
+static unsigned int gshell_route_drop_ready = 0;
+static unsigned int gshell_route_events = 0;
+static const char* gshell_route_state = "idle";
+static const char* gshell_route_target = "desktop";
+static const char* gshell_route_last = "none";
 
 static unsigned int gshell_flow_prepared = 0;
 static unsigned int gshell_flow_demos = 0;
@@ -659,6 +1320,349 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "inputdemo",   GSHELL_CMD_INPUTDEMO,   "INPUTSTATUS", "INPUT DEMO OK" },
     { "inputcheck",  GSHELL_CMD_INPUTCHECK,  "INPUTSTATUS", "INPUT CHECK OK" },
     { "inputreset",  GSHELL_CMD_INPUTRESET,  "INPUTSTATUS", "INPUT RESET OK" },
+    { "cursorstatus", GSHELL_CMD_CURSORSTATUS, "CURSORSTATUS", "CURSOR STATUS OK" },
+    { "pointerstatus", GSHELL_CMD_POINTERSTATUS, "CURSORSTATUS", "POINTER STATUS OK" },
+    { "cursorcenter", GSHELL_CMD_CURSORCENTER, "CURSORSTATUS", "CURSOR CENTER OK" },
+    { "cursormove", GSHELL_CMD_CURSORMOVE, "CURSORSTATUS", "CURSOR MOVE OK" },
+    { "leftclick",   GSHELL_CMD_LEFTCLICK,   "CURSORSTATUS", "LEFT CLICK OK" },
+    { "rightclick",  GSHELL_CMD_RIGHTCLICK,  "CURSORSTATUS", "RIGHT CLICK OK" },
+    { "wheelstep",   GSHELL_CMD_WHEELSTEP,   "CURSORSTATUS", "WHEEL STEP OK" },
+    { "cursorreset", GSHELL_CMD_CURSORRESET, "CURSORSTATUS", "CURSOR RESET OK" },
+    { "hitstatus",   GSHELL_CMD_HITSTATUS,   "HITSTATUS",   "HIT STATUS OK" },
+    { "panelhit",    GSHELL_CMD_PANELHIT,    "HITSTATUS",   "PANEL HIT OK" },
+    { "commandhit",  GSHELL_CMD_COMMANDHIT,  "HITSTATUS",   "COMMAND HIT OK" },
+    { "clickcmd",    GSHELL_CMD_CLICKCMD,    "HITSTATUS",   "CLICK CMD OK" },
+    { "rightmenu",   GSHELL_CMD_RIGHTMENU,   "HITSTATUS",   "RIGHT MENU OK" },
+    { "wheelpick",   GSHELL_CMD_WHEELPICK,   "HITSTATUS",   "WHEEL PICK OK" },
+    { "hitcheck",    GSHELL_CMD_HITCHECK,    "HITSTATUS",   "HIT CHECK OK" },
+    { "hitreset",    GSHELL_CMD_HITRESET,    "HITSTATUS",   "HIT RESET OK" },
+    { "buttonstatus", GSHELL_CMD_BUTTONSTATUS, "BUTTONSTATUS", "BUTTON STATUS OK" },
+    { "buttonhover", GSHELL_CMD_BUTTONHOVER, "BUTTONSTATUS", "BUTTON HOVER OK" },
+    { "buttonpress", GSHELL_CMD_BUTTONPRESS, "BUTTONSTATUS", "BUTTON PRESS OK" },
+    { "buttonfocus", GSHELL_CMD_BUTTONFOCUS, "BUTTONSTATUS", "BUTTON FOCUS OK" },
+    { "buttonactive", GSHELL_CMD_BUTTONACTIVE, "BUTTONSTATUS", "BUTTON ACTIVE OK" },
+    { "buttoncheck", GSHELL_CMD_BUTTONCHECK, "BUTTONSTATUS", "BUTTON CHECK OK" },
+    { "buttonreset", GSHELL_CMD_BUTTONRESET, "BUTTONSTATUS", "BUTTON RESET OK" },
+    { "windowstatus", GSHELL_CMD_WINDOWSTATUS, "WINDOWSTATUS", "WINDOW STATUS OK" },
+    { "windowcreate", GSHELL_CMD_WINDOWCREATE, "WINDOWSTATUS", "WINDOW CREATE OK" },
+    { "windowfocus", GSHELL_CMD_WINDOWFOCUS, "WINDOWSTATUS", "WINDOW FOCUS OK" },
+    { "windowmove", GSHELL_CMD_WINDOWMOVE, "WINDOWSTATUS", "WINDOW MOVE OK" },
+    { "windowmin",   GSHELL_CMD_WINDOWMIN,   "WINDOWSTATUS", "WINDOW MIN OK" },
+    { "windowclose", GSHELL_CMD_WINDOWCLOSE, "WINDOWSTATUS", "WINDOW CLOSE OK" },
+    { "windowcheck", GSHELL_CMD_WINDOWCHECK, "WINDOWSTATUS", "WINDOW CHECK OK" },
+    { "windowreset", GSHELL_CMD_WINDOWRESET, "WINDOWSTATUS", "WINDOW RESET OK" },
+    { "desktopstatus", GSHELL_CMD_DESKTOPSTATUS, "DESKTOPSTATUS", "DESKTOP STATUS OK" },
+    { "workspace",   GSHELL_CMD_WORKSPACE,   "DESKTOPSTATUS", "WORKSPACE OK" },
+    { "iconstatus",  GSHELL_CMD_ICONSTATUS,  "DESKTOPSTATUS", "ICON STATUS OK" },
+    { "iconselect",  GSHELL_CMD_ICONSELECT,  "DESKTOPSTATUS", "ICON SELECT OK" },
+    { "dockstatus",  GSHELL_CMD_DOCKSTATUS,  "DESKTOPSTATUS", "DOCK STATUS OK" },
+    { "desktopcheck", GSHELL_CMD_DESKTOPCHECK, "DESKTOPSTATUS", "DESKTOP CHECK OK" },
+    { "desktopreset", GSHELL_CMD_DESKTOPRESET, "DESKTOPSTATUS", "DESKTOP RESET OK" },
+    { "interactionfinal", GSHELL_CMD_INTERACTIONFINAL, "INTERACTIONFINAL", "INTERACTION FINAL OK" },
+    { "inputsummary", GSHELL_CMD_INPUTSUMMARY, "INTERACTIONFINAL", "INPUT SUMMARY OK" },
+    { "pointersummary", GSHELL_CMD_POINTERSUMMARY, "INTERACTIONFINAL", "POINTER SUMMARY OK" },
+    { "hitsummary",  GSHELL_CMD_HITSUMMARY,  "INTERACTIONFINAL", "HIT SUMMARY OK" },
+    { "buttonsummary", GSHELL_CMD_BUTTONSUMMARY, "INTERACTIONFINAL", "BUTTON SUMMARY OK" },
+    { "windowsummary", GSHELL_CMD_WINDOWSUMMARY, "INTERACTIONFINAL", "WINDOW SUMMARY OK" },
+    { "desktopsummary", GSHELL_CMD_DESKTOPSUMMARY, "INTERACTIONFINAL", "DESKTOP SUMMARY OK" },
+    { "nextphase",   GSHELL_CMD_NEXTPHASE,   "INTERACTIONFINAL", "NEXT PHASE OK" },
+    { "shellstatus", GSHELL_CMD_SHELLSTATUS, "SHELLSTATUS", "SHELL STATUS OK" },
+    { "shellpanel",  GSHELL_CMD_SHELLPANEL,  "SHELLSTATUS", "SHELL PANEL OK" },
+    { "taskbar",     GSHELL_CMD_TASKBAR,     "SHELLSTATUS", "TASKBAR OK" },
+    { "launcher",    GSHELL_CMD_LAUNCHER,    "SHELLSTATUS", "LAUNCHER OK" },
+    { "shellopenapp", GSHELL_CMD_SHELLOPENAPP, "SHELLSTATUS", "SHELL OPEN APP OK" },
+    { "shellcheck",  GSHELL_CMD_SHELLCHECK,  "SHELLSTATUS", "SHELL CHECK OK" },
+    { "shellreset",  GSHELL_CMD_SHELLRESET,  "SHELLSTATUS", "SHELL RESET OK" },
+    { "launcherstatus", GSHELL_CMD_LAUNCHERSTATUS, "LAUNCHERSTATUS", "LAUNCHER STATUS OK" },
+    { "launchergrid", GSHELL_CMD_LAUNCHERGRID, "LAUNCHERSTATUS", "LAUNCHER GRID OK" },
+    { "appselect",   GSHELL_CMD_APPSELECT,   "LAUNCHERSTATUS", "APP SELECT OK" },
+    { "apppin",      GSHELL_CMD_APPPIN,      "LAUNCHERSTATUS", "APP PIN OK" },
+    { "launcheropen", GSHELL_CMD_LAUNCHEROPEN, "LAUNCHERSTATUS", "LAUNCHER OPEN OK" },
+    { "launchercheck", GSHELL_CMD_LAUNCHERCHECK, "LAUNCHERSTATUS", "LAUNCHER CHECK OK" },
+    { "launcherreset", GSHELL_CMD_LAUNCHERRESET, "LAUNCHERSTATUS", "LAUNCHER RESET OK" },
+    { "taskbarstatus", GSHELL_CMD_TASKBARSTATUS, "TASKBARSTATUS", "TASKBAR STATUS OK" },
+    { "taskitem",    GSHELL_CMD_TASKITEM,    "TASKBARSTATUS", "TASK ITEM OK" },
+    { "taskfocus",   GSHELL_CMD_TASKFOCUS,   "TASKBARSTATUS", "TASK FOCUS OK" },
+    { "taskswitch",  GSHELL_CMD_TASKSWITCH,  "TASKBARSTATUS", "TASK SWITCH OK" },
+    { "taskmin",     GSHELL_CMD_TASKMIN,     "TASKBARSTATUS", "TASK MIN OK" },
+    { "taskrestore", GSHELL_CMD_TASKRESTORE, "TASKBARSTATUS", "TASK RESTORE OK" },
+    { "taskcheck",   GSHELL_CMD_TASKCHECK,   "TASKBARSTATUS", "TASK CHECK OK" },
+    { "taskreset",   GSHELL_CMD_TASKRESET,   "TASKBARSTATUS", "TASK RESET OK" },
+    { "layoutstatus", GSHELL_CMD_LAYOUTSTATUS, "LAYOUTSTATUS", "LAYOUT STATUS OK" },
+    { "layoutgrid",  GSHELL_CMD_LAYOUTGRID,  "LAYOUTSTATUS", "LAYOUT GRID OK" },
+    { "windowsnap",  GSHELL_CMD_WINDOWSNAP,  "LAYOUTSTATUS", "WINDOW SNAP OK" },
+    { "windowmax",   GSHELL_CMD_WINDOWMAX,   "LAYOUTSTATUS", "WINDOW MAX OK" },
+    { "zorder",      GSHELL_CMD_ZORDER,      "LAYOUTSTATUS", "ZORDER OK" },
+    { "layoutcheck", GSHELL_CMD_WINLAYOUTCHECK, "LAYOUTSTATUS", "LAYOUT CHECK OK" },
+    { "layoutreset", GSHELL_CMD_LAYOUTRESET, "LAYOUTSTATUS", "LAYOUT RESET OK" },
+    { "desktopshell", GSHELL_CMD_DESKTOPSHELL, "DESKTOPSHELL", "DESKTOP SHELL OK" },
+    { "shellhome",   GSHELL_CMD_SHELLHOME,   "DESKTOPSHELL", "SHELL HOME OK" },
+    { "shellapps",   GSHELL_CMD_SHELLAPPS,   "DESKTOPSHELL", "SHELL APPS OK" },
+    { "shellwindows", GSHELL_CMD_SHELLWINDOWS, "DESKTOPSHELL", "SHELL WINDOWS OK" },
+    { "shelllayout", GSHELL_CMD_SHELLLAYOUT, "DESKTOPSHELL", "SHELL LAYOUT OK" },
+    { "shelldock",   GSHELL_CMD_SHELLDOCK,   "DESKTOPSHELL", "SHELL DOCK OK" },
+    { "shellflow",   GSHELL_CMD_SHELLFLOW,   "DESKTOPSHELL", "SHELL FLOW OK" },
+    { "shellhomecheck", GSHELL_CMD_SHELLHOMECHECK, "DESKTOPSHELL", "SHELL HOME CHECK OK" },
+    { "shellhomereset", GSHELL_CMD_SHELLHOMERESET, "DESKTOPSHELL", "SHELL HOME RESET OK" },
+    { "shellfinal",  GSHELL_CMD_SHELLFINAL,  "SHELLFINAL",  "SHELL FINAL OK" },
+    { "shellhealth", GSHELL_CMD_SHELLHEALTH, "SHELLFINAL",  "SHELL HEALTH OK" },
+    { "shellsummary", GSHELL_CMD_SHELLSUMMARY, "SHELLFINAL", "SHELL SUMMARY OK" },
+    { "launchersum", GSHELL_CMD_LAUNCHERSUM, "SHELLFINAL",  "LAUNCHER SUM OK" },
+    { "taskbarsum",  GSHELL_CMD_TASKBARSUM,  "SHELLFINAL",  "TASKBAR SUM OK" },
+    { "layoutsumb",  GSHELL_CMD_LAYOUTSUMB,  "SHELLFINAL",  "LAYOUT SUM OK" },
+    { "homesummary", GSHELL_CMD_HOMESUMMARY, "SHELLFINAL",  "HOME SUMMARY OK" },
+    { "shellnext",   GSHELL_CMD_SHELLNEXT,   "SHELLFINAL",  "SHELL NEXT OK" },
+    { "appshellstatus", GSHELL_CMD_APPSHELLSTATUS, "APPSHELLSTATUS", "APP SHELL STATUS OK" },
+    { "appcatalog",  GSHELL_CMD_APPCATALOG,  "APPSHELLSTATUS", "APP CATALOG OK" },
+    { "appcard",     GSHELL_CMD_APPCARD,     "APPSHELLSTATUS", "APP CARD OK" },
+    { "appdetails",  GSHELL_CMD_APPDETAILS,  "APPSHELLSTATUS", "APP DETAILS OK" },
+    { "appshelllaunch", GSHELL_CMD_APPSHELLLAUNCH, "APPSHELLSTATUS", "APP SHELL LAUNCH OK" },
+    { "appshellcheck", GSHELL_CMD_APPSHELLCHECK, "APPSHELLSTATUS", "APP SHELL CHECK OK" },
+    { "appshellreset", GSHELL_CMD_APPSHELLRESET, "APPSHELLSTATUS", "APP SHELL RESET OK" },
+    { "catalogstatus", GSHELL_CMD_CATALOGSTATUS, "CATALOGSTATUS", "CATALOG STATUS OK" },
+    { "cataloglist", GSHELL_CMD_CATALOGLIST, "CATALOGSTATUS", "CATALOG LIST OK" },
+    { "catalogsearch", GSHELL_CMD_CATALOGSEARCH, "CATALOGSTATUS", "CATALOG SEARCH OK" },
+    { "catalogpin",  GSHELL_CMD_CATALOGPIN,  "CATALOGSTATUS", "CATALOG PIN OK" },
+    { "catalogenable", GSHELL_CMD_CATALOGENABLE, "CATALOGSTATUS", "CATALOG ENABLE OK" },
+    { "catalogdisable", GSHELL_CMD_CATALOGDISABLE, "CATALOGSTATUS", "CATALOG DISABLE OK" },
+    { "catalogcheck", GSHELL_CMD_CATALOGCHECK, "CATALOGSTATUS", "CATALOG CHECK OK" },
+    { "catalogreset", GSHELL_CMD_CATALOGRESET, "CATALOGSTATUS", "CATALOG RESET OK" },
+    { "detailstatus", GSHELL_CMD_DETAILSTATUS, "DETAILSTATUS", "DETAIL STATUS OK" },
+    { "detailopen", GSHELL_CMD_DETAILOPEN, "DETAILSTATUS", "DETAIL OPEN OK" },
+    { "detailmanifest", GSHELL_CMD_DETAILMANIFEST, "DETAILSTATUS", "DETAIL MANIFEST OK" },
+    { "detailcaps", GSHELL_CMD_DETAILCAPS, "DETAILSTATUS", "DETAIL CAPS OK" },
+    { "detailperms", GSHELL_CMD_DETAILPERMS, "DETAILSTATUS", "DETAIL PERMS OK" },
+    { "detaillaunch", GSHELL_CMD_DETAILLAUNCH, "DETAILSTATUS", "DETAIL LAUNCH OK" },
+    { "detailcheck", GSHELL_CMD_DETAILCHECK, "DETAILSTATUS", "DETAIL CHECK OK" },
+    { "detailreset", GSHELL_CMD_DETAILRESET, "DETAILSTATUS", "DETAIL RESET OK" },
+    { "actionstatus", GSHELL_CMD_ACTIONSTATUS, "ACTIONSTATUS", "ACTION STATUS OK" },
+    { "actionprepare", GSHELL_CMD_ACTIONPREPARE, "ACTIONSTATUS", "ACTION PREPARE OK" },
+    { "actionallow", GSHELL_CMD_ACTIONALLOW, "ACTIONSTATUS", "ACTION ALLOW OK" },
+    { "actionopen",  GSHELL_CMD_ACTIONOPEN,  "ACTIONSTATUS", "ACTION OPEN OK" },
+    { "actionrun",   GSHELL_CMD_ACTIONRUN,   "ACTIONSTATUS", "ACTION RUN OK" },
+    { "actionstop",  GSHELL_CMD_ACTIONSTOP,  "ACTIONSTATUS", "ACTION STOP OK" },
+    { "actioncheck", GSHELL_CMD_ACTIONCHECK, "ACTIONSTATUS", "ACTION CHECK OK" },
+    { "actionreset", GSHELL_CMD_ACTIONRESET, "ACTIONSTATUS", "ACTION RESET OK" },
+    { "appmgmtstatus", GSHELL_CMD_APPMGMTSTATUS, "APPMGMTSTATUS", "APP MGMT STATUS OK" },
+    { "appinventory", GSHELL_CMD_APPINVENTORY, "APPMGMTSTATUS", "APP INVENTORY OK" },
+    { "appscan",    GSHELL_CMD_APPSCAN,    "APPMGMTSTATUS", "APP SCAN OK" },
+    { "appregister", GSHELL_CMD_APPREGISTER, "APPMGMTSTATUS", "APP REGISTER OK" },
+    { "appunregister", GSHELL_CMD_APPUNREGISTER, "APPMGMTSTATUS", "APP UNREGISTER OK" },
+    { "appenable",  GSHELL_CMD_APPENABLE,  "APPMGMTSTATUS", "APP ENABLE OK" },
+    { "appdisable", GSHELL_CMD_APPDISABLE, "APPMGMTSTATUS", "APP DISABLE OK" },
+    { "apptrust",   GSHELL_CMD_APPTRUST,   "APPMGMTSTATUS", "APP TRUST OK" },
+    { "appuntrust", GSHELL_CMD_APPUNTRUST, "APPMGMTSTATUS", "APP UNTRUST OK" },
+    { "appfavorite", GSHELL_CMD_APPFAVORITE, "APPMGMTSTATUS", "APP FAVORITE OK" },
+    { "appunfavorite", GSHELL_CMD_APPUNFAVORITE, "APPMGMTSTATUS", "APP UNFAVORITE OK" },
+    { "appupdatecheck", GSHELL_CMD_APPUPDATECHECK, "APPMGMTSTATUS", "APP UPDATE CHECK OK" },
+    { "appupdatemark", GSHELL_CMD_APPUPDATEMARK, "APPMGMTSTATUS", "APP UPDATE MARK OK" },
+    { "approllback", GSHELL_CMD_APPROLLBACK, "APPMGMTSTATUS", "APP ROLLBACK OK" },
+    { "apprepair",  GSHELL_CMD_APPREPAIR,  "APPMGMTSTATUS", "APP REPAIR OK" },
+    { "appclearcache", GSHELL_CMD_APPCLEARCACHE, "APPMGMTSTATUS", "APP CLEAR CACHE OK" },
+    { "appstats",   GSHELL_CMD_APPSTATS,   "APPMGMTSTATUS", "APP STATS OK" },
+    { "apphealth",  GSHELL_CMD_APPHEALTH,  "APPMGMTSTATUS", "APP HEALTH OK" },
+    { "appmgmtcheck", GSHELL_CMD_APPMGMTCHECK, "APPMGMTSTATUS", "APP MGMT CHECK OK" },
+    { "appmgmtreset", GSHELL_CMD_APPMGMTRESET, "APPMGMTSTATUS", "APP MGMT RESET OK" },
+    { "appfinal",    GSHELL_CMD_APPFINAL,    "APPFINAL",    "APP FINAL OK" },
+    { "apphealthsum", GSHELL_CMD_APPHEALTHSUM, "APPFINAL",  "APP HEALTH SUM OK" },
+    { "appshellsum", GSHELL_CMD_APPSHELLSUM, "APPFINAL",    "APP SHELL SUM OK" },
+    { "catalogsum",  GSHELL_CMD_CATALOGSUM,  "APPFINAL",    "CATALOG SUM OK" },
+    { "detailsum",   GSHELL_CMD_DETAILSUM,   "APPFINAL",    "DETAIL SUM OK" },
+    { "actionsum",   GSHELL_CMD_ACTIONSUM,   "APPFINAL",    "ACTION SUM OK" },
+    { "mgmtsum",     GSHELL_CMD_MGMTSUM,     "APPFINAL",    "MGMT SUM OK" },
+    { "appreadiness", GSHELL_CMD_APPREADINESS, "APPFINAL",  "APP READINESS OK" },
+    { "appflowfull", GSHELL_CMD_APPFLOWFULL, "APPFINAL",    "APP FLOW FULL OK" },
+    { "appdemoall",  GSHELL_CMD_APPDEMOALL,  "APPFINAL",    "APP DEMO ALL OK" },
+    { "appsecuritysum", GSHELL_CMD_APPSECURITYSUM, "APPFINAL", "APP SECURITY SUM OK" },
+    { "apppermissionsum", GSHELL_CMD_APPPERMISSIONSUM, "APPFINAL", "APP PERMISSION SUM OK" },
+    { "appruntimesum", GSHELL_CMD_APPRUNTIMESUM, "APPFINAL", "APP RUNTIME SUM OK" },
+    { "appwindowsum", GSHELL_CMD_APPWINDOWSUM, "APPFINAL",  "APP WINDOW SUM OK" },
+    { "applaunchsum", GSHELL_CMD_APPLAUNCHSUM, "APPFINAL",  "APP LAUNCH SUM OK" },
+    { "appstatesum", GSHELL_CMD_APPSTATESUM, "APPFINAL",    "APP STATE SUM OK" },
+    { "appfinalcheck", GSHELL_CMD_APPFINALCHECK, "APPFINAL", "APP FINAL CHECK OK" },
+    { "appfinalreset", GSHELL_CMD_APPFINALRESET, "APPFINAL", "APP FINAL RESET OK" },
+    { "appnext",     GSHELL_CMD_APPNEXT,     "APPFINAL",    "APP NEXT OK" },
+    { "approadmap",  GSHELL_CMD_APPROADMAP,  "APPFINAL",    "APP ROADMAP OK" },
+    { "visualstatus", GSHELL_CMD_VISUALSTATUS, "VISUALSTATUS", "VISUAL STATUS OK" },
+    { "visualboot", GSHELL_CMD_VISUALBOOT, "VISUALSTATUS", "VISUAL BOOT OK" },
+    { "visualdesktop", GSHELL_CMD_VISUALDESKTOP, "VISUALSTATUS", "VISUAL DESKTOP OK" },
+    { "visualpanel", GSHELL_CMD_VISUALPANEL, "VISUALSTATUS", "VISUAL PANEL OK" },
+    { "visualcards", GSHELL_CMD_VISUALCARDS, "VISUALSTATUS", "VISUAL CARDS OK" },
+    { "visualwindow", GSHELL_CMD_VISUALWINDOW, "VISUALSTATUS", "VISUAL WINDOW OK" },
+    { "visuallauncher", GSHELL_CMD_VISUALLAUNCHER, "VISUALSTATUS", "VISUAL LAUNCHER OK" },
+    { "visualtaskbar", GSHELL_CMD_VISUALTASKBAR, "VISUALSTATUS", "VISUAL TASKBAR OK" },
+    { "visualdock", GSHELL_CMD_VISUALDOCK, "VISUALSTATUS", "VISUAL DOCK OK" },
+    { "visualfocus", GSHELL_CMD_VISUALFOCUS, "VISUALSTATUS", "VISUAL FOCUS OK" },
+    { "visualgrid", GSHELL_CMD_VISUALGRID, "VISUALSTATUS", "VISUAL GRID OK" },
+    { "visualtheme", GSHELL_CMD_VISUALTHEME, "VISUALSTATUS", "VISUAL THEME OK" },
+    { "visualglow", GSHELL_CMD_VISUALGLOW, "VISUALSTATUS", "VISUAL GLOW OK" },
+    { "visualborder", GSHELL_CMD_VISUALBORDER, "VISUALSTATUS", "VISUAL BORDER OK" },
+    { "visualmetrics", GSHELL_CMD_VISUALMETRICS, "VISUALSTATUS", "VISUAL METRICS OK" },
+    { "visualdemo", GSHELL_CMD_VISUALDEMO, "VISUALSTATUS", "VISUAL DEMO OK" },
+    { "visualflow", GSHELL_CMD_VISUALFLOW, "VISUALSTATUS", "VISUAL FLOW OK" },
+    { "visualcheck", GSHELL_CMD_VISUALCHECK, "VISUALSTATUS", "VISUAL CHECK OK" },
+    { "visualreset", GSHELL_CMD_VISUALRESET, "VISUALSTATUS", "VISUAL RESET OK" },
+    { "visualnext", GSHELL_CMD_VISUALNEXT, "VISUALSTATUS", "VISUAL NEXT OK" },
+    { "cardstatus", GSHELL_CMD_CARDSTATUS, "CARDSTATUS", "CARD STATUS OK" },
+    { "cardgrid",   GSHELL_CMD_CARDGRID,   "CARDSTATUS", "CARD GRID OK" },
+    { "cardselect", GSHELL_CMD_CARDSELECT, "CARDSTATUS", "CARD SELECT OK" },
+    { "cardopen",   GSHELL_CMD_CARDOPEN,   "CARDSTATUS", "CARD OPEN OK" },
+    { "cardexpand", GSHELL_CMD_CARDEXPAND, "CARDSTATUS", "CARD EXPAND OK" },
+    { "cardpin",    GSHELL_CMD_CARDPIN,    "CARDSTATUS", "CARD PIN OK" },
+    { "cardbadge",  GSHELL_CMD_CARDBADGE,  "CARDSTATUS", "CARD BADGE OK" },
+    { "cardpreview", GSHELL_CMD_CARDPREVIEW, "CARDSTATUS", "CARD PREVIEW OK" },
+    { "windowvisual", GSHELL_CMD_WINDOWVISUAL, "CARDSTATUS", "WINDOW VISUAL OK" },
+    { "windowtitle", GSHELL_CMD_WINDOWTITLE, "CARDSTATUS", "WINDOW TITLE OK" },
+    { "windowbody", GSHELL_CMD_WINDOWBODY, "CARDSTATUS", "WINDOW BODY OK" },
+    { "windowshadow", GSHELL_CMD_WINDOWSHADOW, "CARDSTATUS", "WINDOW SHADOW OK" },
+    { "windowactive", GSHELL_CMD_WINDOWACTIVE, "CARDSTATUS", "WINDOW ACTIVE OK" },
+    { "windowpreview", GSHELL_CMD_WINDOWPREVIEW, "CARDSTATUS", "WINDOW PREVIEW OK" },
+    { "visualcompose", GSHELL_CMD_VISUALCOMPOSE, "CARDSTATUS", "VISUAL COMPOSE OK" },
+    { "visualsync", GSHELL_CMD_VISUALSYNC, "CARDSTATUS", "VISUAL SYNC OK" },
+    { "cardflow",   GSHELL_CMD_CARDFLOW,   "CARDSTATUS", "CARD FLOW OK" },
+    { "cardcheck",  GSHELL_CMD_CARDCHECK,  "CARDSTATUS", "CARD CHECK OK" },
+    { "cardreset",  GSHELL_CMD_CARDRESET,  "CARDSTATUS", "CARD RESET OK" },
+    { "cardnext",   GSHELL_CMD_CARDNEXT,   "CARDSTATUS", "CARD NEXT OK" },
+    { "uimockstatus", GSHELL_CMD_UIMOCKSTATUS, "UIMOCKSTATUS", "UI MOCK STATUS OK" },
+    { "uimockdesktop", GSHELL_CMD_UIMOCKDESKTOP, "UIMOCKSTATUS", "UI MOCK DESKTOP OK" },
+    { "uimockgrid", GSHELL_CMD_UIMOCKGRID, "UIMOCKSTATUS", "UI MOCK GRID OK" },
+    { "uimockcard1", GSHELL_CMD_UIMOCKCARD1, "UIMOCKSTATUS", "UI MOCK CARD1 OK" },
+    { "uimockcard2", GSHELL_CMD_UIMOCKCARD2, "UIMOCKSTATUS", "UI MOCK CARD2 OK" },
+    { "uimockcard3", GSHELL_CMD_UIMOCKCARD3, "UIMOCKSTATUS", "UI MOCK CARD3 OK" },
+    { "uimockwindow", GSHELL_CMD_UIMOCKWINDOW, "UIMOCKSTATUS", "UI MOCK WINDOW OK" },
+    { "uimocktitle", GSHELL_CMD_UIMOCKTITLE, "UIMOCKSTATUS", "UI MOCK TITLE OK" },
+    { "uimockbody", GSHELL_CMD_UIMOCKBODY, "UIMOCKSTATUS", "UI MOCK BODY OK" },
+    { "uimocktaskbar", GSHELL_CMD_UIMOCKTASKBAR, "UIMOCKSTATUS", "UI MOCK TASKBAR OK" },
+    { "uimockdock", GSHELL_CMD_UIMOCKDOCK, "UIMOCKSTATUS", "UI MOCK DOCK OK" },
+    { "uimockfocus", GSHELL_CMD_UIMOCKFOCUS, "UIMOCKSTATUS", "UI MOCK FOCUS OK" },
+    { "uimockselect", GSHELL_CMD_UIMOCKSELECT, "UIMOCKSTATUS", "UI MOCK SELECT OK" },
+    { "uimockopen", GSHELL_CMD_UIMOCKOPEN, "UIMOCKSTATUS", "UI MOCK OPEN OK" },
+    { "uimocklayout", GSHELL_CMD_UIMOCKLAYOUT, "UIMOCKSTATUS", "UI MOCK LAYOUT OK" },
+    { "uimockmetrics", GSHELL_CMD_UIMOCKMETRICS, "UIMOCKSTATUS", "UI MOCK METRICS OK" },
+    { "uimockdemo", GSHELL_CMD_UIMOCKDEMO, "UIMOCKSTATUS", "UI MOCK DEMO OK" },
+    { "uimockcheck", GSHELL_CMD_UIMOCKCHECK, "UIMOCKSTATUS", "UI MOCK CHECK OK" },
+    { "uimockreset", GSHELL_CMD_UIMOCKRESET, "UIMOCKSTATUS", "UI MOCK RESET OK" },
+    { "uimocknext", GSHELL_CMD_UIMOCKNEXT, "UIMOCKSTATUS", "UI MOCK NEXT OK" },
+    { "launchmockstatus", GSHELL_CMD_LAUNCHMOCKSTATUS, "LAUNCHMOCKSTATUS", "LAUNCH MOCK STATUS OK" },
+    { "launchmockpanel", GSHELL_CMD_LAUNCHMOCKPANEL, "LAUNCHMOCKSTATUS", "LAUNCH MOCK PANEL OK" },
+    { "launchmocksearch", GSHELL_CMD_LAUNCHMOCKSEARCH, "LAUNCHMOCKSTATUS", "LAUNCH MOCK SEARCH OK" },
+    { "launchmockapps", GSHELL_CMD_LAUNCHMOCKAPPS, "LAUNCHMOCKSTATUS", "LAUNCH MOCK APPS OK" },
+    { "launchmockrecent", GSHELL_CMD_LAUNCHMOCKRECENT, "LAUNCHMOCKSTATUS", "LAUNCH MOCK RECENT OK" },
+    { "launchmockpin", GSHELL_CMD_LAUNCHMOCKPIN, "LAUNCHMOCKSTATUS", "LAUNCH MOCK PIN OK" },
+    { "launchmockrun", GSHELL_CMD_LAUNCHMOCKRUN, "LAUNCHMOCKSTATUS", "LAUNCH MOCK RUN OK" },
+    { "taskmockstatus", GSHELL_CMD_TASKMOCKSTATUS, "LAUNCHMOCKSTATUS", "TASK MOCK STATUS OK" },
+    { "taskmockstart", GSHELL_CMD_TASKMOCKSTART, "LAUNCHMOCKSTATUS", "TASK MOCK START OK" },
+    { "taskmockapp", GSHELL_CMD_TASKMOCKAPP, "LAUNCHMOCKSTATUS", "TASK MOCK APP OK" },
+    { "taskmockactive", GSHELL_CMD_TASKMOCKACTIVE, "LAUNCHMOCKSTATUS", "TASK MOCK ACTIVE OK" },
+    { "taskmocktray", GSHELL_CMD_TASKMOCKTRAY, "LAUNCHMOCKSTATUS", "TASK MOCK TRAY OK" },
+    { "taskmockclock", GSHELL_CMD_TASKMOCKCLOCK, "LAUNCHMOCKSTATUS", "TASK MOCK CLOCK OK" },
+    { "taskmocknet", GSHELL_CMD_TASKMOCKNET, "LAUNCHMOCKSTATUS", "TASK MOCK NET OK" },
+    { "taskmockstate", GSHELL_CMD_TASKMOCKSTATE, "LAUNCHMOCKSTATUS", "TASK MOCK STATE OK" },
+    { "mockcompose", GSHELL_CMD_MOCKCOMPOSE, "LAUNCHMOCKSTATUS", "MOCK COMPOSE OK" },
+    { "mockdemo", GSHELL_CMD_MOCKDEMO, "LAUNCHMOCKSTATUS", "MOCK DEMO OK" },
+    { "mockcheck", GSHELL_CMD_MOCKCHECK, "LAUNCHMOCKSTATUS", "MOCK CHECK OK" },
+    { "mockreset", GSHELL_CMD_MOCKRESET, "LAUNCHMOCKSTATUS", "MOCK RESET OK" },
+    { "mocknext", GSHELL_CMD_MOCKNEXT, "LAUNCHMOCKSTATUS", "MOCK NEXT OK" },
+    { "polishstatus", GSHELL_CMD_POLISHSTATUS, "POLISHSTATUS", "POLISH STATUS OK" },
+    { "polishbase", GSHELL_CMD_POLISHBASE, "POLISHSTATUS", "POLISH BASE OK" },
+    { "polishglass", GSHELL_CMD_POLISHGLASS, "POLISHSTATUS", "POLISH GLASS OK" },
+    { "polishtitle", GSHELL_CMD_POLISHTITLE, "POLISHSTATUS", "POLISH TITLE OK" },
+    { "polishcards", GSHELL_CMD_POLISHCARDS, "POLISHSTATUS", "POLISH CARDS OK" },
+    { "polishwindow", GSHELL_CMD_POLISHWINDOW, "POLISHSTATUS", "POLISH WINDOW OK" },
+    { "polishtaskbar", GSHELL_CMD_POLISHTASKBAR, "POLISHSTATUS", "POLISH TASKBAR OK" },
+    { "polishtray", GSHELL_CMD_POLISHTRAY, "POLISHSTATUS", "POLISH TRAY OK" },
+    { "polishbadge", GSHELL_CMD_POLISHBADGE, "POLISHSTATUS", "POLISH BADGE OK" },
+    { "polishfocus", GSHELL_CMD_POLISHFOCUS, "POLISHSTATUS", "POLISH FOCUS OK" },
+    { "polishshadow", GSHELL_CMD_POLISHSHADOW, "POLISHSTATUS", "POLISH SHADOW OK" },
+    { "polishcompact", GSHELL_CMD_POLISHCOMPACT, "POLISHSTATUS", "POLISH COMPACT OK" },
+    { "polishalign", GSHELL_CMD_POLISHALIGN, "POLISHSTATUS", "POLISH ALIGN OK" },
+    { "polishmetrics", GSHELL_CMD_POLISHMETRICS, "POLISHSTATUS", "POLISH METRICS OK" },
+    { "polishsafe", GSHELL_CMD_POLISHSAFE, "POLISHSTATUS", "POLISH SAFE OK" },
+    { "polishdemo", GSHELL_CMD_POLISHDEMO, "POLISHSTATUS", "POLISH DEMO OK" },
+    { "polishflow", GSHELL_CMD_POLISHFLOW, "POLISHSTATUS", "POLISH FLOW OK" },
+    { "polishcheck", GSHELL_CMD_POLISHCHECK, "POLISHSTATUS", "POLISH CHECK OK" },
+    { "polishreset", GSHELL_CMD_POLISHRESET, "POLISHSTATUS", "POLISH RESET OK" },
+    { "polishnext", GSHELL_CMD_POLISHNEXT, "POLISHSTATUS", "POLISH NEXT OK" },
+    { "scenestatus", GSHELL_CMD_SCENESTATUS, "DESKTOPSCENE", "SCENE STATUS OK" },
+    { "sceneboot", GSHELL_CMD_SCENEBOOT, "DESKTOPSCENE", "SCENE BOOT OK" },
+    { "scenebackground", GSHELL_CMD_SCENEBACKGROUND, "DESKTOPSCENE", "SCENE BACKGROUND OK" },
+    { "scenetopbar", GSHELL_CMD_SCENETOPBAR, "DESKTOPSCENE", "SCENE TOPBAR OK" },
+    { "scenelauncher", GSHELL_CMD_SCENELAUNCHER, "DESKTOPSCENE", "SCENE LAUNCHER OK" },
+    { "scenecards", GSHELL_CMD_SCENECARDS, "DESKTOPSCENE", "SCENE CARDS OK" },
+    { "scenewindow", GSHELL_CMD_SCENEWINDOW, "DESKTOPSCENE", "SCENE WINDOW OK" },
+    { "scenetaskbar", GSHELL_CMD_SCENETASKBAR, "DESKTOPSCENE", "SCENE TASKBAR OK" },
+    { "scenedock", GSHELL_CMD_SCENEDOCK, "DESKTOPSCENE", "SCENE DOCK OK" },
+    { "scenetray", GSHELL_CMD_SCENETRAY, "DESKTOPSCENE", "SCENE TRAY OK" },
+    { "scenebadge", GSHELL_CMD_SCENEBADGE, "DESKTOPSCENE", "SCENE BADGE OK" },
+    { "scenefocus", GSHELL_CMD_SCENEFOCUS, "DESKTOPSCENE", "SCENE FOCUS OK" },
+    { "scenewidgets", GSHELL_CMD_SCENEWIDGETS, "DESKTOPSCENE", "SCENE WIDGETS OK" },
+    { "sceneactive", GSHELL_CMD_SCENEACTIVE, "DESKTOPSCENE", "SCENE ACTIVE OK" },
+    { "scenemetrics", GSHELL_CMD_SCENEMETRICS, "DESKTOPSCENE", "SCENE METRICS OK" },
+    { "scenedemo", GSHELL_CMD_SCENEDEMO, "DESKTOPSCENE", "SCENE DEMO OK" },
+    { "sceneflow", GSHELL_CMD_SCENEFLOW, "DESKTOPSCENE", "SCENE FLOW OK" },
+    { "scenecheck", GSHELL_CMD_SCENECHECK, "DESKTOPSCENE", "SCENE CHECK OK" },
+    { "scenereset", GSHELL_CMD_SCENERESET, "DESKTOPSCENE", "SCENE RESET OK" },
+    { "scenenext", GSHELL_CMD_SCENENEXT, "DESKTOPSCENE", "SCENE NEXT OK" },
+    { "visualfinal", GSHELL_CMD_VISUALFINAL, "VISUALFINAL", "VISUAL FINAL OK" },
+    { "visualhealthsum", GSHELL_CMD_VISUALHEALTHSUM, "VISUALFINAL", "VISUAL HEALTH SUM OK" },
+    { "visualscenesum", GSHELL_CMD_VISUALSCENESUM, "VISUALFINAL", "VISUAL SCENE SUM OK" },
+    { "visualmocksum", GSHELL_CMD_VISUALMOCKSUM, "VISUALFINAL", "VISUAL MOCK SUM OK" },
+    { "visualcardsum", GSHELL_CMD_VISUALCARDSUM, "VISUALFINAL", "VISUAL CARD SUM OK" },
+    { "visuallaunchsum", GSHELL_CMD_VISUALLAUNCHSUM, "VISUALFINAL", "VISUAL LAUNCH SUM OK" },
+    { "visualpolishsum", GSHELL_CMD_VISUALPOLISHSUM, "VISUALFINAL", "VISUAL POLISH SUM OK" },
+    { "visualreadiness", GSHELL_CMD_VISUALREADINESS, "VISUALFINAL", "VISUAL READINESS OK" },
+    { "visualdemoall", GSHELL_CMD_VISUALDEMOALL, "VISUALFINAL", "VISUAL DEMO ALL OK" },
+    { "visualregression", GSHELL_CMD_VISUALREGRESSION, "VISUALFINAL", "VISUAL REGRESSION OK" },
+    { "visualbounds", GSHELL_CMD_VISUALBOUNDS, "VISUALFINAL", "VISUAL BOUNDS OK" },
+    { "visualdensity", GSHELL_CMD_VISUALDENSITY, "VISUALFINAL", "VISUAL DENSITY OK" },
+    { "visualdefault", GSHELL_CMD_VISUALDEFAULT, "VISUALFINAL", "VISUAL DEFAULT OK" },
+    { "visualhandoff", GSHELL_CMD_VISUALHANDOFF, "VISUALFINAL", "VISUAL HANDOFF OK" },
+    { "visualnextphase", GSHELL_CMD_VISUALNEXTPHASE, "VISUALFINAL", "VISUAL NEXT PHASE OK" },
+    { "visualfinalcheck", GSHELL_CMD_VISUALFINALCHECK, "VISUALFINAL", "VISUAL FINAL CHECK OK" },
+    { "visualfinalreset", GSHELL_CMD_VISUALFINALRESET, "VISUALFINAL", "VISUAL FINAL RESET OK" },
+    { "visualroadmap", GSHELL_CMD_VISUALROADMAP, "VISUALFINAL", "VISUAL ROADMAP OK" },
+    { "visualinputnext", GSHELL_CMD_VISUALINPUTNEXT, "VISUALFINAL", "VISUAL INPUT NEXT OK" },
+    { "visualcloseout", GSHELL_CMD_VISUALCLOSEOUT, "VISUALFINAL", "VISUAL CLOSEOUT OK" },
+    { "interactstatus", GSHELL_CMD_INTERACTSTATUS, "INTERACTSTATUS", "INTERACT STATUS OK" },
+    { "pointermock", GSHELL_CMD_POINTERMOCK, "INTERACTSTATUS", "POINTER MOCK OK" },
+    { "pointermove", GSHELL_CMD_POINTERMOVE, "INTERACTSTATUS", "POINTER MOVE OK" },
+    { "pointerhover", GSHELL_CMD_POINTERHOVER, "INTERACTSTATUS", "POINTER HOVER OK" },
+    { "pointerclick", GSHELL_CMD_POINTERCLICK, "INTERACTSTATUS", "POINTER CLICK OK" },
+    { "focusmock", GSHELL_CMD_FOCUSMOCK, "INTERACTSTATUS", "FOCUS MOCK OK" },
+    { "focusnext", GSHELL_CMD_FOCUSNEXT, "INTERACTSTATUS", "FOCUS NEXT OK" },
+    { "focuscard", GSHELL_CMD_FOCUSCARD, "INTERACTSTATUS", "FOCUS CARD OK" },
+    { "focuswindow", GSHELL_CMD_FOCUSWINDOW, "INTERACTSTATUS", "FOCUS WINDOW OK" },
+    { "focustaskbar", GSHELL_CMD_FOCUSTASKBAR, "INTERACTSTATUS", "FOCUS TASKBAR OK" },
+    { "selectmock", GSHELL_CMD_SELECTMOCK, "INTERACTSTATUS", "SELECT MOCK OK" },
+    { "openmock", GSHELL_CMD_OPENMOCK, "INTERACTSTATUS", "OPEN MOCK OK" },
+    { "closemock", GSHELL_CMD_CLOSEMOCK, "INTERACTSTATUS", "CLOSE MOCK OK" },
+    { "menumock", GSHELL_CMD_MENUMOCK, "INTERACTSTATUS", "MENU MOCK OK" },
+    { "shortcutmock", GSHELL_CMD_SHORTCUTMOCK, "INTERACTSTATUS", "SHORTCUT MOCK OK" },
+    { "routemock", GSHELL_CMD_ROUTEMOCK, "INTERACTSTATUS", "ROUTE MOCK OK" },
+    { "interactdemo", GSHELL_CMD_INTERACTDEMO, "INTERACTSTATUS", "INTERACT DEMO OK" },
+    { "interactcheck", GSHELL_CMD_INTERACTCHECK, "INTERACTSTATUS", "INTERACT CHECK OK" },
+    { "interactreset", GSHELL_CMD_INTERACTRESET, "INTERACTSTATUS", "INTERACT RESET OK" },
+    { "interactnext", GSHELL_CMD_INTERACTNEXT, "INTERACTSTATUS", "INTERACT NEXT OK" },
+    { "routestatus", GSHELL_CMD_ROUTESTATUS, "ROUTESTATUS", "ROUTE STATUS OK" },
+    { "hitdesktop", GSHELL_CMD_HITDESKTOP, "ROUTESTATUS", "HIT DESKTOP OK" },
+    { "hitcard", GSHELL_CMD_HITCARD, "ROUTESTATUS", "HIT CARD OK" },
+    { "hitwindow", GSHELL_CMD_HITWINDOW, "ROUTESTATUS", "HIT WINDOW OK" },
+    { "hittaskbar", GSHELL_CMD_HITTASKBAR, "ROUTESTATUS", "HIT TASKBAR OK" },
+    { "hitlauncher", GSHELL_CMD_HITLAUNCHER, "ROUTESTATUS", "HIT LAUNCHER OK" },
+    { "hoverroute", GSHELL_CMD_HOVERROUTE, "ROUTESTATUS", "HOVER ROUTE OK" },
+    { "clickroute", GSHELL_CMD_CLICKROUTE, "ROUTESTATUS", "CLICK ROUTE OK" },
+    { "doubleclickroute", GSHELL_CMD_DOUBLECLICKROUTE, "ROUTESTATUS", "DOUBLE CLICK ROUTE OK" },
+    { "rightclickroute", GSHELL_CMD_RIGHTCLICKROUTE, "ROUTESTATUS", "RIGHT CLICK ROUTE OK" },
+    { "menuroute", GSHELL_CMD_MENUROUTE, "ROUTESTATUS", "MENU ROUTE OK" },
+    { "openroute", GSHELL_CMD_OPENROUTE, "ROUTESTATUS", "OPEN ROUTE OK" },
+    { "selectroute", GSHELL_CMD_SELECTROUTE, "ROUTESTATUS", "SELECT ROUTE OK" },
+    { "focusroute", GSHELL_CMD_FOCUSROUTE, "ROUTESTATUS", "FOCUS ROUTE OK" },
+    { "dragroute", GSHELL_CMD_DRAGROUTE, "ROUTESTATUS", "DRAG ROUTE OK" },
+    { "droproute", GSHELL_CMD_DROPROUTE, "ROUTESTATUS", "DROP ROUTE OK" },
+    { "routedemo", GSHELL_CMD_ROUTEDEMO, "ROUTESTATUS", "ROUTE DEMO OK" },
+    { "routecheck", GSHELL_CMD_ROUTECHECK, "ROUTESTATUS", "ROUTE CHECK OK" },
+    { "routereset", GSHELL_CMD_ROUTERESET, "ROUTESTATUS", "ROUTE RESET OK" },
+    { "routenext", GSHELL_CMD_ROUTENEXT, "ROUTESTATUS", "ROUTE NEXT OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
@@ -5453,7 +6457,7 @@ static void gshell_dispatch_command(void) {
         gshell_mouse_layer_ready = 1;
         gshell_click_layer_ready = 1;
         gshell_focus_layer_ready = 1;
-        gshell_input_events++;
+        gshell_interaction_events++;
         gshell_focus_changes++;
         gshell_input_state = "demo";
         gshell_focus_target = "commands";
@@ -5471,7 +6475,7 @@ static void gshell_dispatch_command(void) {
 
     if (command_id == GSHELL_CMD_INPUTCHECK) {
         int ok = gshell_input_layer_enabled && gshell_focus_layer_ready;
-        gshell_input_events++;
+        gshell_interaction_events++;
         gshell_input_last = ok ? "check-ok" : "check-bad";
         gshell_command_name = "INPUTCHECK";
         gshell_command_result = ok ? "INPUT CHECK OK" : "INPUT CHECK BAD";
@@ -5489,7 +6493,7 @@ static void gshell_dispatch_command(void) {
         gshell_mouse_layer_ready = 0;
         gshell_click_layer_ready = 0;
         gshell_focus_layer_ready = 1;
-        gshell_input_events = 0;
+        gshell_interaction_events = 0;
         gshell_focus_changes = 0;
         gshell_input_state = "keyboard";
         gshell_focus_target = "terminal";
@@ -5502,6 +6506,6989 @@ static void gshell_dispatch_command(void) {
         gshell_history_push(gshell_command_normalized, gshell_command_view);
         gshell_result_log_push(gshell_command_normalized, gshell_command_result);
         gshell_terminal_push("INPUTRESET -> INPUT LAYER RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CURSORSTATUS) {
+        gshell_command_name = "CURSORSTATUS";
+        gshell_command_result = "CURSOR STATUS OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CURSORSTATUS -> POINTER STATE CORE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERSTATUS) {
+        gshell_command_name = "POINTERSTATUS";
+        gshell_command_result = "POINTER STATUS OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "POINTER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERSTATUS -> CURSOR METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CURSORCENTER) {
+        gshell_cursor_x = 400;
+        gshell_cursor_y = 300;
+        gshell_cursor_visible = 1;
+        gshell_cursor_state = "center";
+        gshell_cursor_last = "center";
+        gshell_input_state = "pointer";
+        gshell_focus_target = "viewport";
+        gshell_interaction_events++;
+        gshell_command_name = "CURSORCENTER";
+        gshell_command_result = "CURSOR CENTER OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "CENTER";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CURSORCENTER -> POINTER CENTERED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CURSORMOVE) {
+        gshell_cursor_x += 24;
+        gshell_cursor_y += 16;
+
+        if (gshell_cursor_x > 760) {
+            gshell_cursor_x = 40;
+        }
+
+        if (gshell_cursor_y > 560) {
+            gshell_cursor_y = 80;
+        }
+
+        gshell_cursor_moves++;
+        gshell_cursor_state = "moved";
+        gshell_cursor_last = "move";
+        gshell_input_state = "pointer";
+        gshell_focus_target = "viewport";
+        gshell_interaction_events++;
+        gshell_command_name = "CURSORMOVE";
+        gshell_command_result = "CURSOR MOVE OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "MOVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CURSORMOVE -> POINTER MOVED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LEFTCLICK) {
+        gshell_cursor_clicks++;
+        gshell_cursor_state = "left-click";
+        gshell_cursor_last = "left";
+        gshell_click_layer_ready = 1;
+        gshell_focus_target = "commands";
+        gshell_focus_changes++;
+        gshell_interaction_events++;
+        gshell_command_name = "LEFTCLICK";
+        gshell_command_result = "LEFT CLICK OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "LEFT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LEFTCLICK -> COMMAND PANEL FOCUS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RIGHTCLICK) {
+        gshell_cursor_clicks++;
+        gshell_cursor_state = "right-click";
+        gshell_cursor_last = "right";
+        gshell_click_layer_ready = 1;
+        gshell_focus_target = "context";
+        gshell_focus_changes++;
+        gshell_interaction_events++;
+        gshell_command_name = "RIGHTCLICK";
+        gshell_command_result = "RIGHT CLICK OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "RIGHT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RIGHTCLICK -> CONTEXT FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WHEELSTEP) {
+        gshell_cursor_wheel++;
+        gshell_cursor_state = "wheel";
+        gshell_cursor_last = "wheel";
+        gshell_focus_target = "scroll";
+        gshell_interaction_events++;
+        gshell_command_name = "WHEELSTEP";
+        gshell_command_result = "WHEEL STEP OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "WHEEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WHEELSTEP -> SCROLL INTENT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CURSORRESET) {
+        gshell_cursor_x = 400;
+        gshell_cursor_y = 300;
+        gshell_cursor_visible = 1;
+        gshell_cursor_moves = 0;
+        gshell_cursor_clicks = 0;
+        gshell_cursor_wheel = 0;
+        gshell_cursor_state = "center";
+        gshell_cursor_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "CURSORRESET";
+        gshell_command_result = "CURSOR RESET OK";
+        gshell_command_view = "CURSORSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CURSORRESET -> POINTER STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITSTATUS) {
+        gshell_command_name = "HITSTATUS";
+        gshell_command_result = "HIT STATUS OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITSTATUS -> CLICK HIT TEST CORE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PANELHIT) {
+        gshell_cursor_x = 620;
+        gshell_cursor_y = 188;
+        gshell_cursor_state = "hit-test";
+        gshell_cursor_last = "panel";
+        gshell_hit_tests++;
+        gshell_hit_zone = "right-panel";
+        gshell_hit_target = "commands";
+        gshell_hit_action = "hover";
+        gshell_hit_last = "panel-hit";
+        gshell_focus_target = "commands";
+        gshell_interaction_events++;
+        gshell_command_name = "PANELHIT";
+        gshell_command_result = "PANEL HIT OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "PANEL HIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PANELHIT -> RIGHT COMMAND PANEL HIT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_COMMANDHIT) {
+        gshell_cursor_x = 620;
+        gshell_cursor_y = 212;
+        gshell_cursor_state = "cmd-hit";
+        gshell_cursor_last = "command";
+        gshell_hit_tests++;
+        gshell_hit_zone = "command-row";
+        gshell_hit_target = "CURSORMOVE";
+        gshell_hit_action = "select";
+        gshell_hit_last = "command-hit";
+        gshell_focus_target = "commands";
+        gshell_interaction_events++;
+        gshell_command_name = "COMMANDHIT";
+        gshell_command_result = "COMMAND HIT OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "CMD HIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("COMMANDHIT -> COMMAND ROW SELECTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLICKCMD) {
+        gshell_cursor_clicks++;
+        gshell_hit_clicks++;
+        gshell_hit_commands++;
+        gshell_click_layer_ready = 1;
+        gshell_cursor_state = "click-cmd";
+        gshell_cursor_last = "clickcmd";
+        gshell_hit_zone = "command-row";
+        gshell_hit_target = "DASHBOARD";
+        gshell_hit_action = "execute-meta";
+        gshell_hit_last = "click-command";
+        gshell_focus_target = "commands";
+        gshell_focus_changes++;
+        gshell_interaction_events++;
+        gshell_command_name = "CLICKCMD";
+        gshell_command_result = "CLICK CMD OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "CLICK CMD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CLICKCMD -> COMMAND CLICK ROUTE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RIGHTMENU) {
+        gshell_cursor_clicks++;
+        gshell_hit_context++;
+        gshell_click_layer_ready = 1;
+        gshell_cursor_state = "right-menu";
+        gshell_cursor_last = "rightmenu";
+        gshell_hit_zone = "context";
+        gshell_hit_target = "command-menu";
+        gshell_hit_action = "open-menu";
+        gshell_hit_last = "right-menu";
+        gshell_focus_target = "context";
+        gshell_focus_changes++;
+        gshell_interaction_events++;
+        gshell_command_name = "RIGHTMENU";
+        gshell_command_result = "RIGHT MENU OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "MENU OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RIGHTMENU -> CONTEXT MENU METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WHEELPICK) {
+        gshell_cursor_wheel++;
+        gshell_hit_wheel++;
+        gshell_cursor_state = "wheel-pick";
+        gshell_cursor_last = "wheelpick";
+        gshell_hit_zone = "command-list";
+        gshell_hit_target = "next-command";
+        gshell_hit_action = "scroll-select";
+        gshell_hit_last = "wheel-pick";
+        gshell_focus_target = "scroll";
+        gshell_interaction_events++;
+        gshell_command_name = "WHEELPICK";
+        gshell_command_result = "WHEEL PICK OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "WHEEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WHEELPICK -> COMMAND LIST SCROLL SELECT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITCHECK) {
+        int ok = gshell_hit_tests > 0 || gshell_hit_clicks > 0 || gshell_hit_wheel > 0;
+        gshell_command_name = "HITCHECK";
+        gshell_command_result = ok ? "HIT CHECK OK" : "HIT CHECK WAIT";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = ok ? "HIT OK" : "HIT WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_hit_last = ok ? "check-ok" : "check-wait";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "HITCHECK -> HIT TEST METADATA OK" : "HITCHECK -> RUN PANELHIT OR CLICKCMD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITRESET) {
+        gshell_hit_tests = 0;
+        gshell_hit_clicks = 0;
+        gshell_hit_commands = 0;
+        gshell_hit_context = 0;
+        gshell_hit_wheel = 0;
+        gshell_hit_zone = "none";
+        gshell_hit_target = "none";
+        gshell_hit_action = "none";
+        gshell_hit_last = "reset";
+        gshell_cursor_state = "center";
+        gshell_cursor_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "HITRESET";
+        gshell_command_result = "HIT RESET OK";
+        gshell_command_view = "HITSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITRESET -> HIT TEST STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONSTATUS) {
+        gshell_command_name = "BUTTONSTATUS";
+        gshell_command_result = "BUTTON STATUS OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONSTATUS -> BUTTON PANEL INTERACTION READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONHOVER) {
+        gshell_button_hovered = 1;
+        gshell_button_pressed = 0;
+        gshell_button_target = "dashboard";
+        gshell_button_state = "hover";
+        gshell_button_last = "hover";
+        gshell_hit_zone = "button";
+        gshell_hit_target = "dashboard";
+        gshell_hit_action = "hover";
+        gshell_focus_target = "commands";
+        gshell_button_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "BUTTONHOVER";
+        gshell_command_result = "BUTTON HOVER OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "HOVER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONHOVER -> DASHBOARD BUTTON HOVER");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONPRESS) {
+        gshell_button_hovered = 1;
+        gshell_button_pressed = 1;
+        gshell_button_target = "dashboard";
+        gshell_button_state = "pressed";
+        gshell_button_last = "press";
+        gshell_hit_zone = "button";
+        gshell_hit_target = "dashboard";
+        gshell_hit_action = "press";
+        gshell_cursor_clicks++;
+        gshell_hit_clicks++;
+        gshell_button_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "BUTTONPRESS";
+        gshell_command_result = "BUTTON PRESS OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "PRESS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONPRESS -> DASHBOARD BUTTON PRESSED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONFOCUS) {
+        gshell_button_focus = 1;
+        gshell_button_target = "control";
+        gshell_button_state = "focused";
+        gshell_button_last = "focus";
+        gshell_focus_target = "button";
+        gshell_focus_changes++;
+        gshell_button_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "BUTTONFOCUS";
+        gshell_command_result = "BUTTON FOCUS OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONFOCUS -> BUTTON FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONACTIVE) {
+        gshell_button_hovered = 1;
+        gshell_button_pressed = 0;
+        gshell_button_active = 1;
+        gshell_button_focus = 1;
+        gshell_button_target = "dashboard";
+        gshell_button_state = "active";
+        gshell_button_last = "activate";
+        gshell_hit_zone = "button";
+        gshell_hit_target = "dashboard";
+        gshell_hit_action = "activate";
+        gshell_focus_target = "dashboard";
+        gshell_button_events++;
+        gshell_button_activations++;
+        gshell_hit_commands++;
+        gshell_interaction_events++;
+        gshell_command_name = "BUTTONACTIVE";
+        gshell_command_result = "BUTTON ACTIVE OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "ACTIVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONACTIVE -> DASHBOARD BUTTON ACTIVATED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONCHECK) {
+        int ok = gshell_button_hovered || gshell_button_pressed || gshell_button_active || gshell_button_focus;
+        gshell_button_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "BUTTONCHECK";
+        gshell_command_result = ok ? "BUTTON CHECK OK" : "BUTTON CHECK WAIT";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = ok ? "BUTTON OK" : "BUTTON WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "BUTTONCHECK -> BUTTON INTERACTION OK" : "BUTTONCHECK -> RUN BUTTONHOVER OR BUTTONACTIVE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONRESET) {
+        gshell_button_hovered = 0;
+        gshell_button_pressed = 0;
+        gshell_button_active = 0;
+        gshell_button_focus = 0;
+        gshell_button_events = 0;
+        gshell_button_activations = 0;
+        gshell_button_target = "none";
+        gshell_button_state = "idle";
+        gshell_button_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "BUTTONRESET";
+        gshell_command_result = "BUTTON RESET OK";
+        gshell_command_view = "BUTTONSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONRESET -> BUTTON PANEL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWSTATUS) {
+        gshell_command_name = "WINDOWSTATUS";
+        gshell_command_result = "WINDOW STATUS OK";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWSTATUS -> WINDOW PANEL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWCREATE) {
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_minimized = 0;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+        gshell_window_last = "create";
+        gshell_window_events++;
+        gshell_focus_target = "window";
+        gshell_focus_changes++;
+        gshell_button_target = "window";
+        gshell_button_state = "active";
+        gshell_command_name = "WINDOWCREATE";
+        gshell_command_result = "WINDOW CREATE OK";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_input_status_text = "CREATE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWCREATE -> DEMO WINDOW CREATED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWFOCUS) {
+        if (gshell_window_exists) {
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_state = "focused";
+            gshell_window_last = "focus";
+            gshell_focus_target = "window";
+            gshell_focus_changes++;
+            gshell_command_result = "WINDOW FOCUS OK";
+            gshell_input_status_text = "FOCUS OK";
+            gshell_terminal_push("WINDOWFOCUS -> DEMO WINDOW FOCUSED");
+        } else {
+            gshell_window_last = "focus-wait";
+            gshell_command_result = "WINDOW FOCUS WAIT";
+            gshell_input_status_text = "FOCUS WAIT";
+            gshell_terminal_push("WINDOWFOCUS -> NEED WINDOWCREATE");
+        }
+
+        gshell_window_events++;
+        gshell_command_name = "WINDOWFOCUS";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWMOVE) {
+        if (gshell_window_exists && !gshell_window_minimized) {
+            gshell_window_x += 16;
+            gshell_window_y += 12;
+
+            if (gshell_window_x > 420) {
+                gshell_window_x = 120;
+            }
+
+            if (gshell_window_y > 260) {
+                gshell_window_y = 92;
+            }
+
+            gshell_window_moves++;
+            gshell_window_state = "moved";
+            gshell_window_last = "move";
+            gshell_cursor_state = "drag";
+            gshell_cursor_last = "window-move";
+            gshell_command_result = "WINDOW MOVE OK";
+            gshell_input_status_text = "MOVE OK";
+            gshell_terminal_push("WINDOWMOVE -> DEMO WINDOW MOVED");
+        } else {
+            gshell_window_last = "move-wait";
+            gshell_command_result = "WINDOW MOVE WAIT";
+            gshell_input_status_text = "MOVE WAIT";
+            gshell_terminal_push("WINDOWMOVE -> NEED OPEN WINDOW");
+        }
+
+        gshell_window_events++;
+        gshell_command_name = "WINDOWMOVE";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWMIN) {
+        if (gshell_window_exists) {
+            gshell_window_minimized = 1;
+            gshell_window_focused = 0;
+            gshell_window_state = "minimized";
+            gshell_window_last = "minimize";
+            gshell_focus_target = "terminal";
+            gshell_command_result = "WINDOW MIN OK";
+            gshell_input_status_text = "MIN OK";
+            gshell_terminal_push("WINDOWMIN -> DEMO WINDOW MINIMIZED");
+        } else {
+            gshell_window_last = "min-wait";
+            gshell_command_result = "WINDOW MIN WAIT";
+            gshell_input_status_text = "MIN WAIT";
+            gshell_terminal_push("WINDOWMIN -> NEED WINDOWCREATE");
+        }
+
+        gshell_window_events++;
+        gshell_command_name = "WINDOWMIN";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWCLOSE) {
+        if (gshell_window_exists) {
+            gshell_window_exists = 0;
+            gshell_window_focused = 0;
+            gshell_window_minimized = 0;
+            gshell_window_title = "none";
+            gshell_window_state = "closed";
+            gshell_window_last = "close";
+            gshell_focus_target = "terminal";
+            gshell_command_result = "WINDOW CLOSE OK";
+            gshell_input_status_text = "CLOSE OK";
+            gshell_terminal_push("WINDOWCLOSE -> DEMO WINDOW CLOSED");
+        } else {
+            gshell_window_last = "close-wait";
+            gshell_command_result = "WINDOW CLOSE WAIT";
+            gshell_input_status_text = "CLOSE WAIT";
+            gshell_terminal_push("WINDOWCLOSE -> NO WINDOW OPEN");
+        }
+
+        gshell_window_events++;
+        gshell_command_name = "WINDOWCLOSE";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWCHECK) {
+        int ok = gshell_window_exists && !gshell_window_minimized;
+        gshell_window_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "WINDOWCHECK";
+        gshell_command_result = ok ? "WINDOW CHECK OK" : "WINDOW CHECK WAIT";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_input_status_text = ok ? "WIN OK" : "WIN WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "WINDOWCHECK -> ACTIVE WINDOW READY" : "WINDOWCHECK -> NEED OPEN ACTIVE WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWRESET) {
+        gshell_window_exists = 0;
+        gshell_window_focused = 0;
+        gshell_window_minimized = 0;
+        gshell_window_moves = 0;
+        gshell_window_events = 0;
+        gshell_window_x = 120;
+        gshell_window_y = 92;
+        gshell_window_title = "none";
+        gshell_window_state = "closed";
+        gshell_window_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "WINDOWRESET";
+        gshell_command_result = "WINDOW RESET OK";
+        gshell_command_view = "WINDOWSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWRESET -> WINDOW STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DESKTOPSTATUS) {
+        gshell_command_name = "DESKTOPSTATUS";
+        gshell_command_result = "DESKTOP STATUS OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DESKTOPSTATUS -> DESKTOP WORKSPACE STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WORKSPACE) {
+        gshell_workspace_ready = 1;
+        gshell_workspace_id = 1;
+        gshell_desktop_state = "workspace";
+        gshell_desktop_focus = "workspace";
+        gshell_desktop_last = "workspace";
+        gshell_focus_target = "workspace";
+        gshell_focus_changes++;
+        gshell_desktop_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "WORKSPACE";
+        gshell_command_result = "WORKSPACE OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "WORKSPACE";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WORKSPACE -> WORKSPACE 1 READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ICONSTATUS) {
+        gshell_desktop_state = "icons";
+        gshell_desktop_focus = "icons";
+        gshell_desktop_last = "icon-status";
+        gshell_focus_target = "icons";
+        gshell_desktop_events++;
+        gshell_command_name = "ICONSTATUS";
+        gshell_command_result = "ICON STATUS OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "ICONS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ICONSTATUS -> DESKTOP ICON METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ICONSELECT) {
+        gshell_icon_selected = 1;
+        gshell_desktop_state = "icon-selected";
+        gshell_desktop_focus = "demo.icon";
+        gshell_desktop_last = "icon-select";
+        gshell_hit_zone = "desktop-icon";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "select";
+        gshell_focus_target = "demo.icon";
+        gshell_focus_changes++;
+        gshell_desktop_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "ICONSELECT";
+        gshell_command_result = "ICON SELECT OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "ICON SEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ICONSELECT -> DEMO APP ICON SELECTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DOCKSTATUS) {
+        gshell_dock_ready = 1;
+        gshell_desktop_state = "dock";
+        gshell_desktop_focus = "dock";
+        gshell_desktop_last = "dock-ready";
+        gshell_hit_zone = "dock";
+        gshell_hit_target = "launcher";
+        gshell_hit_action = "dock-focus";
+        gshell_focus_target = "dock";
+        gshell_focus_changes++;
+        gshell_desktop_events++;
+        gshell_interaction_events++;
+        gshell_command_name = "DOCKSTATUS";
+        gshell_command_result = "DOCK STATUS OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "DOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DOCKSTATUS -> DOCK METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DESKTOPCHECK) {
+        int ok = gshell_desktop_enabled && gshell_workspace_ready;
+        gshell_desktop_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "DESKTOPCHECK";
+        gshell_command_result = ok ? "DESKTOP CHECK OK" : "DESKTOP CHECK WAIT";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = ok ? "DESK OK" : "DESK WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "DESKTOPCHECK -> WORKSPACE READY" : "DESKTOPCHECK -> RUN WORKSPACE FIRST");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DESKTOPRESET) {
+        gshell_desktop_enabled = 1;
+        gshell_workspace_ready = 0;
+        gshell_icon_selected = 0;
+        gshell_dock_ready = 0;
+        gshell_desktop_events = 0;
+        gshell_workspace_id = 0;
+        gshell_desktop_state = "idle";
+        gshell_desktop_focus = "terminal";
+        gshell_desktop_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "DESKTOPRESET";
+        gshell_command_result = "DESKTOP RESET OK";
+        gshell_command_view = "DESKTOPSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DESKTOPRESET -> DESKTOP STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTIONFINAL) {
+        gshell_command_name = "INTERFINAL";
+        gshell_command_result = "INTERACTION FINAL OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INTERACTIONFINAL -> 1.1 INTERACTION UI CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INPUTSUMMARY) {
+        gshell_command_name = "INPUTSUMMARY";
+        gshell_command_result = "INPUT SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "INPUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INPUTSUMMARY -> KEYBOARD FOCUS INPUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERSUMMARY) {
+        gshell_command_name = "POINTERSUMMARY";
+        gshell_command_result = "POINTER SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "POINTER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERSUMMARY -> CURSOR CLICK WHEEL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITSUMMARY) {
+        gshell_command_name = "HITSUMMARY";
+        gshell_command_result = "HIT SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "HIT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITSUMMARY -> COMMAND HIT TEST READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BUTTONSUMMARY) {
+        gshell_command_name = "BUTTONSUMMARY";
+        gshell_command_result = "BUTTON SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "BUTTON OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BUTTONSUMMARY -> BUTTON PANEL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWSUMMARY) {
+        gshell_command_name = "WINDOWSUMMARY";
+        gshell_command_result = "WINDOW SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWSUMMARY -> WINDOW PANEL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DESKTOPSUMMARY) {
+        gshell_command_name = "DESKTOPSUMMARY";
+        gshell_command_result = "DESKTOP SUMMARY OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "DESKTOP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DESKTOPSUMMARY -> DESKTOP WORKSPACE STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_NEXTPHASE) {
+        gshell_command_name = "NEXTPHASE";
+        gshell_command_result = "NEXT PHASE OK";
+        gshell_command_view = "INTERACTIONFINAL";
+        gshell_input_status_text = "NEXT 1.2";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("NEXTPHASE -> 1.2 REAL INPUT OR WINDOW SHELL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLSTATUS) {
+        gshell_command_name = "SHELLSTATUS";
+        gshell_command_result = "SHELL STATUS OK";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLSTATUS -> WINDOW SHELL BASE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLPANEL) {
+        gshell_shell_panel_ready = 1;
+        gshell_shell_state = "panel";
+        gshell_shell_focus = "main-panel";
+        gshell_shell_last = "panel-ready";
+        gshell_shell_events++;
+        gshell_desktop_state = "shell-panel";
+        gshell_desktop_focus = "main-panel";
+        gshell_focus_target = "main-panel";
+        gshell_focus_changes++;
+        gshell_command_name = "SHELLPANEL";
+        gshell_command_result = "SHELL PANEL OK";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = "PANEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLPANEL -> MAIN SHELL PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKBAR) {
+        gshell_shell_taskbar_ready = 1;
+        gshell_shell_state = "taskbar";
+        gshell_shell_focus = "taskbar";
+        gshell_shell_last = "taskbar-ready";
+        gshell_shell_events++;
+        gshell_dock_ready = 1;
+        gshell_desktop_focus = "taskbar";
+        gshell_focus_target = "taskbar";
+        gshell_focus_changes++;
+        gshell_command_name = "TASKBAR";
+        gshell_command_result = "TASKBAR OK";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKBAR -> SHELL TASKBAR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHER) {
+        gshell_shell_launcher_ready = 1;
+        gshell_shell_state = "launcher";
+        gshell_shell_focus = "launcher";
+        gshell_shell_last = "launcher-ready";
+        gshell_shell_events++;
+        gshell_hit_zone = "launcher";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "select-app";
+        gshell_focus_target = "launcher";
+        gshell_focus_changes++;
+        gshell_command_name = "LAUNCHER";
+        gshell_command_result = "LAUNCHER OK";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = "LAUNCHER";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHER -> DEMO APP LAUNCHER READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLOPENAPP) {
+        int shell_ready = gshell_shell_panel_ready && gshell_shell_taskbar_ready && gshell_shell_launcher_ready;
+
+        if (shell_ready) {
+            gshell_shell_open_apps++;
+            gshell_shell_state = "app-open";
+            gshell_shell_focus = "demo.app";
+            gshell_shell_last = "open-demo";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "open";
+            gshell_window_last = "shell-open";
+            gshell_app_slot_allocated = 1;
+            gshell_app_slot_pid = 1;
+            gshell_app_slot_state = "allocated";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "SHELL OPEN APP OK";
+            gshell_input_status_text = "APP OPEN";
+            gshell_terminal_push("SHELLOPENAPP -> DEMO APP WINDOW OPENED");
+        } else {
+            gshell_shell_state = "wait";
+            gshell_shell_last = "open-wait";
+            gshell_command_result = "SHELL OPEN APP WAIT";
+            gshell_input_status_text = "OPEN WAIT";
+            gshell_terminal_push("SHELLOPENAPP -> NEED SHELLPANEL TASKBAR LAUNCHER");
+        }
+
+        gshell_shell_events++;
+        gshell_command_name = "SHELLOPENAPP";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLCHECK) {
+        int ok = gshell_shell_enabled && gshell_shell_panel_ready && gshell_shell_taskbar_ready && gshell_shell_launcher_ready;
+        gshell_shell_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "SHELLCHECK";
+        gshell_command_result = ok ? "SHELL CHECK OK" : "SHELL CHECK WAIT";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = ok ? "SHELL OK" : "SHELL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "SHELLCHECK -> WINDOW SHELL READY" : "SHELLCHECK -> NEED PANEL TASKBAR LAUNCHER");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLRESET) {
+        gshell_shell_enabled = 1;
+        gshell_shell_panel_ready = 0;
+        gshell_shell_taskbar_ready = 0;
+        gshell_shell_launcher_ready = 0;
+        gshell_shell_open_apps = 0;
+        gshell_shell_events = 0;
+        gshell_shell_state = "idle";
+        gshell_shell_focus = "terminal";
+        gshell_shell_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "SHELLRESET";
+        gshell_command_result = "SHELL RESET OK";
+        gshell_command_view = "SHELLSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLRESET -> WINDOW SHELL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHERSTATUS) {
+        gshell_command_name = "LAUNCHERSTATUS";
+        gshell_command_result = "LAUNCHER STATUS OK";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHERSTATUS -> APP LAUNCHER FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHERGRID) {
+        gshell_shell_launcher_ready = 1;
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_state = "grid";
+        gshell_launcher_last = "grid-ready";
+        gshell_shell_state = "launcher";
+        gshell_shell_focus = "launcher-grid";
+        gshell_hit_zone = "launcher-grid";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "show-apps";
+        gshell_focus_target = "launcher-grid";
+        gshell_focus_changes++;
+        gshell_launcher_events++;
+        gshell_shell_events++;
+        gshell_command_name = "LAUNCHERGRID";
+        gshell_command_result = "LAUNCHER GRID OK";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_input_status_text = "GRID OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHERGRID -> APP GRID READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSELECT) {
+        if (gshell_launcher_grid_ready) {
+            gshell_launcher_app_selected = 1;
+            gshell_launcher_selected_app = "demo.app";
+            gshell_launcher_state = "selected";
+            gshell_launcher_last = "select-demo";
+            gshell_hit_zone = "app-icon";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "select";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "APP SELECT OK";
+            gshell_input_status_text = "SELECT OK";
+            gshell_terminal_push("APPSELECT -> DEMO APP SELECTED");
+        } else {
+            gshell_launcher_state = "wait";
+            gshell_launcher_last = "select-wait";
+            gshell_command_result = "APP SELECT WAIT";
+            gshell_input_status_text = "SELECT WAIT";
+            gshell_terminal_push("APPSELECT -> NEED LAUNCHERGRID");
+        }
+
+        gshell_launcher_events++;
+        gshell_command_name = "APPSELECT";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPPIN) {
+        if (gshell_launcher_app_selected) {
+            gshell_launcher_app_pinned = 1;
+            gshell_shell_taskbar_ready = 1;
+            gshell_dock_ready = 1;
+            gshell_launcher_state = "pinned";
+            gshell_launcher_last = "pin-demo";
+            gshell_hit_zone = "taskbar";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "pin";
+            gshell_focus_target = "taskbar";
+            gshell_command_result = "APP PIN OK";
+            gshell_input_status_text = "PIN OK";
+            gshell_terminal_push("APPPIN -> DEMO APP PINNED TO TASKBAR");
+        } else {
+            gshell_launcher_state = "wait";
+            gshell_launcher_last = "pin-wait";
+            gshell_command_result = "APP PIN WAIT";
+            gshell_input_status_text = "PIN WAIT";
+            gshell_terminal_push("APPPIN -> NEED APPSELECT");
+        }
+
+        gshell_launcher_events++;
+        gshell_command_name = "APPPIN";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHEROPEN) {
+        if (gshell_launcher_app_selected) {
+            gshell_shell_panel_ready = 1;
+            gshell_shell_taskbar_ready = 1;
+            gshell_shell_launcher_ready = 1;
+            gshell_shell_open_apps++;
+            gshell_launcher_open_count++;
+            gshell_launcher_state = "app-open";
+            gshell_launcher_last = "open-demo";
+            gshell_shell_state = "app-open";
+            gshell_shell_focus = "demo.app";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "open";
+            gshell_window_last = "launcher-open";
+            gshell_app_slot_allocated = 1;
+            gshell_app_slot_pid = 1;
+            gshell_app_slot_state = "allocated";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "LAUNCHER OPEN OK";
+            gshell_input_status_text = "OPEN OK";
+            gshell_terminal_push("LAUNCHEROPEN -> DEMO APP OPENED FROM LAUNCHER");
+        } else {
+            gshell_launcher_state = "wait";
+            gshell_launcher_last = "open-wait";
+            gshell_command_result = "LAUNCHER OPEN WAIT";
+            gshell_input_status_text = "OPEN WAIT";
+            gshell_terminal_push("LAUNCHEROPEN -> NEED APPSELECT");
+        }
+
+        gshell_launcher_events++;
+        gshell_shell_events++;
+        gshell_command_name = "LAUNCHEROPEN";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHERCHECK) {
+        int ok = gshell_launcher_grid_ready && gshell_launcher_app_selected;
+        gshell_launcher_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "LAUNCHERCHECK";
+        gshell_command_result = ok ? "LAUNCHER CHECK OK" : "LAUNCHER CHECK WAIT";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_input_status_text = ok ? "LAUNCHER OK" : "LAUNCHER WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "LAUNCHERCHECK -> APP LAUNCHER READY" : "LAUNCHERCHECK -> NEED GRID AND SELECT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHERRESET) {
+        gshell_launcher_grid_ready = 0;
+        gshell_launcher_app_selected = 0;
+        gshell_launcher_app_pinned = 0;
+        gshell_launcher_open_count = 0;
+        gshell_launcher_events = 0;
+        gshell_launcher_state = "idle";
+        gshell_launcher_selected_app = "none";
+        gshell_launcher_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "LAUNCHERRESET";
+        gshell_command_result = "LAUNCHER RESET OK";
+        gshell_command_view = "LAUNCHERSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHERRESET -> APP LAUNCHER STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKBARSTATUS) {
+        gshell_command_name = "TASKBARSTATUS";
+        gshell_command_result = "TASKBAR STATUS OK";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKBARSTATUS -> TASKBAR APP SWITCH READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKITEM) {
+        gshell_shell_taskbar_ready = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_taskbar_state = "item-ready";
+        gshell_taskbar_last = "item";
+        gshell_shell_state = "taskbar";
+        gshell_shell_focus = "taskbar";
+        gshell_hit_zone = "taskbar";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "task-item";
+        gshell_focus_target = "taskbar";
+        gshell_focus_changes++;
+        gshell_taskbar_events++;
+        gshell_shell_events++;
+        gshell_command_name = "TASKITEM";
+        gshell_command_result = "TASK ITEM OK";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_input_status_text = "ITEM OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKITEM -> DEMO APP TASK ITEM READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKFOCUS) {
+        if (gshell_taskbar_item_ready) {
+            gshell_taskbar_focused = 1;
+            gshell_taskbar_minimized = 0;
+            gshell_taskbar_state = "focused";
+            gshell_taskbar_last = "focus";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "focused";
+            gshell_window_last = "task-focus";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "TASK FOCUS OK";
+            gshell_input_status_text = "FOCUS OK";
+            gshell_terminal_push("TASKFOCUS -> DEMO APP FOCUSED FROM TASKBAR");
+        } else {
+            gshell_taskbar_state = "wait";
+            gshell_taskbar_last = "focus-wait";
+            gshell_command_result = "TASK FOCUS WAIT";
+            gshell_input_status_text = "FOCUS WAIT";
+            gshell_terminal_push("TASKFOCUS -> NEED TASKITEM");
+        }
+
+        gshell_taskbar_events++;
+        gshell_command_name = "TASKFOCUS";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKSWITCH) {
+        if (gshell_taskbar_item_ready) {
+            gshell_taskbar_focused = 1;
+            gshell_taskbar_minimized = 0;
+            gshell_taskbar_switches++;
+            gshell_taskbar_state = "switched";
+            gshell_taskbar_last = "switch";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "focused";
+            gshell_window_last = "task-switch";
+            gshell_focus_target = "demo.app";
+            gshell_focus_changes++;
+            gshell_command_result = "TASK SWITCH OK";
+            gshell_input_status_text = "SWITCH OK";
+            gshell_terminal_push("TASKSWITCH -> SWITCHED TO DEMO APP");
+        } else {
+            gshell_taskbar_state = "wait";
+            gshell_taskbar_last = "switch-wait";
+            gshell_command_result = "TASK SWITCH WAIT";
+            gshell_input_status_text = "SWITCH WAIT";
+            gshell_terminal_push("TASKSWITCH -> NEED TASKITEM");
+        }
+
+        gshell_taskbar_events++;
+        gshell_command_name = "TASKSWITCH";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMIN) {
+        if (gshell_taskbar_item_ready && gshell_window_exists) {
+            gshell_taskbar_minimized = 1;
+            gshell_taskbar_focused = 0;
+            gshell_taskbar_state = "minimized";
+            gshell_taskbar_last = "minimize";
+            gshell_window_minimized = 1;
+            gshell_window_focused = 0;
+            gshell_window_state = "minimized";
+            gshell_window_last = "task-min";
+            gshell_focus_target = "taskbar";
+            gshell_command_result = "TASK MIN OK";
+            gshell_input_status_text = "MIN OK";
+            gshell_terminal_push("TASKMIN -> DEMO APP MINIMIZED TO TASKBAR");
+        } else {
+            gshell_taskbar_state = "wait";
+            gshell_taskbar_last = "min-wait";
+            gshell_command_result = "TASK MIN WAIT";
+            gshell_input_status_text = "MIN WAIT";
+            gshell_terminal_push("TASKMIN -> NEED OPEN TASK WINDOW");
+        }
+
+        gshell_taskbar_events++;
+        gshell_command_name = "TASKMIN";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKRESTORE) {
+        if (gshell_taskbar_item_ready) {
+            gshell_taskbar_minimized = 0;
+            gshell_taskbar_focused = 1;
+            gshell_taskbar_state = "restored";
+            gshell_taskbar_last = "restore";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "focused";
+            gshell_window_last = "task-restore";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "TASK RESTORE OK";
+            gshell_input_status_text = "RESTORE OK";
+            gshell_terminal_push("TASKRESTORE -> DEMO APP RESTORED");
+        } else {
+            gshell_taskbar_state = "wait";
+            gshell_taskbar_last = "restore-wait";
+            gshell_command_result = "TASK RESTORE WAIT";
+            gshell_input_status_text = "RESTORE WAIT";
+            gshell_terminal_push("TASKRESTORE -> NEED TASKITEM");
+        }
+
+        gshell_taskbar_events++;
+        gshell_command_name = "TASKRESTORE";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKCHECK) {
+        int ok = gshell_taskbar_enabled && gshell_taskbar_item_ready;
+        gshell_taskbar_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "TASKCHECK";
+        gshell_command_result = ok ? "TASK CHECK OK" : "TASK CHECK WAIT";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_input_status_text = ok ? "TASK OK" : "TASK WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "TASKCHECK -> TASKBAR ITEM READY" : "TASKCHECK -> NEED TASKITEM");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKRESET) {
+        gshell_taskbar_enabled = 1;
+        gshell_taskbar_item_ready = 0;
+        gshell_taskbar_focused = 0;
+        gshell_taskbar_minimized = 0;
+        gshell_taskbar_switches = 0;
+        gshell_taskbar_events = 0;
+        gshell_taskbar_state = "idle";
+        gshell_taskbar_item = "none";
+        gshell_taskbar_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "TASKRESET";
+        gshell_command_result = "TASK RESET OK";
+        gshell_command_view = "TASKBARSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKRESET -> TASKBAR STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAYOUTSTATUS) {
+        gshell_command_name = "LAYOUTSTATUS";
+        gshell_command_result = "LAYOUT STATUS OK";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAYOUTSTATUS -> WINDOW LAYOUT STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAYOUTGRID) {
+        gshell_layout_grid_ready = 1;
+        gshell_layout_state = "grid";
+        gshell_layout_mode = "grid";
+        gshell_layout_last = "grid-ready";
+        gshell_shell_state = "layout";
+        gshell_shell_focus = "layout-grid";
+        gshell_focus_target = "layout-grid";
+        gshell_focus_changes++;
+        gshell_layout_events++;
+        gshell_shell_events++;
+        gshell_command_name = "LAYOUTGRID";
+        gshell_command_result = "LAYOUT GRID OK";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_input_status_text = "GRID OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAYOUTGRID -> WINDOW GRID READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWSNAP) {
+        if (gshell_window_exists || gshell_taskbar_item_ready || gshell_shell_open_apps > 0) {
+            gshell_window_exists = 1;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "snapped";
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_x = 96;
+            gshell_window_y = 84;
+            gshell_window_last = "snap";
+            gshell_layout_snapped = 1;
+            gshell_layout_maximized = 0;
+            gshell_layout_state = "snapped";
+            gshell_layout_mode = "left-snap";
+            gshell_layout_last = "snap-left";
+            gshell_focus_target = "demo.window";
+            gshell_command_result = "WINDOW SNAP OK";
+            gshell_input_status_text = "SNAP OK";
+            gshell_terminal_push("WINDOWSNAP -> DEMO WINDOW SNAPPED");
+        } else {
+            gshell_layout_state = "wait";
+            gshell_layout_last = "snap-wait";
+            gshell_command_result = "WINDOW SNAP WAIT";
+            gshell_input_status_text = "SNAP WAIT";
+            gshell_terminal_push("WINDOWSNAP -> NEED WINDOW OR TASK ITEM");
+        }
+
+        gshell_layout_events++;
+        gshell_command_name = "WINDOWSNAP";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWMAX) {
+        if (gshell_window_exists || gshell_taskbar_item_ready || gshell_shell_open_apps > 0) {
+            gshell_window_exists = 1;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "maximized";
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_x = 80;
+            gshell_window_y = 72;
+            gshell_window_last = "maximize";
+            gshell_layout_snapped = 0;
+            gshell_layout_maximized = 1;
+            gshell_layout_state = "maximized";
+            gshell_layout_mode = "max";
+            gshell_layout_last = "maximize";
+            gshell_focus_target = "demo.window";
+            gshell_command_result = "WINDOW MAX OK";
+            gshell_input_status_text = "MAX OK";
+            gshell_terminal_push("WINDOWMAX -> DEMO WINDOW MAXIMIZED");
+        } else {
+            gshell_layout_state = "wait";
+            gshell_layout_last = "max-wait";
+            gshell_command_result = "WINDOW MAX WAIT";
+            gshell_input_status_text = "MAX WAIT";
+            gshell_terminal_push("WINDOWMAX -> NEED WINDOW OR TASK ITEM");
+        }
+
+        gshell_layout_events++;
+        gshell_command_name = "WINDOWMAX";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ZORDER) {
+        if (gshell_window_exists) {
+            gshell_layout_z_index++;
+            gshell_layout_state = "z-order";
+            gshell_layout_last = "bring-front";
+            gshell_window_state = "focused";
+            gshell_window_last = "z-front";
+            gshell_focus_target = "demo.window";
+            gshell_command_result = "ZORDER OK";
+            gshell_input_status_text = "Z OK";
+            gshell_terminal_push("ZORDER -> DEMO WINDOW BROUGHT TO FRONT");
+        } else {
+            gshell_layout_state = "wait";
+            gshell_layout_last = "z-wait";
+            gshell_command_result = "ZORDER WAIT";
+            gshell_input_status_text = "Z WAIT";
+            gshell_terminal_push("ZORDER -> NEED WINDOW");
+        }
+
+        gshell_layout_events++;
+        gshell_command_name = "ZORDER";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINLAYOUTCHECK) {
+        int ok = gshell_layout_enabled && (gshell_layout_grid_ready || gshell_window_exists);
+        gshell_layout_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "LAYOUTCHECK";
+        gshell_command_result = ok ? "LAYOUT CHECK OK" : "LAYOUT CHECK WAIT";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_input_status_text = ok ? "LAYOUT OK" : "LAYOUT WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "LAYOUTCHECK -> LAYOUT STATE READY" : "LAYOUTCHECK -> NEED LAYOUTGRID OR WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAYOUTRESET) {
+        gshell_layout_enabled = 1;
+        gshell_layout_grid_ready = 0;
+        gshell_layout_snapped = 0;
+        gshell_layout_maximized = 0;
+        gshell_layout_z_index = 0;
+        gshell_layout_events = 0;
+        gshell_layout_state = "idle";
+        gshell_layout_mode = "free";
+        gshell_layout_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "LAYOUTRESET";
+        gshell_command_result = "LAYOUT RESET OK";
+        gshell_command_view = "LAYOUTSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAYOUTRESET -> WINDOW LAYOUT STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DESKTOPSHELL) {
+        gshell_command_name = "DESKTOPSHELL";
+        gshell_command_result = "DESKTOP SHELL OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DESKTOPSHELL -> DESKTOP SHELL INTEGRATION READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLHOME) {
+        gshell_home_ready = 1;
+        gshell_home_state = "home";
+        gshell_home_focus = "desktop";
+        gshell_home_last = "home-ready";
+        gshell_desktop_enabled = 1;
+        gshell_workspace_ready = 1;
+        gshell_workspace_id = 1;
+        gshell_desktop_state = "shell-home";
+        gshell_desktop_focus = "desktop";
+        gshell_shell_enabled = 1;
+        gshell_shell_state = "home";
+        gshell_shell_focus = "desktop";
+        gshell_focus_target = "desktop";
+        gshell_focus_changes++;
+        gshell_home_events++;
+        gshell_shell_events++;
+        gshell_command_name = "SHELLHOME";
+        gshell_command_result = "SHELL HOME OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "HOME OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLHOME -> DESKTOP SHELL HOME READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLAPPS) {
+        gshell_home_apps_ready = 1;
+        gshell_home_state = "apps";
+        gshell_home_focus = "launcher";
+        gshell_home_last = "apps-ready";
+        gshell_shell_launcher_ready = 1;
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_app_selected = 1;
+        gshell_launcher_selected_app = "demo.app";
+        gshell_launcher_state = "selected";
+        gshell_hit_zone = "launcher";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "select-app";
+        gshell_focus_target = "launcher";
+        gshell_focus_changes++;
+        gshell_home_events++;
+        gshell_launcher_events++;
+        gshell_command_name = "SHELLAPPS";
+        gshell_command_result = "SHELL APPS OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "APPS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLAPPS -> LAUNCHER APP ENTRY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLWINDOWS) {
+        gshell_home_windows_ready = 1;
+        gshell_home_state = "windows";
+        gshell_home_focus = "demo.window";
+        gshell_home_last = "windows-ready";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_minimized = 0;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "focused";
+        gshell_window_last = "shell-windows";
+        gshell_shell_open_apps = 1;
+        gshell_shell_state = "app-open";
+        gshell_shell_focus = "demo.app";
+        gshell_focus_target = "demo.window";
+        gshell_focus_changes++;
+        gshell_home_events++;
+        gshell_window_events++;
+        gshell_command_name = "SHELLWINDOWS";
+        gshell_command_result = "SHELL WINDOWS OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLWINDOWS -> DEMO WINDOW IN SHELL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLLAYOUT) {
+        gshell_home_layout_ready = 1;
+        gshell_home_state = "layout";
+        gshell_home_focus = "layout";
+        gshell_home_last = "layout-ready";
+        gshell_layout_grid_ready = 1;
+        gshell_layout_state = "grid";
+        gshell_layout_mode = "grid";
+        gshell_layout_last = "shell-layout";
+        gshell_focus_target = "layout";
+        gshell_focus_changes++;
+        gshell_home_events++;
+        gshell_layout_events++;
+        gshell_command_name = "SHELLLAYOUT";
+        gshell_command_result = "SHELL LAYOUT OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "LAYOUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLLAYOUT -> SHELL WINDOW LAYOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLDOCK) {
+        gshell_home_dock_ready = 1;
+        gshell_home_state = "dock";
+        gshell_home_focus = "taskbar";
+        gshell_home_last = "dock-ready";
+        gshell_shell_taskbar_ready = 1;
+        gshell_taskbar_enabled = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_taskbar_state = "item-ready";
+        gshell_taskbar_last = "shell-dock";
+        gshell_dock_ready = 1;
+        gshell_focus_target = "taskbar";
+        gshell_focus_changes++;
+        gshell_home_events++;
+        gshell_taskbar_events++;
+        gshell_command_name = "SHELLDOCK";
+        gshell_command_result = "SHELL DOCK OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "DOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLDOCK -> TASKBAR DOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLFLOW) {
+        gshell_home_ready = 1;
+        gshell_home_apps_ready = 1;
+        gshell_home_windows_ready = 1;
+        gshell_home_layout_ready = 1;
+        gshell_home_dock_ready = 1;
+        gshell_home_state = "ready";
+        gshell_home_focus = "desktop-shell";
+        gshell_home_last = "flow-ready";
+
+        gshell_desktop_enabled = 1;
+        gshell_workspace_ready = 1;
+        gshell_shell_panel_ready = 1;
+        gshell_shell_taskbar_ready = 1;
+        gshell_shell_launcher_ready = 1;
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_app_selected = 1;
+        gshell_launcher_selected_app = "demo.app";
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_minimized = 0;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "focused";
+        gshell_layout_grid_ready = 1;
+        gshell_layout_state = "grid";
+        gshell_layout_mode = "grid";
+        gshell_focus_target = "desktop-shell";
+
+        gshell_home_events++;
+        gshell_shell_events++;
+        gshell_command_name = "SHELLFLOW";
+        gshell_command_result = "SHELL FLOW OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLFLOW -> FULL DESKTOP SHELL FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLHOMECHECK) {
+        int ok = gshell_home_ready && gshell_home_apps_ready && gshell_home_windows_ready && gshell_home_layout_ready && gshell_home_dock_ready;
+        gshell_home_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "SHELLHOMECHECK";
+        gshell_command_result = ok ? "SHELL HOME CHECK OK" : "SHELL HOME CHECK WAIT";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = ok ? "HOME OK" : "HOME WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "SHELLHOMECHECK -> DESKTOP SHELL READY" : "SHELLHOMECHECK -> RUN SHELLFLOW OR HOME/APPS/WINDOWS/LAYOUT/DOCK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLHOMERESET) {
+        gshell_home_ready = 0;
+        gshell_home_apps_ready = 0;
+        gshell_home_windows_ready = 0;
+        gshell_home_layout_ready = 0;
+        gshell_home_dock_ready = 0;
+        gshell_home_events = 0;
+        gshell_home_state = "idle";
+        gshell_home_focus = "terminal";
+        gshell_home_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "SHELLHOMERESET";
+        gshell_command_result = "SHELL HOME RESET OK";
+        gshell_command_view = "DESKTOPSHELL";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLHOMERESET -> DESKTOP SHELL HOME RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLFINAL) {
+        gshell_command_name = "SHELLFINAL";
+        gshell_command_result = "SHELL FINAL OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLFINAL -> 1.2 DESKTOP SHELL CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLHEALTH) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_command_name = "SHELLHEALTH";
+        gshell_command_result = core_ok ? "SHELL HEALTH OK" : "SHELL HEALTH BAD";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = core_ok ? "HEALTH OK" : "HEALTH BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "SHELLHEALTH -> CORE GSHELL READY" : "SHELLHEALTH -> CORE ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLSUMMARY) {
+        gshell_command_name = "SHELLSUMMARY";
+        gshell_command_result = "SHELL SUMMARY OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "SHELL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLSUMMARY -> WINDOW SHELL SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHERSUM) {
+        gshell_command_name = "LAUNCHERSUM";
+        gshell_command_result = "LAUNCHER SUM OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "LAUNCHER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHERSUM -> LAUNCHER FLOW SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKBARSUM) {
+        gshell_command_name = "TASKBARSUM";
+        gshell_command_result = "TASKBAR SUM OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKBARSUM -> TASKBAR SWITCH SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAYOUTSUMB) {
+        gshell_command_name = "LAYOUTSUM";
+        gshell_command_result = "LAYOUT SUM OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "LAYOUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAYOUTSUM -> WINDOW LAYOUT SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HOMESUMMARY) {
+        gshell_command_name = "HOMESUMMARY";
+        gshell_command_result = "HOME SUMMARY OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "HOME OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HOMESUMMARY -> DESKTOP SHELL HOME SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHELLNEXT) {
+        gshell_command_name = "SHELLNEXT";
+        gshell_command_result = "SHELL NEXT OK";
+        gshell_command_view = "SHELLFINAL";
+        gshell_input_status_text = "NEXT 1.3";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHELLNEXT -> 1.3 REAL INPUT OR APP SHELL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSHELLSTATUS) {
+        gshell_command_name = "APPSHELLSTATUS";
+        gshell_command_result = "APP SHELL STATUS OK";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSHELLSTATUS -> APP SHELL BASE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPCATALOG) {
+        gshell_app_catalog_ready = 1;
+        gshell_app_shell_state = "catalog";
+        gshell_app_shell_selected = "demo.app";
+        gshell_app_shell_last = "catalog-ready";
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_selected_app = "demo.app";
+        gshell_launcher_state = "grid";
+        gshell_home_apps_ready = 1;
+        gshell_hit_zone = "app-catalog";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "browse";
+        gshell_focus_target = "app-catalog";
+        gshell_focus_changes++;
+        gshell_app_shell_events++;
+        gshell_command_name = "APPCATALOG";
+        gshell_command_result = "APP CATALOG OK";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_input_status_text = "CATALOG OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPCATALOG -> DEMO APP CATALOG READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPCARD) {
+        if (gshell_app_catalog_ready) {
+            gshell_app_card_ready = 1;
+            gshell_app_shell_state = "card";
+            gshell_app_shell_selected = "demo.app";
+            gshell_app_shell_last = "card-ready";
+            gshell_hit_zone = "app-card";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "select-card";
+            gshell_focus_target = "app-card";
+            gshell_command_result = "APP CARD OK";
+            gshell_input_status_text = "CARD OK";
+            gshell_terminal_push("APPCARD -> DEMO APP CARD READY");
+        } else {
+            gshell_app_shell_state = "wait";
+            gshell_app_shell_last = "card-wait";
+            gshell_command_result = "APP CARD WAIT";
+            gshell_input_status_text = "CARD WAIT";
+            gshell_terminal_push("APPCARD -> NEED APPCATALOG");
+        }
+
+        gshell_app_shell_events++;
+        gshell_command_name = "APPCARD";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPDETAILS) {
+        if (gshell_app_card_ready) {
+            gshell_app_details_ready = 1;
+            gshell_app_shell_state = "details";
+            gshell_app_shell_selected = "demo.app";
+            gshell_app_shell_last = "details-ready";
+            gshell_hit_zone = "app-details";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "show-details";
+            gshell_focus_target = "app-details";
+            gshell_command_result = "APP DETAILS OK";
+            gshell_input_status_text = "DETAIL OK";
+            gshell_terminal_push("APPDETAILS -> DEMO APP DETAILS READY");
+        } else {
+            gshell_app_shell_state = "wait";
+            gshell_app_shell_last = "details-wait";
+            gshell_command_result = "APP DETAILS WAIT";
+            gshell_input_status_text = "DETAIL WAIT";
+            gshell_terminal_push("APPDETAILS -> NEED APPCARD");
+        }
+
+        gshell_app_shell_events++;
+        gshell_command_name = "APPDETAILS";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSHELLLAUNCH) {
+        if (gshell_app_details_ready || gshell_app_card_ready) {
+            gshell_app_shell_launch_ready = 1;
+            gshell_app_shell_state = "launch";
+            gshell_app_shell_last = "launch-ready";
+            gshell_launcher_app_selected = 1;
+            gshell_launcher_selected_app = "demo.app";
+            gshell_launch_prepared = 1;
+            gshell_launch_approved = 1;
+            gshell_launch_state = "approved";
+            gshell_launch_last_result = "app-shell";
+            gshell_app_slot_allocated = 1;
+            gshell_app_slot_pid = 1;
+            gshell_app_slot_state = "allocated";
+            gshell_focus_target = "launch-flow";
+            gshell_command_result = "APP SHELL LAUNCH OK";
+            gshell_input_status_text = "LAUNCH OK";
+            gshell_terminal_push("APPSHELLLAUNCH -> DEMO APP LAUNCH FLOW READY");
+        } else {
+            gshell_app_shell_state = "wait";
+            gshell_app_shell_last = "launch-wait";
+            gshell_command_result = "APP SHELL LAUNCH WAIT";
+            gshell_input_status_text = "LAUNCH WAIT";
+            gshell_terminal_push("APPSHELLLAUNCH -> NEED APPCARD OR APPDETAILS");
+        }
+
+        gshell_app_shell_events++;
+        gshell_command_name = "APPSHELLLAUNCH";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSHELLCHECK) {
+        int ok = gshell_app_shell_enabled && gshell_app_catalog_ready && gshell_app_card_ready;
+        gshell_app_shell_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "APPSHELLCHECK";
+        gshell_command_result = ok ? "APP SHELL CHECK OK" : "APP SHELL CHECK WAIT";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_input_status_text = ok ? "APP SHELL OK" : "APP SHELL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "APPSHELLCHECK -> APP SHELL READY" : "APPSHELLCHECK -> NEED CATALOG AND CARD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSHELLRESET) {
+        gshell_app_shell_enabled = 1;
+        gshell_app_catalog_ready = 0;
+        gshell_app_card_ready = 0;
+        gshell_app_details_ready = 0;
+        gshell_app_shell_launch_ready = 0;
+        gshell_app_shell_events = 0;
+        gshell_app_shell_state = "idle";
+        gshell_app_shell_selected = "none";
+        gshell_app_shell_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "APPSHELLRESET";
+        gshell_command_result = "APP SHELL RESET OK";
+        gshell_command_view = "APPSHELLSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSHELLRESET -> APP SHELL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGSTATUS) {
+        gshell_command_name = "CATALOGSTATUS";
+        gshell_command_result = "CATALOG STATUS OK";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGSTATUS -> APP CATALOG MANAGEMENT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGLIST) {
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_state = "list";
+        gshell_catalog_selected = "demo.app";
+        gshell_catalog_last = "list-ready";
+        gshell_app_catalog_ready = 1;
+        gshell_app_shell_state = "catalog";
+        gshell_app_shell_selected = "demo.app";
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_selected_app = "demo.app";
+        gshell_focus_target = "app-catalog";
+        gshell_focus_changes++;
+        gshell_catalog_events++;
+        gshell_command_name = "CATALOGLIST";
+        gshell_command_result = "CATALOG LIST OK";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = "LIST OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGLIST -> DEMO APP LISTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGSEARCH) {
+        if (gshell_catalog_ready) {
+            gshell_catalog_search_hits = 1;
+            gshell_catalog_state = "search";
+            gshell_catalog_selected = "demo.app";
+            gshell_catalog_last = "search-hit";
+            gshell_hit_zone = "catalog-search";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "search";
+            gshell_focus_target = "catalog-search";
+            gshell_command_result = "CATALOG SEARCH OK";
+            gshell_input_status_text = "SEARCH OK";
+            gshell_terminal_push("CATALOGSEARCH -> DEMO APP FOUND");
+        } else {
+            gshell_catalog_state = "wait";
+            gshell_catalog_last = "search-wait";
+            gshell_command_result = "CATALOG SEARCH WAIT";
+            gshell_input_status_text = "SEARCH WAIT";
+            gshell_terminal_push("CATALOGSEARCH -> NEED CATALOGLIST");
+        }
+
+        gshell_catalog_events++;
+        gshell_command_name = "CATALOGSEARCH";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGPIN) {
+        if (gshell_catalog_ready) {
+            gshell_catalog_pinned = 1;
+            gshell_catalog_state = "pinned";
+            gshell_catalog_selected = "demo.app";
+            gshell_catalog_last = "pin-demo";
+            gshell_launcher_app_pinned = 1;
+            gshell_taskbar_item_ready = 1;
+            gshell_taskbar_item = "demo.app";
+            gshell_shell_taskbar_ready = 1;
+            gshell_dock_ready = 1;
+            gshell_hit_zone = "taskbar";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "pin";
+            gshell_focus_target = "taskbar";
+            gshell_command_result = "CATALOG PIN OK";
+            gshell_input_status_text = "PIN OK";
+            gshell_terminal_push("CATALOGPIN -> DEMO APP PINNED");
+        } else {
+            gshell_catalog_state = "wait";
+            gshell_catalog_last = "pin-wait";
+            gshell_command_result = "CATALOG PIN WAIT";
+            gshell_input_status_text = "PIN WAIT";
+            gshell_terminal_push("CATALOGPIN -> NEED CATALOGLIST");
+        }
+
+        gshell_catalog_events++;
+        gshell_command_name = "CATALOGPIN";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGENABLE) {
+        gshell_catalog_enabled = 1;
+        gshell_catalog_state = "enabled";
+        gshell_catalog_last = "enable";
+        gshell_command_name = "CATALOGENABLE";
+        gshell_command_result = "CATALOG ENABLE OK";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = "ENABLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_catalog_events++;
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGENABLE -> DEMO APP ENABLED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGDISABLE) {
+        gshell_catalog_enabled = 0;
+        gshell_catalog_state = "disabled";
+        gshell_catalog_last = "disable";
+        gshell_command_name = "CATALOGDISABLE";
+        gshell_command_result = "CATALOG DISABLE OK";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = "DISABLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_catalog_events++;
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGDISABLE -> DEMO APP DISABLED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGCHECK) {
+        int ok = gshell_catalog_ready && gshell_catalog_items > 0 && gshell_catalog_enabled;
+        gshell_catalog_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "CATALOGCHECK";
+        gshell_command_result = ok ? "CATALOG CHECK OK" : "CATALOG CHECK WAIT";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = ok ? "CATALOG OK" : "CATALOG WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "CATALOGCHECK -> APP CATALOG READY" : "CATALOGCHECK -> NEED LIST AND ENABLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGRESET) {
+        gshell_catalog_ready = 0;
+        gshell_catalog_items = 0;
+        gshell_catalog_search_hits = 0;
+        gshell_catalog_pinned = 0;
+        gshell_catalog_enabled = 1;
+        gshell_catalog_events = 0;
+        gshell_catalog_state = "idle";
+        gshell_catalog_selected = "none";
+        gshell_catalog_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "CATALOGRESET";
+        gshell_command_result = "CATALOG RESET OK";
+        gshell_command_view = "CATALOGSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGRESET -> APP CATALOG STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILSTATUS) {
+        gshell_command_name = "DETAILSTATUS";
+        gshell_command_result = "DETAIL STATUS OK";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DETAILSTATUS -> APP DETAIL PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILOPEN) {
+        if (gshell_catalog_ready || gshell_app_catalog_ready) {
+            gshell_detail_ready = 1;
+            gshell_detail_state = "open";
+            gshell_detail_app = "demo.app";
+            gshell_detail_last = "open-demo";
+            gshell_app_details_ready = 1;
+            gshell_app_shell_state = "details";
+            gshell_app_shell_selected = "demo.app";
+            gshell_hit_zone = "app-details";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "open-detail";
+            gshell_focus_target = "app-details";
+            gshell_command_result = "DETAIL OPEN OK";
+            gshell_input_status_text = "OPEN OK";
+            gshell_terminal_push("DETAILOPEN -> DEMO APP DETAIL OPENED");
+        } else {
+            gshell_detail_state = "wait";
+            gshell_detail_last = "open-wait";
+            gshell_command_result = "DETAIL OPEN WAIT";
+            gshell_input_status_text = "OPEN WAIT";
+            gshell_terminal_push("DETAILOPEN -> NEED CATALOGLIST OR APPCATALOG");
+        }
+
+        gshell_detail_events++;
+        gshell_command_name = "DETAILOPEN";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILMANIFEST) {
+        if (gshell_detail_ready) {
+            gshell_detail_manifest_ready = 1;
+            gshell_detail_state = "manifest";
+            gshell_detail_last = "manifest-ready";
+            gshell_command_result = "DETAIL MANIFEST OK";
+            gshell_input_status_text = "MANIFEST OK";
+            gshell_terminal_push("DETAILMANIFEST -> DEMO APP MANIFEST READY");
+        } else {
+            gshell_detail_state = "wait";
+            gshell_detail_last = "manifest-wait";
+            gshell_command_result = "DETAIL MANIFEST WAIT";
+            gshell_input_status_text = "MANIFEST WAIT";
+            gshell_terminal_push("DETAILMANIFEST -> NEED DETAILOPEN");
+        }
+
+        gshell_detail_events++;
+        gshell_command_name = "DETAILMANIFEST";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILCAPS) {
+        if (gshell_detail_ready) {
+            gshell_detail_caps_ready = 1;
+            gshell_detail_state = "caps";
+            gshell_detail_last = "caps-ready";
+            gshell_command_result = "DETAIL CAPS OK";
+            gshell_input_status_text = "CAPS OK";
+            gshell_terminal_push("DETAILCAPS -> DEMO APP CAPABILITIES READY");
+        } else {
+            gshell_detail_state = "wait";
+            gshell_detail_last = "caps-wait";
+            gshell_command_result = "DETAIL CAPS WAIT";
+            gshell_input_status_text = "CAPS WAIT";
+            gshell_terminal_push("DETAILCAPS -> NEED DETAILOPEN");
+        }
+
+        gshell_detail_events++;
+        gshell_command_name = "DETAILCAPS";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILPERMS) {
+        if (gshell_detail_ready) {
+            gshell_detail_perms_ready = 1;
+            gshell_detail_state = "perms";
+            gshell_detail_last = "perms-ready";
+            gshell_perm_requested = 1;
+            gshell_perm_allowed = 1;
+            gshell_perm_denied = 0;
+            gshell_perm_state = "granted";
+            gshell_perm_last = "detail-granted";
+            gshell_command_result = "DETAIL PERMS OK";
+            gshell_input_status_text = "PERMS OK";
+            gshell_terminal_push("DETAILPERMS -> DEMO APP PERMISSION INFO READY");
+        } else {
+            gshell_detail_state = "wait";
+            gshell_detail_last = "perms-wait";
+            gshell_command_result = "DETAIL PERMS WAIT";
+            gshell_input_status_text = "PERMS WAIT";
+            gshell_terminal_push("DETAILPERMS -> NEED DETAILOPEN");
+        }
+
+        gshell_detail_events++;
+        gshell_command_name = "DETAILPERMS";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILLAUNCH) {
+        if (gshell_detail_ready && gshell_detail_manifest_ready) {
+            gshell_detail_launch_ready = 1;
+            gshell_detail_state = "launch";
+            gshell_detail_last = "launch-ready";
+            gshell_app_shell_launch_ready = 1;
+            gshell_launch_prepared = 1;
+            gshell_launch_approved = 1;
+            gshell_launch_state = "approved";
+            gshell_launch_last_result = "detail-launch";
+            gshell_app_slot_allocated = 1;
+            gshell_app_slot_pid = 1;
+            gshell_app_slot_state = "allocated";
+            gshell_focus_target = "launch-flow";
+            gshell_command_result = "DETAIL LAUNCH OK";
+            gshell_input_status_text = "LAUNCH OK";
+            gshell_terminal_push("DETAILLAUNCH -> DEMO APP DETAIL LAUNCH READY");
+        } else {
+            gshell_detail_state = "wait";
+            gshell_detail_last = "launch-wait";
+            gshell_command_result = "DETAIL LAUNCH WAIT";
+            gshell_input_status_text = "LAUNCH WAIT";
+            gshell_terminal_push("DETAILLAUNCH -> NEED DETAILOPEN AND DETAILMANIFEST");
+        }
+
+        gshell_detail_events++;
+        gshell_command_name = "DETAILLAUNCH";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILCHECK) {
+        int ok = gshell_detail_ready && gshell_detail_manifest_ready && gshell_detail_caps_ready && gshell_detail_perms_ready;
+        gshell_detail_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "DETAILCHECK";
+        gshell_command_result = ok ? "DETAIL CHECK OK" : "DETAIL CHECK WAIT";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_input_status_text = ok ? "DETAIL OK" : "DETAIL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "DETAILCHECK -> APP DETAIL READY" : "DETAILCHECK -> NEED OPEN/MANIFEST/CAPS/PERMS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILRESET) {
+        gshell_detail_ready = 0;
+        gshell_detail_manifest_ready = 0;
+        gshell_detail_caps_ready = 0;
+        gshell_detail_perms_ready = 0;
+        gshell_detail_launch_ready = 0;
+        gshell_detail_events = 0;
+        gshell_detail_state = "idle";
+        gshell_detail_app = "none";
+        gshell_detail_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "DETAILRESET";
+        gshell_command_result = "DETAIL RESET OK";
+        gshell_command_view = "DETAILSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DETAILRESET -> APP DETAIL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONSTATUS) {
+        gshell_command_name = "ACTIONSTATUS";
+        gshell_command_result = "ACTION STATUS OK";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ACTIONSTATUS -> APP ACTION FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONPREPARE) {
+        if (gshell_detail_ready || gshell_app_card_ready || gshell_catalog_ready) {
+            gshell_action_prepared = 1;
+            gshell_action_app = "demo.app";
+            gshell_action_state = "prepared";
+            gshell_action_last = "prepare";
+            gshell_detail_ready = 1;
+            gshell_detail_app = "demo.app";
+            gshell_launch_prepared = 1;
+            gshell_launch_state = "prepared";
+            gshell_launch_last_result = "action-prepare";
+            gshell_app_slot_allocated = 1;
+            gshell_app_slot_pid = 1;
+            gshell_app_slot_state = "allocated";
+            gshell_focus_target = "app-action";
+            gshell_command_result = "ACTION PREPARE OK";
+            gshell_input_status_text = "PREPARE OK";
+            gshell_terminal_push("ACTIONPREPARE -> DEMO APP ACTION PREPARED");
+        } else {
+            gshell_action_state = "wait";
+            gshell_action_last = "prepare-wait";
+            gshell_command_result = "ACTION PREPARE WAIT";
+            gshell_input_status_text = "PREPARE WAIT";
+            gshell_terminal_push("ACTIONPREPARE -> NEED DETAILOPEN OR APPCARD");
+        }
+
+        gshell_action_events++;
+        gshell_command_name = "ACTIONPREPARE";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONALLOW) {
+        if (gshell_action_prepared) {
+            gshell_action_allowed = 1;
+            gshell_action_state = "allowed";
+            gshell_action_last = "allow";
+            gshell_launch_approved = 1;
+            gshell_launch_state = "approved";
+            gshell_launch_last_result = "action-allow";
+            gshell_perm_requested = 1;
+            gshell_perm_allowed = 1;
+            gshell_perm_denied = 0;
+            gshell_perm_state = "granted";
+            gshell_perm_last = "action-granted";
+            gshell_command_result = "ACTION ALLOW OK";
+            gshell_input_status_text = "ALLOW OK";
+            gshell_terminal_push("ACTIONALLOW -> USER APPROVED DEMO APP ACTION");
+        } else {
+            gshell_action_state = "wait";
+            gshell_action_last = "allow-wait";
+            gshell_command_result = "ACTION ALLOW WAIT";
+            gshell_input_status_text = "ALLOW WAIT";
+            gshell_terminal_push("ACTIONALLOW -> NEED ACTIONPREPARE");
+        }
+
+        gshell_action_events++;
+        gshell_command_name = "ACTIONALLOW";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONOPEN) {
+        if (gshell_action_allowed) {
+            gshell_action_opened = 1;
+            gshell_action_state = "opened";
+            gshell_action_last = "open-window";
+            gshell_shell_panel_ready = 1;
+            gshell_shell_taskbar_ready = 1;
+            gshell_shell_launcher_ready = 1;
+            gshell_shell_state = "app-open";
+            gshell_shell_focus = "demo.app";
+            gshell_window_exists = 1;
+            gshell_window_focused = 1;
+            gshell_window_minimized = 0;
+            gshell_window_title = "demo.window";
+            gshell_window_state = "open";
+            gshell_window_last = "action-open";
+            gshell_taskbar_item_ready = 1;
+            gshell_taskbar_item = "demo.app";
+            gshell_taskbar_state = "focused";
+            gshell_focus_target = "demo.window";
+            gshell_command_result = "ACTION OPEN OK";
+            gshell_input_status_text = "OPEN OK";
+            gshell_terminal_push("ACTIONOPEN -> DEMO APP WINDOW OPENED");
+        } else {
+            gshell_action_state = "wait";
+            gshell_action_last = "open-wait";
+            gshell_command_result = "ACTION OPEN WAIT";
+            gshell_input_status_text = "OPEN WAIT";
+            gshell_terminal_push("ACTIONOPEN -> NEED ACTIONALLOW");
+        }
+
+        gshell_action_events++;
+        gshell_command_name = "ACTIONOPEN";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONRUN) {
+        if (gshell_action_opened) {
+            gshell_action_running = 1;
+            gshell_action_state = "running";
+            gshell_action_last = "run";
+            gshell_launch_state = "running";
+            gshell_launch_last_result = "action-run";
+            gshell_life_started = 1;
+            gshell_life_paused = 0;
+            gshell_life_state = "running";
+            gshell_life_last = "action-run";
+            gshell_command_result = "ACTION RUN OK";
+            gshell_input_status_text = "RUN OK";
+            gshell_terminal_push("ACTIONRUN -> DEMO APP RUNNING");
+        } else {
+            gshell_action_state = "wait";
+            gshell_action_last = "run-wait";
+            gshell_command_result = "ACTION RUN WAIT";
+            gshell_input_status_text = "RUN WAIT";
+            gshell_terminal_push("ACTIONRUN -> NEED ACTIONOPEN");
+        }
+
+        gshell_action_events++;
+        gshell_command_name = "ACTIONRUN";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONSTOP) {
+        if (gshell_action_running || gshell_life_started) {
+            gshell_action_running = 0;
+            gshell_action_state = "stopped";
+            gshell_action_last = "stop";
+            gshell_life_started = 0;
+            gshell_life_paused = 0;
+            gshell_life_state = "stopped";
+            gshell_life_last = "action-stop";
+            gshell_launch_state = "stopped";
+            gshell_launch_last_result = "action-stop";
+            gshell_command_result = "ACTION STOP OK";
+            gshell_input_status_text = "STOP OK";
+            gshell_terminal_push("ACTIONSTOP -> DEMO APP STOPPED");
+        } else {
+            gshell_action_state = "wait";
+            gshell_action_last = "stop-wait";
+            gshell_command_result = "ACTION STOP WAIT";
+            gshell_input_status_text = "STOP WAIT";
+            gshell_terminal_push("ACTIONSTOP -> APP NOT RUNNING");
+        }
+
+        gshell_action_events++;
+        gshell_command_name = "ACTIONSTOP";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONCHECK) {
+        int ok = gshell_action_prepared && gshell_action_allowed && gshell_action_opened;
+        gshell_action_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "ACTIONCHECK";
+        gshell_command_result = ok ? "ACTION CHECK OK" : "ACTION CHECK WAIT";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_input_status_text = ok ? "ACTION OK" : "ACTION WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "ACTIONCHECK -> APP ACTION FLOW READY" : "ACTIONCHECK -> NEED PREPARE/ALLOW/OPEN");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONRESET) {
+        gshell_action_prepared = 0;
+        gshell_action_allowed = 0;
+        gshell_action_opened = 0;
+        gshell_action_running = 0;
+        gshell_action_events = 0;
+        gshell_action_state = "idle";
+        gshell_action_app = "none";
+        gshell_action_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "ACTIONRESET";
+        gshell_command_result = "ACTION RESET OK";
+        gshell_command_view = "ACTIONSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ACTIONRESET -> APP ACTION STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPMGMTSTATUS) {
+        gshell_command_name = "APPMGMTSTATUS";
+        gshell_command_result = "APP MGMT STATUS OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPMGMTSTATUS -> APP MANAGEMENT PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPINVENTORY) {
+        gshell_app_mgmt_inventory_ready = 1;
+        gshell_app_mgmt_app = "demo.app";
+        gshell_app_mgmt_state = "inventory";
+        gshell_app_mgmt_last = "inventory-ready";
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_selected = "demo.app";
+        gshell_app_catalog_ready = 1;
+        gshell_focus_target = "app-inventory";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPINVENTORY";
+        gshell_command_result = "APP INVENTORY OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "INV OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPINVENTORY -> DEMO APP INVENTORY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSCAN) {
+        gshell_app_mgmt_scanned = 1;
+        gshell_app_mgmt_inventory_ready = 1;
+        gshell_app_mgmt_app = "demo.app";
+        gshell_app_mgmt_state = "scanned";
+        gshell_app_mgmt_last = "scan-demo";
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_selected = "demo.app";
+        gshell_focus_target = "app-scan";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPSCAN";
+        gshell_command_result = "APP SCAN OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "SCAN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSCAN -> DEMO APP SCANNED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPREGISTER) {
+        if (gshell_app_mgmt_scanned || gshell_catalog_ready) {
+            gshell_app_mgmt_registered = 1;
+            gshell_app_mgmt_app = "demo.app";
+            gshell_app_mgmt_state = "registered";
+            gshell_app_mgmt_last = "register-demo";
+            gshell_app_shell_selected = "demo.app";
+            gshell_catalog_selected = "demo.app";
+            gshell_command_result = "APP REGISTER OK";
+            gshell_input_status_text = "REG OK";
+            gshell_terminal_push("APPREGISTER -> DEMO APP REGISTERED");
+        } else {
+            gshell_app_mgmt_state = "wait";
+            gshell_app_mgmt_last = "register-wait";
+            gshell_command_result = "APP REGISTER WAIT";
+            gshell_input_status_text = "REG WAIT";
+            gshell_terminal_push("APPREGISTER -> NEED APPSCAN OR CATALOGLIST");
+        }
+
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPREGISTER";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPUNREGISTER) {
+        gshell_app_mgmt_registered = 0;
+        gshell_app_mgmt_state = "unregistered";
+        gshell_app_mgmt_last = "unregister";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPUNREGISTER";
+        gshell_command_result = "APP UNREGISTER OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "UNREG OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPUNREGISTER -> DEMO APP UNREGISTERED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPENABLE) {
+        gshell_app_mgmt_enabled = 1;
+        gshell_catalog_enabled = 1;
+        gshell_app_mgmt_state = "enabled";
+        gshell_app_mgmt_last = "enable";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPENABLE";
+        gshell_command_result = "APP ENABLE OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "ENABLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPENABLE -> DEMO APP ENABLED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPDISABLE) {
+        gshell_app_mgmt_enabled = 0;
+        gshell_catalog_enabled = 0;
+        gshell_app_mgmt_state = "disabled";
+        gshell_app_mgmt_last = "disable";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPDISABLE";
+        gshell_command_result = "APP DISABLE OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "DISABLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPDISABLE -> DEMO APP DISABLED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPTRUST) {
+        gshell_app_mgmt_trusted = 1;
+        gshell_app_mgmt_state = "trusted";
+        gshell_app_mgmt_last = "trust";
+        security_rule_default_allow();
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPTRUST";
+        gshell_command_result = "APP TRUST OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "TRUST OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPTRUST -> DEMO APP TRUSTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPUNTRUST) {
+        gshell_app_mgmt_trusted = 0;
+        gshell_app_mgmt_state = "untrusted";
+        gshell_app_mgmt_last = "untrust";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPUNTRUST";
+        gshell_command_result = "APP UNTRUST OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "UNTRUST";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPUNTRUST -> DEMO APP TRUST CLEARED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPFAVORITE) {
+        gshell_app_mgmt_favorite = 1;
+        gshell_app_mgmt_state = "favorite";
+        gshell_app_mgmt_last = "favorite";
+        gshell_launcher_app_pinned = 1;
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPFAVORITE";
+        gshell_command_result = "APP FAVORITE OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "FAV OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPFAVORITE -> DEMO APP FAVORITED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPUNFAVORITE) {
+        gshell_app_mgmt_favorite = 0;
+        gshell_app_mgmt_state = "unfavorite";
+        gshell_app_mgmt_last = "unfavorite";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPUNFAVORITE";
+        gshell_command_result = "APP UNFAVORITE OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "UNFAV OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPUNFAVORITE -> DEMO APP FAVORITE CLEARED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPUPDATECHECK) {
+        gshell_app_mgmt_update_ready = 1;
+        gshell_app_mgmt_state = "update-check";
+        gshell_app_mgmt_last = "update-ready";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPUPDATECHECK";
+        gshell_command_result = "APP UPDATE CHECK OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "UPDATE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPUPDATECHECK -> UPDATE METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPUPDATEMARK) {
+        gshell_app_mgmt_update_ready = 1;
+        gshell_app_mgmt_state = "update-marked";
+        gshell_app_mgmt_last = "update-mark";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPUPDATEMARK";
+        gshell_command_result = "APP UPDATE MARK OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "MARK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPUPDATEMARK -> DEMO APP UPDATE MARKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPROLLBACK) {
+        gshell_app_mgmt_rollback_ready = 1;
+        gshell_app_mgmt_state = "rollback";
+        gshell_app_mgmt_last = "rollback-ready";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPROLLBACK";
+        gshell_command_result = "APP ROLLBACK OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "ROLLBACK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPROLLBACK -> ROLLBACK METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPREPAIR) {
+        gshell_app_mgmt_healthy = 1;
+        gshell_app_mgmt_state = "repaired";
+        gshell_app_mgmt_last = "repair";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPREPAIR";
+        gshell_command_result = "APP REPAIR OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "REPAIR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPREPAIR -> DEMO APP HEALTH REPAIRED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPCLEARCACHE) {
+        gshell_app_mgmt_cache_cleared = 1;
+        gshell_app_mgmt_state = "cache-clear";
+        gshell_app_mgmt_last = "clear-cache";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPCLEARCACHE";
+        gshell_command_result = "APP CLEAR CACHE OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "CACHE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPCLEARCACHE -> DEMO APP CACHE CLEARED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSTATS) {
+        gshell_app_mgmt_state = "stats";
+        gshell_app_mgmt_last = "stats-ready";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPSTATS";
+        gshell_command_result = "APP STATS OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "STATS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSTATS -> APP MGMT STATS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPHEALTH) {
+        gshell_app_mgmt_healthy = 1;
+        gshell_app_mgmt_state = "healthy";
+        gshell_app_mgmt_last = "health-ok";
+        gshell_app_mgmt_events++;
+        gshell_command_name = "APPHEALTH";
+        gshell_command_result = "APP HEALTH OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "HEALTH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPHEALTH -> DEMO APP HEALTH OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPMGMTCHECK) {
+        int ok = gshell_app_mgmt_inventory_ready && gshell_app_mgmt_registered && gshell_app_mgmt_enabled && gshell_app_mgmt_healthy;
+        gshell_app_mgmt_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "APPMGMTCHECK";
+        gshell_command_result = ok ? "APP MGMT CHECK OK" : "APP MGMT CHECK WAIT";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = ok ? "MGMT OK" : "MGMT WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "APPMGMTCHECK -> APP MANAGEMENT READY" : "APPMGMTCHECK -> NEED INVENTORY REGISTER ENABLE HEALTH");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPMGMTRESET) {
+        gshell_app_mgmt_inventory_ready = 0;
+        gshell_app_mgmt_scanned = 0;
+        gshell_app_mgmt_registered = 0;
+        gshell_app_mgmt_enabled = 1;
+        gshell_app_mgmt_trusted = 0;
+        gshell_app_mgmt_favorite = 0;
+        gshell_app_mgmt_update_ready = 0;
+        gshell_app_mgmt_rollback_ready = 0;
+        gshell_app_mgmt_cache_cleared = 0;
+        gshell_app_mgmt_healthy = 1;
+        gshell_app_mgmt_events = 0;
+        gshell_app_mgmt_state = "idle";
+        gshell_app_mgmt_app = "none";
+        gshell_app_mgmt_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "APPMGMTRESET";
+        gshell_command_result = "APP MGMT RESET OK";
+        gshell_command_view = "APPMGMTSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPMGMTRESET -> APP MANAGEMENT STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPFINAL) {
+        gshell_command_name = "APPFINAL";
+        gshell_command_result = "APP FINAL OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPFINAL -> 1.3 APP SHELL CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPHEALTHSUM) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_app_final_state = core_ok ? "health-ok" : "health-bad";
+        gshell_app_final_last = "health-sum";
+        gshell_app_final_events++;
+        gshell_command_name = "APPHEALTHSUM";
+        gshell_command_result = core_ok ? "APP HEALTH SUM OK" : "APP HEALTH SUM BAD";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = core_ok ? "HEALTH OK" : "HEALTH BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "APPHEALTHSUM -> CORE HEALTH OK" : "APPHEALTHSUM -> CORE HEALTH ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSHELLSUM) {
+        gshell_app_final_state = "appshell";
+        gshell_app_final_last = "appshell-sum";
+        gshell_app_shell_enabled = 1;
+        gshell_app_shell_selected = "demo.app";
+        gshell_app_final_events++;
+        gshell_command_name = "APPSHELLSUM";
+        gshell_command_result = "APP SHELL SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "SHELL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSHELLSUM -> APP SHELL SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CATALOGSUM) {
+        gshell_app_final_state = "catalog";
+        gshell_app_final_last = "catalog-sum";
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_enabled = 1;
+        gshell_catalog_selected = "demo.app";
+        gshell_app_catalog_ready = 1;
+        gshell_app_final_events++;
+        gshell_command_name = "CATALOGSUM";
+        gshell_command_result = "CATALOG SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "CATALOG OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CATALOGSUM -> APP CATALOG SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DETAILSUM) {
+        gshell_app_final_state = "detail";
+        gshell_app_final_last = "detail-sum";
+        gshell_detail_ready = 1;
+        gshell_detail_manifest_ready = 1;
+        gshell_detail_caps_ready = 1;
+        gshell_detail_perms_ready = 1;
+        gshell_detail_app = "demo.app";
+        gshell_app_final_events++;
+        gshell_command_name = "DETAILSUM";
+        gshell_command_result = "DETAIL SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "DETAIL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DETAILSUM -> APP DETAIL SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ACTIONSUM) {
+        gshell_app_final_state = "action";
+        gshell_app_final_last = "action-sum";
+        gshell_action_prepared = 1;
+        gshell_action_allowed = 1;
+        gshell_action_opened = 1;
+        gshell_action_app = "demo.app";
+        gshell_app_final_events++;
+        gshell_command_name = "ACTIONSUM";
+        gshell_command_result = "ACTION SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "ACTION OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ACTIONSUM -> APP ACTION SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MGMTSUM) {
+        gshell_app_final_state = "mgmt";
+        gshell_app_final_last = "mgmt-sum";
+        gshell_app_mgmt_inventory_ready = 1;
+        gshell_app_mgmt_registered = 1;
+        gshell_app_mgmt_enabled = 1;
+        gshell_app_mgmt_healthy = 1;
+        gshell_app_mgmt_app = "demo.app";
+        gshell_app_final_events++;
+        gshell_command_name = "MGMTSUM";
+        gshell_command_result = "MGMT SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "MGMT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MGMTSUM -> APP MANAGEMENT SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPREADINESS) {
+        int ok = gshell_catalog_ready && gshell_detail_ready && gshell_action_prepared && gshell_app_mgmt_registered;
+        gshell_app_final_ready = ok ? 1 : 0;
+        gshell_app_final_state = ok ? "ready" : "partial";
+        gshell_app_final_last = ok ? "ready-ok" : "ready-partial";
+        gshell_app_final_events++;
+        gshell_command_name = "APPREADINESS";
+        gshell_command_result = ok ? "APP READINESS OK" : "APP READINESS PARTIAL";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = ok ? "READY OK" : "READY PART";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "APPREADINESS -> APP SHELL READY" : "APPREADINESS -> RUN APPFLOWFULL OR APPDEMOALL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPFLOWFULL) {
+        gshell_app_final_ready = 1;
+        gshell_app_final_flow_ready = 1;
+        gshell_app_final_state = "flow-ready";
+        gshell_app_final_focus = "app-flow";
+        gshell_app_final_last = "full-flow";
+
+        gshell_app_shell_enabled = 1;
+        gshell_app_catalog_ready = 1;
+        gshell_app_card_ready = 1;
+        gshell_app_details_ready = 1;
+        gshell_app_shell_launch_ready = 1;
+        gshell_app_shell_selected = "demo.app";
+
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_enabled = 1;
+        gshell_catalog_selected = "demo.app";
+
+        gshell_detail_ready = 1;
+        gshell_detail_manifest_ready = 1;
+        gshell_detail_caps_ready = 1;
+        gshell_detail_perms_ready = 1;
+        gshell_detail_launch_ready = 1;
+        gshell_detail_app = "demo.app";
+
+        gshell_action_prepared = 1;
+        gshell_action_allowed = 1;
+        gshell_action_opened = 1;
+        gshell_action_app = "demo.app";
+
+        gshell_app_mgmt_inventory_ready = 1;
+        gshell_app_mgmt_registered = 1;
+        gshell_app_mgmt_enabled = 1;
+        gshell_app_mgmt_healthy = 1;
+        gshell_app_mgmt_app = "demo.app";
+
+        gshell_focus_target = "app-flow";
+        gshell_app_final_events++;
+        gshell_command_name = "APPFLOWFULL";
+        gshell_command_result = "APP FLOW FULL OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPFLOWFULL -> FULL APP SHELL FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPDEMOALL) {
+        gshell_app_final_ready = 1;
+        gshell_app_final_flow_ready = 1;
+        gshell_app_final_demo_ready = 1;
+        gshell_app_final_state = "demo-ready";
+        gshell_app_final_focus = "demo.app";
+        gshell_app_final_last = "demo-all";
+
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_enabled = 1;
+        gshell_catalog_selected = "demo.app";
+
+        gshell_detail_ready = 1;
+        gshell_detail_manifest_ready = 1;
+        gshell_detail_caps_ready = 1;
+        gshell_detail_perms_ready = 1;
+        gshell_detail_launch_ready = 1;
+        gshell_detail_app = "demo.app";
+
+        gshell_action_prepared = 1;
+        gshell_action_allowed = 1;
+        gshell_action_opened = 1;
+        gshell_action_running = 1;
+        gshell_action_app = "demo.app";
+
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 1;
+        gshell_launch_state = "running";
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_app_slot_state = "allocated";
+        gshell_life_started = 1;
+        gshell_life_state = "running";
+
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_minimized = 0;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+
+        gshell_focus_target = "demo.app";
+        gshell_app_final_events++;
+        gshell_command_name = "APPDEMOALL";
+        gshell_command_result = "APP DEMO ALL OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPDEMOALL -> FULL DEMO APP RUNNING");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSECURITYSUM) {
+        gshell_app_final_state = "security";
+        gshell_app_final_last = "security-sum";
+        gshell_app_mgmt_trusted = 1;
+        gshell_focus_target = "app-security";
+        gshell_app_final_events++;
+        gshell_command_name = "APPSECURITYSUM";
+        gshell_command_result = "APP SECURITY SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "SEC OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSECURITYSUM -> APP SECURITY SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPPERMISSIONSUM) {
+        gshell_app_final_state = "permission";
+        gshell_app_final_last = "permission-sum";
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 1;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "granted";
+        gshell_app_final_events++;
+        gshell_command_name = "APPPERMISSIONSUM";
+        gshell_command_result = "APP PERMISSION SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "PERM OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPPERMISSIONSUM -> APP PERMISSION SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPRUNTIMESUM) {
+        gshell_app_final_state = "runtime";
+        gshell_app_final_last = "runtime-sum";
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_life_started = 1;
+        gshell_life_state = "running";
+        gshell_app_final_events++;
+        gshell_command_name = "APPRUNTIMESUM";
+        gshell_command_result = "APP RUNTIME SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "RUNTIME OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPRUNTIMESUM -> APP RUNTIME SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPWINDOWSUM) {
+        gshell_app_final_state = "window";
+        gshell_app_final_last = "window-sum";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "focused";
+        gshell_app_final_events++;
+        gshell_command_name = "APPWINDOWSUM";
+        gshell_command_result = "APP WINDOW SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPWINDOWSUM -> APP WINDOW SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPLAUNCHSUM) {
+        gshell_app_final_state = "launch";
+        gshell_app_final_last = "launch-sum";
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 1;
+        gshell_launch_state = "approved";
+        gshell_detail_launch_ready = 1;
+        gshell_app_shell_launch_ready = 1;
+        gshell_app_final_events++;
+        gshell_command_name = "APPLAUNCHSUM";
+        gshell_command_result = "APP LAUNCH SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "LAUNCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPLAUNCHSUM -> APP LAUNCH SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSTATESUM) {
+        gshell_app_final_state = "state-sum";
+        gshell_app_final_last = "state-sum";
+        gshell_app_final_events++;
+        gshell_command_name = "APPSTATESUM";
+        gshell_command_result = "APP STATE SUM OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "STATE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSTATESUM -> APP STATE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPFINALCHECK) {
+        int ok = gshell_app_final_ready || (gshell_catalog_ready && gshell_detail_ready && gshell_action_prepared && gshell_app_mgmt_registered);
+        gshell_app_final_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "APPFINALCHECK";
+        gshell_command_result = ok ? "APP FINAL CHECK OK" : "APP FINAL CHECK WAIT";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = ok ? "FINAL OK" : "FINAL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "APPFINALCHECK -> APP SHELL CLOSEOUT READY" : "APPFINALCHECK -> RUN APPFLOWFULL OR APPDEMOALL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPFINALRESET) {
+        gshell_app_final_ready = 0;
+        gshell_app_final_flow_ready = 0;
+        gshell_app_final_demo_ready = 0;
+        gshell_app_final_events = 0;
+        gshell_app_final_state = "idle";
+        gshell_app_final_focus = "terminal";
+        gshell_app_final_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "APPFINALRESET";
+        gshell_command_result = "APP FINAL RESET OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPFINALRESET -> APP FINAL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPNEXT) {
+        gshell_command_name = "APPNEXT";
+        gshell_command_result = "APP NEXT OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "NEXT 1.4";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPNEXT -> 1.4 VISUAL UI PANELS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPROADMAP) {
+        gshell_command_name = "APPROADMAP";
+        gshell_command_result = "APP ROADMAP OK";
+        gshell_command_view = "APPFINAL";
+        gshell_input_status_text = "ROADMAP";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPROADMAP -> VISUAL DESKTOP APP CARDS WINDOWS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALSTATUS) {
+        gshell_command_name = "VISUALSTATUS";
+        gshell_command_result = "VISUAL STATUS OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALSTATUS -> VISUAL DESKTOP UI PANELS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALBOOT) {
+        gshell_visual_state = "boot-visual";
+        gshell_visual_last = "boot";
+        gshell_visual_metrics++;
+        gshell_visual_events++;
+        gshell_command_name = "VISUALBOOT";
+        gshell_command_result = "VISUAL BOOT OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "BOOT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALBOOT -> BOOT VISUAL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDESKTOP) {
+        gshell_visual_desktop_ready = 1;
+        gshell_visual_state = "desktop";
+        gshell_visual_focus = "desktop";
+        gshell_visual_last = "desktop-ready";
+        gshell_desktop_enabled = 1;
+        gshell_workspace_ready = 1;
+        gshell_desktop_state = "visual-desktop";
+        gshell_focus_target = "desktop";
+        gshell_focus_changes++;
+        gshell_visual_events++;
+        gshell_command_name = "VISUALDESKTOP";
+        gshell_command_result = "VISUAL DESKTOP OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "DESKTOP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDESKTOP -> DESKTOP VISUAL PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALPANEL) {
+        gshell_visual_panel_ready = 1;
+        gshell_visual_state = "panel";
+        gshell_visual_focus = "main-panel";
+        gshell_visual_last = "panel-ready";
+        gshell_shell_panel_ready = 1;
+        gshell_shell_state = "visual-panel";
+        gshell_focus_target = "main-panel";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALPANEL";
+        gshell_command_result = "VISUAL PANEL OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "PANEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALPANEL -> MAIN VISUAL PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALCARDS) {
+        gshell_visual_cards_ready = 1;
+        gshell_visual_state = "cards";
+        gshell_visual_focus = "app-cards";
+        gshell_visual_last = "cards-ready";
+        gshell_app_card_ready = 1;
+        gshell_app_shell_state = "card";
+        gshell_hit_zone = "app-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "visual-card";
+        gshell_focus_target = "app-card";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALCARDS";
+        gshell_command_result = "VISUAL CARDS OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "CARDS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALCARDS -> APP CARD VISUAL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALWINDOW) {
+        gshell_visual_window_ready = 1;
+        gshell_visual_state = "window";
+        gshell_visual_focus = "demo.window";
+        gshell_visual_last = "window-ready";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "visual";
+        gshell_focus_target = "demo.window";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALWINDOW";
+        gshell_command_result = "VISUAL WINDOW OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALWINDOW -> WINDOW VISUAL STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALLAUNCHER) {
+        gshell_visual_launcher_ready = 1;
+        gshell_visual_state = "launcher";
+        gshell_visual_focus = "launcher";
+        gshell_visual_last = "launcher-ready";
+        gshell_shell_launcher_ready = 1;
+        gshell_launcher_grid_ready = 1;
+        gshell_launcher_state = "visual";
+        gshell_focus_target = "launcher";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALLAUNCHER";
+        gshell_command_result = "VISUAL LAUNCHER OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "LAUNCHER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALLAUNCHER -> LAUNCHER VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALTASKBAR) {
+        gshell_visual_taskbar_ready = 1;
+        gshell_visual_state = "taskbar";
+        gshell_visual_focus = "taskbar";
+        gshell_visual_last = "taskbar-ready";
+        gshell_shell_taskbar_ready = 1;
+        gshell_taskbar_enabled = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_taskbar_state = "visual";
+        gshell_focus_target = "taskbar";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALTASKBAR";
+        gshell_command_result = "VISUAL TASKBAR OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALTASKBAR -> TASKBAR VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDOCK) {
+        gshell_visual_dock_ready = 1;
+        gshell_visual_state = "dock";
+        gshell_visual_focus = "dock";
+        gshell_visual_last = "dock-ready";
+        gshell_dock_ready = 1;
+        gshell_desktop_focus = "dock";
+        gshell_focus_target = "dock";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALDOCK";
+        gshell_command_result = "VISUAL DOCK OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "DOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDOCK -> DOCK VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALFOCUS) {
+        gshell_visual_state = "focus";
+        gshell_visual_focus = "demo.app";
+        gshell_visual_last = "focus-demo";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_visual_events++;
+        gshell_command_name = "VISUALFOCUS";
+        gshell_command_result = "VISUAL FOCUS OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALFOCUS -> VISUAL FOCUS RING READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALGRID) {
+        gshell_visual_grid_ready = 1;
+        gshell_visual_state = "grid";
+        gshell_visual_last = "grid-ready";
+        gshell_layout_grid_ready = 1;
+        gshell_layout_state = "visual-grid";
+        gshell_layout_mode = "grid";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALGRID";
+        gshell_command_result = "VISUAL GRID OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "GRID OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALGRID -> VISUAL GRID READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALTHEME) {
+        gshell_visual_theme_ready = 1;
+        gshell_visual_state = "theme";
+        gshell_visual_last = "theme-ready";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALTHEME";
+        gshell_command_result = "VISUAL THEME OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "THEME OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALTHEME -> LINGJING VISUAL THEME READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALGLOW) {
+        gshell_visual_glow_ready = 1;
+        gshell_visual_state = "glow";
+        gshell_visual_last = "glow-ready";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALGLOW";
+        gshell_command_result = "VISUAL GLOW OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "GLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALGLOW -> PANEL GLOW STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALBORDER) {
+        gshell_visual_border_ready = 1;
+        gshell_visual_state = "border";
+        gshell_visual_last = "border-ready";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALBORDER";
+        gshell_command_result = "VISUAL BORDER OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "BORDER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALBORDER -> PANEL BORDER STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALMETRICS) {
+        gshell_visual_metrics++;
+        gshell_visual_state = "metrics";
+        gshell_visual_last = "metrics";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALMETRICS";
+        gshell_command_result = "VISUAL METRICS OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "METRICS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALMETRICS -> UI METRICS UPDATED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDEMO) {
+        gshell_visual_desktop_ready = 1;
+        gshell_visual_panel_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_visual_launcher_ready = 1;
+        gshell_visual_taskbar_ready = 1;
+        gshell_visual_dock_ready = 1;
+        gshell_visual_grid_ready = 1;
+        gshell_visual_theme_ready = 1;
+        gshell_visual_glow_ready = 1;
+        gshell_visual_border_ready = 1;
+        gshell_visual_state = "demo";
+        gshell_visual_focus = "demo.app";
+        gshell_visual_last = "demo-ready";
+        gshell_focus_target = "demo.app";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "visual";
+        gshell_app_final_state = "visual-demo";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALDEMO";
+        gshell_command_result = "VISUAL DEMO OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDEMO -> FULL VISUAL DEMO STATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALFLOW) {
+        gshell_visual_desktop_ready = 1;
+        gshell_visual_panel_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_visual_launcher_ready = 1;
+        gshell_visual_taskbar_ready = 1;
+        gshell_visual_dock_ready = 1;
+        gshell_visual_grid_ready = 1;
+        gshell_visual_state = "flow";
+        gshell_visual_focus = "visual-flow";
+        gshell_visual_last = "flow-ready";
+        gshell_focus_target = "visual-flow";
+        gshell_visual_events++;
+        gshell_command_name = "VISUALFLOW";
+        gshell_command_result = "VISUAL FLOW OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALFLOW -> VISUAL DESKTOP FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALCHECK) {
+        int ok = gshell_visual_enabled && gshell_visual_desktop_ready && gshell_visual_panel_ready && gshell_visual_window_ready;
+        gshell_visual_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "VISUALCHECK";
+        gshell_command_result = ok ? "VISUAL CHECK OK" : "VISUAL CHECK WAIT";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = ok ? "VISUAL OK" : "VISUAL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "VISUALCHECK -> VISUAL UI READY" : "VISUALCHECK -> NEED VISUALDESKTOP PANEL WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALRESET) {
+        gshell_visual_enabled = 1;
+        gshell_visual_desktop_ready = 0;
+        gshell_visual_panel_ready = 0;
+        gshell_visual_cards_ready = 0;
+        gshell_visual_window_ready = 0;
+        gshell_visual_launcher_ready = 0;
+        gshell_visual_taskbar_ready = 0;
+        gshell_visual_dock_ready = 0;
+        gshell_visual_grid_ready = 0;
+        gshell_visual_theme_ready = 0;
+        gshell_visual_glow_ready = 0;
+        gshell_visual_border_ready = 0;
+        gshell_visual_metrics = 0;
+        gshell_visual_events = 0;
+        gshell_visual_state = "idle";
+        gshell_visual_focus = "terminal";
+        gshell_visual_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "VISUALRESET";
+        gshell_command_result = "VISUAL RESET OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALRESET -> VISUAL UI STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALNEXT) {
+        gshell_command_name = "VISUALNEXT";
+        gshell_command_result = "VISUAL NEXT OK";
+        gshell_command_view = "VISUALSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALNEXT -> 1.4.1 VISUAL APP CARDS WINDOWS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDSTATUS) {
+        gshell_command_name = "CARDSTATUS";
+        gshell_command_result = "CARD STATUS OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDSTATUS -> VISUAL APP CARDS WINDOWS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDGRID) {
+        gshell_card_grid_ready = 1;
+        gshell_card_state = "grid";
+        gshell_card_app = "demo.app";
+        gshell_card_last = "grid-ready";
+        gshell_visual_cards_ready = 1;
+        gshell_visual_state = "cards";
+        gshell_app_card_ready = 1;
+        gshell_focus_target = "card-grid";
+        gshell_card_events++;
+        gshell_command_name = "CARDGRID";
+        gshell_command_result = "CARD GRID OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "GRID OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDGRID -> APP CARD GRID READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDSELECT) {
+        if (gshell_card_grid_ready || gshell_visual_cards_ready) {
+            gshell_card_selected = 1;
+            gshell_card_state = "selected";
+            gshell_card_app = "demo.app";
+            gshell_card_last = "select-demo";
+            gshell_hit_zone = "visual-card";
+            gshell_hit_target = "demo.app";
+            gshell_hit_action = "select";
+            gshell_focus_target = "demo.app";
+            gshell_command_result = "CARD SELECT OK";
+            gshell_input_status_text = "SELECT OK";
+            gshell_terminal_push("CARDSELECT -> DEMO APP CARD SELECTED");
+        } else {
+            gshell_card_state = "wait";
+            gshell_card_last = "select-wait";
+            gshell_command_result = "CARD SELECT WAIT";
+            gshell_input_status_text = "SELECT WAIT";
+            gshell_terminal_push("CARDSELECT -> NEED CARDGRID");
+        }
+
+        gshell_card_events++;
+        gshell_command_name = "CARDSELECT";
+        gshell_command_view = "CARDSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDOPEN) {
+        if (gshell_card_selected) {
+            gshell_card_opened = 1;
+            gshell_card_state = "opened";
+            gshell_card_last = "open-card";
+            gshell_app_details_ready = 1;
+            gshell_detail_ready = 1;
+            gshell_detail_app = "demo.app";
+            gshell_focus_target = "app-details";
+            gshell_command_result = "CARD OPEN OK";
+            gshell_input_status_text = "OPEN OK";
+            gshell_terminal_push("CARDOPEN -> DEMO APP CARD OPENED");
+        } else {
+            gshell_card_state = "wait";
+            gshell_card_last = "open-wait";
+            gshell_command_result = "CARD OPEN WAIT";
+            gshell_input_status_text = "OPEN WAIT";
+            gshell_terminal_push("CARDOPEN -> NEED CARDSELECT");
+        }
+
+        gshell_card_events++;
+        gshell_command_name = "CARDOPEN";
+        gshell_command_view = "CARDSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDEXPAND) {
+        if (gshell_card_selected) {
+            gshell_card_expanded = 1;
+            gshell_card_state = "expanded";
+            gshell_card_last = "expand-card";
+            gshell_visual_state = "card-expanded";
+            gshell_focus_target = "expanded-card";
+            gshell_command_result = "CARD EXPAND OK";
+            gshell_input_status_text = "EXPAND OK";
+            gshell_terminal_push("CARDEXPAND -> DEMO APP CARD EXPANDED");
+        } else {
+            gshell_card_state = "wait";
+            gshell_card_last = "expand-wait";
+            gshell_command_result = "CARD EXPAND WAIT";
+            gshell_input_status_text = "EXPAND WAIT";
+            gshell_terminal_push("CARDEXPAND -> NEED CARDSELECT");
+        }
+
+        gshell_card_events++;
+        gshell_command_name = "CARDEXPAND";
+        gshell_command_view = "CARDSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDPIN) {
+        gshell_card_pinned = 1;
+        gshell_card_state = "pinned";
+        gshell_card_app = "demo.app";
+        gshell_card_last = "pin-card";
+        gshell_launcher_app_pinned = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_focus_target = "taskbar";
+        gshell_card_events++;
+        gshell_command_name = "CARDPIN";
+        gshell_command_result = "CARD PIN OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "PIN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDPIN -> DEMO APP CARD PINNED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDBADGE) {
+        gshell_card_badge_ready = 1;
+        gshell_card_state = "badge";
+        gshell_card_last = "badge-ready";
+        gshell_card_events++;
+        gshell_command_name = "CARDBADGE";
+        gshell_command_result = "CARD BADGE OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "BADGE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDBADGE -> CARD BADGE VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDPREVIEW) {
+        gshell_card_preview_ready = 1;
+        gshell_card_state = "preview";
+        gshell_card_last = "preview-ready";
+        gshell_visual_state = "card-preview";
+        gshell_card_events++;
+        gshell_command_name = "CARDPREVIEW";
+        gshell_command_result = "CARD PREVIEW OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "PREVIEW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDPREVIEW -> CARD PREVIEW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWVISUAL) {
+        gshell_window_visual_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "visual";
+        gshell_card_state = "window-visual";
+        gshell_card_last = "window-visual";
+        gshell_focus_target = "demo.window";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWVISUAL";
+        gshell_command_result = "WINDOW VISUAL OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWVISUAL -> DEMO WINDOW VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWTITLE) {
+        gshell_window_title_ready = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_last = "visual-title";
+        gshell_card_state = "window-title";
+        gshell_card_last = "title-ready";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWTITLE";
+        gshell_command_result = "WINDOW TITLE OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "TITLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWTITLE -> WINDOW TITLEBAR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWBODY) {
+        gshell_window_body_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_state = "body-ready";
+        gshell_card_state = "window-body";
+        gshell_card_last = "body-ready";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWBODY";
+        gshell_command_result = "WINDOW BODY OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "BODY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWBODY -> WINDOW BODY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWSHADOW) {
+        gshell_window_shadow_ready = 1;
+        gshell_card_state = "shadow";
+        gshell_card_last = "shadow-ready";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWSHADOW";
+        gshell_command_result = "WINDOW SHADOW OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "SHADOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWSHADOW -> WINDOW SHADOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWACTIVE) {
+        gshell_window_active_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_state = "active";
+        gshell_card_state = "window-active";
+        gshell_card_last = "active-ready";
+        gshell_focus_target = "demo.window";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWACTIVE";
+        gshell_command_result = "WINDOW ACTIVE OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "ACTIVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWACTIVE -> WINDOW ACTIVE VISUAL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WINDOWPREVIEW) {
+        gshell_window_preview_ready = 1;
+        gshell_card_state = "window-preview";
+        gshell_card_last = "window-preview";
+        gshell_card_events++;
+        gshell_command_name = "WINDOWPREVIEW";
+        gshell_command_result = "WINDOW PREVIEW OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "PREVIEW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WINDOWPREVIEW -> WINDOW PREVIEW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALCOMPOSE) {
+        gshell_card_grid_ready = 1;
+        gshell_card_selected = 1;
+        gshell_card_opened = 1;
+        gshell_window_visual_ready = 1;
+        gshell_window_title_ready = 1;
+        gshell_window_body_ready = 1;
+        gshell_window_shadow_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_card_state = "composed";
+        gshell_card_app = "demo.app";
+        gshell_card_last = "compose";
+        gshell_focus_target = "visual-compose";
+        gshell_card_events++;
+        gshell_command_name = "VISUALCOMPOSE";
+        gshell_command_result = "VISUAL COMPOSE OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "COMPOSE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALCOMPOSE -> CARD AND WINDOW COMPOSED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALSYNC) {
+        gshell_card_state = "synced";
+        gshell_card_last = "sync";
+        gshell_visual_state = "cards-window-sync";
+        gshell_app_final_state = "visual-sync";
+        gshell_card_events++;
+        gshell_command_name = "VISUALSYNC";
+        gshell_command_result = "VISUAL SYNC OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "SYNC OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALSYNC -> VISUAL CARD WINDOW SYNCED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDFLOW) {
+        gshell_card_grid_ready = 1;
+        gshell_card_selected = 1;
+        gshell_card_opened = 1;
+        gshell_card_expanded = 1;
+        gshell_card_pinned = 1;
+        gshell_card_badge_ready = 1;
+        gshell_card_preview_ready = 1;
+        gshell_window_visual_ready = 1;
+        gshell_window_title_ready = 1;
+        gshell_window_body_ready = 1;
+        gshell_window_shadow_ready = 1;
+        gshell_window_active_ready = 1;
+        gshell_window_preview_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_card_state = "flow-ready";
+        gshell_card_app = "demo.app";
+        gshell_card_last = "flow";
+        gshell_focus_target = "card-flow";
+        gshell_card_events++;
+        gshell_command_name = "CARDFLOW";
+        gshell_command_result = "CARD FLOW OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDFLOW -> FULL CARD WINDOW VISUAL FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDCHECK) {
+        int ok = gshell_card_grid_ready && gshell_card_selected && gshell_window_visual_ready;
+        gshell_card_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "CARDCHECK";
+        gshell_command_result = ok ? "CARD CHECK OK" : "CARD CHECK WAIT";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = ok ? "CARD OK" : "CARD WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "CARDCHECK -> VISUAL CARD WINDOW READY" : "CARDCHECK -> NEED CARDGRID CARDSELECT WINDOWVISUAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDRESET) {
+        gshell_card_grid_ready = 0;
+        gshell_card_selected = 0;
+        gshell_card_opened = 0;
+        gshell_card_expanded = 0;
+        gshell_card_pinned = 0;
+        gshell_card_badge_ready = 0;
+        gshell_card_preview_ready = 0;
+        gshell_window_visual_ready = 0;
+        gshell_window_title_ready = 0;
+        gshell_window_body_ready = 0;
+        gshell_window_shadow_ready = 0;
+        gshell_window_active_ready = 0;
+        gshell_window_preview_ready = 0;
+        gshell_card_events = 0;
+        gshell_card_state = "idle";
+        gshell_card_app = "none";
+        gshell_card_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "CARDRESET";
+        gshell_command_result = "CARD RESET OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDRESET -> VISUAL CARD WINDOW STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CARDNEXT) {
+        gshell_command_name = "CARDNEXT";
+        gshell_command_result = "CARD NEXT OK";
+        gshell_command_view = "CARDSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CARDNEXT -> 1.4.2 VISUAL LAUNCHER TASKBAR");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKSTATUS) {
+        gshell_command_name = "UIMOCKSTATUS";
+        gshell_command_result = "UI MOCK STATUS OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKSTATUS -> VISIBLE UI MOCK LAYOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKDESKTOP) {
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_state = "desktop";
+        gshell_ui_mock_focus = "desktop";
+        gshell_ui_mock_last = "desktop-ready";
+        gshell_visual_desktop_ready = 1;
+        gshell_desktop_state = "ui-mock";
+        gshell_focus_target = "desktop";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKDESKTOP";
+        gshell_command_result = "UI MOCK DESKTOP OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "DESKTOP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKDESKTOP -> DESKTOP RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKGRID) {
+        gshell_ui_mock_grid_ready = 1;
+        gshell_ui_mock_state = "grid";
+        gshell_ui_mock_focus = "card-grid";
+        gshell_ui_mock_last = "grid-ready";
+        gshell_visual_grid_ready = 1;
+        gshell_card_grid_ready = 1;
+        gshell_focus_target = "card-grid";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKGRID";
+        gshell_command_result = "UI MOCK GRID OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "GRID OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKGRID -> CARD GRID RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKCARD1) {
+        gshell_ui_mock_card1_ready = 1;
+        gshell_ui_mock_selected_card = 1;
+        gshell_ui_mock_state = "card1";
+        gshell_ui_mock_focus = "demo.app";
+        gshell_ui_mock_last = "card1-ready";
+        gshell_card_selected = 1;
+        gshell_card_app = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKCARD1";
+        gshell_command_result = "UI MOCK CARD1 OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "CARD1 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKCARD1 -> DEMO CARD RECT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKCARD2) {
+        gshell_ui_mock_card2_ready = 1;
+        gshell_ui_mock_selected_card = 2;
+        gshell_ui_mock_state = "card2";
+        gshell_ui_mock_focus = "sys.tool";
+        gshell_ui_mock_last = "card2-ready";
+        gshell_focus_target = "sys.tool";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKCARD2";
+        gshell_command_result = "UI MOCK CARD2 OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "CARD2 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKCARD2 -> SYSTEM CARD RECT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKCARD3) {
+        gshell_ui_mock_card3_ready = 1;
+        gshell_ui_mock_selected_card = 3;
+        gshell_ui_mock_state = "card3";
+        gshell_ui_mock_focus = "file.app";
+        gshell_ui_mock_last = "card3-ready";
+        gshell_focus_target = "file.app";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKCARD3";
+        gshell_command_result = "UI MOCK CARD3 OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "CARD3 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKCARD3 -> FILE CARD RECT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKWINDOW) {
+        gshell_ui_mock_window_ready = 1;
+        gshell_ui_mock_state = "window";
+        gshell_ui_mock_focus = "demo.window";
+        gshell_ui_mock_last = "window-ready";
+        gshell_visual_window_ready = 1;
+        gshell_window_visual_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "ui-mock";
+        gshell_focus_target = "demo.window";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKWINDOW";
+        gshell_command_result = "UI MOCK WINDOW OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKWINDOW -> WINDOW RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKTITLE) {
+        gshell_ui_mock_title_ready = 1;
+        gshell_ui_mock_state = "titlebar";
+        gshell_ui_mock_last = "title-ready";
+        gshell_window_title_ready = 1;
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKTITLE";
+        gshell_command_result = "UI MOCK TITLE OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "TITLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKTITLE -> WINDOW TITLEBAR VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKBODY) {
+        gshell_ui_mock_body_ready = 1;
+        gshell_ui_mock_state = "body";
+        gshell_ui_mock_last = "body-ready";
+        gshell_window_body_ready = 1;
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKBODY";
+        gshell_command_result = "UI MOCK BODY OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "BODY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKBODY -> WINDOW BODY RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKTASKBAR) {
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_ui_mock_state = "taskbar";
+        gshell_ui_mock_focus = "taskbar";
+        gshell_ui_mock_last = "taskbar-ready";
+        gshell_visual_taskbar_ready = 1;
+        gshell_shell_taskbar_ready = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_focus_target = "taskbar";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKTASKBAR";
+        gshell_command_result = "UI MOCK TASKBAR OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKTASKBAR -> TASKBAR RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKDOCK) {
+        gshell_ui_mock_dock_ready = 1;
+        gshell_ui_mock_state = "dock";
+        gshell_ui_mock_focus = "dock";
+        gshell_ui_mock_last = "dock-ready";
+        gshell_visual_dock_ready = 1;
+        gshell_dock_ready = 1;
+        gshell_focus_target = "dock";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKDOCK";
+        gshell_command_result = "UI MOCK DOCK OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "DOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKDOCK -> DOCK RECT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKFOCUS) {
+        gshell_ui_mock_focus_ready = 1;
+        gshell_ui_mock_state = "focus";
+        gshell_ui_mock_focus = "demo.app";
+        gshell_ui_mock_last = "focus-ring";
+        gshell_visual_focus = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKFOCUS";
+        gshell_command_result = "UI MOCK FOCUS OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKFOCUS -> FOCUS RING VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKSELECT) {
+        gshell_ui_mock_selected_card = 1;
+        gshell_ui_mock_card1_ready = 1;
+        gshell_ui_mock_focus_ready = 1;
+        gshell_ui_mock_state = "selected";
+        gshell_ui_mock_focus = "demo.app";
+        gshell_ui_mock_last = "select-demo";
+        gshell_card_selected = 1;
+        gshell_card_app = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKSELECT";
+        gshell_command_result = "UI MOCK SELECT OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "SELECT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKSELECT -> DEMO CARD SELECTED VISIBLY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKOPEN) {
+        gshell_ui_mock_window_ready = 1;
+        gshell_ui_mock_title_ready = 1;
+        gshell_ui_mock_body_ready = 1;
+        gshell_ui_mock_state = "open";
+        gshell_ui_mock_focus = "demo.window";
+        gshell_ui_mock_last = "open-window";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+        gshell_focus_target = "demo.window";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKOPEN";
+        gshell_command_result = "UI MOCK OPEN OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "OPEN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKOPEN -> DEMO WINDOW OPENED VISIBLY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKLAYOUT) {
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_grid_ready = 1;
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_ui_mock_dock_ready = 1;
+        gshell_ui_mock_state = "layout";
+        gshell_ui_mock_last = "layout-ready";
+        gshell_layout_grid_ready = 1;
+        gshell_layout_state = "ui-mock";
+        gshell_layout_mode = "visual";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKLAYOUT";
+        gshell_command_result = "UI MOCK LAYOUT OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "LAYOUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKLAYOUT -> DESKTOP CARD TASKBAR LAYOUT VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKMETRICS) {
+        gshell_visual_metrics++;
+        gshell_ui_mock_state = "metrics";
+        gshell_ui_mock_last = "metrics";
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKMETRICS";
+        gshell_command_result = "UI MOCK METRICS OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "METRICS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKMETRICS -> CARD 76x48 WINDOW 210x86");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKDEMO) {
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_grid_ready = 1;
+        gshell_ui_mock_card1_ready = 1;
+        gshell_ui_mock_card2_ready = 1;
+        gshell_ui_mock_card3_ready = 1;
+        gshell_ui_mock_window_ready = 1;
+        gshell_ui_mock_title_ready = 1;
+        gshell_ui_mock_body_ready = 1;
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_ui_mock_dock_ready = 1;
+        gshell_ui_mock_focus_ready = 1;
+        gshell_ui_mock_selected_card = 1;
+        gshell_ui_mock_state = "demo";
+        gshell_ui_mock_focus = "demo.app";
+        gshell_ui_mock_last = "demo-ready";
+
+        gshell_visual_desktop_ready = 1;
+        gshell_visual_panel_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_visual_window_ready = 1;
+        gshell_visual_taskbar_ready = 1;
+        gshell_visual_dock_ready = 1;
+        gshell_visual_grid_ready = 1;
+        gshell_card_state = "ui-mock";
+        gshell_card_app = "demo.app";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "ui-mock";
+        gshell_focus_target = "demo.app";
+
+        gshell_ui_mock_events++;
+        gshell_command_name = "UIMOCKDEMO";
+        gshell_command_result = "UI MOCK DEMO OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKDEMO -> FULL VISIBLE DESKTOP MOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKCHECK) {
+        int ok = gshell_ui_mock_desktop_ready && gshell_ui_mock_grid_ready && gshell_ui_mock_window_ready && gshell_ui_mock_taskbar_ready;
+        gshell_ui_mock_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "UIMOCKCHECK";
+        gshell_command_result = ok ? "UI MOCK CHECK OK" : "UI MOCK CHECK WAIT";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = ok ? "MOCK OK" : "MOCK WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "UIMOCKCHECK -> VISIBLE UI MOCK READY" : "UIMOCKCHECK -> NEED DESKTOP GRID WINDOW TASKBAR");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKRESET) {
+        gshell_ui_mock_desktop_ready = 0;
+        gshell_ui_mock_grid_ready = 0;
+        gshell_ui_mock_card1_ready = 0;
+        gshell_ui_mock_card2_ready = 0;
+        gshell_ui_mock_card3_ready = 0;
+        gshell_ui_mock_window_ready = 0;
+        gshell_ui_mock_title_ready = 0;
+        gshell_ui_mock_body_ready = 0;
+        gshell_ui_mock_taskbar_ready = 0;
+        gshell_ui_mock_dock_ready = 0;
+        gshell_ui_mock_focus_ready = 0;
+        gshell_ui_mock_selected_card = 0;
+        gshell_ui_mock_events = 0;
+        gshell_ui_mock_state = "idle";
+        gshell_ui_mock_focus = "terminal";
+        gshell_ui_mock_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "UIMOCKRESET";
+        gshell_command_result = "UI MOCK RESET OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKRESET -> VISIBLE UI MOCK RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIMOCKNEXT) {
+        gshell_command_name = "UIMOCKNEXT";
+        gshell_command_result = "UI MOCK NEXT OK";
+        gshell_command_view = "UIMOCKSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIMOCKNEXT -> 1.4.3 VISUAL LAUNCHER TASKBAR MOCK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKSTATUS) {
+        gshell_command_name = "LAUNCHMOCKSTATUS";
+        gshell_command_result = "LAUNCH MOCK STATUS OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKSTATUS -> VISIBLE LAUNCHER TASKBAR MOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKPANEL) {
+        gshell_launch_mock_panel_ready = 1;
+        gshell_mock_state = "launcher-panel";
+        gshell_mock_focus = "launcher";
+        gshell_mock_last = "panel-ready";
+        gshell_shell_launcher_ready = 1;
+        gshell_focus_target = "launcher";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKPANEL";
+        gshell_command_result = "LAUNCH MOCK PANEL OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "PANEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKPANEL -> LAUNCHER PANEL VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKSEARCH) {
+        gshell_launch_mock_search_ready = 1;
+        gshell_mock_state = "search";
+        gshell_mock_focus = "search";
+        gshell_mock_last = "search-ready";
+        gshell_focus_target = "launcher-search";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKSEARCH";
+        gshell_command_result = "LAUNCH MOCK SEARCH OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "SEARCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKSEARCH -> SEARCH BOX VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKAPPS) {
+        gshell_launch_mock_apps_ready = 1;
+        gshell_mock_state = "apps";
+        gshell_mock_focus = "app-list";
+        gshell_mock_last = "apps-ready";
+        gshell_launcher_grid_ready = 1;
+        gshell_catalog_ready = 1;
+        gshell_catalog_items = 1;
+        gshell_catalog_selected = "demo.app";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKAPPS";
+        gshell_command_result = "LAUNCH MOCK APPS OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "APPS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKAPPS -> APP LIST VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKRECENT) {
+        gshell_launch_mock_recent_ready = 1;
+        gshell_mock_state = "recent";
+        gshell_mock_focus = "recent";
+        gshell_mock_last = "recent-ready";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKRECENT";
+        gshell_command_result = "LAUNCH MOCK RECENT OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "RECENT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKRECENT -> RECENT AREA VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKPIN) {
+        gshell_launch_mock_pin_ready = 1;
+        gshell_mock_state = "pin";
+        gshell_mock_focus = "pinned-app";
+        gshell_mock_last = "pin-ready";
+        gshell_launcher_app_pinned = 1;
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKPIN";
+        gshell_command_result = "LAUNCH MOCK PIN OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "PIN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKPIN -> PINNED APP VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHMOCKRUN) {
+        gshell_launch_mock_run_ready = 1;
+        gshell_mock_state = "run";
+        gshell_mock_focus = "demo.app";
+        gshell_mock_last = "run-ready";
+        gshell_action_running = 1;
+        gshell_life_started = 1;
+        gshell_life_state = "running";
+        gshell_window_exists = 1;
+        gshell_window_state = "running";
+        gshell_mock_events++;
+        gshell_command_name = "LAUNCHMOCKRUN";
+        gshell_command_result = "LAUNCH MOCK RUN OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "RUN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHMOCKRUN -> RUNNING APP INDICATOR VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKSTATUS) {
+        gshell_command_name = "TASKMOCKSTATUS";
+        gshell_command_result = "TASK MOCK STATUS OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "TASK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKSTATUS -> TASKBAR MOCK STATUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKSTART) {
+        gshell_task_mock_start_ready = 1;
+        gshell_mock_state = "start";
+        gshell_mock_focus = "start-button";
+        gshell_mock_last = "start-ready";
+        gshell_focus_target = "start-button";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKSTART";
+        gshell_command_result = "TASK MOCK START OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "START OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKSTART -> START BUTTON VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKAPP) {
+        gshell_task_mock_app_ready = 1;
+        gshell_mock_state = "task-app";
+        gshell_mock_focus = "demo.task";
+        gshell_mock_last = "task-app-ready";
+        gshell_taskbar_item_ready = 1;
+        gshell_taskbar_item = "demo.app";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKAPP";
+        gshell_command_result = "TASK MOCK APP OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "APP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKAPP -> TASKBAR APP BLOCK VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKACTIVE) {
+        gshell_task_mock_active_ready = 1;
+        gshell_mock_state = "active";
+        gshell_mock_focus = "demo.task";
+        gshell_mock_last = "active-ready";
+        gshell_taskbar_focused = 1;
+        gshell_window_focused = 1;
+        gshell_focus_target = "demo.app";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKACTIVE";
+        gshell_command_result = "TASK MOCK ACTIVE OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "ACTIVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKACTIVE -> ACTIVE TASK INDICATOR VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKTRAY) {
+        gshell_task_mock_tray_ready = 1;
+        gshell_mock_state = "tray";
+        gshell_mock_focus = "tray";
+        gshell_mock_last = "tray-ready";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKTRAY";
+        gshell_command_result = "TASK MOCK TRAY OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "TRAY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKTRAY -> TRAY AREA VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKCLOCK) {
+        gshell_task_mock_clock_ready = 1;
+        gshell_mock_state = "clock";
+        gshell_mock_last = "clock-ready";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKCLOCK";
+        gshell_command_result = "TASK MOCK CLOCK OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "CLOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKCLOCK -> CLOCK PLACEHOLDER VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKNET) {
+        gshell_task_mock_net_ready = 1;
+        gshell_mock_state = "net";
+        gshell_mock_last = "net-ready";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKNET";
+        gshell_command_result = "TASK MOCK NET OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "NET OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKNET -> NETWORK INDICATOR VISIBLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TASKMOCKSTATE) {
+        gshell_mock_state = "task-state";
+        gshell_mock_last = "task-state";
+        gshell_mock_events++;
+        gshell_command_name = "TASKMOCKSTATE";
+        gshell_command_result = "TASK MOCK STATE OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "STATE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TASKMOCKSTATE -> TASKBAR STATE INDICATORS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOCKCOMPOSE) {
+        gshell_launch_mock_panel_ready = 1;
+        gshell_launch_mock_search_ready = 1;
+        gshell_launch_mock_apps_ready = 1;
+        gshell_task_mock_start_ready = 1;
+        gshell_task_mock_app_ready = 1;
+        gshell_task_mock_tray_ready = 1;
+        gshell_mock_state = "composed";
+        gshell_mock_focus = "launcher-taskbar";
+        gshell_mock_last = "compose";
+        gshell_focus_target = "launcher-taskbar";
+        gshell_mock_events++;
+        gshell_command_name = "MOCKCOMPOSE";
+        gshell_command_result = "MOCK COMPOSE OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "COMPOSE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MOCKCOMPOSE -> LAUNCHER TASKBAR MOCK COMPOSED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOCKDEMO) {
+        gshell_launch_mock_panel_ready = 1;
+        gshell_launch_mock_search_ready = 1;
+        gshell_launch_mock_apps_ready = 1;
+        gshell_launch_mock_recent_ready = 1;
+        gshell_launch_mock_pin_ready = 1;
+        gshell_launch_mock_run_ready = 1;
+        gshell_task_mock_start_ready = 1;
+        gshell_task_mock_app_ready = 1;
+        gshell_task_mock_active_ready = 1;
+        gshell_task_mock_tray_ready = 1;
+        gshell_task_mock_clock_ready = 1;
+        gshell_task_mock_net_ready = 1;
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_mock_state = "demo";
+        gshell_mock_focus = "demo.app";
+        gshell_mock_last = "demo-ready";
+        gshell_focus_target = "demo.app";
+        gshell_mock_events++;
+        gshell_command_name = "MOCKDEMO";
+        gshell_command_result = "MOCK DEMO OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MOCKDEMO -> FULL LAUNCHER TASKBAR MOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOCKCHECK) {
+        int ok = gshell_launch_mock_panel_ready && gshell_task_mock_start_ready && gshell_task_mock_app_ready && gshell_task_mock_tray_ready;
+        gshell_mock_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "MOCKCHECK";
+        gshell_command_result = ok ? "MOCK CHECK OK" : "MOCK CHECK WAIT";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = ok ? "MOCK OK" : "MOCK WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "MOCKCHECK -> LAUNCHER TASKBAR MOCK READY" : "MOCKCHECK -> NEED PANEL START APP TRAY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOCKRESET) {
+        gshell_launch_mock_panel_ready = 0;
+        gshell_launch_mock_search_ready = 0;
+        gshell_launch_mock_apps_ready = 0;
+        gshell_launch_mock_recent_ready = 0;
+        gshell_launch_mock_pin_ready = 0;
+        gshell_launch_mock_run_ready = 0;
+        gshell_task_mock_start_ready = 0;
+        gshell_task_mock_app_ready = 0;
+        gshell_task_mock_active_ready = 0;
+        gshell_task_mock_tray_ready = 0;
+        gshell_task_mock_clock_ready = 0;
+        gshell_task_mock_net_ready = 0;
+        gshell_mock_events = 0;
+        gshell_mock_state = "idle";
+        gshell_mock_focus = "terminal";
+        gshell_mock_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "MOCKRESET";
+        gshell_command_result = "MOCK RESET OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MOCKRESET -> LAUNCHER TASKBAR MOCK RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOCKNEXT) {
+        gshell_command_name = "MOCKNEXT";
+        gshell_command_result = "MOCK NEXT OK";
+        gshell_command_view = "LAUNCHMOCKSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MOCKNEXT -> 1.4.4 VISUAL POLISH MOCK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHSTATUS) {
+        gshell_command_name = "POLISHSTATUS";
+        gshell_command_result = "POLISH STATUS OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHSTATUS -> VISUAL POLISH MOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHBASE) {
+        gshell_polish_base_ready = 1;
+        gshell_polish_state = "base";
+        gshell_polish_focus = "desktop";
+        gshell_polish_last = "base-ready";
+        gshell_visual_desktop_ready = 1;
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_focus_target = "desktop";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHBASE";
+        gshell_command_result = "POLISH BASE OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "BASE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHBASE -> BASE DESKTOP PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHGLASS) {
+        gshell_polish_glass_ready = 1;
+        gshell_polish_state = "glass";
+        gshell_polish_last = "glass-ready";
+        gshell_visual_glow_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHGLASS";
+        gshell_command_result = "POLISH GLASS OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "GLASS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHGLASS -> GLASS PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHTITLE) {
+        gshell_polish_title_ready = 1;
+        gshell_polish_state = "title";
+        gshell_polish_last = "title-ready";
+        gshell_window_title_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHTITLE";
+        gshell_command_result = "POLISH TITLE OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "TITLE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHTITLE -> TITLE BAR POLISHED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHCARDS) {
+        gshell_polish_cards_ready = 1;
+        gshell_polish_state = "cards";
+        gshell_polish_focus = "cards";
+        gshell_polish_last = "cards-ready";
+        gshell_ui_mock_grid_ready = 1;
+        gshell_card_grid_ready = 1;
+        gshell_visual_cards_ready = 1;
+        gshell_focus_target = "cards";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHCARDS";
+        gshell_command_result = "POLISH CARDS OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "CARDS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHCARDS -> COMPACT CARD ROW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHWINDOW) {
+        gshell_polish_window_ready = 1;
+        gshell_polish_state = "window";
+        gshell_polish_focus = "demo.window";
+        gshell_polish_last = "window-ready";
+        gshell_ui_mock_window_ready = 1;
+        gshell_window_visual_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_state = "polished";
+        gshell_window_title = "demo.window";
+        gshell_focus_target = "demo.window";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHWINDOW";
+        gshell_command_result = "POLISH WINDOW OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHWINDOW -> WINDOW PANEL POLISHED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHTASKBAR) {
+        gshell_polish_taskbar_ready = 1;
+        gshell_polish_state = "taskbar";
+        gshell_polish_focus = "taskbar";
+        gshell_polish_last = "taskbar-ready";
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_task_mock_start_ready = 1;
+        gshell_task_mock_app_ready = 1;
+        gshell_focus_target = "taskbar";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHTASKBAR";
+        gshell_command_result = "POLISH TASKBAR OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHTASKBAR -> TASKBAR POLISHED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHTRAY) {
+        gshell_polish_tray_ready = 1;
+        gshell_polish_state = "tray";
+        gshell_polish_last = "tray-ready";
+        gshell_task_mock_tray_ready = 1;
+        gshell_task_mock_net_ready = 1;
+        gshell_task_mock_clock_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHTRAY";
+        gshell_command_result = "POLISH TRAY OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "TRAY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHTRAY -> TRAY STATUS POLISHED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHBADGE) {
+        gshell_polish_badge_ready = 1;
+        gshell_polish_state = "badge";
+        gshell_polish_last = "badge-ready";
+        gshell_card_badge_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHBADGE";
+        gshell_command_result = "POLISH BADGE OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "BADGE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHBADGE -> STATUS BADGES READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHFOCUS) {
+        gshell_polish_focus_ready = 1;
+        gshell_polish_state = "focus";
+        gshell_polish_focus = "demo.app";
+        gshell_polish_last = "focus-ready";
+        gshell_ui_mock_focus_ready = 1;
+        gshell_visual_focus = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHFOCUS";
+        gshell_command_result = "POLISH FOCUS OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHFOCUS -> FOCUS HIGHLIGHT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHSHADOW) {
+        gshell_polish_shadow_ready = 1;
+        gshell_polish_state = "shadow";
+        gshell_polish_last = "shadow-ready";
+        gshell_window_shadow_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHSHADOW";
+        gshell_command_result = "POLISH SHADOW OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "SHADOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHSHADOW -> WINDOW SHADOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHCOMPACT) {
+        gshell_polish_compact_ready = 1;
+        gshell_polish_state = "compact";
+        gshell_polish_last = "compact-ready";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHCOMPACT";
+        gshell_command_result = "POLISH COMPACT OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "COMPACT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHCOMPACT -> COMPACT UI MODE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHALIGN) {
+        gshell_polish_align_ready = 1;
+        gshell_polish_state = "aligned";
+        gshell_polish_last = "align-ready";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHALIGN";
+        gshell_command_result = "POLISH ALIGN OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "ALIGN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHALIGN -> TEXT BOUNDS SAFE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHMETRICS) {
+        gshell_polish_metrics_ready = 1;
+        gshell_visual_metrics++;
+        gshell_polish_state = "metrics";
+        gshell_polish_last = "metrics-ready";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHMETRICS";
+        gshell_command_result = "POLISH METRICS OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "METRICS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHMETRICS -> FIT METRICS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHSAFE) {
+        gshell_polish_safe_ready = 1;
+        gshell_polish_state = "safe";
+        gshell_polish_last = "safe-ready";
+        gshell_polish_align_ready = 1;
+        gshell_polish_metrics_ready = 1;
+        gshell_polish_events++;
+        gshell_command_name = "POLISHSAFE";
+        gshell_command_result = "POLISH SAFE OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "SAFE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHSAFE -> NO OVERFLOW MODE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHDEMO) {
+        gshell_polish_base_ready = 1;
+        gshell_polish_glass_ready = 1;
+        gshell_polish_title_ready = 1;
+        gshell_polish_cards_ready = 1;
+        gshell_polish_window_ready = 1;
+        gshell_polish_taskbar_ready = 1;
+        gshell_polish_tray_ready = 1;
+        gshell_polish_badge_ready = 1;
+        gshell_polish_focus_ready = 1;
+        gshell_polish_shadow_ready = 1;
+        gshell_polish_compact_ready = 1;
+        gshell_polish_align_ready = 1;
+        gshell_polish_metrics_ready = 1;
+        gshell_polish_safe_ready = 1;
+
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_grid_ready = 1;
+        gshell_ui_mock_card1_ready = 1;
+        gshell_ui_mock_card2_ready = 1;
+        gshell_ui_mock_card3_ready = 1;
+        gshell_ui_mock_window_ready = 1;
+        gshell_ui_mock_title_ready = 1;
+        gshell_ui_mock_body_ready = 1;
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_ui_mock_dock_ready = 1;
+        gshell_ui_mock_focus_ready = 1;
+        gshell_ui_mock_selected_card = 1;
+
+        gshell_task_mock_start_ready = 1;
+        gshell_task_mock_app_ready = 1;
+        gshell_task_mock_active_ready = 1;
+        gshell_task_mock_tray_ready = 1;
+        gshell_task_mock_clock_ready = 1;
+        gshell_task_mock_net_ready = 1;
+
+        gshell_polish_state = "demo";
+        gshell_polish_focus = "demo.app";
+        gshell_polish_last = "demo-ready";
+        gshell_focus_target = "demo.app";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHDEMO";
+        gshell_command_result = "POLISH DEMO OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHDEMO -> FULL POLISHED VISUAL MOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHFLOW) {
+        gshell_polish_base_ready = 1;
+        gshell_polish_cards_ready = 1;
+        gshell_polish_window_ready = 1;
+        gshell_polish_taskbar_ready = 1;
+        gshell_polish_align_ready = 1;
+        gshell_polish_safe_ready = 1;
+        gshell_polish_state = "flow";
+        gshell_polish_focus = "visual-flow";
+        gshell_polish_last = "flow-ready";
+        gshell_focus_target = "visual-flow";
+        gshell_polish_events++;
+        gshell_command_name = "POLISHFLOW";
+        gshell_command_result = "POLISH FLOW OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHFLOW -> POLISH FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHCHECK) {
+        int ok = gshell_polish_base_ready && gshell_polish_cards_ready && gshell_polish_window_ready && gshell_polish_taskbar_ready && gshell_polish_safe_ready;
+        gshell_polish_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "POLISHCHECK";
+        gshell_command_result = ok ? "POLISH CHECK OK" : "POLISH CHECK WAIT";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = ok ? "POLISH OK" : "POLISH WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "POLISHCHECK -> VISUAL POLISH READY" : "POLISHCHECK -> NEED BASE CARDS WINDOW TASKBAR SAFE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHRESET) {
+        gshell_polish_base_ready = 0;
+        gshell_polish_glass_ready = 0;
+        gshell_polish_title_ready = 0;
+        gshell_polish_cards_ready = 0;
+        gshell_polish_window_ready = 0;
+        gshell_polish_taskbar_ready = 0;
+        gshell_polish_tray_ready = 0;
+        gshell_polish_badge_ready = 0;
+        gshell_polish_focus_ready = 0;
+        gshell_polish_shadow_ready = 0;
+        gshell_polish_compact_ready = 0;
+        gshell_polish_align_ready = 0;
+        gshell_polish_metrics_ready = 0;
+        gshell_polish_safe_ready = 0;
+        gshell_polish_events = 0;
+        gshell_polish_state = "idle";
+        gshell_polish_focus = "terminal";
+        gshell_polish_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "POLISHRESET";
+        gshell_command_result = "POLISH RESET OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHRESET -> VISUAL POLISH STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POLISHNEXT) {
+        gshell_command_name = "POLISHNEXT";
+        gshell_command_result = "POLISH NEXT OK";
+        gshell_command_view = "POLISHSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POLISHNEXT -> 1.4.5 VISUAL CLOSEOUT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENESTATUS) {
+        gshell_command_name = "SCENESTATUS";
+        gshell_command_result = "SCENE STATUS OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENESTATUS -> DEFAULT DESKTOP SCENE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEBOOT) {
+        gshell_scene_state = "boot";
+        gshell_scene_last = "boot";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEBOOT";
+        gshell_command_result = "SCENE BOOT OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "BOOT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEBOOT -> DESKTOP SCENE BOOTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEBACKGROUND) {
+        gshell_scene_background_ready = 1;
+        gshell_scene_state = "background";
+        gshell_scene_last = "background-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEBACKGROUND";
+        gshell_command_result = "SCENE BACKGROUND OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "BG OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEBACKGROUND -> BACKGROUND READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENETOPBAR) {
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_state = "topbar";
+        gshell_scene_last = "topbar-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENETOPBAR";
+        gshell_command_result = "SCENE TOPBAR OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "TOPBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENETOPBAR -> TOPBAR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENELAUNCHER) {
+        gshell_scene_launcher_ready = 1;
+        gshell_scene_state = "launcher";
+        gshell_scene_focus = "launcher";
+        gshell_scene_last = "launcher-ready";
+        gshell_focus_target = "launcher";
+        gshell_scene_events++;
+        gshell_command_name = "SCENELAUNCHER";
+        gshell_command_result = "SCENE LAUNCHER OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "LAUNCHER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENELAUNCHER -> LAUNCHER READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENECARDS) {
+        gshell_scene_cards_ready = 1;
+        gshell_scene_state = "cards";
+        gshell_scene_focus = "cards";
+        gshell_scene_last = "cards-ready";
+        gshell_focus_target = "cards";
+        gshell_scene_events++;
+        gshell_command_name = "SCENECARDS";
+        gshell_command_result = "SCENE CARDS OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "CARDS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENECARDS -> DESKTOP CARDS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEWINDOW) {
+        gshell_scene_window_ready = 1;
+        gshell_scene_state = "window";
+        gshell_scene_focus = "demo.window";
+        gshell_scene_last = "window-ready";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "scene";
+        gshell_focus_target = "demo.window";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEWINDOW";
+        gshell_command_result = "SCENE WINDOW OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEWINDOW -> MAIN WINDOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENETASKBAR) {
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_state = "taskbar";
+        gshell_scene_focus = "taskbar";
+        gshell_scene_last = "taskbar-ready";
+        gshell_focus_target = "taskbar";
+        gshell_scene_events++;
+        gshell_command_name = "SCENETASKBAR";
+        gshell_command_result = "SCENE TASKBAR OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "TASKBAR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENETASKBAR -> TASKBAR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEDOCK) {
+        gshell_scene_dock_ready = 1;
+        gshell_scene_state = "dock";
+        gshell_scene_focus = "dock";
+        gshell_scene_last = "dock-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEDOCK";
+        gshell_command_result = "SCENE DOCK OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "DOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEDOCK -> DOCK READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENETRAY) {
+        gshell_scene_tray_ready = 1;
+        gshell_scene_state = "tray";
+        gshell_scene_last = "tray-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENETRAY";
+        gshell_command_result = "SCENE TRAY OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "TRAY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENETRAY -> TRAY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEBADGE) {
+        gshell_scene_badge_ready = 1;
+        gshell_scene_state = "badge";
+        gshell_scene_last = "badge-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEBADGE";
+        gshell_command_result = "SCENE BADGE OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "BADGE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEBADGE -> STATUS BADGE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEFOCUS) {
+        gshell_scene_focus_ready = 1;
+        gshell_scene_state = "focus";
+        gshell_scene_focus = "demo.app";
+        gshell_scene_last = "focus-ready";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_scene_events++;
+        gshell_command_name = "SCENEFOCUS";
+        gshell_command_result = "SCENE FOCUS OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEFOCUS -> FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEWIDGETS) {
+        gshell_scene_widgets_ready = 1;
+        gshell_scene_state = "widgets";
+        gshell_scene_last = "widgets-ready";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEWIDGETS";
+        gshell_command_result = "SCENE WIDGETS OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "WIDGETS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEWIDGETS -> WIDGETS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEACTIVE) {
+        gshell_scene_active_ready = 1;
+        gshell_scene_state = "active";
+        gshell_scene_focus = "demo.app";
+        gshell_scene_last = "active-ready";
+        gshell_focus_target = "demo.app";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEACTIVE";
+        gshell_command_result = "SCENE ACTIVE OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "ACTIVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEACTIVE -> ACTIVE APP READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEMETRICS) {
+        gshell_scene_metrics++;
+        gshell_scene_state = "metrics";
+        gshell_scene_last = "metrics";
+        gshell_scene_events++;
+        gshell_command_name = "SCENEMETRICS";
+        gshell_command_result = "SCENE METRICS OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "METRICS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENEMETRICS -> DEFAULT SCENE METRICS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENEDEMO || command_id == GSHELL_CMD_SCENEFLOW) {
+        gshell_scene_background_ready = 1;
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_launcher_ready = 1;
+        gshell_scene_cards_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_dock_ready = 1;
+        gshell_scene_tray_ready = 1;
+        gshell_scene_badge_ready = 1;
+        gshell_scene_focus_ready = 1;
+        gshell_scene_widgets_ready = 1;
+        gshell_scene_active_ready = 1;
+        gshell_scene_state = command_id == GSHELL_CMD_SCENEDEMO ? "demo" : "flow";
+        gshell_scene_focus = "demo.app";
+        gshell_scene_last = command_id == GSHELL_CMD_SCENEDEMO ? "demo-ready" : "flow-ready";
+        gshell_focus_target = "demo.app";
+        gshell_scene_events++;
+        gshell_command_name = command_id == GSHELL_CMD_SCENEDEMO ? "SCENEDEMO" : "SCENEFLOW";
+        gshell_command_result = command_id == GSHELL_CMD_SCENEDEMO ? "SCENE DEMO OK" : "SCENE FLOW OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = command_id == GSHELL_CMD_SCENEDEMO ? "DEMO OK" : "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(command_id == GSHELL_CMD_SCENEDEMO ? "SCENEDEMO -> DEFAULT DESKTOP SCENE READY" : "SCENEFLOW -> DEFAULT DESKTOP FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENECHECK) {
+        int ok = gshell_scene_background_ready && gshell_scene_topbar_ready && gshell_scene_window_ready && gshell_scene_taskbar_ready;
+        gshell_scene_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "SCENECHECK";
+        gshell_command_result = ok ? "SCENE CHECK OK" : "SCENE CHECK WAIT";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = ok ? "SCENE OK" : "SCENE WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "SCENECHECK -> DEFAULT DESKTOP SCENE OK" : "SCENECHECK -> NEED BACKGROUND TOPBAR WINDOW TASKBAR");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENERESET) {
+        gshell_scene_background_ready = 0;
+        gshell_scene_topbar_ready = 0;
+        gshell_scene_launcher_ready = 0;
+        gshell_scene_cards_ready = 0;
+        gshell_scene_window_ready = 0;
+        gshell_scene_taskbar_ready = 0;
+        gshell_scene_dock_ready = 0;
+        gshell_scene_tray_ready = 0;
+        gshell_scene_badge_ready = 0;
+        gshell_scene_focus_ready = 0;
+        gshell_scene_widgets_ready = 0;
+        gshell_scene_active_ready = 0;
+        gshell_scene_metrics = 0;
+        gshell_scene_events = 0;
+        gshell_scene_state = "idle";
+        gshell_scene_focus = "terminal";
+        gshell_scene_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "SCENERESET";
+        gshell_command_result = "SCENE RESET OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENERESET -> DEFAULT SCENE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SCENENEXT) {
+        gshell_command_name = "SCENENEXT";
+        gshell_command_result = "SCENE NEXT OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SCENENEXT -> 1.4.6 VISUAL CLOSEOUT OR 1.5 INPUT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALFINAL) {
+        gshell_command_name = "VISUALFINAL";
+        gshell_command_result = "VISUAL FINAL OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALFINAL -> 1.4 VISUAL UI CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALHEALTHSUM) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_visual_final_state = core_ok ? "health-ok" : "health-bad";
+        gshell_visual_final_last = "health-sum";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALHEALTHSUM";
+        gshell_command_result = core_ok ? "VISUAL HEALTH SUM OK" : "VISUAL HEALTH SUM BAD";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = core_ok ? "HEALTH OK" : "HEALTH BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "VISUALHEALTHSUM -> CORE VISUAL HEALTH OK" : "VISUALHEALTHSUM -> CORE ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALSCENESUM) {
+        gshell_visual_final_scene_ready = 1;
+        gshell_visual_final_state = "scene";
+        gshell_visual_final_last = "scene-sum";
+        gshell_scene_background_ready = 1;
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_state = "summary";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALSCENESUM";
+        gshell_command_result = "VISUAL SCENE SUM OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "SCENE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALSCENESUM -> DEFAULT SCENE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALMOCKSUM) {
+        gshell_visual_final_mock_ready = 1;
+        gshell_visual_final_state = "mock";
+        gshell_visual_final_last = "mock-sum";
+        gshell_ui_mock_desktop_ready = 1;
+        gshell_ui_mock_grid_ready = 1;
+        gshell_ui_mock_window_ready = 1;
+        gshell_ui_mock_taskbar_ready = 1;
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALMOCKSUM";
+        gshell_command_result = "VISUAL MOCK SUM OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "MOCK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALMOCKSUM -> UI MOCK SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALCARDSUM) {
+        gshell_visual_final_cards_ready = 1;
+        gshell_visual_final_state = "cards";
+        gshell_visual_final_last = "card-sum";
+        gshell_card_grid_ready = 1;
+        gshell_card_selected = 1;
+        gshell_window_visual_ready = 1;
+        gshell_card_state = "summary";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALCARDSUM";
+        gshell_command_result = "VISUAL CARD SUM OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "CARD OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALCARDSUM -> CARD WINDOW SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALLAUNCHSUM) {
+        gshell_visual_final_launcher_ready = 1;
+        gshell_visual_final_state = "launcher";
+        gshell_visual_final_last = "launch-sum";
+        gshell_launch_mock_panel_ready = 1;
+        gshell_launch_mock_apps_ready = 1;
+        gshell_task_mock_start_ready = 1;
+        gshell_task_mock_app_ready = 1;
+        gshell_mock_state = "summary";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALLAUNCHSUM";
+        gshell_command_result = "VISUAL LAUNCH SUM OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "LAUNCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALLAUNCHSUM -> LAUNCHER TASKBAR SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALPOLISHSUM) {
+        gshell_visual_final_polish_ready = 1;
+        gshell_visual_final_state = "polish";
+        gshell_visual_final_last = "polish-sum";
+        gshell_polish_base_ready = 1;
+        gshell_polish_cards_ready = 1;
+        gshell_polish_window_ready = 1;
+        gshell_polish_taskbar_ready = 1;
+        gshell_polish_safe_ready = 1;
+        gshell_polish_state = "summary";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALPOLISHSUM";
+        gshell_command_result = "VISUAL POLISH SUM OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "POLISH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALPOLISHSUM -> POLISH SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALREADINESS) {
+        int ok = gshell_visual_final_scene_ready && gshell_visual_final_mock_ready && gshell_visual_final_polish_ready;
+        gshell_visual_final_ready = ok ? 1 : 0;
+        gshell_visual_final_state = ok ? "ready" : "partial";
+        gshell_visual_final_last = ok ? "ready-ok" : "ready-partial";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALREADINESS";
+        gshell_command_result = ok ? "VISUAL READINESS OK" : "VISUAL READINESS PARTIAL";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = ok ? "READY OK" : "READY PART";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "VISUALREADINESS -> VISUAL UI READY" : "VISUALREADINESS -> RUN VISUALDEMOALL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDEMOALL) {
+        gshell_visual_final_ready = 1;
+        gshell_visual_final_scene_ready = 1;
+        gshell_visual_final_mock_ready = 1;
+        gshell_visual_final_cards_ready = 1;
+        gshell_visual_final_launcher_ready = 1;
+        gshell_visual_final_polish_ready = 1;
+        gshell_visual_final_bounds_ready = 1;
+        gshell_visual_final_density_ready = 1;
+        gshell_visual_final_default_ready = 1;
+        gshell_visual_final_state = "demo-all";
+        gshell_visual_final_focus = "desktop";
+        gshell_visual_final_last = "demo-all";
+
+        gshell_scene_background_ready = 1;
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_launcher_ready = 1;
+        gshell_scene_cards_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_dock_ready = 1;
+        gshell_scene_tray_ready = 1;
+        gshell_scene_badge_ready = 1;
+        gshell_scene_focus_ready = 1;
+        gshell_scene_widgets_ready = 1;
+        gshell_scene_state = "demo-all";
+
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALDEMOALL";
+        gshell_command_result = "VISUAL DEMO ALL OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDEMOALL -> FULL 1.4 VISUAL DEMO READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALREGRESSION) {
+        gshell_visual_final_state = "regression";
+        gshell_visual_final_last = "regression-ok";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALREGRESSION";
+        gshell_command_result = "VISUAL REGRESSION OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "REGRESS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALREGRESSION -> OLD VISUAL COMMANDS PRESERVED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALBOUNDS) {
+        gshell_visual_final_bounds_ready = 1;
+        gshell_visual_final_state = "bounds";
+        gshell_visual_final_last = "bounds-ok";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALBOUNDS";
+        gshell_command_result = "VISUAL BOUNDS OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "BOUNDS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALBOUNDS -> 800x600 PANEL BOUNDS CHECKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDENSITY) {
+        gshell_visual_final_density_ready = 1;
+        gshell_visual_final_state = "density";
+        gshell_visual_final_last = "density-ok";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALDENSITY";
+        gshell_command_result = "VISUAL DENSITY OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "DENSITY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDENSITY -> LOW RES DENSITY ACCEPTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALDEFAULT) {
+        gshell_visual_final_default_ready = 1;
+        gshell_visual_final_state = "default-scene";
+        gshell_visual_final_last = "default";
+        gshell_scene_background_ready = 1;
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_command_name = "VISUALDEFAULT";
+        gshell_command_result = "VISUAL DEFAULT OK";
+        gshell_command_view = "DESKTOPSCENE";
+        gshell_input_status_text = "DEFAULT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALDEFAULT -> DEFAULT DESKTOP SCENE ACTIVE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALHANDOFF) {
+        gshell_visual_final_state = "handoff";
+        gshell_visual_final_last = "handoff-ready";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALHANDOFF";
+        gshell_command_result = "VISUAL HANDOFF OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "HANDOFF";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALHANDOFF -> READY FOR INPUT OR NEXT UI LAYER");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALNEXTPHASE) {
+        gshell_visual_final_state = "next-phase";
+        gshell_visual_final_last = "next-phase";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALNEXTPHASE";
+        gshell_command_result = "VISUAL NEXT PHASE OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALNEXTPHASE -> 1.5 INPUT OR DESKTOP INTERACTION");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALFINALCHECK) {
+        int ok = gshell_visual_final_ready || (gshell_scene_background_ready && gshell_scene_window_ready && gshell_scene_taskbar_ready);
+        gshell_visual_final_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "VISUALFINALCHECK";
+        gshell_command_result = ok ? "VISUAL FINAL CHECK OK" : "VISUAL FINAL CHECK WAIT";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = ok ? "FINAL OK" : "FINAL WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "VISUALFINALCHECK -> 1.4 VISUAL UI CLOSEOUT OK" : "VISUALFINALCHECK -> RUN VISUALDEMOALL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALFINALRESET) {
+        gshell_visual_final_ready = 0;
+        gshell_visual_final_scene_ready = 0;
+        gshell_visual_final_mock_ready = 0;
+        gshell_visual_final_cards_ready = 0;
+        gshell_visual_final_launcher_ready = 0;
+        gshell_visual_final_polish_ready = 0;
+        gshell_visual_final_bounds_ready = 0;
+        gshell_visual_final_density_ready = 0;
+        gshell_visual_final_default_ready = 1;
+        gshell_visual_final_events = 0;
+        gshell_visual_final_state = "idle";
+        gshell_visual_final_focus = "desktop";
+        gshell_visual_final_last = "reset";
+        gshell_command_name = "VISUALFINALRESET";
+        gshell_command_result = "VISUAL FINAL RESET OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALFINALRESET -> VISUAL FINAL STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALROADMAP) {
+        gshell_command_name = "VISUALROADMAP";
+        gshell_command_result = "VISUAL ROADMAP OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "ROADMAP";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALROADMAP -> NEXT REAL INPUT / CLICK / WINDOW INTERACTION");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALINPUTNEXT) {
+        gshell_command_name = "VISUALINPUTNEXT";
+        gshell_command_result = "VISUAL INPUT NEXT OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "INPUT NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALINPUTNEXT -> 1.5 REAL INPUT DECISION POINT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VISUALCLOSEOUT) {
+        gshell_visual_final_ready = 1;
+        gshell_visual_final_state = "closeout";
+        gshell_visual_final_last = "closeout";
+        gshell_visual_final_events++;
+        gshell_command_name = "VISUALCLOSEOUT";
+        gshell_command_result = "VISUAL CLOSEOUT OK";
+        gshell_command_view = "VISUALFINAL";
+        gshell_input_status_text = "CLOSEOUT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VISUALCLOSEOUT -> 1.4 VISUAL UI STAGE CLOSED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTSTATUS) {
+        gshell_command_name = "INTERACTSTATUS";
+        gshell_command_result = "INTERACT STATUS OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INTERACTSTATUS -> DESKTOP INTERACTION EVENT CORE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERMOCK) {
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_pointer_x = 120;
+        gshell_interact_pointer_y = 80;
+        gshell_interact_state = "pointer";
+        gshell_interact_target = "desktop";
+        gshell_interact_last = "pointer-ready";
+        gshell_focus_target = "desktop";
+        gshell_interact_events++;
+        gshell_command_name = "POINTERMOCK";
+        gshell_command_result = "POINTER MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "PTR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERMOCK -> MOCK POINTER READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERMOVE) {
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_pointer_x += 16;
+        gshell_interact_pointer_y += 8;
+        gshell_interact_state = "move";
+        gshell_interact_target = "desktop";
+        gshell_interact_last = "move";
+        gshell_interact_events++;
+        gshell_command_name = "POINTERMOVE";
+        gshell_command_result = "POINTER MOVE OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "MOVE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERMOVE -> MOCK POINTER MOVED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERHOVER) {
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_hover_ready = 1;
+        gshell_interact_state = "hover";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "hover-card";
+        gshell_hit_zone = "scene-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "hover";
+        gshell_focus_target = "demo.app";
+        gshell_interact_events++;
+        gshell_command_name = "POINTERHOVER";
+        gshell_command_result = "POINTER HOVER OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "HOVER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERHOVER -> DEMO APP HOVERED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_POINTERCLICK) {
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_click_ready = 1;
+        gshell_interact_select_ready = 1;
+        gshell_interact_state = "click";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "click-card";
+        gshell_scene_focus = "demo.app";
+        gshell_scene_focus_ready = 1;
+        gshell_focus_target = "demo.app";
+        gshell_interact_events++;
+        gshell_command_name = "POINTERCLICK";
+        gshell_command_result = "POINTER CLICK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "CLICK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("POINTERCLICK -> DEMO APP CLICKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSMOCK) {
+        gshell_interact_focus_ready = 1;
+        gshell_interact_state = "focus";
+        gshell_interact_target = "desktop";
+        gshell_interact_last = "focus-ready";
+        gshell_focus_target = "desktop";
+        gshell_focus_changes++;
+        gshell_interact_events++;
+        gshell_command_name = "FOCUSMOCK";
+        gshell_command_result = "FOCUS MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSMOCK -> FOCUS MODEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSNEXT) {
+        gshell_interact_focus_ready = 1;
+        gshell_interact_state = "focus-next";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "focus-next";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_interact_events++;
+        gshell_command_name = "FOCUSNEXT";
+        gshell_command_result = "FOCUS NEXT OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "NEXT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSNEXT -> FOCUS MOVED TO DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSCARD) {
+        gshell_interact_focus_ready = 1;
+        gshell_interact_state = "focus-card";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "focus-card";
+        gshell_scene_focus_ready = 1;
+        gshell_scene_focus = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_interact_events++;
+        gshell_command_name = "FOCUSCARD";
+        gshell_command_result = "FOCUS CARD OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "CARD OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSCARD -> CARD FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSWINDOW) {
+        gshell_interact_focus_ready = 1;
+        gshell_interact_state = "focus-window";
+        gshell_interact_target = "demo.window";
+        gshell_interact_last = "focus-window";
+        gshell_window_exists = 1;
+        gshell_window_focused = 1;
+        gshell_window_state = "focused";
+        gshell_focus_target = "demo.window";
+        gshell_interact_events++;
+        gshell_command_name = "FOCUSWINDOW";
+        gshell_command_result = "FOCUS WINDOW OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSWINDOW -> WINDOW FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSTASKBAR) {
+        gshell_interact_focus_ready = 1;
+        gshell_interact_state = "focus-taskbar";
+        gshell_interact_target = "taskbar";
+        gshell_interact_last = "focus-taskbar";
+        gshell_focus_target = "taskbar";
+        gshell_taskbar_focused = 1;
+        gshell_interact_events++;
+        gshell_command_name = "FOCUSTASKBAR";
+        gshell_command_result = "FOCUS TASKBAR OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "TASK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSTASKBAR -> TASKBAR FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SELECTMOCK) {
+        gshell_interact_select_ready = 1;
+        gshell_interact_state = "selected";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "select";
+        gshell_card_selected = 1;
+        gshell_card_app = "demo.app";
+        gshell_scene_focus_ready = 1;
+        gshell_focus_target = "demo.app";
+        gshell_interact_events++;
+        gshell_command_name = "SELECTMOCK";
+        gshell_command_result = "SELECT MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "SELECT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SELECTMOCK -> DEMO APP SELECTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_OPENMOCK) {
+        gshell_interact_open_ready = 1;
+        gshell_interact_state = "open";
+        gshell_interact_target = "demo.window";
+        gshell_interact_last = "open-window";
+        gshell_scene_window_ready = 1;
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+        gshell_focus_target = "demo.window";
+        gshell_interact_events++;
+        gshell_command_name = "OPENMOCK";
+        gshell_command_result = "OPEN MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "OPEN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("OPENMOCK -> DEMO WINDOW OPENED BY INTERACTION");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLOSEMOCK) {
+        gshell_interact_open_ready = 0;
+        gshell_interact_state = "close";
+        gshell_interact_target = "demo.window";
+        gshell_interact_last = "close-window";
+        gshell_window_state = "closed";
+        gshell_focus_target = "desktop";
+        gshell_interact_events++;
+        gshell_command_name = "CLOSEMOCK";
+        gshell_command_result = "CLOSE MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "CLOSE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CLOSEMOCK -> DEMO WINDOW CLOSED BY INTERACTION");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MENUMOCK) {
+        gshell_interact_menu_ready = 1;
+        gshell_interact_state = "menu";
+        gshell_interact_target = "desktop-menu";
+        gshell_interact_last = "menu-open";
+        gshell_focus_target = "desktop-menu";
+        gshell_interact_events++;
+        gshell_command_name = "MENUMOCK";
+        gshell_command_result = "MENU MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "MENU OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MENUMOCK -> DESKTOP MENU OPENED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SHORTCUTMOCK) {
+        gshell_interact_shortcut_ready = 1;
+        gshell_interact_state = "shortcut";
+        gshell_interact_target = "launcher";
+        gshell_interact_last = "shortcut-launcher";
+        gshell_scene_launcher_ready = 1;
+        gshell_focus_target = "launcher";
+        gshell_interact_events++;
+        gshell_command_name = "SHORTCUTMOCK";
+        gshell_command_result = "SHORTCUT MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "SHORTCUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SHORTCUTMOCK -> LAUNCHER SHORTCUT ROUTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTEMOCK) {
+        gshell_interact_route_ready = 1;
+        gshell_interact_state = "route";
+        gshell_interact_target = "scene";
+        gshell_interact_last = "route-scene";
+        gshell_scene_state = "interaction-routed";
+        gshell_interact_events++;
+        gshell_command_name = "ROUTEMOCK";
+        gshell_command_result = "ROUTE MOCK OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "ROUTE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ROUTEMOCK -> INTERACTION ROUTED TO DESKTOP SCENE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTDEMO) {
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_hover_ready = 1;
+        gshell_interact_click_ready = 1;
+        gshell_interact_focus_ready = 1;
+        gshell_interact_select_ready = 1;
+        gshell_interact_open_ready = 1;
+        gshell_interact_menu_ready = 1;
+        gshell_interact_shortcut_ready = 1;
+        gshell_interact_route_ready = 1;
+        gshell_interact_pointer_x = 156;
+        gshell_interact_pointer_y = 98;
+        gshell_interact_state = "demo";
+        gshell_interact_target = "demo.app";
+        gshell_interact_last = "demo-ready";
+
+        gshell_scene_background_ready = 1;
+        gshell_scene_topbar_ready = 1;
+        gshell_scene_launcher_ready = 1;
+        gshell_scene_cards_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_focus_ready = 1;
+        gshell_scene_state = "interactive-demo";
+
+        gshell_focus_target = "demo.app";
+        gshell_interact_events++;
+        gshell_command_name = "INTERACTDEMO";
+        gshell_command_result = "INTERACT DEMO OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INTERACTDEMO -> FULL INTERACTION EVENT DEMO READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTCHECK) {
+        int ok = gshell_interact_pointer_ready && gshell_interact_focus_ready && gshell_interact_select_ready && gshell_interact_route_ready;
+        gshell_interact_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "INTERACTCHECK";
+        gshell_command_result = ok ? "INTERACT CHECK OK" : "INTERACT CHECK WAIT";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = ok ? "INTERACT OK" : "INTERACT WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "INTERACTCHECK -> DESKTOP INTERACTION MODEL READY" : "INTERACTCHECK -> NEED POINTER FOCUS SELECT ROUTE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTRESET) {
+        gshell_interact_pointer_ready = 0;
+        gshell_interact_pointer_x = 120;
+        gshell_interact_pointer_y = 80;
+        gshell_interact_hover_ready = 0;
+        gshell_interact_click_ready = 0;
+        gshell_interact_focus_ready = 0;
+        gshell_interact_select_ready = 0;
+        gshell_interact_open_ready = 0;
+        gshell_interact_menu_ready = 0;
+        gshell_interact_shortcut_ready = 0;
+        gshell_interact_route_ready = 0;
+        gshell_interact_events = 0;
+        gshell_interact_state = "idle";
+        gshell_interact_target = "desktop";
+        gshell_interact_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "INTERACTRESET";
+        gshell_command_result = "INTERACT RESET OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INTERACTRESET -> DESKTOP INTERACTION STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INTERACTNEXT) {
+        gshell_command_name = "INTERACTNEXT";
+        gshell_command_result = "INTERACT NEXT OK";
+        gshell_command_view = "INTERACTSTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INTERACTNEXT -> 1.5.1 CLICK ROUTING OR 1.6 PS2 MOUSE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTESTATUS) {
+        gshell_command_name = "ROUTESTATUS";
+        gshell_command_result = "ROUTE STATUS OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ROUTESTATUS -> DESKTOP CLICK ROUTING CORE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITDESKTOP) {
+        gshell_route_desktop_ready = 1;
+        gshell_route_state = "hit-desktop";
+        gshell_route_target = "desktop";
+        gshell_route_last = "hit-desktop";
+        gshell_hit_zone = "desktop";
+        gshell_hit_target = "desktop";
+        gshell_hit_action = "hit";
+        gshell_interact_target = "desktop";
+        gshell_focus_target = "desktop";
+        gshell_route_events++;
+        gshell_command_name = "HITDESKTOP";
+        gshell_command_result = "HIT DESKTOP OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "DESK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITDESKTOP -> DESKTOP HIT TARGET READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITCARD) {
+        gshell_route_card_ready = 1;
+        gshell_route_state = "hit-card";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "hit-card";
+        gshell_hit_zone = "scene-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "hit";
+        gshell_interact_target = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_card_selected = 1;
+        gshell_card_app = "demo.app";
+        gshell_route_events++;
+        gshell_command_name = "HITCARD";
+        gshell_command_result = "HIT CARD OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "CARD OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITCARD -> DEMO APP CARD HIT TARGET READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITWINDOW) {
+        gshell_route_window_ready = 1;
+        gshell_route_state = "hit-window";
+        gshell_route_target = "demo.window";
+        gshell_route_last = "hit-window";
+        gshell_hit_zone = "window";
+        gshell_hit_target = "demo.window";
+        gshell_hit_action = "hit";
+        gshell_interact_target = "demo.window";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "hit";
+        gshell_focus_target = "demo.window";
+        gshell_route_events++;
+        gshell_command_name = "HITWINDOW";
+        gshell_command_result = "HIT WINDOW OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITWINDOW -> DEMO WINDOW HIT TARGET READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITTASKBAR) {
+        gshell_route_taskbar_ready = 1;
+        gshell_route_state = "hit-taskbar";
+        gshell_route_target = "taskbar";
+        gshell_route_last = "hit-taskbar";
+        gshell_hit_zone = "taskbar";
+        gshell_hit_target = "taskbar";
+        gshell_hit_action = "hit";
+        gshell_interact_target = "taskbar";
+        gshell_taskbar_focused = 1;
+        gshell_focus_target = "taskbar";
+        gshell_route_events++;
+        gshell_command_name = "HITTASKBAR";
+        gshell_command_result = "HIT TASKBAR OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "TASK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITTASKBAR -> TASKBAR HIT TARGET READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HITLAUNCHER) {
+        gshell_route_launcher_ready = 1;
+        gshell_route_state = "hit-launcher";
+        gshell_route_target = "launcher";
+        gshell_route_last = "hit-launcher";
+        gshell_hit_zone = "launcher";
+        gshell_hit_target = "launcher";
+        gshell_hit_action = "hit";
+        gshell_interact_target = "launcher";
+        gshell_scene_launcher_ready = 1;
+        gshell_focus_target = "launcher";
+        gshell_route_events++;
+        gshell_command_name = "HITLAUNCHER";
+        gshell_command_result = "HIT LAUNCHER OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "LAUNCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HITLAUNCHER -> LAUNCHER HIT TARGET READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HOVERROUTE) {
+        gshell_route_hover_ready = 1;
+        gshell_interact_hover_ready = 1;
+        gshell_interact_pointer_ready = 1;
+        gshell_route_state = "hover";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "hover-route";
+        gshell_hit_zone = "scene-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "hover";
+        gshell_interact_state = "hover";
+        gshell_interact_target = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_route_events++;
+        gshell_command_name = "HOVERROUTE";
+        gshell_command_result = "HOVER ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "HOVER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HOVERROUTE -> HOVER ROUTED TO DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLICKROUTE) {
+        gshell_route_click_ready = 1;
+        gshell_interact_click_ready = 1;
+        gshell_interact_select_ready = 1;
+        gshell_route_card_ready = 1;
+        gshell_route_state = "click";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "click-route";
+        gshell_hit_zone = "scene-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "click";
+        gshell_interact_state = "click";
+        gshell_interact_target = "demo.app";
+        gshell_card_selected = 1;
+        gshell_scene_focus_ready = 1;
+        gshell_focus_target = "demo.app";
+        gshell_route_events++;
+        gshell_command_name = "CLICKROUTE";
+        gshell_command_result = "CLICK ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "CLICK OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CLICKROUTE -> CLICK ROUTED TO DEMO APP CARD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DOUBLECLICKROUTE) {
+        gshell_route_double_click_ready = 1;
+        gshell_route_click_ready = 1;
+        gshell_route_open_ready = 1;
+        gshell_interact_open_ready = 1;
+        gshell_route_state = "double-click";
+        gshell_route_target = "demo.window";
+        gshell_route_last = "double-click-open";
+        gshell_hit_zone = "scene-card";
+        gshell_hit_target = "demo.app";
+        gshell_hit_action = "double-click";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+        gshell_scene_window_ready = 1;
+        gshell_focus_target = "demo.window";
+        gshell_route_events++;
+        gshell_command_name = "DOUBLECLICKROUTE";
+        gshell_command_result = "DOUBLE CLICK ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "DBL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DOUBLECLICKROUTE -> DOUBLE CLICK OPENED DEMO WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RIGHTCLICKROUTE) {
+        gshell_route_right_click_ready = 1;
+        gshell_route_menu_ready = 1;
+        gshell_interact_menu_ready = 1;
+        gshell_route_state = "right-click";
+        gshell_route_target = "desktop-menu";
+        gshell_route_last = "right-click-menu";
+        gshell_hit_zone = "desktop";
+        gshell_hit_target = "desktop-menu";
+        gshell_hit_action = "right-click";
+        gshell_focus_target = "desktop-menu";
+        gshell_route_events++;
+        gshell_command_name = "RIGHTCLICKROUTE";
+        gshell_command_result = "RIGHT CLICK ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "RIGHT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RIGHTCLICKROUTE -> RIGHT CLICK ROUTED TO MENU");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MENUROUTE) {
+        gshell_route_menu_ready = 1;
+        gshell_interact_menu_ready = 1;
+        gshell_route_state = "menu";
+        gshell_route_target = "desktop-menu";
+        gshell_route_last = "menu-route";
+        gshell_hit_zone = "menu";
+        gshell_hit_target = "desktop-menu";
+        gshell_hit_action = "open-menu";
+        gshell_focus_target = "desktop-menu";
+        gshell_route_events++;
+        gshell_command_name = "MENUROUTE";
+        gshell_command_result = "MENU ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "MENU OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MENUROUTE -> MENU ROUTE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_OPENROUTE) {
+        gshell_route_open_ready = 1;
+        gshell_interact_open_ready = 1;
+        gshell_route_state = "open";
+        gshell_route_target = "demo.window";
+        gshell_route_last = "open-route";
+        gshell_window_exists = 1;
+        gshell_window_title = "demo.window";
+        gshell_window_state = "open";
+        gshell_scene_window_ready = 1;
+        gshell_focus_target = "demo.window";
+        gshell_route_events++;
+        gshell_command_name = "OPENROUTE";
+        gshell_command_result = "OPEN ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "OPEN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("OPENROUTE -> OPEN ROUTED TO DEMO WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SELECTROUTE) {
+        gshell_route_select_ready = 1;
+        gshell_interact_select_ready = 1;
+        gshell_route_card_ready = 1;
+        gshell_route_state = "select";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "select-route";
+        gshell_card_selected = 1;
+        gshell_card_app = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_route_events++;
+        gshell_command_name = "SELECTROUTE";
+        gshell_command_result = "SELECT ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "SELECT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SELECTROUTE -> SELECT ROUTED TO DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSROUTE) {
+        gshell_route_focus_ready = 1;
+        gshell_interact_focus_ready = 1;
+        gshell_route_state = "focus";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "focus-route";
+        gshell_scene_focus_ready = 1;
+        gshell_scene_focus = "demo.app";
+        gshell_focus_target = "demo.app";
+        gshell_focus_changes++;
+        gshell_route_events++;
+        gshell_command_name = "FOCUSROUTE";
+        gshell_command_result = "FOCUS ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSROUTE -> FOCUS ROUTED TO DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DRAGROUTE) {
+        gshell_route_drag_ready = 1;
+        gshell_route_state = "drag";
+        gshell_route_target = "demo.window";
+        gshell_route_last = "drag-window";
+        gshell_hit_zone = "window-title";
+        gshell_hit_target = "demo.window";
+        gshell_hit_action = "drag";
+        gshell_window_state = "dragging";
+        gshell_focus_target = "demo.window";
+        gshell_route_events++;
+        gshell_command_name = "DRAGROUTE";
+        gshell_command_result = "DRAG ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "DRAG OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DRAGROUTE -> DRAG ROUTED TO WINDOW TITLE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DROPROUTE) {
+        gshell_route_drop_ready = 1;
+        gshell_route_state = "drop";
+        gshell_route_target = "demo.window";
+        gshell_route_last = "drop-window";
+        gshell_hit_zone = "window";
+        gshell_hit_target = "demo.window";
+        gshell_hit_action = "drop";
+        gshell_window_state = "dropped";
+        gshell_focus_target = "demo.window";
+        gshell_route_events++;
+        gshell_command_name = "DROPROUTE";
+        gshell_command_result = "DROP ROUTE OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "DROP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DROPROUTE -> DROP ROUTED TO WINDOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTEDEMO) {
+        gshell_route_desktop_ready = 1;
+        gshell_route_card_ready = 1;
+        gshell_route_window_ready = 1;
+        gshell_route_taskbar_ready = 1;
+        gshell_route_launcher_ready = 1;
+        gshell_route_hover_ready = 1;
+        gshell_route_click_ready = 1;
+        gshell_route_double_click_ready = 1;
+        gshell_route_right_click_ready = 1;
+        gshell_route_menu_ready = 1;
+        gshell_route_open_ready = 1;
+        gshell_route_select_ready = 1;
+        gshell_route_focus_ready = 1;
+        gshell_route_drag_ready = 1;
+        gshell_route_drop_ready = 1;
+        gshell_route_state = "demo";
+        gshell_route_target = "demo.app";
+        gshell_route_last = "demo-ready";
+
+        gshell_interact_pointer_ready = 1;
+        gshell_interact_hover_ready = 1;
+        gshell_interact_click_ready = 1;
+        gshell_interact_focus_ready = 1;
+        gshell_interact_select_ready = 1;
+        gshell_interact_open_ready = 1;
+        gshell_interact_route_ready = 1;
+        gshell_interact_target = "demo.app";
+
+        gshell_scene_background_ready = 1;
+        gshell_scene_cards_ready = 1;
+        gshell_scene_window_ready = 1;
+        gshell_scene_taskbar_ready = 1;
+        gshell_scene_focus_ready = 1;
+        gshell_focus_target = "demo.app";
+
+        gshell_route_events++;
+        gshell_command_name = "ROUTEDEMO";
+        gshell_command_result = "ROUTE DEMO OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ROUTEDEMO -> FULL CLICK ROUTING DEMO READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTECHECK) {
+        int ok = gshell_route_desktop_ready && gshell_route_card_ready && gshell_route_window_ready && gshell_route_click_ready && gshell_route_focus_ready;
+        gshell_route_last = ok ? "check-ok" : "check-wait";
+        gshell_command_name = "ROUTECHECK";
+        gshell_command_result = ok ? "ROUTE CHECK OK" : "ROUTE CHECK WAIT";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = ok ? "ROUTE OK" : "ROUTE WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "ROUTECHECK -> CLICK ROUTING READY" : "ROUTECHECK -> NEED DESKTOP CARD WINDOW CLICK FOCUS");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTERESET) {
+        gshell_route_desktop_ready = 0;
+        gshell_route_card_ready = 0;
+        gshell_route_window_ready = 0;
+        gshell_route_taskbar_ready = 0;
+        gshell_route_launcher_ready = 0;
+        gshell_route_hover_ready = 0;
+        gshell_route_click_ready = 0;
+        gshell_route_double_click_ready = 0;
+        gshell_route_right_click_ready = 0;
+        gshell_route_menu_ready = 0;
+        gshell_route_open_ready = 0;
+        gshell_route_select_ready = 0;
+        gshell_route_focus_ready = 0;
+        gshell_route_drag_ready = 0;
+        gshell_route_drop_ready = 0;
+        gshell_route_events = 0;
+        gshell_route_state = "idle";
+        gshell_route_target = "desktop";
+        gshell_route_last = "reset";
+        gshell_focus_target = "terminal";
+        gshell_command_name = "ROUTERESET";
+        gshell_command_result = "ROUTE RESET OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ROUTERESET -> CLICK ROUTING STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ROUTENEXT) {
+        gshell_command_name = "ROUTENEXT";
+        gshell_command_result = "ROUTE NEXT OK";
+        gshell_command_view = "ROUTESTATUS";
+        gshell_input_status_text = "NEXT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ROUTENEXT -> 1.5.2 DESKTOP ACTION BINDING");
         return;
     }
 
@@ -6017,10 +14004,10 @@ static void gshell_draw_command_view_registry(unsigned int x, unsigned int y, un
     graphics_text(x + 132, y + 172, "capinfo");
     graphics_text(x + 24, y + 196, "intentinfo");
     graphics_text(x + 132, y + 196, "taskinfo");
-    graphics_text(x + 24, y + 224, "inputstatus");
-    graphics_text(x + 132, y + 224, "mousestatus");
-    graphics_text(x + 24, y + 252, "focusstatus");
-    graphics_text(x + 132, y + 252, "inputcheck");
+    graphics_text(x + 24, y + 224, "routestatus");
+    graphics_text(x + 132, y + 224, "hitcard");
+    graphics_text(x + 24, y + 252, "clickroute");
+    graphics_text(x + 132, y + 252, "routecheck");
 }
 
 static void gshell_draw_command_view_textcmds(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -8358,12 +16345,1087 @@ static void gshell_draw_command_view_inputstatus(unsigned int x, unsigned int y,
     graphics_text(x + 156, y + 144, gshell_focus_layer_ready ? "ready" : "bad");
     graphics_text(x + 24, y + 168, "TARGET");
     graphics_text(x + 156, y + 168, gshell_focus_target);
-    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_input_events);
+    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_interaction_events);
     gshell_draw_value_uint(x + 24, y + 216, "FOCUS CHG", gshell_focus_changes);
     graphics_text(x + 24, y + 240, "LAST");
     graphics_text(x + 156, y + 240, gshell_input_last);
     graphics_text(x + 24, y + 264, "NEXT");
     graphics_text(x + 156, y + 264, "real mouse");
+}
+
+static void gshell_draw_command_view_cursorstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "CURSOR POINTER CORE");
+    graphics_text(x + 24, y + 48, "VISIBLE");
+    graphics_text(x + 156, y + 48, gshell_cursor_visible ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 72, "X", (unsigned int)gshell_cursor_x);
+    gshell_draw_value_uint(x + 24, y + 96, "Y", (unsigned int)gshell_cursor_y);
+    graphics_text(x + 24, y + 120, "STATE");
+    graphics_text(x + 156, y + 120, gshell_cursor_state);
+    graphics_text(x + 24, y + 144, "FOCUS");
+    graphics_text(x + 156, y + 144, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 168, "MOVES", gshell_cursor_moves);
+    gshell_draw_value_uint(x + 24, y + 192, "CLICKS", gshell_cursor_clicks);
+    gshell_draw_value_uint(x + 24, y + 216, "WHEEL", gshell_cursor_wheel);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_cursor_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "click map");
+}
+
+static void gshell_draw_command_view_hitstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "CLICK HIT TEST CORE");
+    graphics_text(x + 24, y + 48, "ZONE");
+    graphics_text(x + 156, y + 48, gshell_hit_zone);
+    graphics_text(x + 24, y + 72, "TARGET");
+    graphics_text(x + 156, y + 72, gshell_hit_target);
+    graphics_text(x + 24, y + 96, "ACTION");
+    graphics_text(x + 156, y + 96, gshell_hit_action);
+    graphics_text(x + 24, y + 120, "FOCUS");
+    graphics_text(x + 156, y + 120, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 144, "HITS", gshell_hit_tests);
+    gshell_draw_value_uint(x + 24, y + 168, "CLICKS", gshell_hit_clicks);
+    gshell_draw_value_uint(x + 24, y + 192, "COMMANDS", gshell_hit_commands);
+    gshell_draw_value_uint(x + 24, y + 216, "WHEEL", gshell_hit_wheel);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_hit_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "button ui");
+}
+
+static void gshell_draw_command_view_buttonstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "BUTTON PANEL CORE");
+    graphics_text(x + 24, y + 48, "TARGET");
+    graphics_text(x + 156, y + 48, gshell_button_target);
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_button_state);
+    graphics_text(x + 24, y + 96, "HOVER");
+    graphics_text(x + 156, y + 96, gshell_button_hovered ? "yes" : "no");
+    graphics_text(x + 24, y + 120, "PRESS");
+    graphics_text(x + 156, y + 120, gshell_button_pressed ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "FOCUS");
+    graphics_text(x + 156, y + 144, gshell_button_focus ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "ACTIVE");
+    graphics_text(x + 156, y + 168, gshell_button_active ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_button_events);
+    gshell_draw_value_uint(x + 24, y + 216, "ACTIVATES", gshell_button_activations);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_button_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "window shell");
+}
+
+static void gshell_draw_command_view_windowstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "WINDOW PANEL CORE");
+    graphics_text(x + 24, y + 48, "TITLE");
+    graphics_text(x + 156, y + 48, gshell_window_title);
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_window_state);
+    graphics_text(x + 24, y + 96, "EXISTS");
+    graphics_text(x + 156, y + 96, gshell_window_exists ? "yes" : "no");
+    graphics_text(x + 24, y + 120, "FOCUS");
+    graphics_text(x + 156, y + 120, gshell_window_focused ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "MIN");
+    graphics_text(x + 156, y + 144, gshell_window_minimized ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 168, "X", gshell_window_x);
+    gshell_draw_value_uint(x + 24, y + 192, "Y", gshell_window_y);
+    gshell_draw_value_uint(x + 24, y + 216, "MOVES", gshell_window_moves);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_window_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "desktop");
+}
+
+static void gshell_draw_command_view_desktopstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "DESKTOP WORKSPACE");
+    graphics_text(x + 24, y + 48, "DESKTOP");
+    graphics_text(x + 156, y + 48, gshell_desktop_enabled ? "on" : "off");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_desktop_state);
+    graphics_text(x + 24, y + 96, "WORKSPACE");
+    graphics_text(x + 156, y + 96, gshell_workspace_ready ? "ready" : "none");
+    gshell_draw_value_uint(x + 24, y + 120, "WORK ID", gshell_workspace_id);
+    graphics_text(x + 24, y + 144, "ICON");
+    graphics_text(x + 156, y + 144, gshell_icon_selected ? "selected" : "none");
+    graphics_text(x + 24, y + 168, "DOCK");
+    graphics_text(x + 156, y + 168, gshell_dock_ready ? "ready" : "planned");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_desktop_focus);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_desktop_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_desktop_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.1 close");
+}
+
+static void gshell_draw_command_view_interactionfinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.1 UI INTERACTION");
+    graphics_text(x + 24, y + 48, "INPUT");
+    graphics_text(x + 156, y + 48, gshell_input_state);
+    graphics_text(x + 24, y + 72, "CURSOR");
+    graphics_text(x + 156, y + 72, gshell_cursor_state);
+    graphics_text(x + 24, y + 96, "HIT");
+    graphics_text(x + 156, y + 96, gshell_hit_zone);
+    graphics_text(x + 24, y + 120, "BUTTON");
+    graphics_text(x + 156, y + 120, gshell_button_state);
+    graphics_text(x + 24, y + 144, "WINDOW");
+    graphics_text(x + 156, y + 144, gshell_window_state);
+    graphics_text(x + 24, y + 168, "DESKTOP");
+    graphics_text(x + 156, y + 168, gshell_desktop_state);
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_interaction_events);
+    graphics_text(x + 24, y + 240, "STATUS");
+    graphics_text(x + 156, y + 240, "1.1 ready");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.2 input");
+}
+
+static void gshell_draw_command_view_shellstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "WINDOW SHELL BASE");
+    graphics_text(x + 24, y + 48, "SHELL");
+    graphics_text(x + 156, y + 48, gshell_shell_enabled ? "on" : "off");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_shell_state);
+    graphics_text(x + 24, y + 96, "PANEL");
+    graphics_text(x + 156, y + 96, gshell_shell_panel_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "TASKBAR");
+    graphics_text(x + 156, y + 120, gshell_shell_taskbar_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "LAUNCHER");
+    graphics_text(x + 156, y + 144, gshell_shell_launcher_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "FOCUS");
+    graphics_text(x + 156, y + 168, gshell_shell_focus);
+    gshell_draw_value_uint(x + 24, y + 192, "OPEN APP", gshell_shell_open_apps);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_shell_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_shell_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "shell flow");
+}
+
+static void gshell_draw_command_view_launcherstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "LAUNCHER APP FLOW");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_launcher_state);
+    graphics_text(x + 24, y + 72, "GRID");
+    graphics_text(x + 156, y + 72, gshell_launcher_grid_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 96, "APP");
+    graphics_text(x + 156, y + 96, gshell_launcher_selected_app);
+    graphics_text(x + 24, y + 120, "SELECTED");
+    graphics_text(x + 156, y + 120, gshell_launcher_app_selected ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "PINNED");
+    graphics_text(x + 156, y + 144, gshell_launcher_app_pinned ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 168, "OPENED", gshell_launcher_open_count);
+    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_launcher_events);
+    graphics_text(x + 24, y + 216, "FOCUS");
+    graphics_text(x + 156, y + 216, gshell_focus_target);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_launcher_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "task flow");
+}
+
+static void gshell_draw_command_view_taskbarstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "TASKBAR APP SWITCH");
+    graphics_text(x + 24, y + 48, "TASKBAR");
+    graphics_text(x + 156, y + 48, gshell_taskbar_enabled ? "on" : "off");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_taskbar_state);
+    graphics_text(x + 24, y + 96, "ITEM");
+    graphics_text(x + 156, y + 96, gshell_taskbar_item);
+    graphics_text(x + 24, y + 120, "FOCUS");
+    graphics_text(x + 156, y + 120, gshell_taskbar_focused ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "MIN");
+    graphics_text(x + 156, y + 144, gshell_taskbar_minimized ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 168, "SWITCHES", gshell_taskbar_switches);
+    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_taskbar_events);
+    graphics_text(x + 24, y + 216, "WINDOW");
+    graphics_text(x + 156, y + 216, gshell_window_state);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_taskbar_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "shell close");
+}
+
+static void gshell_draw_command_view_layoutstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "WINDOW LAYOUT CORE");
+    graphics_text(x + 24, y + 48, "LAYOUT");
+    graphics_text(x + 156, y + 48, gshell_layout_enabled ? "on" : "off");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_layout_state);
+    graphics_text(x + 24, y + 96, "MODE");
+    graphics_text(x + 156, y + 96, gshell_layout_mode);
+    graphics_text(x + 24, y + 120, "GRID");
+    graphics_text(x + 156, y + 120, gshell_layout_grid_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "SNAP");
+    graphics_text(x + 156, y + 144, gshell_layout_snapped ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "MAX");
+    graphics_text(x + 156, y + 168, gshell_layout_maximized ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 192, "Z", gshell_layout_z_index);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_layout_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_layout_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "shell final");
+}
+
+static void gshell_draw_command_view_desktopshell(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "DESKTOP SHELL CORE");
+    graphics_text(x + 24, y + 48, "HOME");
+    graphics_text(x + 156, y + 48, gshell_home_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_home_state);
+    graphics_text(x + 24, y + 96, "APPS");
+    graphics_text(x + 156, y + 96, gshell_home_apps_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "WINDOWS");
+    graphics_text(x + 156, y + 120, gshell_home_windows_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "LAYOUT");
+    graphics_text(x + 156, y + 144, gshell_home_layout_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "DOCK");
+    graphics_text(x + 156, y + 168, gshell_home_dock_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_home_focus);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_home_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_home_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "shell close");
+}
+
+static void gshell_draw_command_view_shellfinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.2 DESKTOP SHELL");
+    graphics_text(x + 24, y + 48, "SHELL");
+    graphics_text(x + 156, y + 48, gshell_shell_state);
+    graphics_text(x + 24, y + 72, "HOME");
+    graphics_text(x + 156, y + 72, gshell_home_state);
+    graphics_text(x + 24, y + 96, "LAUNCHER");
+    graphics_text(x + 156, y + 96, gshell_launcher_state);
+    graphics_text(x + 24, y + 120, "TASKBAR");
+    graphics_text(x + 156, y + 120, gshell_taskbar_state);
+    graphics_text(x + 24, y + 144, "WINDOW");
+    graphics_text(x + 156, y + 144, gshell_window_state);
+    graphics_text(x + 24, y + 168, "LAYOUT");
+    graphics_text(x + 156, y + 168, gshell_layout_state);
+    graphics_text(x + 24, y + 192, "DESKTOP");
+    graphics_text(x + 156, y + 192, gshell_desktop_state);
+    graphics_text(x + 24, y + 216, "FOCUS");
+    graphics_text(x + 156, y + 216, gshell_focus_target);
+    graphics_text(x + 24, y + 240, "STATUS");
+    graphics_text(x + 156, y + 240, "1.2 ready");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.3 input");
+}
+
+static void gshell_draw_command_view_appshellstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP SHELL BASE");
+    graphics_text(x + 24, y + 48, "APP SHELL");
+    graphics_text(x + 156, y + 48, gshell_app_shell_enabled ? "on" : "off");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_app_shell_state);
+    graphics_text(x + 24, y + 96, "CATALOG");
+    graphics_text(x + 156, y + 96, gshell_app_catalog_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "CARD");
+    graphics_text(x + 156, y + 120, gshell_app_card_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "DETAILS");
+    graphics_text(x + 156, y + 144, gshell_app_details_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "APP");
+    graphics_text(x + 156, y + 168, gshell_app_shell_selected);
+    graphics_text(x + 24, y + 192, "LAUNCH");
+    graphics_text(x + 156, y + 192, gshell_app_shell_launch_ready ? "ready" : "none");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_app_shell_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_app_shell_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "app control");
+}
+
+static void gshell_draw_command_view_catalogstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP CATALOG CORE");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_catalog_state);
+    graphics_text(x + 24, y + 72, "SELECTED");
+    graphics_text(x + 156, y + 72, gshell_catalog_selected);
+    gshell_draw_value_uint(x + 24, y + 96, "ITEMS", gshell_catalog_items);
+    gshell_draw_value_uint(x + 24, y + 120, "SEARCH", gshell_catalog_search_hits);
+    graphics_text(x + 24, y + 144, "PINNED");
+    graphics_text(x + 156, y + 144, gshell_catalog_pinned ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "ENABLED");
+    graphics_text(x + 156, y + 168, gshell_catalog_enabled ? "yes" : "no");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_catalog_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_catalog_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "app control");
+}
+
+static void gshell_draw_command_view_detailstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP DETAIL PANEL");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_detail_state);
+    graphics_text(x + 24, y + 72, "APP");
+    graphics_text(x + 156, y + 72, gshell_detail_app);
+    graphics_text(x + 24, y + 96, "MANIFEST");
+    graphics_text(x + 156, y + 96, gshell_detail_manifest_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "CAPS");
+    graphics_text(x + 156, y + 120, gshell_detail_caps_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "PERMS");
+    graphics_text(x + 156, y + 144, gshell_detail_perms_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "LAUNCH");
+    graphics_text(x + 156, y + 168, gshell_detail_launch_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_detail_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_detail_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "app action");
+}
+
+static void gshell_draw_command_view_actionstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP ACTION FLOW");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_action_state);
+    graphics_text(x + 24, y + 72, "APP");
+    graphics_text(x + 156, y + 72, gshell_action_app);
+    graphics_text(x + 24, y + 96, "PREPARE");
+    graphics_text(x + 156, y + 96, gshell_action_prepared ? "yes" : "no");
+    graphics_text(x + 24, y + 120, "ALLOW");
+    graphics_text(x + 156, y + 120, gshell_action_allowed ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "OPEN");
+    graphics_text(x + 156, y + 144, gshell_action_opened ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "RUN");
+    graphics_text(x + 156, y + 168, gshell_action_running ? "yes" : "no");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_action_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_action_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "app final");
+}
+
+static void gshell_draw_command_view_appmgmtstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP MANAGEMENT");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_app_mgmt_state);
+    graphics_text(x + 24, y + 72, "APP");
+    graphics_text(x + 156, y + 72, gshell_app_mgmt_app);
+    graphics_text(x + 24, y + 96, "REGISTER");
+    graphics_text(x + 156, y + 96, gshell_app_mgmt_registered ? "yes" : "no");
+    graphics_text(x + 24, y + 120, "ENABLED");
+    graphics_text(x + 156, y + 120, gshell_app_mgmt_enabled ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "TRUSTED");
+    graphics_text(x + 156, y + 144, gshell_app_mgmt_trusted ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "FAVORITE");
+    graphics_text(x + 156, y + 168, gshell_app_mgmt_favorite ? "yes" : "no");
+    graphics_text(x + 24, y + 192, "HEALTH");
+    graphics_text(x + 156, y + 192, gshell_app_mgmt_healthy ? "ok" : "bad");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_app_mgmt_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_app_mgmt_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "app close");
+}
+
+static void gshell_draw_command_view_appfinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.3 APP SHELL FINAL");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_app_final_state);
+    graphics_text(x + 24, y + 72, "APP SHELL");
+    graphics_text(x + 156, y + 72, gshell_app_shell_state);
+    graphics_text(x + 24, y + 96, "CATALOG");
+    graphics_text(x + 156, y + 96, gshell_catalog_state);
+    graphics_text(x + 24, y + 120, "DETAIL");
+    graphics_text(x + 156, y + 120, gshell_detail_state);
+    graphics_text(x + 24, y + 144, "ACTION");
+    graphics_text(x + 156, y + 144, gshell_action_state);
+    graphics_text(x + 24, y + 168, "MGMT");
+    graphics_text(x + 156, y + 168, gshell_app_mgmt_state);
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_app_final_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_app_final_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.4 visual");
+}
+
+static void gshell_draw_command_view_visualstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "VISUAL DESKTOP UI");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_visual_state);
+    graphics_text(x + 24, y + 72, "DESKTOP");
+    graphics_text(x + 156, y + 72, gshell_visual_desktop_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 96, "PANEL");
+    graphics_text(x + 156, y + 96, gshell_visual_panel_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "CARDS");
+    graphics_text(x + 156, y + 120, gshell_visual_cards_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "WINDOW");
+    graphics_text(x + 156, y + 144, gshell_visual_window_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "TASKBAR");
+    graphics_text(x + 156, y + 168, gshell_visual_taskbar_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 156, y + 192, gshell_visual_focus);
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_visual_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_visual_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "cards ui");
+}
+
+static void gshell_draw_command_view_cardstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "VISUAL CARDS WINDOW");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 156, y + 48, gshell_card_state);
+    graphics_text(x + 24, y + 72, "APP");
+    graphics_text(x + 156, y + 72, gshell_card_app);
+    graphics_text(x + 24, y + 96, "GRID");
+    graphics_text(x + 156, y + 96, gshell_card_grid_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 120, "SELECT");
+    graphics_text(x + 156, y + 120, gshell_card_selected ? "yes" : "no");
+    graphics_text(x + 24, y + 144, "CARD");
+    graphics_text(x + 156, y + 144, gshell_card_opened ? "open" : "closed");
+    graphics_text(x + 24, y + 168, "WINDOW");
+    graphics_text(x + 156, y + 168, gshell_window_visual_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 192, "ACTIVE");
+    graphics_text(x + 156, y + 192, gshell_window_active_ready ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_card_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_card_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "launcher ui");
+}
+
+static void gshell_draw_command_view_uimockstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int dx = x + 14;
+    unsigned int dy = y + 34;
+    unsigned int dw = w - 28;
+    unsigned int dh = h - 68;
+
+    unsigned int card_y = dy + 34;
+    unsigned int card_w = 54;
+    unsigned int card_h = 38;
+    unsigned int card1_x = dx + 14;
+    unsigned int card2_x = dx + 76;
+    unsigned int card3_x = dx + 138;
+
+    unsigned int win_x = dx + 18;
+    unsigned int win_y = dy + 92;
+    unsigned int win_w = dw - 78;
+    unsigned int win_h = 72;
+
+    unsigned int dock_x = dx + dw - 52;
+    unsigned int dock_y = dy + 54;
+    unsigned int dock_w = 34;
+    unsigned int dock_h = 98;
+
+    unsigned int taskbar_y = dy + dh - 26;
+
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 18, y + 14, "VISIBLE UI MOCK");
+
+    graphics_rect(dx, dy, dw, dh, gshell_ui_mock_desktop_ready ? 0x00001228 : 0x00000812);
+    graphics_rect(dx, dy, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy + dh - 2, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy, 2, dh, 0x000044AA);
+    graphics_rect(dx + dw - 2, dy, 2, dh, 0x000044AA);
+
+    graphics_text(dx + 8, dy + 8, "DESKTOP");
+
+    if (gshell_ui_mock_grid_ready || gshell_ui_mock_card1_ready || gshell_ui_mock_card2_ready || gshell_ui_mock_card3_ready) {
+        graphics_rect(card1_x - 6, card_y - 6, 3 * card_w + 26, card_h + 14, 0x00001022);
+        graphics_text(card1_x - 2, card_y - 20, "APP GRID");
+    }
+
+    graphics_rect(card1_x, card_y, card_w, card_h, gshell_ui_mock_card1_ready ? 0x000055AA : 0x00002244);
+    graphics_rect(card2_x, card_y, card_w, card_h, gshell_ui_mock_card2_ready ? 0x00004488 : 0x00001833);
+    graphics_rect(card3_x, card_y, card_w, card_h, gshell_ui_mock_card3_ready ? 0x00004488 : 0x00001833);
+
+    graphics_rect(card1_x, card_y, card_w, 2, gshell_ui_mock_selected_card == 1 ? 0x0000FFFF : 0x000066AA);
+    graphics_rect(card2_x, card_y, card_w, 2, gshell_ui_mock_selected_card == 2 ? 0x0000FFFF : 0x000066AA);
+    graphics_rect(card3_x, card_y, card_w, 2, gshell_ui_mock_selected_card == 3 ? 0x0000FFFF : 0x000066AA);
+
+    graphics_text(card1_x + 6, card_y + 11, "DEMO");
+    graphics_text(card2_x + 8, card_y + 11, "SYS");
+    graphics_text(card3_x + 6, card_y + 11, "FILE");
+
+    if (gshell_ui_mock_focus_ready && gshell_ui_mock_selected_card == 1) {
+        graphics_rect(card1_x - 3, card_y - 3, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card1_x - 3, card_y + card_h + 1, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card1_x - 3, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+        graphics_rect(card1_x + card_w + 1, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+    }
+
+    if (gshell_ui_mock_window_ready) {
+        graphics_rect(win_x + 4, win_y + 4, win_w, win_h, gshell_window_shadow_ready ? 0x00000408 : 0x00000103);
+        graphics_rect(win_x, win_y, win_w, win_h, 0x00001833);
+        graphics_rect(win_x, win_y, win_w, 16, gshell_ui_mock_title_ready ? 0x000066AA : 0x00003366);
+        graphics_rect(win_x, win_y, win_w, 2, gshell_window_active_ready ? 0x0000FFFF : 0x000088CC);
+        graphics_text(win_x + 8, win_y + 4, "demo.window");
+
+        if (gshell_ui_mock_body_ready) {
+            graphics_rect(win_x + 8, win_y + 25, win_w - 16, win_h - 34, 0x00000A18);
+            graphics_text(win_x + 14, win_y + 38, "APP BODY");
+        }
+    }
+
+    if (gshell_ui_mock_dock_ready) {
+        graphics_rect(dock_x, dock_y, dock_w, dock_h, 0x00001430);
+        graphics_text(dock_x + 3, dock_y + 8, "D");
+        graphics_rect(dock_x + 7, dock_y + 28, 18, 16, 0x000055AA);
+        graphics_rect(dock_x + 7, dock_y + 50, 18, 16, 0x00004488);
+        graphics_rect(dock_x + 7, dock_y + 72, 18, 16, 0x00004488);
+    }
+
+    if (gshell_ui_mock_taskbar_ready) {
+        graphics_rect(dx + 8, taskbar_y, dw - 16, 20, 0x00002255);
+        graphics_text(dx + 16, taskbar_y + 6, "TASKBAR");
+        graphics_rect(dx + 92, taskbar_y + 4, 46, 12, 0x000055AA);
+        graphics_text(dx + 98, taskbar_y + 7, "APP");
+    }
+
+    graphics_text(x + 18, y + h - 28, "CARD 54x38  WIN FIT  TASKBAR H20");
+}
+
+static void gshell_draw_command_view_launchmockstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int dx = x + 14;
+    unsigned int dy = y + 34;
+    unsigned int dw = w - 28;
+    unsigned int dh = h - 68;
+
+    unsigned int panel_x = dx + 16;
+    unsigned int panel_y = dy + 24;
+    unsigned int panel_w = 132;
+    unsigned int panel_h = 126;
+
+    unsigned int search_x = panel_x + 10;
+    unsigned int search_y = panel_y + 12;
+
+    unsigned int taskbar_y = dy + dh - 26;
+
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 18, y + 14, "LAUNCHER TASKBAR");
+
+    graphics_rect(dx, dy, dw, dh, 0x00000812);
+    graphics_rect(dx, dy, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy + dh - 2, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy, 2, dh, 0x000044AA);
+    graphics_rect(dx + dw - 2, dy, 2, dh, 0x000044AA);
+
+    if (gshell_launch_mock_panel_ready) {
+        graphics_rect(panel_x, panel_y, panel_w, panel_h, 0x00001430);
+        graphics_rect(panel_x, panel_y, panel_w, 2, 0x000088CC);
+        graphics_text(panel_x + 10, panel_y + 104, "LAUNCHER");
+    }
+
+    if (gshell_launch_mock_search_ready) {
+        graphics_rect(search_x, search_y, panel_w - 20, 18, 0x00002044);
+        graphics_text(search_x + 8, search_y + 5, "search");
+    }
+
+    if (gshell_launch_mock_apps_ready) {
+        graphics_rect(panel_x + 12, panel_y + 42, 28, 24, 0x000055AA);
+        graphics_rect(panel_x + 52, panel_y + 42, 28, 24, 0x00004488);
+        graphics_rect(panel_x + 92, panel_y + 42, 28, 24, 0x00004488);
+        graphics_text(panel_x + 13, panel_y + 50, "D");
+        graphics_text(panel_x + 54, panel_y + 50, "S");
+        graphics_text(panel_x + 94, panel_y + 50, "F");
+    }
+
+    if (gshell_launch_mock_recent_ready) {
+        graphics_rect(panel_x + 12, panel_y + 76, panel_w - 24, 18, 0x00001A38);
+        graphics_text(panel_x + 18, panel_y + 82, "recent demo");
+    }
+
+    if (gshell_launch_mock_pin_ready) {
+        graphics_rect(panel_x + panel_w - 18, panel_y + 8, 8, 8, 0x0000FFFF);
+    }
+
+    if (gshell_launch_mock_run_ready) {
+        graphics_rect(panel_x + 14, panel_y + 68, 24, 3, 0x0000FF66);
+    }
+
+    graphics_rect(dx + 8, taskbar_y, dw - 16, 20, 0x00002255);
+
+    if (gshell_task_mock_start_ready) {
+        graphics_rect(dx + 14, taskbar_y + 4, 34, 12, 0x000055AA);
+        graphics_text(dx + 18, taskbar_y + 7, "START");
+    }
+
+    if (gshell_task_mock_app_ready) {
+        graphics_rect(dx + 58, taskbar_y + 4, 52, 12, 0x00004488);
+        graphics_text(dx + 64, taskbar_y + 7, "DEMO");
+    }
+
+    if (gshell_task_mock_active_ready) {
+        graphics_rect(dx + 58, taskbar_y + 17, 52, 2, 0x0000FFFF);
+    }
+
+    if (gshell_task_mock_tray_ready) {
+        graphics_rect(dx + dw - 78, taskbar_y + 4, 62, 12, 0x00001430);
+    }
+
+    if (gshell_task_mock_net_ready) {
+        graphics_text(dx + dw - 72, taskbar_y + 7, "NET");
+    }
+
+    if (gshell_task_mock_clock_ready) {
+        graphics_text(dx + dw - 40, taskbar_y + 7, "12:00");
+    }
+
+    graphics_text(x + 18, y + h - 28, "START 34x12  PANEL 132x126  TASKBAR H20");
+}
+
+static void gshell_draw_command_view_polishstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int dx = x + 14;
+    unsigned int dy = y + 34;
+    unsigned int dw = w - 28;
+    unsigned int dh = h - 68;
+
+    unsigned int panel_x = dx + 10;
+    unsigned int panel_y = dy + 18;
+    unsigned int panel_w = dw - 20;
+    unsigned int panel_h = dh - 42;
+
+    unsigned int card_y = panel_y + 42;
+    unsigned int card_w = 44;
+    unsigned int card_h = 28;
+    unsigned int card1_x = panel_x + 12;
+    unsigned int card2_x = panel_x + 64;
+    unsigned int card3_x = panel_x + 116;
+
+    unsigned int win_x = panel_x + 12;
+    unsigned int win_y = panel_y + 82;
+    unsigned int win_w = panel_w - 72;
+    unsigned int win_h = 54;
+
+    unsigned int tray_x = panel_x + panel_w - 54;
+    unsigned int tray_y = panel_y + 42;
+
+    unsigned int taskbar_y = dy + dh - 24;
+
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 18, y + 14, "VISUAL POLISH");
+
+    graphics_rect(dx, dy, dw, dh, gshell_polish_base_ready ? 0x00000816 : 0x0000040A);
+    graphics_rect(dx, dy, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy + dh - 2, dw, 2, 0x000044AA);
+    graphics_rect(dx, dy, 2, dh, 0x000044AA);
+    graphics_rect(dx + dw - 2, dy, 2, dh, 0x000044AA);
+
+    if (gshell_polish_glass_ready) {
+        graphics_rect(panel_x, panel_y, panel_w, panel_h, 0x00001028);
+    } else {
+        graphics_rect(panel_x, panel_y, panel_w, panel_h, 0x00000818);
+    }
+
+    graphics_rect(panel_x, panel_y, panel_w, 2, 0x000088CC);
+    graphics_rect(panel_x, panel_y + panel_h - 2, panel_w, 2, 0x00002266);
+    graphics_rect(panel_x, panel_y, 2, panel_h, 0x00004488);
+    graphics_rect(panel_x + panel_w - 2, panel_y, 2, panel_h, 0x00004488);
+
+    if (gshell_polish_title_ready) {
+        graphics_rect(panel_x + 8, panel_y + 8, panel_w - 16, 18, 0x00002455);
+        graphics_text(panel_x + 14, panel_y + 13, "LINGJING DESK");
+    }
+
+    if (gshell_polish_badge_ready) {
+        graphics_rect(panel_x + panel_w - 54, panel_y + 11, 42, 12, 0x000055AA);
+        graphics_text(panel_x + panel_w - 48, panel_y + 14, "OK");
+    }
+
+    if (gshell_polish_cards_ready) {
+        graphics_rect(card1_x, card_y, card_w, card_h, 0x000055AA);
+        graphics_rect(card2_x, card_y, card_w, card_h, 0x00003377);
+        graphics_rect(card3_x, card_y, card_w, card_h, 0x00003377);
+        graphics_text(card1_x + 7, card_y + 10, "APP");
+        graphics_text(card2_x + 7, card_y + 10, "SYS");
+        graphics_text(card3_x + 7, card_y + 10, "FS");
+    }
+
+    if (gshell_polish_focus_ready) {
+        graphics_rect(card1_x - 3, card_y - 3, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card1_x - 3, card_y + card_h + 1, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card1_x - 3, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+        graphics_rect(card1_x + card_w + 1, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+    }
+
+    if (gshell_polish_shadow_ready) {
+        graphics_rect(win_x + 4, win_y + 4, win_w, win_h, 0x00000206);
+    }
+
+    if (gshell_polish_window_ready) {
+        graphics_rect(win_x, win_y, win_w, win_h, 0x00001430);
+        graphics_rect(win_x, win_y, win_w, 14, 0x000066AA);
+        graphics_text(win_x + 7, win_y + 4, "demo.window");
+        graphics_rect(win_x + 8, win_y + 23, win_w - 16, win_h - 32, 0x00000816);
+        graphics_text(win_x + 14, win_y + 32, "RUNNING");
+    }
+
+    if (gshell_polish_tray_ready) {
+        graphics_rect(tray_x, tray_y, 38, 64, 0x00001430);
+        graphics_text(tray_x + 5, tray_y + 8, "NET");
+        graphics_text(tray_x + 5, tray_y + 28, "AI");
+        graphics_text(tray_x + 5, tray_y + 48, "12");
+    }
+
+    if (gshell_polish_taskbar_ready) {
+        graphics_rect(dx + 8, taskbar_y, dw - 16, 18, 0x00002255);
+        graphics_rect(dx + 14, taskbar_y + 4, 28, 10, 0x000055AA);
+        graphics_text(dx + 18, taskbar_y + 6, "LJ");
+        graphics_rect(dx + 50, taskbar_y + 4, 46, 10, 0x00004488);
+        graphics_text(dx + 56, taskbar_y + 6, "APP");
+
+        if (gshell_polish_safe_ready) {
+            graphics_text(dx + dw - 66, taskbar_y + 6, "SAFE");
+        }
+    }
+
+    graphics_text(x + 18, y + h - 28, "FIT OK  NO OVERFLOW");
+}
+
+static void gshell_draw_command_view_desktopscene(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int dx = x + 14;
+    unsigned int dy = y + 30;
+    unsigned int dw = w - 28;
+    unsigned int dh = h - 64;
+
+    unsigned int top_x = dx + 8;
+    unsigned int top_y = dy + 8;
+    unsigned int top_w = dw - 16;
+
+    unsigned int launch_x = dx + 10;
+    unsigned int launch_y = dy + 42;
+    unsigned int launch_w = 58;
+    unsigned int launch_h = 82;
+
+    unsigned int card_y = dy + 42;
+    unsigned int card_x = dx + 80;
+    unsigned int card_w = 34;
+    unsigned int card_h = 24;
+
+    unsigned int win_x = dx + 78;
+    unsigned int win_y = dy + 88;
+    unsigned int win_w = dw - 102;
+    unsigned int win_h = 62;
+
+    unsigned int dock_x = dx + dw - 24;
+    unsigned int dock_y = dy + 54;
+
+    unsigned int task_y = dy + dh - 22;
+
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 18, y + 12, "LINGJING DESKTOP");
+
+    if (gshell_scene_background_ready) {
+        graphics_rect(dx, dy, dw, dh, 0x00000614);
+        graphics_rect(dx, dy, dw, 2, 0x000044AA);
+        graphics_rect(dx, dy + dh - 2, dw, 2, 0x000044AA);
+        graphics_rect(dx, dy, 2, dh, 0x000044AA);
+        graphics_rect(dx + dw - 2, dy, 2, dh, 0x000044AA);
+    }
+
+    if (gshell_scene_topbar_ready) {
+        graphics_rect(top_x, top_y, top_w, 18, 0x00001430);
+        graphics_text(top_x + 8, top_y + 5, "LJ OS");
+        graphics_text(top_x + top_w - 34, top_y + 5, "OK");
+    }
+
+    if (gshell_scene_launcher_ready) {
+        graphics_rect(launch_x, launch_y, launch_w, launch_h, 0x00001028);
+        graphics_rect(launch_x, launch_y, launch_w, 2, 0x000088CC);
+        graphics_text(launch_x + 8, launch_y + 8, "START");
+
+        graphics_rect(launch_x + 8, launch_y + 27, 40, 12, 0x00002044);
+        graphics_text(launch_x + 12, launch_y + 30, "find");
+
+        graphics_rect(launch_x + 8, launch_y + 50, 16, 16, 0x000055AA);
+        graphics_rect(launch_x + 32, launch_y + 50, 16, 16, 0x00004488);
+        graphics_text(launch_x + 12, launch_y + 55, "D");
+        graphics_text(launch_x + 36, launch_y + 55, "S");
+    }
+
+    if (gshell_scene_cards_ready) {
+        graphics_rect(card_x, card_y, card_w, card_h, 0x000055AA);
+        graphics_rect(card_x + 42, card_y, card_w, card_h, 0x00003377);
+        graphics_rect(card_x + 84, card_y, card_w, card_h, 0x00003377);
+
+        graphics_text(card_x + 6, card_y + 8, "APP");
+        graphics_text(card_x + 48, card_y + 8, "SYS");
+        graphics_text(card_x + 92, card_y + 8, "FS");
+    }
+
+    if (gshell_scene_focus_ready) {
+        graphics_rect(card_x - 3, card_y - 3, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card_x - 3, card_y + card_h + 1, card_w + 6, 2, 0x0000FFFF);
+        graphics_rect(card_x - 3, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+        graphics_rect(card_x + card_w + 1, card_y - 3, 2, card_h + 6, 0x0000FFFF);
+    }
+
+    if (gshell_scene_window_ready) {
+        graphics_rect(win_x + 4, win_y + 4, win_w, win_h, 0x00000206);
+        graphics_rect(win_x, win_y, win_w, win_h, 0x00001430);
+        graphics_rect(win_x, win_y, win_w, 14, 0x000066AA);
+        graphics_text(win_x + 7, win_y + 4, "demo.win");
+
+        graphics_rect(win_x + 8, win_y + 24, win_w - 16, win_h - 34, 0x00000816);
+        graphics_text(win_x + 14, win_y + 34, "RUNNING");
+    }
+
+    if (gshell_scene_dock_ready) {
+        graphics_rect(dock_x, dock_y, 16, 70, 0x00001430);
+        graphics_rect(dock_x + 4, dock_y + 8, 8, 10, 0x000055AA);
+        graphics_rect(dock_x + 4, dock_y + 28, 8, 10, 0x00004488);
+        graphics_rect(dock_x + 4, dock_y + 48, 8, 10, 0x00004488);
+    }
+
+    if (gshell_scene_taskbar_ready) {
+        graphics_rect(dx + 8, task_y, dw - 16, 18, 0x00002255);
+
+        graphics_rect(dx + 14, task_y + 4, 26, 10, 0x000055AA);
+        graphics_text(dx + 19, task_y + 6, "LJ");
+
+        graphics_rect(dx + 48, task_y + 4, 40, 10, 0x00004488);
+        graphics_text(dx + 54, task_y + 6, "APP");
+    }
+
+    if (gshell_scene_tray_ready) {
+        graphics_text(dx + dw - 60, task_y + 6, "NET");
+        graphics_text(dx + dw - 30, task_y + 6, "12");
+    }
+
+    if (gshell_scene_widgets_ready) {
+        graphics_rect(dx + dw - 58, dy + 32, 36, 12, 0x00001028);
+        graphics_text(dx + dw - 52, dy + 35, "CTRL");
+    }
+
+    graphics_text(x + 18, y + h - 28, "DEFAULT DESKTOP");
+}
+
+static void gshell_draw_command_view_visualfinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.4 VISUAL UI FINAL");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 170, y + 48, gshell_visual_final_state);
+    graphics_text(x + 24, y + 72, "SCENE");
+    graphics_text(x + 170, y + 72, gshell_visual_final_scene_ready ? "ready" : "partial");
+    graphics_text(x + 24, y + 96, "MOCK");
+    graphics_text(x + 170, y + 96, gshell_visual_final_mock_ready ? "ready" : "partial");
+    graphics_text(x + 24, y + 120, "CARDS");
+    graphics_text(x + 170, y + 120, gshell_visual_final_cards_ready ? "ready" : "partial");
+    graphics_text(x + 24, y + 144, "LAUNCHER");
+    graphics_text(x + 170, y + 144, gshell_visual_final_launcher_ready ? "ready" : "partial");
+    graphics_text(x + 24, y + 168, "POLISH");
+    graphics_text(x + 170, y + 168, gshell_visual_final_polish_ready ? "ready" : "partial");
+    graphics_text(x + 24, y + 192, "DEFAULT");
+    graphics_text(x + 170, y + 192, gshell_visual_final_default_ready ? "on" : "off");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_visual_final_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 170, y + 240, gshell_visual_final_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 170, y + 264, "1.5 input");
+}
+
+static void gshell_draw_command_view_interactstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "DESKTOP INTERACTION");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 170, y + 48, gshell_interact_state);
+    graphics_text(x + 24, y + 72, "TARGET");
+    graphics_text(x + 170, y + 72, gshell_interact_target);
+    gshell_draw_value_uint(x + 24, y + 96, "PTR X", gshell_interact_pointer_x);
+    gshell_draw_value_uint(x + 24, y + 120, "PTR Y", gshell_interact_pointer_y);
+    graphics_text(x + 24, y + 144, "HOVER");
+    graphics_text(x + 170, y + 144, gshell_interact_hover_ready ? "yes" : "no");
+    graphics_text(x + 24, y + 168, "CLICK");
+    graphics_text(x + 170, y + 168, gshell_interact_click_ready ? "yes" : "no");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 170, y + 192, gshell_interact_focus_ready ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_interact_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 170, y + 240, gshell_interact_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 170, y + 264, "click route");
+}
+
+static void gshell_draw_command_view_routestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "CLICK ROUTING CORE");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 170, y + 48, gshell_route_state);
+    graphics_text(x + 24, y + 72, "TARGET");
+    graphics_text(x + 170, y + 72, gshell_route_target);
+    graphics_text(x + 24, y + 96, "DESKTOP");
+    graphics_text(x + 170, y + 96, gshell_route_desktop_ready ? "hit" : "none");
+    graphics_text(x + 24, y + 120, "CARD");
+    graphics_text(x + 170, y + 120, gshell_route_card_ready ? "hit" : "none");
+    graphics_text(x + 24, y + 144, "WINDOW");
+    graphics_text(x + 170, y + 144, gshell_route_window_ready ? "hit" : "none");
+    graphics_text(x + 24, y + 168, "CLICK");
+    graphics_text(x + 170, y + 168, gshell_route_click_ready ? "yes" : "no");
+    graphics_text(x + 24, y + 192, "FOCUS");
+    graphics_text(x + 170, y + 192, gshell_route_focus_ready ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_route_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 170, y + 240, gshell_route_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 170, y + 264, "action bind");
 }
 
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -9047,6 +18109,141 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "CURSORSTATUS")) {
+        gshell_draw_command_view_cursorstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "HITSTATUS")) {
+        gshell_draw_command_view_hitstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "BUTTONSTATUS")) {
+        gshell_draw_command_view_buttonstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "WINDOWSTATUS")) {
+        gshell_draw_command_view_windowstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DESKTOPSTATUS")) {
+        gshell_draw_command_view_desktopstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "INTERACTIONFINAL")) {
+        gshell_draw_command_view_interactionfinal(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "SHELLSTATUS")) {
+        gshell_draw_command_view_shellstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LAUNCHERSTATUS")) {
+        gshell_draw_command_view_launcherstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "TASKBARSTATUS")) {
+        gshell_draw_command_view_taskbarstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LAYOUTSTATUS")) {
+        gshell_draw_command_view_layoutstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DESKTOPSHELL")) {
+        gshell_draw_command_view_desktopshell(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "SHELLFINAL")) {
+        gshell_draw_command_view_shellfinal(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "APPSHELLSTATUS")) {
+        gshell_draw_command_view_appshellstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CATALOGSTATUS")) {
+        gshell_draw_command_view_catalogstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DETAILSTATUS")) {
+        gshell_draw_command_view_detailstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "ACTIONSTATUS")) {
+        gshell_draw_command_view_actionstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "APPMGMTSTATUS")) {
+        gshell_draw_command_view_appmgmtstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "APPFINAL")) {
+        gshell_draw_command_view_appfinal(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "VISUALSTATUS")) {
+        gshell_draw_command_view_visualstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CARDSTATUS")) {
+        gshell_draw_command_view_cardstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "UIMOCKSTATUS")) {
+        gshell_draw_command_view_uimockstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LAUNCHMOCKSTATUS")) {
+        gshell_draw_command_view_launchmockstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "POLISHSTATUS")) {
+        gshell_draw_command_view_polishstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DESKTOPSCENE")) {
+        gshell_draw_command_view_desktopscene(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "VISUALFINAL")) {
+        gshell_draw_command_view_visualfinal(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "INTERACTSTATUS")) {
+        gshell_draw_command_view_interactstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "ROUTESTATUS")) {
+        gshell_draw_command_view_routestatus(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -9276,7 +18473,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "INPUT LAYER");
+    graphics_text(390, 54, "CLICK ROUTE");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -9303,14 +18500,14 @@ void gshell_graphics_dashboard(void) {
     graphics_rect(width - 40, 116, 4, 300, 0x00FFAA00);
 
     graphics_text(width - 208, 136, "COMMANDS");
-    graphics_text(width - 208, 164, "INPUTSTATUS");
-    graphics_text(width - 208, 188, "MOUSESTATUS");
-    graphics_text(width - 208, 212, "CLICKSTATUS");
-    graphics_text(width - 208, 236, "FOCUSSTATUS");
-    graphics_text(width - 208, 260, "INPUTDEMO");
-    graphics_text(width - 208, 284, "INPUTCHECK");
-    graphics_text(width - 208, 308, "INPUTRESET");
-    graphics_text(width - 208, 332, "CLOSEOUT");
+    graphics_text(width - 208, 164, "ROUTESTATUS");
+    graphics_text(width - 208, 188, "HITDESKTOP");
+    graphics_text(width - 208, 212, "HITCARD");
+    graphics_text(width - 208, 236, "HITWINDOW");
+    graphics_text(width - 208, 260, "CLICKROUTE");
+    graphics_text(width - 208, 284, "OPENROUTE");
+    graphics_text(width - 208, 308, "ROUTEDEMO");
+    graphics_text(width - 208, 332, "ROUTECHECK");
 
     gshell_draw_history_panel(width - 208, 368);
 
@@ -9323,7 +18520,7 @@ void gshell_graphics_dashboard(void) {
     graphics_pixel(center_x, center_y - 1, 0x00FFFFFF);
 
     platform_print("  output: graphics-self\n");
-    platform_print("  command zone: interaction-input-base\n");
+    platform_print("  command zone: desktop-click-routing-core\n");
     platform_print("  result: real-written\n");
 }
 

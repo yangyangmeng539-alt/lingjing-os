@@ -20,6 +20,20 @@ void graphics_rect(unsigned int x, unsigned int y, unsigned int w, unsigned int 
 void graphics_text(unsigned int x, unsigned int y, const char* text);
 void graphics_font(void);
 void graphics_text_metrics(const char* text);
+void graphics_text_backend(void);
+void graphics_text_arm(void);
+void graphics_text_disarm(void);
+void graphics_text_gate(void);
+void graphics_boot_mode(void);
+void graphics_boot_plan(void);
+void graphics_boot_doctor(void);
+void graphics_boot_preflight(void);
+void graphics_boot_ready(void);
+void graphics_boot_auto_mark(void);
+int graphics_boot_auto_mark_early(void);
+void graphics_boot_text(void);
+void graphics_boot_graphics(void);
+
 
 void graphics_panel(void);
 
@@ -30,6 +44,7 @@ int graphics_is_ready(void);
 int graphics_is_broken(void);
 int graphics_real_is_armed(void);
 int graphics_backend_is_ready(void);
+int graphics_text_backend_is_armed(void);
 
 unsigned int graphics_get_draw_count(void);
 unsigned int graphics_get_last_x(void);

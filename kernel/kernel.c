@@ -28,15 +28,73 @@ extern unsigned int boot_multiboot_info_addr;
 
 unsigned int kernel_stack_marker = 0;
 
+static int kernel_boot_is_graphics_framebuffer(void) {
+    unsigned int type = bootinfo_get_framebuffer_type();
+    unsigned int bpp = bootinfo_get_framebuffer_bpp();
+    unsigned int addr = bootinfo_get_framebuffer_addr_low();
+    unsigned int width = bootinfo_get_framebuffer_width();
+    unsigned int height = bootinfo_get_framebuffer_height();
+
+    if (!bootinfo_has_framebuffer()) {
+        return 0;
+    }
+
+    if (addr == 0) {
+        return 0;
+    }
+
+    if (width < 160 || height < 120) {
+        return 0;
+    }
+
+    if (bpp != 32) {
+        return 0;
+    }
+
+    if (type == 0 || type == 1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+static void kernel_graphics_mainflow_mark(void) {
+    if (!kernel_boot_is_graphics_framebuffer()) {
+        return;
+    }
+
+    if (!framebuffer_is_ready()) {
+        return;
+    }
+
+    if (framebuffer_get_address() == 0) {
+        return;
+    }
+
+    if (framebuffer_get_bpp() != 32) {
+        return;
+    }
+
+    gshell_graphics_dashboard();
+}
+
 void kernel_main(void) {
     unsigned int local_stack_marker = 0;
+    int early_mark = 0;
+
     kernel_stack_marker = (unsigned int)&local_stack_marker;
+
+    bootinfo_init(boot_multiboot_magic, boot_multiboot_info_addr);
+
+    early_mark = graphics_boot_auto_mark_early();
 
     platform_clear();
 
-    platform_print("Lingjing OS booted.\n");
+    if (early_mark) {
+        platform_print("Lingjing OS gfxboot early framebuffer mark done.\n");
+    }
 
-    bootinfo_init(boot_multiboot_magic, boot_multiboot_info_addr);
+    platform_print("Lingjing OS booted.\n");
 
     module_init();
     module_register("core", "loaded", "kernel", "system", "none");
@@ -88,9 +146,13 @@ void kernel_main(void) {
     module_register("framebuffer", "loaded", "kernel", "display", "screen");
     platform_print("Framebuffer metadata initialized.\n");
 
+    framebuffer_prepare_silent();
+
     graphics_init();
     module_register("graphics", "loaded", "kernel", "display", "framebuffer");
     platform_print("Graphics metadata initialized.\n");
+
+    graphics_boot_auto_mark();
 
     gshell_init();
     module_register("gshell", "loaded", "kernel", "display", "graphics");
@@ -119,6 +181,8 @@ void kernel_main(void) {
     paging_init();
     module_register("paging", "loaded", "kernel", "paging", "memory");
     platform_print("Paging initialized.\n");
+
+    kernel_graphics_mainflow_mark();
 
     enable_interrupts();
     platform_print("Interrupts enabled.\n");

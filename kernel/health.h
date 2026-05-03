@@ -18,5 +18,6 @@ int health_ring3_ok(void);
 int health_result_ok(void);
 
 void health_print(void);
+void health_print_short(void);
 
 #endif

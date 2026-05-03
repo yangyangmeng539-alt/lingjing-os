@@ -163,3 +163,33 @@ void health_print(void) {
     platform_print("  result:   ");
     platform_print(health_result_ok() ? "ok\n" : "bad\n");
 }
+
+void health_print_short(void) {
+    platform_print("Health short:\n");
+
+    platform_print("  deps=");
+    platform_print(health_deps_ok() ? "ok" : "bad");
+
+    platform_print(" task=");
+    platform_print(health_task_ok() ? "ok" : "bad");
+
+    platform_print(" mem=");
+    platform_print(health_memory_ok() ? "ok" : "bad");
+
+    platform_print(" paging=");
+    platform_print(health_paging_ok() ? "ok" : "bad");
+
+    platform_print(" syscall=");
+    platform_print(health_syscall_ok() ? "ok" : "bad");
+
+    platform_print(" user=");
+    platform_print(health_user_ok() ? "ok" : "bad");
+
+    platform_print(" ring3=");
+    platform_print(health_ring3_ok() ? "ok" : "bad");
+
+    platform_print(" result=");
+    platform_print(health_result_ok() ? "ok" : "bad");
+
+    platform_print("\n");
+}
