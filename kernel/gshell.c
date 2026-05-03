@@ -211,7 +211,108 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_RULESUMMARY 137
 #define GSHELL_CMD_DECISIONSUMMARY 138
 #define GSHELL_CMD_NEXTSTAGE   139
+#define GSHELL_CMD_RUNTIMESTATUS 140
+#define GSHELL_CMD_APPSTATUS   141
+#define GSHELL_CMD_LOADERSTATUS 142
+#define GSHELL_CMD_LAUNCHSTATUS 143
+#define GSHELL_CMD_RUNTIMECHECK 144
+#define GSHELL_CMD_APPCHECK    145
+#define GSHELL_CMD_ELFSTATUS   146
+#define GSHELL_CMD_ELFHEADER   147
+#define GSHELL_CMD_ELFSEGMENTS 148
+#define GSHELL_CMD_ELFSECTIONS 149
+#define GSHELL_CMD_ELFVALIDATE 150
+#define GSHELL_CMD_LOADERCHECK 151
+#define GSHELL_CMD_MANIFESTSTATUS 152
+#define GSHELL_CMD_APPMANIFEST 153
+#define GSHELL_CMD_APPDESCRIPTOR 154
+#define GSHELL_CMD_APPENTRY    155
+#define GSHELL_CMD_APPCAPS     156
+#define GSHELL_CMD_MANIFESTCHECK 157
+#define GSHELL_CMD_APPSLOTSTATUS 158
+#define GSHELL_CMD_SLOTLIST    159
+#define GSHELL_CMD_SLOTLALLOC  160
+#define GSHELL_CMD_SLOTFREE    161
+#define GSHELL_CMD_PROCESSSLOT 162
+#define GSHELL_CMD_SLOTCHECK   163
+#define GSHELL_CMD_LAUNCHGATE  164
+#define GSHELL_CMD_LAUNCHPREPARE 165
+#define GSHELL_CMD_LAUNCHAPPROVE 166
+#define GSHELL_CMD_LAUNCHDENY  167
+#define GSHELL_CMD_LAUNCHRUN   168
+#define GSHELL_CMD_LAUNCHCHECK 169
+#define GSHELL_CMD_PERMSTATUS  170
+#define GSHELL_CMD_PERMREQUEST 171
+#define GSHELL_CMD_PERMALLOW   172
+#define GSHELL_CMD_PERMDENY    173
+#define GSHELL_CMD_PERMCHECK   174
+#define GSHELL_CMD_PERMRESET   175
+#define GSHELL_CMD_FSSTATUS    176
+#define GSHELL_CMD_RAMFSSTATUS 177
+#define GSHELL_CMD_FSMOUNT     178
+#define GSHELL_CMD_FSWRITE     179
+#define GSHELL_CMD_FSREAD      180
+#define GSHELL_CMD_FSCHECK     181
+#define GSHELL_CMD_FSRESET     182
+#define GSHELL_CMD_LIFESTATUS  183
+#define GSHELL_CMD_APPSTART    184
+#define GSHELL_CMD_APPPAUSE    185
+#define GSHELL_CMD_APPRESUME   186
+#define GSHELL_CMD_APPSTOP     187
+#define GSHELL_CMD_LIFECHECK   188
+#define GSHELL_CMD_LIFERESET   189
+#define GSHELL_CMD_RUNTIMEPANEL 190
+#define GSHELL_CMD_APPPANEL    191
+#define GSHELL_CMD_LAUNCHPANEL 192
+#define GSHELL_CMD_PERMISSIONPANEL 193
+#define GSHELL_CMD_FSPANEL     194
+#define GSHELL_CMD_LIFEPANEL   195
+#define GSHELL_CMD_RUNTIMEFINAL 196
+#define GSHELL_CMD_RUNTIMEHEALTH 197
+#define GSHELL_CMD_APPSUMMARY  198
+#define GSHELL_CMD_LAUNCHSUMMARY 199
+#define GSHELL_CMD_PERMISSIONSUMMARY 200
+#define GSHELL_CMD_FSSUMMARY   201
+#define GSHELL_CMD_LIFESUMMARY 202
+#define GSHELL_CMD_NEXTMAJOR   203
 #define GSHELL_CMD_UNKNOWN     255
+
+static unsigned int gshell_life_started = 0;
+static unsigned int gshell_life_paused = 0;
+static unsigned int gshell_life_starts = 0;
+static unsigned int gshell_life_pauses = 0;
+static unsigned int gshell_life_resumes = 0;
+static unsigned int gshell_life_stops = 0;
+static unsigned int gshell_life_checks = 0;
+static const char* gshell_life_state = "idle";
+static const char* gshell_life_last = "none";
+
+static unsigned int gshell_fs_mounted = 0;
+static unsigned int gshell_fs_has_file = 0;
+static unsigned int gshell_fs_reads = 0;
+static unsigned int gshell_fs_writes = 0;
+static unsigned int gshell_fs_checks = 0;
+static const char* gshell_fs_state = "unmounted";
+static const char* gshell_fs_file = "none";
+static const char* gshell_fs_last = "none";
+
+static unsigned int gshell_perm_requested = 0;
+static unsigned int gshell_perm_allowed = 0;
+static unsigned int gshell_perm_denied = 0;
+static unsigned int gshell_perm_checks = 0;
+static const char* gshell_perm_state = "idle";
+static const char* gshell_perm_last = "none";
+
+static unsigned int gshell_app_slot_allocated = 0;
+static unsigned int gshell_app_slot_pid = 0;
+static unsigned int gshell_app_slot_checks = 0;
+static const char* gshell_app_slot_state = "empty";
+
+static unsigned int gshell_launch_prepared = 0;
+static unsigned int gshell_launch_approved = 0;
+static unsigned int gshell_launch_attempts = 0;
+static const char* gshell_launch_state = "idle";
+static const char* gshell_launch_last_result = "none";
 
 typedef struct GShellCommandRegistryEntry {
     const char* name;
@@ -353,6 +454,70 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "rulesummary", GSHELL_CMD_RULESUMMARY, "CONTROLFINAL", "RULE SUMMARY OK" },
     { "decisionsummary", GSHELL_CMD_DECISIONSUMMARY, "CONTROLFINAL", "DECISION SUMMARY OK" },
     { "nextstage",   GSHELL_CMD_NEXTSTAGE,   "CONTROLFINAL", "NEXT STAGE OK" },
+    { "runtimestatus", GSHELL_CMD_RUNTIMESTATUS, "RUNTIMESTATUS", "RUNTIME STATUS OK" },
+    { "appstatus",   GSHELL_CMD_APPSTATUS,   "RUNTIMESTATUS", "APP STATUS OK" },
+    { "loaderstatus", GSHELL_CMD_LOADERSTATUS, "RUNTIMESTATUS", "LOADER STATUS OK" },
+    { "launchstatus", GSHELL_CMD_LAUNCHSTATUS, "RUNTIMESTATUS", "LAUNCH STATUS OK" },
+    { "runtimecheck", GSHELL_CMD_RUNTIMECHECK, "RUNTIMESTATUS", "RUNTIME CHECK OK" },
+    { "appcheck",    GSHELL_CMD_APPCHECK,    "RUNTIMESTATUS", "APP CHECK OK" },
+    { "elfstatus",   GSHELL_CMD_ELFSTATUS,   "ELFSTATUS",   "ELF STATUS OK" },
+    { "elfheader",   GSHELL_CMD_ELFHEADER,   "ELFSTATUS",   "ELF HEADER OK" },
+    { "elfsegments", GSHELL_CMD_ELFSEGMENTS, "ELFSTATUS",   "ELF SEGMENTS OK" },
+    { "elfsections", GSHELL_CMD_ELFSECTIONS, "ELFSTATUS",   "ELF SECTIONS OK" },
+    { "elfvalidate", GSHELL_CMD_ELFVALIDATE, "ELFSTATUS",   "ELF VALIDATE OK" },
+    { "loadercheck", GSHELL_CMD_LOADERCHECK, "ELFSTATUS",   "LOADER CHECK OK" },
+    { "manifeststatus", GSHELL_CMD_MANIFESTSTATUS, "MANIFESTSTATUS", "MANIFEST STATUS OK" },
+    { "appmanifest", GSHELL_CMD_APPMANIFEST, "MANIFESTSTATUS", "APP MANIFEST OK" },
+    { "appdescriptor", GSHELL_CMD_APPDESCRIPTOR, "MANIFESTSTATUS", "APP DESCRIPTOR OK" },
+    { "appentry",    GSHELL_CMD_APPENTRY,    "MANIFESTSTATUS", "APP ENTRY OK" },
+    { "appcaps",     GSHELL_CMD_APPCAPS,     "MANIFESTSTATUS", "APP CAPS OK" },
+    { "manifestcheck", GSHELL_CMD_MANIFESTCHECK, "MANIFESTSTATUS", "MANIFEST CHECK OK" },
+    { "appslotstatus", GSHELL_CMD_APPSLOTSTATUS, "APPSLOTSTATUS", "APP SLOT STATUS OK" },
+    { "slotlist",    GSHELL_CMD_SLOTLIST,    "APPSLOTSTATUS", "SLOT LIST OK" },
+    { "slotalloc",   GSHELL_CMD_SLOTLALLOC,  "APPSLOTSTATUS", "SLOT ALLOC OK" },
+    { "slotfree",    GSHELL_CMD_SLOTFREE,    "APPSLOTSTATUS", "SLOT FREE OK" },
+    { "processslot", GSHELL_CMD_PROCESSSLOT, "APPSLOTSTATUS", "PROCESS SLOT OK" },
+    { "slotcheck",   GSHELL_CMD_SLOTCHECK,   "APPSLOTSTATUS", "SLOT CHECK OK" },
+    { "launchgate",  GSHELL_CMD_LAUNCHGATE,  "LAUNCHGATE",  "LAUNCH GATE OK" },
+    { "launchprepare", GSHELL_CMD_LAUNCHPREPARE, "LAUNCHGATE", "LAUNCH PREPARE OK" },
+    { "launchapprove", GSHELL_CMD_LAUNCHAPPROVE, "LAUNCHGATE", "LAUNCH APPROVE OK" },
+    { "launchdeny",  GSHELL_CMD_LAUNCHDENY,  "LAUNCHGATE",  "LAUNCH DENY OK" },
+    { "launchrun",   GSHELL_CMD_LAUNCHRUN,   "LAUNCHGATE",  "LAUNCH RUN OK" },
+    { "launchcheck", GSHELL_CMD_LAUNCHCHECK, "LAUNCHGATE",  "LAUNCH CHECK OK" },
+    { "permstatus",  GSHELL_CMD_PERMSTATUS,  "PERMSTATUS",  "PERMISSION STATUS OK" },
+    { "permrequest", GSHELL_CMD_PERMREQUEST, "PERMSTATUS",  "PERMISSION REQUEST OK" },
+    { "permallow",   GSHELL_CMD_PERMALLOW,   "PERMSTATUS",  "PERMISSION ALLOW OK" },
+    { "permdeny",    GSHELL_CMD_PERMDENY,    "PERMSTATUS",  "PERMISSION DENY OK" },
+    { "permcheck",   GSHELL_CMD_PERMCHECK,   "PERMSTATUS",  "PERMISSION CHECK OK" },
+    { "permreset",   GSHELL_CMD_PERMRESET,   "PERMSTATUS",  "PERMISSION RESET OK" },
+    { "fsstatus",    GSHELL_CMD_FSSTATUS,    "FSSTATUS",    "FS STATUS OK" },
+    { "ramfsstatus", GSHELL_CMD_RAMFSSTATUS, "FSSTATUS",    "RAMFS STATUS OK" },
+    { "fsmount",     GSHELL_CMD_FSMOUNT,     "FSSTATUS",    "FS MOUNT OK" },
+    { "fswrite",     GSHELL_CMD_FSWRITE,     "FSSTATUS",    "FS WRITE OK" },
+    { "fsread",      GSHELL_CMD_FSREAD,      "FSSTATUS",    "FS READ OK" },
+    { "fscheck",     GSHELL_CMD_FSCHECK,     "FSSTATUS",    "FS CHECK OK" },
+    { "fsreset",     GSHELL_CMD_FSRESET,     "FSSTATUS",    "FS RESET OK" },
+    { "lifestatus",  GSHELL_CMD_LIFESTATUS,  "LIFESTATUS",  "LIFE STATUS OK" },
+    { "appstart",    GSHELL_CMD_APPSTART,    "LIFESTATUS",  "APP START OK" },
+    { "apppause",    GSHELL_CMD_APPPAUSE,    "LIFESTATUS",  "APP PAUSE OK" },
+    { "appresume",   GSHELL_CMD_APPRESUME,   "LIFESTATUS",  "APP RESUME OK" },
+    { "appstop",     GSHELL_CMD_APPSTOP,     "LIFESTATUS",  "APP STOP OK" },
+    { "lifecheck",   GSHELL_CMD_LIFECHECK,   "LIFESTATUS",  "LIFE CHECK OK" },
+    { "lifereset",   GSHELL_CMD_LIFERESET,   "LIFESTATUS",  "LIFE RESET OK" },
+    { "runtimepanel", GSHELL_CMD_RUNTIMEPANEL, "RUNTIMEPANEL", "RUNTIME PANEL OK" },
+    { "apppanel",    GSHELL_CMD_APPPANEL,    "RUNTIMEPANEL", "APP PANEL OK" },
+    { "launchpanel", GSHELL_CMD_LAUNCHPANEL, "RUNTIMEPANEL", "LAUNCH PANEL OK" },
+    { "permissionpanel", GSHELL_CMD_PERMISSIONPANEL, "RUNTIMEPANEL", "PERMISSION PANEL OK" },
+    { "fspanel",     GSHELL_CMD_FSPANEL,     "RUNTIMEPANEL", "FS PANEL OK" },
+    { "lifepanel",   GSHELL_CMD_LIFEPANEL,   "RUNTIMEPANEL", "LIFE PANEL OK" },
+    { "runtimefinal", GSHELL_CMD_RUNTIMEFINAL, "RUNTIMEFINAL", "RUNTIME FINAL OK" },
+    { "runtimehealth", GSHELL_CMD_RUNTIMEHEALTH, "RUNTIMEFINAL", "RUNTIME HEALTH OK" },
+    { "appsummary",  GSHELL_CMD_APPSUMMARY,  "RUNTIMEFINAL", "APP SUMMARY OK" },
+    { "launchsummary", GSHELL_CMD_LAUNCHSUMMARY, "RUNTIMEFINAL", "LAUNCH SUMMARY OK" },
+    { "permissionsummary", GSHELL_CMD_PERMISSIONSUMMARY, "RUNTIMEFINAL", "PERMISSION SUMMARY OK" },
+    { "fssummary",   GSHELL_CMD_FSSUMMARY,   "RUNTIMEFINAL", "FS SUMMARY OK" },
+    { "lifesummary", GSHELL_CMD_LIFESUMMARY, "RUNTIMEFINAL", "LIFE SUMMARY OK" },
+    { "nextmajor",   GSHELL_CMD_NEXTMAJOR,   "RUNTIMEFINAL", "NEXT MAJOR OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
@@ -3308,6 +3473,964 @@ static void gshell_dispatch_command(void) {
         return;
     }
 
+    if (command_id == GSHELL_CMD_RUNTIMESTATUS) {
+        gshell_command_name = "RUNTIMESTATUS";
+        gshell_command_result = "RUNTIME STATUS OK";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RUNTIMESTATUS -> APP RUNTIME BASE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSTATUS) {
+        gshell_command_name = "APPSTATUS";
+        gshell_command_result = "APP STATUS OK";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = "APP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSTATUS -> APP LAYER STATUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LOADERSTATUS) {
+        gshell_command_name = "LOADERSTATUS";
+        gshell_command_result = "LOADER STATUS OK";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = "LOADER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LOADERSTATUS -> LOADER PREP READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHSTATUS) {
+        gshell_command_name = "LAUNCHSTATUS";
+        gshell_command_result = "LAUNCH STATUS OK";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = "LAUNCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHSTATUS -> LAUNCH PIPELINE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RUNTIMECHECK) {
+        int user_ok = health_user_ok();
+        int ring3_ok = health_ring3_ok();
+        int syscall_ok = health_syscall_ok();
+        gshell_command_name = "RUNTIMECHECK";
+        gshell_command_result = (user_ok && ring3_ok && syscall_ok) ? "RUNTIME CHECK OK" : "RUNTIME CHECK BAD";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = (user_ok && ring3_ok && syscall_ok) ? "RUNTIME OK" : "RUNTIME BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push((user_ok && ring3_ok && syscall_ok) ? "RUNTIMECHECK -> USER/RING3/SYSCALL OK" : "RUNTIMECHECK -> RUNTIME ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPCHECK) {
+        int gate_ok = security_check_sandbox();
+        gshell_command_name = "APPCHECK";
+        gshell_command_result = gate_ok ? "APP CHECK OK" : "APP CHECK BLOCKED";
+        gshell_command_view = "RUNTIMESTATUS";
+        gshell_input_status_text = gate_ok ? "APP OK" : "APP BLOCK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(gate_ok ? "APPCHECK -> APP SANDBOX OK" : "APPCHECK -> APP SANDBOX BLOCKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ELFSTATUS) {
+        gshell_command_name = "ELFSTATUS";
+        gshell_command_result = "ELF STATUS OK";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ELFSTATUS -> ELF LOADER METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ELFHEADER) {
+        gshell_command_name = "ELFHEADER";
+        gshell_command_result = "ELF HEADER OK";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = "HEADER OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ELFHEADER -> ELF32 HEADER PROFILE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ELFSEGMENTS) {
+        gshell_command_name = "ELFSEGMENTS";
+        gshell_command_result = "ELF SEGMENTS OK";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = "SEGMENT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ELFSEGMENTS -> PROGRAM HEADER METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ELFSECTIONS) {
+        gshell_command_name = "ELFSECTIONS";
+        gshell_command_result = "ELF SECTIONS OK";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = "SECTION OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("ELFSECTIONS -> SECTION METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_ELFVALIDATE) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_command_name = "ELFVALIDATE";
+        gshell_command_result = runtime_ok ? "ELF VALIDATE OK" : "ELF VALIDATE BAD";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = runtime_ok ? "ELF OK" : "ELF BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(runtime_ok ? "ELFVALIDATE -> RUNTIME BASE OK" : "ELFVALIDATE -> RUNTIME BASE BAD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LOADERCHECK) {
+        int sandbox_ok = security_check_sandbox();
+        gshell_command_name = "LOADERCHECK";
+        gshell_command_result = sandbox_ok ? "LOADER CHECK OK" : "LOADER CHECK BLOCKED";
+        gshell_command_view = "ELFSTATUS";
+        gshell_input_status_text = sandbox_ok ? "LOADER OK" : "LOADER BLOCK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(sandbox_ok ? "LOADERCHECK -> SANDBOX GATE OK" : "LOADERCHECK -> SANDBOX GATE BLOCKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MANIFESTSTATUS) {
+        gshell_command_name = "MANIFESTSTATUS";
+        gshell_command_result = "MANIFEST STATUS OK";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MANIFESTSTATUS -> APP MANIFEST METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPMANIFEST) {
+        gshell_command_name = "APPMANIFEST";
+        gshell_command_result = "APP MANIFEST OK";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = "MANIFEST OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPMANIFEST -> MANIFEST PROFILE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPDESCRIPTOR) {
+        gshell_command_name = "APPDESCRIPTOR";
+        gshell_command_result = "APP DESCRIPTOR OK";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = "DESC OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPDESCRIPTOR -> APP DESCRIPTOR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPENTRY) {
+        gshell_command_name = "APPENTRY";
+        gshell_command_result = "APP ENTRY OK";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = "ENTRY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPENTRY -> ENTRYPOINT METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPCAPS) {
+        gshell_command_name = "APPCAPS";
+        gshell_command_result = "APP CAPS OK";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = "CAPS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPCAPS -> CAPABILITY DECLARATION READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MANIFESTCHECK) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        gshell_command_name = "MANIFESTCHECK";
+        gshell_command_result = (runtime_ok && sandbox_ok) ? "MANIFEST CHECK OK" : "MANIFEST CHECK BAD";
+        gshell_command_view = "MANIFESTSTATUS";
+        gshell_input_status_text = (runtime_ok && sandbox_ok) ? "MANIFEST OK" : "MANIFEST BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push((runtime_ok && sandbox_ok) ? "MANIFESTCHECK -> RUNTIME + SANDBOX OK" : "MANIFESTCHECK -> MANIFEST GATE BAD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSLOTSTATUS) {
+        gshell_command_name = "APPSLOTSTATUS";
+        gshell_command_result = "APP SLOT STATUS OK";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSLOTSTATUS -> APP SLOT CORE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SLOTLIST) {
+        gshell_command_name = "SLOTLIST";
+        gshell_command_result = "SLOT LIST OK";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = "SLOT LIST";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SLOTLIST -> SLOT TABLE METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SLOTLALLOC) {
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_app_slot_state = "allocated";
+        gshell_command_name = "SLOTALLOC";
+        gshell_command_result = "SLOT ALLOC OK";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = "ALLOC OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SLOTALLOC -> DEMO APP SLOT ALLOCATED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SLOTFREE) {
+        gshell_app_slot_allocated = 0;
+        gshell_app_slot_pid = 0;
+        gshell_app_slot_state = "empty";
+        gshell_command_name = "SLOTFREE";
+        gshell_command_result = "SLOT FREE OK";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = "FREE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SLOTFREE -> DEMO APP SLOT RELEASED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROCESSSLOT) {
+        gshell_command_name = "PROCESSSLOT";
+        gshell_command_result = "PROCESS SLOT OK";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = "PROC SLOT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(gshell_app_slot_allocated ? "PROCESSSLOT -> PID 1 BOUND TO APP SLOT" : "PROCESSSLOT -> NO APP SLOT BOUND");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SLOTCHECK) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        int slot_ok = runtime_ok && sandbox_ok && gshell_app_slot_allocated;
+        gshell_app_slot_checks++;
+        gshell_command_name = "SLOTCHECK";
+        gshell_command_result = slot_ok ? "SLOT CHECK OK" : "SLOT CHECK WAIT";
+        gshell_command_view = "APPSLOTSTATUS";
+        gshell_input_status_text = slot_ok ? "SLOT OK" : "SLOT WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(slot_ok ? "SLOTCHECK -> APP SLOT READY" : "SLOTCHECK -> NEED SLOTALLOC OR GATE OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHGATE) {
+        gshell_command_name = "LAUNCHGATE";
+        gshell_command_result = "LAUNCH GATE OK";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHGATE -> APP LAUNCH GATE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHPREPARE) {
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 0;
+        gshell_launch_state = "prepared";
+        gshell_launch_last_result = "prepared";
+        gshell_command_name = "LAUNCHPREPARE";
+        gshell_command_result = "LAUNCH PREPARE OK";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = "PREPARED";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHPREPARE -> DEMO APP READY FOR APPROVAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHAPPROVE) {
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 1;
+        gshell_launch_state = "approved";
+        gshell_launch_last_result = "approved";
+        gshell_command_name = "LAUNCHAPPROVE";
+        gshell_command_result = "LAUNCH APPROVE OK";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = "APPROVED";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHAPPROVE -> USER APPROVED DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHDENY) {
+        gshell_launch_approved = 0;
+        gshell_launch_state = "denied";
+        gshell_launch_last_result = "denied";
+        gshell_command_name = "LAUNCHDENY";
+        gshell_command_result = "LAUNCH DENY OK";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = "DENIED";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHDENY -> USER DENIED DEMO APP");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHRUN) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        int rule_ok = security_check_rule("demo.app.launch");
+        int file_ok = security_check_capability("file.read", "file");
+        int launch_ok = runtime_ok && sandbox_ok && rule_ok && file_ok && gshell_app_slot_allocated && gshell_launch_prepared && gshell_launch_approved;
+
+        gshell_launch_attempts++;
+
+        if (launch_ok) {
+            gshell_launch_state = "running";
+            gshell_launch_last_result = "started";
+        } else {
+            gshell_launch_state = "blocked";
+            gshell_launch_last_result = "blocked";
+        }
+
+        gshell_command_name = "LAUNCHRUN";
+        gshell_command_result = launch_ok ? "LAUNCH RUN OK" : "LAUNCH RUN BLOCKED";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = launch_ok ? "RUN OK" : "RUN BLOCK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(launch_ok ? "LAUNCHRUN -> DEMO APP LAUNCH ACCEPTED" : "LAUNCHRUN -> NEED SLOT/PREPARE/APPROVE/GATE OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHCHECK) {
+        int ready = gshell_app_slot_allocated && gshell_launch_prepared && gshell_launch_approved;
+        gshell_command_name = "LAUNCHCHECK";
+        gshell_command_result = ready ? "LAUNCH CHECK OK" : "LAUNCH CHECK WAIT";
+        gshell_command_view = "LAUNCHGATE";
+        gshell_input_status_text = ready ? "READY" : "WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ready ? "LAUNCHCHECK -> SLOT/PREPARE/APPROVE READY" : "LAUNCHCHECK -> WAITING FOR SLOT OR APPROVAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMSTATUS) {
+        gshell_command_name = "PERMSTATUS";
+        gshell_command_result = "PERMISSION STATUS OK";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMSTATUS -> APP PERMISSION REQUEST READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMREQUEST) {
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 0;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "requested";
+        gshell_perm_last = "file.read";
+        gshell_command_name = "PERMREQUEST";
+        gshell_command_result = "PERMISSION REQUEST OK";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = "REQUESTED";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMREQUEST -> DEMO APP REQUESTED FILE.READ");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMALLOW) {
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 1;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "allowed";
+        gshell_perm_last = "file.read";
+        gshell_command_name = "PERMALLOW";
+        gshell_command_result = "PERMISSION ALLOW OK";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = "ALLOW";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMALLOW -> USER ALLOWED FILE.READ");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMDENY) {
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 0;
+        gshell_perm_denied = 1;
+        gshell_perm_state = "denied";
+        gshell_perm_last = "file.read";
+        gshell_command_name = "PERMDENY";
+        gshell_command_result = "PERMISSION DENY OK";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = "DENY";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMDENY -> USER DENIED FILE.READ");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMCHECK) {
+        int cap_ok = security_check_capability("file.read", "file");
+        int rule_ok = security_check_rule("demo.app.permission.file.read");
+        int perm_ok = cap_ok && rule_ok && gshell_perm_requested && gshell_perm_allowed && !gshell_perm_denied;
+
+        gshell_perm_checks++;
+
+        if (perm_ok) {
+            gshell_perm_state = "granted";
+            gshell_perm_last = "granted";
+        } else {
+            gshell_perm_state = "blocked";
+            gshell_perm_last = "blocked";
+        }
+
+        gshell_command_name = "PERMCHECK";
+        gshell_command_result = perm_ok ? "PERMISSION CHECK OK" : "PERMISSION CHECK BLOCKED";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = perm_ok ? "PERM OK" : "PERM BLOCK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(perm_ok ? "PERMCHECK -> FILE.READ GRANTED" : "PERMCHECK -> NEED REQUEST/ALLOW/GATE OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMRESET) {
+        gshell_perm_requested = 0;
+        gshell_perm_allowed = 0;
+        gshell_perm_denied = 0;
+        gshell_perm_checks = 0;
+        gshell_perm_state = "idle";
+        gshell_perm_last = "none";
+        gshell_command_name = "PERMRESET";
+        gshell_command_result = "PERMISSION RESET OK";
+        gshell_command_view = "PERMSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMRESET -> PERMISSION REQUEST RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSSTATUS) {
+        gshell_command_name = "FSSTATUS";
+        gshell_command_result = "FS STATUS OK";
+        gshell_command_view = "FSSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FSSTATUS -> RAMFS PREP READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RAMFSSTATUS) {
+        gshell_command_name = "RAMFSSTATUS";
+        gshell_command_result = "RAMFS STATUS OK";
+        gshell_command_view = "FSSTATUS";
+        gshell_input_status_text = "RAMFS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RAMFSSTATUS -> RAMFS METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSMOUNT) {
+        gshell_fs_mounted = 1;
+        gshell_fs_state = "mounted";
+        gshell_fs_last = "mounted";
+        gshell_command_name = "FSMOUNT";
+        gshell_command_result = "FS MOUNT OK";
+        gshell_command_view = "FSSTATUS";
+        gshell_input_status_text = "MOUNT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FSMOUNT -> RAMFS MOUNTED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSWRITE) {
+        int file_ok = security_check_capability("file.read", "file");
+        if (gshell_fs_mounted && file_ok) {
+            gshell_fs_has_file = 1;
+            gshell_fs_file = "demo.txt";
+            gshell_fs_writes++;
+            gshell_fs_state = "dirty";
+            gshell_fs_last = "write-ok";
+            gshell_command_result = "FS WRITE OK";
+            gshell_input_status_text = "WRITE OK";
+            gshell_terminal_push("FSWRITE -> DEMO.TXT WRITTEN");
+        } else {
+            gshell_fs_last = "write-blocked";
+            gshell_command_result = "FS WRITE BLOCKED";
+            gshell_input_status_text = "WRITE BLOCK";
+            gshell_terminal_push("FSWRITE -> NEED MOUNT OR FILE GATE OK");
+        }
+
+        gshell_command_name = "FSWRITE";
+        gshell_command_view = "FSSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSREAD) {
+        int file_ok = security_check_capability("file.read", "file");
+        if (gshell_fs_mounted && gshell_fs_has_file && file_ok) {
+            gshell_fs_reads++;
+            gshell_fs_state = "ready";
+            gshell_fs_last = "read-ok";
+            gshell_command_result = "FS READ OK";
+            gshell_input_status_text = "READ OK";
+            gshell_terminal_push("FSREAD -> DEMO.TXT READ");
+        } else {
+            gshell_fs_last = "read-wait";
+            gshell_command_result = "FS READ WAIT";
+            gshell_input_status_text = "READ WAIT";
+            gshell_terminal_push("FSREAD -> NEED MOUNT/WRITE/FILE GATE OK");
+        }
+
+        gshell_command_name = "FSREAD";
+        gshell_command_view = "FSSTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSCHECK) {
+        int ready = gshell_fs_mounted && gshell_fs_has_file;
+        gshell_fs_checks++;
+        gshell_command_name = "FSCHECK";
+        gshell_command_result = ready ? "FS CHECK OK" : "FS CHECK WAIT";
+        gshell_command_view = "FSSTATUS";
+        gshell_input_status_text = ready ? "FS OK" : "FS WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_fs_last = ready ? "check-ok" : "check-wait";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ready ? "FSCHECK -> RAMFS READY" : "FSCHECK -> NEED MOUNT AND WRITE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSRESET) {
+        gshell_fs_mounted = 0;
+        gshell_fs_has_file = 0;
+        gshell_fs_reads = 0;
+        gshell_fs_writes = 0;
+        gshell_fs_checks = 0;
+        gshell_fs_state = "unmounted";
+        gshell_fs_file = "none";
+        gshell_fs_last = "reset";
+        gshell_command_name = "FSRESET";
+        gshell_command_result = "FS RESET OK";
+        gshell_command_view = "FSSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FSRESET -> RAMFS STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LIFESTATUS) {
+        gshell_command_name = "LIFESTATUS";
+        gshell_command_result = "LIFE STATUS OK";
+        gshell_command_view = "LIFESTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LIFESTATUS -> APP LIFECYCLE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSTART) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        int rule_ok = security_check_rule("demo.app.lifecycle.start");
+        int file_ok = security_check_capability("file.read", "file");
+        int ready = runtime_ok && sandbox_ok && rule_ok && file_ok && gshell_app_slot_allocated && gshell_launch_approved;
+
+        if (ready) {
+            gshell_life_started = 1;
+            gshell_life_paused = 0;
+            gshell_life_starts++;
+            gshell_life_state = "running";
+            gshell_life_last = "start-ok";
+            gshell_command_result = "APP START OK";
+            gshell_input_status_text = "START OK";
+            gshell_terminal_push("APPSTART -> DEMO APP RUNNING");
+        } else {
+            gshell_life_state = "blocked";
+            gshell_life_last = "start-block";
+            gshell_command_result = "APP START BLOCKED";
+            gshell_input_status_text = "START BLOCK";
+            gshell_terminal_push("APPSTART -> NEED SLOT/APPROVAL/GATE OK");
+        }
+
+        gshell_command_name = "APPSTART";
+        gshell_command_view = "LIFESTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPPAUSE) {
+        if (gshell_life_started && !gshell_life_paused) {
+            gshell_life_paused = 1;
+            gshell_life_pauses++;
+            gshell_life_state = "paused";
+            gshell_life_last = "pause-ok";
+            gshell_command_result = "APP PAUSE OK";
+            gshell_input_status_text = "PAUSE OK";
+            gshell_terminal_push("APPPAUSE -> DEMO APP PAUSED");
+        } else {
+            gshell_life_last = "pause-wait";
+            gshell_command_result = "APP PAUSE WAIT";
+            gshell_input_status_text = "PAUSE WAIT";
+            gshell_terminal_push("APPPAUSE -> APP NOT RUNNING");
+        }
+
+        gshell_command_name = "APPPAUSE";
+        gshell_command_view = "LIFESTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPRESUME) {
+        if (gshell_life_started && gshell_life_paused) {
+            gshell_life_paused = 0;
+            gshell_life_resumes++;
+            gshell_life_state = "running";
+            gshell_life_last = "resume-ok";
+            gshell_command_result = "APP RESUME OK";
+            gshell_input_status_text = "RESUME OK";
+            gshell_terminal_push("APPRESUME -> DEMO APP RUNNING");
+        } else {
+            gshell_life_last = "resume-wait";
+            gshell_command_result = "APP RESUME WAIT";
+            gshell_input_status_text = "RESUME WAIT";
+            gshell_terminal_push("APPRESUME -> APP NOT PAUSED");
+        }
+
+        gshell_command_name = "APPRESUME";
+        gshell_command_view = "LIFESTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSTOP) {
+        if (gshell_life_started) {
+            gshell_life_started = 0;
+            gshell_life_paused = 0;
+            gshell_life_stops++;
+            gshell_life_state = "stopped";
+            gshell_life_last = "stop-ok";
+            gshell_command_result = "APP STOP OK";
+            gshell_input_status_text = "STOP OK";
+            gshell_terminal_push("APPSTOP -> DEMO APP STOPPED");
+        } else {
+            gshell_life_last = "stop-wait";
+            gshell_command_result = "APP STOP WAIT";
+            gshell_input_status_text = "STOP WAIT";
+            gshell_terminal_push("APPSTOP -> APP NOT RUNNING");
+        }
+
+        gshell_command_name = "APPSTOP";
+        gshell_command_view = "LIFESTATUS";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LIFECHECK) {
+        int ok = gshell_life_started && !gshell_life_paused;
+        gshell_life_checks++;
+        gshell_command_name = "LIFECHECK";
+        gshell_command_result = ok ? "LIFE CHECK OK" : "LIFE CHECK WAIT";
+        gshell_command_view = "LIFESTATUS";
+        gshell_input_status_text = ok ? "LIFE OK" : "LIFE WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_life_last = ok ? "check-ok" : "check-wait";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "LIFECHECK -> APP RUNNING" : "LIFECHECK -> APP NOT RUNNING");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LIFERESET) {
+        gshell_life_started = 0;
+        gshell_life_paused = 0;
+        gshell_life_starts = 0;
+        gshell_life_pauses = 0;
+        gshell_life_resumes = 0;
+        gshell_life_stops = 0;
+        gshell_life_checks = 0;
+        gshell_life_state = "idle";
+        gshell_life_last = "reset";
+        gshell_command_name = "LIFERESET";
+        gshell_command_result = "LIFE RESET OK";
+        gshell_command_view = "LIFESTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LIFERESET -> APP LIFECYCLE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RUNTIMEPANEL) {
+        gshell_command_name = "RUNTIMEPANEL";
+        gshell_command_result = "RUNTIME PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RUNTIMEPANEL -> APP RUNTIME CONTROL PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPPANEL) {
+        gshell_command_name = "APPPANEL";
+        gshell_command_result = "APP PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "APP PANEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPPANEL -> APP SLOT SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHPANEL) {
+        gshell_command_name = "LAUNCHPANEL";
+        gshell_command_result = "LAUNCH PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "LAUNCH PANEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHPANEL -> LAUNCH GATE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMISSIONPANEL) {
+        gshell_command_name = "PERMISSIONPANEL";
+        gshell_command_result = "PERMISSION PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "PERM PANEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMISSIONPANEL -> PERMISSION SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSPANEL) {
+        gshell_command_name = "FSPANEL";
+        gshell_command_result = "FS PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "FS PANEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FSPANEL -> RAMFS SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LIFEPANEL) {
+        gshell_command_name = "LIFEPANEL";
+        gshell_command_result = "LIFE PANEL OK";
+        gshell_command_view = "RUNTIMEPANEL";
+        gshell_input_status_text = "LIFE PANEL";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LIFEPANEL -> LIFECYCLE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RUNTIMEFINAL) {
+        gshell_command_name = "RUNTIMEFINAL";
+        gshell_command_result = "RUNTIME FINAL OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RUNTIMEFINAL -> 0.9X RUNTIME CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RUNTIMEHEALTH) {
+        gshell_command_name = "RUNTIMEHEALTH";
+        gshell_command_result = "RUNTIME HEALTH OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "HEALTH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RUNTIMEHEALTH -> USER/RING3/SYSCALL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_APPSUMMARY) {
+        gshell_command_name = "APPSUMMARY";
+        gshell_command_result = "APP SUMMARY OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "APP OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("APPSUMMARY -> APP SLOT SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAUNCHSUMMARY) {
+        gshell_command_name = "LAUNCHSUMMARY";
+        gshell_command_result = "LAUNCH SUMMARY OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "LAUNCH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAUNCHSUMMARY -> LAUNCH GATE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PERMISSIONSUMMARY) {
+        gshell_command_name = "PERMISSIONSUMMARY";
+        gshell_command_result = "PERMISSION SUMMARY OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "PERM OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PERMISSIONSUMMARY -> APP PERMISSION SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FSSUMMARY) {
+        gshell_command_name = "FSSUMMARY";
+        gshell_command_result = "FS SUMMARY OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "FS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FSSUMMARY -> RAMFS SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LIFESUMMARY) {
+        gshell_command_name = "LIFESUMMARY";
+        gshell_command_result = "LIFE SUMMARY OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "LIFE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LIFESUMMARY -> LIFECYCLE SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_NEXTMAJOR) {
+        gshell_command_name = "NEXTMAJOR";
+        gshell_command_result = "NEXT MAJOR OK";
+        gshell_command_view = "RUNTIMEFINAL";
+        gshell_input_status_text = "NEXT 1.0";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("NEXTMAJOR -> 1.0 OS PROTOTYPE ENTRY");
+        return;
+    }
+
     gshell_command_unknown++;
     gshell_command_name = "UNKNOWN";
     gshell_command_result = "UNKNOWN";
@@ -3820,10 +4943,10 @@ static void gshell_draw_command_view_registry(unsigned int x, unsigned int y, un
     graphics_text(x + 132, y + 172, "capinfo");
     graphics_text(x + 24, y + 196, "intentinfo");
     graphics_text(x + 132, y + 196, "taskinfo");
-    graphics_text(x + 24, y + 224, "controlfinal");
-    graphics_text(x + 132, y + 224, "controlhealth");
-    graphics_text(x + 24, y + 252, "gatesummary");
-    graphics_text(x + 132, y + 252, "nextstage");
+    graphics_text(x + 24, y + 224, "runtimefinal");
+    graphics_text(x + 132, y + 224, "runtimehealth");
+    graphics_text(x + 24, y + 252, "appsummary");
+    graphics_text(x + 132, y + 252, "nextmajor");
 }
 
 static void gshell_draw_command_view_textcmds(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -5613,6 +6736,294 @@ static void gshell_draw_command_view_controlfinal(unsigned int x, unsigned int y
     graphics_text(x + 156, y + 268, "0.9 runtime");
 }
 
+static void gshell_draw_command_view_runtimestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP RUNTIME BASE");
+    graphics_text(x + 24, y + 52, "RUNTIME");
+    graphics_text(x + 156, y + 52, "prepared");
+    graphics_text(x + 24, y + 76, "USER");
+    graphics_text(x + 156, y + 76, health_user_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 100, "RING3");
+    graphics_text(x + 156, y + 100, health_ring3_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 124, "SYSCALL");
+    graphics_text(x + 156, y + 124, health_syscall_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 148, "LOADER");
+    graphics_text(x + 156, y + 148, "next");
+    graphics_text(x + 24, y + 172, "APP SLOT");
+    graphics_text(x + 156, y + 172, "planned");
+    graphics_text(x + 24, y + 196, "SANDBOX");
+    graphics_text(x + 156, y + 196, security_sandbox_profile());
+    graphics_text(x + 24, y + 220, "RULE");
+    graphics_text(x + 156, y + 220, security_rule_default_policy());
+    graphics_text(x + 24, y + 244, "GATE");
+    graphics_text(x + 156, y + 244, security_decision_health());
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "elf loader");
+}
+
+static void gshell_draw_command_view_elfstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "ELF LOADER METADATA");
+    graphics_text(x + 24, y + 52, "FORMAT");
+    graphics_text(x + 156, y + 52, "ELF32");
+    graphics_text(x + 24, y + 76, "ARCH");
+    graphics_text(x + 156, y + 76, "i386");
+    graphics_text(x + 24, y + 100, "TYPE");
+    graphics_text(x + 156, y + 100, "executable");
+    graphics_text(x + 24, y + 124, "HEADER");
+    graphics_text(x + 156, y + 124, "metadata");
+    graphics_text(x + 24, y + 148, "SEGMENTS");
+    graphics_text(x + 156, y + 148, "planned");
+    graphics_text(x + 24, y + 172, "SECTIONS");
+    graphics_text(x + 156, y + 172, "planned");
+    graphics_text(x + 24, y + 196, "ENTRY");
+    graphics_text(x + 156, y + 196, "planned");
+    graphics_text(x + 24, y + 220, "SANDBOX");
+    graphics_text(x + 156, y + 220, security_sandbox_profile());
+    graphics_text(x + 24, y + 244, "VALIDATE");
+    graphics_text(x + 156, y + 244, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ready" : "bad");
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "manifest");
+}
+
+static void gshell_draw_command_view_manifeststatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP MANIFEST CORE");
+    graphics_text(x + 24, y + 52, "MANIFEST");
+    graphics_text(x + 156, y + 52, "metadata");
+    graphics_text(x + 24, y + 76, "APP NAME");
+    graphics_text(x + 156, y + 76, "demo.app");
+    graphics_text(x + 24, y + 100, "APP TYPE");
+    graphics_text(x + 156, y + 100, "user");
+    graphics_text(x + 24, y + 124, "ENTRY");
+    graphics_text(x + 156, y + 124, "main");
+    graphics_text(x + 24, y + 148, "BINARY");
+    graphics_text(x + 156, y + 148, "elf32");
+    graphics_text(x + 24, y + 172, "CAPS");
+    graphics_text(x + 156, y + 172, "declared");
+    graphics_text(x + 24, y + 196, "SANDBOX");
+    graphics_text(x + 156, y + 196, security_sandbox_profile());
+    graphics_text(x + 24, y + 220, "RULE");
+    graphics_text(x + 156, y + 220, security_rule_default_policy());
+    graphics_text(x + 24, y + 244, "VALIDATE");
+    graphics_text(x + 156, y + 244, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ready" : "bad");
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "app slot");
+}
+
+static void gshell_draw_command_view_appslotstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP SLOT CORE");
+    graphics_text(x + 24, y + 52, "SLOT 0");
+    graphics_text(x + 156, y + 52, gshell_app_slot_allocated ? "used" : "free");
+    graphics_text(x + 24, y + 76, "STATE");
+    graphics_text(x + 156, y + 76, gshell_app_slot_state);
+    gshell_draw_value_uint(x + 24, y + 100, "PID", gshell_app_slot_pid);
+    gshell_draw_value_uint(x + 24, y + 124, "CHECKS", gshell_app_slot_checks);
+    graphics_text(x + 24, y + 148, "USER");
+    graphics_text(x + 156, y + 148, health_user_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 172, "RING3");
+    graphics_text(x + 156, y + 172, health_ring3_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 196, "SYSCALL");
+    graphics_text(x + 156, y + 196, health_syscall_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 220, "SANDBOX");
+    graphics_text(x + 156, y + 220, security_sandbox_profile());
+    graphics_text(x + 24, y + 244, "BINDING");
+    graphics_text(x + 156, y + 244, gshell_app_slot_allocated ? "demo.app" : "none");
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "launch gate");
+}
+
+static void gshell_draw_command_view_launchgate(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP LAUNCH GATE");
+    graphics_text(x + 24, y + 52, "APP");
+    graphics_text(x + 156, y + 52, "demo.app");
+    graphics_text(x + 24, y + 76, "SLOT");
+    graphics_text(x + 156, y + 76, gshell_app_slot_allocated ? "ready" : "none");
+    graphics_text(x + 24, y + 100, "PREPARE");
+    graphics_text(x + 156, y + 100, gshell_launch_prepared ? "yes" : "no");
+    graphics_text(x + 24, y + 124, "APPROVAL");
+    graphics_text(x + 156, y + 124, gshell_launch_approved ? "approved" : "pending");
+    graphics_text(x + 24, y + 148, "STATE");
+    graphics_text(x + 156, y + 148, gshell_launch_state);
+    graphics_text(x + 24, y + 172, "LAST");
+    graphics_text(x + 156, y + 172, gshell_launch_last_result);
+    gshell_draw_value_uint(x + 24, y + 196, "ATTEMPTS", gshell_launch_attempts);
+    graphics_text(x + 24, y + 220, "SANDBOX");
+    graphics_text(x + 156, y + 220, security_sandbox_profile());
+    graphics_text(x + 24, y + 244, "RULE");
+    graphics_text(x + 156, y + 244, security_rule_default_policy());
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "permission req");
+}
+
+static void gshell_draw_command_view_permstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP PERMISSION REQUEST");
+    graphics_text(x + 24, y + 52, "APP");
+    graphics_text(x + 156, y + 52, "demo.app");
+    graphics_text(x + 24, y + 76, "REQUEST");
+    graphics_text(x + 156, y + 76, gshell_perm_requested ? "yes" : "no");
+    graphics_text(x + 24, y + 100, "CAPABILITY");
+    graphics_text(x + 156, y + 100, "file.read");
+    graphics_text(x + 24, y + 124, "USER ALLOW");
+    graphics_text(x + 156, y + 124, gshell_perm_allowed ? "yes" : "no");
+    graphics_text(x + 24, y + 148, "USER DENY");
+    graphics_text(x + 156, y + 148, gshell_perm_denied ? "yes" : "no");
+    graphics_text(x + 24, y + 172, "STATE");
+    graphics_text(x + 156, y + 172, gshell_perm_state);
+    graphics_text(x + 24, y + 196, "LAST");
+    graphics_text(x + 156, y + 196, gshell_perm_last);
+    gshell_draw_value_uint(x + 24, y + 220, "CHECKS", gshell_perm_checks);
+    graphics_text(x + 24, y + 244, "FILE GATE");
+    graphics_text(x + 156, y + 244, security_file_policy());
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "ramfs prep");
+}
+
+static void gshell_draw_command_view_fsstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "BASIC FS / RAMFS PREP");
+    graphics_text(x + 24, y + 52, "FS");
+    graphics_text(x + 156, y + 52, "ramfs");
+    graphics_text(x + 24, y + 76, "MOUNT");
+    graphics_text(x + 156, y + 76, gshell_fs_mounted ? "yes" : "no");
+    graphics_text(x + 24, y + 100, "STATE");
+    graphics_text(x + 156, y + 100, gshell_fs_state);
+    graphics_text(x + 24, y + 124, "FILE");
+    graphics_text(x + 156, y + 124, gshell_fs_file);
+    gshell_draw_value_uint(x + 24, y + 148, "WRITES", gshell_fs_writes);
+    gshell_draw_value_uint(x + 24, y + 172, "READS", gshell_fs_reads);
+    gshell_draw_value_uint(x + 24, y + 196, "CHECKS", gshell_fs_checks);
+    graphics_text(x + 24, y + 220, "FILE GATE");
+    graphics_text(x + 156, y + 220, security_file_policy());
+    graphics_text(x + 24, y + 244, "LAST");
+    graphics_text(x + 156, y + 244, gshell_fs_last);
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "lifecycle");
+}
+
+static void gshell_draw_command_view_lifestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP LIFECYCLE");
+    graphics_text(x + 24, y + 52, "APP");
+    graphics_text(x + 156, y + 52, "demo.app");
+    graphics_text(x + 24, y + 76, "STATE");
+    graphics_text(x + 156, y + 76, gshell_life_state);
+    graphics_text(x + 24, y + 100, "LAST");
+    graphics_text(x + 156, y + 100, gshell_life_last);
+    gshell_draw_value_uint(x + 24, y + 124, "STARTS", gshell_life_starts);
+    gshell_draw_value_uint(x + 24, y + 148, "PAUSES", gshell_life_pauses);
+    gshell_draw_value_uint(x + 24, y + 172, "RESUMES", gshell_life_resumes);
+    gshell_draw_value_uint(x + 24, y + 196, "STOPS", gshell_life_stops);
+    gshell_draw_value_uint(x + 24, y + 220, "CHECKS", gshell_life_checks);
+    graphics_text(x + 24, y + 244, "SANDBOX");
+    graphics_text(x + 156, y + 244, security_sandbox_profile());
+    graphics_text(x + 24, y + 268, "NEXT");
+    graphics_text(x + 156, y + 268, "runtime panel");
+}
+
+static void gshell_draw_command_view_runtimepanel(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "APP RUNTIME PANEL");
+    graphics_text(x + 24, y + 48, "USER/RING3");
+    graphics_text(x + 156, y + 48, (health_user_ok() && health_ring3_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 72, "SYSCALL");
+    graphics_text(x + 156, y + 72, health_syscall_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 96, "APP SLOT");
+    graphics_text(x + 156, y + 96, gshell_app_slot_allocated ? "allocated" : "empty");
+    graphics_text(x + 24, y + 120, "LAUNCH");
+    graphics_text(x + 156, y + 120, gshell_launch_state);
+    graphics_text(x + 24, y + 144, "PERMISSION");
+    graphics_text(x + 156, y + 144, gshell_perm_state);
+    graphics_text(x + 24, y + 168, "RAMFS");
+    graphics_text(x + 156, y + 168, gshell_fs_state);
+    graphics_text(x + 24, y + 192, "LIFECYCLE");
+    graphics_text(x + 156, y + 192, gshell_life_state);
+    graphics_text(x + 24, y + 216, "SANDBOX");
+    graphics_text(x + 156, y + 216, security_sandbox_profile());
+    graphics_text(x + 24, y + 240, "RULE");
+    graphics_text(x + 156, y + 240, security_rule_default_policy());
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "0.9 closeout");
+}
+
+static void gshell_draw_command_view_runtimefinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "0.9X RUNTIME CLOSEOUT");
+    graphics_text(x + 24, y + 48, "USER/RING3");
+    graphics_text(x + 156, y + 48, (health_user_ok() && health_ring3_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 72, "SYSCALL");
+    graphics_text(x + 156, y + 72, health_syscall_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 96, "APP SLOT");
+    graphics_text(x + 156, y + 96, gshell_app_slot_allocated ? "ready" : "empty");
+    graphics_text(x + 24, y + 120, "LAUNCH");
+    graphics_text(x + 156, y + 120, gshell_launch_state);
+    graphics_text(x + 24, y + 144, "PERM");
+    graphics_text(x + 156, y + 144, gshell_perm_state);
+    graphics_text(x + 24, y + 168, "RAMFS");
+    graphics_text(x + 156, y + 168, gshell_fs_state);
+    graphics_text(x + 24, y + 192, "LIFE");
+    graphics_text(x + 156, y + 192, gshell_life_state);
+    graphics_text(x + 24, y + 216, "SANDBOX");
+    graphics_text(x + 156, y + 216, security_sandbox_profile());
+    graphics_text(x + 24, y + 240, "CONTROL");
+    graphics_text(x + 156, y + 240, security_user_control_enabled() ? "enabled" : "disabled");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.0 proto");
+}
+
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
     graphics_rect(x, y, w, h, 0x00000000);
     graphics_rect(x, y, w, 4, 0x00004477);
@@ -6199,6 +7610,56 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "RUNTIMESTATUS")) {
+        gshell_draw_command_view_runtimestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "ELFSTATUS")) {
+        gshell_draw_command_view_elfstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "MANIFESTSTATUS")) {
+        gshell_draw_command_view_manifeststatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "APPSLOTSTATUS")) {
+        gshell_draw_command_view_appslotstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LAUNCHGATE")) {
+        gshell_draw_command_view_launchgate(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "PERMSTATUS")) {
+        gshell_draw_command_view_permstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "FSSTATUS")) {
+        gshell_draw_command_view_fsstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LIFESTATUS")) {
+        gshell_draw_command_view_lifestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "RUNTIMEPANEL")) {
+        gshell_draw_command_view_runtimepanel(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "RUNTIMEFINAL")) {
+        gshell_draw_command_view_runtimefinal(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -6428,7 +7889,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "0.8X CLOSEOUT");
+    graphics_text(390, 54, "0.9X CLOSEOUT");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -6455,14 +7916,14 @@ void gshell_graphics_dashboard(void) {
     graphics_rect(width - 40, 116, 4, 300, 0x00FFAA00);
 
     graphics_text(width - 208, 136, "COMMANDS");
-    graphics_text(width - 208, 164, "CONTROLFINAL");
-    graphics_text(width - 208, 188, "CONTROLHEALTH");
-    graphics_text(width - 208, 212, "POLICYHEALTH");
-    graphics_text(width - 208, 236, "GATESUMMARY");
-    graphics_text(width - 208, 260, "SANDBOXSUMMARY");
-    graphics_text(width - 208, 284, "RULESUMMARY");
-    graphics_text(width - 208, 308, "DECISIONSUMMARY");
-    graphics_text(width - 208, 332, "NEXTSTAGE");
+    graphics_text(width - 208, 164, "RUNTIMEFINAL");
+    graphics_text(width - 208, 188, "RUNTIMEHEALTH");
+    graphics_text(width - 208, 212, "APPSUMMARY");
+    graphics_text(width - 208, 236, "LAUNCHSUMMARY");
+    graphics_text(width - 208, 260, "PERMSUMMARY");
+    graphics_text(width - 208, 284, "FSSUMMARY");
+    graphics_text(width - 208, 308, "LIFESUMMARY");
+    graphics_text(width - 208, 332, "NEXTMAJOR");
 
     gshell_draw_history_panel(width - 208, 368);
 
@@ -6475,7 +7936,7 @@ void gshell_graphics_dashboard(void) {
     graphics_pixel(center_x, center_y - 1, 0x00FFFFFF);
 
     platform_print("  output: graphics-self\n");
-    platform_print("  command zone: 0.8x-control-closeout\n");
+    platform_print("  command zone: 0.9x-runtime-closeout\n");
     platform_print("  result: real-written\n");
 }
 
