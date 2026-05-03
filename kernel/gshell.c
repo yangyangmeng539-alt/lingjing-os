@@ -275,7 +275,71 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_FSSUMMARY   201
 #define GSHELL_CMD_LIFESUMMARY 202
 #define GSHELL_CMD_NEXTMAJOR   203
-#define GSHELL_CMD_UNKNOWN     255
+#define GSHELL_CMD_PROTOTYPE   204
+#define GSHELL_CMD_PROTOSTATUS 205
+#define GSHELL_CMD_PROTOMILESTONE 206
+#define GSHELL_CMD_SYSTEMFLOW  207
+#define GSHELL_CMD_DEMOFLOW    208
+#define GSHELL_CMD_PROTOREADY  209
+#define GSHELL_CMD_UNIDASH     210
+#define GSHELL_CMD_SYSDASH     211
+#define GSHELL_CMD_BOOTDASH    212
+#define GSHELL_CMD_CONTROLDASH 213
+#define GSHELL_CMD_RUNTIMEDASH 214
+#define GSHELL_CMD_FLOWDASH    215
+#define GSHELL_CMD_BOOTHEALTH  216
+#define GSHELL_CMD_HEALTHDASH  217
+#define GSHELL_CMD_DOCTORDASH  218
+#define GSHELL_CMD_CORECHECK   219
+#define GSHELL_CMD_BOOTCHECK   220
+#define GSHELL_CMD_SYSTEMCHECK 221
+#define GSHELL_CMD_FLOWSTATUS  222
+#define GSHELL_CMD_FLOWPREPARE 223
+#define GSHELL_CMD_FLOWCONTROL 224
+#define GSHELL_CMD_FLOWRUNTIME 225
+#define GSHELL_CMD_FLOWDEMO    226
+#define GSHELL_CMD_FLOWCHECK   227
+#define GSHELL_CMD_FLOWRESET   228
+#define GSHELL_CMD_WALKTHROUGH 229
+#define GSHELL_CMD_DEMOSTEP1   230
+#define GSHELL_CMD_DEMOSTEP2   231
+#define GSHELL_CMD_DEMOSTEP3   232
+#define GSHELL_CMD_DEMOSTEP4   233
+#define GSHELL_CMD_DEMOSTEP5   234
+#define GSHELL_CMD_DEMOCHECK   235
+#define GSHELL_CMD_DEMORESET   236
+#define GSHELL_CMD_MILESTONEFINAL 237
+#define GSHELL_CMD_PROTOSUMMARY 238
+#define GSHELL_CMD_CHAINSUMMARY 239
+#define GSHELL_CMD_READYPANEL  240
+#define GSHELL_CMD_VERSIONPANEL 241
+#define GSHELL_CMD_CLOSECHECK  242
+#define GSHELL_CMD_UIPOLISH    243
+#define GSHELL_CMD_LAYOUTCHECK 244
+#define GSHELL_CMD_PANELCHECK  245
+#define GSHELL_CMD_TEXTCHECK   246
+#define GSHELL_CMD_COMMANDCLEAN 247
+#define GSHELL_CMD_UICHECK     248
+#define GSHELL_CMD_CLOSEOUT    249
+#define GSHELL_CMD_FINALSTATUS 250
+#define GSHELL_CMD_FINALHEALTH 251
+#define GSHELL_CMD_FINALDEMO   252
+#define GSHELL_CMD_FINALREADY  253
+#define GSHELL_CMD_RELEASEINFO 254
+#define GSHELL_CMD_VERSIONFINAL 255
+#define GSHELL_CMD_NEXTROADMAP 256
+#define GSHELL_CMD_UNKNOWN     999
+
+static unsigned int gshell_flow_prepared = 0;
+static unsigned int gshell_flow_demos = 0;
+static unsigned int gshell_flow_checks = 0;
+static const char* gshell_flow_state = "idle";
+static const char* gshell_flow_last = "none";
+
+static unsigned int gshell_demo_step = 0;
+static unsigned int gshell_demo_checks = 0;
+static const char* gshell_demo_state = "idle";
+static const char* gshell_demo_last = "none";
 
 static unsigned int gshell_life_started = 0;
 static unsigned int gshell_life_paused = 0;
@@ -518,6 +582,59 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "fssummary",   GSHELL_CMD_FSSUMMARY,   "RUNTIMEFINAL", "FS SUMMARY OK" },
     { "lifesummary", GSHELL_CMD_LIFESUMMARY, "RUNTIMEFINAL", "LIFE SUMMARY OK" },
     { "nextmajor",   GSHELL_CMD_NEXTMAJOR,   "RUNTIMEFINAL", "NEXT MAJOR OK" },
+    { "prototype",   GSHELL_CMD_PROTOTYPE,   "PROTOTYPE",   "PROTOTYPE OK" },
+    { "protostatus", GSHELL_CMD_PROTOSTATUS, "PROTOTYPE",   "PROTO STATUS OK" },
+    { "milestone",   GSHELL_CMD_PROTOMILESTONE, "PROTOTYPE",   "MILESTONE OK" },
+    { "systemflow",  GSHELL_CMD_SYSTEMFLOW,  "PROTOTYPE",   "SYSTEM FLOW OK" },
+    { "demoflow",    GSHELL_CMD_DEMOFLOW,    "PROTOTYPE",   "DEMO FLOW OK" },
+    { "protoready",  GSHELL_CMD_PROTOREADY,  "PROTOTYPE",   "PROTO READY OK" },
+    { "dashboard",   GSHELL_CMD_UNIDASH,     "DASHBOARD",   "DASHBOARD OK" },
+    { "sysdash",     GSHELL_CMD_SYSDASH,     "DASHBOARD",   "SYSTEM DASH OK" },
+    { "bootdash",    GSHELL_CMD_BOOTDASH,    "DASHBOARD",   "BOOT DASH OK" },
+    { "controldash", GSHELL_CMD_CONTROLDASH, "DASHBOARD",   "CONTROL DASH OK" },
+    { "runtimedash", GSHELL_CMD_RUNTIMEDASH, "DASHBOARD",   "RUNTIME DASH OK" },
+    { "flowdash",    GSHELL_CMD_FLOWDASH,    "DASHBOARD",   "FLOW DASH OK" },
+    { "boothealth",  GSHELL_CMD_BOOTHEALTH,  "BOOTHEALTH",  "BOOT HEALTH OK" },
+    { "healthdash",  GSHELL_CMD_HEALTHDASH,  "BOOTHEALTH",  "HEALTH DASH OK" },
+    { "doctordash",  GSHELL_CMD_DOCTORDASH,  "BOOTHEALTH",  "DOCTOR DASH OK" },
+    { "corecheck",   GSHELL_CMD_CORECHECK,   "BOOTHEALTH",  "CORE CHECK OK" },
+    { "bootcheck",   GSHELL_CMD_BOOTCHECK,   "BOOTHEALTH",  "BOOT CHECK OK" },
+    { "systemcheck", GSHELL_CMD_SYSTEMCHECK, "BOOTHEALTH",  "SYSTEM CHECK OK" },
+    { "flowstatus",  GSHELL_CMD_FLOWSTATUS,  "FLOWSTATUS",  "FLOW STATUS OK" },
+    { "flowprepare", GSHELL_CMD_FLOWPREPARE, "FLOWSTATUS",  "FLOW PREPARE OK" },
+    { "flowcontrol", GSHELL_CMD_FLOWCONTROL, "FLOWSTATUS",  "FLOW CONTROL OK" },
+    { "flowruntime", GSHELL_CMD_FLOWRUNTIME, "FLOWSTATUS",  "FLOW RUNTIME OK" },
+    { "flowdemo",    GSHELL_CMD_FLOWDEMO,    "FLOWSTATUS",  "FLOW DEMO OK" },
+    { "flowcheck",   GSHELL_CMD_FLOWCHECK,   "FLOWSTATUS",  "FLOW CHECK OK" },
+    { "flowreset",   GSHELL_CMD_FLOWRESET,   "FLOWSTATUS",  "FLOW RESET OK" },
+    { "walkthrough", GSHELL_CMD_WALKTHROUGH, "WALKTHROUGH", "WALKTHROUGH OK" },
+    { "demostep1",   GSHELL_CMD_DEMOSTEP1,   "WALKTHROUGH", "DEMO STEP1 OK" },
+    { "demostep2",   GSHELL_CMD_DEMOSTEP2,   "WALKTHROUGH", "DEMO STEP2 OK" },
+    { "demostep3",   GSHELL_CMD_DEMOSTEP3,   "WALKTHROUGH", "DEMO STEP3 OK" },
+    { "demostep4",   GSHELL_CMD_DEMOSTEP4,   "WALKTHROUGH", "DEMO STEP4 OK" },
+    { "demostep5",   GSHELL_CMD_DEMOSTEP5,   "WALKTHROUGH", "DEMO STEP5 OK" },
+    { "democheck",   GSHELL_CMD_DEMOCHECK,   "WALKTHROUGH", "DEMO CHECK OK" },
+    { "demoreset",   GSHELL_CMD_DEMORESET,   "WALKTHROUGH", "DEMO RESET OK" },
+    { "milestonefinal", GSHELL_CMD_MILESTONEFINAL, "MILEFINAL", "MILESTONE FINAL OK" },
+    { "protosummary", GSHELL_CMD_PROTOSUMMARY, "MILEFINAL", "PROTO SUMMARY OK" },
+    { "chainsummary", GSHELL_CMD_CHAINSUMMARY, "MILEFINAL", "CHAIN SUMMARY OK" },
+    { "readypanel",  GSHELL_CMD_READYPANEL,  "MILEFINAL", "READY PANEL OK" },
+    { "versionpanel", GSHELL_CMD_VERSIONPANEL, "MILEFINAL", "VERSION PANEL OK" },
+    { "closecheck",  GSHELL_CMD_CLOSECHECK,  "MILEFINAL", "CLOSE CHECK OK" },
+    { "uipolish",    GSHELL_CMD_UIPOLISH,    "UIPOLISH",    "UI POLISH OK" },
+    { "layoutcheck", GSHELL_CMD_LAYOUTCHECK, "UIPOLISH",    "LAYOUT CHECK OK" },
+    { "panelcheck",  GSHELL_CMD_PANELCHECK,  "UIPOLISH",    "PANEL CHECK OK" },
+    { "textcheck",   GSHELL_CMD_TEXTCHECK,   "UIPOLISH",    "TEXT CHECK OK" },
+    { "commandclean", GSHELL_CMD_COMMANDCLEAN, "UIPOLISH",  "COMMAND CLEAN OK" },
+    { "uicheck",     GSHELL_CMD_UICHECK,     "UIPOLISH",    "UI CHECK OK" },
+    { "closeout",    GSHELL_CMD_CLOSEOUT,    "CLOSEOUT",    "CLOSEOUT OK" },
+    { "finalstatus", GSHELL_CMD_FINALSTATUS, "CLOSEOUT",    "FINAL STATUS OK" },
+    { "finalhealth", GSHELL_CMD_FINALHEALTH, "CLOSEOUT",    "FINAL HEALTH OK" },
+    { "finaldemo",   GSHELL_CMD_FINALDEMO,   "CLOSEOUT",    "FINAL DEMO OK" },
+    { "finalready",  GSHELL_CMD_FINALREADY,  "CLOSEOUT",    "FINAL READY OK" },
+    { "releaseinfo", GSHELL_CMD_RELEASEINFO, "CLOSEOUT",    "RELEASE INFO OK" },
+    { "versionfinal", GSHELL_CMD_VERSIONFINAL, "CLOSEOUT",  "VERSION FINAL OK" },
+    { "nextroadmap", GSHELL_CMD_NEXTROADMAP, "CLOSEOUT",    "NEXT ROADMAP OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
@@ -3426,7 +3543,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_SANDBOXSUMMARY) {
-        gshell_command_name = "SANDBOXSUMMARY";
+        gshell_command_name = "SBOXSUM";
         gshell_command_result = "SANDBOX SUMMARY OK";
         gshell_command_view = "CONTROLFINAL";
         gshell_input_status_text = "SANDBOX OK";
@@ -3450,7 +3567,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_DECISIONSUMMARY) {
-        gshell_command_name = "DECISIONSUMMARY";
+        gshell_command_name = "DECSUM";
         gshell_command_result = "DECISION SUMMARY OK";
         gshell_command_view = "CONTROLFINAL";
         gshell_input_status_text = "DECISION OK";
@@ -3794,8 +3911,8 @@ static void gshell_dispatch_command(void) {
     if (command_id == GSHELL_CMD_LAUNCHPREPARE) {
         gshell_launch_prepared = 1;
         gshell_launch_approved = 0;
-        gshell_launch_state = "prepared";
-        gshell_launch_last_result = "prepared";
+        gshell_launch_state = "prep";
+        gshell_launch_last_result = "prep";
         gshell_command_name = "LAUNCHPREPARE";
         gshell_command_result = "LAUNCH PREPARE OK";
         gshell_command_view = "LAUNCHGATE";
@@ -3810,8 +3927,8 @@ static void gshell_dispatch_command(void) {
     if (command_id == GSHELL_CMD_LAUNCHAPPROVE) {
         gshell_launch_prepared = 1;
         gshell_launch_approved = 1;
-        gshell_launch_state = "approved";
-        gshell_launch_last_result = "approved";
+        gshell_launch_state = "yes";
+        gshell_launch_last_result = "yes";
         gshell_command_name = "LAUNCHAPPROVE";
         gshell_command_result = "LAUNCH APPROVE OK";
         gshell_command_view = "LAUNCHGATE";
@@ -4300,7 +4417,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_PERMISSIONPANEL) {
-        gshell_command_name = "PERMISSIONPANEL";
+        gshell_command_name = "PERMPANEL";
         gshell_command_result = "PERMISSION PANEL OK";
         gshell_command_view = "RUNTIMEPANEL";
         gshell_input_status_text = "PERM PANEL";
@@ -4348,7 +4465,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_RUNTIMEHEALTH) {
-        gshell_command_name = "RUNTIMEHEALTH";
+        gshell_command_name = "RTHEALTH";
         gshell_command_result = "RUNTIME HEALTH OK";
         gshell_command_view = "RUNTIMEFINAL";
         gshell_input_status_text = "HEALTH OK";
@@ -4372,7 +4489,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_LAUNCHSUMMARY) {
-        gshell_command_name = "LAUNCHSUMMARY";
+        gshell_command_name = "LAUNCHSUM";
         gshell_command_result = "LAUNCH SUMMARY OK";
         gshell_command_view = "RUNTIMEFINAL";
         gshell_input_status_text = "LAUNCH OK";
@@ -4384,7 +4501,7 @@ static void gshell_dispatch_command(void) {
     }
 
     if (command_id == GSHELL_CMD_PERMISSIONSUMMARY) {
-        gshell_command_name = "PERMISSIONSUMMARY";
+        gshell_command_name = "PERMSUM";
         gshell_command_result = "PERMISSION SUMMARY OK";
         gshell_command_view = "RUNTIMEFINAL";
         gshell_input_status_text = "PERM OK";
@@ -4428,6 +4545,835 @@ static void gshell_dispatch_command(void) {
         gshell_history_push(gshell_command_normalized, gshell_command_view);
         gshell_result_log_push(gshell_command_normalized, gshell_command_result);
         gshell_terminal_push("NEXTMAJOR -> 1.0 OS PROTOTYPE ENTRY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROTOTYPE) {
+        gshell_command_name = "PROTOTYPE";
+        gshell_command_result = "PROTOTYPE OK";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PROTOTYPE -> 1.0 OS PROTOTYPE MILESTONE READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROTOSTATUS) {
+        gshell_command_name = "PROTOSTATUS";
+        gshell_command_result = "PROTO STATUS OK";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = "PROTO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PROTOSTATUS -> BOOT/CONTROL/RUNTIME STATUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROTOMILESTONE) {
+        gshell_command_name = "MILESTONE";
+        gshell_command_result = "MILESTONE OK";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = "MILESTONE";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MILESTONE -> LINGJING OS 1.0 PROTOTYPE BASE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SYSTEMFLOW) {
+        gshell_command_name = "SYSTEMFLOW";
+        gshell_command_result = "SYSTEM FLOW OK";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SYSTEMFLOW -> BOOT HEALTH CONTROL RUNTIME LINKED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOFLOW) {
+        gshell_command_name = "DEMOFLOW";
+        gshell_command_result = "DEMO FLOW OK";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMOFLOW -> SLOT LAUNCH PERM FS LIFE CHAIN READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROTOREADY) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int control_ok = security_user_control_enabled();
+        int runtime_ok = gshell_app_slot_allocated && gshell_launch_approved;
+        gshell_command_name = "PROTOREADY";
+        gshell_command_result = (core_ok && control_ok) ? "PROTO READY OK" : "PROTO READY BAD";
+        gshell_command_view = "PROTOTYPE";
+        gshell_input_status_text = (core_ok && control_ok) ? "READY" : "BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(runtime_ok ? "PROTOREADY -> FULL DEMO CHAIN READY" : "PROTOREADY -> CORE READY, DEMO CHAIN OPTIONAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UNIDASH) {
+        gshell_command_name = "DASHBOARD";
+        gshell_command_result = "DASHBOARD OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DASHBOARD -> UNIFIED SYSTEM DASHBOARD READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SYSDASH) {
+        gshell_command_name = "SYSDASH";
+        gshell_command_result = "SYSTEM DASH OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "SYS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("SYSDASH -> SYSTEM SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BOOTDASH) {
+        gshell_command_name = "BOOTDASH";
+        gshell_command_result = "BOOT DASH OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "BOOT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BOOTDASH -> BOOT GRAPHICS SHELL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CONTROLDASH) {
+        gshell_command_name = "CONTROLDASH";
+        gshell_command_result = "CONTROL DASH OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "CONTROL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CONTROLDASH -> CONTROL POLICY SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RUNTIMEDASH) {
+        gshell_command_name = "RUNTIMEDASH";
+        gshell_command_result = "RUNTIME DASH OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "RUNTIME OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RUNTIMEDASH -> APP RUNTIME SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWDASH) {
+        gshell_command_name = "FLOWDASH";
+        gshell_command_result = "FLOW DASH OK";
+        gshell_command_view = "DASHBOARD";
+        gshell_input_status_text = "FLOW OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWDASH -> BOOT CONTROL RUNTIME FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BOOTHEALTH) {
+        gshell_command_name = "BOOTHEALTH";
+        gshell_command_result = "BOOT HEALTH OK";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BOOTHEALTH -> BOOT HEALTH DOCTOR READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_HEALTHDASH) {
+        gshell_command_name = "HEALTHDASH";
+        gshell_command_result = "HEALTH DASH OK";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = "HEALTH OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("HEALTHDASH -> CORE HEALTH SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DOCTORDASH) {
+        gshell_command_name = "DOCTORDASH";
+        gshell_command_result = "DOCTOR DASH OK";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = "DOCTOR OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DOCTORDASH -> DOCTOR PATH READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CORECHECK) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_command_name = "CORECHECK";
+        gshell_command_result = core_ok ? "CORE CHECK OK" : "CORE CHECK BAD";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = core_ok ? "CORE OK" : "CORE BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "CORECHECK -> USER RING3 SYSCALL OK" : "CORECHECK -> CORE ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_BOOTCHECK) {
+        gshell_command_name = "BOOTCHECK";
+        gshell_command_result = "BOOT CHECK OK";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = "BOOT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("BOOTCHECK -> MULTIBOOT GRAPHICS GSHELL OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_SYSTEMCHECK) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int control_ok = security_user_control_enabled();
+        gshell_command_name = "SYSTEMCHECK";
+        gshell_command_result = (core_ok && control_ok) ? "SYSTEM CHECK OK" : "SYSTEM CHECK BAD";
+        gshell_command_view = "BOOTHEALTH";
+        gshell_input_status_text = (core_ok && control_ok) ? "SYSTEM OK" : "SYSTEM BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push((core_ok && control_ok) ? "SYSTEMCHECK -> BOOT CONTROL RUNTIME OK" : "SYSTEMCHECK -> SYSTEM ISSUE");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWSTATUS) {
+        gshell_command_name = "FLOWSTATUS";
+        gshell_command_result = "FLOW STATUS OK";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWSTATUS -> CONTROL RUNTIME FLOW READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWPREPARE) {
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_app_slot_state = "allocated";
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 0;
+        gshell_launch_state = "prepared";
+        gshell_launch_last_result = "prepared";
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 0;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "requested";
+        gshell_perm_last = "file.read";
+        gshell_flow_prepared = 1;
+        gshell_flow_state = "prepared";
+        gshell_flow_last = "prepared";
+        gshell_command_name = "FLOWPREPARE";
+        gshell_command_result = "FLOW PREPARE OK";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = "PREPARED";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWPREPARE -> SLOT LAUNCH PERM PREPARED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWCONTROL) {
+        security_sandbox_profile_open();
+        security_rule_default_allow();
+        security_decision_reset_counters();
+        gshell_flow_state = "control";
+        gshell_flow_last = "control-ok";
+        gshell_command_name = "FLOWCONTROL";
+        gshell_command_result = "FLOW CONTROL OK";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = "CONTROL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWCONTROL -> OPEN SANDBOX RULE ALLOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWRUNTIME) {
+        int runtime_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        int ready = runtime_ok && sandbox_ok && gshell_app_slot_allocated;
+        gshell_flow_checks++;
+        gshell_flow_state = ready ? "runtime-ok" : "runtime-wait";
+        gshell_flow_last = ready ? "runtime-ok" : "runtime-wait";
+        gshell_command_name = "FLOWRUNTIME";
+        gshell_command_result = ready ? "FLOW RUNTIME OK" : "FLOW RUNTIME WAIT";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = ready ? "RUNTIME OK" : "RUNTIME WAIT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ready ? "FLOWRUNTIME -> RUNTIME SLOT READY" : "FLOWRUNTIME -> NEED FLOWPREPARE OR GATE OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWDEMO) {
+        security_sandbox_profile_open();
+        security_rule_default_allow();
+
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_app_slot_state = "allocated";
+
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 1;
+        gshell_launch_state = "running";
+        gshell_launch_last_result = "started";
+
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 1;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "granted";
+        gshell_perm_last = "granted";
+
+        gshell_fs_mounted = 1;
+        gshell_fs_has_file = 1;
+        gshell_fs_file = "demo.txt";
+        gshell_fs_state = "ready";
+        gshell_fs_last = "demo-ready";
+
+        gshell_life_started = 1;
+        gshell_life_paused = 0;
+        gshell_life_state = "running";
+        gshell_life_last = "demo-run";
+
+        gshell_flow_prepared = 1;
+        gshell_flow_demos++;
+        gshell_flow_state = "demo-ready";
+        gshell_flow_last = "full-demo";
+
+        gshell_command_name = "FLOWDEMO";
+        gshell_command_result = "FLOW DEMO OK";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWDEMO -> FULL BOOT CONTROL RUNTIME APP CHAIN READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWCHECK) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int control_ok = security_user_control_enabled();
+        int runtime_ok = gshell_app_slot_allocated && gshell_launch_approved && gshell_perm_allowed && gshell_fs_mounted && gshell_life_started;
+        int ok = core_ok && control_ok && runtime_ok;
+        gshell_flow_checks++;
+        gshell_flow_state = ok ? "ready" : "partial";
+        gshell_flow_last = ok ? "check-ok" : "check-partial";
+        gshell_command_name = "FLOWCHECK";
+        gshell_command_result = ok ? "FLOW CHECK OK" : "FLOW CHECK PARTIAL";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = ok ? "FLOW OK" : "FLOW PART";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "FLOWCHECK -> FULL SYSTEM FLOW READY" : "FLOWCHECK -> RUN FLOWDEMO FOR FULL CHAIN");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FLOWRESET) {
+        gshell_flow_prepared = 0;
+        gshell_flow_demos = 0;
+        gshell_flow_checks = 0;
+        gshell_flow_state = "idle";
+        gshell_flow_last = "reset";
+        gshell_launch_prepared = 0;
+        gshell_launch_approved = 0;
+        gshell_launch_state = "idle";
+        gshell_launch_last_result = "none";
+        gshell_life_started = 0;
+        gshell_life_paused = 0;
+        gshell_life_state = "idle";
+        gshell_life_last = "reset";
+        gshell_command_name = "FLOWRESET";
+        gshell_command_result = "FLOW RESET OK";
+        gshell_command_view = "FLOWSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FLOWRESET -> FLOW STATE RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_WALKTHROUGH) {
+        gshell_command_name = "WALKTHROUGH";
+        gshell_command_result = "WALKTHROUGH OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("WALKTHROUGH -> DEMO APP FULL CHAIN READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOSTEP1) {
+        security_sandbox_profile_open();
+        security_rule_default_allow();
+        security_decision_reset_counters();
+
+        gshell_demo_step = 1;
+        gshell_demo_state = "control";
+        gshell_demo_last = "control-ok";
+        gshell_flow_state = "control";
+        gshell_flow_last = "demo-step1";
+
+        gshell_command_name = "DEMOSTEP1";
+        gshell_command_result = "DEMO STEP1 OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "STEP1 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMOSTEP1 -> CONTROL OPEN + RULE ALLOW");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOSTEP2) {
+        gshell_app_slot_allocated = 1;
+        gshell_app_slot_pid = 1;
+        gshell_app_slot_state = "allocated";
+
+        gshell_demo_step = 2;
+        gshell_demo_state = "slot";
+        gshell_demo_last = "slot-ok";
+        gshell_flow_state = "slot-ready";
+        gshell_flow_last = "demo-step2";
+
+        gshell_command_name = "DEMOSTEP2";
+        gshell_command_result = "DEMO STEP2 OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "STEP2 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMOSTEP2 -> DEMO APP SLOT ALLOCATED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOSTEP3) {
+        gshell_launch_prepared = 1;
+        gshell_launch_approved = 1;
+        gshell_launch_state = "approved";
+        gshell_launch_last_result = "approved";
+
+        gshell_demo_step = 3;
+        gshell_demo_state = "launch";
+        gshell_demo_last = "launch-ok";
+        gshell_flow_state = "launch-ready";
+        gshell_flow_last = "demo-step3";
+
+        gshell_command_name = "DEMOSTEP3";
+        gshell_command_result = "DEMO STEP3 OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "STEP3 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMOSTEP3 -> LAUNCH PREPARED + APPROVED");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOSTEP4) {
+        gshell_perm_requested = 1;
+        gshell_perm_allowed = 1;
+        gshell_perm_denied = 0;
+        gshell_perm_state = "granted";
+        gshell_perm_last = "granted";
+
+        gshell_fs_mounted = 1;
+        gshell_fs_has_file = 1;
+        gshell_fs_file = "demo.txt";
+        gshell_fs_state = "ready";
+        gshell_fs_last = "demo-ready";
+
+        gshell_demo_step = 4;
+        gshell_demo_state = "perm-fs";
+        gshell_demo_last = "perm-fs-ok";
+        gshell_flow_state = "perm-fs-ready";
+        gshell_flow_last = "demo-step4";
+
+        gshell_command_name = "DEMOSTEP4";
+        gshell_command_result = "DEMO STEP4 OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "STEP4 OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMOSTEP4 -> PERMISSION GRANTED + RAMFS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOSTEP5) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int sandbox_ok = security_check_sandbox();
+        int ready = core_ok && sandbox_ok && gshell_app_slot_allocated && gshell_launch_approved && gshell_perm_allowed && gshell_fs_mounted;
+
+        if (ready) {
+            gshell_life_started = 1;
+            gshell_life_paused = 0;
+            gshell_life_state = "running";
+            gshell_life_last = "demo-run";
+            gshell_launch_state = "running";
+            gshell_launch_last_result = "started";
+            gshell_demo_step = 5;
+            gshell_demo_state = "running";
+            gshell_demo_last = "demo-running";
+            gshell_flow_state = "demo-ready";
+            gshell_flow_last = "demo-step5";
+            gshell_command_result = "DEMO STEP5 OK";
+            gshell_input_status_text = "STEP5 OK";
+            gshell_terminal_push("DEMOSTEP5 -> DEMO APP RUNNING");
+        } else {
+            gshell_demo_state = "blocked";
+            gshell_demo_last = "step5-block";
+            gshell_flow_state = "blocked";
+            gshell_flow_last = "demo-step5-block";
+            gshell_command_result = "DEMO STEP5 BLOCKED";
+            gshell_input_status_text = "STEP5 BLOCK";
+            gshell_terminal_push("DEMOSTEP5 -> NEED STEP1-4 OR GATE OK");
+        }
+
+        gshell_command_name = "DEMOSTEP5";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMOCHECK) {
+        int ok = gshell_demo_step >= 5 && gshell_life_started && gshell_app_slot_allocated && gshell_launch_approved && gshell_perm_allowed && gshell_fs_mounted;
+        gshell_demo_checks++;
+        gshell_command_name = "DEMOCHECK";
+        gshell_command_result = ok ? "DEMO CHECK OK" : "DEMO CHECK PARTIAL";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = ok ? "DEMO OK" : "DEMO PART";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_demo_last = ok ? "check-ok" : "check-partial";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "DEMOCHECK -> FULL WALKTHROUGH READY" : "DEMOCHECK -> RUN DEMOSTEP1-5");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_DEMORESET) {
+        gshell_demo_step = 0;
+        gshell_demo_checks = 0;
+        gshell_demo_state = "idle";
+        gshell_demo_last = "reset";
+
+        gshell_flow_prepared = 0;
+        gshell_flow_state = "idle";
+        gshell_flow_last = "reset";
+
+        gshell_life_started = 0;
+        gshell_life_paused = 0;
+        gshell_life_state = "idle";
+        gshell_life_last = "reset";
+
+        gshell_launch_prepared = 0;
+        gshell_launch_approved = 0;
+        gshell_launch_state = "idle";
+        gshell_launch_last_result = "none";
+
+        gshell_command_name = "DEMORESET";
+        gshell_command_result = "DEMO RESET OK";
+        gshell_command_view = "WALKTHROUGH";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("DEMORESET -> DEMO WALKTHROUGH RESET");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MILESTONEFINAL) {
+        gshell_command_name = "MILEFINAL";
+        gshell_command_result = "MILESTONE FINAL OK";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MILESTONEFINAL -> 1.0 MILESTONE PANEL READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PROTOSUMMARY) {
+        gshell_command_name = "PROTOSUM";
+        gshell_command_result = "PROTO SUMMARY OK";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = "PROTO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PROTOSUMMARY -> BOOT GSHELL CONTROL RUNTIME READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CHAINSUMMARY) {
+        gshell_command_name = "CHAINSUM";
+        gshell_command_result = "CHAIN SUMMARY OK";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = "CHAIN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CHAINSUMMARY -> BOOT CONTROL RUNTIME DEMO CHAIN READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_READYPANEL) {
+        gshell_command_name = "READYPANEL";
+        gshell_command_result = "READY PANEL OK";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = "READY OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("READYPANEL -> 1.0 READINESS SUMMARY READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VERSIONPANEL) {
+        gshell_command_name = "VERPANEL";
+        gshell_command_result = "VERSION PANEL OK";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = "VERSION OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VERSIONPANEL -> DEV 1.0.5 MILESTONE FINAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLOSECHECK) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int control_ok = security_user_control_enabled();
+        int demo_ok = gshell_demo_step >= 5 && gshell_life_started;
+        int ok = core_ok && control_ok;
+        gshell_command_name = "CLOSECHECK";
+        gshell_command_result = ok ? "CLOSE CHECK OK" : "CLOSE CHECK BAD";
+        gshell_command_view = "MILEFINAL";
+        gshell_input_status_text = ok ? "CLOSE OK" : "CLOSE BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(demo_ok ? "CLOSECHECK -> CORE AND DEMO READY" : "CLOSECHECK -> CORE READY, DEMO OPTIONAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UIPOLISH) {
+        gshell_command_name = "UIPOLISH";
+        gshell_command_result = "UI POLISH OK";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("UIPOLISH -> 1.0 UI POLISH READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_LAYOUTCHECK) {
+        gshell_command_name = "LAYOUTCHK";
+        gshell_command_result = "LAYOUT CHECK OK";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = "LAYOUT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("LAYOUTCHECK -> VIEWPORT PANEL LAYOUT OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_PANELCHECK) {
+        gshell_command_name = "PANELCHK";
+        gshell_command_result = "PANEL CHECK OK";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = "PANEL OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("PANELCHECK -> SYSTEM COMMAND TERMINAL PANELS OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_TEXTCHECK) {
+        gshell_command_name = "TEXTCHK";
+        gshell_command_result = "TEXT CHECK OK";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = "TEXT OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("TEXTCHECK -> SHORT LABELS OK");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_COMMANDCLEAN) {
+        gshell_command_name = "CMDCLEAN";
+        gshell_command_result = "COMMAND CLEAN OK";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = "CLEAN OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("COMMANDCLEAN -> 1.0 COMMAND PANEL CLEAN");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_UICHECK) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_command_name = "UICHECK";
+        gshell_command_result = core_ok ? "UI CHECK OK" : "UI CHECK BAD";
+        gshell_command_view = "UIPOLISH";
+        gshell_input_status_text = core_ok ? "UI OK" : "UI BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "UICHECK -> GSHELL UI READY" : "UICHECK -> CORE HEALTH BAD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLOSEOUT) {
+        gshell_command_name = "CLOSEOUT";
+        gshell_command_result = "CLOSEOUT OK";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CLOSEOUT -> 1.0 PROTOTYPE CLOSEOUT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FINALSTATUS) {
+        gshell_command_name = "FINALSTATUS";
+        gshell_command_result = "FINAL STATUS OK";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = "STATUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FINALSTATUS -> BOOT CONTROL RUNTIME DEMO STATUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FINALHEALTH) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        gshell_command_name = "FINALHEALTH";
+        gshell_command_result = core_ok ? "FINAL HEALTH OK" : "FINAL HEALTH BAD";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = core_ok ? "HEALTH OK" : "HEALTH BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(core_ok ? "FINALHEALTH -> CORE HEALTH OK" : "FINALHEALTH -> CORE HEALTH BAD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FINALDEMO) {
+        int demo_ok = gshell_demo_step >= 5 && gshell_life_started;
+        gshell_command_name = "FINALDEMO";
+        gshell_command_result = demo_ok ? "FINAL DEMO OK" : "FINAL DEMO OPTIONAL";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = demo_ok ? "DEMO OK" : "DEMO OPT";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(demo_ok ? "FINALDEMO -> FULL DEMO CHAIN READY" : "FINALDEMO -> RUN DEMOSTEP1-5 OPTIONAL");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FINALREADY) {
+        int core_ok = health_user_ok() && health_ring3_ok() && health_syscall_ok();
+        int control_ok = security_user_control_enabled();
+        int ready = core_ok && control_ok;
+        gshell_command_name = "FINALREADY";
+        gshell_command_result = ready ? "FINAL READY OK" : "FINAL READY BAD";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = ready ? "READY" : "BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ready ? "FINALREADY -> 1.0 PROTOTYPE READY" : "FINALREADY -> 1.0 PROTOTYPE NOT READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_RELEASEINFO) {
+        gshell_command_name = "RELEASEINFO";
+        gshell_command_result = "RELEASE INFO OK";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = "RELEASE OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("RELEASEINFO -> DEV 1.0.7 PROTOTYPE CLOSEOUT");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_VERSIONFINAL) {
+        gshell_command_name = "VERSIONFINAL";
+        gshell_command_result = "VERSION FINAL OK";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = "VERSION OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("VERSIONFINAL -> LINGJING OS DEV 1.0.7");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_NEXTROADMAP) {
+        gshell_command_name = "NEXTROADMAP";
+        gshell_command_result = "NEXT ROADMAP OK";
+        gshell_command_view = "CLOSEOUT";
+        gshell_input_status_text = "NEXT 1.1";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("NEXTROADMAP -> 1.1 INTERACTION UI INPUT LAYER");
         return;
     }
 
@@ -4943,10 +5889,10 @@ static void gshell_draw_command_view_registry(unsigned int x, unsigned int y, un
     graphics_text(x + 132, y + 172, "capinfo");
     graphics_text(x + 24, y + 196, "intentinfo");
     graphics_text(x + 132, y + 196, "taskinfo");
-    graphics_text(x + 24, y + 224, "runtimefinal");
-    graphics_text(x + 132, y + 224, "runtimehealth");
-    graphics_text(x + 24, y + 252, "appsummary");
-    graphics_text(x + 132, y + 252, "nextmajor");
+    graphics_text(x + 24, y + 224, "closeout");
+    graphics_text(x + 132, y + 224, "finalstatus");
+    graphics_text(x + 24, y + 252, "finalready");
+    graphics_text(x + 132, y + 252, "nextroadmap");
 }
 
 static void gshell_draw_command_view_textcmds(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -6745,7 +7691,7 @@ static void gshell_draw_command_view_runtimestatus(unsigned int x, unsigned int 
 
     graphics_text(x + 24, y + 20, "APP RUNTIME BASE");
     graphics_text(x + 24, y + 52, "RUNTIME");
-    graphics_text(x + 156, y + 52, "prepared");
+    graphics_text(x + 156, y + 52, "prep");
     graphics_text(x + 24, y + 76, "USER");
     graphics_text(x + 156, y + 76, health_user_ok() ? "ok" : "bad");
     graphics_text(x + 24, y + 100, "RING3");
@@ -6861,26 +7807,26 @@ static void gshell_draw_command_view_launchgate(unsigned int x, unsigned int y, 
     graphics_rect(x, y, 4, h, 0x0000AAFF);
     graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
 
-    graphics_text(x + 24, y + 20, "APP LAUNCH GATE");
+    graphics_text(x + 24, y + 20, "APP LAUNCH");
     graphics_text(x + 24, y + 52, "APP");
     graphics_text(x + 156, y + 52, "demo.app");
     graphics_text(x + 24, y + 76, "SLOT");
     graphics_text(x + 156, y + 76, gshell_app_slot_allocated ? "ready" : "none");
     graphics_text(x + 24, y + 100, "PREPARE");
     graphics_text(x + 156, y + 100, gshell_launch_prepared ? "yes" : "no");
-    graphics_text(x + 24, y + 124, "APPROVAL");
-    graphics_text(x + 156, y + 124, gshell_launch_approved ? "approved" : "pending");
+    graphics_text(x + 24, y + 124, "APPROVE");
+    graphics_text(x + 156, y + 124, gshell_launch_approved ? "yes" : "wait");
     graphics_text(x + 24, y + 148, "STATE");
     graphics_text(x + 156, y + 148, gshell_launch_state);
     graphics_text(x + 24, y + 172, "LAST");
     graphics_text(x + 156, y + 172, gshell_launch_last_result);
-    gshell_draw_value_uint(x + 24, y + 196, "ATTEMPTS", gshell_launch_attempts);
+    gshell_draw_value_uint(x + 24, y + 196, "TRIES", gshell_launch_attempts);
     graphics_text(x + 24, y + 220, "SANDBOX");
     graphics_text(x + 156, y + 220, security_sandbox_profile());
     graphics_text(x + 24, y + 244, "RULE");
     graphics_text(x + 156, y + 244, security_rule_default_policy());
     graphics_text(x + 24, y + 268, "NEXT");
-    graphics_text(x + 156, y + 268, "permission req");
+    graphics_text(x + 156, y + 268, "perm req");
 }
 
 static void gshell_draw_command_view_permstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -7022,6 +7968,246 @@ static void gshell_draw_command_view_runtimefinal(unsigned int x, unsigned int y
     graphics_text(x + 156, y + 240, security_user_control_enabled() ? "enabled" : "disabled");
     graphics_text(x + 24, y + 264, "NEXT");
     graphics_text(x + 156, y + 264, "1.0 proto");
+}
+
+static void gshell_draw_command_view_prototype(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "LINGJING 1.0 PROTOTYPE");
+    graphics_text(x + 24, y + 48, "BOOT");
+    graphics_text(x + 156, y + 48, "ready");
+    graphics_text(x + 24, y + 72, "GSHELL");
+    graphics_text(x + 156, y + 72, "control");
+    graphics_text(x + 24, y + 96, "HEALTH");
+    graphics_text(x + 156, y + 96, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 120, "CONTROL");
+    graphics_text(x + 156, y + 120, security_user_control_enabled() ? "enabled" : "disabled");
+    graphics_text(x + 24, y + 144, "SANDBOX");
+    graphics_text(x + 156, y + 144, security_sandbox_profile());
+    graphics_text(x + 24, y + 168, "RUNTIME");
+    graphics_text(x + 156, y + 168, gshell_life_state);
+    graphics_text(x + 24, y + 192, "APP SLOT");
+    graphics_text(x + 156, y + 192, gshell_app_slot_allocated ? "ready" : "empty");
+    graphics_text(x + 24, y + 216, "LAUNCH");
+    graphics_text(x + 156, y + 216, gshell_launch_state);
+    graphics_text(x + 24, y + 240, "MOTTO");
+    graphics_text(x + 156, y + 240, "my rules");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "dashboard");
+}
+
+static void gshell_draw_command_view_dashboard(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "UNIFIED DASH");
+    graphics_text(x + 24, y + 48, "BOOT");
+    graphics_text(x + 156, y + 48, "ready");
+    graphics_text(x + 24, y + 72, "GSHELL");
+    graphics_text(x + 156, y + 72, "online");
+    graphics_text(x + 24, y + 96, "HEALTH");
+    graphics_text(x + 156, y + 96, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 120, "CONTROL");
+    graphics_text(x + 156, y + 120, security_user_control_enabled() ? "on" : "off");
+    graphics_text(x + 24, y + 144, "POLICY");
+    graphics_text(x + 156, y + 144, security_policy_mode());
+    graphics_text(x + 24, y + 168, "SANDBOX");
+    graphics_text(x + 156, y + 168, security_sandbox_profile());
+    graphics_text(x + 24, y + 192, "RUNTIME");
+    graphics_text(x + 156, y + 192, gshell_life_state);
+    graphics_text(x + 24, y + 216, "APP SLOT");
+    graphics_text(x + 156, y + 216, gshell_app_slot_allocated ? "ready" : "empty");
+    graphics_text(x + 24, y + 240, "LAUNCH");
+    graphics_text(x + 156, y + 240, gshell_launch_state);
+    graphics_text(x + 24, y + 264, "FLOW");
+    graphics_text(x + 156, y + 264, "boot-control-app");
+}
+
+static void gshell_draw_command_view_boothealth(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "BOOT HEALTH");
+    graphics_text(x + 24, y + 48, "BOOT");
+    graphics_text(x + 156, y + 48, "ready");
+    graphics_text(x + 24, y + 72, "GRAPHICS");
+    graphics_text(x + 156, y + 72, "ready");
+    graphics_text(x + 24, y + 96, "GSHELL");
+    graphics_text(x + 156, y + 96, "online");
+    graphics_text(x + 24, y + 120, "USER");
+    graphics_text(x + 156, y + 120, health_user_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 144, "RING3");
+    graphics_text(x + 156, y + 144, health_ring3_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 168, "SYSCALL");
+    graphics_text(x + 156, y + 168, health_syscall_ok() ? "ok" : "bad");
+    graphics_text(x + 24, y + 192, "CONTROL");
+    graphics_text(x + 156, y + 192, security_user_control_enabled() ? "ok" : "bad");
+    graphics_text(x + 24, y + 216, "SANDBOX");
+    graphics_text(x + 156, y + 216, security_sandbox_profile());
+    graphics_text(x + 24, y + 240, "DOCTOR");
+    graphics_text(x + 156, y + 240, "ready");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "flow demo");
+}
+
+static void gshell_draw_command_view_flowstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "CONTROL RUNTIME");
+    graphics_text(x + 24, y + 48, "FLOW");
+    graphics_text(x + 156, y + 48, gshell_flow_state);
+    graphics_text(x + 24, y + 72, "LAST");
+    graphics_text(x + 156, y + 72, gshell_flow_last);
+    graphics_text(x + 24, y + 96, "CONTROL");
+    graphics_text(x + 156, y + 96, security_user_control_enabled() ? "on" : "off");
+    graphics_text(x + 24, y + 120, "SANDBOX");
+    graphics_text(x + 156, y + 120, security_sandbox_profile());
+    graphics_text(x + 24, y + 144, "APP SLOT");
+    graphics_text(x + 156, y + 144, gshell_app_slot_allocated ? "ready" : "empty");
+    graphics_text(x + 24, y + 168, "LAUNCH");
+    graphics_text(x + 156, y + 168, gshell_launch_state);
+    graphics_text(x + 24, y + 192, "PERM");
+    graphics_text(x + 156, y + 192, gshell_perm_state);
+    graphics_text(x + 24, y + 216, "FS");
+    graphics_text(x + 156, y + 216, gshell_fs_state);
+    graphics_text(x + 24, y + 240, "LIFE");
+    graphics_text(x + 156, y + 240, gshell_life_state);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "demo chain");
+}
+
+static void gshell_draw_command_view_walkthrough(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "DEMO WALK");
+    graphics_text(x + 24, y + 48, "STEP");
+    gshell_draw_value_uint(x + 156, y + 48, "", gshell_demo_step);
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_demo_state);
+    graphics_text(x + 24, y + 96, "LAST");
+    graphics_text(x + 156, y + 96, gshell_demo_last);
+    graphics_text(x + 24, y + 120, "CONTROL");
+    graphics_text(x + 156, y + 120, security_policy_mode());
+    graphics_text(x + 24, y + 144, "SLOT");
+    graphics_text(x + 156, y + 144, gshell_app_slot_allocated ? "ready" : "empty");
+    graphics_text(x + 24, y + 168, "LAUNCH");
+    graphics_text(x + 156, y + 168, gshell_launch_state);
+    graphics_text(x + 24, y + 192, "PERM");
+    graphics_text(x + 156, y + 192, gshell_perm_state);
+    graphics_text(x + 24, y + 216, "FS");
+    graphics_text(x + 156, y + 216, gshell_fs_state);
+    graphics_text(x + 24, y + 240, "LIFE");
+    graphics_text(x + 156, y + 240, gshell_life_state);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "milestone");
+}
+
+static void gshell_draw_command_view_milestonefinal(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.0 MILESTONE");
+    graphics_text(x + 24, y + 48, "BOOT");
+    graphics_text(x + 156, y + 48, "ready");
+    graphics_text(x + 24, y + 72, "GSHELL");
+    graphics_text(x + 156, y + 72, "ready");
+    graphics_text(x + 24, y + 96, "CORE");
+    graphics_text(x + 156, y + 96, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 120, "CONTROL");
+    graphics_text(x + 156, y + 120, security_user_control_enabled() ? "on" : "off");
+    graphics_text(x + 24, y + 144, "SANDBOX");
+    graphics_text(x + 156, y + 144, security_sandbox_profile());
+    graphics_text(x + 24, y + 168, "RUNTIME");
+    graphics_text(x + 156, y + 168, gshell_life_state);
+    graphics_text(x + 24, y + 192, "DEMO");
+    graphics_text(x + 156, y + 192, gshell_demo_state);
+    graphics_text(x + 24, y + 216, "FLOW");
+    graphics_text(x + 156, y + 216, gshell_flow_state);
+    graphics_text(x + 24, y + 240, "MILESTONE");
+    graphics_text(x + 156, y + 240, "proto");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "ui polish");
+}
+
+static void gshell_draw_command_view_uipolish(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.0 UI POLISH");
+    graphics_text(x + 24, y + 48, "LAYOUT");
+    graphics_text(x + 156, y + 48, "ok");
+    graphics_text(x + 24, y + 72, "PANELS");
+    graphics_text(x + 156, y + 72, "ok");
+    graphics_text(x + 24, y + 96, "TEXT");
+    graphics_text(x + 156, y + 96, "short");
+    graphics_text(x + 24, y + 120, "COMMANDS");
+    graphics_text(x + 156, y + 120, "clean");
+    graphics_text(x + 24, y + 144, "DASH");
+    graphics_text(x + 156, y + 144, "ready");
+    graphics_text(x + 24, y + 168, "PROTO");
+    graphics_text(x + 156, y + 168, "ready");
+    graphics_text(x + 24, y + 192, "DEMO");
+    graphics_text(x + 156, y + 192, gshell_demo_state);
+    graphics_text(x + 24, y + 216, "FLOW");
+    graphics_text(x + 156, y + 216, gshell_flow_state);
+    graphics_text(x + 24, y + 240, "STYLE");
+    graphics_text(x + 156, y + 240, "gshell");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "closeout");
+}
+
+static void gshell_draw_command_view_closeout(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "1.0 PROTO CLOSEOUT");
+    graphics_text(x + 24, y + 48, "BOOT");
+    graphics_text(x + 156, y + 48, "ready");
+    graphics_text(x + 24, y + 72, "GSHELL");
+    graphics_text(x + 156, y + 72, "ready");
+    graphics_text(x + 24, y + 96, "CORE");
+    graphics_text(x + 156, y + 96, (health_user_ok() && health_ring3_ok() && health_syscall_ok()) ? "ok" : "bad");
+    graphics_text(x + 24, y + 120, "CONTROL");
+    graphics_text(x + 156, y + 120, security_user_control_enabled() ? "on" : "off");
+    graphics_text(x + 24, y + 144, "RUNTIME");
+    graphics_text(x + 156, y + 144, gshell_life_state);
+    graphics_text(x + 24, y + 168, "DEMO");
+    graphics_text(x + 156, y + 168, gshell_demo_state);
+    graphics_text(x + 24, y + 192, "FLOW");
+    graphics_text(x + 156, y + 192, gshell_flow_state);
+    graphics_text(x + 24, y + 216, "UI");
+    graphics_text(x + 156, y + 216, "polished");
+    graphics_text(x + 24, y + 240, "STATUS");
+    graphics_text(x + 156, y + 240, "1.0 ready");
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "1.1 ui/input");
 }
 
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -7660,6 +8846,46 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "PROTOTYPE")) {
+        gshell_draw_command_view_prototype(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DASHBOARD")) {
+        gshell_draw_command_view_dashboard(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "BOOTHEALTH")) {
+        gshell_draw_command_view_boothealth(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "FLOWSTATUS")) {
+        gshell_draw_command_view_flowstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "WALKTHROUGH")) {
+        gshell_draw_command_view_walkthrough(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "MILEFINAL")) {
+        gshell_draw_command_view_milestonefinal(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "UIPOLISH")) {
+        gshell_draw_command_view_uipolish(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CLOSEOUT")) {
+        gshell_draw_command_view_closeout(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -7889,7 +9115,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "0.9X CLOSEOUT");
+    graphics_text(390, 54, "1.0 CLOSEOUT");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -7916,14 +9142,14 @@ void gshell_graphics_dashboard(void) {
     graphics_rect(width - 40, 116, 4, 300, 0x00FFAA00);
 
     graphics_text(width - 208, 136, "COMMANDS");
-    graphics_text(width - 208, 164, "RUNTIMEFINAL");
-    graphics_text(width - 208, 188, "RUNTIMEHEALTH");
-    graphics_text(width - 208, 212, "APPSUMMARY");
-    graphics_text(width - 208, 236, "LAUNCHSUMMARY");
-    graphics_text(width - 208, 260, "PERMSUMMARY");
-    graphics_text(width - 208, 284, "FSSUMMARY");
-    graphics_text(width - 208, 308, "LIFESUMMARY");
-    graphics_text(width - 208, 332, "NEXTMAJOR");
+    graphics_text(width - 208, 164, "CLOSEOUT");
+    graphics_text(width - 208, 188, "FINALSTATUS");
+    graphics_text(width - 208, 212, "FINALHEALTH");
+    graphics_text(width - 208, 236, "FINALDEMO");
+    graphics_text(width - 208, 260, "FINALREADY");
+    graphics_text(width - 208, 284, "RELEASEINFO");
+    graphics_text(width - 208, 308, "VERSIONFINAL");
+    graphics_text(width - 208, 332, "NEXTROADMAP");
 
     gshell_draw_history_panel(width - 208, 368);
 
@@ -7936,7 +9162,7 @@ void gshell_graphics_dashboard(void) {
     graphics_pixel(center_x, center_y - 1, 0x00FFFFFF);
 
     platform_print("  output: graphics-self\n");
-    platform_print("  command zone: 0.9x-runtime-closeout\n");
+    platform_print("  command zone: 1.0-prototype-closeout\n");
     platform_print("  result: real-written\n");
 }
 
