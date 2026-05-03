@@ -678,6 +678,323 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_ROUTECHECK 604
 #define GSHELL_CMD_ROUTERESET 605
 #define GSHELL_CMD_ROUTENEXT 606
+#define GSHELL_CMD_ACTIONBINDSTATUS 607
+#define GSHELL_CMD_BINDCARD   608
+#define GSHELL_CMD_BINDWINDOW 609
+#define GSHELL_CMD_BINDTASKBAR 610
+#define GSHELL_CMD_BINDLAUNCHER 611
+#define GSHELL_CMD_BINDDESKTOP 612
+#define GSHELL_CMD_CARDSELECTACT 613
+#define GSHELL_CMD_CARDOPENACT 614
+#define GSHELL_CMD_DESKTOPMENUACT 615
+#define GSHELL_CMD_TASKFOCUSACT 616
+#define GSHELL_CMD_TASKRESTOREACT 617
+#define GSHELL_CMD_WINDOWFOCUSACT 618
+#define GSHELL_CMD_WINDOWDRAGACT 619
+#define GSHELL_CMD_WINDOWCLOSEACT 620
+#define GSHELL_CMD_SHORTCUTLAUNCHACT 621
+#define GSHELL_CMD_SHORTCUTSWITCHACT 622
+#define GSHELL_CMD_ROUTEACTION 623
+#define GSHELL_CMD_ACTIONBINDDEMO 624
+#define GSHELL_CMD_ACTIONBINDCHECK 625
+#define GSHELL_CMD_ACTIONBINDRESET 626
+#define GSHELL_CMD_ACTIONBINDNEXT 627
+#define GSHELL_CMD_MENUSTATUS 628
+#define GSHELL_CMD_DESKTOPMENU 629
+#define GSHELL_CMD_CARDMENU 630
+#define GSHELL_CMD_TASKBARMENU 631
+#define GSHELL_CMD_WINDOWMENU 632
+#define GSHELL_CMD_MENUOPENITEM 633
+#define GSHELL_CMD_MENUSELECTITEM 634
+#define GSHELL_CMD_MENUCLOSEITEM 635
+#define GSHELL_CMD_SHORTCUTSTATUS 636
+#define GSHELL_CMD_SHORTCUTLAUNCHER 637
+#define GSHELL_CMD_SHORTCUTSWITCH 638
+#define GSHELL_CMD_SHORTCUTCLOSE 639
+#define GSHELL_CMD_SHORTCUTFOCUSNEXT 640
+#define GSHELL_CMD_SHORTCUTMENU 641
+#define GSHELL_CMD_MENUROUTEBIND 642
+#define GSHELL_CMD_SHORTCUTROUTEBIND 643
+#define GSHELL_CMD_MENUSHORTFLOW 644
+#define GSHELL_CMD_MENUSHORTDEMO 645
+#define GSHELL_CMD_MENUSHORTCHECK 646
+#define GSHELL_CMD_MENUSHORTRESET 647
+#define GSHELL_CMD_MENUSHORTNEXT 648
+#define GSHELL_CMD_WINDOWFLOWSTATUS 649
+#define GSHELL_CMD_WINDOWSPAWN 650
+#define GSHELL_CMD_WINDOWACTIVATE 651
+#define GSHELL_CMD_WINDOWFLOWMOVE 652
+#define GSHELL_CMD_WINDOWDRAGSTART 653
+#define GSHELL_CMD_WINDOWDRAGMOVE 654
+#define GSHELL_CMD_WINDOWDRAGEND 655
+#define GSHELL_CMD_WINDOWMINIMIZE 656
+#define GSHELL_CMD_WINDOWRESTORE 657
+#define GSHELL_CMD_WINDOWMAXIMIZE 658
+#define GSHELL_CMD_WINDOWFRONT 659
+#define GSHELL_CMD_WINDOWBACK 660
+#define GSHELL_CMD_WINDOWLAYERNEXT 661
+#define GSHELL_CMD_WINDOWFOCUSNEXTFLOW 662
+#define GSHELL_CMD_WINDOWCLOSEMOCK 663
+#define GSHELL_CMD_WINDOWMENUFLOW 664
+#define GSHELL_CMD_WINDOWSHORTFLOW 665
+#define GSHELL_CMD_WINDOWFLOWDEMO 666
+#define GSHELL_CMD_WINDOWFLOWCHECK 667
+#define GSHELL_CMD_WINDOWFLOWRESET 668
+#define GSHELL_CMD_WINDOWFLOWNEXT 669
+#define GSHELL_CMD_INTERACTCLOSESTATUS 670
+#define GSHELL_CMD_POINTERFLOWSUM 671
+#define GSHELL_CMD_CLICKFLOWSUM 672
+#define GSHELL_CMD_ROUTEFLOWSUM 673
+#define GSHELL_CMD_ACTIONFLOWSUM 674
+#define GSHELL_CMD_MENUFLOWSUM 675
+#define GSHELL_CMD_SHORTCUTFLOWSUM 676
+#define GSHELL_CMD_WINDOWFLOWSUM 677
+#define GSHELL_CMD_FOCUSFLOWSUM 678
+#define GSHELL_CMD_SELECTFLOWSUM 679
+#define GSHELL_CMD_OPENCLOSEFLOWSUM 680
+#define GSHELL_CMD_DRAGFLOWSUM 681
+#define GSHELL_CMD_INTERACTHANDOFF 682
+#define GSHELL_CMD_REALINPUTREADY 683
+#define GSHELL_CMD_INTERACTREGRESSION 684
+#define GSHELL_CMD_INTERACTDEMOALL 685
+#define GSHELL_CMD_INTERACTFINALCHECK 686
+#define GSHELL_CMD_INTERACTFINALRESET 687
+#define GSHELL_CMD_INTERACTCLOSEOUT 688
+#define GSHELL_CMD_INTERACTNEXTPHASE 689
+#define GSHELL_CMD_INPUTPREPSTATUS 690
+#define GSHELL_CMD_INPUTDEVSTATUS 691
+#define GSHELL_CMD_PS2MOUSEPLAN 692
+#define GSHELL_CMD_IRQ12PLAN 693
+#define GSHELL_CMD_MOUSEPACKETPLAN 694
+#define GSHELL_CMD_MOUSECOORDPLAN 695
+#define GSHELL_CMD_INPUTQUEUEPLAN 696
+#define GSHELL_CMD_POINTERBRIDGE 697
+#define GSHELL_CMD_MOCKPOINTERFEED 698
+#define GSHELL_CMD_REALPOINTERGATE 699
+#define GSHELL_CMD_INPUTROUTEBRIDGE 700
+#define GSHELL_CMD_INPUTACTIONBRIDGE 701
+#define GSHELL_CMD_INPUTFALLBACK 702
+#define GSHELL_CMD_INPUTSAFECHECK 703
+#define GSHELL_CMD_INPUTREGRESSION 704
+#define GSHELL_CMD_INPUTHANDOFF 705
+#define GSHELL_CMD_INPUTPREPDEMO 706
+#define GSHELL_CMD_INPUTPREPCHECK 707
+#define GSHELL_CMD_INPUTPREPRESET 708
+#define GSHELL_CMD_INPUTNEXT 709
+#define GSHELL_CMD_MOUSEDRVSTATUS 710
+#define GSHELL_CMD_MOUSEDRVPLAN 711
+#define GSHELL_CMD_MOUSEPORTCHECK 712
+#define GSHELL_CMD_MOUSEIRQROUTE 713
+#define GSHELL_CMD_MOUSEPACKETBUF 714
+#define GSHELL_CMD_MOUSEPACKETPARSE 715
+#define GSHELL_CMD_MOUSEBUTTONMAP 716
+#define GSHELL_CMD_MOUSECOORDMAP 717
+#define GSHELL_CMD_MOUSECURSORBRIDGE 718
+#define GSHELL_CMD_MOUSEEVENTPUSH 719
+#define GSHELL_CMD_MOUSEEVENTROUTE 720
+#define GSHELL_CMD_MOUSEACTIONFEED 721
+#define GSHELL_CMD_MOUSESAFEGATE 722
+#define GSHELL_CMD_MOUSENOIRQMODE 723
+#define GSHELL_CMD_MOUSEREGRESSION 724
+#define GSHELL_CMD_MOUSEDRVDEMO 725
+#define GSHELL_CMD_MOUSEDRVCHECK 726
+#define GSHELL_CMD_MOUSEDRVRESET 727
+#define GSHELL_CMD_MOUSEDRVNEXT 728
+#define GSHELL_CMD_PACKETPIPESTATUS 729
+#define GSHELL_CMD_PACKETSYNCPLAN 730
+#define GSHELL_CMD_PACKETBYTE0 731
+#define GSHELL_CMD_PACKETBYTE1 732
+#define GSHELL_CMD_PACKETBYTE2 733
+#define GSHELL_CMD_PACKETDXDY 734
+#define GSHELL_CMD_PACKETSIGNFLAGS 735
+#define GSHELL_CMD_PACKETOVERFLOW 736
+#define GSHELL_CMD_PACKETBUTTONS 737
+#define GSHELL_CMD_PACKETCURSORDELTA 738
+#define GSHELL_CMD_PACKETQUEUEPUSH 739
+#define GSHELL_CMD_PACKETROUTEFEED 740
+#define GSHELL_CMD_PACKETACTIONFEED 741
+#define GSHELL_CMD_PACKETSAFEGATE 742
+#define GSHELL_CMD_PACKETNOIRQMODE 743
+#define GSHELL_CMD_PACKETREGRESSION 744
+#define GSHELL_CMD_PACKETPIPEDEMO 745
+#define GSHELL_CMD_PACKETPIPECHECK 746
+#define GSHELL_CMD_PACKETPIPERESET 747
+#define GSHELL_CMD_PACKETPIPENEXT 748
+#define GSHELL_CMD_CURSORPIPESTATUS 749
+#define GSHELL_CMD_CURSORORIGIN 750
+#define GSHELL_CMD_CURSORDELTA 751
+#define GSHELL_CMD_CURSORAPPLYDELTA 752
+#define GSHELL_CMD_CURSORBOUNDS 753
+#define GSHELL_CMD_CURSORCLAMP 754
+#define GSHELL_CMD_CURSORBUTTONSTATE 755
+#define GSHELL_CMD_CURSORCLICKSTATE 756
+#define GSHELL_CMD_CURSOREVENTPUSH 757
+#define GSHELL_CMD_CURSORROUTEFEED 758
+#define GSHELL_CMD_CURSORACTIONFEED 759
+#define GSHELL_CMD_CURSORVISUALPLAN 760
+#define GSHELL_CMD_CURSORSAFEGATE 761
+#define GSHELL_CMD_CURSORNOIRQMODE 762
+#define GSHELL_CMD_CURSORREGRESSION 763
+#define GSHELL_CMD_CURSORPIPEDEMO 764
+#define GSHELL_CMD_CURSORPIPECHECK 765
+#define GSHELL_CMD_CURSORPIPERESET 766
+#define GSHELL_CMD_CURSORPIPENEXT 767
+#define GSHELL_CMD_CURSORVISUALSTATUS 768
+#define GSHELL_CMD_CURSORVISUALPLAN2 769
+#define GSHELL_CMD_CURSORSHAPEMOCK 770
+#define GSHELL_CMD_CURSORHOTSPOT 771
+#define GSHELL_CMD_CURSORPOSITIONVIS 772
+#define GSHELL_CMD_CURSORTRAILMOCK 773
+#define GSHELL_CMD_CURSORBLINKMOCK 774
+#define GSHELL_CMD_CURSOROVERLAYGATE 775
+#define GSHELL_CMD_CURSORVISUALFEED 776
+#define GSHELL_CMD_CURSORVISUALROUTE 777
+#define GSHELL_CMD_CURSORVISUALACTION 778
+#define GSHELL_CMD_CURSORVISUALSAFE 779
+#define GSHELL_CMD_CURSORVISUALREGRESSION 780
+#define GSHELL_CMD_CURSORVISUALDEMO 781
+#define GSHELL_CMD_CURSORVISUALCHECK 782
+#define GSHELL_CMD_CURSORVISUALRESET 783
+#define GSHELL_CMD_CURSORVISUALNEXT 784
+#define GSHELL_CMD_REALPTRSTATUS 785
+#define GSHELL_CMD_REALPTRGATE 786
+#define GSHELL_CMD_REALPTRSOURCE 787
+#define GSHELL_CMD_REALPTRCOORD 788
+#define GSHELL_CMD_REALPTRHITTEST 789
+#define GSHELL_CMD_REALPTRDESKTOPROUTE 790
+#define GSHELL_CMD_REALPTRCARDROUTE 791
+#define GSHELL_CMD_REALPTRWINDOWROUTE 792
+#define GSHELL_CMD_REALPTRTASKROUTE 793
+#define GSHELL_CMD_REALPTRCLICKROUTE 794
+#define GSHELL_CMD_REALPTRDRAGROUTE 795
+#define GSHELL_CMD_REALPTRACTIONBRIDGE 796
+#define GSHELL_CMD_REALPTRCURSORVIS 797
+#define GSHELL_CMD_REALPTRSAFE 798
+#define GSHELL_CMD_REALPTRREGRESSION 799
+#define GSHELL_CMD_REALPTRDEMO 800
+#define GSHELL_CMD_REALPTRCHECK 801
+#define GSHELL_CMD_REALPTRRESET 802
+#define GSHELL_CMD_REALPTRNEXT 803
+#define GSHELL_CMD_REALINPUTCLOSESTATUS 804
+#define GSHELL_CMD_REALINPUTPREPSUM 805
+#define GSHELL_CMD_REALINPUTMOUSESUM 806
+#define GSHELL_CMD_REALINPUTPACKETSUM 807
+#define GSHELL_CMD_REALINPUTCURSORSUM 808
+#define GSHELL_CMD_REALINPUTVISUALSUM 809
+#define GSHELL_CMD_REALINPUTPTRROUTESUM 810
+#define GSHELL_CMD_REALINPUTBRIDGESUM 811
+#define GSHELL_CMD_REALINPUTSAFESUM 812
+#define GSHELL_CMD_REALINPUTREGRESSSUM 813
+#define GSHELL_CMD_REALINPUTHANDOFFSUM 814
+#define GSHELL_CMD_REALINPUTDEMOALL 815
+#define GSHELL_CMD_REALINPUTFINALCHECK 816
+#define GSHELL_CMD_REALINPUTFINALRESET 817
+#define GSHELL_CMD_REALINPUTCLOSEOUT 818
+#define GSHELL_CMD_REALINPUTNEXTPHASE 819
+#define GSHELL_CMD_REALINPUTROADMAP 820
+#define GSHELL_CMD_REALINPUTBOUNDS 821
+#define GSHELL_CMD_REALINPUTLEGACYCHECK 822
+#define GSHELL_CMD_REALINPUTFINALREADY 823
+#define GSHELL_CMD_CLICKUISTATUS 824
+#define GSHELL_CMD_CLICKUIDESKTOP 825
+#define GSHELL_CMD_CLICKUICARD 826
+#define GSHELL_CMD_CLICKUIWINDOW 827
+#define GSHELL_CMD_CLICKUITASKBAR 828
+#define GSHELL_CMD_CLICKUILAUNCHER 829
+#define GSHELL_CMD_CLICKUIMENU 830
+#define GSHELL_CMD_CLICKUIHOVER 831
+#define GSHELL_CMD_CLICKUICLICK 832
+#define GSHELL_CMD_CLICKUIDOUBLE 833
+#define GSHELL_CMD_CLICKUIRIGHT 834
+#define GSHELL_CMD_CLICKUIDRAG 835
+#define GSHELL_CMD_CLICKUIDROP 836
+#define GSHELL_CMD_CLICKUIACTION 837
+#define GSHELL_CMD_CLICKUIFOCUS 838
+#define GSHELL_CMD_CLICKUIOPEN 839
+#define GSHELL_CMD_CLICKUICLOSE 840
+#define GSHELL_CMD_CLICKUIDEMO 841
+#define GSHELL_CMD_CLICKUICHECK 842
+#define GSHELL_CMD_CLICKUIRESET 843
+#define GSHELL_CMD_CLICKUINEXT 844
+#define GSHELL_CMD_DESKTARGETSTATUS 845
+#define GSHELL_CMD_DESKTARGETDESKTOP 846
+#define GSHELL_CMD_DESKTARGETCARD 847
+#define GSHELL_CMD_DESKTARGETWINDOW 848
+#define GSHELL_CMD_DESKTARGETTASKBAR 849
+#define GSHELL_CMD_DESKTARGETLAUNCHER 850
+#define GSHELL_CMD_DESKTARGETMENU 851
+#define GSHELL_CMD_DESKTARGETFOCUS 852
+#define GSHELL_CMD_DESKTARGETSELECT 853
+#define GSHELL_CMD_DESKTARGETOPEN 854
+#define GSHELL_CMD_DESKTARGETCLOSE 855
+#define GSHELL_CMD_DESKTARGETDRAG 856
+#define GSHELL_CMD_DESKTARGETDROP 857
+#define GSHELL_CMD_DESKTARGETSTATE 858
+#define GSHELL_CMD_DESKTARGETVISUAL 859
+#define GSHELL_CMD_DESKTARGETSAFE 860
+#define GSHELL_CMD_DESKTARGETDEMO 861
+#define GSHELL_CMD_DESKTARGETCHECK 862
+#define GSHELL_CMD_DESKTARGETRESET 863
+#define GSHELL_CMD_DESKTARGETNEXT 864
+#define GSHELL_CMD_CLICKACTIONSTATUS 865
+#define GSHELL_CMD_CLICKACTIONSELECT 866
+#define GSHELL_CMD_CLICKACTIONOPEN 867
+#define GSHELL_CMD_CLICKACTIONMENU 868
+#define GSHELL_CMD_CLICKACTIONFOCUS 869
+#define GSHELL_CMD_CLICKACTIONTASKSWITCH 870
+#define GSHELL_CMD_CLICKACTIONLAUNCH 871
+#define GSHELL_CMD_CLICKACTIONDRAGSTART 872
+#define GSHELL_CMD_CLICKACTIONDRAGMOVE 873
+#define GSHELL_CMD_CLICKACTIONDROP 874
+#define GSHELL_CMD_CLICKACTIONCLOSE 875
+#define GSHELL_CMD_CLICKACTIONRESTORE 876
+#define GSHELL_CMD_CLICKACTIONROUTE 877
+#define GSHELL_CMD_CLICKACTIONBIND 878
+#define GSHELL_CMD_CLICKACTIONVISUAL 879
+#define GSHELL_CMD_CLICKACTIONSAFE 880
+#define GSHELL_CMD_CLICKACTIONDEMO 881
+#define GSHELL_CMD_CLICKACTIONCHECK 882
+#define GSHELL_CMD_CLICKACTIONRESET 883
+#define GSHELL_CMD_CLICKACTIONNEXT 884
+#define GSHELL_CMD_DESKDRAGSTATUS 885
+#define GSHELL_CMD_DESKDRAGTARGET 886
+#define GSHELL_CMD_DESKDRAGTITLE 887
+#define GSHELL_CMD_DESKDRAGSTART 888
+#define GSHELL_CMD_DESKDRAGMOVE 889
+#define GSHELL_CMD_DESKDRAGBOUNDS 890
+#define GSHELL_CMD_DESKDRAGSHADOW 891
+#define GSHELL_CMD_DESKDRAGSNAP 892
+#define GSHELL_CMD_DESKDRAGDROP 893
+#define GSHELL_CMD_DESKDRAGCANCEL 894
+#define GSHELL_CMD_DESKDRAGFOCUS 895
+#define GSHELL_CMD_DESKDRAGROUTE 896
+#define GSHELL_CMD_DESKDRAGACTION 897
+#define GSHELL_CMD_DESKDRAGVISUAL 898
+#define GSHELL_CMD_DESKDRAGSAFE 899
+#define GSHELL_CMD_DESKDRAGDEMO 900
+#define GSHELL_CMD_DESKDRAGCHECK 901
+#define GSHELL_CMD_DESKDRAGRESET 902
+#define GSHELL_CMD_DESKDRAGNEXT 903
+#define GSHELL_CMD_UIFEEDBACKSTATUS 904
+#define GSHELL_CMD_UIFEEDBACKHOVER 905
+#define GSHELL_CMD_UIFEEDBACKSELECT 906
+#define GSHELL_CMD_UIFEEDBACKACTIVE 907
+#define GSHELL_CMD_UIFEEDBACKFOCUS 908
+#define GSHELL_CMD_UIFEEDBACKPRESS 909
+#define GSHELL_CMD_UIFEEDBACKOPEN 910
+#define GSHELL_CMD_UIFEEDBACKCLOSE 911
+#define GSHELL_CMD_UIFEEDBACKDRAG 912
+#define GSHELL_CMD_UIFEEDBACKDROP 913
+#define GSHELL_CMD_UIFEEDBACKTASKBAR 914
+#define GSHELL_CMD_UIFEEDBACKLAUNCHER 915
+#define GSHELL_CMD_UIFEEDBACKMENU 916
+#define GSHELL_CMD_UIFEEDBACKCURSOR 917
+#define GSHELL_CMD_UIFEEDBACKPANEL 918
+#define GSHELL_CMD_UIFEEDBACKSAFE 919
+#define GSHELL_CMD_UIFEEDBACKDEMO 920
+#define GSHELL_CMD_UIFEEDBACKCHECK 921
+#define GSHELL_CMD_UIFEEDBACKRESET 922
+#define GSHELL_CMD_UIFEEDBACKNEXT 923
 #define GSHELL_CMD_UNKNOWN     999
 
 static unsigned int gshell_input_layer_enabled = 1;
@@ -1007,6 +1324,358 @@ static unsigned int gshell_route_events = 0;
 static const char* gshell_route_state = "idle";
 static const char* gshell_route_target = "desktop";
 static const char* gshell_route_last = "none";
+
+static unsigned int gshell_action_bind_card_ready = 0;
+static unsigned int gshell_action_bind_window_ready = 0;
+static unsigned int gshell_action_bind_taskbar_ready = 0;
+static unsigned int gshell_action_bind_launcher_ready = 0;
+static unsigned int gshell_action_bind_desktop_ready = 0;
+static unsigned int gshell_action_card_select_ready = 0;
+static unsigned int gshell_action_card_open_ready = 0;
+static unsigned int gshell_action_desktop_menu_ready = 0;
+static unsigned int gshell_action_task_focus_ready = 0;
+static unsigned int gshell_action_task_restore_ready = 0;
+static unsigned int gshell_action_window_focus_ready = 0;
+static unsigned int gshell_action_window_drag_ready = 0;
+static unsigned int gshell_action_window_close_ready = 0;
+static unsigned int gshell_action_shortcut_launch_ready = 0;
+static unsigned int gshell_action_shortcut_switch_ready = 0;
+static unsigned int gshell_action_route_ready = 0;
+static unsigned int gshell_action_bind_events = 0;
+static const char* gshell_action_bind_state = "idle";
+static const char* gshell_action_bind_target = "desktop";
+static const char* gshell_action_bind_last = "none";
+
+static unsigned int gshell_menu_desktop_ready = 0;
+static unsigned int gshell_menu_card_ready = 0;
+static unsigned int gshell_menu_taskbar_ready = 0;
+static unsigned int gshell_menu_window_ready = 0;
+static unsigned int gshell_menu_open_ready = 0;
+static unsigned int gshell_menu_select_ready = 0;
+static unsigned int gshell_menu_close_ready = 0;
+static unsigned int gshell_shortcut_launcher_ready = 0;
+static unsigned int gshell_shortcut_switch_ready = 0;
+static unsigned int gshell_shortcut_close_ready = 0;
+static unsigned int gshell_shortcut_focus_next_ready = 0;
+static unsigned int gshell_shortcut_menu_ready = 0;
+static unsigned int gshell_menu_route_bind_ready = 0;
+static unsigned int gshell_shortcut_route_bind_ready = 0;
+static unsigned int gshell_menu_short_flow_ready = 0;
+static unsigned int gshell_menu_short_events = 0;
+static const char* gshell_menu_short_state = "idle";
+static const char* gshell_menu_short_target = "desktop";
+static const char* gshell_menu_short_item = "none";
+static const char* gshell_menu_short_last = "none";
+
+static unsigned int gshell_window_flow_spawn_ready = 0;
+static unsigned int gshell_window_flow_activate_ready = 0;
+static unsigned int gshell_window_flow_move_ready = 0;
+static unsigned int gshell_window_flow_drag_ready = 0;
+static unsigned int gshell_window_flow_minimize_ready = 0;
+static unsigned int gshell_window_flow_restore_ready = 0;
+static unsigned int gshell_window_flow_maximize_ready = 0;
+static unsigned int gshell_window_flow_front_ready = 0;
+static unsigned int gshell_window_flow_back_ready = 0;
+static unsigned int gshell_window_flow_layer_ready = 0;
+static unsigned int gshell_window_flow_focus_ready = 0;
+static unsigned int gshell_window_flow_close_ready = 0;
+static unsigned int gshell_window_flow_menu_ready = 0;
+static unsigned int gshell_window_flow_shortcut_ready = 0;
+static unsigned int gshell_window_flow_demo_ready = 0;
+static unsigned int gshell_window_flow_layer = 1;
+static unsigned int gshell_window_flow_events = 0;
+static const char* gshell_window_flow_state = "idle";
+static const char* gshell_window_flow_target = "desktop";
+static const char* gshell_window_flow_action = "none";
+static const char* gshell_window_flow_last = "none";
+
+static unsigned int gshell_interact_close_pointer_ready = 0;
+static unsigned int gshell_interact_close_click_ready = 0;
+static unsigned int gshell_interact_close_route_ready = 0;
+static unsigned int gshell_interact_close_action_ready = 0;
+static unsigned int gshell_interact_close_menu_ready = 0;
+static unsigned int gshell_interact_close_shortcut_ready = 0;
+static unsigned int gshell_interact_close_window_ready = 0;
+static unsigned int gshell_interact_close_focus_ready = 0;
+static unsigned int gshell_interact_close_select_ready = 0;
+static unsigned int gshell_interact_close_open_close_ready = 0;
+static unsigned int gshell_interact_close_drag_ready = 0;
+static unsigned int gshell_interact_close_handoff_ready = 0;
+static unsigned int gshell_interact_close_real_input_ready = 0;
+static unsigned int gshell_interact_close_regression_ready = 0;
+static unsigned int gshell_interact_close_demo_ready = 0;
+static unsigned int gshell_interact_closeout_ready = 0;
+static unsigned int gshell_interact_close_events = 0;
+static const char* gshell_interact_close_state = "idle";
+static const char* gshell_interact_close_layer = "desktop-interaction";
+static const char* gshell_interact_close_handoff = "none";
+static const char* gshell_interact_close_last = "none";
+
+static unsigned int gshell_input_device_ready = 0;
+static unsigned int gshell_input_ps2_mouse_planned = 0;
+static unsigned int gshell_input_irq12_planned = 0;
+static unsigned int gshell_input_packet_planned = 0;
+static unsigned int gshell_input_coord_planned = 0;
+static unsigned int gshell_input_queue_planned = 0;
+static unsigned int gshell_input_pointer_bridge_ready = 0;
+static unsigned int gshell_input_mock_feed_ready = 0;
+static unsigned int gshell_input_real_gate_ready = 0;
+static unsigned int gshell_input_route_bridge_ready = 0;
+static unsigned int gshell_input_action_bridge_ready = 0;
+static unsigned int gshell_input_fallback_ready = 0;
+static unsigned int gshell_input_safe_ready = 0;
+static unsigned int gshell_input_regression_ready = 0;
+static unsigned int gshell_input_handoff_ready = 0;
+static unsigned int gshell_input_demo_ready = 0;
+static unsigned int gshell_input_prep_events = 0;
+static const char* gshell_input_prep_state = "idle";
+static const char* gshell_input_prep_device = "none";
+static const char* gshell_input_prep_bridge = "none";
+static const char* gshell_input_prep_last = "none";
+
+static unsigned int gshell_mouse_drv_plan_ready = 0;
+static unsigned int gshell_mouse_port_check_ready = 0;
+static unsigned int gshell_mouse_irq_route_ready = 0;
+static unsigned int gshell_mouse_packet_buf_ready = 0;
+static unsigned int gshell_mouse_packet_parse_ready = 0;
+static unsigned int gshell_mouse_button_map_ready = 0;
+static unsigned int gshell_mouse_coord_map_ready = 0;
+static unsigned int gshell_mouse_cursor_bridge_ready = 0;
+static unsigned int gshell_mouse_event_push_ready = 0;
+static unsigned int gshell_mouse_event_route_ready = 0;
+static unsigned int gshell_mouse_action_feed_ready = 0;
+static unsigned int gshell_mouse_safe_gate_ready = 0;
+static unsigned int gshell_mouse_no_irq_ready = 0;
+static unsigned int gshell_mouse_regression_ready = 0;
+static unsigned int gshell_mouse_demo_ready = 0;
+static unsigned int gshell_mouse_drv_events = 0;
+static unsigned int gshell_mouse_packet_count = 0;
+static const char* gshell_mouse_drv_state = "idle";
+static const char* gshell_mouse_drv_device = "ps2-mouse";
+static const char* gshell_mouse_drv_path = "closed";
+static const char* gshell_mouse_drv_last = "none";
+
+static unsigned int gshell_packet_sync_ready = 0;
+static unsigned int gshell_packet_byte0_ready = 0;
+static unsigned int gshell_packet_byte1_ready = 0;
+static unsigned int gshell_packet_byte2_ready = 0;
+static unsigned int gshell_packet_dxdy_ready = 0;
+static unsigned int gshell_packet_sign_ready = 0;
+static unsigned int gshell_packet_overflow_ready = 0;
+static unsigned int gshell_packet_buttons_ready = 0;
+static unsigned int gshell_packet_cursor_delta_ready = 0;
+static unsigned int gshell_packet_queue_push_ready = 0;
+static unsigned int gshell_packet_route_feed_ready = 0;
+static unsigned int gshell_packet_action_feed_ready = 0;
+static unsigned int gshell_packet_safe_gate_ready = 0;
+static unsigned int gshell_packet_no_irq_ready = 0;
+static unsigned int gshell_packet_regression_ready = 0;
+static unsigned int gshell_packet_demo_ready = 0;
+static unsigned int gshell_packet_pipe_events = 0;
+static unsigned int gshell_packet_pipe_count = 0;
+static int gshell_packet_dx = 0;
+static int gshell_packet_dy = 0;
+static const char* gshell_packet_pipe_state = "idle";
+static const char* gshell_packet_pipe_phase = "none";
+static const char* gshell_packet_pipe_flags = "none";
+static const char* gshell_packet_pipe_last = "none";
+
+static unsigned int gshell_cursor_origin_ready = 0;
+static unsigned int gshell_cursor_delta_ready = 0;
+static unsigned int gshell_cursor_apply_delta_ready = 0;
+static unsigned int gshell_cursor_bounds_ready = 0;
+static unsigned int gshell_cursor_clamp_ready = 0;
+static unsigned int gshell_cursor_button_state_ready = 0;
+static unsigned int gshell_cursor_click_state_ready = 0;
+static unsigned int gshell_cursor_event_push_ready = 0;
+static unsigned int gshell_cursor_route_feed_ready = 0;
+static unsigned int gshell_cursor_action_feed_ready = 0;
+static unsigned int gshell_cursor_visual_plan_ready = 0;
+static unsigned int gshell_cursor_safe_gate_ready = 0;
+static unsigned int gshell_cursor_no_irq_ready = 0;
+static unsigned int gshell_cursor_regression_ready = 0;
+static unsigned int gshell_cursor_demo_ready = 0;
+static unsigned int gshell_cursor_pipe_events = 0;
+static unsigned int gshell_cursor_button_mask = 0;
+static int gshell_cursor_dx = 0;
+static int gshell_cursor_dy = 0;
+static const char* gshell_cursor_pipe_state = "idle";
+static const char* gshell_cursor_pipe_phase = "none";
+static const char* gshell_cursor_pipe_target = "desktop";
+static const char* gshell_cursor_pipe_last = "none";
+
+static unsigned int gshell_cursor_shape_ready = 0;
+static unsigned int gshell_cursor_hotspot_ready = 0;
+static unsigned int gshell_cursor_position_visual_ready = 0;
+static unsigned int gshell_cursor_trail_ready = 0;
+static unsigned int gshell_cursor_blink_ready = 0;
+static unsigned int gshell_cursor_overlay_gate_ready = 0;
+static unsigned int gshell_cursor_visual_feed_ready = 0;
+static unsigned int gshell_cursor_visual_route_ready = 0;
+static unsigned int gshell_cursor_visual_action_ready = 0;
+static unsigned int gshell_cursor_visual_safe_ready = 0;
+static unsigned int gshell_cursor_visual_regression_ready = 0;
+static unsigned int gshell_cursor_visual_demo_ready = 0;
+static unsigned int gshell_cursor_visual_events = 0;
+static unsigned int gshell_cursor_visual_visible = 0;
+static unsigned int gshell_cursor_visual_blink = 0;
+static const char* gshell_cursor_visual_state = "idle";
+static const char* gshell_cursor_visual_shape = "none";
+static const char* gshell_cursor_visual_layer = "closed";
+static const char* gshell_cursor_visual_last = "none";
+
+static unsigned int gshell_realptr_gate_ready = 0;
+static unsigned int gshell_realptr_source_ready = 0;
+static unsigned int gshell_realptr_coord_ready = 0;
+static unsigned int gshell_realptr_hittest_ready = 0;
+static unsigned int gshell_realptr_desktop_route_ready = 0;
+static unsigned int gshell_realptr_card_route_ready = 0;
+static unsigned int gshell_realptr_window_route_ready = 0;
+static unsigned int gshell_realptr_task_route_ready = 0;
+static unsigned int gshell_realptr_click_route_ready = 0;
+static unsigned int gshell_realptr_drag_route_ready = 0;
+static unsigned int gshell_realptr_action_bridge_ready = 0;
+static unsigned int gshell_realptr_cursor_visual_ready = 0;
+static unsigned int gshell_realptr_safe_ready = 0;
+static unsigned int gshell_realptr_regression_ready = 0;
+static unsigned int gshell_realptr_demo_ready = 0;
+static unsigned int gshell_realptr_events = 0;
+static const char* gshell_realptr_state = "idle";
+static const char* gshell_realptr_source = "mock-cursor";
+static const char* gshell_realptr_target = "desktop";
+static const char* gshell_realptr_last = "none";
+
+static unsigned int gshell_realinput_close_prep_ready = 0;
+static unsigned int gshell_realinput_close_mouse_ready = 0;
+static unsigned int gshell_realinput_close_packet_ready = 0;
+static unsigned int gshell_realinput_close_cursor_ready = 0;
+static unsigned int gshell_realinput_close_visual_ready = 0;
+static unsigned int gshell_realinput_close_ptrroute_ready = 0;
+static unsigned int gshell_realinput_close_bridge_ready = 0;
+static unsigned int gshell_realinput_close_safe_ready = 0;
+static unsigned int gshell_realinput_close_regression_ready = 0;
+static unsigned int gshell_realinput_close_handoff_ready = 0;
+static unsigned int gshell_realinput_close_demo_ready = 0;
+static unsigned int gshell_realinput_close_bounds_ready = 0;
+static unsigned int gshell_realinput_close_legacy_ready = 0;
+static unsigned int gshell_realinput_close_roadmap_ready = 0;
+static unsigned int gshell_realinput_closeout_ready = 0;
+static unsigned int gshell_realinput_final_ready = 0;
+static unsigned int gshell_realinput_close_events = 0;
+static const char* gshell_realinput_close_state = "idle";
+static const char* gshell_realinput_close_source = "1.6-input-layer";
+static const char* gshell_realinput_close_target = "1.7-clickable-ui";
+static const char* gshell_realinput_close_last = "none";
+
+static unsigned int gshell_clickui_desktop_ready = 0;
+static unsigned int gshell_clickui_card_ready = 0;
+static unsigned int gshell_clickui_window_ready = 0;
+static unsigned int gshell_clickui_taskbar_ready = 0;
+static unsigned int gshell_clickui_launcher_ready = 0;
+static unsigned int gshell_clickui_menu_ready = 0;
+static unsigned int gshell_clickui_hover_ready = 0;
+static unsigned int gshell_clickui_click_ready = 0;
+static unsigned int gshell_clickui_double_ready = 0;
+static unsigned int gshell_clickui_right_ready = 0;
+static unsigned int gshell_clickui_drag_ready = 0;
+static unsigned int gshell_clickui_drop_ready = 0;
+static unsigned int gshell_clickui_action_ready = 0;
+static unsigned int gshell_clickui_focus_ready = 0;
+static unsigned int gshell_clickui_open_ready = 0;
+static unsigned int gshell_clickui_close_ready = 0;
+static unsigned int gshell_clickui_demo_ready = 0;
+static unsigned int gshell_clickui_events = 0;
+static const char* gshell_clickui_state = "idle";
+static const char* gshell_clickui_target = "desktop";
+static const char* gshell_clickui_action = "none";
+static const char* gshell_clickui_last = "none";
+
+static unsigned int gshell_desktarget_desktop_ready = 0;
+static unsigned int gshell_desktarget_card_ready = 0;
+static unsigned int gshell_desktarget_window_ready = 0;
+static unsigned int gshell_desktarget_taskbar_ready = 0;
+static unsigned int gshell_desktarget_launcher_ready = 0;
+static unsigned int gshell_desktarget_menu_ready = 0;
+static unsigned int gshell_desktarget_focus_ready = 0;
+static unsigned int gshell_desktarget_select_ready = 0;
+static unsigned int gshell_desktarget_open_ready = 0;
+static unsigned int gshell_desktarget_close_ready = 0;
+static unsigned int gshell_desktarget_drag_ready = 0;
+static unsigned int gshell_desktarget_drop_ready = 0;
+static unsigned int gshell_desktarget_state_ready = 0;
+static unsigned int gshell_desktarget_visual_ready = 0;
+static unsigned int gshell_desktarget_safe_ready = 0;
+static unsigned int gshell_desktarget_demo_ready = 0;
+static unsigned int gshell_desktarget_events = 0;
+static const char* gshell_desktarget_state = "idle";
+static const char* gshell_desktarget_active = "none";
+static const char* gshell_desktarget_action = "none";
+static const char* gshell_desktarget_last = "none";
+
+static unsigned int gshell_clickaction_select_ready = 0;
+static unsigned int gshell_clickaction_open_ready = 0;
+static unsigned int gshell_clickaction_menu_ready = 0;
+static unsigned int gshell_clickaction_focus_ready = 0;
+static unsigned int gshell_clickaction_task_switch_ready = 0;
+static unsigned int gshell_clickaction_launch_ready = 0;
+static unsigned int gshell_clickaction_drag_start_ready = 0;
+static unsigned int gshell_clickaction_drag_move_ready = 0;
+static unsigned int gshell_clickaction_drop_ready = 0;
+static unsigned int gshell_clickaction_close_ready = 0;
+static unsigned int gshell_clickaction_restore_ready = 0;
+static unsigned int gshell_clickaction_route_ready = 0;
+static unsigned int gshell_clickaction_bind_ready = 0;
+static unsigned int gshell_clickaction_visual_ready = 0;
+static unsigned int gshell_clickaction_safe_ready = 0;
+static unsigned int gshell_clickaction_demo_ready = 0;
+static unsigned int gshell_clickaction_events = 0;
+static const char* gshell_clickaction_state = "idle";
+static const char* gshell_clickaction_target = "none";
+static const char* gshell_clickaction_action = "none";
+static const char* gshell_clickaction_last = "none";
+
+static unsigned int gshell_deskdrag_target_ready = 0;
+static unsigned int gshell_deskdrag_title_ready = 0;
+static unsigned int gshell_deskdrag_start_ready = 0;
+static unsigned int gshell_deskdrag_move_ready = 0;
+static unsigned int gshell_deskdrag_bounds_ready = 0;
+static unsigned int gshell_deskdrag_shadow_ready = 0;
+static unsigned int gshell_deskdrag_snap_ready = 0;
+static unsigned int gshell_deskdrag_drop_ready = 0;
+static unsigned int gshell_deskdrag_cancel_ready = 0;
+static unsigned int gshell_deskdrag_focus_ready = 0;
+static unsigned int gshell_deskdrag_route_ready = 0;
+static unsigned int gshell_deskdrag_action_ready = 0;
+static unsigned int gshell_deskdrag_visual_ready = 0;
+static unsigned int gshell_deskdrag_safe_ready = 0;
+static unsigned int gshell_deskdrag_demo_ready = 0;
+static unsigned int gshell_deskdrag_events = 0;
+static const char* gshell_deskdrag_state = "idle";
+static const char* gshell_deskdrag_target = "none";
+static const char* gshell_deskdrag_action = "none";
+static const char* gshell_deskdrag_last = "none";
+
+static unsigned int gshell_uifeedback_hover_ready = 0;
+static unsigned int gshell_uifeedback_select_ready = 0;
+static unsigned int gshell_uifeedback_active_ready = 0;
+static unsigned int gshell_uifeedback_focus_ready = 0;
+static unsigned int gshell_uifeedback_press_ready = 0;
+static unsigned int gshell_uifeedback_open_ready = 0;
+static unsigned int gshell_uifeedback_close_ready = 0;
+static unsigned int gshell_uifeedback_drag_ready = 0;
+static unsigned int gshell_uifeedback_drop_ready = 0;
+static unsigned int gshell_uifeedback_taskbar_ready = 0;
+static unsigned int gshell_uifeedback_launcher_ready = 0;
+static unsigned int gshell_uifeedback_menu_ready = 0;
+static unsigned int gshell_uifeedback_cursor_ready = 0;
+static unsigned int gshell_uifeedback_panel_ready = 0;
+static unsigned int gshell_uifeedback_safe_ready = 0;
+static unsigned int gshell_uifeedback_demo_ready = 0;
+static unsigned int gshell_uifeedback_events = 0;
+static const char* gshell_uifeedback_state = "idle";
+static const char* gshell_uifeedback_target = "none";
+static const char* gshell_uifeedback_effect = "none";
+static const char* gshell_uifeedback_last = "none";
 
 static unsigned int gshell_flow_prepared = 0;
 static unsigned int gshell_flow_demos = 0;
@@ -1663,6 +2332,323 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "routecheck", GSHELL_CMD_ROUTECHECK, "ROUTESTATUS", "ROUTE CHECK OK" },
     { "routereset", GSHELL_CMD_ROUTERESET, "ROUTESTATUS", "ROUTE RESET OK" },
     { "routenext", GSHELL_CMD_ROUTENEXT, "ROUTESTATUS", "ROUTE NEXT OK" },
+    { "actionbindstatus", GSHELL_CMD_ACTIONBINDSTATUS, "ACTIONBINDSTATUS", "ACTION BIND STATUS OK" },
+    { "bindcard", GSHELL_CMD_BINDCARD, "ACTIONBINDSTATUS", "BIND CARD OK" },
+    { "bindwindow", GSHELL_CMD_BINDWINDOW, "ACTIONBINDSTATUS", "BIND WINDOW OK" },
+    { "bindtaskbar", GSHELL_CMD_BINDTASKBAR, "ACTIONBINDSTATUS", "BIND TASKBAR OK" },
+    { "bindlauncher", GSHELL_CMD_BINDLAUNCHER, "ACTIONBINDSTATUS", "BIND LAUNCHER OK" },
+    { "binddesktop", GSHELL_CMD_BINDDESKTOP, "ACTIONBINDSTATUS", "BIND DESKTOP OK" },
+    { "cardselectact", GSHELL_CMD_CARDSELECTACT, "ACTIONBINDSTATUS", "CARD SELECT ACTION OK" },
+    { "cardopenact", GSHELL_CMD_CARDOPENACT, "ACTIONBINDSTATUS", "CARD OPEN ACTION OK" },
+    { "desktopmenuact", GSHELL_CMD_DESKTOPMENUACT, "ACTIONBINDSTATUS", "DESKTOP MENU ACTION OK" },
+    { "taskfocusact", GSHELL_CMD_TASKFOCUSACT, "ACTIONBINDSTATUS", "TASK FOCUS ACTION OK" },
+    { "taskrestoreact", GSHELL_CMD_TASKRESTOREACT, "ACTIONBINDSTATUS", "TASK RESTORE ACTION OK" },
+    { "windowfocusact", GSHELL_CMD_WINDOWFOCUSACT, "ACTIONBINDSTATUS", "WINDOW FOCUS ACTION OK" },
+    { "windowdragact", GSHELL_CMD_WINDOWDRAGACT, "ACTIONBINDSTATUS", "WINDOW DRAG ACTION OK" },
+    { "windowcloseact", GSHELL_CMD_WINDOWCLOSEACT, "ACTIONBINDSTATUS", "WINDOW CLOSE ACTION OK" },
+    { "shortcutlaunchact", GSHELL_CMD_SHORTCUTLAUNCHACT, "ACTIONBINDSTATUS", "SHORTCUT LAUNCH ACTION OK" },
+    { "shortcutswitchact", GSHELL_CMD_SHORTCUTSWITCHACT, "ACTIONBINDSTATUS", "SHORTCUT SWITCH ACTION OK" },
+    { "routeaction", GSHELL_CMD_ROUTEACTION, "ACTIONBINDSTATUS", "ROUTE ACTION OK" },
+    { "actionbinddemo", GSHELL_CMD_ACTIONBINDDEMO, "ACTIONBINDSTATUS", "ACTION BIND DEMO OK" },
+    { "actionbindcheck", GSHELL_CMD_ACTIONBINDCHECK, "ACTIONBINDSTATUS", "ACTION BIND CHECK OK" },
+    { "actionbindreset", GSHELL_CMD_ACTIONBINDRESET, "ACTIONBINDSTATUS", "ACTION BIND RESET OK" },
+    { "actionbindnext", GSHELL_CMD_ACTIONBINDNEXT, "ACTIONBINDSTATUS", "ACTION BIND NEXT OK" },
+    { "menustatus", GSHELL_CMD_MENUSTATUS, "MENUSHORTSTATUS", "MENU STATUS OK" },
+    { "desktopmenu", GSHELL_CMD_DESKTOPMENU, "MENUSHORTSTATUS", "DESKTOP MENU OK" },
+    { "cardmenu", GSHELL_CMD_CARDMENU, "MENUSHORTSTATUS", "CARD MENU OK" },
+    { "taskbarmenu", GSHELL_CMD_TASKBARMENU, "MENUSHORTSTATUS", "TASKBAR MENU OK" },
+    { "windowmenu", GSHELL_CMD_WINDOWMENU, "MENUSHORTSTATUS", "WINDOW MENU OK" },
+    { "menuopenitem", GSHELL_CMD_MENUOPENITEM, "MENUSHORTSTATUS", "MENU OPEN ITEM OK" },
+    { "menuselectitem", GSHELL_CMD_MENUSELECTITEM, "MENUSHORTSTATUS", "MENU SELECT ITEM OK" },
+    { "menucloseitem", GSHELL_CMD_MENUCLOSEITEM, "MENUSHORTSTATUS", "MENU CLOSE ITEM OK" },
+    { "shortcutstatus", GSHELL_CMD_SHORTCUTSTATUS, "MENUSHORTSTATUS", "SHORTCUT STATUS OK" },
+    { "shortcutlauncher", GSHELL_CMD_SHORTCUTLAUNCHER, "MENUSHORTSTATUS", "SHORTCUT LAUNCHER OK" },
+    { "shortcutswitch", GSHELL_CMD_SHORTCUTSWITCH, "MENUSHORTSTATUS", "SHORTCUT SWITCH OK" },
+    { "shortcutclose", GSHELL_CMD_SHORTCUTCLOSE, "MENUSHORTSTATUS", "SHORTCUT CLOSE OK" },
+    { "shortcutfocusnext", GSHELL_CMD_SHORTCUTFOCUSNEXT, "MENUSHORTSTATUS", "SHORTCUT FOCUS NEXT OK" },
+    { "shortcutmenu", GSHELL_CMD_SHORTCUTMENU, "MENUSHORTSTATUS", "SHORTCUT MENU OK" },
+    { "menuroutebind", GSHELL_CMD_MENUROUTEBIND, "MENUSHORTSTATUS", "MENU ROUTE BIND OK" },
+    { "shortcutroutebind", GSHELL_CMD_SHORTCUTROUTEBIND, "MENUSHORTSTATUS", "SHORTCUT ROUTE BIND OK" },
+    { "menushortflow", GSHELL_CMD_MENUSHORTFLOW, "MENUSHORTSTATUS", "MENU SHORT FLOW OK" },
+    { "menushortdemo", GSHELL_CMD_MENUSHORTDEMO, "MENUSHORTSTATUS", "MENU SHORT DEMO OK" },
+    { "menushortcheck", GSHELL_CMD_MENUSHORTCHECK, "MENUSHORTSTATUS", "MENU SHORT CHECK OK" },
+    { "menushortreset", GSHELL_CMD_MENUSHORTRESET, "MENUSHORTSTATUS", "MENU SHORT RESET OK" },
+    { "menushortnext", GSHELL_CMD_MENUSHORTNEXT, "MENUSHORTSTATUS", "MENU SHORT NEXT OK" },
+    { "windowflowstatus", GSHELL_CMD_WINDOWFLOWSTATUS, "WINDOWFLOWSTATUS", "WINDOW FLOW STATUS OK" },
+    { "windowspawn", GSHELL_CMD_WINDOWSPAWN, "WINDOWFLOWSTATUS", "WINDOW SPAWN OK" },
+    { "windowactivate", GSHELL_CMD_WINDOWACTIVATE, "WINDOWFLOWSTATUS", "WINDOW ACTIVATE OK" },
+    { "windowmove", GSHELL_CMD_WINDOWFLOWMOVE, "WINDOWFLOWSTATUS", "WINDOW MOVE OK" },
+    { "windowdragstart", GSHELL_CMD_WINDOWDRAGSTART, "WINDOWFLOWSTATUS", "WINDOW DRAG START OK" },
+    { "windowdragmove", GSHELL_CMD_WINDOWDRAGMOVE, "WINDOWFLOWSTATUS", "WINDOW DRAG MOVE OK" },
+    { "windowdragend", GSHELL_CMD_WINDOWDRAGEND, "WINDOWFLOWSTATUS", "WINDOW DRAG END OK" },
+    { "windowminimize", GSHELL_CMD_WINDOWMINIMIZE, "WINDOWFLOWSTATUS", "WINDOW MINIMIZE OK" },
+    { "windowrestore", GSHELL_CMD_WINDOWRESTORE, "WINDOWFLOWSTATUS", "WINDOW RESTORE OK" },
+    { "windowmaximize", GSHELL_CMD_WINDOWMAXIMIZE, "WINDOWFLOWSTATUS", "WINDOW MAXIMIZE OK" },
+    { "windowfront", GSHELL_CMD_WINDOWFRONT, "WINDOWFLOWSTATUS", "WINDOW FRONT OK" },
+    { "windowback", GSHELL_CMD_WINDOWBACK, "WINDOWFLOWSTATUS", "WINDOW BACK OK" },
+    { "windowlayernext", GSHELL_CMD_WINDOWLAYERNEXT, "WINDOWFLOWSTATUS", "WINDOW LAYER NEXT OK" },
+    { "windowfocusnextflow", GSHELL_CMD_WINDOWFOCUSNEXTFLOW, "WINDOWFLOWSTATUS", "WINDOW FOCUS NEXT FLOW OK" },
+    { "windowclosemock", GSHELL_CMD_WINDOWCLOSEMOCK, "WINDOWFLOWSTATUS", "WINDOW CLOSE MOCK OK" },
+    { "windowmenuflow", GSHELL_CMD_WINDOWMENUFLOW, "WINDOWFLOWSTATUS", "WINDOW MENU FLOW OK" },
+    { "windowshortflow", GSHELL_CMD_WINDOWSHORTFLOW, "WINDOWFLOWSTATUS", "WINDOW SHORT FLOW OK" },
+    { "windowflowdemo", GSHELL_CMD_WINDOWFLOWDEMO, "WINDOWFLOWSTATUS", "WINDOW FLOW DEMO OK" },
+    { "windowflowcheck", GSHELL_CMD_WINDOWFLOWCHECK, "WINDOWFLOWSTATUS", "WINDOW FLOW CHECK OK" },
+    { "windowflowreset", GSHELL_CMD_WINDOWFLOWRESET, "WINDOWFLOWSTATUS", "WINDOW FLOW RESET OK" },
+    { "windowflownext", GSHELL_CMD_WINDOWFLOWNEXT, "WINDOWFLOWSTATUS", "WINDOW FLOW NEXT OK" },
+    { "interactclosestatus", GSHELL_CMD_INTERACTCLOSESTATUS, "INTERACTCLOSESTATUS", "INTERACTION CLOSE STATUS OK" },
+    { "pointerflowsum", GSHELL_CMD_POINTERFLOWSUM, "INTERACTCLOSESTATUS", "POINTER FLOW SUMMARY OK" },
+    { "clickflowsum", GSHELL_CMD_CLICKFLOWSUM, "INTERACTCLOSESTATUS", "CLICK FLOW SUMMARY OK" },
+    { "routeflowsum", GSHELL_CMD_ROUTEFLOWSUM, "INTERACTCLOSESTATUS", "ROUTE FLOW SUMMARY OK" },
+    { "actionflowsum", GSHELL_CMD_ACTIONFLOWSUM, "INTERACTCLOSESTATUS", "ACTION FLOW SUMMARY OK" },
+    { "menuflowsum", GSHELL_CMD_MENUFLOWSUM, "INTERACTCLOSESTATUS", "MENU FLOW SUMMARY OK" },
+    { "shortcutflowsum", GSHELL_CMD_SHORTCUTFLOWSUM, "INTERACTCLOSESTATUS", "SHORTCUT FLOW SUMMARY OK" },
+    { "windowflowsum", GSHELL_CMD_WINDOWFLOWSUM, "INTERACTCLOSESTATUS", "WINDOW FLOW SUMMARY OK" },
+    { "focusflowsum", GSHELL_CMD_FOCUSFLOWSUM, "INTERACTCLOSESTATUS", "FOCUS FLOW SUMMARY OK" },
+    { "selectflowsum", GSHELL_CMD_SELECTFLOWSUM, "INTERACTCLOSESTATUS", "SELECT FLOW SUMMARY OK" },
+    { "opencloseflowsum", GSHELL_CMD_OPENCLOSEFLOWSUM, "INTERACTCLOSESTATUS", "OPEN CLOSE FLOW SUMMARY OK" },
+    { "dragflowsum", GSHELL_CMD_DRAGFLOWSUM, "INTERACTCLOSESTATUS", "DRAG FLOW SUMMARY OK" },
+    { "interacthandoff", GSHELL_CMD_INTERACTHANDOFF, "INTERACTCLOSESTATUS", "INTERACTION HANDOFF OK" },
+    { "realinputready", GSHELL_CMD_REALINPUTREADY, "INTERACTCLOSESTATUS", "REAL INPUT READY OK" },
+    { "interactregression", GSHELL_CMD_INTERACTREGRESSION, "INTERACTCLOSESTATUS", "INTERACTION REGRESSION OK" },
+    { "interactdemoall", GSHELL_CMD_INTERACTDEMOALL, "INTERACTCLOSESTATUS", "INTERACTION DEMO ALL OK" },
+    { "interactfinalcheck", GSHELL_CMD_INTERACTFINALCHECK, "INTERACTCLOSESTATUS", "INTERACTION FINAL CHECK OK" },
+    { "interactfinalreset", GSHELL_CMD_INTERACTFINALRESET, "INTERACTCLOSESTATUS", "INTERACTION FINAL RESET OK" },
+    { "interactcloseout", GSHELL_CMD_INTERACTCLOSEOUT, "INTERACTCLOSESTATUS", "INTERACTION CLOSEOUT OK" },
+    { "interactnextphase", GSHELL_CMD_INTERACTNEXTPHASE, "INTERACTCLOSESTATUS", "INTERACTION NEXT PHASE OK" },
+    { "inputprepstatus", GSHELL_CMD_INPUTPREPSTATUS, "INPUTPREPSTATUS", "INPUT PREP STATUS OK" },
+    { "inputdevstatus", GSHELL_CMD_INPUTDEVSTATUS, "INPUTPREPSTATUS", "INPUT DEVICE STATUS OK" },
+    { "ps2mouseplan", GSHELL_CMD_PS2MOUSEPLAN, "INPUTPREPSTATUS", "PS2 MOUSE PLAN OK" },
+    { "irq12plan", GSHELL_CMD_IRQ12PLAN, "INPUTPREPSTATUS", "IRQ12 PLAN OK" },
+    { "mousepacketplan", GSHELL_CMD_MOUSEPACKETPLAN, "INPUTPREPSTATUS", "MOUSE PACKET PLAN OK" },
+    { "mousecoordplan", GSHELL_CMD_MOUSECOORDPLAN, "INPUTPREPSTATUS", "MOUSE COORD PLAN OK" },
+    { "inputqueueplan", GSHELL_CMD_INPUTQUEUEPLAN, "INPUTPREPSTATUS", "INPUT QUEUE PLAN OK" },
+    { "pointerbridge", GSHELL_CMD_POINTERBRIDGE, "INPUTPREPSTATUS", "POINTER BRIDGE OK" },
+    { "mockpointerfeed", GSHELL_CMD_MOCKPOINTERFEED, "INPUTPREPSTATUS", "MOCK POINTER FEED OK" },
+    { "realpointergate", GSHELL_CMD_REALPOINTERGATE, "INPUTPREPSTATUS", "REAL POINTER GATE OK" },
+    { "inputroutebridge", GSHELL_CMD_INPUTROUTEBRIDGE, "INPUTPREPSTATUS", "INPUT ROUTE BRIDGE OK" },
+    { "inputactionbridge", GSHELL_CMD_INPUTACTIONBRIDGE, "INPUTPREPSTATUS", "INPUT ACTION BRIDGE OK" },
+    { "inputfallback", GSHELL_CMD_INPUTFALLBACK, "INPUTPREPSTATUS", "INPUT FALLBACK OK" },
+    { "inputsafecheck", GSHELL_CMD_INPUTSAFECHECK, "INPUTPREPSTATUS", "INPUT SAFE CHECK OK" },
+    { "inputregression", GSHELL_CMD_INPUTREGRESSION, "INPUTPREPSTATUS", "INPUT REGRESSION OK" },
+    { "inputhandoff", GSHELL_CMD_INPUTHANDOFF, "INPUTPREPSTATUS", "INPUT HANDOFF OK" },
+    { "inputdemo", GSHELL_CMD_INPUTPREPDEMO, "INPUTPREPSTATUS", "INPUT DEMO OK" },
+    { "inputcheck", GSHELL_CMD_INPUTPREPCHECK, "INPUTPREPSTATUS", "INPUT CHECK OK" },
+    { "inputreset", GSHELL_CMD_INPUTPREPRESET, "INPUTPREPSTATUS", "INPUT RESET OK" },
+    { "inputnext", GSHELL_CMD_INPUTNEXT, "INPUTPREPSTATUS", "INPUT NEXT OK" },
+    { "mousedrvstatus", GSHELL_CMD_MOUSEDRVSTATUS, "MOUSEDRVSTATUS", "MOUSE DRIVER STATUS OK" },
+    { "mousedrvplan", GSHELL_CMD_MOUSEDRVPLAN, "MOUSEDRVSTATUS", "MOUSE DRIVER PLAN OK" },
+    { "mouseportcheck", GSHELL_CMD_MOUSEPORTCHECK, "MOUSEDRVSTATUS", "MOUSE PORT CHECK OK" },
+    { "mouseirqroute", GSHELL_CMD_MOUSEIRQROUTE, "MOUSEDRVSTATUS", "MOUSE IRQ ROUTE OK" },
+    { "mousepacketbuf", GSHELL_CMD_MOUSEPACKETBUF, "MOUSEDRVSTATUS", "MOUSE PACKET BUFFER OK" },
+    { "mousepacketparse", GSHELL_CMD_MOUSEPACKETPARSE, "MOUSEDRVSTATUS", "MOUSE PACKET PARSE OK" },
+    { "mousebuttonmap", GSHELL_CMD_MOUSEBUTTONMAP, "MOUSEDRVSTATUS", "MOUSE BUTTON MAP OK" },
+    { "mousecoordmap", GSHELL_CMD_MOUSECOORDMAP, "MOUSEDRVSTATUS", "MOUSE COORD MAP OK" },
+    { "mousecursorbridge", GSHELL_CMD_MOUSECURSORBRIDGE, "MOUSEDRVSTATUS", "MOUSE CURSOR BRIDGE OK" },
+    { "mouseeventpush", GSHELL_CMD_MOUSEEVENTPUSH, "MOUSEDRVSTATUS", "MOUSE EVENT PUSH OK" },
+    { "mouseeventroute", GSHELL_CMD_MOUSEEVENTROUTE, "MOUSEDRVSTATUS", "MOUSE EVENT ROUTE OK" },
+    { "mouseactionfeed", GSHELL_CMD_MOUSEACTIONFEED, "MOUSEDRVSTATUS", "MOUSE ACTION FEED OK" },
+    { "mousesafegate", GSHELL_CMD_MOUSESAFEGATE, "MOUSEDRVSTATUS", "MOUSE SAFE GATE OK" },
+    { "mousenoirqmode", GSHELL_CMD_MOUSENOIRQMODE, "MOUSEDRVSTATUS", "MOUSE NO IRQ MODE OK" },
+    { "mouseregression", GSHELL_CMD_MOUSEREGRESSION, "MOUSEDRVSTATUS", "MOUSE REGRESSION OK" },
+    { "mousedrvdemo", GSHELL_CMD_MOUSEDRVDEMO, "MOUSEDRVSTATUS", "MOUSE DRIVER DEMO OK" },
+    { "mousedrvcheck", GSHELL_CMD_MOUSEDRVCHECK, "MOUSEDRVSTATUS", "MOUSE DRIVER CHECK OK" },
+    { "mousedrvreset", GSHELL_CMD_MOUSEDRVRESET, "MOUSEDRVSTATUS", "MOUSE DRIVER RESET OK" },
+    { "mousedrvnext", GSHELL_CMD_MOUSEDRVNEXT, "MOUSEDRVSTATUS", "MOUSE DRIVER NEXT OK" },
+    { "packetpipestatus", GSHELL_CMD_PACKETPIPESTATUS, "PACKETPIPESTATUS", "PACKET PIPE STATUS OK" },
+    { "packetsyncplan", GSHELL_CMD_PACKETSYNCPLAN, "PACKETPIPESTATUS", "PACKET SYNC PLAN OK" },
+    { "packetbyte0", GSHELL_CMD_PACKETBYTE0, "PACKETPIPESTATUS", "PACKET BYTE0 OK" },
+    { "packetbyte1", GSHELL_CMD_PACKETBYTE1, "PACKETPIPESTATUS", "PACKET BYTE1 OK" },
+    { "packetbyte2", GSHELL_CMD_PACKETBYTE2, "PACKETPIPESTATUS", "PACKET BYTE2 OK" },
+    { "packetdxdy", GSHELL_CMD_PACKETDXDY, "PACKETPIPESTATUS", "PACKET DX DY OK" },
+    { "packetsignflags", GSHELL_CMD_PACKETSIGNFLAGS, "PACKETPIPESTATUS", "PACKET SIGN FLAGS OK" },
+    { "packetoverflow", GSHELL_CMD_PACKETOVERFLOW, "PACKETPIPESTATUS", "PACKET OVERFLOW OK" },
+    { "packetbuttons", GSHELL_CMD_PACKETBUTTONS, "PACKETPIPESTATUS", "PACKET BUTTONS OK" },
+    { "packetcursordelta", GSHELL_CMD_PACKETCURSORDELTA, "PACKETPIPESTATUS", "PACKET CURSOR DELTA OK" },
+    { "packetqueuepush", GSHELL_CMD_PACKETQUEUEPUSH, "PACKETPIPESTATUS", "PACKET QUEUE PUSH OK" },
+    { "packetroutefeed", GSHELL_CMD_PACKETROUTEFEED, "PACKETPIPESTATUS", "PACKET ROUTE FEED OK" },
+    { "packetactionfeed", GSHELL_CMD_PACKETACTIONFEED, "PACKETPIPESTATUS", "PACKET ACTION FEED OK" },
+    { "packetsafegate", GSHELL_CMD_PACKETSAFEGATE, "PACKETPIPESTATUS", "PACKET SAFE GATE OK" },
+    { "packetnoirqmode", GSHELL_CMD_PACKETNOIRQMODE, "PACKETPIPESTATUS", "PACKET NO IRQ MODE OK" },
+    { "packetregression", GSHELL_CMD_PACKETREGRESSION, "PACKETPIPESTATUS", "PACKET REGRESSION OK" },
+    { "packetpipedemo", GSHELL_CMD_PACKETPIPEDEMO, "PACKETPIPESTATUS", "PACKET PIPE DEMO OK" },
+    { "packetpipecheck", GSHELL_CMD_PACKETPIPECHECK, "PACKETPIPESTATUS", "PACKET PIPE CHECK OK" },
+    { "packetpipereset", GSHELL_CMD_PACKETPIPERESET, "PACKETPIPESTATUS", "PACKET PIPE RESET OK" },
+    { "packetpipenext", GSHELL_CMD_PACKETPIPENEXT, "PACKETPIPESTATUS", "PACKET PIPE NEXT OK" },
+    { "cursorpipestatus", GSHELL_CMD_CURSORPIPESTATUS, "CURSORPIPESTATUS", "CURSOR PIPE STATUS OK" },
+    { "cursororigin", GSHELL_CMD_CURSORORIGIN, "CURSORPIPESTATUS", "CURSOR ORIGIN OK" },
+    { "cursordelta", GSHELL_CMD_CURSORDELTA, "CURSORPIPESTATUS", "CURSOR DELTA OK" },
+    { "cursorapplydelta", GSHELL_CMD_CURSORAPPLYDELTA, "CURSORPIPESTATUS", "CURSOR APPLY DELTA OK" },
+    { "cursorbounds", GSHELL_CMD_CURSORBOUNDS, "CURSORPIPESTATUS", "CURSOR BOUNDS OK" },
+    { "cursorclamp", GSHELL_CMD_CURSORCLAMP, "CURSORPIPESTATUS", "CURSOR CLAMP OK" },
+    { "cursorbuttonstate", GSHELL_CMD_CURSORBUTTONSTATE, "CURSORPIPESTATUS", "CURSOR BUTTON STATE OK" },
+    { "cursorclickstate", GSHELL_CMD_CURSORCLICKSTATE, "CURSORPIPESTATUS", "CURSOR CLICK STATE OK" },
+    { "cursoreventpush", GSHELL_CMD_CURSOREVENTPUSH, "CURSORPIPESTATUS", "CURSOR EVENT PUSH OK" },
+    { "cursorroutefeed", GSHELL_CMD_CURSORROUTEFEED, "CURSORPIPESTATUS", "CURSOR ROUTE FEED OK" },
+    { "cursoractionfeed", GSHELL_CMD_CURSORACTIONFEED, "CURSORPIPESTATUS", "CURSOR ACTION FEED OK" },
+    { "cursorvisualplan", GSHELL_CMD_CURSORVISUALPLAN, "CURSORPIPESTATUS", "CURSOR VISUAL PLAN OK" },
+    { "cursorsafegate", GSHELL_CMD_CURSORSAFEGATE, "CURSORPIPESTATUS", "CURSOR SAFE GATE OK" },
+    { "cursornoirqmode", GSHELL_CMD_CURSORNOIRQMODE, "CURSORPIPESTATUS", "CURSOR NO IRQ MODE OK" },
+    { "cursorregression", GSHELL_CMD_CURSORREGRESSION, "CURSORPIPESTATUS", "CURSOR REGRESSION OK" },
+    { "cursorpipedemo", GSHELL_CMD_CURSORPIPEDEMO, "CURSORPIPESTATUS", "CURSOR PIPE DEMO OK" },
+    { "cursorpipecheck", GSHELL_CMD_CURSORPIPECHECK, "CURSORPIPESTATUS", "CURSOR PIPE CHECK OK" },
+    { "cursorpipereset", GSHELL_CMD_CURSORPIPERESET, "CURSORPIPESTATUS", "CURSOR PIPE RESET OK" },
+    { "cursorpipenext", GSHELL_CMD_CURSORPIPENEXT, "CURSORPIPESTATUS", "CURSOR PIPE NEXT OK" },
+    { "cursorvisualstatus", GSHELL_CMD_CURSORVISUALSTATUS, "CURSORVISUALSTATUS", "CURSOR VISUAL STATUS OK" },
+    { "cursorvisualplan", GSHELL_CMD_CURSORVISUALPLAN2, "CURSORVISUALSTATUS", "CURSOR VISUAL PLAN OK" },
+    { "cursorshapemock", GSHELL_CMD_CURSORSHAPEMOCK, "CURSORVISUALSTATUS", "CURSOR SHAPE MOCK OK" },
+    { "cursorhotspot", GSHELL_CMD_CURSORHOTSPOT, "CURSORVISUALSTATUS", "CURSOR HOTSPOT OK" },
+    { "cursorpositionvis", GSHELL_CMD_CURSORPOSITIONVIS, "CURSORVISUALSTATUS", "CURSOR POSITION VIS OK" },
+    { "cursortrailmock", GSHELL_CMD_CURSORTRAILMOCK, "CURSORVISUALSTATUS", "CURSOR TRAIL MOCK OK" },
+    { "cursorblinkmock", GSHELL_CMD_CURSORBLINKMOCK, "CURSORVISUALSTATUS", "CURSOR BLINK MOCK OK" },
+    { "cursoroverlaygate", GSHELL_CMD_CURSOROVERLAYGATE, "CURSORVISUALSTATUS", "CURSOR OVERLAY GATE OK" },
+    { "cursorvisualfeed", GSHELL_CMD_CURSORVISUALFEED, "CURSORVISUALSTATUS", "CURSOR VISUAL FEED OK" },
+    { "cursorvisualroute", GSHELL_CMD_CURSORVISUALROUTE, "CURSORVISUALSTATUS", "CURSOR VISUAL ROUTE OK" },
+    { "cursorvisualaction", GSHELL_CMD_CURSORVISUALACTION, "CURSORVISUALSTATUS", "CURSOR VISUAL ACTION OK" },
+    { "cursorvisualsafe", GSHELL_CMD_CURSORVISUALSAFE, "CURSORVISUALSTATUS", "CURSOR VISUAL SAFE OK" },
+    { "cursorvisualregression", GSHELL_CMD_CURSORVISUALREGRESSION, "CURSORVISUALSTATUS", "CURSOR VISUAL REGRESSION OK" },
+    { "cursorvisualdemo", GSHELL_CMD_CURSORVISUALDEMO, "CURSORVISUALSTATUS", "CURSOR VISUAL DEMO OK" },
+    { "cursorvisualcheck", GSHELL_CMD_CURSORVISUALCHECK, "CURSORVISUALSTATUS", "CURSOR VISUAL CHECK OK" },
+    { "cursorvisualreset", GSHELL_CMD_CURSORVISUALRESET, "CURSORVISUALSTATUS", "CURSOR VISUAL RESET OK" },
+    { "cursorvisualnext", GSHELL_CMD_CURSORVISUALNEXT, "CURSORVISUALSTATUS", "CURSOR VISUAL NEXT OK" },
+    { "realptrstatus", GSHELL_CMD_REALPTRSTATUS, "REALPTRSTATUS", "REAL POINTER STATUS OK" },
+    { "realptrgate", GSHELL_CMD_REALPTRGATE, "REALPTRSTATUS", "REAL POINTER GATE OK" },
+    { "realptrsource", GSHELL_CMD_REALPTRSOURCE, "REALPTRSTATUS", "REAL POINTER SOURCE OK" },
+    { "realptrcoord", GSHELL_CMD_REALPTRCOORD, "REALPTRSTATUS", "REAL POINTER COORD OK" },
+    { "realptrhittest", GSHELL_CMD_REALPTRHITTEST, "REALPTRSTATUS", "REAL POINTER HIT TEST OK" },
+    { "realptrdesktoproute", GSHELL_CMD_REALPTRDESKTOPROUTE, "REALPTRSTATUS", "REAL POINTER DESKTOP ROUTE OK" },
+    { "realptrcardroute", GSHELL_CMD_REALPTRCARDROUTE, "REALPTRSTATUS", "REAL POINTER CARD ROUTE OK" },
+    { "realptrwindowroute", GSHELL_CMD_REALPTRWINDOWROUTE, "REALPTRSTATUS", "REAL POINTER WINDOW ROUTE OK" },
+    { "realptrtaskroute", GSHELL_CMD_REALPTRTASKROUTE, "REALPTRSTATUS", "REAL POINTER TASK ROUTE OK" },
+    { "realptrclickroute", GSHELL_CMD_REALPTRCLICKROUTE, "REALPTRSTATUS", "REAL POINTER CLICK ROUTE OK" },
+    { "realptrdragroute", GSHELL_CMD_REALPTRDRAGROUTE, "REALPTRSTATUS", "REAL POINTER DRAG ROUTE OK" },
+    { "realptractionbridge", GSHELL_CMD_REALPTRACTIONBRIDGE, "REALPTRSTATUS", "REAL POINTER ACTION BRIDGE OK" },
+    { "realptrcursorvis", GSHELL_CMD_REALPTRCURSORVIS, "REALPTRSTATUS", "REAL POINTER CURSOR VIS OK" },
+    { "realptrsafe", GSHELL_CMD_REALPTRSAFE, "REALPTRSTATUS", "REAL POINTER SAFE OK" },
+    { "realptrregression", GSHELL_CMD_REALPTRREGRESSION, "REALPTRSTATUS", "REAL POINTER REGRESSION OK" },
+    { "realptrdemo", GSHELL_CMD_REALPTRDEMO, "REALPTRSTATUS", "REAL POINTER DEMO OK" },
+    { "realptrcheck", GSHELL_CMD_REALPTRCHECK, "REALPTRSTATUS", "REAL POINTER CHECK OK" },
+    { "realptrreset", GSHELL_CMD_REALPTRRESET, "REALPTRSTATUS", "REAL POINTER RESET OK" },
+    { "realptrnext", GSHELL_CMD_REALPTRNEXT, "REALPTRSTATUS", "REAL POINTER NEXT OK" },
+    { "realinputclosestatus", GSHELL_CMD_REALINPUTCLOSESTATUS, "REALINPUTCLOSESTATUS", "REAL INPUT CLOSE STATUS OK" },
+    { "realinputprepsum", GSHELL_CMD_REALINPUTPREPSUM, "REALINPUTCLOSESTATUS", "REAL INPUT PREP SUMMARY OK" },
+    { "realinputmousesum", GSHELL_CMD_REALINPUTMOUSESUM, "REALINPUTCLOSESTATUS", "REAL INPUT MOUSE SUMMARY OK" },
+    { "realinputpacketsum", GSHELL_CMD_REALINPUTPACKETSUM, "REALINPUTCLOSESTATUS", "REAL INPUT PACKET SUMMARY OK" },
+    { "realinputcursorsum", GSHELL_CMD_REALINPUTCURSORSUM, "REALINPUTCLOSESTATUS", "REAL INPUT CURSOR SUMMARY OK" },
+    { "realinputvisualsum", GSHELL_CMD_REALINPUTVISUALSUM, "REALINPUTCLOSESTATUS", "REAL INPUT VISUAL SUMMARY OK" },
+    { "realinputptrroutesum", GSHELL_CMD_REALINPUTPTRROUTESUM, "REALINPUTCLOSESTATUS", "REAL INPUT POINTER ROUTE SUMMARY OK" },
+    { "realinputbridgesum", GSHELL_CMD_REALINPUTBRIDGESUM, "REALINPUTCLOSESTATUS", "REAL INPUT BRIDGE SUMMARY OK" },
+    { "realinputsafesum", GSHELL_CMD_REALINPUTSAFESUM, "REALINPUTCLOSESTATUS", "REAL INPUT SAFE SUMMARY OK" },
+    { "realinputregresssum", GSHELL_CMD_REALINPUTREGRESSSUM, "REALINPUTCLOSESTATUS", "REAL INPUT REGRESSION SUMMARY OK" },
+    { "realinputhandoffsum", GSHELL_CMD_REALINPUTHANDOFFSUM, "REALINPUTCLOSESTATUS", "REAL INPUT HANDOFF SUMMARY OK" },
+    { "realinputdemoall", GSHELL_CMD_REALINPUTDEMOALL, "REALINPUTCLOSESTATUS", "REAL INPUT DEMO ALL OK" },
+    { "realinputfinalcheck", GSHELL_CMD_REALINPUTFINALCHECK, "REALINPUTCLOSESTATUS", "REAL INPUT FINAL CHECK OK" },
+    { "realinputfinalreset", GSHELL_CMD_REALINPUTFINALRESET, "REALINPUTCLOSESTATUS", "REAL INPUT FINAL RESET OK" },
+    { "realinputcloseout", GSHELL_CMD_REALINPUTCLOSEOUT, "REALINPUTCLOSESTATUS", "REAL INPUT CLOSEOUT OK" },
+    { "realinputnextphase", GSHELL_CMD_REALINPUTNEXTPHASE, "REALINPUTCLOSESTATUS", "REAL INPUT NEXT PHASE OK" },
+    { "realinputroadmap", GSHELL_CMD_REALINPUTROADMAP, "REALINPUTCLOSESTATUS", "REAL INPUT ROADMAP OK" },
+    { "realinputbounds", GSHELL_CMD_REALINPUTBOUNDS, "REALINPUTCLOSESTATUS", "REAL INPUT BOUNDS OK" },
+    { "realinputlegacycheck", GSHELL_CMD_REALINPUTLEGACYCHECK, "REALINPUTCLOSESTATUS", "REAL INPUT LEGACY CHECK OK" },
+    { "realinputfinalready", GSHELL_CMD_REALINPUTFINALREADY, "REALINPUTCLOSESTATUS", "REAL INPUT FINAL READY OK" },
+    { "clickuistatus", GSHELL_CMD_CLICKUISTATUS, "CLICKUISTATUS", "CLICK UI STATUS OK" },
+    { "clickuidesktop", GSHELL_CMD_CLICKUIDESKTOP, "CLICKUISTATUS", "CLICK UI DESKTOP OK" },
+    { "clickuicard", GSHELL_CMD_CLICKUICARD, "CLICKUISTATUS", "CLICK UI CARD OK" },
+    { "clickuiwindow", GSHELL_CMD_CLICKUIWINDOW, "CLICKUISTATUS", "CLICK UI WINDOW OK" },
+    { "clickuitaskbar", GSHELL_CMD_CLICKUITASKBAR, "CLICKUISTATUS", "CLICK UI TASKBAR OK" },
+    { "clickuilauncher", GSHELL_CMD_CLICKUILAUNCHER, "CLICKUISTATUS", "CLICK UI LAUNCHER OK" },
+    { "clickuimenu", GSHELL_CMD_CLICKUIMENU, "CLICKUISTATUS", "CLICK UI MENU OK" },
+    { "clickuihover", GSHELL_CMD_CLICKUIHOVER, "CLICKUISTATUS", "CLICK UI HOVER OK" },
+    { "clickuiclick", GSHELL_CMD_CLICKUICLICK, "CLICKUISTATUS", "CLICK UI CLICK OK" },
+    { "clickuidouble", GSHELL_CMD_CLICKUIDOUBLE, "CLICKUISTATUS", "CLICK UI DOUBLE OK" },
+    { "clickuiright", GSHELL_CMD_CLICKUIRIGHT, "CLICKUISTATUS", "CLICK UI RIGHT OK" },
+    { "clickuidrag", GSHELL_CMD_CLICKUIDRAG, "CLICKUISTATUS", "CLICK UI DRAG OK" },
+    { "clickuidrop", GSHELL_CMD_CLICKUIDROP, "CLICKUISTATUS", "CLICK UI DROP OK" },
+    { "clickuiaction", GSHELL_CMD_CLICKUIACTION, "CLICKUISTATUS", "CLICK UI ACTION OK" },
+    { "clickuifocus", GSHELL_CMD_CLICKUIFOCUS, "CLICKUISTATUS", "CLICK UI FOCUS OK" },
+    { "clickuiopen", GSHELL_CMD_CLICKUIOPEN, "CLICKUISTATUS", "CLICK UI OPEN OK" },
+    { "clickuiclose", GSHELL_CMD_CLICKUICLOSE, "CLICKUISTATUS", "CLICK UI CLOSE OK" },
+    { "clickuidemo", GSHELL_CMD_CLICKUIDEMO, "CLICKUISTATUS", "CLICK UI DEMO OK" },
+    { "clickuicheck", GSHELL_CMD_CLICKUICHECK, "CLICKUISTATUS", "CLICK UI CHECK OK" },
+    { "clickuireset", GSHELL_CMD_CLICKUIRESET, "CLICKUISTATUS", "CLICK UI RESET OK" },
+    { "clickuinext", GSHELL_CMD_CLICKUINEXT, "CLICKUISTATUS", "CLICK UI NEXT OK" },
+    { "desktoptargetstatus", GSHELL_CMD_DESKTARGETSTATUS, "DESKTARGETSTATUS", "DESKTOP TARGET STATUS OK" },
+    { "desktoptargetdesktop", GSHELL_CMD_DESKTARGETDESKTOP, "DESKTARGETSTATUS", "DESKTOP TARGET DESKTOP OK" },
+    { "desktoptargetcard", GSHELL_CMD_DESKTARGETCARD, "DESKTARGETSTATUS", "DESKTOP TARGET CARD OK" },
+    { "desktoptargetwindow", GSHELL_CMD_DESKTARGETWINDOW, "DESKTARGETSTATUS", "DESKTOP TARGET WINDOW OK" },
+    { "desktoptargettaskbar", GSHELL_CMD_DESKTARGETTASKBAR, "DESKTARGETSTATUS", "DESKTOP TARGET TASKBAR OK" },
+    { "desktoptargetlauncher", GSHELL_CMD_DESKTARGETLAUNCHER, "DESKTARGETSTATUS", "DESKTOP TARGET LAUNCHER OK" },
+    { "desktoptargetmenu", GSHELL_CMD_DESKTARGETMENU, "DESKTARGETSTATUS", "DESKTOP TARGET MENU OK" },
+    { "desktoptargetfocus", GSHELL_CMD_DESKTARGETFOCUS, "DESKTARGETSTATUS", "DESKTOP TARGET FOCUS OK" },
+    { "desktoptargetselect", GSHELL_CMD_DESKTARGETSELECT, "DESKTARGETSTATUS", "DESKTOP TARGET SELECT OK" },
+    { "desktoptargetopen", GSHELL_CMD_DESKTARGETOPEN, "DESKTARGETSTATUS", "DESKTOP TARGET OPEN OK" },
+    { "desktoptargetclose", GSHELL_CMD_DESKTARGETCLOSE, "DESKTARGETSTATUS", "DESKTOP TARGET CLOSE OK" },
+    { "desktoptargetdrag", GSHELL_CMD_DESKTARGETDRAG, "DESKTARGETSTATUS", "DESKTOP TARGET DRAG OK" },
+    { "desktoptargetdrop", GSHELL_CMD_DESKTARGETDROP, "DESKTARGETSTATUS", "DESKTOP TARGET DROP OK" },
+    { "desktoptargetstate", GSHELL_CMD_DESKTARGETSTATE, "DESKTARGETSTATUS", "DESKTOP TARGET STATE OK" },
+    { "desktoptargetvisual", GSHELL_CMD_DESKTARGETVISUAL, "DESKTARGETSTATUS", "DESKTOP TARGET VISUAL OK" },
+    { "desktoptargetsafe", GSHELL_CMD_DESKTARGETSAFE, "DESKTARGETSTATUS", "DESKTOP TARGET SAFE OK" },
+    { "desktoptargetdemo", GSHELL_CMD_DESKTARGETDEMO, "DESKTARGETSTATUS", "DESKTOP TARGET DEMO OK" },
+    { "desktoptargetcheck", GSHELL_CMD_DESKTARGETCHECK, "DESKTARGETSTATUS", "DESKTOP TARGET CHECK OK" },
+    { "desktoptargetreset", GSHELL_CMD_DESKTARGETRESET, "DESKTARGETSTATUS", "DESKTOP TARGET RESET OK" },
+    { "desktoptargetnext", GSHELL_CMD_DESKTARGETNEXT, "DESKTARGETSTATUS", "DESKTOP TARGET NEXT OK" },
+    { "clickactionstatus", GSHELL_CMD_CLICKACTIONSTATUS, "CLICKACTIONSTATUS", "CLICK ACTION STATUS OK" },
+    { "clickactionselect", GSHELL_CMD_CLICKACTIONSELECT, "CLICKACTIONSTATUS", "CLICK ACTION SELECT OK" },
+    { "clickactionopen", GSHELL_CMD_CLICKACTIONOPEN, "CLICKACTIONSTATUS", "CLICK ACTION OPEN OK" },
+    { "clickactionmenu", GSHELL_CMD_CLICKACTIONMENU, "CLICKACTIONSTATUS", "CLICK ACTION MENU OK" },
+    { "clickactionfocus", GSHELL_CMD_CLICKACTIONFOCUS, "CLICKACTIONSTATUS", "CLICK ACTION FOCUS OK" },
+    { "clickactiontaskswitch", GSHELL_CMD_CLICKACTIONTASKSWITCH, "CLICKACTIONSTATUS", "CLICK ACTION TASK SWITCH OK" },
+    { "clickactionlaunch", GSHELL_CMD_CLICKACTIONLAUNCH, "CLICKACTIONSTATUS", "CLICK ACTION LAUNCH OK" },
+    { "clickactiondragstart", GSHELL_CMD_CLICKACTIONDRAGSTART, "CLICKACTIONSTATUS", "CLICK ACTION DRAG START OK" },
+    { "clickactiondragmove", GSHELL_CMD_CLICKACTIONDRAGMOVE, "CLICKACTIONSTATUS", "CLICK ACTION DRAG MOVE OK" },
+    { "clickactiondrop", GSHELL_CMD_CLICKACTIONDROP, "CLICKACTIONSTATUS", "CLICK ACTION DROP OK" },
+    { "clickactionclose", GSHELL_CMD_CLICKACTIONCLOSE, "CLICKACTIONSTATUS", "CLICK ACTION CLOSE OK" },
+    { "clickactionrestore", GSHELL_CMD_CLICKACTIONRESTORE, "CLICKACTIONSTATUS", "CLICK ACTION RESTORE OK" },
+    { "clickactionroute", GSHELL_CMD_CLICKACTIONROUTE, "CLICKACTIONSTATUS", "CLICK ACTION ROUTE OK" },
+    { "clickactionbind", GSHELL_CMD_CLICKACTIONBIND, "CLICKACTIONSTATUS", "CLICK ACTION BIND OK" },
+    { "clickactionvisual", GSHELL_CMD_CLICKACTIONVISUAL, "CLICKACTIONSTATUS", "CLICK ACTION VISUAL OK" },
+    { "clickactionsafe", GSHELL_CMD_CLICKACTIONSAFE, "CLICKACTIONSTATUS", "CLICK ACTION SAFE OK" },
+    { "clickactiondemo", GSHELL_CMD_CLICKACTIONDEMO, "CLICKACTIONSTATUS", "CLICK ACTION DEMO OK" },
+    { "clickactioncheck", GSHELL_CMD_CLICKACTIONCHECK, "CLICKACTIONSTATUS", "CLICK ACTION CHECK OK" },
+    { "clickactionreset", GSHELL_CMD_CLICKACTIONRESET, "CLICKACTIONSTATUS", "CLICK ACTION RESET OK" },
+    { "clickactionnext", GSHELL_CMD_CLICKACTIONNEXT, "CLICKACTIONSTATUS", "CLICK ACTION NEXT OK" },
+    { "deskdragstatus", GSHELL_CMD_DESKDRAGSTATUS, "DESKDRAGSTATUS", "DESKTOP DRAG STATUS OK" },
+    { "deskdragtarget", GSHELL_CMD_DESKDRAGTARGET, "DESKDRAGSTATUS", "DESKTOP DRAG TARGET OK" },
+    { "deskdragtitle", GSHELL_CMD_DESKDRAGTITLE, "DESKDRAGSTATUS", "DESKTOP DRAG TITLE OK" },
+    { "deskdragstart", GSHELL_CMD_DESKDRAGSTART, "DESKDRAGSTATUS", "DESKTOP DRAG START OK" },
+    { "deskdragmove", GSHELL_CMD_DESKDRAGMOVE, "DESKDRAGSTATUS", "DESKTOP DRAG MOVE OK" },
+    { "deskdragbounds", GSHELL_CMD_DESKDRAGBOUNDS, "DESKDRAGSTATUS", "DESKTOP DRAG BOUNDS OK" },
+    { "deskdragshadow", GSHELL_CMD_DESKDRAGSHADOW, "DESKDRAGSTATUS", "DESKTOP DRAG SHADOW OK" },
+    { "deskdragsnap", GSHELL_CMD_DESKDRAGSNAP, "DESKDRAGSTATUS", "DESKTOP DRAG SNAP OK" },
+    { "deskdragdrop", GSHELL_CMD_DESKDRAGDROP, "DESKDRAGSTATUS", "DESKTOP DRAG DROP OK" },
+    { "deskdragcancel", GSHELL_CMD_DESKDRAGCANCEL, "DESKDRAGSTATUS", "DESKTOP DRAG CANCEL OK" },
+    { "deskdragfocus", GSHELL_CMD_DESKDRAGFOCUS, "DESKDRAGSTATUS", "DESKTOP DRAG FOCUS OK" },
+    { "deskdragroute", GSHELL_CMD_DESKDRAGROUTE, "DESKDRAGSTATUS", "DESKTOP DRAG ROUTE OK" },
+    { "deskdragaction", GSHELL_CMD_DESKDRAGACTION, "DESKDRAGSTATUS", "DESKTOP DRAG ACTION OK" },
+    { "deskdragvisual", GSHELL_CMD_DESKDRAGVISUAL, "DESKDRAGSTATUS", "DESKTOP DRAG VISUAL OK" },
+    { "deskdragsafe", GSHELL_CMD_DESKDRAGSAFE, "DESKDRAGSTATUS", "DESKTOP DRAG SAFE OK" },
+    { "deskdragdemo", GSHELL_CMD_DESKDRAGDEMO, "DESKDRAGSTATUS", "DESKTOP DRAG DEMO OK" },
+    { "deskdragcheck", GSHELL_CMD_DESKDRAGCHECK, "DESKDRAGSTATUS", "DESKTOP DRAG CHECK OK" },
+    { "deskdragreset", GSHELL_CMD_DESKDRAGRESET, "DESKDRAGSTATUS", "DESKTOP DRAG RESET OK" },
+    { "deskdragnext", GSHELL_CMD_DESKDRAGNEXT, "DESKDRAGSTATUS", "DESKTOP DRAG NEXT OK" },
+    { "uifeedbackstatus", GSHELL_CMD_UIFEEDBACKSTATUS, "UIFEEDBACKSTATUS", "UI FEEDBACK STATUS OK" },
+    { "uifeedbackhover", GSHELL_CMD_UIFEEDBACKHOVER, "UIFEEDBACKSTATUS", "UI FEEDBACK HOVER OK" },
+    { "uifeedbackselect", GSHELL_CMD_UIFEEDBACKSELECT, "UIFEEDBACKSTATUS", "UI FEEDBACK SELECT OK" },
+    { "uifeedbackactive", GSHELL_CMD_UIFEEDBACKACTIVE, "UIFEEDBACKSTATUS", "UI FEEDBACK ACTIVE OK" },
+    { "uifeedbackfocus", GSHELL_CMD_UIFEEDBACKFOCUS, "UIFEEDBACKSTATUS", "UI FEEDBACK FOCUS OK" },
+    { "uifeedbackpress", GSHELL_CMD_UIFEEDBACKPRESS, "UIFEEDBACKSTATUS", "UI FEEDBACK PRESS OK" },
+    { "uifeedbackopen", GSHELL_CMD_UIFEEDBACKOPEN, "UIFEEDBACKSTATUS", "UI FEEDBACK OPEN OK" },
+    { "uifeedbackclose", GSHELL_CMD_UIFEEDBACKCLOSE, "UIFEEDBACKSTATUS", "UI FEEDBACK CLOSE OK" },
+    { "uifeedbackdrag", GSHELL_CMD_UIFEEDBACKDRAG, "UIFEEDBACKSTATUS", "UI FEEDBACK DRAG OK" },
+    { "uifeedbackdrop", GSHELL_CMD_UIFEEDBACKDROP, "UIFEEDBACKSTATUS", "UI FEEDBACK DROP OK" },
+    { "uifeedbacktaskbar", GSHELL_CMD_UIFEEDBACKTASKBAR, "UIFEEDBACKSTATUS", "UI FEEDBACK TASKBAR OK" },
+    { "uifeedbacklauncher", GSHELL_CMD_UIFEEDBACKLAUNCHER, "UIFEEDBACKSTATUS", "UI FEEDBACK LAUNCHER OK" },
+    { "uifeedbackmenu", GSHELL_CMD_UIFEEDBACKMENU, "UIFEEDBACKSTATUS", "UI FEEDBACK MENU OK" },
+    { "uifeedbackcursor", GSHELL_CMD_UIFEEDBACKCURSOR, "UIFEEDBACKSTATUS", "UI FEEDBACK CURSOR OK" },
+    { "uifeedbackpanel", GSHELL_CMD_UIFEEDBACKPANEL, "UIFEEDBACKSTATUS", "UI FEEDBACK PANEL OK" },
+    { "uifeedbacksafe", GSHELL_CMD_UIFEEDBACKSAFE, "UIFEEDBACKSTATUS", "UI FEEDBACK SAFE OK" },
+    { "uifeedbackdemo", GSHELL_CMD_UIFEEDBACKDEMO, "UIFEEDBACKSTATUS", "UI FEEDBACK DEMO OK" },
+    { "uifeedbackcheck", GSHELL_CMD_UIFEEDBACKCHECK, "UIFEEDBACKSTATUS", "UI FEEDBACK CHECK OK" },
+    { "uifeedbackreset", GSHELL_CMD_UIFEEDBACKRESET, "UIFEEDBACKSTATUS", "UI FEEDBACK RESET OK" },
+    { "uifeedbacknext", GSHELL_CMD_UIFEEDBACKNEXT, "UIFEEDBACKSTATUS", "UI FEEDBACK NEXT OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
@@ -13492,6 +14478,6191 @@ static void gshell_dispatch_command(void) {
         return;
     }
 
+    if (command_id >= GSHELL_CMD_ACTIONBINDSTATUS && command_id <= GSHELL_CMD_ACTIONBINDNEXT) {
+        const char* action_terminal_text = "ACTIONBINDSTATUS -> DESKTOP ACTION BINDING CORE READY";
+
+        gshell_command_view = "ACTIONBINDSTATUS";
+        gshell_input_status_text = "ACTION OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_ACTIONBINDSTATUS:
+                gshell_command_name = "ACTIONBINDSTATUS";
+                gshell_command_result = "ACTION BIND STATUS OK";
+                gshell_input_status_text = "COMMAND OK";
+                break;
+
+            case GSHELL_CMD_BINDCARD:
+                gshell_action_bind_card_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_hit_zone = "scene-card";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "bind-action";
+                gshell_action_bind_state = "bind-card";
+                gshell_action_bind_target = "demo.app";
+                gshell_action_bind_last = "bind-card";
+                gshell_action_bind_events++;
+                gshell_command_name = "BINDCARD";
+                gshell_command_result = "BIND CARD OK";
+                gshell_input_status_text = "CARD BIND";
+                action_terminal_text = "BINDCARD -> CARD ROUTE BOUND TO SELECT OPEN ACTIONS";
+                break;
+
+            case GSHELL_CMD_BINDWINDOW:
+                gshell_action_bind_window_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_title = "demo.window";
+                gshell_scene_window_ready = 1;
+                gshell_hit_zone = "window";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "bind-action";
+                gshell_action_bind_state = "bind-window";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "bind-window";
+                gshell_action_bind_events++;
+                gshell_command_name = "BINDWINDOW";
+                gshell_command_result = "BIND WINDOW OK";
+                gshell_input_status_text = "WIN BIND";
+                action_terminal_text = "BINDWINDOW -> WINDOW ROUTE BOUND TO FOCUS DRAG CLOSE";
+                break;
+
+            case GSHELL_CMD_BINDTASKBAR:
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_shell_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_hit_zone = "taskbar";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "bind-action";
+                gshell_action_bind_state = "bind-taskbar";
+                gshell_action_bind_target = "taskbar";
+                gshell_action_bind_last = "bind-taskbar";
+                gshell_action_bind_events++;
+                gshell_command_name = "BINDTASKBAR";
+                gshell_command_result = "BIND TASKBAR OK";
+                gshell_input_status_text = "TASK BIND";
+                action_terminal_text = "BINDTASKBAR -> TASKBAR ROUTE BOUND TO FOCUS RESTORE";
+                break;
+
+            case GSHELL_CMD_BINDLAUNCHER:
+                gshell_action_bind_launcher_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_hit_zone = "launcher";
+                gshell_hit_target = "launcher";
+                gshell_hit_action = "bind-action";
+                gshell_action_bind_state = "bind-launcher";
+                gshell_action_bind_target = "launcher";
+                gshell_action_bind_last = "bind-launcher";
+                gshell_action_bind_events++;
+                gshell_command_name = "BINDLAUNCHER";
+                gshell_command_result = "BIND LAUNCHER OK";
+                gshell_input_status_text = "LAUNCH BIND";
+                action_terminal_text = "BINDLAUNCHER -> LAUNCHER ROUTE BOUND TO SHORTCUT LAUNCH";
+                break;
+
+            case GSHELL_CMD_BINDDESKTOP:
+                gshell_action_bind_desktop_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_desktop_enabled = 1;
+                gshell_scene_background_ready = 1;
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop";
+                gshell_hit_action = "bind-action";
+                gshell_action_bind_state = "bind-desktop";
+                gshell_action_bind_target = "desktop";
+                gshell_action_bind_last = "bind-desktop";
+                gshell_action_bind_events++;
+                gshell_command_name = "BINDDESKTOP";
+                gshell_command_result = "BIND DESKTOP OK";
+                gshell_input_status_text = "DESK BIND";
+                action_terminal_text = "BINDDESKTOP -> DESKTOP ROUTE BOUND TO MENU ACTION";
+                break;
+
+            case GSHELL_CMD_CARDSELECTACT:
+                gshell_action_bind_card_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_interact_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "action-select";
+                gshell_focus_target = "demo.app";
+                gshell_action_bind_state = "card-select";
+                gshell_action_bind_target = "demo.app";
+                gshell_action_bind_last = "card-select";
+                gshell_action_bind_events++;
+                gshell_command_name = "CARDSELECTACT";
+                gshell_command_result = "CARD SELECT ACTION OK";
+                gshell_input_status_text = "SELECT ACT";
+                action_terminal_text = "CARDSELECTACT -> CLICK CARD SELECTS DEMO APP";
+                break;
+
+            case GSHELL_CMD_CARDOPENACT:
+                gshell_action_bind_card_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_route_open_ready = 1;
+                gshell_route_double_click_ready = 1;
+                gshell_interact_open_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_card_state = "opened";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "action-open";
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "open";
+                gshell_window_last = "action-open";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_action_bind_state = "card-open";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "card-open";
+                gshell_action_bind_events++;
+                gshell_command_name = "CARDOPENACT";
+                gshell_command_result = "CARD OPEN ACTION OK";
+                gshell_input_status_text = "OPEN ACT";
+                action_terminal_text = "CARDOPENACT -> DOUBLE CLICK CARD OPENS DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_DESKTOPMENUACT:
+                gshell_action_bind_desktop_ready = 1;
+                gshell_action_desktop_menu_ready = 1;
+                gshell_route_right_click_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_desktop_state = "menu";
+                gshell_desktop_focus = "desktop-menu";
+                gshell_desktop_last = "action-menu";
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop-menu";
+                gshell_hit_action = "menu";
+                gshell_focus_target = "desktop-menu";
+                gshell_action_bind_state = "desktop-menu";
+                gshell_action_bind_target = "desktop-menu";
+                gshell_action_bind_last = "desktop-menu";
+                gshell_action_bind_events++;
+                gshell_command_name = "DESKTOPMENUACT";
+                gshell_command_result = "DESKTOP MENU ACTION OK";
+                gshell_input_status_text = "MENU ACT";
+                action_terminal_text = "DESKTOPMENUACT -> RIGHT CLICK DESKTOP OPENS MENU MOCK";
+                break;
+
+            case GSHELL_CMD_TASKFOCUSACT:
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_action_task_focus_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_minimized = 0;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "focused";
+                gshell_taskbar_last = "action-focus";
+                gshell_focus_target = "demo.app";
+                gshell_action_bind_state = "task-focus";
+                gshell_action_bind_target = "taskbar";
+                gshell_action_bind_last = "task-focus";
+                gshell_action_bind_events++;
+                gshell_command_name = "TASKFOCUSACT";
+                gshell_command_result = "TASK FOCUS ACTION OK";
+                gshell_input_status_text = "TASK FOCUS";
+                action_terminal_text = "TASKFOCUSACT -> TASKBAR CLICK FOCUSES DEMO APP";
+                break;
+
+            case GSHELL_CMD_TASKRESTOREACT:
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_action_task_restore_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_minimized = 0;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "restored";
+                gshell_taskbar_last = "action-restore";
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "restored";
+                gshell_window_last = "task-restore";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_action_bind_state = "task-restore";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "task-restore";
+                gshell_action_bind_events++;
+                gshell_command_name = "TASKRESTOREACT";
+                gshell_command_result = "TASK RESTORE ACTION OK";
+                gshell_input_status_text = "RESTORE";
+                action_terminal_text = "TASKRESTOREACT -> TASKBAR RESTORES DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_WINDOWFOCUSACT:
+                gshell_action_bind_window_ready = 1;
+                gshell_action_window_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "focused";
+                gshell_window_last = "action-focus";
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_focus_changes++;
+                gshell_action_bind_state = "window-focus";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "window-focus";
+                gshell_action_bind_events++;
+                gshell_command_name = "WINDOWFOCUSACT";
+                gshell_command_result = "WINDOW FOCUS ACTION OK";
+                gshell_input_status_text = "WIN FOCUS";
+                action_terminal_text = "WINDOWFOCUSACT -> WINDOW BODY FOCUSES DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_WINDOWDRAGACT:
+                gshell_action_bind_window_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_moves++;
+                gshell_window_x += 8;
+                gshell_window_y += 4;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "dragging";
+                gshell_window_last = "action-drag";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag";
+                gshell_focus_target = "demo.window";
+                gshell_action_bind_state = "window-drag";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "window-drag";
+                gshell_action_bind_events++;
+                gshell_command_name = "WINDOWDRAGACT";
+                gshell_command_result = "WINDOW DRAG ACTION OK";
+                gshell_input_status_text = "DRAG ACT";
+                action_terminal_text = "WINDOWDRAGACT -> TITLE BAR STARTS WINDOW DRAG MOCK";
+                break;
+
+            case GSHELL_CMD_WINDOWCLOSEACT:
+                gshell_action_bind_window_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed";
+                gshell_window_last = "action-close";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_action_bind_state = "window-close";
+                gshell_action_bind_target = "desktop";
+                gshell_action_bind_last = "window-close";
+                gshell_action_bind_events++;
+                gshell_command_name = "WINDOWCLOSEACT";
+                gshell_command_result = "WINDOW CLOSE ACTION OK";
+                gshell_input_status_text = "CLOSE ACT";
+                action_terminal_text = "WINDOWCLOSEACT -> CLOSE BUTTON CLOSES DEMO WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_SHORTCUTLAUNCHACT:
+                gshell_action_bind_launcher_ready = 1;
+                gshell_action_shortcut_launch_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_state = "shortcut";
+                gshell_launcher_last = "shortcut-launch";
+                gshell_focus_target = "launcher";
+                gshell_action_bind_state = "shortcut-launch";
+                gshell_action_bind_target = "launcher";
+                gshell_action_bind_last = "shortcut-launch";
+                gshell_action_bind_events++;
+                gshell_command_name = "SHORTCUTLAUNCHACT";
+                gshell_command_result = "SHORTCUT LAUNCH ACTION OK";
+                gshell_input_status_text = "SHORTCUT";
+                action_terminal_text = "SHORTCUTLAUNCHACT -> SHORTCUT OPENS LAUNCHER MOCK";
+                break;
+
+            case GSHELL_CMD_SHORTCUTSWITCHACT:
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_action_shortcut_switch_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_switches++;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_state = "shortcut-switch";
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_last = "shortcut-switch";
+                gshell_focus_target = "demo.app";
+                gshell_action_bind_state = "shortcut-switch";
+                gshell_action_bind_target = "demo.app";
+                gshell_action_bind_last = "shortcut-switch";
+                gshell_action_bind_events++;
+                gshell_command_name = "SHORTCUTSWITCHACT";
+                gshell_command_result = "SHORTCUT SWITCH ACTION OK";
+                gshell_input_status_text = "SWITCH";
+                action_terminal_text = "SHORTCUTSWITCHACT -> SHORTCUT SWITCHES ACTIVE APP MOCK";
+                break;
+
+            case GSHELL_CMD_ROUTEACTION:
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected";
+                gshell_card_app = "demo.app";
+                gshell_focus_target = "demo.app";
+                gshell_action_bind_state = "route-action";
+                gshell_action_bind_target = "demo.app";
+                gshell_action_bind_last = "route-click-select";
+                gshell_action_bind_events++;
+                gshell_command_name = "ROUTEACTION";
+                gshell_command_result = "ROUTE ACTION OK";
+                gshell_input_status_text = "ROUTE ACT";
+                action_terminal_text = "ROUTEACTION -> ROUTE RESULT EXECUTES BOUND SELECT ACTION";
+                break;
+
+            case GSHELL_CMD_ACTIONBINDDEMO:
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_action_bind_launcher_ready = 1;
+                gshell_action_bind_desktop_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_action_desktop_menu_ready = 1;
+                gshell_action_task_focus_ready = 1;
+                gshell_action_task_restore_ready = 1;
+                gshell_action_window_focus_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_action_shortcut_launch_ready = 1;
+                gshell_action_shortcut_switch_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_open_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_card_state = "opened";
+                gshell_card_app = "demo.app";
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "focused";
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_launcher_grid_ready = 1;
+                gshell_scene_window_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_action_bind_state = "demo";
+                gshell_action_bind_target = "demo.window";
+                gshell_action_bind_last = "demo-ready";
+                gshell_action_bind_events++;
+                gshell_command_name = "ACTIONBINDDEMO";
+                gshell_command_result = "ACTION BIND DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                action_terminal_text = "ACTIONBINDDEMO -> FULL DESKTOP ACTION BINDING DEMO READY";
+                break;
+
+            case GSHELL_CMD_ACTIONBINDCHECK: {
+                int ok = gshell_action_bind_card_ready && gshell_action_bind_window_ready && gshell_action_bind_taskbar_ready && gshell_action_bind_desktop_ready && gshell_action_card_select_ready && gshell_action_card_open_ready && gshell_action_route_ready;
+                gshell_action_bind_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "ACTIONBINDCHECK";
+                gshell_command_result = ok ? "ACTION BIND CHECK OK" : "ACTION BIND CHECK WAIT";
+                gshell_input_status_text = ok ? "ACTION OK" : "ACTION WAIT";
+                action_terminal_text = ok ? "ACTIONBINDCHECK -> ACTION BINDING READY" : "ACTIONBINDCHECK -> RUN ACTIONBINDDEMO OR BIND REQUIRED ACTIONS";
+                break;
+            }
+
+            case GSHELL_CMD_ACTIONBINDRESET:
+                gshell_action_bind_card_ready = 0;
+                gshell_action_bind_window_ready = 0;
+                gshell_action_bind_taskbar_ready = 0;
+                gshell_action_bind_launcher_ready = 0;
+                gshell_action_bind_desktop_ready = 0;
+                gshell_action_card_select_ready = 0;
+                gshell_action_card_open_ready = 0;
+                gshell_action_desktop_menu_ready = 0;
+                gshell_action_task_focus_ready = 0;
+                gshell_action_task_restore_ready = 0;
+                gshell_action_window_focus_ready = 0;
+                gshell_action_window_drag_ready = 0;
+                gshell_action_window_close_ready = 0;
+                gshell_action_shortcut_launch_ready = 0;
+                gshell_action_shortcut_switch_ready = 0;
+                gshell_action_route_ready = 0;
+                gshell_action_bind_events = 0;
+                gshell_action_bind_state = "idle";
+                gshell_action_bind_target = "desktop";
+                gshell_action_bind_last = "reset";
+                gshell_focus_target = "terminal";
+                gshell_command_name = "ACTIONBINDRESET";
+                gshell_command_result = "ACTION BIND RESET OK";
+                gshell_input_status_text = "RESET";
+                action_terminal_text = "ACTIONBINDRESET -> ACTION BINDING STATE RESET";
+                break;
+
+            case GSHELL_CMD_ACTIONBINDNEXT:
+                gshell_command_name = "ACTIONBINDNEXT";
+                gshell_command_result = "ACTION BIND NEXT OK";
+                gshell_input_status_text = "NEXT";
+                action_terminal_text = "ACTIONBINDNEXT -> 1.5.3 DESKTOP MENU SHORTCUT FLOW";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(action_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_MENUSTATUS && command_id <= GSHELL_CMD_MENUSHORTNEXT) {
+        const char* menu_terminal_text = "MENUSTATUS -> DESKTOP MENU SHORTCUT FLOW READY";
+
+        gshell_command_view = "MENUSHORTSTATUS";
+        gshell_input_status_text = "MENU OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_MENUSTATUS:
+                gshell_command_name = "MENUSTATUS";
+                gshell_command_result = "MENU STATUS OK";
+                break;
+
+            case GSHELL_CMD_DESKTOPMENU:
+                gshell_menu_desktop_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_right_click_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_desktop_menu_ready = 1;
+                gshell_desktop_state = "menu";
+                gshell_desktop_focus = "desktop-menu";
+                gshell_desktop_last = "menu-open";
+                gshell_focus_target = "desktop-menu";
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop-menu";
+                gshell_hit_action = "menu";
+                gshell_menu_short_state = "desktop-menu";
+                gshell_menu_short_target = "desktop";
+                gshell_menu_short_item = "root-menu";
+                gshell_menu_short_last = "desktop-menu";
+                gshell_menu_short_events++;
+                gshell_command_name = "DESKTOPMENU";
+                gshell_command_result = "DESKTOP MENU OK";
+                gshell_input_status_text = "DESK MENU";
+                menu_terminal_text = "DESKTOPMENU -> RIGHT CLICK DESKTOP OPENS ROOT MENU MOCK";
+                break;
+
+            case GSHELL_CMD_CARDMENU:
+                gshell_menu_card_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "menu";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "card-menu";
+                gshell_focus_target = "demo.app-menu";
+                gshell_hit_zone = "scene-card";
+                gshell_hit_target = "demo.app-menu";
+                gshell_hit_action = "menu";
+                gshell_menu_short_state = "card-menu";
+                gshell_menu_short_target = "demo.app";
+                gshell_menu_short_item = "app-menu";
+                gshell_menu_short_last = "card-menu";
+                gshell_menu_short_events++;
+                gshell_command_name = "CARDMENU";
+                gshell_command_result = "CARD MENU OK";
+                gshell_input_status_text = "CARD MENU";
+                menu_terminal_text = "CARDMENU -> RIGHT CLICK CARD OPENS APP MENU MOCK";
+                break;
+
+            case GSHELL_CMD_TASKBARMENU:
+                gshell_menu_taskbar_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "menu";
+                gshell_taskbar_last = "taskbar-menu";
+                gshell_focus_target = "taskbar-menu";
+                gshell_hit_zone = "taskbar";
+                gshell_hit_target = "taskbar-menu";
+                gshell_hit_action = "menu";
+                gshell_menu_short_state = "taskbar-menu";
+                gshell_menu_short_target = "taskbar";
+                gshell_menu_short_item = "task-menu";
+                gshell_menu_short_last = "taskbar-menu";
+                gshell_menu_short_events++;
+                gshell_command_name = "TASKBARMENU";
+                gshell_command_result = "TASKBAR MENU OK";
+                gshell_input_status_text = "TASK MENU";
+                menu_terminal_text = "TASKBARMENU -> RIGHT CLICK TASKBAR OPENS TASK MENU MOCK";
+                break;
+
+            case GSHELL_CMD_WINDOWMENU:
+                gshell_menu_window_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "menu";
+                gshell_window_last = "window-menu";
+                gshell_focus_target = "window-menu";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "window-menu";
+                gshell_hit_action = "menu";
+                gshell_scene_window_ready = 1;
+                gshell_menu_short_state = "window-menu";
+                gshell_menu_short_target = "demo.window";
+                gshell_menu_short_item = "window-menu";
+                gshell_menu_short_last = "window-menu";
+                gshell_menu_short_events++;
+                gshell_command_name = "WINDOWMENU";
+                gshell_command_result = "WINDOW MENU OK";
+                gshell_input_status_text = "WIN MENU";
+                menu_terminal_text = "WINDOWMENU -> RIGHT CLICK WINDOW OPENS WINDOW MENU MOCK";
+                break;
+
+            case GSHELL_CMD_MENUOPENITEM:
+                gshell_menu_open_ready = 1;
+                gshell_menu_select_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_route_open_ready = 1;
+                gshell_card_opened = 1;
+                gshell_card_state = "opened";
+                gshell_card_app = "demo.app";
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "opened-by-menu";
+                gshell_window_last = "menu-open-item";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_menu_short_state = "menu-open";
+                gshell_menu_short_target = "demo.window";
+                gshell_menu_short_item = "open";
+                gshell_menu_short_last = "menu-open-item";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUOPENITEM";
+                gshell_command_result = "MENU OPEN ITEM OK";
+                gshell_input_status_text = "MENU OPEN";
+                menu_terminal_text = "MENUOPENITEM -> MENU ITEM OPENS DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_MENUSELECTITEM:
+                gshell_menu_select_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected-by-menu";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "menu-select-item";
+                gshell_focus_target = "demo.app";
+                gshell_menu_short_state = "menu-select";
+                gshell_menu_short_target = "demo.app";
+                gshell_menu_short_item = "select";
+                gshell_menu_short_last = "menu-select-item";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUSELECTITEM";
+                gshell_command_result = "MENU SELECT ITEM OK";
+                gshell_input_status_text = "MENU SELECT";
+                menu_terminal_text = "MENUSELECTITEM -> MENU ITEM SELECTS DEMO APP";
+                break;
+
+            case GSHELL_CMD_MENUCLOSEITEM:
+                gshell_menu_close_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed-by-menu";
+                gshell_window_last = "menu-close-item";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_menu_short_state = "menu-close";
+                gshell_menu_short_target = "desktop";
+                gshell_menu_short_item = "close";
+                gshell_menu_short_last = "menu-close-item";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUCLOSEITEM";
+                gshell_command_result = "MENU CLOSE ITEM OK";
+                gshell_input_status_text = "MENU CLOSE";
+                menu_terminal_text = "MENUCLOSEITEM -> MENU ITEM CLOSES DEMO WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_SHORTCUTSTATUS:
+                gshell_command_name = "SHORTCUTSTATUS";
+                gshell_command_result = "SHORTCUT STATUS OK";
+                menu_terminal_text = "SHORTCUTSTATUS -> SHORTCUT FLOW STATE READY";
+                break;
+
+            case GSHELL_CMD_SHORTCUTLAUNCHER:
+                gshell_shortcut_launcher_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_action_shortcut_launch_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_open_count++;
+                gshell_launcher_state = "shortcut-open";
+                gshell_launcher_last = "shortcut-launcher";
+                gshell_focus_target = "launcher";
+                gshell_menu_short_state = "shortcut-launcher";
+                gshell_menu_short_target = "launcher";
+                gshell_menu_short_item = "super";
+                gshell_menu_short_last = "shortcut-launcher";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTLAUNCHER";
+                gshell_command_result = "SHORTCUT LAUNCHER OK";
+                gshell_input_status_text = "LAUNCH KEY";
+                menu_terminal_text = "SHORTCUTLAUNCHER -> SHORTCUT OPENS LAUNCHER";
+                break;
+
+            case GSHELL_CMD_SHORTCUTSWITCH:
+                gshell_shortcut_switch_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_action_shortcut_switch_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_switches++;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "shortcut-switch";
+                gshell_taskbar_last = "shortcut-switch";
+                gshell_focus_target = "demo.app";
+                gshell_menu_short_state = "shortcut-switch";
+                gshell_menu_short_target = "demo.app";
+                gshell_menu_short_item = "alt-tab";
+                gshell_menu_short_last = "shortcut-switch";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTSWITCH";
+                gshell_command_result = "SHORTCUT SWITCH OK";
+                gshell_input_status_text = "SWITCH KEY";
+                menu_terminal_text = "SHORTCUTSWITCH -> SHORTCUT SWITCHES ACTIVE APP";
+                break;
+
+            case GSHELL_CMD_SHORTCUTCLOSE:
+                gshell_shortcut_close_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed-by-shortcut";
+                gshell_window_last = "shortcut-close";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_menu_short_state = "shortcut-close";
+                gshell_menu_short_target = "desktop";
+                gshell_menu_short_item = "alt-f4";
+                gshell_menu_short_last = "shortcut-close";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTCLOSE";
+                gshell_command_result = "SHORTCUT CLOSE OK";
+                gshell_input_status_text = "CLOSE KEY";
+                menu_terminal_text = "SHORTCUTCLOSE -> SHORTCUT CLOSES ACTIVE WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_SHORTCUTFOCUSNEXT:
+                gshell_shortcut_focus_next_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_interact_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_focus_changes++;
+                gshell_focus_target = "next-target";
+                gshell_scene_focus_ready = 1;
+                gshell_menu_short_state = "shortcut-focus-next";
+                gshell_menu_short_target = "next-target";
+                gshell_menu_short_item = "tab";
+                gshell_menu_short_last = "shortcut-focus-next";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTFOCUSNEXT";
+                gshell_command_result = "SHORTCUT FOCUS NEXT OK";
+                gshell_input_status_text = "FOCUS KEY";
+                menu_terminal_text = "SHORTCUTFOCUSNEXT -> SHORTCUT MOVES FOCUS TO NEXT TARGET";
+                break;
+
+            case GSHELL_CMD_SHORTCUTMENU:
+                gshell_shortcut_menu_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_focus_target = "keyboard-menu";
+                gshell_menu_short_state = "shortcut-menu";
+                gshell_menu_short_target = "keyboard-menu";
+                gshell_menu_short_item = "menu-key";
+                gshell_menu_short_last = "shortcut-menu";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTMENU";
+                gshell_command_result = "SHORTCUT MENU OK";
+                gshell_input_status_text = "MENU KEY";
+                menu_terminal_text = "SHORTCUTMENU -> KEYBOARD SHORTCUT OPENS MENU MOCK";
+                break;
+
+            case GSHELL_CMD_MENUROUTEBIND:
+                gshell_menu_route_bind_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_desktop_menu_ready = 1;
+                gshell_menu_short_state = "menu-route-bind";
+                gshell_menu_short_target = "menu";
+                gshell_menu_short_item = "route";
+                gshell_menu_short_last = "menu-route-bind";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUROUTEBIND";
+                gshell_command_result = "MENU ROUTE BIND OK";
+                gshell_input_status_text = "MENU BIND";
+                menu_terminal_text = "MENUROUTEBIND -> MENU ROUTE BOUND TO ACTION FLOW";
+                break;
+
+            case GSHELL_CMD_SHORTCUTROUTEBIND:
+                gshell_shortcut_route_bind_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_shortcut_launch_ready = 1;
+                gshell_action_shortcut_switch_ready = 1;
+                gshell_menu_short_state = "shortcut-route-bind";
+                gshell_menu_short_target = "shortcut";
+                gshell_menu_short_item = "route";
+                gshell_menu_short_last = "shortcut-route-bind";
+                gshell_menu_short_events++;
+                gshell_command_name = "SHORTCUTROUTEBIND";
+                gshell_command_result = "SHORTCUT ROUTE BIND OK";
+                gshell_input_status_text = "KEY BIND";
+                menu_terminal_text = "SHORTCUTROUTEBIND -> SHORTCUT ROUTE BOUND TO ACTION FLOW";
+                break;
+
+            case GSHELL_CMD_MENUSHORTFLOW:
+                gshell_menu_short_flow_ready = 1;
+                gshell_menu_route_bind_ready = 1;
+                gshell_shortcut_route_bind_ready = 1;
+                gshell_menu_open_ready = 1;
+                gshell_menu_select_ready = 1;
+                gshell_shortcut_launcher_ready = 1;
+                gshell_shortcut_switch_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_menu_short_state = "flow";
+                gshell_menu_short_target = "desktop";
+                gshell_menu_short_item = "menu+shortcut";
+                gshell_menu_short_last = "flow-ready";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUSHORTFLOW";
+                gshell_command_result = "MENU SHORT FLOW OK";
+                gshell_input_status_text = "FLOW OK";
+                menu_terminal_text = "MENUSHORTFLOW -> MENU AND SHORTCUT ROUTES CONNECTED";
+                break;
+
+            case GSHELL_CMD_MENUSHORTDEMO:
+                gshell_menu_desktop_ready = 1;
+                gshell_menu_card_ready = 1;
+                gshell_menu_taskbar_ready = 1;
+                gshell_menu_window_ready = 1;
+                gshell_menu_open_ready = 1;
+                gshell_menu_select_ready = 1;
+                gshell_menu_close_ready = 1;
+                gshell_shortcut_launcher_ready = 1;
+                gshell_shortcut_switch_ready = 1;
+                gshell_shortcut_close_ready = 1;
+                gshell_shortcut_focus_next_ready = 1;
+                gshell_shortcut_menu_ready = 1;
+                gshell_menu_route_bind_ready = 1;
+                gshell_shortcut_route_bind_ready = 1;
+                gshell_menu_short_flow_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_shortcut_launch_ready = 1;
+                gshell_action_shortcut_switch_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "menu-short-demo";
+                gshell_scene_window_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_menu_short_state = "demo";
+                gshell_menu_short_target = "demo.window";
+                gshell_menu_short_item = "full-flow";
+                gshell_menu_short_last = "demo-ready";
+                gshell_menu_short_events++;
+                gshell_command_name = "MENUSHORTDEMO";
+                gshell_command_result = "MENU SHORT DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                menu_terminal_text = "MENUSHORTDEMO -> FULL MENU SHORTCUT FLOW DEMO READY";
+                break;
+
+            case GSHELL_CMD_MENUSHORTCHECK: {
+                int ok = gshell_menu_desktop_ready && gshell_menu_card_ready && gshell_menu_taskbar_ready && gshell_menu_window_ready && gshell_shortcut_launcher_ready && gshell_shortcut_switch_ready && gshell_menu_route_bind_ready && gshell_shortcut_route_bind_ready && gshell_menu_short_flow_ready;
+                gshell_menu_short_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "MENUSHORTCHECK";
+                gshell_command_result = ok ? "MENU SHORT CHECK OK" : "MENU SHORT CHECK WAIT";
+                gshell_input_status_text = ok ? "FLOW OK" : "FLOW WAIT";
+                menu_terminal_text = ok ? "MENUSHORTCHECK -> MENU SHORTCUT FLOW READY" : "MENUSHORTCHECK -> RUN MENUSHORTDEMO OR REQUIRED MENU COMMANDS";
+                break;
+            }
+
+            case GSHELL_CMD_MENUSHORTRESET:
+                gshell_menu_desktop_ready = 0;
+                gshell_menu_card_ready = 0;
+                gshell_menu_taskbar_ready = 0;
+                gshell_menu_window_ready = 0;
+                gshell_menu_open_ready = 0;
+                gshell_menu_select_ready = 0;
+                gshell_menu_close_ready = 0;
+                gshell_shortcut_launcher_ready = 0;
+                gshell_shortcut_switch_ready = 0;
+                gshell_shortcut_close_ready = 0;
+                gshell_shortcut_focus_next_ready = 0;
+                gshell_shortcut_menu_ready = 0;
+                gshell_menu_route_bind_ready = 0;
+                gshell_shortcut_route_bind_ready = 0;
+                gshell_menu_short_flow_ready = 0;
+                gshell_menu_short_events = 0;
+                gshell_menu_short_state = "idle";
+                gshell_menu_short_target = "desktop";
+                gshell_menu_short_item = "none";
+                gshell_menu_short_last = "reset";
+                gshell_focus_target = "terminal";
+                gshell_command_name = "MENUSHORTRESET";
+                gshell_command_result = "MENU SHORT RESET OK";
+                gshell_input_status_text = "RESET";
+                menu_terminal_text = "MENUSHORTRESET -> MENU SHORTCUT FLOW STATE RESET";
+                break;
+
+            case GSHELL_CMD_MENUSHORTNEXT:
+                gshell_command_name = "MENUSHORTNEXT";
+                gshell_command_result = "MENU SHORT NEXT OK";
+                gshell_input_status_text = "NEXT";
+                menu_terminal_text = "MENUSHORTNEXT -> 1.5.4 DESKTOP WINDOW INTERACTION FLOW";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(menu_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_WINDOWFLOWSTATUS && command_id <= GSHELL_CMD_WINDOWFLOWNEXT) {
+        const char* window_terminal_text = "WINDOWFLOWSTATUS -> DESKTOP WINDOW INTERACTION FLOW READY";
+
+        gshell_command_view = "WINDOWFLOWSTATUS";
+        gshell_input_status_text = "WINDOW OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_WINDOWFLOWSTATUS:
+                gshell_command_name = "WINDOWFLOWSTATUS";
+                gshell_command_result = "WINDOW FLOW STATUS OK";
+                gshell_input_status_text = "COMMAND OK";
+                break;
+
+            case GSHELL_CMD_WINDOWSPAWN:
+                gshell_window_flow_spawn_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 0;
+                gshell_window_minimized = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "spawned";
+                gshell_window_last = "window-spawn";
+                gshell_scene_window_ready = 1;
+                gshell_window_flow_state = "spawned";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "spawn";
+                gshell_window_flow_last = "window-spawn";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWSPAWN";
+                gshell_command_result = "WINDOW SPAWN OK";
+                gshell_input_status_text = "SPAWN";
+                window_terminal_text = "WINDOWSPAWN -> CREATE DEMO WINDOW MOCK STATE";
+                break;
+
+            case GSHELL_CMD_WINDOWACTIVATE:
+                gshell_window_flow_activate_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "active";
+                gshell_window_last = "window-activate";
+                gshell_scene_window_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_focus_changes++;
+                gshell_window_flow_state = "active";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "activate";
+                gshell_window_flow_last = "window-activate";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWACTIVATE";
+                gshell_command_result = "WINDOW ACTIVATE OK";
+                gshell_input_status_text = "ACTIVE";
+                window_terminal_text = "WINDOWACTIVATE -> DEMO WINDOW BECOMES ACTIVE";
+                break;
+
+            case GSHELL_CMD_WINDOWFLOWMOVE:
+                gshell_window_flow_move_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_moves++;
+                gshell_window_x += 16;
+                gshell_window_y += 8;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "moved";
+                gshell_window_last = "window-move";
+                gshell_window_flow_state = "moved";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "move";
+                gshell_window_flow_last = "window-move";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWMOVE";
+                gshell_command_result = "WINDOW MOVE OK";
+                gshell_input_status_text = "MOVE";
+                window_terminal_text = "WINDOWMOVE -> DEMO WINDOW POSITION UPDATED";
+                break;
+
+            case GSHELL_CMD_WINDOWDRAGSTART:
+                gshell_window_flow_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "drag-start";
+                gshell_window_last = "window-drag-start";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag-start";
+                gshell_window_flow_state = "drag-start";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "drag-start";
+                gshell_window_flow_last = "window-drag-start";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWDRAGSTART";
+                gshell_command_result = "WINDOW DRAG START OK";
+                gshell_input_status_text = "DRAG START";
+                window_terminal_text = "WINDOWDRAGSTART -> TITLE BAR STARTS DRAG FLOW";
+                break;
+
+            case GSHELL_CMD_WINDOWDRAGMOVE:
+                gshell_window_flow_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_moves++;
+                gshell_window_x += 24;
+                gshell_window_y += 12;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "drag-moving";
+                gshell_window_last = "window-drag-move";
+                gshell_window_flow_state = "drag-moving";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "drag-move";
+                gshell_window_flow_last = "window-drag-move";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWDRAGMOVE";
+                gshell_command_result = "WINDOW DRAG MOVE OK";
+                gshell_input_status_text = "DRAG MOVE";
+                window_terminal_text = "WINDOWDRAGMOVE -> DRAG FLOW MOVES DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_WINDOWDRAGEND:
+                gshell_window_flow_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "drag-end";
+                gshell_window_last = "window-drag-end";
+                gshell_hit_action = "drop";
+                gshell_window_flow_state = "drag-end";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "drag-end";
+                gshell_window_flow_last = "window-drag-end";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWDRAGEND";
+                gshell_command_result = "WINDOW DRAG END OK";
+                gshell_input_status_text = "DRAG END";
+                window_terminal_text = "WINDOWDRAGEND -> DRAG FLOW ENDS ON DEMO WINDOW";
+                break;
+
+            case GSHELL_CMD_WINDOWMINIMIZE:
+                gshell_window_flow_minimize_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 0;
+                gshell_window_minimized = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "minimized";
+                gshell_window_last = "window-minimize";
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_minimized = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "minimized";
+                gshell_taskbar_last = "window-minimize";
+                gshell_focus_target = "taskbar";
+                gshell_window_flow_state = "minimized";
+                gshell_window_flow_target = "taskbar";
+                gshell_window_flow_action = "minimize";
+                gshell_window_flow_last = "window-minimize";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWMINIMIZE";
+                gshell_command_result = "WINDOW MINIMIZE OK";
+                gshell_input_status_text = "MIN";
+                window_terminal_text = "WINDOWMINIMIZE -> DEMO WINDOW MINIMIZED TO TASKBAR";
+                break;
+
+            case GSHELL_CMD_WINDOWRESTORE:
+                gshell_window_flow_restore_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "restored";
+                gshell_window_last = "window-restore";
+                gshell_taskbar_minimized = 0;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "restored";
+                gshell_taskbar_last = "window-restore";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_window_flow_state = "restored";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "restore";
+                gshell_window_flow_last = "window-restore";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWRESTORE";
+                gshell_command_result = "WINDOW RESTORE OK";
+                gshell_input_status_text = "RESTORE";
+                window_terminal_text = "WINDOWRESTORE -> DEMO WINDOW RESTORED FROM TASKBAR";
+                break;
+
+            case GSHELL_CMD_WINDOWMAXIMIZE:
+                gshell_window_flow_maximize_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_x = 72;
+                gshell_window_y = 76;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "maximized";
+                gshell_window_last = "window-maximize";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_window_flow_state = "maximized";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "maximize";
+                gshell_window_flow_last = "window-maximize";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWMAXIMIZE";
+                gshell_command_result = "WINDOW MAXIMIZE OK";
+                gshell_input_status_text = "MAX";
+                window_terminal_text = "WINDOWMAXIMIZE -> DEMO WINDOW MAXIMIZE MOCK";
+                break;
+
+            case GSHELL_CMD_WINDOWFRONT:
+                gshell_window_flow_front_ready = 1;
+                gshell_window_flow_layer_ready = 1;
+                gshell_window_flow_layer++;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "front";
+                gshell_window_last = "window-front";
+                gshell_focus_target = "demo.window";
+                gshell_window_flow_state = "front";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "front";
+                gshell_window_flow_last = "window-front";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWFRONT";
+                gshell_command_result = "WINDOW FRONT OK";
+                gshell_input_status_text = "FRONT";
+                window_terminal_text = "WINDOWFRONT -> DEMO WINDOW MOVED TO FRONT LAYER";
+                break;
+
+            case GSHELL_CMD_WINDOWBACK:
+                gshell_window_flow_back_ready = 1;
+                gshell_window_flow_layer_ready = 1;
+                if (gshell_window_flow_layer > 0) {
+                    gshell_window_flow_layer--;
+                }
+                gshell_window_exists = 1;
+                gshell_window_focused = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "back";
+                gshell_window_last = "window-back";
+                gshell_focus_target = "desktop";
+                gshell_window_flow_state = "back";
+                gshell_window_flow_target = "desktop";
+                gshell_window_flow_action = "back";
+                gshell_window_flow_last = "window-back";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWBACK";
+                gshell_command_result = "WINDOW BACK OK";
+                gshell_input_status_text = "BACK";
+                window_terminal_text = "WINDOWBACK -> DEMO WINDOW SENT BEHIND ACTIVE LAYER";
+                break;
+
+            case GSHELL_CMD_WINDOWLAYERNEXT:
+                gshell_window_flow_layer_ready = 1;
+                gshell_window_flow_layer++;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "layer-next";
+                gshell_window_last = "window-layer-next";
+                gshell_focus_target = "demo.window";
+                gshell_window_flow_state = "layer-next";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "layer-next";
+                gshell_window_flow_last = "window-layer-next";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWLAYERNEXT";
+                gshell_command_result = "WINDOW LAYER NEXT OK";
+                gshell_input_status_text = "LAYER";
+                window_terminal_text = "WINDOWLAYERNEXT -> WINDOW Z-LAYER COUNTER ADVANCED";
+                break;
+
+            case GSHELL_CMD_WINDOWFOCUSNEXTFLOW:
+                gshell_window_flow_focus_ready = 1;
+                gshell_shortcut_focus_next_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_focus_changes++;
+                gshell_focus_target = "demo.window";
+                gshell_scene_focus_ready = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "focus-next";
+                gshell_window_last = "window-focus-next";
+                gshell_window_flow_state = "focus-next";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "focus-next";
+                gshell_window_flow_last = "window-focus-next";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWFOCUSNEXTFLOW";
+                gshell_command_result = "WINDOW FOCUS NEXT FLOW OK";
+                gshell_input_status_text = "FOCUS";
+                window_terminal_text = "WINDOWFOCUSNEXTFLOW -> WINDOW FOCUS MOVES THROUGH FLOW";
+                break;
+
+            case GSHELL_CMD_WINDOWCLOSEMOCK:
+                gshell_window_flow_close_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_minimized = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed";
+                gshell_window_last = "window-close-mock";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_window_flow_state = "closed";
+                gshell_window_flow_target = "desktop";
+                gshell_window_flow_action = "close";
+                gshell_window_flow_last = "window-close-mock";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWCLOSEMOCK";
+                gshell_command_result = "WINDOW CLOSE MOCK OK";
+                gshell_input_status_text = "CLOSE";
+                window_terminal_text = "WINDOWCLOSEMOCK -> DEMO WINDOW CLOSED BY WINDOW FLOW";
+                break;
+
+            case GSHELL_CMD_WINDOWMENUFLOW:
+                gshell_window_flow_menu_ready = 1;
+                gshell_menu_window_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "window-menu-flow";
+                gshell_window_last = "window-menu-flow";
+                gshell_focus_target = "window-menu";
+                gshell_window_flow_state = "menu-flow";
+                gshell_window_flow_target = "window-menu";
+                gshell_window_flow_action = "menu";
+                gshell_window_flow_last = "window-menu-flow";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWMENUFLOW";
+                gshell_command_result = "WINDOW MENU FLOW OK";
+                gshell_input_status_text = "MENU FLOW";
+                window_terminal_text = "WINDOWMENUFLOW -> WINDOW MENU ROUTED INTO WINDOW FLOW";
+                break;
+
+            case GSHELL_CMD_WINDOWSHORTFLOW:
+                gshell_window_flow_shortcut_ready = 1;
+                gshell_shortcut_switch_ready = 1;
+                gshell_shortcut_close_ready = 1;
+                gshell_shortcut_focus_next_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "shortcut-flow";
+                gshell_window_last = "window-shortcut-flow";
+                gshell_focus_target = "demo.window";
+                gshell_window_flow_state = "shortcut-flow";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "shortcut";
+                gshell_window_flow_last = "window-shortcut-flow";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWSHORTFLOW";
+                gshell_command_result = "WINDOW SHORT FLOW OK";
+                gshell_input_status_text = "KEY FLOW";
+                window_terminal_text = "WINDOWSHORTFLOW -> SHORTCUTS CONNECTED TO WINDOW FLOW";
+                break;
+
+            case GSHELL_CMD_WINDOWFLOWDEMO:
+                gshell_window_flow_spawn_ready = 1;
+                gshell_window_flow_activate_ready = 1;
+                gshell_window_flow_move_ready = 1;
+                gshell_window_flow_drag_ready = 1;
+                gshell_window_flow_minimize_ready = 1;
+                gshell_window_flow_restore_ready = 1;
+                gshell_window_flow_maximize_ready = 1;
+                gshell_window_flow_front_ready = 1;
+                gshell_window_flow_back_ready = 1;
+                gshell_window_flow_layer_ready = 1;
+                gshell_window_flow_focus_ready = 1;
+                gshell_window_flow_close_ready = 1;
+                gshell_window_flow_menu_ready = 1;
+                gshell_window_flow_shortcut_ready = 1;
+                gshell_window_flow_demo_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_x = 104;
+                gshell_window_y = 88;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "window-flow-demo";
+                gshell_window_last = "window-flow-demo";
+                gshell_scene_window_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_route_window_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_action_window_focus_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_flow_state = "demo";
+                gshell_window_flow_target = "demo.window";
+                gshell_window_flow_action = "full-flow";
+                gshell_window_flow_last = "demo-ready";
+                gshell_window_flow_events++;
+                gshell_command_name = "WINDOWFLOWDEMO";
+                gshell_command_result = "WINDOW FLOW DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                window_terminal_text = "WINDOWFLOWDEMO -> FULL WINDOW INTERACTION FLOW DEMO READY";
+                break;
+
+            case GSHELL_CMD_WINDOWFLOWCHECK: {
+                int ok = gshell_window_flow_spawn_ready && gshell_window_flow_activate_ready && gshell_window_flow_move_ready && gshell_window_flow_drag_ready && gshell_window_flow_minimize_ready && gshell_window_flow_restore_ready && gshell_window_flow_layer_ready && gshell_window_flow_menu_ready && gshell_window_flow_shortcut_ready;
+                gshell_window_flow_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "WINDOWFLOWCHECK";
+                gshell_command_result = ok ? "WINDOW FLOW CHECK OK" : "WINDOW FLOW CHECK WAIT";
+                gshell_input_status_text = ok ? "FLOW OK" : "FLOW WAIT";
+                window_terminal_text = ok ? "WINDOWFLOWCHECK -> WINDOW INTERACTION FLOW READY" : "WINDOWFLOWCHECK -> RUN WINDOWFLOWDEMO OR REQUIRED WINDOW COMMANDS";
+                break;
+            }
+
+            case GSHELL_CMD_WINDOWFLOWRESET:
+                gshell_window_flow_spawn_ready = 0;
+                gshell_window_flow_activate_ready = 0;
+                gshell_window_flow_move_ready = 0;
+                gshell_window_flow_drag_ready = 0;
+                gshell_window_flow_minimize_ready = 0;
+                gshell_window_flow_restore_ready = 0;
+                gshell_window_flow_maximize_ready = 0;
+                gshell_window_flow_front_ready = 0;
+                gshell_window_flow_back_ready = 0;
+                gshell_window_flow_layer_ready = 0;
+                gshell_window_flow_focus_ready = 0;
+                gshell_window_flow_close_ready = 0;
+                gshell_window_flow_menu_ready = 0;
+                gshell_window_flow_shortcut_ready = 0;
+                gshell_window_flow_demo_ready = 0;
+                gshell_window_flow_layer = 1;
+                gshell_window_flow_events = 0;
+                gshell_window_flow_state = "idle";
+                gshell_window_flow_target = "desktop";
+                gshell_window_flow_action = "none";
+                gshell_window_flow_last = "reset";
+                gshell_focus_target = "terminal";
+                gshell_command_name = "WINDOWFLOWRESET";
+                gshell_command_result = "WINDOW FLOW RESET OK";
+                gshell_input_status_text = "RESET";
+                window_terminal_text = "WINDOWFLOWRESET -> WINDOW INTERACTION FLOW STATE RESET";
+                break;
+
+            case GSHELL_CMD_WINDOWFLOWNEXT:
+                gshell_command_name = "WINDOWFLOWNEXT";
+                gshell_command_result = "WINDOW FLOW NEXT OK";
+                gshell_input_status_text = "NEXT";
+                window_terminal_text = "WINDOWFLOWNEXT -> 1.5.5 DESKTOP INTERACTION CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(window_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_INTERACTCLOSESTATUS && command_id <= GSHELL_CMD_INTERACTNEXTPHASE) {
+        const char* close_terminal_text = "INTERACTCLOSESTATUS -> DESKTOP INTERACTION CLOSEOUT READY";
+
+        gshell_command_view = "INTERACTCLOSESTATUS";
+        gshell_input_status_text = "CLOSEOUT OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_INTERACTCLOSESTATUS:
+                gshell_command_name = "INTERACTCLOSESTATUS";
+                gshell_command_result = "INTERACTION CLOSE STATUS OK";
+                break;
+
+            case GSHELL_CMD_POINTERFLOWSUM:
+                gshell_interact_close_pointer_ready = 1;
+                gshell_interact_close_state = "pointer-summary";
+                gshell_interact_close_layer = "pointer";
+                gshell_interact_close_handoff = "mock-pointer";
+                gshell_interact_close_last = "pointer-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "POINTERFLOWSUM";
+                gshell_command_result = "POINTER FLOW SUMMARY OK";
+                gshell_input_status_text = "POINTER SUM";
+                close_terminal_text = "POINTERFLOWSUM -> POINTER MOCK FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_CLICKFLOWSUM:
+                gshell_interact_close_click_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_double_click_ready = 1;
+                gshell_route_right_click_ready = 1;
+                gshell_interact_close_state = "click-summary";
+                gshell_interact_close_layer = "click";
+                gshell_interact_close_handoff = "click-route";
+                gshell_interact_close_last = "click-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "CLICKFLOWSUM";
+                gshell_command_result = "CLICK FLOW SUMMARY OK";
+                gshell_input_status_text = "CLICK SUM";
+                close_terminal_text = "CLICKFLOWSUM -> CLICK DOUBLECLICK RIGHTCLICK FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_ROUTEFLOWSUM:
+                gshell_interact_close_route_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_interact_close_state = "route-summary";
+                gshell_interact_close_layer = "route";
+                gshell_interact_close_handoff = "route-action";
+                gshell_interact_close_last = "route-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "ROUTEFLOWSUM";
+                gshell_command_result = "ROUTE FLOW SUMMARY OK";
+                gshell_input_status_text = "ROUTE SUM";
+                close_terminal_text = "ROUTEFLOWSUM -> DESKTOP CARD WINDOW TASKBAR LAUNCHER ROUTES SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_ACTIONFLOWSUM:
+                gshell_interact_close_action_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_action_bind_desktop_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_action_window_focus_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_interact_close_state = "action-summary";
+                gshell_interact_close_layer = "action";
+                gshell_interact_close_handoff = "action-binding";
+                gshell_interact_close_last = "action-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "ACTIONFLOWSUM";
+                gshell_command_result = "ACTION FLOW SUMMARY OK";
+                gshell_input_status_text = "ACTION SUM";
+                close_terminal_text = "ACTIONFLOWSUM -> ACTION BINDING FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_MENUFLOWSUM:
+                gshell_interact_close_menu_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_menu_card_ready = 1;
+                gshell_menu_taskbar_ready = 1;
+                gshell_menu_window_ready = 1;
+                gshell_menu_route_bind_ready = 1;
+                gshell_interact_close_state = "menu-summary";
+                gshell_interact_close_layer = "menu";
+                gshell_interact_close_handoff = "menu-route-bind";
+                gshell_interact_close_last = "menu-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "MENUFLOWSUM";
+                gshell_command_result = "MENU FLOW SUMMARY OK";
+                gshell_input_status_text = "MENU SUM";
+                close_terminal_text = "MENUFLOWSUM -> MENU FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SHORTCUTFLOWSUM:
+                gshell_interact_close_shortcut_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_shortcut_launcher_ready = 1;
+                gshell_shortcut_switch_ready = 1;
+                gshell_shortcut_close_ready = 1;
+                gshell_shortcut_focus_next_ready = 1;
+                gshell_shortcut_menu_ready = 1;
+                gshell_shortcut_route_bind_ready = 1;
+                gshell_interact_close_state = "shortcut-summary";
+                gshell_interact_close_layer = "shortcut";
+                gshell_interact_close_handoff = "shortcut-route-bind";
+                gshell_interact_close_last = "shortcut-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "SHORTCUTFLOWSUM";
+                gshell_command_result = "SHORTCUT FLOW SUMMARY OK";
+                gshell_input_status_text = "KEY SUM";
+                close_terminal_text = "SHORTCUTFLOWSUM -> SHORTCUT FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_WINDOWFLOWSUM:
+                gshell_interact_close_window_ready = 1;
+                gshell_window_flow_spawn_ready = 1;
+                gshell_window_flow_activate_ready = 1;
+                gshell_window_flow_move_ready = 1;
+                gshell_window_flow_minimize_ready = 1;
+                gshell_window_flow_restore_ready = 1;
+                gshell_window_flow_layer_ready = 1;
+                gshell_window_flow_menu_ready = 1;
+                gshell_window_flow_shortcut_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "flow-summary";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_interact_close_state = "window-summary";
+                gshell_interact_close_layer = "window";
+                gshell_interact_close_handoff = "window-flow";
+                gshell_interact_close_last = "window-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "WINDOWFLOWSUM";
+                gshell_command_result = "WINDOW FLOW SUMMARY OK";
+                gshell_input_status_text = "WIN SUM";
+                close_terminal_text = "WINDOWFLOWSUM -> WINDOW INTERACTION FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_FOCUSFLOWSUM:
+                gshell_interact_close_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_changes++;
+                gshell_focus_target = "demo.window";
+                gshell_interact_close_state = "focus-summary";
+                gshell_interact_close_layer = "focus";
+                gshell_interact_close_handoff = "focus-route";
+                gshell_interact_close_last = "focus-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "FOCUSFLOWSUM";
+                gshell_command_result = "FOCUS FLOW SUMMARY OK";
+                gshell_input_status_text = "FOCUS SUM";
+                close_terminal_text = "FOCUSFLOWSUM -> FOCUS FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SELECTFLOWSUM:
+                gshell_interact_close_select_ready = 1;
+                gshell_interact_select_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected";
+                gshell_card_app = "demo.app";
+                gshell_focus_target = "demo.app";
+                gshell_interact_close_state = "select-summary";
+                gshell_interact_close_layer = "select";
+                gshell_interact_close_handoff = "select-action";
+                gshell_interact_close_last = "select-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "SELECTFLOWSUM";
+                gshell_command_result = "SELECT FLOW SUMMARY OK";
+                gshell_input_status_text = "SELECT SUM";
+                close_terminal_text = "SELECTFLOWSUM -> SELECT FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_OPENCLOSEFLOWSUM:
+                gshell_interact_close_open_close_ready = 1;
+                gshell_interact_open_ready = 1;
+                gshell_route_open_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_menu_open_ready = 1;
+                gshell_menu_close_ready = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "open-close-summary";
+                gshell_scene_window_ready = 1;
+                gshell_interact_close_state = "open-close-summary";
+                gshell_interact_close_layer = "open-close";
+                gshell_interact_close_handoff = "open-close-action";
+                gshell_interact_close_last = "open-close-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "OPENCLOSEFLOWSUM";
+                gshell_command_result = "OPEN CLOSE FLOW SUMMARY OK";
+                gshell_input_status_text = "OPEN SUM";
+                close_terminal_text = "OPENCLOSEFLOWSUM -> OPEN CLOSE FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_DRAGFLOWSUM:
+                gshell_interact_close_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_flow_drag_ready = 1;
+                gshell_window_moves++;
+                gshell_window_x += 8;
+                gshell_window_y += 4;
+                gshell_window_state = "drag-summary";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag-summary";
+                gshell_interact_close_state = "drag-summary";
+                gshell_interact_close_layer = "drag";
+                gshell_interact_close_handoff = "drag-route";
+                gshell_interact_close_last = "drag-flow-summary";
+                gshell_interact_close_events++;
+                gshell_command_name = "DRAGFLOWSUM";
+                gshell_command_result = "DRAG FLOW SUMMARY OK";
+                gshell_input_status_text = "DRAG SUM";
+                close_terminal_text = "DRAGFLOWSUM -> DRAG FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_INTERACTHANDOFF:
+                gshell_interact_close_handoff_ready = 1;
+                gshell_interact_close_state = "handoff";
+                gshell_interact_close_layer = "desktop-interaction";
+                gshell_interact_close_handoff = "1.6-real-input";
+                gshell_interact_close_last = "handoff-ready";
+                gshell_interact_close_events++;
+                gshell_command_name = "INTERACTHANDOFF";
+                gshell_command_result = "INTERACTION HANDOFF OK";
+                gshell_input_status_text = "HANDOFF";
+                close_terminal_text = "INTERACTHANDOFF -> 1.5 MODEL READY FOR REAL INPUT LATER";
+                break;
+
+            case GSHELL_CMD_REALINPUTREADY:
+                gshell_interact_close_real_input_ready = 1;
+                gshell_interact_close_handoff_ready = 1;
+                gshell_interact_close_state = "real-input-ready";
+                gshell_interact_close_layer = "input-handoff";
+                gshell_interact_close_handoff = "ps2-mouse-candidate";
+                gshell_interact_close_last = "real-input-ready";
+                gshell_interact_close_events++;
+                gshell_command_name = "REALINPUTREADY";
+                gshell_command_result = "REAL INPUT READY OK";
+                gshell_input_status_text = "INPUT READY";
+                close_terminal_text = "REALINPUTREADY -> REAL POINTER CAN FEED EXISTING ROUTE ACTION MODEL LATER";
+                break;
+
+            case GSHELL_CMD_INTERACTREGRESSION:
+                gshell_interact_close_regression_ready = 1;
+                gshell_interact_close_state = "regression";
+                gshell_interact_close_layer = "old-command-safe";
+                gshell_interact_close_handoff = "keep-old-chain";
+                gshell_interact_close_last = "regression-ready";
+                gshell_interact_close_events++;
+                gshell_command_name = "INTERACTREGRESSION";
+                gshell_command_result = "INTERACTION REGRESSION OK";
+                gshell_input_status_text = "REGRESS OK";
+                close_terminal_text = "INTERACTREGRESSION -> OLD INTERACTION COMMANDS KEPT";
+                break;
+
+            case GSHELL_CMD_INTERACTDEMOALL:
+                gshell_interact_close_pointer_ready = 1;
+                gshell_interact_close_click_ready = 1;
+                gshell_interact_close_route_ready = 1;
+                gshell_interact_close_action_ready = 1;
+                gshell_interact_close_menu_ready = 1;
+                gshell_interact_close_shortcut_ready = 1;
+                gshell_interact_close_window_ready = 1;
+                gshell_interact_close_focus_ready = 1;
+                gshell_interact_close_select_ready = 1;
+                gshell_interact_close_open_close_ready = 1;
+                gshell_interact_close_drag_ready = 1;
+                gshell_interact_close_handoff_ready = 1;
+                gshell_interact_close_real_input_ready = 1;
+                gshell_interact_close_regression_ready = 1;
+                gshell_interact_close_demo_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_interact_shortcut_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_menu_short_flow_ready = 1;
+                gshell_window_flow_demo_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "interaction-demo-all";
+                gshell_scene_window_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_interact_close_state = "demo-all";
+                gshell_interact_close_layer = "desktop-interaction";
+                gshell_interact_close_handoff = "1.6-ready";
+                gshell_interact_close_last = "demo-all-ready";
+                gshell_interact_close_events++;
+                gshell_command_name = "INTERACTDEMOALL";
+                gshell_command_result = "INTERACTION DEMO ALL OK";
+                gshell_input_status_text = "DEMO ALL";
+                close_terminal_text = "INTERACTDEMOALL -> FULL 1.5 DESKTOP INTERACTION DEMO READY";
+                break;
+
+            case GSHELL_CMD_INTERACTFINALCHECK: {
+                int ok = gshell_interact_close_pointer_ready && gshell_interact_close_click_ready && gshell_interact_close_route_ready && gshell_interact_close_action_ready && gshell_interact_close_menu_ready && gshell_interact_close_shortcut_ready && gshell_interact_close_window_ready && gshell_interact_close_focus_ready && gshell_interact_close_select_ready && gshell_interact_close_open_close_ready && gshell_interact_close_drag_ready && gshell_interact_close_handoff_ready && gshell_interact_close_regression_ready;
+                gshell_interact_close_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "INTERACTFINALCHECK";
+                gshell_command_result = ok ? "INTERACTION FINAL CHECK OK" : "INTERACTION FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "FINAL OK" : "FINAL WAIT";
+                close_terminal_text = ok ? "INTERACTFINALCHECK -> DESKTOP INTERACTION LAYER READY" : "INTERACTFINALCHECK -> RUN INTERACTDEMOALL";
+                break;
+            }
+
+            case GSHELL_CMD_INTERACTFINALRESET:
+                gshell_interact_close_pointer_ready = 0;
+                gshell_interact_close_click_ready = 0;
+                gshell_interact_close_route_ready = 0;
+                gshell_interact_close_action_ready = 0;
+                gshell_interact_close_menu_ready = 0;
+                gshell_interact_close_shortcut_ready = 0;
+                gshell_interact_close_window_ready = 0;
+                gshell_interact_close_focus_ready = 0;
+                gshell_interact_close_select_ready = 0;
+                gshell_interact_close_open_close_ready = 0;
+                gshell_interact_close_drag_ready = 0;
+                gshell_interact_close_handoff_ready = 0;
+                gshell_interact_close_real_input_ready = 0;
+                gshell_interact_close_regression_ready = 0;
+                gshell_interact_close_demo_ready = 0;
+                gshell_interact_closeout_ready = 0;
+                gshell_interact_close_events = 0;
+                gshell_interact_close_state = "idle";
+                gshell_interact_close_layer = "desktop-interaction";
+                gshell_interact_close_handoff = "none";
+                gshell_interact_close_last = "reset";
+                gshell_focus_target = "terminal";
+                gshell_command_name = "INTERACTFINALRESET";
+                gshell_command_result = "INTERACTION FINAL RESET OK";
+                gshell_input_status_text = "RESET";
+                close_terminal_text = "INTERACTFINALRESET -> INTERACTION CLOSEOUT STATE RESET";
+                break;
+
+            case GSHELL_CMD_INTERACTCLOSEOUT:
+                gshell_interact_close_pointer_ready = 1;
+                gshell_interact_close_click_ready = 1;
+                gshell_interact_close_route_ready = 1;
+                gshell_interact_close_action_ready = 1;
+                gshell_interact_close_menu_ready = 1;
+                gshell_interact_close_shortcut_ready = 1;
+                gshell_interact_close_window_ready = 1;
+                gshell_interact_close_focus_ready = 1;
+                gshell_interact_close_select_ready = 1;
+                gshell_interact_close_open_close_ready = 1;
+                gshell_interact_close_drag_ready = 1;
+                gshell_interact_close_handoff_ready = 1;
+                gshell_interact_close_real_input_ready = 1;
+                gshell_interact_close_regression_ready = 1;
+                gshell_interact_close_demo_ready = 1;
+                gshell_interact_closeout_ready = 1;
+                gshell_interact_close_state = "closeout";
+                gshell_interact_close_layer = "desktop-interaction";
+                gshell_interact_close_handoff = "dev-1.6.x";
+                gshell_interact_close_last = "closeout-ready";
+                gshell_interact_close_events++;
+                gshell_command_name = "INTERACTCLOSEOUT";
+                gshell_command_result = "INTERACTION CLOSEOUT OK";
+                gshell_input_status_text = "CLOSEOUT";
+                close_terminal_text = "INTERACTCLOSEOUT -> 1.5.X DESKTOP INTERACTION LAYER CLOSED";
+                break;
+
+            case GSHELL_CMD_INTERACTNEXTPHASE:
+                gshell_command_name = "INTERACTNEXTPHASE";
+                gshell_command_result = "INTERACTION NEXT PHASE OK";
+                gshell_input_status_text = "NEXT";
+                close_terminal_text = "INTERACTNEXTPHASE -> 1.6.0 REAL INPUT PREPARATION / PS2 MOUSE CANDIDATE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(close_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_INPUTPREPSTATUS && command_id <= GSHELL_CMD_INPUTNEXT) {
+        const char* input_terminal_text = "INPUTPREPSTATUS -> REAL INPUT PREPARATION CORE READY";
+
+        gshell_command_view = "INPUTPREPSTATUS";
+        gshell_input_status_text = "INPUT OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_INPUTPREPSTATUS:
+                gshell_command_name = "INPUTPREPSTATUS";
+                gshell_command_result = "INPUT PREP STATUS OK";
+                break;
+
+            case GSHELL_CMD_INPUTDEVSTATUS:
+                gshell_input_device_ready = 1;
+                gshell_input_prep_state = "device-map";
+                gshell_input_prep_device = "keyboard+mouse";
+                gshell_input_prep_bridge = "mock-ready";
+                gshell_input_prep_last = "input-device-status";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTDEVSTATUS";
+                gshell_command_result = "INPUT DEVICE STATUS OK";
+                gshell_input_status_text = "DEV OK";
+                input_terminal_text = "INPUTDEVSTATUS -> INPUT DEVICE MAP READY";
+                break;
+
+            case GSHELL_CMD_PS2MOUSEPLAN:
+                gshell_input_ps2_mouse_planned = 1;
+                gshell_input_prep_state = "ps2-plan";
+                gshell_input_prep_device = "ps2-mouse";
+                gshell_input_prep_bridge = "planned";
+                gshell_input_prep_last = "ps2-mouse-plan";
+                gshell_input_prep_events++;
+                gshell_command_name = "PS2MOUSEPLAN";
+                gshell_command_result = "PS2 MOUSE PLAN OK";
+                gshell_input_status_text = "PS2 PLAN";
+                input_terminal_text = "PS2MOUSEPLAN -> PS2 MOUSE DRIVER PLAN RECORDED";
+                break;
+
+            case GSHELL_CMD_IRQ12PLAN:
+                gshell_input_irq12_planned = 1;
+                gshell_input_prep_state = "irq12-plan";
+                gshell_input_prep_device = "ps2-mouse";
+                gshell_input_prep_bridge = "irq12-planned";
+                gshell_input_prep_last = "irq12-plan";
+                gshell_input_prep_events++;
+                gshell_command_name = "IRQ12PLAN";
+                gshell_command_result = "IRQ12 PLAN OK";
+                gshell_input_status_text = "IRQ PLAN";
+                input_terminal_text = "IRQ12PLAN -> IRQ12 ROUTE PLAN RECORDED BUT NOT ENABLED";
+                break;
+
+            case GSHELL_CMD_MOUSEPACKETPLAN:
+                gshell_input_packet_planned = 1;
+                gshell_input_prep_state = "packet-plan";
+                gshell_input_prep_device = "ps2-mouse";
+                gshell_input_prep_bridge = "packet-parser";
+                gshell_input_prep_last = "mouse-packet-plan";
+                gshell_input_prep_events++;
+                gshell_command_name = "MOUSEPACKETPLAN";
+                gshell_command_result = "MOUSE PACKET PLAN OK";
+                gshell_input_status_text = "PACKET";
+                input_terminal_text = "MOUSEPACKETPLAN -> 3 BYTE MOUSE PACKET PLAN READY";
+                break;
+
+            case GSHELL_CMD_MOUSECOORDPLAN:
+                gshell_input_coord_planned = 1;
+                gshell_input_prep_state = "coord-plan";
+                gshell_input_prep_device = "pointer";
+                gshell_input_prep_bridge = "coord-map";
+                gshell_input_prep_last = "mouse-coord-plan";
+                gshell_input_prep_events++;
+                gshell_command_name = "MOUSECOORDPLAN";
+                gshell_command_result = "MOUSE COORD PLAN OK";
+                gshell_input_status_text = "COORD";
+                input_terminal_text = "MOUSECOORDPLAN -> POINTER COORDINATE PLAN READY";
+                break;
+
+            case GSHELL_CMD_INPUTQUEUEPLAN:
+                gshell_input_queue_planned = 1;
+                gshell_input_prep_state = "queue-plan";
+                gshell_input_prep_device = "input-event";
+                gshell_input_prep_bridge = "event-queue";
+                gshell_input_prep_last = "input-queue-plan";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTQUEUEPLAN";
+                gshell_command_result = "INPUT QUEUE PLAN OK";
+                gshell_input_status_text = "QUEUE";
+                input_terminal_text = "INPUTQUEUEPLAN -> INPUT EVENT QUEUE PLAN READY";
+                break;
+
+            case GSHELL_CMD_POINTERBRIDGE:
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_interact_close_real_input_ready = 1;
+                gshell_input_prep_state = "pointer-bridge";
+                gshell_input_prep_device = "pointer";
+                gshell_input_prep_bridge = "input-to-pointer";
+                gshell_input_prep_last = "pointer-bridge";
+                gshell_input_prep_events++;
+                gshell_command_name = "POINTERBRIDGE";
+                gshell_command_result = "POINTER BRIDGE OK";
+                gshell_input_status_text = "PTR BRIDGE";
+                input_terminal_text = "POINTERBRIDGE -> REAL INPUT CAN FEED POINTER MODEL LATER";
+                break;
+
+            case GSHELL_CMD_MOCKPOINTERFEED:
+                gshell_input_mock_feed_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "mock-pointer";
+                gshell_hit_action = "feed";
+                gshell_focus_target = "mock-pointer";
+                gshell_input_prep_state = "mock-feed";
+                gshell_input_prep_device = "mock-pointer";
+                gshell_input_prep_bridge = "feed-route";
+                gshell_input_prep_last = "mock-pointer-feed";
+                gshell_input_prep_events++;
+                gshell_command_name = "MOCKPOINTERFEED";
+                gshell_command_result = "MOCK POINTER FEED OK";
+                gshell_input_status_text = "MOCK FEED";
+                input_terminal_text = "MOCKPOINTERFEED -> MOCK POINTER EVENT FED INTO INPUT PREP";
+                break;
+
+            case GSHELL_CMD_REALPOINTERGATE:
+                gshell_input_real_gate_ready = 1;
+                gshell_input_prep_state = "real-gate";
+                gshell_input_prep_device = "real-pointer";
+                gshell_input_prep_bridge = "gate-closed";
+                gshell_input_prep_last = "real-pointer-gate";
+                gshell_input_prep_events++;
+                gshell_command_name = "REALPOINTERGATE";
+                gshell_command_result = "REAL POINTER GATE OK";
+                gshell_input_status_text = "GATE";
+                input_terminal_text = "REALPOINTERGATE -> REAL POINTER GATE READY BUT CLOSED";
+                break;
+
+            case GSHELL_CMD_INPUTROUTEBRIDGE:
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_input_prep_state = "route-bridge";
+                gshell_input_prep_device = "pointer";
+                gshell_input_prep_bridge = "input-to-route";
+                gshell_input_prep_last = "input-route-bridge";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTROUTEBRIDGE";
+                gshell_command_result = "INPUT ROUTE BRIDGE OK";
+                gshell_input_status_text = "ROUTE";
+                input_terminal_text = "INPUTROUTEBRIDGE -> INPUT EVENTS CAN ENTER ROUTE MODEL";
+                break;
+
+            case GSHELL_CMD_INPUTACTIONBRIDGE:
+                gshell_input_action_bridge_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_input_prep_state = "action-bridge";
+                gshell_input_prep_device = "pointer";
+                gshell_input_prep_bridge = "input-to-action";
+                gshell_input_prep_last = "input-action-bridge";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTACTIONBRIDGE";
+                gshell_command_result = "INPUT ACTION BRIDGE OK";
+                gshell_input_status_text = "ACTION";
+                input_terminal_text = "INPUTACTIONBRIDGE -> INPUT ROUTE CAN TRIGGER ACTION MODEL";
+                break;
+
+            case GSHELL_CMD_INPUTFALLBACK:
+                gshell_input_fallback_ready = 1;
+                gshell_input_prep_state = "fallback";
+                gshell_input_prep_device = "keyboard";
+                gshell_input_prep_bridge = "keyboard-safe";
+                gshell_input_prep_last = "input-fallback";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTFALLBACK";
+                gshell_command_result = "INPUT FALLBACK OK";
+                gshell_input_status_text = "FALLBACK";
+                input_terminal_text = "INPUTFALLBACK -> KEYBOARD CHAIN REMAINS FALLBACK";
+                break;
+
+            case GSHELL_CMD_INPUTSAFECHECK:
+                gshell_input_safe_ready = 1;
+                gshell_input_fallback_ready = 1;
+                gshell_input_prep_state = "safe-check";
+                gshell_input_prep_device = "input";
+                gshell_input_prep_bridge = "safe";
+                gshell_input_prep_last = "input-safe-check";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTSAFECHECK";
+                gshell_command_result = "INPUT SAFE CHECK OK";
+                gshell_input_status_text = "SAFE";
+                input_terminal_text = "INPUTSAFECHECK -> REAL INPUT PREP DOES NOT TOUCH KEYBOARD CHAIN";
+                break;
+
+            case GSHELL_CMD_INPUTREGRESSION:
+                gshell_input_regression_ready = 1;
+                gshell_interact_close_regression_ready = 1;
+                gshell_input_prep_state = "regression";
+                gshell_input_prep_device = "old-chain";
+                gshell_input_prep_bridge = "kept";
+                gshell_input_prep_last = "input-regression";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTREGRESSION";
+                gshell_command_result = "INPUT REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                input_terminal_text = "INPUTREGRESSION -> 1.5 INTERACTION COMMANDS KEPT";
+                break;
+
+            case GSHELL_CMD_INPUTHANDOFF:
+                gshell_input_handoff_ready = 1;
+                gshell_input_prep_state = "handoff";
+                gshell_input_prep_device = "ps2-mouse";
+                gshell_input_prep_bridge = "dev-1.6.x";
+                gshell_input_prep_last = "input-handoff";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTHANDOFF";
+                gshell_command_result = "INPUT HANDOFF OK";
+                gshell_input_status_text = "HANDOFF";
+                input_terminal_text = "INPUTHANDOFF -> READY FOR REAL PS2 MOUSE DRIVER STEP LATER";
+                break;
+
+            case GSHELL_CMD_INPUTPREPDEMO:
+                gshell_input_device_ready = 1;
+                gshell_input_ps2_mouse_planned = 1;
+                gshell_input_irq12_planned = 1;
+                gshell_input_packet_planned = 1;
+                gshell_input_coord_planned = 1;
+                gshell_input_queue_planned = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_input_mock_feed_ready = 1;
+                gshell_input_real_gate_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_input_fallback_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_input_handoff_ready = 1;
+                gshell_input_demo_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_interact_close_real_input_ready = 1;
+                gshell_input_prep_state = "demo";
+                gshell_input_prep_device = "ps2-mouse";
+                gshell_input_prep_bridge = "mock-to-route-action";
+                gshell_input_prep_last = "input-demo-ready";
+                gshell_input_prep_events++;
+                gshell_command_name = "INPUTDEMO";
+                gshell_command_result = "INPUT DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                input_terminal_text = "INPUTDEMO -> FULL REAL INPUT PREPARATION DEMO READY";
+                break;
+
+            case GSHELL_CMD_INPUTPREPCHECK: {
+                int ok = gshell_input_device_ready &&
+                         gshell_input_ps2_mouse_planned &&
+                         gshell_input_irq12_planned &&
+                         gshell_input_packet_planned &&
+                         gshell_input_coord_planned &&
+                         gshell_input_queue_planned &&
+                         gshell_input_pointer_bridge_ready &&
+                         gshell_input_real_gate_ready &&
+                         gshell_input_route_bridge_ready &&
+                         gshell_input_action_bridge_ready &&
+                         gshell_input_fallback_ready &&
+                         gshell_input_safe_ready &&
+                         gshell_input_regression_ready &&
+                         gshell_input_handoff_ready;
+                gshell_input_prep_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "INPUTCHECK";
+                gshell_command_result = ok ? "INPUT CHECK OK" : "INPUT CHECK WAIT";
+                gshell_input_status_text = ok ? "INPUT OK" : "INPUT WAIT";
+                input_terminal_text = ok ? "INPUTCHECK -> REAL INPUT PREPARATION READY" : "INPUTCHECK -> RUN INPUTDEMO OR REQUIRED INPUT COMMANDS";
+                break;
+            }
+
+            case GSHELL_CMD_INPUTPREPRESET:
+                gshell_input_device_ready = 0;
+                gshell_input_ps2_mouse_planned = 0;
+                gshell_input_irq12_planned = 0;
+                gshell_input_packet_planned = 0;
+                gshell_input_coord_planned = 0;
+                gshell_input_queue_planned = 0;
+                gshell_input_pointer_bridge_ready = 0;
+                gshell_input_mock_feed_ready = 0;
+                gshell_input_real_gate_ready = 0;
+                gshell_input_route_bridge_ready = 0;
+                gshell_input_action_bridge_ready = 0;
+                gshell_input_fallback_ready = 0;
+                gshell_input_safe_ready = 0;
+                gshell_input_regression_ready = 0;
+                gshell_input_handoff_ready = 0;
+                gshell_input_demo_ready = 0;
+                gshell_input_prep_events = 0;
+                gshell_input_prep_state = "idle";
+                gshell_input_prep_device = "none";
+                gshell_input_prep_bridge = "none";
+                gshell_input_prep_last = "reset";
+                gshell_command_name = "INPUTRESET";
+                gshell_command_result = "INPUT RESET OK";
+                gshell_input_status_text = "RESET";
+                input_terminal_text = "INPUTRESET -> INPUT PREPARATION STATE RESET";
+                break;
+
+            case GSHELL_CMD_INPUTNEXT:
+                gshell_command_name = "INPUTNEXT";
+                gshell_command_result = "INPUT NEXT OK";
+                gshell_input_status_text = "NEXT";
+                input_terminal_text = "INPUTNEXT -> 1.6.1 PS2 MOUSE DRIVER SKELETON";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(input_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_MOUSEDRVSTATUS && command_id <= GSHELL_CMD_MOUSEDRVNEXT) {
+        const char* mouse_terminal_text = "MOUSEDRVSTATUS -> PS2 MOUSE DRIVER SKELETON READY";
+
+        gshell_command_view = "MOUSEDRVSTATUS";
+        gshell_input_status_text = "MOUSE OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_MOUSEDRVSTATUS:
+                gshell_command_name = "MOUSEDRVSTATUS";
+                gshell_command_result = "MOUSE DRIVER STATUS OK";
+                break;
+
+            case GSHELL_CMD_MOUSEDRVPLAN:
+                gshell_mouse_drv_plan_ready = 1;
+                gshell_mouse_drv_state = "driver-plan";
+                gshell_mouse_drv_path = "skeleton";
+                gshell_mouse_drv_last = "mouse-driver-plan";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEDRVPLAN";
+                gshell_command_result = "MOUSE DRIVER PLAN OK";
+                gshell_input_status_text = "DRV PLAN";
+                mouse_terminal_text = "MOUSEDRVPLAN -> PS2 MOUSE DRIVER SKELETON PLAN READY";
+                break;
+
+            case GSHELL_CMD_MOUSEPORTCHECK:
+                gshell_mouse_port_check_ready = 1;
+                gshell_mouse_drv_state = "port-check";
+                gshell_mouse_drv_path = "0x60-0x64-planned";
+                gshell_mouse_drv_last = "mouse-port-check";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEPORTCHECK";
+                gshell_command_result = "MOUSE PORT CHECK OK";
+                gshell_input_status_text = "PORT";
+                mouse_terminal_text = "MOUSEPORTCHECK -> PS2 PORT CHECK SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSEIRQROUTE:
+                gshell_mouse_irq_route_ready = 1;
+                gshell_input_irq12_planned = 1;
+                gshell_mouse_drv_state = "irq12-route";
+                gshell_mouse_drv_path = "irq12-planned-closed";
+                gshell_mouse_drv_last = "mouse-irq-route";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEIRQROUTE";
+                gshell_command_result = "MOUSE IRQ ROUTE OK";
+                gshell_input_status_text = "IRQ12";
+                mouse_terminal_text = "MOUSEIRQROUTE -> IRQ12 ROUTE SKELETON READY BUT NOT ENABLED";
+                break;
+
+            case GSHELL_CMD_MOUSEPACKETBUF:
+                gshell_mouse_packet_buf_ready = 1;
+                gshell_input_packet_planned = 1;
+                gshell_mouse_packet_count++;
+                gshell_mouse_drv_state = "packet-buffer";
+                gshell_mouse_drv_path = "buffer";
+                gshell_mouse_drv_last = "mouse-packet-buffer";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEPACKETBUF";
+                gshell_command_result = "MOUSE PACKET BUFFER OK";
+                gshell_input_status_text = "PACKET BUF";
+                mouse_terminal_text = "MOUSEPACKETBUF -> 3 BYTE PACKET BUFFER SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSEPACKETPARSE:
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_mouse_packet_buf_ready = 1;
+                gshell_input_packet_planned = 1;
+                gshell_mouse_packet_count++;
+                gshell_mouse_drv_state = "packet-parse";
+                gshell_mouse_drv_path = "3-byte-parse";
+                gshell_mouse_drv_last = "mouse-packet-parse";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEPACKETPARSE";
+                gshell_command_result = "MOUSE PACKET PARSE OK";
+                gshell_input_status_text = "PARSE";
+                mouse_terminal_text = "MOUSEPACKETPARSE -> MOUSE PACKET PARSE SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSEBUTTONMAP:
+                gshell_mouse_button_map_ready = 1;
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_mouse_drv_state = "button-map";
+                gshell_mouse_drv_path = "left-right-middle";
+                gshell_mouse_drv_last = "mouse-button-map";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEBUTTONMAP";
+                gshell_command_result = "MOUSE BUTTON MAP OK";
+                gshell_input_status_text = "BUTTON";
+                mouse_terminal_text = "MOUSEBUTTONMAP -> LEFT RIGHT MIDDLE BUTTON MAP READY";
+                break;
+
+            case GSHELL_CMD_MOUSECOORDMAP:
+                gshell_mouse_coord_map_ready = 1;
+                gshell_input_coord_planned = 1;
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_mouse_drv_state = "coord-map";
+                gshell_mouse_drv_path = "dx-dy-to-pointer";
+                gshell_mouse_drv_last = "mouse-coord-map";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSECOORDMAP";
+                gshell_command_result = "MOUSE COORD MAP OK";
+                gshell_input_status_text = "COORD";
+                mouse_terminal_text = "MOUSECOORDMAP -> DX DY COORD MAP SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSECURSORBRIDGE:
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_mouse_coord_map_ready = 1;
+                gshell_mouse_drv_state = "cursor-bridge";
+                gshell_mouse_drv_path = "mouse-to-cursor";
+                gshell_mouse_drv_last = "mouse-cursor-bridge";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSECURSORBRIDGE";
+                gshell_command_result = "MOUSE CURSOR BRIDGE OK";
+                gshell_input_status_text = "CURSOR";
+                mouse_terminal_text = "MOUSECURSORBRIDGE -> MOUSE CAN FEED CURSOR MODEL LATER";
+                break;
+
+            case GSHELL_CMD_MOUSEEVENTPUSH:
+                gshell_mouse_event_push_ready = 1;
+                gshell_input_queue_planned = 1;
+                gshell_mouse_drv_state = "event-push";
+                gshell_mouse_drv_path = "mouse-event-queue";
+                gshell_mouse_drv_last = "mouse-event-push";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEEVENTPUSH";
+                gshell_command_result = "MOUSE EVENT PUSH OK";
+                gshell_input_status_text = "EVENT";
+                mouse_terminal_text = "MOUSEEVENTPUSH -> MOUSE EVENT PUSH SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSEEVENTROUTE:
+                gshell_mouse_event_route_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_mouse_drv_state = "event-route";
+                gshell_mouse_drv_path = "event-to-route";
+                gshell_mouse_drv_last = "mouse-event-route";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEEVENTROUTE";
+                gshell_command_result = "MOUSE EVENT ROUTE OK";
+                gshell_input_status_text = "ROUTE";
+                mouse_terminal_text = "MOUSEEVENTROUTE -> MOUSE EVENT CAN ENTER ROUTE MODEL";
+                break;
+
+            case GSHELL_CMD_MOUSEACTIONFEED:
+                gshell_mouse_action_feed_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_mouse_drv_state = "action-feed";
+                gshell_mouse_drv_path = "mouse-to-action";
+                gshell_mouse_drv_last = "mouse-action-feed";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEACTIONFEED";
+                gshell_command_result = "MOUSE ACTION FEED OK";
+                gshell_input_status_text = "ACTION";
+                mouse_terminal_text = "MOUSEACTIONFEED -> MOUSE EVENT CAN FEED ACTION MODEL";
+                break;
+
+            case GSHELL_CMD_MOUSESAFEGATE:
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_mouse_drv_state = "safe-gate";
+                gshell_mouse_drv_path = "gate-closed";
+                gshell_mouse_drv_last = "mouse-safe-gate";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSESAFEGATE";
+                gshell_command_result = "MOUSE SAFE GATE OK";
+                gshell_input_status_text = "SAFE";
+                mouse_terminal_text = "MOUSESAFEGATE -> REAL MOUSE INPUT GATE CLOSED FOR SAFETY";
+                break;
+
+            case GSHELL_CMD_MOUSENOIRQMODE:
+                gshell_mouse_no_irq_ready = 1;
+                gshell_input_fallback_ready = 1;
+                gshell_mouse_drv_state = "no-irq-mode";
+                gshell_mouse_drv_path = "mock-only";
+                gshell_mouse_drv_last = "mouse-no-irq-mode";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSENOIRQMODE";
+                gshell_command_result = "MOUSE NO IRQ MODE OK";
+                gshell_input_status_text = "NO IRQ";
+                mouse_terminal_text = "MOUSENOIRQMODE -> MOUSE SKELETON STAYS MOCK WITHOUT IRQ12";
+                break;
+
+            case GSHELL_CMD_MOUSEREGRESSION:
+                gshell_mouse_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_mouse_drv_state = "regression";
+                gshell_mouse_drv_path = "keyboard-safe";
+                gshell_mouse_drv_last = "mouse-regression";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEREGRESSION";
+                gshell_command_result = "MOUSE REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                mouse_terminal_text = "MOUSEREGRESSION -> KEYBOARD AND 1.5 COMMANDS KEPT";
+                break;
+
+            case GSHELL_CMD_MOUSEDRVDEMO:
+                gshell_mouse_drv_plan_ready = 1;
+                gshell_mouse_port_check_ready = 1;
+                gshell_mouse_irq_route_ready = 1;
+                gshell_mouse_packet_buf_ready = 1;
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_mouse_button_map_ready = 1;
+                gshell_mouse_coord_map_ready = 1;
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_mouse_event_push_ready = 1;
+                gshell_mouse_event_route_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_mouse_no_irq_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_mouse_demo_ready = 1;
+                gshell_input_ps2_mouse_planned = 1;
+                gshell_input_irq12_planned = 1;
+                gshell_input_packet_planned = 1;
+                gshell_input_coord_planned = 1;
+                gshell_input_queue_planned = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_mouse_packet_count++;
+                gshell_mouse_drv_state = "demo";
+                gshell_mouse_drv_path = "skeleton-ready";
+                gshell_mouse_drv_last = "mouse-driver-demo";
+                gshell_mouse_drv_events++;
+                gshell_command_name = "MOUSEDRVDEMO";
+                gshell_command_result = "MOUSE DRIVER DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                mouse_terminal_text = "MOUSEDRVDEMO -> FULL PS2 MOUSE DRIVER SKELETON READY";
+                break;
+
+            case GSHELL_CMD_MOUSEDRVCHECK: {
+                int ok = gshell_mouse_drv_plan_ready &&
+                         gshell_mouse_port_check_ready &&
+                         gshell_mouse_irq_route_ready &&
+                         gshell_mouse_packet_buf_ready &&
+                         gshell_mouse_packet_parse_ready &&
+                         gshell_mouse_button_map_ready &&
+                         gshell_mouse_coord_map_ready &&
+                         gshell_mouse_cursor_bridge_ready &&
+                         gshell_mouse_event_push_ready &&
+                         gshell_mouse_event_route_ready &&
+                         gshell_mouse_action_feed_ready &&
+                         gshell_mouse_safe_gate_ready &&
+                         gshell_mouse_no_irq_ready &&
+                         gshell_mouse_regression_ready;
+                gshell_mouse_drv_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "MOUSEDRVCHECK";
+                gshell_command_result = ok ? "MOUSE DRIVER CHECK OK" : "MOUSE DRIVER CHECK WAIT";
+                gshell_input_status_text = ok ? "MOUSE OK" : "MOUSE WAIT";
+                mouse_terminal_text = ok ? "MOUSEDRVCHECK -> PS2 MOUSE SKELETON READY" : "MOUSEDRVCHECK -> RUN MOUSEDRVDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_MOUSEDRVRESET:
+                gshell_mouse_drv_plan_ready = 0;
+                gshell_mouse_port_check_ready = 0;
+                gshell_mouse_irq_route_ready = 0;
+                gshell_mouse_packet_buf_ready = 0;
+                gshell_mouse_packet_parse_ready = 0;
+                gshell_mouse_button_map_ready = 0;
+                gshell_mouse_coord_map_ready = 0;
+                gshell_mouse_cursor_bridge_ready = 0;
+                gshell_mouse_event_push_ready = 0;
+                gshell_mouse_event_route_ready = 0;
+                gshell_mouse_action_feed_ready = 0;
+                gshell_mouse_safe_gate_ready = 0;
+                gshell_mouse_no_irq_ready = 0;
+                gshell_mouse_regression_ready = 0;
+                gshell_mouse_demo_ready = 0;
+                gshell_mouse_drv_events = 0;
+                gshell_mouse_packet_count = 0;
+                gshell_mouse_drv_state = "idle";
+                gshell_mouse_drv_device = "ps2-mouse";
+                gshell_mouse_drv_path = "closed";
+                gshell_mouse_drv_last = "reset";
+                gshell_command_name = "MOUSEDRVRESET";
+                gshell_command_result = "MOUSE DRIVER RESET OK";
+                gshell_input_status_text = "RESET";
+                mouse_terminal_text = "MOUSEDRVRESET -> MOUSE DRIVER SKELETON STATE RESET";
+                break;
+
+            case GSHELL_CMD_MOUSEDRVNEXT:
+                gshell_command_name = "MOUSEDRVNEXT";
+                gshell_command_result = "MOUSE DRIVER NEXT OK";
+                gshell_input_status_text = "NEXT";
+                mouse_terminal_text = "MOUSEDRVNEXT -> 1.6.2 PS2 MOUSE PACKET PIPELINE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(mouse_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_PACKETPIPESTATUS && command_id <= GSHELL_CMD_PACKETPIPENEXT) {
+        const char* packet_terminal_text = "PACKETPIPESTATUS -> PS2 MOUSE PACKET PIPELINE READY";
+
+        gshell_command_view = "PACKETPIPESTATUS";
+        gshell_input_status_text = "PACKET OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_PACKETPIPESTATUS:
+                gshell_command_name = "PACKETPIPESTATUS";
+                gshell_command_result = "PACKET PIPE STATUS OK";
+                break;
+
+            case GSHELL_CMD_PACKETSYNCPLAN:
+                gshell_packet_sync_ready = 1;
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_packet_pipe_state = "sync-plan";
+                gshell_packet_pipe_phase = "sync";
+                gshell_packet_pipe_flags = "bit3-check";
+                gshell_packet_pipe_last = "packet-sync-plan";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETSYNCPLAN";
+                gshell_command_result = "PACKET SYNC PLAN OK";
+                gshell_input_status_text = "SYNC";
+                packet_terminal_text = "PACKETSYNCPLAN -> BYTE0 SYNC BIT PLAN READY";
+                break;
+
+            case GSHELL_CMD_PACKETBYTE0:
+                gshell_packet_byte0_ready = 1;
+                gshell_packet_sync_ready = 1;
+                gshell_packet_pipe_state = "byte0";
+                gshell_packet_pipe_phase = "buttons+flags";
+                gshell_packet_pipe_flags = "L/R/M SIGN OVF";
+                gshell_packet_pipe_last = "packet-byte0";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETBYTE0";
+                gshell_command_result = "PACKET BYTE0 OK";
+                gshell_input_status_text = "BYTE0";
+                packet_terminal_text = "PACKETBYTE0 -> FIRST BYTE FLAGS SKELETON READY";
+                break;
+
+            case GSHELL_CMD_PACKETBYTE1:
+                gshell_packet_byte1_ready = 1;
+                gshell_packet_pipe_state = "byte1";
+                gshell_packet_pipe_phase = "dx";
+                gshell_packet_dx = 12;
+                gshell_packet_pipe_last = "packet-byte1";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETBYTE1";
+                gshell_command_result = "PACKET BYTE1 OK";
+                gshell_input_status_text = "BYTE1";
+                packet_terminal_text = "PACKETBYTE1 -> SECOND BYTE DX SKELETON READY";
+                break;
+
+            case GSHELL_CMD_PACKETBYTE2:
+                gshell_packet_byte2_ready = 1;
+                gshell_packet_pipe_state = "byte2";
+                gshell_packet_pipe_phase = "dy";
+                gshell_packet_dy = -7;
+                gshell_packet_pipe_last = "packet-byte2";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETBYTE2";
+                gshell_command_result = "PACKET BYTE2 OK";
+                gshell_input_status_text = "BYTE2";
+                packet_terminal_text = "PACKETBYTE2 -> THIRD BYTE DY SKELETON READY";
+                break;
+
+            case GSHELL_CMD_PACKETDXDY:
+                gshell_packet_dxdy_ready = 1;
+                gshell_packet_byte1_ready = 1;
+                gshell_packet_byte2_ready = 1;
+                gshell_packet_dx = 16;
+                gshell_packet_dy = -10;
+                gshell_packet_pipe_state = "dxdy";
+                gshell_packet_pipe_phase = "delta";
+                gshell_packet_pipe_last = "packet-dxdy";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETDXDY";
+                gshell_command_result = "PACKET DX DY OK";
+                gshell_input_status_text = "DXDY";
+                packet_terminal_text = "PACKETDXDY -> DX DY DELTA PIPE READY";
+                break;
+
+            case GSHELL_CMD_PACKETSIGNFLAGS:
+                gshell_packet_sign_ready = 1;
+                gshell_packet_byte0_ready = 1;
+                gshell_packet_pipe_state = "sign-flags";
+                gshell_packet_pipe_phase = "sign";
+                gshell_packet_pipe_flags = "xsign ysign";
+                gshell_packet_pipe_last = "packet-sign-flags";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETSIGNFLAGS";
+                gshell_command_result = "PACKET SIGN FLAGS OK";
+                gshell_input_status_text = "SIGN";
+                packet_terminal_text = "PACKETSIGNFLAGS -> SIGN EXTENSION FLAGS READY";
+                break;
+
+            case GSHELL_CMD_PACKETOVERFLOW:
+                gshell_packet_overflow_ready = 1;
+                gshell_packet_byte0_ready = 1;
+                gshell_packet_pipe_state = "overflow";
+                gshell_packet_pipe_phase = "overflow";
+                gshell_packet_pipe_flags = "xovf yovf guarded";
+                gshell_packet_pipe_last = "packet-overflow";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETOVERFLOW";
+                gshell_command_result = "PACKET OVERFLOW OK";
+                gshell_input_status_text = "OVF";
+                packet_terminal_text = "PACKETOVERFLOW -> OVERFLOW GUARD READY";
+                break;
+
+            case GSHELL_CMD_PACKETBUTTONS:
+                gshell_packet_buttons_ready = 1;
+                gshell_mouse_button_map_ready = 1;
+                gshell_packet_byte0_ready = 1;
+                gshell_packet_pipe_state = "buttons";
+                gshell_packet_pipe_phase = "button-map";
+                gshell_packet_pipe_flags = "left right middle";
+                gshell_packet_pipe_last = "packet-buttons";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETBUTTONS";
+                gshell_command_result = "PACKET BUTTONS OK";
+                gshell_input_status_text = "BUTTON";
+                packet_terminal_text = "PACKETBUTTONS -> BUTTON DECODE PIPE READY";
+                break;
+
+            case GSHELL_CMD_PACKETCURSORDELTA:
+                gshell_packet_cursor_delta_ready = 1;
+                gshell_packet_dxdy_ready = 1;
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_packet_dx = 20;
+                gshell_packet_dy = -12;
+                gshell_packet_pipe_state = "cursor-delta";
+                gshell_packet_pipe_phase = "cursor";
+                gshell_packet_pipe_last = "packet-cursor-delta";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETCURSORDELTA";
+                gshell_command_result = "PACKET CURSOR DELTA OK";
+                gshell_input_status_text = "CURSOR";
+                packet_terminal_text = "PACKETCURSORDELTA -> PACKET DELTA CAN FEED CURSOR MODEL";
+                break;
+
+            case GSHELL_CMD_PACKETQUEUEPUSH:
+                gshell_packet_queue_push_ready = 1;
+                gshell_mouse_event_push_ready = 1;
+                gshell_input_queue_planned = 1;
+                gshell_packet_pipe_count++;
+                gshell_mouse_packet_count++;
+                gshell_packet_pipe_state = "queue-push";
+                gshell_packet_pipe_phase = "event-queue";
+                gshell_packet_pipe_last = "packet-queue-push";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETQUEUEPUSH";
+                gshell_command_result = "PACKET QUEUE PUSH OK";
+                gshell_input_status_text = "QUEUE";
+                packet_terminal_text = "PACKETQUEUEPUSH -> PACKET EVENT PUSHED TO MOCK QUEUE";
+                break;
+
+            case GSHELL_CMD_PACKETROUTEFEED:
+                gshell_packet_route_feed_ready = 1;
+                gshell_packet_queue_push_ready = 1;
+                gshell_mouse_event_route_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_packet_pipe_state = "route-feed";
+                gshell_packet_pipe_phase = "route";
+                gshell_packet_pipe_last = "packet-route-feed";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETROUTEFEED";
+                gshell_command_result = "PACKET ROUTE FEED OK";
+                gshell_input_status_text = "ROUTE";
+                packet_terminal_text = "PACKETROUTEFEED -> PACKET EVENT CAN ENTER ROUTE MODEL";
+                break;
+
+            case GSHELL_CMD_PACKETACTIONFEED:
+                gshell_packet_action_feed_ready = 1;
+                gshell_packet_route_feed_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_packet_pipe_state = "action-feed";
+                gshell_packet_pipe_phase = "action";
+                gshell_packet_pipe_last = "packet-action-feed";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETACTIONFEED";
+                gshell_command_result = "PACKET ACTION FEED OK";
+                gshell_input_status_text = "ACTION";
+                packet_terminal_text = "PACKETACTIONFEED -> PACKET ROUTE CAN FEED ACTION MODEL";
+                break;
+
+            case GSHELL_CMD_PACKETSAFEGATE:
+                gshell_packet_safe_gate_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_packet_pipe_state = "safe-gate";
+                gshell_packet_pipe_phase = "gate";
+                gshell_packet_pipe_flags = "real-read-off";
+                gshell_packet_pipe_last = "packet-safe-gate";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETSAFEGATE";
+                gshell_command_result = "PACKET SAFE GATE OK";
+                gshell_input_status_text = "SAFE";
+                packet_terminal_text = "PACKETSAFEGATE -> REAL PACKET READ GATE REMAINS CLOSED";
+                break;
+
+            case GSHELL_CMD_PACKETNOIRQMODE:
+                gshell_packet_no_irq_ready = 1;
+                gshell_mouse_no_irq_ready = 1;
+                gshell_input_fallback_ready = 1;
+                gshell_packet_pipe_state = "no-irq";
+                gshell_packet_pipe_phase = "mock-only";
+                gshell_packet_pipe_flags = "irq12-off";
+                gshell_packet_pipe_last = "packet-no-irq-mode";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETNOIRQMODE";
+                gshell_command_result = "PACKET NO IRQ MODE OK";
+                gshell_input_status_text = "NO IRQ";
+                packet_terminal_text = "PACKETNOIRQMODE -> PACKET PIPELINE STAYS MOCK WITHOUT IRQ12";
+                break;
+
+            case GSHELL_CMD_PACKETREGRESSION:
+                gshell_packet_regression_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_packet_pipe_state = "regression";
+                gshell_packet_pipe_phase = "old-chain";
+                gshell_packet_pipe_flags = "keyboard-safe";
+                gshell_packet_pipe_last = "packet-regression";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETREGRESSION";
+                gshell_command_result = "PACKET REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                packet_terminal_text = "PACKETREGRESSION -> KEYBOARD AND OLD GShell INPUT KEPT";
+                break;
+
+            case GSHELL_CMD_PACKETPIPEDEMO:
+                gshell_packet_sync_ready = 1;
+                gshell_packet_byte0_ready = 1;
+                gshell_packet_byte1_ready = 1;
+                gshell_packet_byte2_ready = 1;
+                gshell_packet_dxdy_ready = 1;
+                gshell_packet_sign_ready = 1;
+                gshell_packet_overflow_ready = 1;
+                gshell_packet_buttons_ready = 1;
+                gshell_packet_cursor_delta_ready = 1;
+                gshell_packet_queue_push_ready = 1;
+                gshell_packet_route_feed_ready = 1;
+                gshell_packet_action_feed_ready = 1;
+                gshell_packet_safe_gate_ready = 1;
+                gshell_packet_no_irq_ready = 1;
+                gshell_packet_regression_ready = 1;
+                gshell_packet_demo_ready = 1;
+                gshell_mouse_packet_parse_ready = 1;
+                gshell_mouse_button_map_ready = 1;
+                gshell_mouse_coord_map_ready = 1;
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_mouse_event_push_ready = 1;
+                gshell_mouse_event_route_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_mouse_no_irq_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_input_packet_planned = 1;
+                gshell_input_coord_planned = 1;
+                gshell_input_queue_planned = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_packet_dx = 24;
+                gshell_packet_dy = -16;
+                gshell_packet_pipe_count++;
+                gshell_mouse_packet_count++;
+                gshell_packet_pipe_state = "demo";
+                gshell_packet_pipe_phase = "full-pipeline";
+                gshell_packet_pipe_flags = "safe-noirq";
+                gshell_packet_pipe_last = "packet-pipe-demo";
+                gshell_packet_pipe_events++;
+                gshell_command_name = "PACKETPIPEDEMO";
+                gshell_command_result = "PACKET PIPE DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                packet_terminal_text = "PACKETPIPEDEMO -> FULL PS2 MOUSE PACKET PIPELINE READY";
+                break;
+
+            case GSHELL_CMD_PACKETPIPECHECK: {
+                int ok = gshell_packet_sync_ready &&
+                         gshell_packet_byte0_ready &&
+                         gshell_packet_byte1_ready &&
+                         gshell_packet_byte2_ready &&
+                         gshell_packet_dxdy_ready &&
+                         gshell_packet_sign_ready &&
+                         gshell_packet_overflow_ready &&
+                         gshell_packet_buttons_ready &&
+                         gshell_packet_cursor_delta_ready &&
+                         gshell_packet_queue_push_ready &&
+                         gshell_packet_route_feed_ready &&
+                         gshell_packet_action_feed_ready &&
+                         gshell_packet_safe_gate_ready &&
+                         gshell_packet_no_irq_ready &&
+                         gshell_packet_regression_ready;
+                gshell_packet_pipe_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "PACKETPIPECHECK";
+                gshell_command_result = ok ? "PACKET PIPE CHECK OK" : "PACKET PIPE CHECK WAIT";
+                gshell_input_status_text = ok ? "PIPE OK" : "PIPE WAIT";
+                packet_terminal_text = ok ? "PACKETPIPECHECK -> PACKET PIPELINE READY" : "PACKETPIPECHECK -> RUN PACKETPIPEDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_PACKETPIPERESET:
+                gshell_packet_sync_ready = 0;
+                gshell_packet_byte0_ready = 0;
+                gshell_packet_byte1_ready = 0;
+                gshell_packet_byte2_ready = 0;
+                gshell_packet_dxdy_ready = 0;
+                gshell_packet_sign_ready = 0;
+                gshell_packet_overflow_ready = 0;
+                gshell_packet_buttons_ready = 0;
+                gshell_packet_cursor_delta_ready = 0;
+                gshell_packet_queue_push_ready = 0;
+                gshell_packet_route_feed_ready = 0;
+                gshell_packet_action_feed_ready = 0;
+                gshell_packet_safe_gate_ready = 0;
+                gshell_packet_no_irq_ready = 0;
+                gshell_packet_regression_ready = 0;
+                gshell_packet_demo_ready = 0;
+                gshell_packet_pipe_events = 0;
+                gshell_packet_pipe_count = 0;
+                gshell_packet_dx = 0;
+                gshell_packet_dy = 0;
+                gshell_packet_pipe_state = "idle";
+                gshell_packet_pipe_phase = "none";
+                gshell_packet_pipe_flags = "none";
+                gshell_packet_pipe_last = "reset";
+                gshell_command_name = "PACKETPIPERESET";
+                gshell_command_result = "PACKET PIPE RESET OK";
+                gshell_input_status_text = "RESET";
+                packet_terminal_text = "PACKETPIPERESET -> PACKET PIPELINE STATE RESET";
+                break;
+
+            case GSHELL_CMD_PACKETPIPENEXT:
+                gshell_command_name = "PACKETPIPENEXT";
+                gshell_command_result = "PACKET PIPE NEXT OK";
+                gshell_input_status_text = "NEXT";
+                packet_terminal_text = "PACKETPIPENEXT -> 1.6.3 POINTER CURSOR PIPELINE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(packet_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_CURSORPIPESTATUS && command_id <= GSHELL_CMD_CURSORPIPENEXT) {
+        const char* cursor_terminal_text = "CURSORPIPESTATUS -> POINTER CURSOR PIPELINE READY";
+
+        gshell_command_view = "CURSORPIPESTATUS";
+        gshell_input_status_text = "CURSOR OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CURSORPIPESTATUS:
+                gshell_command_name = "CURSORPIPESTATUS";
+                gshell_command_result = "CURSOR PIPE STATUS OK";
+                break;
+
+            case GSHELL_CMD_CURSORORIGIN:
+                gshell_cursor_origin_ready = 1;
+                gshell_cursor_x = 400;
+                gshell_cursor_y = 300;
+                gshell_cursor_pipe_state = "origin";
+                gshell_cursor_pipe_phase = "center";
+                gshell_cursor_pipe_target = "desktop";
+                gshell_cursor_pipe_last = "cursor-origin";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORORIGIN";
+                gshell_command_result = "CURSOR ORIGIN OK";
+                gshell_input_status_text = "ORIGIN";
+                cursor_terminal_text = "CURSORORIGIN -> CURSOR ORIGIN SET TO SCREEN CENTER";
+                break;
+
+            case GSHELL_CMD_CURSORDELTA:
+                gshell_cursor_delta_ready = 1;
+                gshell_packet_dxdy_ready = 1;
+                gshell_packet_cursor_delta_ready = 1;
+                gshell_cursor_dx = 24;
+                gshell_cursor_dy = -16;
+                gshell_cursor_pipe_state = "delta";
+                gshell_cursor_pipe_phase = "packet-dxdy";
+                gshell_cursor_pipe_target = "cursor";
+                gshell_cursor_pipe_last = "cursor-delta";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORDELTA";
+                gshell_command_result = "CURSOR DELTA OK";
+                gshell_input_status_text = "DELTA";
+                cursor_terminal_text = "CURSORDELTA -> PACKET DX DY COPIED TO CURSOR DELTA";
+                break;
+
+            case GSHELL_CMD_CURSORAPPLYDELTA:
+                gshell_cursor_apply_delta_ready = 1;
+                gshell_cursor_delta_ready = 1;
+                gshell_packet_cursor_delta_ready = 1;
+                gshell_cursor_dx = 24;
+                gshell_cursor_dy = -16;
+                gshell_cursor_x = (gshell_cursor_x + 24);
+                if (gshell_cursor_y > 16) {
+                    gshell_cursor_y = gshell_cursor_y - 16;
+                }
+                gshell_cursor_pipe_state = "apply-delta";
+                gshell_cursor_pipe_phase = "x+y";
+                gshell_cursor_pipe_target = "cursor";
+                gshell_cursor_pipe_last = "cursor-apply-delta";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORAPPLYDELTA";
+                gshell_command_result = "CURSOR APPLY DELTA OK";
+                gshell_input_status_text = "APPLY";
+                cursor_terminal_text = "CURSORAPPLYDELTA -> CURSOR POSITION UPDATED BY DELTA";
+                break;
+
+            case GSHELL_CMD_CURSORBOUNDS:
+                gshell_cursor_bounds_ready = 1;
+                gshell_cursor_pipe_state = "bounds";
+                gshell_cursor_pipe_phase = "800x600";
+                gshell_cursor_pipe_target = "screen";
+                gshell_cursor_pipe_last = "cursor-bounds";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORBOUNDS";
+                gshell_command_result = "CURSOR BOUNDS OK";
+                gshell_input_status_text = "BOUNDS";
+                cursor_terminal_text = "CURSORBOUNDS -> CURSOR SCREEN BOUNDS READY";
+                break;
+
+            case GSHELL_CMD_CURSORCLAMP:
+                gshell_cursor_clamp_ready = 1;
+                gshell_cursor_bounds_ready = 1;
+                if (gshell_cursor_x > 799) {
+                    gshell_cursor_x = 799;
+                }
+                if (gshell_cursor_y > 599) {
+                    gshell_cursor_y = 599;
+                }
+                gshell_cursor_pipe_state = "clamp";
+                gshell_cursor_pipe_phase = "screen-limit";
+                gshell_cursor_pipe_target = "screen";
+                gshell_cursor_pipe_last = "cursor-clamp";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORCLAMP";
+                gshell_command_result = "CURSOR CLAMP OK";
+                gshell_input_status_text = "CLAMP";
+                cursor_terminal_text = "CURSORCLAMP -> CURSOR POSITION CLAMPED TO SCREEN";
+                break;
+
+            case GSHELL_CMD_CURSORBUTTONSTATE:
+                gshell_cursor_button_state_ready = 1;
+                gshell_packet_buttons_ready = 1;
+                gshell_mouse_button_map_ready = 1;
+                gshell_cursor_button_mask = 1;
+                gshell_cursor_pipe_state = "button-state";
+                gshell_cursor_pipe_phase = "left-button";
+                gshell_cursor_pipe_target = "cursor";
+                gshell_cursor_pipe_last = "cursor-button-state";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORBUTTONSTATE";
+                gshell_command_result = "CURSOR BUTTON STATE OK";
+                gshell_input_status_text = "BUTTON";
+                cursor_terminal_text = "CURSORBUTTONSTATE -> CURSOR BUTTON MASK READY";
+                break;
+
+            case GSHELL_CMD_CURSORCLICKSTATE:
+                gshell_cursor_click_state_ready = 1;
+                gshell_cursor_button_state_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_cursor_button_mask = 1;
+                gshell_cursor_pipe_state = "click-state";
+                gshell_cursor_pipe_phase = "left-click";
+                gshell_cursor_pipe_target = "desktop";
+                gshell_cursor_pipe_last = "cursor-click-state";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORCLICKSTATE";
+                gshell_command_result = "CURSOR CLICK STATE OK";
+                gshell_input_status_text = "CLICK";
+                cursor_terminal_text = "CURSORCLICKSTATE -> CURSOR CLICK STATE READY";
+                break;
+
+            case GSHELL_CMD_CURSOREVENTPUSH:
+                gshell_cursor_event_push_ready = 1;
+                gshell_packet_queue_push_ready = 1;
+                gshell_mouse_event_push_ready = 1;
+                gshell_packet_pipe_count++;
+                gshell_cursor_pipe_state = "event-push";
+                gshell_cursor_pipe_phase = "cursor-event";
+                gshell_cursor_pipe_target = "input-queue";
+                gshell_cursor_pipe_last = "cursor-event-push";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSOREVENTPUSH";
+                gshell_command_result = "CURSOR EVENT PUSH OK";
+                gshell_input_status_text = "EVENT";
+                cursor_terminal_text = "CURSOREVENTPUSH -> CURSOR EVENT PUSHED TO MOCK QUEUE";
+                break;
+
+            case GSHELL_CMD_CURSORROUTEFEED:
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_event_push_ready = 1;
+                gshell_packet_route_feed_ready = 1;
+                gshell_mouse_event_route_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "cursor-hit";
+                gshell_hit_action = "route";
+                gshell_cursor_pipe_state = "route-feed";
+                gshell_cursor_pipe_phase = "hit-test";
+                gshell_cursor_pipe_target = "desktop";
+                gshell_cursor_pipe_last = "cursor-route-feed";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORROUTEFEED";
+                gshell_command_result = "CURSOR ROUTE FEED OK";
+                gshell_input_status_text = "ROUTE";
+                cursor_terminal_text = "CURSORROUTEFEED -> CURSOR EVENT CAN FEED ROUTE MODEL";
+                break;
+
+            case GSHELL_CMD_CURSORACTIONFEED:
+                gshell_cursor_action_feed_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_packet_action_feed_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_focus_target = "cursor-action";
+                gshell_cursor_pipe_state = "action-feed";
+                gshell_cursor_pipe_phase = "route-action";
+                gshell_cursor_pipe_target = "window";
+                gshell_cursor_pipe_last = "cursor-action-feed";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORACTIONFEED";
+                gshell_command_result = "CURSOR ACTION FEED OK";
+                gshell_input_status_text = "ACTION";
+                cursor_terminal_text = "CURSORACTIONFEED -> CURSOR ROUTE CAN FEED ACTION MODEL";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALPLAN:
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_cursor_pipe_state = "visual-plan";
+                gshell_cursor_pipe_phase = "draw-later";
+                gshell_cursor_pipe_target = "framebuffer";
+                gshell_cursor_pipe_last = "cursor-visual-plan";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORVISUALPLAN";
+                gshell_command_result = "CURSOR VISUAL PLAN OK";
+                gshell_input_status_text = "VISUAL";
+                cursor_terminal_text = "CURSORVISUALPLAN -> CURSOR VISUAL DRAW PLAN READY";
+                break;
+
+            case GSHELL_CMD_CURSORSAFEGATE:
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_packet_safe_gate_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_cursor_pipe_state = "safe-gate";
+                gshell_cursor_pipe_phase = "real-input-off";
+                gshell_cursor_pipe_target = "safe";
+                gshell_cursor_pipe_last = "cursor-safe-gate";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORSAFEGATE";
+                gshell_command_result = "CURSOR SAFE GATE OK";
+                gshell_input_status_text = "SAFE";
+                cursor_terminal_text = "CURSORSAFEGATE -> REAL CURSOR INPUT GATE REMAINS CLOSED";
+                break;
+
+            case GSHELL_CMD_CURSORNOIRQMODE:
+                gshell_cursor_no_irq_ready = 1;
+                gshell_packet_no_irq_ready = 1;
+                gshell_mouse_no_irq_ready = 1;
+                gshell_input_fallback_ready = 1;
+                gshell_cursor_pipe_state = "no-irq";
+                gshell_cursor_pipe_phase = "mock-only";
+                gshell_cursor_pipe_target = "keyboard-safe";
+                gshell_cursor_pipe_last = "cursor-no-irq-mode";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORNOIRQMODE";
+                gshell_command_result = "CURSOR NO IRQ MODE OK";
+                gshell_input_status_text = "NO IRQ";
+                cursor_terminal_text = "CURSORNOIRQMODE -> CURSOR PIPELINE STAYS MOCK WITHOUT IRQ12";
+                break;
+
+            case GSHELL_CMD_CURSORREGRESSION:
+                gshell_cursor_regression_ready = 1;
+                gshell_packet_regression_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_cursor_pipe_state = "regression";
+                gshell_cursor_pipe_phase = "old-chain";
+                gshell_cursor_pipe_target = "gshell-keyboard";
+                gshell_cursor_pipe_last = "cursor-regression";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORREGRESSION";
+                gshell_command_result = "CURSOR REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                cursor_terminal_text = "CURSORREGRESSION -> KEYBOARD AND OLD GShell INPUT KEPT";
+                break;
+
+            case GSHELL_CMD_CURSORPIPEDEMO:
+                gshell_cursor_origin_ready = 1;
+                gshell_cursor_delta_ready = 1;
+                gshell_cursor_apply_delta_ready = 1;
+                gshell_cursor_bounds_ready = 1;
+                gshell_cursor_clamp_ready = 1;
+                gshell_cursor_button_state_ready = 1;
+                gshell_cursor_click_state_ready = 1;
+                gshell_cursor_event_push_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_cursor_no_irq_ready = 1;
+                gshell_cursor_regression_ready = 1;
+                gshell_cursor_demo_ready = 1;
+                gshell_packet_cursor_delta_ready = 1;
+                gshell_packet_route_feed_ready = 1;
+                gshell_packet_action_feed_ready = 1;
+                gshell_mouse_cursor_bridge_ready = 1;
+                gshell_mouse_event_route_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_cursor_dx = 24;
+                gshell_cursor_dy = -16;
+                gshell_cursor_button_mask = 1;
+                gshell_cursor_pipe_state = "demo";
+                gshell_cursor_pipe_phase = "full-pipeline";
+                gshell_cursor_pipe_target = "route-action";
+                gshell_cursor_pipe_last = "cursor-pipe-demo";
+                gshell_cursor_pipe_events++;
+                gshell_command_name = "CURSORPIPEDEMO";
+                gshell_command_result = "CURSOR PIPE DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                cursor_terminal_text = "CURSORPIPEDEMO -> FULL POINTER CURSOR PIPELINE READY";
+                break;
+
+            case GSHELL_CMD_CURSORPIPECHECK: {
+                int ok = gshell_cursor_origin_ready &&
+                         gshell_cursor_delta_ready &&
+                         gshell_cursor_apply_delta_ready &&
+                         gshell_cursor_bounds_ready &&
+                         gshell_cursor_clamp_ready &&
+                         gshell_cursor_button_state_ready &&
+                         gshell_cursor_click_state_ready &&
+                         gshell_cursor_event_push_ready &&
+                         gshell_cursor_route_feed_ready &&
+                         gshell_cursor_action_feed_ready &&
+                         gshell_cursor_visual_plan_ready &&
+                         gshell_cursor_safe_gate_ready &&
+                         gshell_cursor_no_irq_ready &&
+                         gshell_cursor_regression_ready;
+                gshell_cursor_pipe_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CURSORPIPECHECK";
+                gshell_command_result = ok ? "CURSOR PIPE CHECK OK" : "CURSOR PIPE CHECK WAIT";
+                gshell_input_status_text = ok ? "CURSOR OK" : "CURSOR WAIT";
+                cursor_terminal_text = ok ? "CURSORPIPECHECK -> POINTER CURSOR PIPELINE READY" : "CURSORPIPECHECK -> RUN CURSORPIPEDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_CURSORPIPERESET:
+                gshell_cursor_origin_ready = 0;
+                gshell_cursor_delta_ready = 0;
+                gshell_cursor_apply_delta_ready = 0;
+                gshell_cursor_bounds_ready = 0;
+                gshell_cursor_clamp_ready = 0;
+                gshell_cursor_button_state_ready = 0;
+                gshell_cursor_click_state_ready = 0;
+                gshell_cursor_event_push_ready = 0;
+                gshell_cursor_route_feed_ready = 0;
+                gshell_cursor_action_feed_ready = 0;
+                gshell_cursor_visual_plan_ready = 0;
+                gshell_cursor_safe_gate_ready = 0;
+                gshell_cursor_no_irq_ready = 0;
+                gshell_cursor_regression_ready = 0;
+                gshell_cursor_demo_ready = 0;
+                gshell_cursor_pipe_events = 0;
+                gshell_cursor_x = 400;
+                gshell_cursor_y = 300;
+                gshell_cursor_button_mask = 0;
+                gshell_cursor_dx = 0;
+                gshell_cursor_dy = 0;
+                gshell_cursor_pipe_state = "idle";
+                gshell_cursor_pipe_phase = "none";
+                gshell_cursor_pipe_target = "desktop";
+                gshell_cursor_pipe_last = "reset";
+                gshell_command_name = "CURSORPIPERESET";
+                gshell_command_result = "CURSOR PIPE RESET OK";
+                gshell_input_status_text = "RESET";
+                cursor_terminal_text = "CURSORPIPERESET -> CURSOR PIPELINE STATE RESET";
+                break;
+
+            case GSHELL_CMD_CURSORPIPENEXT:
+                gshell_command_name = "CURSORPIPENEXT";
+                gshell_command_result = "CURSOR PIPE NEXT OK";
+                gshell_input_status_text = "NEXT";
+                cursor_terminal_text = "CURSORPIPENEXT -> 1.6.4 CURSOR VISUAL LAYER";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(cursor_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_CURSORVISUALSTATUS && command_id <= GSHELL_CMD_CURSORVISUALNEXT) {
+        const char* visual_terminal_text = "CURSORVISUALSTATUS -> CURSOR VISUAL LAYER READY";
+
+        gshell_command_view = "CURSORVISUALSTATUS";
+        gshell_input_status_text = "VISUAL OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CURSORVISUALSTATUS:
+                gshell_command_name = "CURSORVISUALSTATUS";
+                gshell_command_result = "CURSOR VISUAL STATUS OK";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALPLAN2:
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_cursor_visual_state = "visual-plan";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "mock-overlay";
+                gshell_cursor_visual_last = "cursor-visual-plan";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALPLAN";
+                gshell_command_result = "CURSOR VISUAL PLAN OK";
+                gshell_input_status_text = "PLAN";
+                visual_terminal_text = "CURSORVISUALPLAN -> CURSOR DRAW PLAN READY";
+                break;
+
+            case GSHELL_CMD_CURSORSHAPEMOCK:
+                gshell_cursor_shape_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_state = "shape-mock";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "view";
+                gshell_cursor_visual_last = "cursor-shape-mock";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORSHAPEMOCK";
+                gshell_command_result = "CURSOR SHAPE MOCK OK";
+                gshell_input_status_text = "SHAPE";
+                visual_terminal_text = "CURSORSHAPEMOCK -> MOCK CURSOR SHAPE READY";
+                break;
+
+            case GSHELL_CMD_CURSORHOTSPOT:
+                gshell_cursor_hotspot_ready = 1;
+                gshell_cursor_shape_ready = 1;
+                gshell_cursor_visual_state = "hotspot";
+                gshell_cursor_visual_shape = "arrow-hotspot";
+                gshell_cursor_visual_layer = "view";
+                gshell_cursor_visual_last = "cursor-hotspot";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORHOTSPOT";
+                gshell_command_result = "CURSOR HOTSPOT OK";
+                gshell_input_status_text = "HOTSPOT";
+                visual_terminal_text = "CURSORHOTSPOT -> CURSOR HOTSPOT MODEL READY";
+                break;
+
+            case GSHELL_CMD_CURSORPOSITIONVIS:
+                gshell_cursor_position_visual_ready = 1;
+                gshell_cursor_origin_ready = 1;
+                gshell_cursor_apply_delta_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_cursor_visual_state = "position-visual";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "view";
+                gshell_cursor_visual_last = "cursor-position-vis";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORPOSITIONVIS";
+                gshell_command_result = "CURSOR POSITION VIS OK";
+                gshell_input_status_text = "POSITION";
+                visual_terminal_text = "CURSORPOSITIONVIS -> CURSOR POSITION VISUAL STATE READY";
+                break;
+
+            case GSHELL_CMD_CURSORTRAILMOCK:
+                gshell_cursor_trail_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_state = "trail-mock";
+                gshell_cursor_visual_shape = "arrow+trail";
+                gshell_cursor_visual_layer = "view";
+                gshell_cursor_visual_last = "cursor-trail-mock";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORTRAILMOCK";
+                gshell_command_result = "CURSOR TRAIL MOCK OK";
+                gshell_input_status_text = "TRAIL";
+                visual_terminal_text = "CURSORTRAILMOCK -> CURSOR TRAIL MOCK READY";
+                break;
+
+            case GSHELL_CMD_CURSORBLINKMOCK:
+                gshell_cursor_blink_ready = 1;
+                gshell_cursor_visual_blink = gshell_cursor_visual_blink ? 0 : 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_state = "blink-mock";
+                gshell_cursor_visual_shape = "blink";
+                gshell_cursor_visual_layer = "view";
+                gshell_cursor_visual_last = "cursor-blink-mock";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORBLINKMOCK";
+                gshell_command_result = "CURSOR BLINK MOCK OK";
+                gshell_input_status_text = "BLINK";
+                visual_terminal_text = "CURSORBLINKMOCK -> CURSOR BLINK MOCK TOGGLED";
+                break;
+
+            case GSHELL_CMD_CURSOROVERLAYGATE:
+                gshell_cursor_overlay_gate_ready = 1;
+                gshell_cursor_visual_state = "overlay-gate";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "gate-closed";
+                gshell_cursor_visual_last = "cursor-overlay-gate";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSOROVERLAYGATE";
+                gshell_command_result = "CURSOR OVERLAY GATE OK";
+                gshell_input_status_text = "GATE";
+                visual_terminal_text = "CURSOROVERLAYGATE -> CURSOR OVERLAY GATE READY BUT CLOSED";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALFEED:
+                gshell_cursor_visual_feed_ready = 1;
+                gshell_cursor_event_push_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_state = "visual-feed";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "cursor-event";
+                gshell_cursor_visual_last = "cursor-visual-feed";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALFEED";
+                gshell_command_result = "CURSOR VISUAL FEED OK";
+                gshell_input_status_text = "FEED";
+                visual_terminal_text = "CURSORVISUALFEED -> CURSOR EVENT FEEDS VISUAL STATE";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALROUTE:
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_visual_feed_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_cursor_visual_state = "visual-route";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "route";
+                gshell_cursor_visual_last = "cursor-visual-route";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALROUTE";
+                gshell_command_result = "CURSOR VISUAL ROUTE OK";
+                gshell_input_status_text = "ROUTE";
+                visual_terminal_text = "CURSORVISUALROUTE -> CURSOR VISUAL STATE CONNECTED TO ROUTE";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALACTION:
+                gshell_cursor_visual_action_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_cursor_visual_state = "visual-action";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "action";
+                gshell_cursor_visual_last = "cursor-visual-action";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALACTION";
+                gshell_command_result = "CURSOR VISUAL ACTION OK";
+                gshell_input_status_text = "ACTION";
+                visual_terminal_text = "CURSORVISUALACTION -> CURSOR VISUAL STATE CONNECTED TO ACTION";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALSAFE:
+                gshell_cursor_visual_safe_ready = 1;
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_cursor_overlay_gate_ready = 1;
+                gshell_cursor_visual_state = "visual-safe";
+                gshell_cursor_visual_shape = "arrow";
+                gshell_cursor_visual_layer = "safe";
+                gshell_cursor_visual_last = "cursor-visual-safe";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALSAFE";
+                gshell_command_result = "CURSOR VISUAL SAFE OK";
+                gshell_input_status_text = "SAFE";
+                visual_terminal_text = "CURSORVISUALSAFE -> CURSOR VISUAL SAFE GATE READY";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALREGRESSION:
+                gshell_cursor_visual_regression_ready = 1;
+                gshell_cursor_regression_ready = 1;
+                gshell_cursor_visual_state = "regression";
+                gshell_cursor_visual_shape = "old-chain-safe";
+                gshell_cursor_visual_layer = "keyboard-safe";
+                gshell_cursor_visual_last = "cursor-visual-regression";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALREGRESSION";
+                gshell_command_result = "CURSOR VISUAL REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                visual_terminal_text = "CURSORVISUALREGRESSION -> OLD GShell INPUT AND 1.6.3 COMMANDS KEPT";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALDEMO:
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_cursor_visual_plan_ready = 1;
+                gshell_cursor_shape_ready = 1;
+                gshell_cursor_hotspot_ready = 1;
+                gshell_cursor_position_visual_ready = 1;
+                gshell_cursor_trail_ready = 1;
+                gshell_cursor_blink_ready = 1;
+                gshell_cursor_overlay_gate_ready = 1;
+                gshell_cursor_visual_feed_ready = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_cursor_visual_safe_ready = 1;
+                gshell_cursor_visual_regression_ready = 1;
+                gshell_cursor_visual_demo_ready = 1;
+                gshell_cursor_origin_ready = 1;
+                gshell_cursor_delta_ready = 1;
+                gshell_cursor_apply_delta_ready = 1;
+                gshell_cursor_bounds_ready = 1;
+                gshell_cursor_clamp_ready = 1;
+                gshell_cursor_button_state_ready = 1;
+                gshell_cursor_click_state_ready = 1;
+                gshell_cursor_event_push_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_cursor_button_mask = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_blink = 1;
+                gshell_cursor_visual_state = "demo";
+                gshell_cursor_visual_shape = "arrow+trail";
+                gshell_cursor_visual_layer = "mock-overlay";
+                gshell_cursor_visual_last = "cursor-visual-demo";
+                gshell_cursor_visual_events++;
+                gshell_command_name = "CURSORVISUALDEMO";
+                gshell_command_result = "CURSOR VISUAL DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                visual_terminal_text = "CURSORVISUALDEMO -> FULL CURSOR VISUAL LAYER READY";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALCHECK: {
+                int ok = gshell_cursor_visual_plan_ready &&
+                         gshell_cursor_shape_ready &&
+                         gshell_cursor_hotspot_ready &&
+                         gshell_cursor_position_visual_ready &&
+                         gshell_cursor_overlay_gate_ready &&
+                         gshell_cursor_visual_feed_ready &&
+                         gshell_cursor_visual_route_ready &&
+                         gshell_cursor_visual_action_ready &&
+                         gshell_cursor_visual_safe_ready &&
+                         gshell_cursor_visual_regression_ready;
+                gshell_cursor_visual_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CURSORVISUALCHECK";
+                gshell_command_result = ok ? "CURSOR VISUAL CHECK OK" : "CURSOR VISUAL CHECK WAIT";
+                gshell_input_status_text = ok ? "VISUAL OK" : "VISUAL WAIT";
+                visual_terminal_text = ok ? "CURSORVISUALCHECK -> CURSOR VISUAL LAYER READY" : "CURSORVISUALCHECK -> RUN CURSORVISUALDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_CURSORVISUALRESET:
+                gshell_cursor_visual_plan_ready = 0;
+                gshell_cursor_shape_ready = 0;
+                gshell_cursor_hotspot_ready = 0;
+                gshell_cursor_position_visual_ready = 0;
+                gshell_cursor_trail_ready = 0;
+                gshell_cursor_blink_ready = 0;
+                gshell_cursor_overlay_gate_ready = 0;
+                gshell_cursor_visual_feed_ready = 0;
+                gshell_cursor_visual_route_ready = 0;
+                gshell_cursor_visual_action_ready = 0;
+                gshell_cursor_visual_safe_ready = 0;
+                gshell_cursor_visual_regression_ready = 0;
+                gshell_cursor_visual_demo_ready = 0;
+                gshell_cursor_visual_events = 0;
+                gshell_cursor_visual_visible = 0;
+                gshell_cursor_visual_blink = 0;
+                gshell_cursor_visual_state = "idle";
+                gshell_cursor_visual_shape = "none";
+                gshell_cursor_visual_layer = "closed";
+                gshell_cursor_visual_last = "reset";
+                gshell_command_name = "CURSORVISUALRESET";
+                gshell_command_result = "CURSOR VISUAL RESET OK";
+                gshell_input_status_text = "RESET";
+                visual_terminal_text = "CURSORVISUALRESET -> CURSOR VISUAL STATE RESET";
+                break;
+
+            case GSHELL_CMD_CURSORVISUALNEXT:
+                gshell_command_name = "CURSORVISUALNEXT";
+                gshell_command_result = "CURSOR VISUAL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                visual_terminal_text = "CURSORVISUALNEXT -> 1.6.5 REAL POINTER ROUTE BRIDGE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(visual_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_REALPTRSTATUS && command_id <= GSHELL_CMD_REALPTRNEXT) {
+        const char* ptr_terminal_text = "REALPTRSTATUS -> REAL POINTER ROUTE BRIDGE READY";
+
+        gshell_command_view = "REALPTRSTATUS";
+        gshell_input_status_text = "PTR OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_REALPTRSTATUS:
+                gshell_command_name = "REALPTRSTATUS";
+                gshell_command_result = "REAL POINTER STATUS OK";
+                break;
+
+            case GSHELL_CMD_REALPTRGATE:
+                gshell_realptr_gate_ready = 1;
+                gshell_input_real_gate_ready = 1;
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_realptr_state = "gate";
+                gshell_realptr_source = "real-input-gated";
+                gshell_realptr_target = "closed";
+                gshell_realptr_last = "real-pointer-gate";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRGATE";
+                gshell_command_result = "REAL POINTER GATE OK";
+                gshell_input_status_text = "GATE";
+                ptr_terminal_text = "REALPTRGATE -> REAL POINTER INPUT GATE READY BUT CLOSED";
+                break;
+
+            case GSHELL_CMD_REALPTRSOURCE:
+                gshell_realptr_source_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_cursor_visual_feed_ready = 1;
+                gshell_realptr_state = "source";
+                gshell_realptr_source = "cursor-pipeline";
+                gshell_realptr_target = "route";
+                gshell_realptr_last = "real-pointer-source";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRSOURCE";
+                gshell_command_result = "REAL POINTER SOURCE OK";
+                gshell_input_status_text = "SOURCE";
+                ptr_terminal_text = "REALPTRSOURCE -> POINTER SOURCE CONNECTED TO CURSOR PIPELINE";
+                break;
+
+            case GSHELL_CMD_REALPTRCOORD:
+                gshell_realptr_coord_ready = 1;
+                gshell_cursor_origin_ready = 1;
+                gshell_cursor_apply_delta_ready = 1;
+                gshell_cursor_clamp_ready = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_realptr_state = "coord";
+                gshell_realptr_source = "cursor-x-y";
+                gshell_realptr_target = "hit-test";
+                gshell_realptr_last = "real-pointer-coord";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRCOORD";
+                gshell_command_result = "REAL POINTER COORD OK";
+                gshell_input_status_text = "COORD";
+                ptr_terminal_text = "REALPTRCOORD -> CURSOR X/Y READY FOR HIT TEST";
+                break;
+
+            case GSHELL_CMD_REALPTRHITTEST:
+                gshell_realptr_hittest_ready = 1;
+                gshell_realptr_coord_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "real-pointer-hit";
+                gshell_hit_action = "hit-test";
+                gshell_realptr_state = "hit-test";
+                gshell_realptr_source = "cursor-x-y";
+                gshell_realptr_target = "desktop";
+                gshell_realptr_last = "real-pointer-hit-test";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRHITTEST";
+                gshell_command_result = "REAL POINTER HIT TEST OK";
+                gshell_input_status_text = "HIT";
+                ptr_terminal_text = "REALPTRHITTEST -> POINTER COORD ENTERS HIT TEST MODEL";
+                break;
+
+            case GSHELL_CMD_REALPTRDESKTOPROUTE:
+                gshell_realptr_desktop_route_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_interact_route_ready = 1;
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop";
+                gshell_hit_action = "route";
+                gshell_realptr_state = "desktop-route";
+                gshell_realptr_source = "pointer";
+                gshell_realptr_target = "desktop";
+                gshell_realptr_last = "real-pointer-desktop-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRDESKTOPROUTE";
+                gshell_command_result = "REAL POINTER DESKTOP ROUTE OK";
+                gshell_input_status_text = "DESK";
+                ptr_terminal_text = "REALPTRDESKTOPROUTE -> POINTER ROUTED TO DESKTOP TARGET";
+                break;
+
+            case GSHELL_CMD_REALPTRCARDROUTE:
+                gshell_realptr_card_route_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "pointer-hover";
+                gshell_card_app = "demo.app";
+                gshell_hit_zone = "scene-card";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "route";
+                gshell_realptr_state = "card-route";
+                gshell_realptr_source = "pointer";
+                gshell_realptr_target = "demo.app";
+                gshell_realptr_last = "real-pointer-card-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRCARDROUTE";
+                gshell_command_result = "REAL POINTER CARD ROUTE OK";
+                gshell_input_status_text = "CARD";
+                ptr_terminal_text = "REALPTRCARDROUTE -> POINTER ROUTED TO APP CARD TARGET";
+                break;
+
+            case GSHELL_CMD_REALPTRWINDOWROUTE:
+                gshell_realptr_window_route_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "pointer-hover";
+                gshell_scene_window_ready = 1;
+                gshell_hit_zone = "window";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "route";
+                gshell_realptr_state = "window-route";
+                gshell_realptr_source = "pointer";
+                gshell_realptr_target = "demo.window";
+                gshell_realptr_last = "real-pointer-window-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRWINDOWROUTE";
+                gshell_command_result = "REAL POINTER WINDOW ROUTE OK";
+                gshell_input_status_text = "WINDOW";
+                ptr_terminal_text = "REALPTRWINDOWROUTE -> POINTER ROUTED TO WINDOW TARGET";
+                break;
+
+            case GSHELL_CMD_REALPTRTASKROUTE:
+                gshell_realptr_task_route_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "pointer-hover";
+                gshell_hit_zone = "taskbar";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "route";
+                gshell_realptr_state = "task-route";
+                gshell_realptr_source = "pointer";
+                gshell_realptr_target = "taskbar";
+                gshell_realptr_last = "real-pointer-task-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRTASKROUTE";
+                gshell_command_result = "REAL POINTER TASK ROUTE OK";
+                gshell_input_status_text = "TASK";
+                ptr_terminal_text = "REALPTRTASKROUTE -> POINTER ROUTED TO TASKBAR TARGET";
+                break;
+
+            case GSHELL_CMD_REALPTRCLICKROUTE:
+                gshell_realptr_click_route_ready = 1;
+                gshell_cursor_click_state_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_select_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "pointer-click";
+                gshell_focus_target = "demo.app";
+                gshell_hit_action = "click";
+                gshell_realptr_state = "click-route";
+                gshell_realptr_source = "pointer-click";
+                gshell_realptr_target = "demo.app";
+                gshell_realptr_last = "real-pointer-click-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRCLICKROUTE";
+                gshell_command_result = "REAL POINTER CLICK ROUTE OK";
+                gshell_input_status_text = "CLICK";
+                ptr_terminal_text = "REALPTRCLICKROUTE -> POINTER CLICK ROUTED TO SELECT ACTION";
+                break;
+
+            case GSHELL_CMD_REALPTRDRAGROUTE:
+                gshell_realptr_drag_route_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_flow_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "pointer-drag";
+                gshell_window_last = "real-pointer-drag";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag";
+                gshell_realptr_state = "drag-route";
+                gshell_realptr_source = "pointer-drag";
+                gshell_realptr_target = "demo.window";
+                gshell_realptr_last = "real-pointer-drag-route";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRDRAGROUTE";
+                gshell_command_result = "REAL POINTER DRAG ROUTE OK";
+                gshell_input_status_text = "DRAG";
+                ptr_terminal_text = "REALPTRDRAGROUTE -> POINTER DRAG ROUTED TO WINDOW DRAG MODEL";
+                break;
+
+            case GSHELL_CMD_REALPTRACTIONBRIDGE:
+                gshell_realptr_action_bridge_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_packet_action_feed_ready = 1;
+                gshell_mouse_action_feed_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_realptr_state = "action-bridge";
+                gshell_realptr_source = "pointer-route";
+                gshell_realptr_target = "action-binding";
+                gshell_realptr_last = "real-pointer-action-bridge";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRACTIONBRIDGE";
+                gshell_command_result = "REAL POINTER ACTION BRIDGE OK";
+                gshell_input_status_text = "ACTION";
+                ptr_terminal_text = "REALPTRACTIONBRIDGE -> POINTER ROUTE CONNECTED TO ACTION BINDING";
+                break;
+
+            case GSHELL_CMD_REALPTRCURSORVIS:
+                gshell_realptr_cursor_visual_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_cursor_visual_state = "realptr-bridge";
+                gshell_cursor_visual_shape = "arrow+route";
+                gshell_cursor_visual_layer = "pointer-bridge";
+                gshell_realptr_state = "cursor-visual";
+                gshell_realptr_source = "pointer";
+                gshell_realptr_target = "cursor-visual";
+                gshell_realptr_last = "real-pointer-cursor-visual";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRCURSORVIS";
+                gshell_command_result = "REAL POINTER CURSOR VIS OK";
+                gshell_input_status_text = "VISUAL";
+                ptr_terminal_text = "REALPTRCURSORVIS -> POINTER BRIDGE CONNECTED TO CURSOR VISUAL";
+                break;
+
+            case GSHELL_CMD_REALPTRSAFE:
+                gshell_realptr_safe_ready = 1;
+                gshell_realptr_gate_ready = 1;
+                gshell_cursor_visual_safe_ready = 1;
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_packet_safe_gate_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_realptr_state = "safe";
+                gshell_realptr_source = "real-input";
+                gshell_realptr_target = "gate-closed";
+                gshell_realptr_last = "real-pointer-safe";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRSAFE";
+                gshell_command_result = "REAL POINTER SAFE OK";
+                gshell_input_status_text = "SAFE";
+                ptr_terminal_text = "REALPTRSAFE -> REAL POINTER ROUTE GATE REMAINS SAFE";
+                break;
+
+            case GSHELL_CMD_REALPTRREGRESSION:
+                gshell_realptr_regression_ready = 1;
+                gshell_cursor_visual_regression_ready = 1;
+                gshell_cursor_regression_ready = 1;
+                gshell_packet_regression_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_realptr_state = "regression";
+                gshell_realptr_source = "old-chain";
+                gshell_realptr_target = "keyboard-safe";
+                gshell_realptr_last = "real-pointer-regression";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRREGRESSION";
+                gshell_command_result = "REAL POINTER REGRESSION OK";
+                gshell_input_status_text = "REGRESS";
+                ptr_terminal_text = "REALPTRREGRESSION -> OLD KEYBOARD AND GShell COMMANDS KEPT";
+                break;
+
+            case GSHELL_CMD_REALPTRDEMO:
+                gshell_realptr_gate_ready = 1;
+                gshell_realptr_source_ready = 1;
+                gshell_realptr_coord_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_realptr_desktop_route_ready = 1;
+                gshell_realptr_card_route_ready = 1;
+                gshell_realptr_window_route_ready = 1;
+                gshell_realptr_task_route_ready = 1;
+                gshell_realptr_click_route_ready = 1;
+                gshell_realptr_drag_route_ready = 1;
+                gshell_realptr_action_bridge_ready = 1;
+                gshell_realptr_cursor_visual_ready = 1;
+                gshell_realptr_safe_ready = 1;
+                gshell_realptr_regression_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_cursor_button_mask = 1;
+                gshell_realptr_state = "demo";
+                gshell_realptr_source = "cursor-visual";
+                gshell_realptr_target = "route-action";
+                gshell_realptr_last = "real-pointer-demo";
+                gshell_realptr_events++;
+                gshell_command_name = "REALPTRDEMO";
+                gshell_command_result = "REAL POINTER DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                ptr_terminal_text = "REALPTRDEMO -> FULL REAL POINTER ROUTE BRIDGE READY";
+                break;
+
+            case GSHELL_CMD_REALPTRCHECK: {
+                int ok = gshell_realptr_gate_ready &&
+                         gshell_realptr_source_ready &&
+                         gshell_realptr_coord_ready &&
+                         gshell_realptr_hittest_ready &&
+                         gshell_realptr_desktop_route_ready &&
+                         gshell_realptr_card_route_ready &&
+                         gshell_realptr_window_route_ready &&
+                         gshell_realptr_task_route_ready &&
+                         gshell_realptr_click_route_ready &&
+                         gshell_realptr_drag_route_ready &&
+                         gshell_realptr_action_bridge_ready &&
+                         gshell_realptr_cursor_visual_ready &&
+                         gshell_realptr_safe_ready &&
+                         gshell_realptr_regression_ready;
+                gshell_realptr_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "REALPTRCHECK";
+                gshell_command_result = ok ? "REAL POINTER CHECK OK" : "REAL POINTER CHECK WAIT";
+                gshell_input_status_text = ok ? "PTR OK" : "PTR WAIT";
+                ptr_terminal_text = ok ? "REALPTRCHECK -> REAL POINTER ROUTE BRIDGE READY" : "REALPTRCHECK -> RUN REALPTRDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_REALPTRRESET:
+                gshell_realptr_gate_ready = 0;
+                gshell_realptr_source_ready = 0;
+                gshell_realptr_coord_ready = 0;
+                gshell_realptr_hittest_ready = 0;
+                gshell_realptr_desktop_route_ready = 0;
+                gshell_realptr_card_route_ready = 0;
+                gshell_realptr_window_route_ready = 0;
+                gshell_realptr_task_route_ready = 0;
+                gshell_realptr_click_route_ready = 0;
+                gshell_realptr_drag_route_ready = 0;
+                gshell_realptr_action_bridge_ready = 0;
+                gshell_realptr_cursor_visual_ready = 0;
+                gshell_realptr_safe_ready = 0;
+                gshell_realptr_regression_ready = 0;
+                gshell_realptr_demo_ready = 0;
+                gshell_realptr_events = 0;
+                gshell_realptr_state = "idle";
+                gshell_realptr_source = "mock-cursor";
+                gshell_realptr_target = "desktop";
+                gshell_realptr_last = "reset";
+                gshell_command_name = "REALPTRRESET";
+                gshell_command_result = "REAL POINTER RESET OK";
+                gshell_input_status_text = "RESET";
+                ptr_terminal_text = "REALPTRRESET -> REAL POINTER ROUTE BRIDGE STATE RESET";
+                break;
+
+            case GSHELL_CMD_REALPTRNEXT:
+                gshell_command_name = "REALPTRNEXT";
+                gshell_command_result = "REAL POINTER NEXT OK";
+                gshell_input_status_text = "NEXT";
+                ptr_terminal_text = "REALPTRNEXT -> 1.6.6 REAL INPUT CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ptr_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_REALINPUTCLOSESTATUS && command_id <= GSHELL_CMD_REALINPUTFINALREADY) {
+        const char* close_terminal_text = "REALINPUTCLOSESTATUS -> REAL INPUT CLOSEOUT READY";
+
+        gshell_command_view = "REALINPUTCLOSESTATUS";
+        gshell_input_status_text = "INPUT FINAL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_REALINPUTCLOSESTATUS:
+                gshell_command_name = "REALINPUTCLOSESTATUS";
+                gshell_command_result = "REAL INPUT CLOSE STATUS OK";
+                break;
+
+            case GSHELL_CMD_REALINPUTPREPSUM:
+                gshell_realinput_close_prep_ready = 1;
+                gshell_input_demo_ready = 1;
+                gshell_input_handoff_ready = 1;
+                gshell_realinput_close_state = "prep-summary";
+                gshell_realinput_close_source = "input-prep";
+                gshell_realinput_close_target = "real-input";
+                gshell_realinput_close_last = "prep-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTPREPSUM";
+                gshell_command_result = "REAL INPUT PREP SUMMARY OK";
+                gshell_input_status_text = "PREP SUM";
+                close_terminal_text = "REALINPUTPREPSUM -> INPUT PREPARATION SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTMOUSESUM:
+                gshell_realinput_close_mouse_ready = 1;
+                gshell_mouse_demo_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_realinput_close_state = "mouse-summary";
+                gshell_realinput_close_source = "ps2-mouse";
+                gshell_realinput_close_target = "packet";
+                gshell_realinput_close_last = "mouse-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTMOUSESUM";
+                gshell_command_result = "REAL INPUT MOUSE SUMMARY OK";
+                gshell_input_status_text = "MOUSE SUM";
+                close_terminal_text = "REALINPUTMOUSESUM -> MOUSE SKELETON SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTPACKETSUM:
+                gshell_realinput_close_packet_ready = 1;
+                gshell_packet_demo_ready = 1;
+                gshell_packet_safe_gate_ready = 1;
+                gshell_packet_route_feed_ready = 1;
+                gshell_packet_action_feed_ready = 1;
+                gshell_realinput_close_state = "packet-summary";
+                gshell_realinput_close_source = "packet-pipe";
+                gshell_realinput_close_target = "cursor";
+                gshell_realinput_close_last = "packet-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTPACKETSUM";
+                gshell_command_result = "REAL INPUT PACKET SUMMARY OK";
+                gshell_input_status_text = "PACKET SUM";
+                close_terminal_text = "REALINPUTPACKETSUM -> PACKET PIPELINE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTCURSORSUM:
+                gshell_realinput_close_cursor_ready = 1;
+                gshell_cursor_demo_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_realinput_close_state = "cursor-summary";
+                gshell_realinput_close_source = "cursor-pipe";
+                gshell_realinput_close_target = "visual";
+                gshell_realinput_close_last = "cursor-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTCURSORSUM";
+                gshell_command_result = "REAL INPUT CURSOR SUMMARY OK";
+                gshell_input_status_text = "CURSOR SUM";
+                close_terminal_text = "REALINPUTCURSORSUM -> CURSOR PIPELINE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTVISUALSUM:
+                gshell_realinput_close_visual_ready = 1;
+                gshell_cursor_visual_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_realinput_close_state = "visual-summary";
+                gshell_realinput_close_source = "cursor-visual";
+                gshell_realinput_close_target = "route";
+                gshell_realinput_close_last = "visual-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTVISUALSUM";
+                gshell_command_result = "REAL INPUT VISUAL SUMMARY OK";
+                gshell_input_status_text = "VISUAL SUM";
+                close_terminal_text = "REALINPUTVISUALSUM -> CURSOR VISUAL SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTPTRROUTESUM:
+                gshell_realinput_close_ptrroute_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_realptr_action_bridge_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_realinput_close_state = "ptr-route-summary";
+                gshell_realinput_close_source = "realptr";
+                gshell_realinput_close_target = "route-action";
+                gshell_realinput_close_last = "ptr-route-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTPTRROUTESUM";
+                gshell_command_result = "REAL INPUT POINTER ROUTE SUMMARY OK";
+                gshell_input_status_text = "PTR SUM";
+                close_terminal_text = "REALINPUTPTRROUTESUM -> REAL POINTER ROUTE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTBRIDGESUM:
+                gshell_realinput_close_bridge_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_realinput_close_state = "bridge-summary";
+                gshell_realinput_close_source = "input";
+                gshell_realinput_close_target = "route-action";
+                gshell_realinput_close_last = "bridge-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTBRIDGESUM";
+                gshell_command_result = "REAL INPUT BRIDGE SUMMARY OK";
+                gshell_input_status_text = "BRIDGE";
+                close_terminal_text = "REALINPUTBRIDGESUM -> INPUT TO ROUTE ACTION BRIDGE READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTSAFESUM:
+                gshell_realinput_close_safe_ready = 1;
+                gshell_input_safe_ready = 1;
+                gshell_mouse_safe_gate_ready = 1;
+                gshell_packet_safe_gate_ready = 1;
+                gshell_cursor_safe_gate_ready = 1;
+                gshell_cursor_visual_safe_ready = 1;
+                gshell_realptr_safe_ready = 1;
+                gshell_realinput_close_state = "safe-summary";
+                gshell_realinput_close_source = "real-input";
+                gshell_realinput_close_target = "gate-closed";
+                gshell_realinput_close_last = "safe-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTSAFESUM";
+                gshell_command_result = "REAL INPUT SAFE SUMMARY OK";
+                gshell_input_status_text = "SAFE";
+                close_terminal_text = "REALINPUTSAFESUM -> REAL INPUT GATES STAY CLOSED";
+                break;
+
+            case GSHELL_CMD_REALINPUTREGRESSSUM:
+                gshell_realinput_close_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_packet_regression_ready = 1;
+                gshell_cursor_regression_ready = 1;
+                gshell_cursor_visual_regression_ready = 1;
+                gshell_realptr_regression_ready = 1;
+                gshell_realinput_close_state = "regression-summary";
+                gshell_realinput_close_source = "old-chain";
+                gshell_realinput_close_target = "keyboard-safe";
+                gshell_realinput_close_last = "regression-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTREGRESSSUM";
+                gshell_command_result = "REAL INPUT REGRESSION SUMMARY OK";
+                gshell_input_status_text = "REGRESS";
+                close_terminal_text = "REALINPUTREGRESSSUM -> KEYBOARD AND OLD COMMAND CHAINS KEPT";
+                break;
+
+            case GSHELL_CMD_REALINPUTHANDOFFSUM:
+                gshell_realinput_close_handoff_ready = 1;
+                gshell_input_handoff_ready = 1;
+                gshell_interact_close_handoff_ready = 1;
+                gshell_realinput_close_state = "handoff-summary";
+                gshell_realinput_close_source = "dev-1.6.x";
+                gshell_realinput_close_target = "dev-1.7.x";
+                gshell_realinput_close_last = "handoff-summary";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTHANDOFFSUM";
+                gshell_command_result = "REAL INPUT HANDOFF SUMMARY OK";
+                gshell_input_status_text = "HANDOFF";
+                close_terminal_text = "REALINPUTHANDOFFSUM -> READY TO HAND OFF TO CLICKABLE DESKTOP UI";
+                break;
+
+            case GSHELL_CMD_REALINPUTDEMOALL:
+                gshell_realinput_close_prep_ready = 1;
+                gshell_realinput_close_mouse_ready = 1;
+                gshell_realinput_close_packet_ready = 1;
+                gshell_realinput_close_cursor_ready = 1;
+                gshell_realinput_close_visual_ready = 1;
+                gshell_realinput_close_ptrroute_ready = 1;
+                gshell_realinput_close_bridge_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_realinput_close_regression_ready = 1;
+                gshell_realinput_close_handoff_ready = 1;
+                gshell_realinput_close_demo_ready = 1;
+                gshell_realinput_close_bounds_ready = 1;
+                gshell_realinput_close_legacy_ready = 1;
+                gshell_input_demo_ready = 1;
+                gshell_mouse_demo_ready = 1;
+                gshell_packet_demo_ready = 1;
+                gshell_cursor_demo_ready = 1;
+                gshell_cursor_visual_demo_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_realinput_close_state = "demo-all";
+                gshell_realinput_close_source = "real-input-stack";
+                gshell_realinput_close_target = "clickable-desktop";
+                gshell_realinput_close_last = "demo-all";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTDEMOALL";
+                gshell_command_result = "REAL INPUT DEMO ALL OK";
+                gshell_input_status_text = "DEMO ALL";
+                close_terminal_text = "REALINPUTDEMOALL -> FULL 1.6 REAL INPUT STACK DEMO READY";
+                break;
+
+            case GSHELL_CMD_REALINPUTFINALCHECK: {
+                int ok = gshell_realinput_close_prep_ready &&
+                         gshell_realinput_close_mouse_ready &&
+                         gshell_realinput_close_packet_ready &&
+                         gshell_realinput_close_cursor_ready &&
+                         gshell_realinput_close_visual_ready &&
+                         gshell_realinput_close_ptrroute_ready &&
+                         gshell_realinput_close_bridge_ready &&
+                         gshell_realinput_close_safe_ready &&
+                         gshell_realinput_close_regression_ready &&
+                         gshell_realinput_close_handoff_ready;
+                gshell_realinput_close_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "REALINPUTFINALCHECK";
+                gshell_command_result = ok ? "REAL INPUT FINAL CHECK OK" : "REAL INPUT FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "FINAL OK" : "FINAL WAIT";
+                close_terminal_text = ok ? "REALINPUTFINALCHECK -> REAL INPUT LAYER READY" : "REALINPUTFINALCHECK -> RUN REALINPUTDEMOALL";
+                break;
+            }
+
+            case GSHELL_CMD_REALINPUTFINALRESET:
+                gshell_realinput_close_prep_ready = 0;
+                gshell_realinput_close_mouse_ready = 0;
+                gshell_realinput_close_packet_ready = 0;
+                gshell_realinput_close_cursor_ready = 0;
+                gshell_realinput_close_visual_ready = 0;
+                gshell_realinput_close_ptrroute_ready = 0;
+                gshell_realinput_close_bridge_ready = 0;
+                gshell_realinput_close_safe_ready = 0;
+                gshell_realinput_close_regression_ready = 0;
+                gshell_realinput_close_handoff_ready = 0;
+                gshell_realinput_close_demo_ready = 0;
+                gshell_realinput_close_bounds_ready = 0;
+                gshell_realinput_close_legacy_ready = 0;
+                gshell_realinput_close_roadmap_ready = 0;
+                gshell_realinput_closeout_ready = 0;
+                gshell_realinput_final_ready = 0;
+                gshell_realinput_close_events = 0;
+                gshell_realinput_close_state = "idle";
+                gshell_realinput_close_source = "1.6-input-layer";
+                gshell_realinput_close_target = "1.7-clickable-ui";
+                gshell_realinput_close_last = "reset";
+                gshell_command_name = "REALINPUTFINALRESET";
+                gshell_command_result = "REAL INPUT FINAL RESET OK";
+                gshell_input_status_text = "RESET";
+                close_terminal_text = "REALINPUTFINALRESET -> REAL INPUT CLOSEOUT STATE RESET";
+                break;
+
+            case GSHELL_CMD_REALINPUTCLOSEOUT:
+                gshell_realinput_close_prep_ready = 1;
+                gshell_realinput_close_mouse_ready = 1;
+                gshell_realinput_close_packet_ready = 1;
+                gshell_realinput_close_cursor_ready = 1;
+                gshell_realinput_close_visual_ready = 1;
+                gshell_realinput_close_ptrroute_ready = 1;
+                gshell_realinput_close_bridge_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_realinput_close_regression_ready = 1;
+                gshell_realinput_close_handoff_ready = 1;
+                gshell_realinput_close_demo_ready = 1;
+                gshell_realinput_close_bounds_ready = 1;
+                gshell_realinput_close_legacy_ready = 1;
+                gshell_realinput_closeout_ready = 1;
+                gshell_realinput_close_state = "closeout";
+                gshell_realinput_close_source = "dev-1.6.x";
+                gshell_realinput_close_target = "dev-1.7.x";
+                gshell_realinput_close_last = "closeout";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTCLOSEOUT";
+                gshell_command_result = "REAL INPUT CLOSEOUT OK";
+                gshell_input_status_text = "CLOSEOUT";
+                close_terminal_text = "REALINPUTCLOSEOUT -> 1.6.X REAL INPUT LAYER CLOSED";
+                break;
+
+            case GSHELL_CMD_REALINPUTNEXTPHASE:
+                gshell_realinput_close_handoff_ready = 1;
+                gshell_realinput_close_state = "next-phase";
+                gshell_realinput_close_source = "real-input";
+                gshell_realinput_close_target = "clickable-desktop-ui";
+                gshell_realinput_close_last = "next-phase";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTNEXTPHASE";
+                gshell_command_result = "REAL INPUT NEXT PHASE OK";
+                gshell_input_status_text = "NEXT";
+                close_terminal_text = "REALINPUTNEXTPHASE -> 1.7.0 CLICKABLE DESKTOP UI BRIDGE";
+                break;
+
+            case GSHELL_CMD_REALINPUTROADMAP:
+                gshell_realinput_close_roadmap_ready = 1;
+                gshell_realinput_close_state = "roadmap";
+                gshell_realinput_close_source = "1.6-real-input";
+                gshell_realinput_close_target = "1.7-clickable-ui";
+                gshell_realinput_close_last = "roadmap";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTROADMAP";
+                gshell_command_result = "REAL INPUT ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                close_terminal_text = "REALINPUTROADMAP -> 1.7 CLICKABLE UI, 1.8 DESKTOP OPERATIONS";
+                break;
+
+            case GSHELL_CMD_REALINPUTBOUNDS:
+                gshell_realinput_close_bounds_ready = 1;
+                gshell_cursor_bounds_ready = 1;
+                gshell_cursor_clamp_ready = 1;
+                gshell_realinput_close_state = "bounds";
+                gshell_realinput_close_source = "cursor";
+                gshell_realinput_close_target = "screen";
+                gshell_realinput_close_last = "bounds";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTBOUNDS";
+                gshell_command_result = "REAL INPUT BOUNDS OK";
+                gshell_input_status_text = "BOUNDS";
+                close_terminal_text = "REALINPUTBOUNDS -> CURSOR BOUNDS AND CLAMP CONFIRMED";
+                break;
+
+            case GSHELL_CMD_REALINPUTLEGACYCHECK:
+                gshell_realinput_close_legacy_ready = 1;
+                gshell_realinput_close_regression_ready = 1;
+                gshell_realinput_close_state = "legacy-check";
+                gshell_realinput_close_source = "keyboard";
+                gshell_realinput_close_target = "old-gshell";
+                gshell_realinput_close_last = "legacy-check";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTLEGACYCHECK";
+                gshell_command_result = "REAL INPUT LEGACY CHECK OK";
+                gshell_input_status_text = "LEGACY";
+                close_terminal_text = "REALINPUTLEGACYCHECK -> KEYBOARD INPUT CHAIN STILL SAFE";
+                break;
+
+            case GSHELL_CMD_REALINPUTFINALREADY:
+                gshell_realinput_final_ready = 1;
+                gshell_realinput_closeout_ready = 1;
+                gshell_realinput_close_state = "final-ready";
+                gshell_realinput_close_source = "dev-1.6.6";
+                gshell_realinput_close_target = "dev-1.7.0";
+                gshell_realinput_close_last = "final-ready";
+                gshell_realinput_close_events++;
+                gshell_command_name = "REALINPUTFINALREADY";
+                gshell_command_result = "REAL INPUT FINAL READY OK";
+                gshell_input_status_text = "READY";
+                close_terminal_text = "REALINPUTFINALREADY -> REAL INPUT CLOSEOUT FINAL READY";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(close_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_CLICKUISTATUS && command_id <= GSHELL_CMD_CLICKUINEXT) {
+        const char* click_terminal_text = "CLICKUISTATUS -> CLICKABLE DESKTOP UI BRIDGE READY";
+
+        gshell_command_view = "CLICKUISTATUS";
+        gshell_input_status_text = "CLICK UI";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CLICKUISTATUS:
+                gshell_command_name = "CLICKUISTATUS";
+                gshell_command_result = "CLICK UI STATUS OK";
+                break;
+
+            case GSHELL_CMD_CLICKUIDESKTOP:
+                gshell_clickui_desktop_ready = 1;
+                gshell_realptr_desktop_route_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_desktop_state = "clickable";
+                gshell_desktop_focus = "desktop";
+                gshell_desktop_last = "click-ui-desktop";
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "desktop";
+                gshell_clickui_target = "desktop";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "desktop";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIDESKTOP";
+                gshell_command_result = "CLICK UI DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                click_terminal_text = "CLICKUIDESKTOP -> DESKTOP TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUICARD:
+                gshell_clickui_card_ready = 1;
+                gshell_realptr_card_route_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "clickable";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "click-ui-card";
+                gshell_hit_zone = "scene-card";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "card";
+                gshell_clickui_target = "demo.app";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "card";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUICARD";
+                gshell_command_result = "CLICK UI CARD OK";
+                gshell_input_status_text = "CARD";
+                click_terminal_text = "CLICKUICARD -> APP CARD TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUIWINDOW:
+                gshell_clickui_window_ready = 1;
+                gshell_realptr_window_route_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "clickable";
+                gshell_window_last = "click-ui-window";
+                gshell_scene_window_ready = 1;
+                gshell_hit_zone = "window";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "window";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "window";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIWINDOW";
+                gshell_command_result = "CLICK UI WINDOW OK";
+                gshell_input_status_text = "WINDOW";
+                click_terminal_text = "CLICKUIWINDOW -> WINDOW TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUITASKBAR:
+                gshell_clickui_taskbar_ready = 1;
+                gshell_realptr_task_route_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "clickable";
+                gshell_taskbar_last = "click-ui-taskbar";
+                gshell_hit_zone = "taskbar";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "taskbar";
+                gshell_clickui_target = "taskbar";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "taskbar";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUITASKBAR";
+                gshell_command_result = "CLICK UI TASKBAR OK";
+                gshell_input_status_text = "TASKBAR";
+                click_terminal_text = "CLICKUITASKBAR -> TASKBAR TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUILAUNCHER:
+                gshell_clickui_launcher_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_state = "clickable";
+                gshell_launcher_last = "click-ui-launcher";
+                gshell_hit_zone = "launcher";
+                gshell_hit_target = "launcher";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "launcher";
+                gshell_clickui_target = "launcher";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "launcher";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUILAUNCHER";
+                gshell_command_result = "CLICK UI LAUNCHER OK";
+                gshell_input_status_text = "LAUNCHER";
+                click_terminal_text = "CLICKUILAUNCHER -> LAUNCHER TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUIMENU:
+                gshell_clickui_menu_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_hit_zone = "menu";
+                gshell_hit_target = "desktop-menu";
+                gshell_hit_action = "click-ui";
+                gshell_clickui_state = "menu";
+                gshell_clickui_target = "menu";
+                gshell_clickui_action = "route";
+                gshell_clickui_last = "menu";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIMENU";
+                gshell_command_result = "CLICK UI MENU OK";
+                gshell_input_status_text = "MENU";
+                click_terminal_text = "CLICKUIMENU -> MENU TARGET IS CLICKABLE";
+                break;
+
+            case GSHELL_CMD_CLICKUIHOVER:
+                gshell_clickui_hover_ready = 1;
+                gshell_route_hover_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_cursor_route_feed_ready = 1;
+                gshell_hit_action = "hover";
+                gshell_clickui_state = "hover";
+                gshell_clickui_target = "demo.app";
+                gshell_clickui_action = "hover";
+                gshell_clickui_last = "hover";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIHOVER";
+                gshell_command_result = "CLICK UI HOVER OK";
+                gshell_input_status_text = "HOVER";
+                click_terminal_text = "CLICKUIHOVER -> POINTER HOVER FEEDS UI TARGET";
+                break;
+
+            case GSHELL_CMD_CLICKUICLICK:
+                gshell_clickui_click_ready = 1;
+                gshell_realptr_click_route_ready = 1;
+                gshell_cursor_click_state_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_focus_target = "demo.app";
+                gshell_clickui_state = "click";
+                gshell_clickui_target = "demo.app";
+                gshell_clickui_action = "select";
+                gshell_clickui_last = "click";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUICLICK";
+                gshell_command_result = "CLICK UI CLICK OK";
+                gshell_input_status_text = "CLICK";
+                click_terminal_text = "CLICKUICLICK -> POINTER CLICK SELECTS UI TARGET";
+                break;
+
+            case GSHELL_CMD_CLICKUIDOUBLE:
+                gshell_clickui_double_ready = 1;
+                gshell_route_double_click_ready = 1;
+                gshell_route_open_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "opened-by-double-click";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_clickui_state = "double-click";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "open";
+                gshell_clickui_last = "double-click";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIDOUBLE";
+                gshell_command_result = "CLICK UI DOUBLE OK";
+                gshell_input_status_text = "DOUBLE";
+                click_terminal_text = "CLICKUIDOUBLE -> DOUBLE CLICK OPENS WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKUIRIGHT:
+                gshell_clickui_right_ready = 1;
+                gshell_route_right_click_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_focus_target = "desktop-menu";
+                gshell_clickui_state = "right-click";
+                gshell_clickui_target = "desktop-menu";
+                gshell_clickui_action = "menu";
+                gshell_clickui_last = "right-click";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIRIGHT";
+                gshell_command_result = "CLICK UI RIGHT OK";
+                gshell_input_status_text = "RIGHT";
+                click_terminal_text = "CLICKUIRIGHT -> RIGHT CLICK OPENS MENU MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKUIDRAG:
+                gshell_clickui_drag_ready = 1;
+                gshell_realptr_drag_route_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_flow_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "dragging";
+                gshell_window_last = "click-ui-drag";
+                gshell_clickui_state = "drag";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "drag";
+                gshell_clickui_last = "drag";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIDRAG";
+                gshell_command_result = "CLICK UI DRAG OK";
+                gshell_input_status_text = "DRAG";
+                click_terminal_text = "CLICKUIDRAG -> POINTER DRAG MOVES WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKUIDROP:
+                gshell_clickui_drop_ready = 1;
+                gshell_clickui_drag_ready = 1;
+                gshell_route_drop_ready = 1;
+                gshell_window_state = "drop";
+                gshell_window_last = "click-ui-drop";
+                gshell_clickui_state = "drop";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "drop";
+                gshell_clickui_last = "drop";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIDROP";
+                gshell_command_result = "CLICK UI DROP OK";
+                gshell_input_status_text = "DROP";
+                click_terminal_text = "CLICKUIDROP -> POINTER DROP ENDS WINDOW DRAG MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKUIACTION:
+                gshell_clickui_action_ready = 1;
+                gshell_realptr_action_bridge_ready = 1;
+                gshell_cursor_action_feed_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_clickui_state = "action";
+                gshell_clickui_target = "action-binding";
+                gshell_clickui_action = "bridge";
+                gshell_clickui_last = "action";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIACTION";
+                gshell_command_result = "CLICK UI ACTION OK";
+                gshell_input_status_text = "ACTION";
+                click_terminal_text = "CLICKUIACTION -> CLICKABLE UI CONNECTED TO ACTION BINDING";
+                break;
+
+            case GSHELL_CMD_CLICKUIFOCUS:
+                gshell_clickui_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_window_focused = 1;
+                gshell_focus_target = "demo.window";
+                gshell_scene_focus_ready = 1;
+                gshell_clickui_state = "focus";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "focus";
+                gshell_clickui_last = "focus";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIFOCUS";
+                gshell_command_result = "CLICK UI FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                click_terminal_text = "CLICKUIFOCUS -> CLICKABLE UI FOCUSES WINDOW";
+                break;
+
+            case GSHELL_CMD_CLICKUIOPEN:
+                gshell_clickui_open_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "opened";
+                gshell_scene_window_ready = 1;
+                gshell_clickui_state = "open";
+                gshell_clickui_target = "demo.window";
+                gshell_clickui_action = "open";
+                gshell_clickui_last = "open";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIOPEN";
+                gshell_command_result = "CLICK UI OPEN OK";
+                gshell_input_status_text = "OPEN";
+                click_terminal_text = "CLICKUIOPEN -> CLICKABLE UI OPEN ACTION READY";
+                break;
+
+            case GSHELL_CMD_CLICKUICLOSE:
+                gshell_clickui_close_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed-by-click-ui";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_clickui_state = "close";
+                gshell_clickui_target = "desktop";
+                gshell_clickui_action = "close";
+                gshell_clickui_last = "close";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUICLOSE";
+                gshell_command_result = "CLICK UI CLOSE OK";
+                gshell_input_status_text = "CLOSE";
+                click_terminal_text = "CLICKUICLOSE -> CLICKABLE UI CLOSE ACTION READY";
+                break;
+
+            case GSHELL_CMD_CLICKUIDEMO:
+                gshell_clickui_desktop_ready = 1;
+                gshell_clickui_card_ready = 1;
+                gshell_clickui_window_ready = 1;
+                gshell_clickui_taskbar_ready = 1;
+                gshell_clickui_launcher_ready = 1;
+                gshell_clickui_menu_ready = 1;
+                gshell_clickui_hover_ready = 1;
+                gshell_clickui_click_ready = 1;
+                gshell_clickui_double_ready = 1;
+                gshell_clickui_right_ready = 1;
+                gshell_clickui_drag_ready = 1;
+                gshell_clickui_drop_ready = 1;
+                gshell_clickui_action_ready = 1;
+                gshell_clickui_focus_ready = 1;
+                gshell_clickui_open_ready = 1;
+                gshell_clickui_close_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_x = 424;
+                gshell_cursor_y = 284;
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "clickable-ui-demo";
+                gshell_scene_window_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_route_desktop_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_clickui_state = "demo";
+                gshell_clickui_target = "desktop-ui";
+                gshell_clickui_action = "full-flow";
+                gshell_clickui_last = "demo";
+                gshell_clickui_events++;
+                gshell_command_name = "CLICKUIDEMO";
+                gshell_command_result = "CLICK UI DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                click_terminal_text = "CLICKUIDEMO -> FULL CLICKABLE DESKTOP UI BRIDGE READY";
+                break;
+
+            case GSHELL_CMD_CLICKUICHECK: {
+                int ok = gshell_clickui_desktop_ready &&
+                         gshell_clickui_card_ready &&
+                         gshell_clickui_window_ready &&
+                         gshell_clickui_taskbar_ready &&
+                         gshell_clickui_launcher_ready &&
+                         gshell_clickui_menu_ready &&
+                         gshell_clickui_hover_ready &&
+                         gshell_clickui_click_ready &&
+                         gshell_clickui_double_ready &&
+                         gshell_clickui_right_ready &&
+                         gshell_clickui_drag_ready &&
+                         gshell_clickui_drop_ready &&
+                         gshell_clickui_action_ready &&
+                         gshell_clickui_focus_ready &&
+                         gshell_clickui_open_ready &&
+                         gshell_clickui_close_ready;
+                gshell_clickui_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CLICKUICHECK";
+                gshell_command_result = ok ? "CLICK UI CHECK OK" : "CLICK UI CHECK WAIT";
+                gshell_input_status_text = ok ? "CLICK OK" : "CLICK WAIT";
+                click_terminal_text = ok ? "CLICKUICHECK -> CLICKABLE DESKTOP UI BRIDGE READY" : "CLICKUICHECK -> RUN CLICKUIDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_CLICKUIRESET:
+                gshell_clickui_desktop_ready = 0;
+                gshell_clickui_card_ready = 0;
+                gshell_clickui_window_ready = 0;
+                gshell_clickui_taskbar_ready = 0;
+                gshell_clickui_launcher_ready = 0;
+                gshell_clickui_menu_ready = 0;
+                gshell_clickui_hover_ready = 0;
+                gshell_clickui_click_ready = 0;
+                gshell_clickui_double_ready = 0;
+                gshell_clickui_right_ready = 0;
+                gshell_clickui_drag_ready = 0;
+                gshell_clickui_drop_ready = 0;
+                gshell_clickui_action_ready = 0;
+                gshell_clickui_focus_ready = 0;
+                gshell_clickui_open_ready = 0;
+                gshell_clickui_close_ready = 0;
+                gshell_clickui_demo_ready = 0;
+                gshell_clickui_events = 0;
+                gshell_clickui_state = "idle";
+                gshell_clickui_target = "desktop";
+                gshell_clickui_action = "none";
+                gshell_clickui_last = "reset";
+                gshell_command_name = "CLICKUIRESET";
+                gshell_command_result = "CLICK UI RESET OK";
+                gshell_input_status_text = "RESET";
+                click_terminal_text = "CLICKUIRESET -> CLICKABLE UI BRIDGE STATE RESET";
+                break;
+
+            case GSHELL_CMD_CLICKUINEXT:
+                gshell_command_name = "CLICKUINEXT";
+                gshell_command_result = "CLICK UI NEXT OK";
+                gshell_input_status_text = "NEXT";
+                click_terminal_text = "CLICKUINEXT -> 1.7.1 DESKTOP TARGET ACTIVATION";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(click_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_DESKTARGETSTATUS && command_id <= GSHELL_CMD_DESKTARGETNEXT) {
+        const char* target_terminal_text = "DESKTARGETSTATUS -> DESKTOP TARGET ACTIVATION READY";
+
+        gshell_command_view = "DESKTARGETSTATUS";
+        gshell_input_status_text = "TARGET OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_DESKTARGETSTATUS:
+                gshell_command_name = "DESKTARGETSTATUS";
+                gshell_command_result = "DESKTOP TARGET STATUS OK";
+                break;
+
+            case GSHELL_CMD_DESKTARGETDESKTOP:
+                gshell_desktarget_desktop_ready = 1;
+                gshell_clickui_desktop_ready = 1;
+                gshell_route_desktop_ready = 1;
+                gshell_desktop_state = "active-target";
+                gshell_desktop_focus = "desktop";
+                gshell_desktop_last = "target-desktop";
+                gshell_hit_zone = "desktop";
+                gshell_hit_target = "desktop";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "desktop-target";
+                gshell_desktarget_active = "desktop";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "desktop";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETDESKTOP";
+                gshell_command_result = "DESKTOP TARGET DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                target_terminal_text = "DESKTARGETDESKTOP -> DESKTOP TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETCARD:
+                gshell_desktarget_card_ready = 1;
+                gshell_clickui_card_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "active-target";
+                gshell_card_app = "demo.app";
+                gshell_card_last = "target-card";
+                gshell_hit_zone = "scene-card";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "card-target";
+                gshell_desktarget_active = "demo.app";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "card";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETCARD";
+                gshell_command_result = "DESKTOP TARGET CARD OK";
+                gshell_input_status_text = "CARD";
+                target_terminal_text = "DESKTARGETCARD -> APP CARD TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETWINDOW:
+                gshell_desktarget_window_ready = 1;
+                gshell_clickui_window_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "active-target";
+                gshell_window_last = "target-window";
+                gshell_scene_window_ready = 1;
+                gshell_hit_zone = "window";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "window-target";
+                gshell_desktarget_active = "demo.window";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "window";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETWINDOW";
+                gshell_command_result = "DESKTOP TARGET WINDOW OK";
+                gshell_input_status_text = "WINDOW";
+                target_terminal_text = "DESKTARGETWINDOW -> WINDOW TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETTASKBAR:
+                gshell_desktarget_taskbar_ready = 1;
+                gshell_clickui_taskbar_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "active-target";
+                gshell_taskbar_last = "target-taskbar";
+                gshell_hit_zone = "taskbar";
+                gshell_hit_target = "demo.app";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "taskbar-target";
+                gshell_desktarget_active = "taskbar";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "taskbar";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETTASKBAR";
+                gshell_command_result = "DESKTOP TARGET TASKBAR OK";
+                gshell_input_status_text = "TASKBAR";
+                target_terminal_text = "DESKTARGETTASKBAR -> TASKBAR TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETLAUNCHER:
+                gshell_desktarget_launcher_ready = 1;
+                gshell_clickui_launcher_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_state = "active-target";
+                gshell_launcher_last = "target-launcher";
+                gshell_hit_zone = "launcher";
+                gshell_hit_target = "launcher";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "launcher-target";
+                gshell_desktarget_active = "launcher";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "launcher";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETLAUNCHER";
+                gshell_command_result = "DESKTOP TARGET LAUNCHER OK";
+                gshell_input_status_text = "LAUNCHER";
+                target_terminal_text = "DESKTARGETLAUNCHER -> LAUNCHER TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETMENU:
+                gshell_desktarget_menu_ready = 1;
+                gshell_clickui_menu_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_interact_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_hit_zone = "menu";
+                gshell_hit_target = "desktop-menu";
+                gshell_hit_action = "activate";
+                gshell_desktarget_state = "menu-target";
+                gshell_desktarget_active = "desktop-menu";
+                gshell_desktarget_action = "activate";
+                gshell_desktarget_last = "menu";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETMENU";
+                gshell_command_result = "DESKTOP TARGET MENU OK";
+                gshell_input_status_text = "MENU";
+                target_terminal_text = "DESKTARGETMENU -> MENU TARGET ACTIVATED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETFOCUS:
+                gshell_desktarget_focus_ready = 1;
+                gshell_clickui_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_window_focused = 1;
+                gshell_focus_target = "demo.window";
+                gshell_scene_focus_ready = 1;
+                gshell_desktarget_state = "focus";
+                gshell_desktarget_active = "demo.window";
+                gshell_desktarget_action = "focus";
+                gshell_desktarget_last = "focus";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETFOCUS";
+                gshell_command_result = "DESKTOP TARGET FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                target_terminal_text = "DESKTARGETFOCUS -> ACTIVE TARGET FOCUSED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETSELECT:
+                gshell_desktarget_select_ready = 1;
+                gshell_clickui_click_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected-target";
+                gshell_focus_target = "demo.app";
+                gshell_desktarget_state = "select";
+                gshell_desktarget_active = "demo.app";
+                gshell_desktarget_action = "select";
+                gshell_desktarget_last = "select";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETSELECT";
+                gshell_command_result = "DESKTOP TARGET SELECT OK";
+                gshell_input_status_text = "SELECT";
+                target_terminal_text = "DESKTARGETSELECT -> ACTIVE CARD TARGET SELECTED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETOPEN:
+                gshell_desktarget_open_ready = 1;
+                gshell_clickui_open_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "opened-target";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_desktarget_state = "open";
+                gshell_desktarget_active = "demo.window";
+                gshell_desktarget_action = "open";
+                gshell_desktarget_last = "open";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETOPEN";
+                gshell_command_result = "DESKTOP TARGET OPEN OK";
+                gshell_input_status_text = "OPEN";
+                target_terminal_text = "DESKTARGETOPEN -> ACTIVE TARGET OPENED WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_DESKTARGETCLOSE:
+                gshell_desktarget_close_ready = 1;
+                gshell_clickui_close_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "closed-target";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_desktarget_state = "close";
+                gshell_desktarget_active = "desktop";
+                gshell_desktarget_action = "close";
+                gshell_desktarget_last = "close";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETCLOSE";
+                gshell_command_result = "DESKTOP TARGET CLOSE OK";
+                gshell_input_status_text = "CLOSE";
+                target_terminal_text = "DESKTARGETCLOSE -> ACTIVE WINDOW TARGET CLOSED MOCK";
+                break;
+
+            case GSHELL_CMD_DESKTARGETDRAG:
+                gshell_desktarget_drag_ready = 1;
+                gshell_clickui_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "drag-target";
+                gshell_window_last = "target-drag";
+                gshell_desktarget_state = "drag";
+                gshell_desktarget_active = "demo.window";
+                gshell_desktarget_action = "drag";
+                gshell_desktarget_last = "drag";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETDRAG";
+                gshell_command_result = "DESKTOP TARGET DRAG OK";
+                gshell_input_status_text = "DRAG";
+                target_terminal_text = "DESKTARGETDRAG -> ACTIVE WINDOW TARGET DRAG STARTED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETDROP:
+                gshell_desktarget_drop_ready = 1;
+                gshell_clickui_drop_ready = 1;
+                gshell_route_drop_ready = 1;
+                gshell_window_state = "drop-target";
+                gshell_window_last = "target-drop";
+                gshell_desktarget_state = "drop";
+                gshell_desktarget_active = "demo.window";
+                gshell_desktarget_action = "drop";
+                gshell_desktarget_last = "drop";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETDROP";
+                gshell_command_result = "DESKTOP TARGET DROP OK";
+                gshell_input_status_text = "DROP";
+                target_terminal_text = "DESKTARGETDROP -> ACTIVE WINDOW TARGET DROP FINISHED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETSTATE:
+                gshell_desktarget_state_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_desktarget_state = "state-sync";
+                gshell_desktarget_active = "desktop-ui";
+                gshell_desktarget_action = "sync";
+                gshell_desktarget_last = "state-sync";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETSTATE";
+                gshell_command_result = "DESKTOP TARGET STATE OK";
+                gshell_input_status_text = "STATE";
+                target_terminal_text = "DESKTARGETSTATE -> DESKTOP TARGET STATE MODEL SYNCED";
+                break;
+
+            case GSHELL_CMD_DESKTARGETVISUAL:
+                gshell_desktarget_visual_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_scene_window_ready = 1;
+                gshell_desktarget_state = "visual";
+                gshell_desktarget_active = "desktop-ui";
+                gshell_desktarget_action = "visual";
+                gshell_desktarget_last = "visual";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETVISUAL";
+                gshell_command_result = "DESKTOP TARGET VISUAL OK";
+                gshell_input_status_text = "VISUAL";
+                target_terminal_text = "DESKTARGETVISUAL -> DESKTOP TARGET VISUAL STATE READY";
+                break;
+
+            case GSHELL_CMD_DESKTARGETSAFE:
+                gshell_desktarget_safe_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_desktarget_state = "safe";
+                gshell_desktarget_active = "keyboard-safe";
+                gshell_desktarget_action = "safe";
+                gshell_desktarget_last = "safe";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETSAFE";
+                gshell_command_result = "DESKTOP TARGET SAFE OK";
+                gshell_input_status_text = "SAFE";
+                target_terminal_text = "DESKTARGETSAFE -> DESKTOP TARGET ACTIVATION KEEPS OLD CHAINS SAFE";
+                break;
+
+            case GSHELL_CMD_DESKTARGETDEMO:
+                gshell_desktarget_desktop_ready = 1;
+                gshell_desktarget_card_ready = 1;
+                gshell_desktarget_window_ready = 1;
+                gshell_desktarget_taskbar_ready = 1;
+                gshell_desktarget_launcher_ready = 1;
+                gshell_desktarget_menu_ready = 1;
+                gshell_desktarget_focus_ready = 1;
+                gshell_desktarget_select_ready = 1;
+                gshell_desktarget_open_ready = 1;
+                gshell_desktarget_close_ready = 1;
+                gshell_desktarget_drag_ready = 1;
+                gshell_desktarget_drop_ready = 1;
+                gshell_desktarget_state_ready = 1;
+                gshell_desktarget_visual_ready = 1;
+                gshell_desktarget_safe_ready = 1;
+                gshell_desktarget_demo_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "desktop-target-demo";
+                gshell_scene_window_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_desktarget_state = "demo";
+                gshell_desktarget_active = "desktop-ui";
+                gshell_desktarget_action = "full-target-flow";
+                gshell_desktarget_last = "demo";
+                gshell_desktarget_events++;
+                gshell_command_name = "DESKTARGETDEMO";
+                gshell_command_result = "DESKTOP TARGET DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                target_terminal_text = "DESKTARGETDEMO -> FULL DESKTOP TARGET ACTIVATION READY";
+                break;
+
+            case GSHELL_CMD_DESKTARGETCHECK: {
+                int ok = gshell_desktarget_desktop_ready &&
+                         gshell_desktarget_card_ready &&
+                         gshell_desktarget_window_ready &&
+                         gshell_desktarget_taskbar_ready &&
+                         gshell_desktarget_launcher_ready &&
+                         gshell_desktarget_menu_ready &&
+                         gshell_desktarget_focus_ready &&
+                         gshell_desktarget_select_ready &&
+                         gshell_desktarget_open_ready &&
+                         gshell_desktarget_close_ready &&
+                         gshell_desktarget_drag_ready &&
+                         gshell_desktarget_drop_ready &&
+                         gshell_desktarget_state_ready &&
+                         gshell_desktarget_visual_ready &&
+                         gshell_desktarget_safe_ready;
+                gshell_desktarget_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "DESKTARGETCHECK";
+                gshell_command_result = ok ? "DESKTOP TARGET CHECK OK" : "DESKTOP TARGET CHECK WAIT";
+                gshell_input_status_text = ok ? "TARGET OK" : "TARGET WAIT";
+                target_terminal_text = ok ? "DESKTARGETCHECK -> DESKTOP TARGET ACTIVATION READY" : "DESKTARGETCHECK -> RUN DESKTARGETDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_DESKTARGETRESET:
+                gshell_desktarget_desktop_ready = 0;
+                gshell_desktarget_card_ready = 0;
+                gshell_desktarget_window_ready = 0;
+                gshell_desktarget_taskbar_ready = 0;
+                gshell_desktarget_launcher_ready = 0;
+                gshell_desktarget_menu_ready = 0;
+                gshell_desktarget_focus_ready = 0;
+                gshell_desktarget_select_ready = 0;
+                gshell_desktarget_open_ready = 0;
+                gshell_desktarget_close_ready = 0;
+                gshell_desktarget_drag_ready = 0;
+                gshell_desktarget_drop_ready = 0;
+                gshell_desktarget_state_ready = 0;
+                gshell_desktarget_visual_ready = 0;
+                gshell_desktarget_safe_ready = 0;
+                gshell_desktarget_demo_ready = 0;
+                gshell_desktarget_events = 0;
+                gshell_desktarget_state = "idle";
+                gshell_desktarget_active = "none";
+                gshell_desktarget_action = "none";
+                gshell_desktarget_last = "reset";
+                gshell_command_name = "DESKTARGETRESET";
+                gshell_command_result = "DESKTOP TARGET RESET OK";
+                gshell_input_status_text = "RESET";
+                target_terminal_text = "DESKTARGETRESET -> DESKTOP TARGET ACTIVATION STATE RESET";
+                break;
+
+            case GSHELL_CMD_DESKTARGETNEXT:
+                gshell_command_name = "DESKTARGETNEXT";
+                gshell_command_result = "DESKTOP TARGET NEXT OK";
+                gshell_input_status_text = "NEXT";
+                target_terminal_text = "DESKTARGETNEXT -> 1.7.2 DESKTOP CLICK ACTION FLOW";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(target_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_CLICKACTIONSTATUS && command_id <= GSHELL_CMD_CLICKACTIONNEXT) {
+        const char* action_terminal_text = "CLICKACTIONSTATUS -> DESKTOP CLICK ACTION FLOW READY";
+
+        gshell_command_view = "CLICKACTIONSTATUS";
+        gshell_input_status_text = "CLICK ACT";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CLICKACTIONSTATUS:
+                gshell_command_name = "CLICKACTIONSTATUS";
+                gshell_command_result = "CLICK ACTION STATUS OK";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONSELECT:
+                gshell_clickaction_select_ready = 1;
+                gshell_desktarget_select_ready = 1;
+                gshell_clickui_click_ready = 1;
+                gshell_action_card_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "click-action-select";
+                gshell_card_app = "demo.app";
+                gshell_focus_target = "demo.app";
+                gshell_clickaction_state = "select";
+                gshell_clickaction_target = "demo.app";
+                gshell_clickaction_action = "select";
+                gshell_clickaction_last = "select";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONSELECT";
+                gshell_command_result = "CLICK ACTION SELECT OK";
+                gshell_input_status_text = "SELECT";
+                action_terminal_text = "CLICKACTIONSELECT -> CLICK SELECTS APP CARD";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONOPEN:
+                gshell_clickaction_open_ready = 1;
+                gshell_desktarget_open_ready = 1;
+                gshell_clickui_open_ready = 1;
+                gshell_action_card_open_ready = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "click-action-open";
+                gshell_window_last = "click-action-open";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_clickaction_state = "open";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "open";
+                gshell_clickaction_last = "open";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONOPEN";
+                gshell_command_result = "CLICK ACTION OPEN OK";
+                gshell_input_status_text = "OPEN";
+                action_terminal_text = "CLICKACTIONOPEN -> DOUBLE CLICK OPENS WINDOW MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONMENU:
+                gshell_clickaction_menu_ready = 1;
+                gshell_desktarget_menu_ready = 1;
+                gshell_clickui_menu_ready = 1;
+                gshell_route_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_focus_target = "desktop-menu";
+                gshell_clickaction_state = "menu";
+                gshell_clickaction_target = "desktop-menu";
+                gshell_clickaction_action = "open-menu";
+                gshell_clickaction_last = "menu";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONMENU";
+                gshell_command_result = "CLICK ACTION MENU OK";
+                gshell_input_status_text = "MENU";
+                action_terminal_text = "CLICKACTIONMENU -> RIGHT CLICK OPENS CONTEXT MENU";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONFOCUS:
+                gshell_clickaction_focus_ready = 1;
+                gshell_desktarget_focus_ready = 1;
+                gshell_clickui_focus_ready = 1;
+                gshell_route_focus_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_focus_target = "demo.window";
+                gshell_scene_focus_ready = 1;
+                gshell_clickaction_state = "focus";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "focus";
+                gshell_clickaction_last = "focus";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONFOCUS";
+                gshell_command_result = "CLICK ACTION FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                action_terminal_text = "CLICKACTIONFOCUS -> CLICK FOCUSES WINDOW TARGET";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONTASKSWITCH:
+                gshell_clickaction_task_switch_ready = 1;
+                gshell_desktarget_taskbar_ready = 1;
+                gshell_clickui_taskbar_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_switches++;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "click-action-switch";
+                gshell_taskbar_last = "click-action-switch";
+                gshell_focus_target = "demo.app";
+                gshell_clickaction_state = "task-switch";
+                gshell_clickaction_target = "taskbar";
+                gshell_clickaction_action = "switch";
+                gshell_clickaction_last = "task-switch";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONTASKSWITCH";
+                gshell_command_result = "CLICK ACTION TASK SWITCH OK";
+                gshell_input_status_text = "TASK";
+                action_terminal_text = "CLICKACTIONTASKSWITCH -> TASKBAR CLICK SWITCHES APP";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONLAUNCH:
+                gshell_clickaction_launch_ready = 1;
+                gshell_desktarget_launcher_ready = 1;
+                gshell_clickui_launcher_ready = 1;
+                gshell_route_launcher_ready = 1;
+                gshell_shell_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_open_count++;
+                gshell_launcher_state = "click-action-launch";
+                gshell_launcher_last = "click-action-launch";
+                gshell_focus_target = "launcher";
+                gshell_clickaction_state = "launcher";
+                gshell_clickaction_target = "launcher";
+                gshell_clickaction_action = "open-launcher";
+                gshell_clickaction_last = "launcher";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONLAUNCH";
+                gshell_command_result = "CLICK ACTION LAUNCH OK";
+                gshell_input_status_text = "LAUNCH";
+                action_terminal_text = "CLICKACTIONLAUNCH -> START TARGET OPENS LAUNCHER MOCK";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONDRAGSTART:
+                gshell_clickaction_drag_start_ready = 1;
+                gshell_desktarget_drag_ready = 1;
+                gshell_clickui_drag_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "drag-start";
+                gshell_window_last = "click-action-drag-start";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag-start";
+                gshell_clickaction_state = "drag-start";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "drag-start";
+                gshell_clickaction_last = "drag-start";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONDRAGSTART";
+                gshell_command_result = "CLICK ACTION DRAG START OK";
+                gshell_input_status_text = "DRAG START";
+                action_terminal_text = "CLICKACTIONDRAGSTART -> WINDOW DRAG STARTED";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONDRAGMOVE:
+                gshell_clickaction_drag_move_ready = 1;
+                gshell_clickaction_drag_start_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_moves++;
+                gshell_window_x += 12;
+                gshell_window_y += 6;
+                gshell_window_state = "drag-move";
+                gshell_window_last = "click-action-drag-move";
+                gshell_clickaction_state = "drag-move";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "drag-move";
+                gshell_clickaction_last = "drag-move";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONDRAGMOVE";
+                gshell_command_result = "CLICK ACTION DRAG MOVE OK";
+                gshell_input_status_text = "DRAG MOVE";
+                action_terminal_text = "CLICKACTIONDRAGMOVE -> WINDOW POSITION UPDATED BY DRAG";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONDROP:
+                gshell_clickaction_drop_ready = 1;
+                gshell_desktarget_drop_ready = 1;
+                gshell_clickui_drop_ready = 1;
+                gshell_route_drop_ready = 1;
+                gshell_window_state = "drag-drop";
+                gshell_window_last = "click-action-drop";
+                gshell_clickaction_state = "drop";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "drop";
+                gshell_clickaction_last = "drop";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONDROP";
+                gshell_command_result = "CLICK ACTION DROP OK";
+                gshell_input_status_text = "DROP";
+                action_terminal_text = "CLICKACTIONDROP -> WINDOW DRAG FINISHED";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONCLOSE:
+                gshell_clickaction_close_ready = 1;
+                gshell_desktarget_close_ready = 1;
+                gshell_clickui_close_ready = 1;
+                gshell_action_window_close_ready = 1;
+                gshell_window_exists = 0;
+                gshell_window_focused = 0;
+                gshell_window_title = "none";
+                gshell_window_state = "click-action-close";
+                gshell_scene_window_ready = 0;
+                gshell_focus_target = "desktop";
+                gshell_clickaction_state = "close";
+                gshell_clickaction_target = "desktop";
+                gshell_clickaction_action = "close";
+                gshell_clickaction_last = "close";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONCLOSE";
+                gshell_command_result = "CLICK ACTION CLOSE OK";
+                gshell_input_status_text = "CLOSE";
+                action_terminal_text = "CLICKACTIONCLOSE -> WINDOW CLOSE ACTION READY";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONRESTORE:
+                gshell_clickaction_restore_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_minimized = 0;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_minimized = 0;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "click-action-restore";
+                gshell_scene_window_ready = 1;
+                gshell_focus_target = "demo.window";
+                gshell_clickaction_state = "restore";
+                gshell_clickaction_target = "demo.window";
+                gshell_clickaction_action = "restore";
+                gshell_clickaction_last = "restore";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONRESTORE";
+                gshell_command_result = "CLICK ACTION RESTORE OK";
+                gshell_input_status_text = "RESTORE";
+                action_terminal_text = "CLICKACTIONRESTORE -> TASKBAR RESTORES WINDOW";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONROUTE:
+                gshell_clickaction_route_ready = 1;
+                gshell_realptr_hittest_ready = 1;
+                gshell_realptr_action_bridge_ready = 1;
+                gshell_route_click_ready = 1;
+                gshell_route_card_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_route_taskbar_ready = 1;
+                gshell_clickaction_state = "route";
+                gshell_clickaction_target = "desktop-ui";
+                gshell_clickaction_action = "route";
+                gshell_clickaction_last = "route";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONROUTE";
+                gshell_command_result = "CLICK ACTION ROUTE OK";
+                gshell_input_status_text = "ROUTE";
+                action_terminal_text = "CLICKACTIONROUTE -> CLICK EVENTS ROUTE TO UI TARGETS";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONBIND:
+                gshell_clickaction_bind_ready = 1;
+                gshell_clickaction_route_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_action_bind_card_ready = 1;
+                gshell_action_bind_window_ready = 1;
+                gshell_action_bind_taskbar_ready = 1;
+                gshell_clickaction_state = "bind";
+                gshell_clickaction_target = "action-binding";
+                gshell_clickaction_action = "bind";
+                gshell_clickaction_last = "bind";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONBIND";
+                gshell_command_result = "CLICK ACTION BIND OK";
+                gshell_input_status_text = "BIND";
+                action_terminal_text = "CLICKACTIONBIND -> CLICK ROUTES BOUND TO ACTIONS";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONVISUAL:
+                gshell_clickaction_visual_ready = 1;
+                gshell_desktarget_visual_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_clickaction_state = "visual";
+                gshell_clickaction_target = "cursor-visual";
+                gshell_clickaction_action = "sync";
+                gshell_clickaction_last = "visual";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONVISUAL";
+                gshell_command_result = "CLICK ACTION VISUAL OK";
+                gshell_input_status_text = "VISUAL";
+                action_terminal_text = "CLICKACTIONVISUAL -> CLICK ACTION VISUAL FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONSAFE:
+                gshell_clickaction_safe_ready = 1;
+                gshell_desktarget_safe_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_clickaction_state = "safe";
+                gshell_clickaction_target = "keyboard-safe";
+                gshell_clickaction_action = "safe";
+                gshell_clickaction_last = "safe";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONSAFE";
+                gshell_command_result = "CLICK ACTION SAFE OK";
+                gshell_input_status_text = "SAFE";
+                action_terminal_text = "CLICKACTIONSAFE -> CLICK ACTION FLOW KEEPS OLD INPUT SAFE";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONDEMO:
+                gshell_clickaction_select_ready = 1;
+                gshell_clickaction_open_ready = 1;
+                gshell_clickaction_menu_ready = 1;
+                gshell_clickaction_focus_ready = 1;
+                gshell_clickaction_task_switch_ready = 1;
+                gshell_clickaction_launch_ready = 1;
+                gshell_clickaction_drag_start_ready = 1;
+                gshell_clickaction_drag_move_ready = 1;
+                gshell_clickaction_drop_ready = 1;
+                gshell_clickaction_close_ready = 1;
+                gshell_clickaction_restore_ready = 1;
+                gshell_clickaction_route_ready = 1;
+                gshell_clickaction_bind_ready = 1;
+                gshell_clickaction_visual_ready = 1;
+                gshell_clickaction_safe_ready = 1;
+                gshell_clickaction_demo_ready = 1;
+                gshell_desktarget_demo_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "click-action-demo";
+                gshell_scene_window_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_clickaction_state = "demo";
+                gshell_clickaction_target = "desktop-ui";
+                gshell_clickaction_action = "full-click-action";
+                gshell_clickaction_last = "demo";
+                gshell_clickaction_events++;
+                gshell_command_name = "CLICKACTIONDEMO";
+                gshell_command_result = "CLICK ACTION DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                action_terminal_text = "CLICKACTIONDEMO -> FULL DESKTOP CLICK ACTION FLOW READY";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONCHECK: {
+                int ok = gshell_clickaction_select_ready &&
+                         gshell_clickaction_open_ready &&
+                         gshell_clickaction_menu_ready &&
+                         gshell_clickaction_focus_ready &&
+                         gshell_clickaction_task_switch_ready &&
+                         gshell_clickaction_launch_ready &&
+                         gshell_clickaction_drag_start_ready &&
+                         gshell_clickaction_drag_move_ready &&
+                         gshell_clickaction_drop_ready &&
+                         gshell_clickaction_close_ready &&
+                         gshell_clickaction_restore_ready &&
+                         gshell_clickaction_route_ready &&
+                         gshell_clickaction_bind_ready &&
+                         gshell_clickaction_visual_ready &&
+                         gshell_clickaction_safe_ready;
+                gshell_clickaction_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CLICKACTIONCHECK";
+                gshell_command_result = ok ? "CLICK ACTION CHECK OK" : "CLICK ACTION CHECK WAIT";
+                gshell_input_status_text = ok ? "ACTION OK" : "ACTION WAIT";
+                action_terminal_text = ok ? "CLICKACTIONCHECK -> DESKTOP CLICK ACTION FLOW READY" : "CLICKACTIONCHECK -> RUN CLICKACTIONDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_CLICKACTIONRESET:
+                gshell_clickaction_select_ready = 0;
+                gshell_clickaction_open_ready = 0;
+                gshell_clickaction_menu_ready = 0;
+                gshell_clickaction_focus_ready = 0;
+                gshell_clickaction_task_switch_ready = 0;
+                gshell_clickaction_launch_ready = 0;
+                gshell_clickaction_drag_start_ready = 0;
+                gshell_clickaction_drag_move_ready = 0;
+                gshell_clickaction_drop_ready = 0;
+                gshell_clickaction_close_ready = 0;
+                gshell_clickaction_restore_ready = 0;
+                gshell_clickaction_route_ready = 0;
+                gshell_clickaction_bind_ready = 0;
+                gshell_clickaction_visual_ready = 0;
+                gshell_clickaction_safe_ready = 0;
+                gshell_clickaction_demo_ready = 0;
+                gshell_clickaction_events = 0;
+                gshell_clickaction_state = "idle";
+                gshell_clickaction_target = "none";
+                gshell_clickaction_action = "none";
+                gshell_clickaction_last = "reset";
+                gshell_command_name = "CLICKACTIONRESET";
+                gshell_command_result = "CLICK ACTION RESET OK";
+                gshell_input_status_text = "RESET";
+                action_terminal_text = "CLICKACTIONRESET -> CLICK ACTION FLOW STATE RESET";
+                break;
+
+            case GSHELL_CMD_CLICKACTIONNEXT:
+                gshell_command_name = "CLICKACTIONNEXT";
+                gshell_command_result = "CLICK ACTION NEXT OK";
+                gshell_input_status_text = "NEXT";
+                action_terminal_text = "CLICKACTIONNEXT -> 1.7.3 DESKTOP WINDOW DRAG FLOW";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(action_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_DESKDRAGSTATUS && command_id <= GSHELL_CMD_DESKDRAGNEXT) {
+        const char* drag_terminal_text = "DESKDRAGSTATUS -> DESKTOP WINDOW DRAG FLOW READY";
+
+        gshell_command_view = "DESKDRAGSTATUS";
+        gshell_input_status_text = "DRAG OK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_DESKDRAGSTATUS:
+                gshell_command_name = "DESKDRAGSTATUS";
+                gshell_command_result = "DESKTOP DRAG STATUS OK";
+                break;
+
+            case GSHELL_CMD_DESKDRAGTARGET:
+                gshell_deskdrag_target_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_hit_zone = "window-title";
+                gshell_hit_target = "demo.window";
+                gshell_hit_action = "drag-target";
+                gshell_deskdrag_state = "target";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "target";
+                gshell_deskdrag_last = "target";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGTARGET";
+                gshell_command_result = "DESKTOP DRAG TARGET OK";
+                gshell_input_status_text = "TARGET";
+                drag_terminal_text = "DESKDRAGTARGET -> WINDOW TITLE TARGET READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGTITLE:
+                gshell_deskdrag_title_ready = 1;
+                gshell_deskdrag_target_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_hit_zone = "window-title";
+                gshell_hit_action = "title-drag";
+                gshell_deskdrag_state = "title";
+                gshell_deskdrag_target = "window-title";
+                gshell_deskdrag_action = "bind-title";
+                gshell_deskdrag_last = "title";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGTITLE";
+                gshell_command_result = "DESKTOP DRAG TITLE OK";
+                gshell_input_status_text = "TITLE";
+                drag_terminal_text = "DESKDRAGTITLE -> TITLE BAR DRAG TARGET READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGSTART:
+                gshell_deskdrag_start_ready = 1;
+                gshell_clickaction_drag_start_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "drag-start";
+                gshell_window_last = "desk-drag-start";
+                gshell_deskdrag_state = "drag-start";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "start";
+                gshell_deskdrag_last = "drag-start";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGSTART";
+                gshell_command_result = "DESKTOP DRAG START OK";
+                gshell_input_status_text = "START";
+                drag_terminal_text = "DESKDRAGSTART -> WINDOW DRAG STARTED";
+                break;
+
+            case GSHELL_CMD_DESKDRAGMOVE:
+                gshell_deskdrag_move_ready = 1;
+                gshell_deskdrag_start_ready = 1;
+                gshell_clickaction_drag_move_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_moves++;
+                gshell_window_x += 18;
+                gshell_window_y += 8;
+                gshell_window_state = "drag-moving";
+                gshell_window_last = "desk-drag-move";
+                gshell_deskdrag_state = "drag-move";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "move";
+                gshell_deskdrag_last = "drag-move";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGMOVE";
+                gshell_command_result = "DESKTOP DRAG MOVE OK";
+                gshell_input_status_text = "MOVE";
+                drag_terminal_text = "DESKDRAGMOVE -> WINDOW MOVED BY DRAG";
+                break;
+
+            case GSHELL_CMD_DESKDRAGBOUNDS:
+                gshell_deskdrag_bounds_ready = 1;
+                gshell_cursor_bounds_ready = 1;
+                if (gshell_window_x > 640) {
+                    gshell_window_x = 640;
+                }
+                if (gshell_window_y > 420) {
+                    gshell_window_y = 420;
+                }
+                gshell_deskdrag_state = "bounds";
+                gshell_deskdrag_target = "screen";
+                gshell_deskdrag_action = "clamp";
+                gshell_deskdrag_last = "bounds";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGBOUNDS";
+                gshell_command_result = "DESKTOP DRAG BOUNDS OK";
+                gshell_input_status_text = "BOUNDS";
+                drag_terminal_text = "DESKDRAGBOUNDS -> WINDOW DRAG BOUNDS READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGSHADOW:
+                gshell_deskdrag_shadow_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_state = "drag-shadow";
+                gshell_deskdrag_state = "shadow";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "shadow";
+                gshell_deskdrag_last = "shadow";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGSHADOW";
+                gshell_command_result = "DESKTOP DRAG SHADOW OK";
+                gshell_input_status_text = "SHADOW";
+                drag_terminal_text = "DESKDRAGSHADOW -> DRAG SHADOW VISUAL STATE READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGSNAP:
+                gshell_deskdrag_snap_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_x = 96;
+                gshell_window_y = 88;
+                gshell_window_state = "drag-snap";
+                gshell_deskdrag_state = "snap";
+                gshell_deskdrag_target = "snap-zone";
+                gshell_deskdrag_action = "snap";
+                gshell_deskdrag_last = "snap";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGSNAP";
+                gshell_command_result = "DESKTOP DRAG SNAP OK";
+                gshell_input_status_text = "SNAP";
+                drag_terminal_text = "DESKDRAGSNAP -> WINDOW SNAP MOCK READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGDROP:
+                gshell_deskdrag_drop_ready = 1;
+                gshell_clickaction_drop_ready = 1;
+                gshell_route_drop_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_state = "drag-drop";
+                gshell_window_last = "desk-drag-drop";
+                gshell_deskdrag_state = "drop";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "drop";
+                gshell_deskdrag_last = "drop";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGDROP";
+                gshell_command_result = "DESKTOP DRAG DROP OK";
+                gshell_input_status_text = "DROP";
+                drag_terminal_text = "DESKDRAGDROP -> WINDOW DRAG DROPPED";
+                break;
+
+            case GSHELL_CMD_DESKDRAGCANCEL:
+                gshell_deskdrag_cancel_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_state = "drag-cancel";
+                gshell_window_last = "desk-drag-cancel";
+                gshell_deskdrag_state = "cancel";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "cancel";
+                gshell_deskdrag_last = "cancel";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGCANCEL";
+                gshell_command_result = "DESKTOP DRAG CANCEL OK";
+                gshell_input_status_text = "CANCEL";
+                drag_terminal_text = "DESKDRAGCANCEL -> WINDOW DRAG CANCELLED";
+                break;
+
+            case GSHELL_CMD_DESKDRAGFOCUS:
+                gshell_deskdrag_focus_ready = 1;
+                gshell_clickaction_focus_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_focus_target = "demo.window";
+                gshell_scene_focus_ready = 1;
+                gshell_deskdrag_state = "focus";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "focus";
+                gshell_deskdrag_last = "focus";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGFOCUS";
+                gshell_command_result = "DESKTOP DRAG FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                drag_terminal_text = "DESKDRAGFOCUS -> DRAG TARGET FOCUSED";
+                break;
+
+            case GSHELL_CMD_DESKDRAGROUTE:
+                gshell_deskdrag_route_ready = 1;
+                gshell_realptr_drag_route_ready = 1;
+                gshell_route_drag_ready = 1;
+                gshell_route_window_ready = 1;
+                gshell_deskdrag_state = "route";
+                gshell_deskdrag_target = "drag-route";
+                gshell_deskdrag_action = "route";
+                gshell_deskdrag_last = "route";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGROUTE";
+                gshell_command_result = "DESKTOP DRAG ROUTE OK";
+                gshell_input_status_text = "ROUTE";
+                drag_terminal_text = "DESKDRAGROUTE -> DRAG ROUTE CONNECTED";
+                break;
+
+            case GSHELL_CMD_DESKDRAGACTION:
+                gshell_deskdrag_action_ready = 1;
+                gshell_deskdrag_route_ready = 1;
+                gshell_action_window_drag_ready = 1;
+                gshell_action_route_ready = 1;
+                gshell_deskdrag_state = "action";
+                gshell_deskdrag_target = "window-action";
+                gshell_deskdrag_action = "action";
+                gshell_deskdrag_last = "action";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGACTION";
+                gshell_command_result = "DESKTOP DRAG ACTION OK";
+                gshell_input_status_text = "ACTION";
+                drag_terminal_text = "DESKDRAGACTION -> DRAG ACTION BOUND";
+                break;
+
+            case GSHELL_CMD_DESKDRAGVISUAL:
+                gshell_deskdrag_visual_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_scene_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_state = "drag-visual";
+                gshell_deskdrag_state = "visual";
+                gshell_deskdrag_target = "desktop-ui";
+                gshell_deskdrag_action = "visual";
+                gshell_deskdrag_last = "visual";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGVISUAL";
+                gshell_command_result = "DESKTOP DRAG VISUAL OK";
+                gshell_input_status_text = "VISUAL";
+                drag_terminal_text = "DESKDRAGVISUAL -> DRAG VISUAL STATE READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGSAFE:
+                gshell_deskdrag_safe_ready = 1;
+                gshell_clickaction_safe_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_deskdrag_state = "safe";
+                gshell_deskdrag_target = "keyboard-safe";
+                gshell_deskdrag_action = "safe";
+                gshell_deskdrag_last = "safe";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGSAFE";
+                gshell_command_result = "DESKTOP DRAG SAFE OK";
+                gshell_input_status_text = "SAFE";
+                drag_terminal_text = "DESKDRAGSAFE -> DRAG FLOW KEEPS OLD CHAINS SAFE";
+                break;
+
+            case GSHELL_CMD_DESKDRAGDEMO:
+                gshell_deskdrag_target_ready = 1;
+                gshell_deskdrag_title_ready = 1;
+                gshell_deskdrag_start_ready = 1;
+                gshell_deskdrag_move_ready = 1;
+                gshell_deskdrag_bounds_ready = 1;
+                gshell_deskdrag_shadow_ready = 1;
+                gshell_deskdrag_snap_ready = 1;
+                gshell_deskdrag_drop_ready = 1;
+                gshell_deskdrag_cancel_ready = 1;
+                gshell_deskdrag_focus_ready = 1;
+                gshell_deskdrag_route_ready = 1;
+                gshell_deskdrag_action_ready = 1;
+                gshell_deskdrag_visual_ready = 1;
+                gshell_deskdrag_safe_ready = 1;
+                gshell_deskdrag_demo_ready = 1;
+                gshell_clickaction_drag_start_ready = 1;
+                gshell_clickaction_drag_move_ready = 1;
+                gshell_clickaction_drop_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "desk-drag-demo";
+                gshell_window_x = 114;
+                gshell_window_y = 96;
+                gshell_scene_window_ready = 1;
+                gshell_deskdrag_state = "demo";
+                gshell_deskdrag_target = "demo.window";
+                gshell_deskdrag_action = "full-drag";
+                gshell_deskdrag_last = "demo";
+                gshell_deskdrag_events++;
+                gshell_command_name = "DESKDRAGDEMO";
+                gshell_command_result = "DESKTOP DRAG DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                drag_terminal_text = "DESKDRAGDEMO -> FULL DESKTOP WINDOW DRAG FLOW READY";
+                break;
+
+            case GSHELL_CMD_DESKDRAGCHECK: {
+                int ok = gshell_deskdrag_target_ready &&
+                         gshell_deskdrag_title_ready &&
+                         gshell_deskdrag_start_ready &&
+                         gshell_deskdrag_move_ready &&
+                         gshell_deskdrag_bounds_ready &&
+                         gshell_deskdrag_shadow_ready &&
+                         gshell_deskdrag_snap_ready &&
+                         gshell_deskdrag_drop_ready &&
+                         gshell_deskdrag_focus_ready &&
+                         gshell_deskdrag_route_ready &&
+                         gshell_deskdrag_action_ready &&
+                         gshell_deskdrag_visual_ready &&
+                         gshell_deskdrag_safe_ready;
+                gshell_deskdrag_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "DESKDRAGCHECK";
+                gshell_command_result = ok ? "DESKTOP DRAG CHECK OK" : "DESKTOP DRAG CHECK WAIT";
+                gshell_input_status_text = ok ? "DRAG OK" : "DRAG WAIT";
+                drag_terminal_text = ok ? "DESKDRAGCHECK -> DESKTOP WINDOW DRAG FLOW READY" : "DESKDRAGCHECK -> RUN DESKDRAGDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_DESKDRAGRESET:
+                gshell_deskdrag_target_ready = 0;
+                gshell_deskdrag_title_ready = 0;
+                gshell_deskdrag_start_ready = 0;
+                gshell_deskdrag_move_ready = 0;
+                gshell_deskdrag_bounds_ready = 0;
+                gshell_deskdrag_shadow_ready = 0;
+                gshell_deskdrag_snap_ready = 0;
+                gshell_deskdrag_drop_ready = 0;
+                gshell_deskdrag_cancel_ready = 0;
+                gshell_deskdrag_focus_ready = 0;
+                gshell_deskdrag_route_ready = 0;
+                gshell_deskdrag_action_ready = 0;
+                gshell_deskdrag_visual_ready = 0;
+                gshell_deskdrag_safe_ready = 0;
+                gshell_deskdrag_demo_ready = 0;
+                gshell_deskdrag_events = 0;
+                gshell_deskdrag_state = "idle";
+                gshell_deskdrag_target = "none";
+                gshell_deskdrag_action = "none";
+                gshell_deskdrag_last = "reset";
+                gshell_command_name = "DESKDRAGRESET";
+                gshell_command_result = "DESKTOP DRAG RESET OK";
+                gshell_input_status_text = "RESET";
+                drag_terminal_text = "DESKDRAGRESET -> DESKTOP DRAG FLOW RESET";
+                break;
+
+            case GSHELL_CMD_DESKDRAGNEXT:
+                gshell_command_name = "DESKDRAGNEXT";
+                gshell_command_result = "DESKTOP DRAG NEXT OK";
+                gshell_input_status_text = "NEXT";
+                drag_terminal_text = "DESKDRAGNEXT -> 1.7.4 CLICKABLE UI VISUAL FEEDBACK";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(drag_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_UIFEEDBACKSTATUS && command_id <= GSHELL_CMD_UIFEEDBACKNEXT) {
+        const char* feedback_terminal_text = "UIFEEDBACKSTATUS -> CLICKABLE UI VISUAL FEEDBACK READY";
+
+        gshell_command_view = "UIFEEDBACKSTATUS";
+        gshell_input_status_text = "FEEDBACK";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_UIFEEDBACKSTATUS:
+                gshell_command_name = "UIFEEDBACKSTATUS";
+                gshell_command_result = "UI FEEDBACK STATUS OK";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKHOVER:
+                gshell_uifeedback_hover_ready = 1;
+                gshell_clickui_hover_ready = 1;
+                gshell_hit_action = "hover";
+                gshell_card_state = "hover-feedback";
+                gshell_uifeedback_state = "hover";
+                gshell_uifeedback_target = "demo.app";
+                gshell_uifeedback_effect = "highlight";
+                gshell_uifeedback_last = "hover";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKHOVER";
+                gshell_command_result = "UI FEEDBACK HOVER OK";
+                gshell_input_status_text = "HOVER";
+                feedback_terminal_text = "UIFEEDBACKHOVER -> HOVER HIGHLIGHT FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKSELECT:
+                gshell_uifeedback_select_ready = 1;
+                gshell_clickaction_select_ready = 1;
+                gshell_card_selected = 1;
+                gshell_card_state = "selected-feedback";
+                gshell_focus_target = "demo.app";
+                gshell_uifeedback_state = "select";
+                gshell_uifeedback_target = "demo.app";
+                gshell_uifeedback_effect = "selected-border";
+                gshell_uifeedback_last = "select";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKSELECT";
+                gshell_command_result = "UI FEEDBACK SELECT OK";
+                gshell_input_status_text = "SELECT";
+                feedback_terminal_text = "UIFEEDBACKSELECT -> SELECT BORDER FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKACTIVE:
+                gshell_uifeedback_active_ready = 1;
+                gshell_desktarget_window_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "active-feedback";
+                gshell_focus_target = "demo.window";
+                gshell_uifeedback_state = "active";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "active-frame";
+                gshell_uifeedback_last = "active";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKACTIVE";
+                gshell_command_result = "UI FEEDBACK ACTIVE OK";
+                gshell_input_status_text = "ACTIVE";
+                feedback_terminal_text = "UIFEEDBACKACTIVE -> ACTIVE WINDOW FRAME FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKFOCUS:
+                gshell_uifeedback_focus_ready = 1;
+                gshell_clickaction_focus_ready = 1;
+                gshell_scene_focus_ready = 1;
+                gshell_window_focused = 1;
+                gshell_focus_target = "demo.window";
+                gshell_uifeedback_state = "focus";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "focus-ring";
+                gshell_uifeedback_last = "focus";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKFOCUS";
+                gshell_command_result = "UI FEEDBACK FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                feedback_terminal_text = "UIFEEDBACKFOCUS -> FOCUS RING FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKPRESS:
+                gshell_uifeedback_press_ready = 1;
+                gshell_clickui_click_ready = 1;
+                gshell_cursor_button_mask = 1;
+                gshell_uifeedback_state = "press";
+                gshell_uifeedback_target = "demo.app";
+                gshell_uifeedback_effect = "pressed";
+                gshell_uifeedback_last = "press";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKPRESS";
+                gshell_command_result = "UI FEEDBACK PRESS OK";
+                gshell_input_status_text = "PRESS";
+                feedback_terminal_text = "UIFEEDBACKPRESS -> PRESSED STATE FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKOPEN:
+                gshell_uifeedback_open_ready = 1;
+                gshell_clickaction_open_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "open-feedback";
+                gshell_scene_window_ready = 1;
+                gshell_uifeedback_state = "open";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "open-glow";
+                gshell_uifeedback_last = "open";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKOPEN";
+                gshell_command_result = "UI FEEDBACK OPEN OK";
+                gshell_input_status_text = "OPEN";
+                feedback_terminal_text = "UIFEEDBACKOPEN -> OPEN WINDOW FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKCLOSE:
+                gshell_uifeedback_close_ready = 1;
+                gshell_clickaction_close_ready = 1;
+                gshell_window_state = "close-feedback";
+                gshell_uifeedback_state = "close";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "close-fade";
+                gshell_uifeedback_last = "close";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKCLOSE";
+                gshell_command_result = "UI FEEDBACK CLOSE OK";
+                gshell_input_status_text = "CLOSE";
+                feedback_terminal_text = "UIFEEDBACKCLOSE -> CLOSE FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKDRAG:
+                gshell_uifeedback_drag_ready = 1;
+                gshell_deskdrag_demo_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_state = "drag-feedback";
+                gshell_uifeedback_state = "drag";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "drag-shadow";
+                gshell_uifeedback_last = "drag";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKDRAG";
+                gshell_command_result = "UI FEEDBACK DRAG OK";
+                gshell_input_status_text = "DRAG";
+                feedback_terminal_text = "UIFEEDBACKDRAG -> DRAG SHADOW FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKDROP:
+                gshell_uifeedback_drop_ready = 1;
+                gshell_deskdrag_drop_ready = 1;
+                gshell_window_state = "drop-feedback";
+                gshell_uifeedback_state = "drop";
+                gshell_uifeedback_target = "demo.window";
+                gshell_uifeedback_effect = "drop-settle";
+                gshell_uifeedback_last = "drop";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKDROP";
+                gshell_command_result = "UI FEEDBACK DROP OK";
+                gshell_input_status_text = "DROP";
+                feedback_terminal_text = "UIFEEDBACKDROP -> DROP SETTLE FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKTASKBAR:
+                gshell_uifeedback_taskbar_ready = 1;
+                gshell_clickui_taskbar_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_focused = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_taskbar_state = "feedback";
+                gshell_uifeedback_state = "taskbar";
+                gshell_uifeedback_target = "taskbar";
+                gshell_uifeedback_effect = "task-highlight";
+                gshell_uifeedback_last = "taskbar";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKTASKBAR";
+                gshell_command_result = "UI FEEDBACK TASKBAR OK";
+                gshell_input_status_text = "TASKBAR";
+                feedback_terminal_text = "UIFEEDBACKTASKBAR -> TASKBAR FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKLAUNCHER:
+                gshell_uifeedback_launcher_ready = 1;
+                gshell_clickui_launcher_ready = 1;
+                gshell_launcher_grid_ready = 1;
+                gshell_launcher_state = "feedback";
+                gshell_uifeedback_state = "launcher";
+                gshell_uifeedback_target = "launcher";
+                gshell_uifeedback_effect = "launcher-glow";
+                gshell_uifeedback_last = "launcher";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKLAUNCHER";
+                gshell_command_result = "UI FEEDBACK LAUNCHER OK";
+                gshell_input_status_text = "LAUNCH";
+                feedback_terminal_text = "UIFEEDBACKLAUNCHER -> LAUNCHER FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKMENU:
+                gshell_uifeedback_menu_ready = 1;
+                gshell_clickui_menu_ready = 1;
+                gshell_menu_desktop_ready = 1;
+                gshell_uifeedback_state = "menu";
+                gshell_uifeedback_target = "desktop-menu";
+                gshell_uifeedback_effect = "menu-panel";
+                gshell_uifeedback_last = "menu";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKMENU";
+                gshell_command_result = "UI FEEDBACK MENU OK";
+                gshell_input_status_text = "MENU";
+                feedback_terminal_text = "UIFEEDBACKMENU -> MENU PANEL FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKCURSOR:
+                gshell_uifeedback_cursor_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_uifeedback_state = "cursor";
+                gshell_uifeedback_target = "cursor";
+                gshell_uifeedback_effect = "cursor-visible";
+                gshell_uifeedback_last = "cursor";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKCURSOR";
+                gshell_command_result = "UI FEEDBACK CURSOR OK";
+                gshell_input_status_text = "CURSOR";
+                feedback_terminal_text = "UIFEEDBACKCURSOR -> CURSOR FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKPANEL:
+                gshell_uifeedback_panel_ready = 1;
+                gshell_scene_window_ready = 1;
+                gshell_uifeedback_state = "panel";
+                gshell_uifeedback_target = "desktop-panel";
+                gshell_uifeedback_effect = "panel-border";
+                gshell_uifeedback_last = "panel";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKPANEL";
+                gshell_command_result = "UI FEEDBACK PANEL OK";
+                gshell_input_status_text = "PANEL";
+                feedback_terminal_text = "UIFEEDBACKPANEL -> PANEL FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKSAFE:
+                gshell_uifeedback_safe_ready = 1;
+                gshell_clickaction_safe_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_uifeedback_state = "safe";
+                gshell_uifeedback_target = "old-chain";
+                gshell_uifeedback_effect = "safe";
+                gshell_uifeedback_last = "safe";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKSAFE";
+                gshell_command_result = "UI FEEDBACK SAFE OK";
+                gshell_input_status_text = "SAFE";
+                feedback_terminal_text = "UIFEEDBACKSAFE -> UI FEEDBACK KEEPS OLD CHAINS SAFE";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKDEMO:
+                gshell_uifeedback_hover_ready = 1;
+                gshell_uifeedback_select_ready = 1;
+                gshell_uifeedback_active_ready = 1;
+                gshell_uifeedback_focus_ready = 1;
+                gshell_uifeedback_press_ready = 1;
+                gshell_uifeedback_open_ready = 1;
+                gshell_uifeedback_close_ready = 1;
+                gshell_uifeedback_drag_ready = 1;
+                gshell_uifeedback_drop_ready = 1;
+                gshell_uifeedback_taskbar_ready = 1;
+                gshell_uifeedback_launcher_ready = 1;
+                gshell_uifeedback_menu_ready = 1;
+                gshell_uifeedback_cursor_ready = 1;
+                gshell_uifeedback_panel_ready = 1;
+                gshell_uifeedback_safe_ready = 1;
+                gshell_uifeedback_demo_ready = 1;
+                gshell_clickaction_demo_ready = 1;
+                gshell_desktarget_demo_ready = 1;
+                gshell_deskdrag_demo_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_card_selected = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "feedback-demo";
+                gshell_scene_window_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_uifeedback_state = "demo";
+                gshell_uifeedback_target = "desktop-ui";
+                gshell_uifeedback_effect = "full-feedback";
+                gshell_uifeedback_last = "demo";
+                gshell_uifeedback_events++;
+                gshell_command_name = "UIFEEDBACKDEMO";
+                gshell_command_result = "UI FEEDBACK DEMO OK";
+                gshell_input_status_text = "DEMO OK";
+                feedback_terminal_text = "UIFEEDBACKDEMO -> FULL CLICKABLE UI VISUAL FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKCHECK: {
+                int ok = gshell_uifeedback_hover_ready &&
+                         gshell_uifeedback_select_ready &&
+                         gshell_uifeedback_active_ready &&
+                         gshell_uifeedback_focus_ready &&
+                         gshell_uifeedback_press_ready &&
+                         gshell_uifeedback_open_ready &&
+                         gshell_uifeedback_close_ready &&
+                         gshell_uifeedback_drag_ready &&
+                         gshell_uifeedback_drop_ready &&
+                         gshell_uifeedback_taskbar_ready &&
+                         gshell_uifeedback_launcher_ready &&
+                         gshell_uifeedback_menu_ready &&
+                         gshell_uifeedback_cursor_ready &&
+                         gshell_uifeedback_panel_ready &&
+                         gshell_uifeedback_safe_ready;
+                gshell_uifeedback_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "UIFEEDBACKCHECK";
+                gshell_command_result = ok ? "UI FEEDBACK CHECK OK" : "UI FEEDBACK CHECK WAIT";
+                gshell_input_status_text = ok ? "FEED OK" : "FEED WAIT";
+                feedback_terminal_text = ok ? "UIFEEDBACKCHECK -> CLICKABLE UI FEEDBACK READY" : "UIFEEDBACKCHECK -> RUN UIFeedbackDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_UIFEEDBACKRESET:
+                gshell_uifeedback_hover_ready = 0;
+                gshell_uifeedback_select_ready = 0;
+                gshell_uifeedback_active_ready = 0;
+                gshell_uifeedback_focus_ready = 0;
+                gshell_uifeedback_press_ready = 0;
+                gshell_uifeedback_open_ready = 0;
+                gshell_uifeedback_close_ready = 0;
+                gshell_uifeedback_drag_ready = 0;
+                gshell_uifeedback_drop_ready = 0;
+                gshell_uifeedback_taskbar_ready = 0;
+                gshell_uifeedback_launcher_ready = 0;
+                gshell_uifeedback_menu_ready = 0;
+                gshell_uifeedback_cursor_ready = 0;
+                gshell_uifeedback_panel_ready = 0;
+                gshell_uifeedback_safe_ready = 0;
+                gshell_uifeedback_demo_ready = 0;
+                gshell_uifeedback_events = 0;
+                gshell_uifeedback_state = "idle";
+                gshell_uifeedback_target = "none";
+                gshell_uifeedback_effect = "none";
+                gshell_uifeedback_last = "reset";
+                gshell_command_name = "UIFEEDBACKRESET";
+                gshell_command_result = "UI FEEDBACK RESET OK";
+                gshell_input_status_text = "RESET";
+                feedback_terminal_text = "UIFEEDBACKRESET -> UI FEEDBACK STATE RESET";
+                break;
+
+            case GSHELL_CMD_UIFEEDBACKNEXT:
+                gshell_command_name = "UIFEEDBACKNEXT";
+                gshell_command_result = "UI FEEDBACK NEXT OK";
+                gshell_input_status_text = "NEXT";
+                feedback_terminal_text = "UIFEEDBACKNEXT -> 1.7.5 CLICKABLE UI CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(feedback_terminal_text);
+        return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     gshell_command_unknown++;
     gshell_command_name = "UNKNOWN";
     gshell_command_result = "UNKNOWN";
@@ -17428,6 +24599,631 @@ static void gshell_draw_command_view_routestatus(unsigned int x, unsigned int y,
     graphics_text(x + 170, y + 264, "action bind");
 }
 
+static void gshell_draw_command_view_actionbindstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "ACTION BINDING CORE");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 170, y + 48, gshell_action_bind_state);
+    graphics_text(x + 24, y + 72, "TARGET");
+    graphics_text(x + 170, y + 72, gshell_action_bind_target);
+    graphics_text(x + 24, y + 96, "CARD");
+    graphics_text(x + 170, y + 96, gshell_action_bind_card_ready ? "bound" : "none");
+    graphics_text(x + 24, y + 120, "WINDOW");
+    graphics_text(x + 170, y + 120, gshell_action_bind_window_ready ? "bound" : "none");
+    graphics_text(x + 24, y + 144, "TASKBAR");
+    graphics_text(x + 170, y + 144, gshell_action_bind_taskbar_ready ? "bound" : "none");
+    graphics_text(x + 24, y + 168, "DESKTOP");
+    graphics_text(x + 170, y + 168, gshell_action_bind_desktop_ready ? "bound" : "none");
+    graphics_text(x + 24, y + 192, "ROUTE ACT");
+    graphics_text(x + 170, y + 192, gshell_action_route_ready ? "yes" : "no");
+    gshell_draw_value_uint(x + 24, y + 216, "EVENTS", gshell_action_bind_events);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 170, y + 240, gshell_action_bind_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 170, y + 264, "menu shortcut");
+}
+
+static void gshell_draw_command_view_menushortstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000CCAA);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000CCAA);
+    graphics_rect(x, y, 4, h, 0x0000CCAA);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000CCAA);
+
+    graphics_text(x + 24, y + 20, "MENU SHORTCUT FLOW");
+    graphics_text(x + 24, y + 48, "STATE");
+    graphics_text(x + 170, y + 48, gshell_menu_short_state);
+    graphics_text(x + 24, y + 72, "TARGET");
+    graphics_text(x + 170, y + 72, gshell_menu_short_target);
+    graphics_text(x + 24, y + 96, "ITEM");
+    graphics_text(x + 170, y + 96, gshell_menu_short_item);
+    graphics_text(x + 24, y + 120, "DESKTOP MENU");
+    graphics_text(x + 170, y + 120, gshell_menu_desktop_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 144, "CARD MENU");
+    graphics_text(x + 170, y + 144, gshell_menu_card_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 168, "TASK MENU");
+    graphics_text(x + 170, y + 168, gshell_menu_taskbar_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 192, "WIN MENU");
+    graphics_text(x + 170, y + 192, gshell_menu_window_ready ? "ready" : "none");
+    graphics_text(x + 24, y + 216, "SHORTCUTS");
+    graphics_text(x + 170, y + 216, (gshell_shortcut_launcher_ready && gshell_shortcut_switch_ready) ? "ready" : "partial");
+    graphics_text(x + 24, y + 240, "ROUTE BIND");
+    graphics_text(x + 170, y + 240, (gshell_menu_route_bind_ready && gshell_shortcut_route_bind_ready) ? "ready" : "none");
+    gshell_draw_value_uint(x + 24, y + 264, "EVENTS", gshell_menu_short_events);
+    graphics_text(x + 24, y + 288, "LAST");
+    graphics_text(x + 170, y + 288, gshell_menu_short_last);
+}
+
+static void gshell_draw_command_view_windowflowstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x000077FF);
+    graphics_rect(x, y + h - 4, w, 4, 0x000077FF);
+    graphics_rect(x, y, 4, h, 0x000077FF);
+    graphics_rect(x + w - 4, y, 4, h, 0x000077FF);
+
+    graphics_text(x + 24, y + 16, "WINDOW FLOW");
+
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 146, y + 42, gshell_window_flow_state);
+
+    graphics_text(x + 24, y + 64, "TARGET");
+    graphics_text(x + 146, y + 64, gshell_window_flow_target);
+
+    graphics_text(x + 24, y + 86, "ACTION");
+    graphics_text(x + 146, y + 86, gshell_window_flow_action);
+
+    graphics_text(x + 24, y + 108, "WINDOW");
+    graphics_text(x + 146, y + 108, gshell_window_exists ? "exists" : "closed");
+
+    graphics_text(x + 24, y + 130, "FOCUS");
+    graphics_text(x + 146, y + 130, gshell_window_focused ? "active" : "inactive");
+
+    graphics_text(x + 24, y + 152, "MIN");
+    graphics_text(x + 146, y + 152, gshell_window_minimized ? "yes" : "no");
+
+    graphics_text(x + 24, y + 174, "DRAG");
+    graphics_text(x + 146, y + 174, gshell_window_flow_drag_ready ? "ready" : "none");
+
+    graphics_text(x + 24, y + 196, "MENU KEY");
+    graphics_text(x + 146, y + 196, (gshell_window_flow_menu_ready && gshell_window_flow_shortcut_ready) ? "ready" : "partial");
+
+    gshell_draw_value_uint(x + 24, y + 218, "LAYER", gshell_window_flow_layer);
+    gshell_draw_value_uint(x + 24, y + 240, "MOVES", gshell_window_moves);
+    gshell_draw_value_uint(x + 24, y + 262, "EVENTS", gshell_window_flow_events);
+
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 146, y + 284, gshell_window_flow_last);
+}
+
+static void gshell_draw_command_view_interactclosestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000FF88);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000FF88);
+    graphics_rect(x, y, 4, h, 0x0000FF88);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000FF88);
+
+    graphics_text(x + 24, y + 16, "INTERACTION CLOSEOUT");
+
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 160, y + 42, gshell_interact_close_state);
+
+    graphics_text(x + 24, y + 64, "LAYER");
+    graphics_text(x + 160, y + 64, gshell_interact_close_layer);
+
+    graphics_text(x + 24, y + 86, "HANDOFF");
+    graphics_text(x + 160, y + 86, gshell_interact_close_handoff);
+
+    graphics_text(x + 24, y + 108, "PTR/CLICK");
+    graphics_text(x + 160, y + 108, (gshell_interact_close_pointer_ready && gshell_interact_close_click_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 130, "ROUTE/ACT");
+    graphics_text(x + 160, y + 130, (gshell_interact_close_route_ready && gshell_interact_close_action_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 152, "MENU/KEY");
+    graphics_text(x + 160, y + 152, (gshell_interact_close_menu_ready && gshell_interact_close_shortcut_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 174, "WINDOW");
+    graphics_text(x + 160, y + 174, gshell_interact_close_window_ready ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 196, "FOCUS/SEL");
+    graphics_text(x + 160, y + 196, (gshell_interact_close_focus_ready && gshell_interact_close_select_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 218, "OPEN/DRAG");
+    graphics_text(x + 160, y + 218, (gshell_interact_close_open_close_ready && gshell_interact_close_drag_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 240, "REGRESS");
+    graphics_text(x + 160, y + 240, gshell_interact_close_regression_ready ? "ok" : "wait");
+
+    graphics_text(x + 24, y + 262, "CLOSEOUT");
+    graphics_text(x + 160, y + 262, gshell_interact_closeout_ready ? "done" : "open");
+
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 160, y + 284, gshell_interact_close_last);
+}
+
+static void gshell_draw_command_view_inputprepstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AA66);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AA66);
+    graphics_rect(x, y, 4, h, 0x0000AA66);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AA66);
+
+    graphics_text(x + 24, y + 16, "REAL INPUT PREP");
+
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 150, y + 42, gshell_input_prep_state);
+
+    graphics_text(x + 24, y + 64, "DEVICE");
+    graphics_text(x + 150, y + 64, gshell_input_prep_device);
+
+    graphics_text(x + 24, y + 86, "BRIDGE");
+    graphics_text(x + 150, y + 86, gshell_input_prep_bridge);
+
+    graphics_text(x + 24, y + 108, "PS2");
+    graphics_text(x + 150, y + 108, gshell_input_ps2_mouse_planned ? "planned" : "none");
+
+    graphics_text(x + 24, y + 130, "IRQ12");
+    graphics_text(x + 150, y + 130, gshell_input_irq12_planned ? "planned" : "none");
+
+    graphics_text(x + 24, y + 152, "PACKET");
+    graphics_text(x + 150, y + 152, gshell_input_packet_planned ? "planned" : "none");
+
+    graphics_text(x + 24, y + 174, "POINTER");
+    graphics_text(x + 150, y + 174, gshell_input_pointer_bridge_ready ? "bridge" : "wait");
+
+    graphics_text(x + 24, y + 196, "ROUTE/ACT");
+    graphics_text(x + 150, y + 196, (gshell_input_route_bridge_ready && gshell_input_action_bridge_ready) ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 218, "SAFE");
+    graphics_text(x + 150, y + 218, gshell_input_safe_ready ? "ok" : "wait");
+
+    graphics_text(x + 24, y + 240, "HANDOFF");
+    graphics_text(x + 150, y + 240, gshell_input_handoff_ready ? "ready" : "wait");
+
+    graphics_text(x + 24, y + 262, "EVENTS");
+    gshell_draw_value_uint(x + 150, y + 262, "", gshell_input_prep_events);
+
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 150, y + 284, gshell_input_prep_last);
+}
+
+static void gshell_draw_command_view_mousedrvstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 16, "PS2 MOUSE SKELETON");
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 150, y + 42, gshell_mouse_drv_state);
+    graphics_text(x + 24, y + 64, "DEVICE");
+    graphics_text(x + 150, y + 64, gshell_mouse_drv_device);
+    graphics_text(x + 24, y + 86, "PATH");
+    graphics_text(x + 150, y + 86, gshell_mouse_drv_path);
+    graphics_text(x + 24, y + 108, "PORT");
+    graphics_text(x + 150, y + 108, gshell_mouse_port_check_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 130, "IRQ12");
+    graphics_text(x + 150, y + 130, gshell_mouse_irq_route_ready ? "planned" : "closed");
+    graphics_text(x + 24, y + 152, "PACKET");
+    graphics_text(x + 150, y + 152, gshell_mouse_packet_parse_ready ? "parse" : "wait");
+    graphics_text(x + 24, y + 174, "BUTTON");
+    graphics_text(x + 150, y + 174, gshell_mouse_button_map_ready ? "map" : "wait");
+    graphics_text(x + 24, y + 196, "COORD");
+    graphics_text(x + 150, y + 196, gshell_mouse_coord_map_ready ? "map" : "wait");
+    graphics_text(x + 24, y + 218, "ROUTE/ACT");
+    graphics_text(x + 150, y + 218, (gshell_mouse_event_route_ready && gshell_mouse_action_feed_ready) ? "ready" : "wait");
+    gshell_draw_value_uint(x + 24, y + 240, "PACKETS", gshell_mouse_packet_count);
+    gshell_draw_value_uint(x + 24, y + 262, "EVENTS", gshell_mouse_drv_events);
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 150, y + 284, gshell_mouse_drv_last);
+}
+
+static void gshell_draw_command_view_packetpipestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000CC66);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000CC66);
+    graphics_rect(x, y, 4, h, 0x0000CC66);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000CC66);
+
+    graphics_text(x + 24, y + 16, "MOUSE PACKET PIPE");
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 150, y + 42, gshell_packet_pipe_state);
+    graphics_text(x + 24, y + 64, "PHASE");
+    graphics_text(x + 150, y + 64, gshell_packet_pipe_phase);
+    graphics_text(x + 24, y + 86, "FLAGS");
+    graphics_text(x + 150, y + 86, gshell_packet_pipe_flags);
+    graphics_text(x + 24, y + 108, "BYTE0");
+    graphics_text(x + 150, y + 108, gshell_packet_byte0_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 130, "BYTE1/2");
+    graphics_text(x + 150, y + 130, (gshell_packet_byte1_ready && gshell_packet_byte2_ready) ? "ready" : "wait");
+    graphics_text(x + 24, y + 152, "DXDY");
+    graphics_text(x + 150, y + 152, gshell_packet_dxdy_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 174, "BUTTON");
+    graphics_text(x + 150, y + 174, gshell_packet_buttons_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 196, "ROUTE/ACT");
+    graphics_text(x + 150, y + 196, (gshell_packet_route_feed_ready && gshell_packet_action_feed_ready) ? "ready" : "wait");
+    gshell_draw_value_uint(x + 24, y + 218, "COUNT", gshell_packet_pipe_count);
+    gshell_draw_value_uint(x + 24, y + 240, "EVENTS", gshell_packet_pipe_events);
+    graphics_text(x + 24, y + 262, "SAFE");
+    graphics_text(x + 150, y + 262, gshell_packet_safe_gate_ready ? "closed" : "wait");
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 150, y + 284, gshell_packet_pipe_last);
+}
+
+static void gshell_draw_command_view_cursorpipestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000FFAA);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000FFAA);
+    graphics_rect(x, y, 4, h, 0x0000FFAA);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000FFAA);
+
+    graphics_text(x + 24, y + 16, "POINTER CURSOR PIPE");
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 150, y + 42, gshell_cursor_pipe_state);
+    graphics_text(x + 24, y + 64, "PHASE");
+    graphics_text(x + 150, y + 64, gshell_cursor_pipe_phase);
+    graphics_text(x + 24, y + 86, "TARGET");
+    graphics_text(x + 150, y + 86, gshell_cursor_pipe_target);
+    gshell_draw_value_uint(x + 24, y + 108, "CURSOR X", gshell_cursor_x);
+    gshell_draw_value_uint(x + 24, y + 130, "CURSOR Y", gshell_cursor_y);
+    graphics_text(x + 24, y + 152, "DELTA");
+    graphics_text(x + 150, y + 152, gshell_cursor_delta_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 174, "BUTTON");
+    graphics_text(x + 150, y + 174, gshell_cursor_button_state_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 196, "CLICK");
+    graphics_text(x + 150, y + 196, gshell_cursor_click_state_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 218, "ROUTE/ACT");
+    graphics_text(x + 150, y + 218, (gshell_cursor_route_feed_ready && gshell_cursor_action_feed_ready) ? "ready" : "wait");
+    graphics_text(x + 24, y + 240, "VISUAL");
+    graphics_text(x + 150, y + 240, gshell_cursor_visual_plan_ready ? "planned" : "wait");
+    gshell_draw_value_uint(x + 24, y + 262, "EVENTS", gshell_cursor_pipe_events);
+    graphics_text(x + 24, y + 284, "LAST");
+    graphics_text(x + 150, y + 284, gshell_cursor_pipe_last);
+}
+
+static void gshell_draw_command_view_cursorvisualstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int vx = x + 300;
+    unsigned int vy = y + 122;
+
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000FFFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000FFFF);
+    graphics_rect(x, y, 4, h, 0x0000FFFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000FFFF);
+
+    graphics_text(x + 24, y + 16, "CURSOR VISUAL LAYER");
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 150, y + 42, gshell_cursor_visual_state);
+    graphics_text(x + 24, y + 64, "SHAPE");
+    graphics_text(x + 150, y + 64, gshell_cursor_visual_shape);
+    graphics_text(x + 24, y + 86, "LAYER");
+    graphics_text(x + 150, y + 86, gshell_cursor_visual_layer);
+    graphics_text(x + 24, y + 108, "VISIBLE");
+    graphics_text(x + 150, y + 108, gshell_cursor_visual_visible ? "yes" : "no");
+    graphics_text(x + 24, y + 130, "HOTSPOT");
+    graphics_text(x + 150, y + 130, gshell_cursor_hotspot_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 152, "ROUTE/ACT");
+    graphics_text(x + 150, y + 152, (gshell_cursor_visual_route_ready && gshell_cursor_visual_action_ready) ? "ready" : "wait");
+    graphics_text(x + 24, y + 174, "SAFE");
+    graphics_text(x + 150, y + 174, gshell_cursor_visual_safe_ready ? "ok" : "wait");
+    gshell_draw_value_uint(x + 24, y + 196, "CURSOR X", (unsigned int)gshell_cursor_x);
+    gshell_draw_value_uint(x + 24, y + 218, "CURSOR Y", (unsigned int)gshell_cursor_y);
+    gshell_draw_value_uint(x + 24, y + 240, "EVENTS", gshell_cursor_visual_events);
+    graphics_text(x + 24, y + 262, "LAST");
+    graphics_text(x + 150, y + 262, gshell_cursor_visual_last);
+
+    graphics_rect(vx - 16, vy - 16, 96, 96, 0x00001122);
+    graphics_rect(vx - 16, vy - 16, 96, 2, 0x0000FFFF);
+    graphics_rect(vx - 16, vy + 78, 96, 2, 0x0000FFFF);
+    graphics_rect(vx - 16, vy - 16, 2, 96, 0x0000FFFF);
+    graphics_rect(vx + 78, vy - 16, 2, 96, 0x0000FFFF);
+
+    if (gshell_cursor_visual_visible) {
+        graphics_rect(vx + 8, vy + 8, 6, 38, 0x00FFFFFF);
+        graphics_rect(vx + 14, vy + 14, 6, 30, 0x00FFFFFF);
+        graphics_rect(vx + 20, vy + 20, 6, 22, 0x00FFFFFF);
+        graphics_rect(vx + 26, vy + 26, 6, 14, 0x00FFFFFF);
+        graphics_rect(vx + 32, vy + 36, 18, 6, 0x00FFFFFF);
+        if (gshell_cursor_trail_ready) {
+            graphics_rect(vx + 2, vy + 54, 6, 6, 0x0000FFFF);
+            graphics_rect(vx - 8, vy + 64, 4, 4, 0x0000FFFF);
+        }
+    } else {
+        graphics_text(vx, vy + 28, "cursor off");
+    }
+}
+
+static void gshell_draw_command_view_realptrstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000DDFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000DDFF);
+    graphics_rect(x, y, 4, h, 0x0000DDFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000DDFF);
+
+    graphics_text(x + 24, y + 16, "REAL POINTER ROUTE");
+    graphics_text(x + 24, y + 42, "STATE");
+    graphics_text(x + 160, y + 42, gshell_realptr_state);
+    graphics_text(x + 24, y + 64, "SOURCE");
+    graphics_text(x + 160, y + 64, gshell_realptr_source);
+    graphics_text(x + 24, y + 86, "TARGET");
+    graphics_text(x + 160, y + 86, gshell_realptr_target);
+    gshell_draw_value_uint(x + 24, y + 108, "CURSOR X", (unsigned int)gshell_cursor_x);
+    gshell_draw_value_uint(x + 24, y + 130, "CURSOR Y", (unsigned int)gshell_cursor_y);
+    graphics_text(x + 24, y + 152, "HITTEST");
+    graphics_text(x + 160, y + 152, gshell_realptr_hittest_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 174, "D/C/W/T");
+    graphics_text(x + 160, y + 174, (gshell_realptr_desktop_route_ready && gshell_realptr_card_route_ready && gshell_realptr_window_route_ready && gshell_realptr_task_route_ready) ? "ready" : "wait");
+    graphics_text(x + 24, y + 196, "CLICK/DRAG");
+    graphics_text(x + 160, y + 196, (gshell_realptr_click_route_ready && gshell_realptr_drag_route_ready) ? "ready" : "wait");
+    graphics_text(x + 24, y + 218, "ACTION");
+    graphics_text(x + 160, y + 218, gshell_realptr_action_bridge_ready ? "ready" : "wait");
+    graphics_text(x + 24, y + 240, "SAFE");
+    graphics_text(x + 160, y + 240, gshell_realptr_safe_ready ? "ok" : "wait");
+    gshell_draw_value_uint(x + 24, y + 240, "EVENTS", gshell_realptr_events);
+    graphics_text(x + 24, y + 262, "LAST");
+    graphics_text(x + 160, y + 262, gshell_realptr_last);
+}
+
+static void gshell_draw_command_view_realinputclosestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000FF66);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000FF66);
+    graphics_rect(x, y, 4, h, 0x0000FF66);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000FF66);
+
+    graphics_text(x + 18, y + 14, "REAL INPUT FINAL");
+    graphics_text(x + 18, y + 38, "STATE");
+    graphics_text(x + 136, y + 38, gshell_realinput_close_state);
+    graphics_text(x + 18, y + 60, "SRC");
+    graphics_text(x + 136, y + 60, gshell_realinput_close_source);
+    graphics_text(x + 18, y + 82, "DST");
+    graphics_text(x + 136, y + 82, gshell_realinput_close_target);
+
+    graphics_text(x + 18, y + 104, "PREP/MOUSE");
+    graphics_text(x + 176, y + 104, (gshell_realinput_close_prep_ready && gshell_realinput_close_mouse_ready) ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 126, "PKT/CUR");
+    graphics_text(x + 176, y + 126, (gshell_realinput_close_packet_ready && gshell_realinput_close_cursor_ready) ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 148, "VIS/PTR");
+    graphics_text(x + 176, y + 148, (gshell_realinput_close_visual_ready && gshell_realinput_close_ptrroute_ready) ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 170, "BRIDGE");
+    graphics_text(x + 176, y + 170, gshell_realinput_close_bridge_ready ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 192, "SAFE/REG");
+    graphics_text(x + 176, y + 192, (gshell_realinput_close_safe_ready && gshell_realinput_close_regression_ready) ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 214, "HANDOFF");
+    graphics_text(x + 176, y + 214, gshell_realinput_close_handoff_ready ? "ok" : "wait");
+
+    graphics_text(x + 18, y + 236, "CLOSE");
+    graphics_text(x + 176, y + 236, gshell_realinput_closeout_ready ? "done" : "open");
+
+    gshell_draw_value_uint(x + 18, y + 258, "EV", gshell_realinput_close_events);
+    graphics_text(x + 18, y + 280, "LAST");
+    graphics_text(x + 136, y + 280, gshell_realinput_close_last);
+}
+
+static void gshell_draw_command_view_clickuistatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 18, y + 14, "CLICKABLE DESKTOP UI");
+    graphics_text(x + 18, y + 38, "STATE");
+    graphics_text(x + 144, y + 38, gshell_clickui_state);
+    graphics_text(x + 18, y + 60, "TARGET");
+    graphics_text(x + 144, y + 60, gshell_clickui_target);
+    graphics_text(x + 18, y + 82, "ACTION");
+    graphics_text(x + 144, y + 82, gshell_clickui_action);
+
+    graphics_text(x + 18, y + 104, "D/C/W/T");
+    graphics_text(x + 144, y + 104, (gshell_clickui_desktop_ready && gshell_clickui_card_ready && gshell_clickui_window_ready && gshell_clickui_taskbar_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 126, "LAUNCH/MENU");
+    graphics_text(x + 144, y + 126, (gshell_clickui_launcher_ready && gshell_clickui_menu_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 148, "HOVER/CLICK");
+    graphics_text(x + 144, y + 148, (gshell_clickui_hover_ready && gshell_clickui_click_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 170, "DBL/RIGHT");
+    graphics_text(x + 144, y + 170, (gshell_clickui_double_ready && gshell_clickui_right_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 192, "DRAG/DROP");
+    graphics_text(x + 144, y + 192, (gshell_clickui_drag_ready && gshell_clickui_drop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 214, "ACTION");
+    graphics_text(x + 144, y + 214, gshell_clickui_action_ready ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 236, "OPEN/CLOSE");
+    graphics_text(x + 144, y + 236, (gshell_clickui_open_ready && gshell_clickui_close_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 18, y + 258, "EV", gshell_clickui_events);
+    graphics_text(x + 18, y + 280, "LAST");
+    graphics_text(x + 144, y + 280, gshell_clickui_last);
+}
+
+static void gshell_draw_command_view_desktargetstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FF99);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FF99);
+    graphics_rect(x, y, 4, h, 0x0000FF99);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FF99);
+
+    graphics_text(x + 18, y + 14, "DESKTOP TARGET ACT");
+    graphics_text(x + 18, y + 38, "STATE");
+    graphics_text(x + 144, y + 38, gshell_desktarget_state);
+    graphics_text(x + 18, y + 60, "ACTIVE");
+    graphics_text(x + 144, y + 60, gshell_desktarget_active);
+    graphics_text(x + 18, y + 82, "ACTION");
+    graphics_text(x + 144, y + 82, gshell_desktarget_action);
+
+    graphics_text(x + 18, y + 104, "D/C/W/T");
+    graphics_text(x + 144, y + 104, (gshell_desktarget_desktop_ready && gshell_desktarget_card_ready && gshell_desktarget_window_ready && gshell_desktarget_taskbar_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 126, "LAUNCH/MENU");
+    graphics_text(x + 144, y + 126, (gshell_desktarget_launcher_ready && gshell_desktarget_menu_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 148, "FOCUS/SEL");
+    graphics_text(x + 144, y + 148, (gshell_desktarget_focus_ready && gshell_desktarget_select_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 170, "OPEN/CLOSE");
+    graphics_text(x + 144, y + 170, (gshell_desktarget_open_ready && gshell_desktarget_close_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 192, "DRAG/DROP");
+    graphics_text(x + 144, y + 192, (gshell_desktarget_drag_ready && gshell_desktarget_drop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 214, "VISUAL");
+    graphics_text(x + 144, y + 214, gshell_desktarget_visual_ready ? "ready" : "wait");
+
+    graphics_text(x + 18, y + 236, "SAFE");
+    graphics_text(x + 144, y + 236, gshell_desktarget_safe_ready ? "ok" : "wait");
+
+    gshell_draw_value_uint(x + 18, y + 258, "EV", gshell_desktarget_events);
+    graphics_text(x + 18, y + 280, "LAST");
+    graphics_text(x + 144, y + 280, gshell_desktarget_last);
+}
+
+static void gshell_draw_command_view_clickactionstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y, 4, h, 0x0000CCFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCFF);
+
+    graphics_text(x + 16, y + 14, "CLICK ACTION");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_clickaction_state);
+    graphics_text(x + 16, y + 60, "TARGET");
+    graphics_text(x + 126, y + 60, gshell_clickaction_target);
+    graphics_text(x + 16, y + 82, "ACT");
+    graphics_text(x + 126, y + 82, gshell_clickaction_action);
+
+    graphics_text(x + 16, y + 104, "SEL/OPEN");
+    graphics_text(x + 126, y + 104, (gshell_clickaction_select_ready && gshell_clickaction_open_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "MENU/FOC");
+    graphics_text(x + 126, y + 126, (gshell_clickaction_menu_ready && gshell_clickaction_focus_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "TASK/LAU");
+    graphics_text(x + 126, y + 148, (gshell_clickaction_task_switch_ready && gshell_clickaction_launch_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "DRAG/DROP");
+    graphics_text(x + 126, y + 170, (gshell_clickaction_drag_start_ready && gshell_clickaction_drop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "CLS/REST");
+    graphics_text(x + 126, y + 192, (gshell_clickaction_close_ready && gshell_clickaction_restore_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "RTE/BIND");
+    graphics_text(x + 126, y + 214, (gshell_clickaction_route_ready && gshell_clickaction_bind_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "VIS/SAFE");
+    graphics_text(x + 126, y + 236, (gshell_clickaction_visual_ready && gshell_clickaction_safe_ready) ? "ok" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_clickaction_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_clickaction_last);
+}
+
+static void gshell_draw_command_view_deskdragstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FFCC);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FFCC);
+    graphics_rect(x, y, 4, h, 0x0000FFCC);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FFCC);
+
+    graphics_text(x + 16, y + 14, "WINDOW DRAG FLOW");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_deskdrag_state);
+    graphics_text(x + 16, y + 60, "TARGET");
+    graphics_text(x + 126, y + 60, gshell_deskdrag_target);
+    graphics_text(x + 16, y + 82, "ACT");
+    graphics_text(x + 126, y + 82, gshell_deskdrag_action);
+
+    graphics_text(x + 16, y + 104, "TGT/TITLE");
+    graphics_text(x + 126, y + 104, (gshell_deskdrag_target_ready && gshell_deskdrag_title_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "START/MOVE");
+    graphics_text(x + 126, y + 126, (gshell_deskdrag_start_ready && gshell_deskdrag_move_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "BOUND/SNAP");
+    graphics_text(x + 126, y + 148, (gshell_deskdrag_bounds_ready && gshell_deskdrag_snap_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "DROP/CAN");
+    graphics_text(x + 126, y + 170, (gshell_deskdrag_drop_ready && gshell_deskdrag_cancel_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "FOC/ROUTE");
+    graphics_text(x + 126, y + 192, (gshell_deskdrag_focus_ready && gshell_deskdrag_route_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "ACT/VIS");
+    graphics_text(x + 126, y + 214, (gshell_deskdrag_action_ready && gshell_deskdrag_visual_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "SAFE");
+    graphics_text(x + 126, y + 236, gshell_deskdrag_safe_ready ? "ok" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_deskdrag_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_deskdrag_last);
+}
+
+static void gshell_draw_command_view_uifeedbackstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y, 4, h, 0x0000DDFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDFF);
+
+    graphics_text(x + 16, y + 14, "UI VISUAL FEEDBACK");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_uifeedback_state);
+    graphics_text(x + 16, y + 60, "TARGET");
+    graphics_text(x + 126, y + 60, gshell_uifeedback_target);
+    graphics_text(x + 16, y + 82, "EFFECT");
+    graphics_text(x + 126, y + 82, gshell_uifeedback_effect);
+
+    graphics_text(x + 16, y + 104, "HOV/SEL");
+    graphics_text(x + 126, y + 104, (gshell_uifeedback_hover_ready && gshell_uifeedback_select_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "ACT/FOC");
+    graphics_text(x + 126, y + 126, (gshell_uifeedback_active_ready && gshell_uifeedback_focus_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "OPEN/CLS");
+    graphics_text(x + 126, y + 148, (gshell_uifeedback_open_ready && gshell_uifeedback_close_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "DRAG/DROP");
+    graphics_text(x + 126, y + 170, (gshell_uifeedback_drag_ready && gshell_uifeedback_drop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "TASK/LAU");
+    graphics_text(x + 126, y + 192, (gshell_uifeedback_taskbar_ready && gshell_uifeedback_launcher_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "MENU/CUR");
+    graphics_text(x + 126, y + 214, (gshell_uifeedback_menu_ready && gshell_uifeedback_cursor_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "PANEL/SAFE");
+    graphics_text(x + 126, y + 236, (gshell_uifeedback_panel_ready && gshell_uifeedback_safe_ready) ? "ok" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_uifeedback_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_uifeedback_last);
+}
+
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
     graphics_rect(x, y, w, h, 0x00000000);
     graphics_rect(x, y, w, 4, 0x00004477);
@@ -18244,6 +26040,86 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "ACTIONBINDSTATUS")) {
+        gshell_draw_command_view_actionbindstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "MENUSHORTSTATUS")) {
+        gshell_draw_command_view_menushortstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "WINDOWFLOWSTATUS")) {
+        gshell_draw_command_view_windowflowstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "INTERACTCLOSESTATUS")) {
+        gshell_draw_command_view_interactclosestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "INPUTPREPSTATUS")) {
+        gshell_draw_command_view_inputprepstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "MOUSEDRVSTATUS")) {
+        gshell_draw_command_view_mousedrvstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "PACKETPIPESTATUS")) {
+        gshell_draw_command_view_packetpipestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CURSORPIPESTATUS")) {
+        gshell_draw_command_view_cursorpipestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CURSORVISUALSTATUS")) {
+        gshell_draw_command_view_cursorvisualstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "REALPTRSTATUS")) {
+        gshell_draw_command_view_realptrstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "REALINPUTCLOSESTATUS")) {
+        gshell_draw_command_view_realinputclosestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CLICKUISTATUS")) {
+        gshell_draw_command_view_clickuistatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DESKTARGETSTATUS")) {
+        gshell_draw_command_view_desktargetstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CLICKACTIONSTATUS")) {
+        gshell_draw_command_view_clickactionstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "DESKDRAGSTATUS")) {
+        gshell_draw_command_view_deskdragstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "UIFEEDBACKSTATUS")) {
+        gshell_draw_command_view_uifeedbackstatus(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -18400,8 +26276,44 @@ static void gshell_draw_input_zone(unsigned int width, unsigned int height) {
     graphics_text(286, status_y, "PARSER");
     graphics_text(382, status_y, gshell_parser_status_text);
 
-    graphics_text(width - 210, status_y, "VIEW");
-    graphics_text(width - 150, status_y, gshell_command_view);
+    graphics_text(620, status_y, "VIEW");
+
+    const char* gshell_status_view_text = gshell_command_view;
+    if (gshell_text_equal(gshell_command_view, "ACTIONBINDSTATUS")) {
+        gshell_status_view_text = "ACTIONBIND";
+    } else if (gshell_text_equal(gshell_command_view, "MENUSHORTSTATUS")) {
+        gshell_status_view_text = "MENUSHORT";
+    } else if (gshell_text_equal(gshell_command_view, "WINDOWFLOWSTATUS")) {
+        gshell_status_view_text = "WINFLOW";
+    } else if (gshell_text_equal(gshell_command_view, "INTERACTCLOSESTATUS")) {
+        gshell_status_view_text = "CLOSEOUT";
+    } else if (gshell_text_equal(gshell_command_view, "INPUTPREPSTATUS")) {
+        gshell_status_view_text = "INPUTPREP";
+    } else if (gshell_text_equal(gshell_command_view, "MOUSEDRVSTATUS")) {
+        gshell_status_view_text = "MOUSEDRV";
+    } else if (gshell_text_equal(gshell_command_view, "PACKETPIPESTATUS")) {
+        gshell_status_view_text = "PACKET";
+    } else if (gshell_text_equal(gshell_command_view, "CURSORPIPESTATUS")) {
+        gshell_status_view_text = "CURSOR";
+    } else if (gshell_text_equal(gshell_command_view, "CURSORVISUALSTATUS")) {
+        gshell_status_view_text = "CURVIS";
+    } else if (gshell_text_equal(gshell_command_view, "REALPTRSTATUS")) {
+        gshell_status_view_text = "REALPTR";
+    } else if (gshell_text_equal(gshell_command_view, "REALINPUTCLOSESTATUS")) {
+        gshell_status_view_text = "INPUTFINAL";
+    } else if (gshell_text_equal(gshell_command_view, "CLICKUISTATUS")) {
+        gshell_status_view_text = "CLICKUI";
+    } else if (gshell_text_equal(gshell_command_view, "DESKTARGETSTATUS")) {
+        gshell_status_view_text = "TARGET";
+    } else if (gshell_text_equal(gshell_command_view, "CLICKACTIONSTATUS")) {
+        gshell_status_view_text = "CLICKACT";
+    } else if (gshell_text_equal(gshell_command_view, "DESKDRAGSTATUS")) {
+        gshell_status_view_text = "DRAGFLOW";
+    } else if (gshell_text_equal(gshell_command_view, "UIFEEDBACKSTATUS")) {
+        gshell_status_view_text = "UIFEED";
+    }
+
+    graphics_text(width - 96, status_y, gshell_status_view_text);
 }
 
 void gshell_graphics_dashboard(void) {
@@ -18409,9 +26321,9 @@ void gshell_graphics_dashboard(void) {
     unsigned int height = framebuffer_get_height();
     unsigned int center_x = 0;
     unsigned int center_y = 0;
-    unsigned int command_x = 318;
+    unsigned int command_x = 322;
     unsigned int command_y = 116;
-    unsigned int command_w = 250;
+    unsigned int command_w = 236;
     unsigned int command_h = 300;
 
     gshell_render_begin("graphics-dashboard");
@@ -18473,7 +26385,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "CLICK ROUTE");
+    graphics_text(390, 54, "UI FEED");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -18493,23 +26405,23 @@ void gshell_graphics_dashboard(void) {
 
     gshell_draw_command_view(command_x, command_y, command_w, command_h);
 
-    graphics_rect(width - 230, 116, 194, 300, 0x00112233);
-    graphics_rect(width - 230, 116, 194, 4, 0x00FFAA00);
-    graphics_rect(width - 230, 412, 194, 4, 0x00FFAA00);
-    graphics_rect(width - 230, 116, 4, 300, 0x00FFAA00);
-    graphics_rect(width - 40, 116, 4, 300, 0x00FFAA00);
+    graphics_rect(586, 116, 176, 300, 0x00112233);
+    graphics_rect(586, 116, 176, 4, 0x00FFAA00);
+    graphics_rect(586, 412, 176, 4, 0x00FFAA00);
+    graphics_rect(586, 116, 4, 300, 0x00FFAA00);
+    graphics_rect(758, 116, 4, 300, 0x00FFAA00);
 
-    graphics_text(width - 208, 136, "COMMANDS");
-    graphics_text(width - 208, 164, "ROUTESTATUS");
-    graphics_text(width - 208, 188, "HITDESKTOP");
-    graphics_text(width - 208, 212, "HITCARD");
-    graphics_text(width - 208, 236, "HITWINDOW");
-    graphics_text(width - 208, 260, "CLICKROUTE");
-    graphics_text(width - 208, 284, "OPENROUTE");
-    graphics_text(width - 208, 308, "ROUTEDEMO");
-    graphics_text(width - 208, 332, "ROUTECHECK");
+    graphics_text(606, 136, "COMMANDS");
+    graphics_text(606, 164, "FEEDSTAT");
+    graphics_text(606, 188, "HOVER");
+    graphics_text(606, 212, "SELECT");
+    graphics_text(606, 236, "ACTIVE");
+    graphics_text(606, 260, "FOCUS");
+    graphics_text(606, 284, "DRAGFX");
+    graphics_text(606, 308, "FEEDDEMO");
+    graphics_text(606, 332, "FEEDCHECK");
 
-    gshell_draw_history_panel(width - 208, 368);
+    gshell_draw_history_panel(606, 368);
 
     gshell_draw_input_zone(width, height);
 

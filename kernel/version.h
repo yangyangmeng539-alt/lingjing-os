@@ -2,8 +2,8 @@
 #define LINGJING_VERSION_H
 
 #define LINGJING_NAME "Lingjing OS"
-#define LINGJING_VERSION "dev-1.5.1"
-#define LINGJING_STAGE "desktop click routing core"
+#define LINGJING_VERSION "dev-1.7.4m"
+#define LINGJING_STAGE "GShell center panel left adjust"
 #define LINGJING_ARCH "i386"
 #define LINGJING_BOOT "multiboot1 text + multiboot2 gfxboot"
 #define LINGJING_PLATFORM "baremetal"
