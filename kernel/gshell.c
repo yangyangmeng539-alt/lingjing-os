@@ -328,7 +328,24 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_RELEASEINFO 254
 #define GSHELL_CMD_VERSIONFINAL 255
 #define GSHELL_CMD_NEXTROADMAP 256
+#define GSHELL_CMD_INPUTSTATUS 257
+#define GSHELL_CMD_MOUSESTATUS 258
+#define GSHELL_CMD_CLICKSTATUS 259
+#define GSHELL_CMD_FOCUSSTATUS 260
+#define GSHELL_CMD_INPUTDEMO   261
+#define GSHELL_CMD_INPUTCHECK  262
+#define GSHELL_CMD_INPUTRESET  263
 #define GSHELL_CMD_UNKNOWN     999
+
+static unsigned int gshell_input_layer_enabled = 1;
+static unsigned int gshell_mouse_layer_ready = 0;
+static unsigned int gshell_click_layer_ready = 0;
+static unsigned int gshell_focus_layer_ready = 1;
+static unsigned int gshell_input_events = 0;
+static unsigned int gshell_focus_changes = 0;
+static const char* gshell_input_state = "keyboard";
+static const char* gshell_focus_target = "terminal";
+static const char* gshell_input_last = "none";
 
 static unsigned int gshell_flow_prepared = 0;
 static unsigned int gshell_flow_demos = 0;
@@ -635,6 +652,13 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "releaseinfo", GSHELL_CMD_RELEASEINFO, "CLOSEOUT",    "RELEASE INFO OK" },
     { "versionfinal", GSHELL_CMD_VERSIONFINAL, "CLOSEOUT",  "VERSION FINAL OK" },
     { "nextroadmap", GSHELL_CMD_NEXTROADMAP, "CLOSEOUT",    "NEXT ROADMAP OK" },
+    { "inputstatus", GSHELL_CMD_INPUTSTATUS, "INPUTSTATUS", "INPUT STATUS OK" },
+    { "mousestatus", GSHELL_CMD_MOUSESTATUS, "INPUTSTATUS", "MOUSE STATUS OK" },
+    { "clickstatus", GSHELL_CMD_CLICKSTATUS, "INPUTSTATUS", "CLICK STATUS OK" },
+    { "focusstatus", GSHELL_CMD_FOCUSSTATUS, "INPUTSTATUS", "FOCUS STATUS OK" },
+    { "inputdemo",   GSHELL_CMD_INPUTDEMO,   "INPUTSTATUS", "INPUT DEMO OK" },
+    { "inputcheck",  GSHELL_CMD_INPUTCHECK,  "INPUTSTATUS", "INPUT CHECK OK" },
+    { "inputreset",  GSHELL_CMD_INPUTRESET,  "INPUTSTATUS", "INPUT RESET OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
@@ -5377,6 +5401,110 @@ static void gshell_dispatch_command(void) {
         return;
     }
 
+    if (command_id == GSHELL_CMD_INPUTSTATUS) {
+        gshell_command_name = "INPUTSTATUS";
+        gshell_command_result = "INPUT STATUS OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "COMMAND OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INPUTSTATUS -> INTERACTION INPUT LAYER READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_MOUSESTATUS) {
+        gshell_command_name = "MOUSESTATUS";
+        gshell_command_result = "MOUSE STATUS OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "MOUSE META";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("MOUSESTATUS -> MOUSE LAYER METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_CLICKSTATUS) {
+        gshell_command_name = "CLICKSTATUS";
+        gshell_command_result = "CLICK STATUS OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "CLICK META";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("CLICKSTATUS -> CLICK COMMAND METADATA READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_FOCUSSTATUS) {
+        gshell_command_name = "FOCUSSTATUS";
+        gshell_command_result = "FOCUS STATUS OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "FOCUS OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("FOCUSSTATUS -> TERMINAL FOCUS READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INPUTDEMO) {
+        gshell_mouse_layer_ready = 1;
+        gshell_click_layer_ready = 1;
+        gshell_focus_layer_ready = 1;
+        gshell_input_events++;
+        gshell_focus_changes++;
+        gshell_input_state = "demo";
+        gshell_focus_target = "commands";
+        gshell_input_last = "demo-click";
+        gshell_command_name = "INPUTDEMO";
+        gshell_command_result = "INPUT DEMO OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "DEMO OK";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INPUTDEMO -> MOUSE CLICK FOCUS DEMO READY");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INPUTCHECK) {
+        int ok = gshell_input_layer_enabled && gshell_focus_layer_ready;
+        gshell_input_events++;
+        gshell_input_last = ok ? "check-ok" : "check-bad";
+        gshell_command_name = "INPUTCHECK";
+        gshell_command_result = ok ? "INPUT CHECK OK" : "INPUT CHECK BAD";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = ok ? "INPUT OK" : "INPUT BAD";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ok ? "INPUTCHECK -> KEYBOARD FOCUS INPUT OK" : "INPUTCHECK -> INPUT LAYER BAD");
+        return;
+    }
+
+    if (command_id == GSHELL_CMD_INPUTRESET) {
+        gshell_input_layer_enabled = 1;
+        gshell_mouse_layer_ready = 0;
+        gshell_click_layer_ready = 0;
+        gshell_focus_layer_ready = 1;
+        gshell_input_events = 0;
+        gshell_focus_changes = 0;
+        gshell_input_state = "keyboard";
+        gshell_focus_target = "terminal";
+        gshell_input_last = "reset";
+        gshell_command_name = "INPUTRESET";
+        gshell_command_result = "INPUT RESET OK";
+        gshell_command_view = "INPUTSTATUS";
+        gshell_input_status_text = "RESET";
+        gshell_parser_status_text = "REGISTRY";
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push("INPUTRESET -> INPUT LAYER RESET");
+        return;
+    }
+
     gshell_command_unknown++;
     gshell_command_name = "UNKNOWN";
     gshell_command_result = "UNKNOWN";
@@ -5889,10 +6017,10 @@ static void gshell_draw_command_view_registry(unsigned int x, unsigned int y, un
     graphics_text(x + 132, y + 172, "capinfo");
     graphics_text(x + 24, y + 196, "intentinfo");
     graphics_text(x + 132, y + 196, "taskinfo");
-    graphics_text(x + 24, y + 224, "closeout");
-    graphics_text(x + 132, y + 224, "finalstatus");
-    graphics_text(x + 24, y + 252, "finalready");
-    graphics_text(x + 132, y + 252, "nextroadmap");
+    graphics_text(x + 24, y + 224, "inputstatus");
+    graphics_text(x + 132, y + 224, "mousestatus");
+    graphics_text(x + 24, y + 252, "focusstatus");
+    graphics_text(x + 132, y + 252, "inputcheck");
 }
 
 static void gshell_draw_command_view_textcmds(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
@@ -8210,6 +8338,34 @@ static void gshell_draw_command_view_closeout(unsigned int x, unsigned int y, un
     graphics_text(x + 156, y + 264, "1.1 ui/input");
 }
 
+static void gshell_draw_command_view_inputstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    graphics_rect(x, y, w, h, 0x00000000);
+    graphics_rect(x, y, w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 24, y + 20, "INTERACTION INPUT");
+    graphics_text(x + 24, y + 48, "INPUT");
+    graphics_text(x + 156, y + 48, gshell_input_layer_enabled ? "enabled" : "disabled");
+    graphics_text(x + 24, y + 72, "STATE");
+    graphics_text(x + 156, y + 72, gshell_input_state);
+    graphics_text(x + 24, y + 96, "MOUSE");
+    graphics_text(x + 156, y + 96, gshell_mouse_layer_ready ? "meta-ready" : "planned");
+    graphics_text(x + 24, y + 120, "CLICK");
+    graphics_text(x + 156, y + 120, gshell_click_layer_ready ? "ready" : "planned");
+    graphics_text(x + 24, y + 144, "FOCUS");
+    graphics_text(x + 156, y + 144, gshell_focus_layer_ready ? "ready" : "bad");
+    graphics_text(x + 24, y + 168, "TARGET");
+    graphics_text(x + 156, y + 168, gshell_focus_target);
+    gshell_draw_value_uint(x + 24, y + 192, "EVENTS", gshell_input_events);
+    gshell_draw_value_uint(x + 24, y + 216, "FOCUS CHG", gshell_focus_changes);
+    graphics_text(x + 24, y + 240, "LAST");
+    graphics_text(x + 156, y + 240, gshell_input_last);
+    graphics_text(x + 24, y + 264, "NEXT");
+    graphics_text(x + 156, y + 264, "real mouse");
+}
+
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
     graphics_rect(x, y, w, h, 0x00000000);
     graphics_rect(x, y, w, 4, 0x00004477);
@@ -8886,6 +9042,11 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "INPUTSTATUS")) {
+        gshell_draw_command_view_inputstatus(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -9115,7 +9276,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "1.0 CLOSEOUT");
+    graphics_text(390, 54, "INPUT LAYER");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -9142,14 +9303,14 @@ void gshell_graphics_dashboard(void) {
     graphics_rect(width - 40, 116, 4, 300, 0x00FFAA00);
 
     graphics_text(width - 208, 136, "COMMANDS");
-    graphics_text(width - 208, 164, "CLOSEOUT");
-    graphics_text(width - 208, 188, "FINALSTATUS");
-    graphics_text(width - 208, 212, "FINALHEALTH");
-    graphics_text(width - 208, 236, "FINALDEMO");
-    graphics_text(width - 208, 260, "FINALREADY");
-    graphics_text(width - 208, 284, "RELEASEINFO");
-    graphics_text(width - 208, 308, "VERSIONFINAL");
-    graphics_text(width - 208, 332, "NEXTROADMAP");
+    graphics_text(width - 208, 164, "INPUTSTATUS");
+    graphics_text(width - 208, 188, "MOUSESTATUS");
+    graphics_text(width - 208, 212, "CLICKSTATUS");
+    graphics_text(width - 208, 236, "FOCUSSTATUS");
+    graphics_text(width - 208, 260, "INPUTDEMO");
+    graphics_text(width - 208, 284, "INPUTCHECK");
+    graphics_text(width - 208, 308, "INPUTRESET");
+    graphics_text(width - 208, 332, "CLOSEOUT");
 
     gshell_draw_history_panel(width - 208, 368);
 
@@ -9162,7 +9323,7 @@ void gshell_graphics_dashboard(void) {
     graphics_pixel(center_x, center_y - 1, 0x00FFFFFF);
 
     platform_print("  output: graphics-self\n");
-    platform_print("  command zone: 1.0-prototype-closeout\n");
+    platform_print("  command zone: interaction-input-base\n");
     platform_print("  result: real-written\n");
 }
 
