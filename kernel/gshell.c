@@ -995,6 +995,494 @@ static unsigned int gshell_terminal_total = 0;
 #define GSHELL_CMD_UIFEEDBACKCHECK 921
 #define GSHELL_CMD_UIFEEDBACKRESET 922
 #define GSHELL_CMD_UIFEEDBACKNEXT 923
+#define GSHELL_CMD_CLICKCLOSESTATUS 924
+#define GSHELL_CMD_CLICKCLOSEBRIDGESUM 925
+#define GSHELL_CMD_CLICKCLOSETARGETSUM 926
+#define GSHELL_CMD_CLICKCLOSEACTIONSUM 927
+#define GSHELL_CMD_CLICKCLOSEDRAGSUM 928
+#define GSHELL_CMD_CLICKCLOSEFEEDBACKSUM 929
+#define GSHELL_CMD_CLICKCLOSEVISUALSUM 930
+#define GSHELL_CMD_CLICKCLOSEINPUTSUM 931
+#define GSHELL_CMD_CLICKCLOSESAFESUM 932
+#define GSHELL_CMD_CLICKCLOSEREGRESSSUM 933
+#define GSHELL_CMD_CLICKCLOSELAYOUTSUM 934
+#define GSHELL_CMD_CLICKCLOSESUNDIALPLAN 935
+#define GSHELL_CMD_CLICKCLOSEDEMOALL 936
+#define GSHELL_CMD_CLICKCLOSEFINALCHECK 937
+#define GSHELL_CMD_CLICKCLOSERESET 938
+#define GSHELL_CMD_CLICKCLOSEOUT 939
+#define GSHELL_CMD_CLICKCLOSEREADY 940
+#define GSHELL_CMD_CLICKCLOSENEXTPHASE 941
+#define GSHELL_CMD_CLICKCLOSEROADMAP 942
+#define GSHELL_CMD_CLICKCLOSENEXT 943
+#define GSHELL_CMD_DESKTOPOPSSTATUS 944
+#define GSHELL_CMD_DESKTOPOPSSCENE 945
+#define GSHELL_CMD_DESKTOPOPSWALL 946
+#define GSHELL_CMD_DESKTOPOPSCLEAN 947
+#define GSHELL_CMD_DESKTOPOPSSHOWSUNDIAL 948
+#define GSHELL_CMD_DESKTOPOPSHIDESUNDIAL 949
+#define GSHELL_CMD_DESKTOPOPSAPPGRID 950
+#define GSHELL_CMD_DESKTOPOPSAPPFLOAT 951
+#define GSHELL_CMD_DESKTOPOPSRUNNING 952
+#define GSHELL_CMD_DESKTOPOPSINACTIVE 953
+#define GSHELL_CMD_DESKTOPOPSDRAGICON 954
+#define GSHELL_CMD_DESKTOPOPSMENU 955
+#define GSHELL_CMD_DESKTOPOPSSEARCH 956
+#define GSHELL_CMD_DESKTOPOPSVOICE 957
+#define GSHELL_CMD_DESKTOPOPSNETTIME 958
+#define GSHELL_CMD_DESKTOPOPSSTATE 959
+#define GSHELL_CMD_DESKTOPOPSDEMO 960
+#define GSHELL_CMD_DESKTOPOPSCHECK 961
+#define GSHELL_CMD_DESKTOPOPSRESET 962
+#define GSHELL_CMD_DESKTOPOPSNEXT 963
+#define GSHELL_CMD_SUNDIALSTATUS 964
+#define GSHELL_CMD_SUNDIALCORE 965
+#define GSHELL_CMD_SUNDIALRINGS 966
+#define GSHELL_CMD_SUNDIALSECTORS 967
+#define GSHELL_CMD_SUNDIALAPPS 968
+#define GSHELL_CMD_SUNDIALRUNNING 969
+#define GSHELL_CMD_SUNDIALDIM 970
+#define GSHELL_CMD_SUNDIALFLOAT 971
+#define GSHELL_CMD_SUNDIALDRAG 972
+#define GSHELL_CMD_SUNDIALSHOW 973
+#define GSHELL_CMD_SUNDIALHIDE 974
+#define GSHELL_CMD_SUNDIALSEARCH 975
+#define GSHELL_CMD_SUNDIALVOICE 976
+#define GSHELL_CMD_SUNDIALNETTIME 977
+#define GSHELL_CMD_SUNDIALSTATE 978
+#define GSHELL_CMD_SUNDIALDEMO 979
+#define GSHELL_CMD_SUNDIALCHECK 980
+#define GSHELL_CMD_SUNDIALRESET 981
+#define GSHELL_CMD_SUNDIALNEXT 982
+#define GSHELL_CMD_SECTORFLOATSTATUS 983
+#define GSHELL_CMD_SECTORSELECT 984
+#define GSHELL_CMD_SECTOREXPAND 985
+#define GSHELL_CMD_SECTORFLOATAPPS 986
+#define GSHELL_CMD_SECTORRUNLIT 987
+#define GSHELL_CMD_SECTORDIMAPPS 988
+#define GSHELL_CMD_SECTORSCALE 989
+#define GSHELL_CMD_SECTORDENSITY 990
+#define GSHELL_CMD_SECTORPAGE 991
+#define GSHELL_CMD_SECTOROVERFLOW 992
+#define GSHELL_CMD_SECTORDRAGICON 993
+#define GSHELL_CMD_SECTORDROPICON 994
+#define GSHELL_CMD_SECTORMOVEAPP 995
+#define GSHELL_CMD_SECTORCATEGORY 996
+#define GSHELL_CMD_SECTORSEARCH 997
+#define GSHELL_CMD_SECTORVOICE 998
+#define GSHELL_CMD_SECTORDEMO 999
+#define GSHELL_CMD_SECTORCHECK 1000
+#define GSHELL_CMD_SECTORRESET 1001
+#define GSHELL_CMD_SECTORNEXT 1002
+#define GSHELL_CMD_SUNDIALVISSTATUS 1003
+#define GSHELL_CMD_SUNDIALVISCORE 1004
+#define GSHELL_CMD_SUNDIALVISRINGS 1005
+#define GSHELL_CMD_SUNDIALVISSECTORS 1006
+#define GSHELL_CMD_SUNDIALVISICONS 1007
+#define GSHELL_CMD_SUNDIALVISRUNLIT 1008
+#define GSHELL_CMD_SUNDIALVISDIM 1009
+#define GSHELL_CMD_SUNDIALVISFLOAT 1010
+#define GSHELL_CMD_SUNDIALVISDRAG 1011
+#define GSHELL_CMD_SUNDIALVISSHOW 1012
+#define GSHELL_CMD_SUNDIALVISHIDE 1013
+#define GSHELL_CMD_SUNDIALVISNETTIME 1014
+#define GSHELL_CMD_SUNDIALVISSEARCH 1015
+#define GSHELL_CMD_SUNDIALVISVOICE 1016
+#define GSHELL_CMD_SUNDIALVISDENSITY 1017
+#define GSHELL_CMD_SUNDIALVISDEMO 1018
+#define GSHELL_CMD_SUNDIALVISCHECK 1019
+#define GSHELL_CMD_SUNDIALVISRESET 1020
+#define GSHELL_CMD_SUNDIALVISNEXT 1021
+#define GSHELL_CMD_SUNDIALMENUSTATUS 1022
+#define GSHELL_CMD_SUNDIALMENUDESKTOP 1023
+#define GSHELL_CMD_SUNDIALMENUOPEN 1024
+#define GSHELL_CMD_SUNDIALMENUSHOW 1025
+#define GSHELL_CMD_SUNDIALMENUHIDE 1026
+#define GSHELL_CMD_SUNDIALMENUTOGGLE 1027
+#define GSHELL_CMD_SUNDIALMENULOCK 1028
+#define GSHELL_CMD_SUNDIALMENUUNLOCK 1029
+#define GSHELL_CMD_SUNDIALMENUOPACITY 1030
+#define GSHELL_CMD_SUNDIALMENUCOMPACT 1031
+#define GSHELL_CMD_SUNDIALMENUFULL 1032
+#define GSHELL_CMD_SUNDIALMENUEDGE 1033
+#define GSHELL_CMD_SUNDIALMENUAUTOHIDE 1034
+#define GSHELL_CMD_SUNDIALMENUSEARCH 1035
+#define GSHELL_CMD_SUNDIALMENUVOICE 1036
+#define GSHELL_CMD_SUNDIALMENUCLEAN 1037
+#define GSHELL_CMD_SUNDIALMENUSTATE 1038
+#define GSHELL_CMD_SUNDIALMENUDEMO 1039
+#define GSHELL_CMD_SUNDIALMENUCHECK 1040
+#define GSHELL_CMD_SUNDIALMENURESET 1041
+#define GSHELL_CMD_SUNDIALMENUNEXT 1042
+#define GSHELL_CMD_SUNDIALFINALSTATUS 1043
+#define GSHELL_CMD_SUNDIALFINALDESKTOP 1044
+#define GSHELL_CMD_SUNDIALFINALVISUAL 1045
+#define GSHELL_CMD_SUNDIALFINALSECTOR 1046
+#define GSHELL_CMD_SUNDIALFINALMENU 1047
+#define GSHELL_CMD_SUNDIALFINALSEARCH 1048
+#define GSHELL_CMD_SUNDIALFINALVOICE 1049
+#define GSHELL_CMD_SUNDIALFINALNETTIME 1050
+#define GSHELL_CMD_SUNDIALFINALCLEAN 1051
+#define GSHELL_CMD_SUNDIALFINALUX 1052
+#define GSHELL_CMD_SUNDIALFINALDEMO 1053
+#define GSHELL_CMD_SUNDIALFINALCHECK 1054
+#define GSHELL_CMD_SUNDIALFINALRESET 1055
+#define GSHELL_CMD_SUNDIALFINALCLOSEOUT 1056
+#define GSHELL_CMD_SUNDIALFINALNEXTPHASE 1057
+#define GSHELL_CMD_SUNDIALFINALROADMAP 1058
+#define GSHELL_CMD_SUNDIALFINALNEXT 1059
+#define GSHELL_CMD_SUNDIALHUBSTATUS 1060
+#define GSHELL_CMD_SUNDIALHUBCORE 1061
+#define GSHELL_CMD_SUNDIALHUBCONTROL 1062
+#define GSHELL_CMD_SUNDIALHUBPERMS 1063
+#define GSHELL_CMD_SUNDIALHUBRULES 1064
+#define GSHELL_CMD_SUNDIALHUBAUDIT 1065
+#define GSHELL_CMD_SUNDIALHUBAPPBEHAVIOR 1066
+#define GSHELL_CMD_SUNDIALHUBNETWORK 1067
+#define GSHELL_CMD_SUNDIALHUBFILE 1068
+#define GSHELL_CMD_SUNDIALHUBAI 1069
+#define GSHELL_CMD_SUNDIALHUBVOICE 1070
+#define GSHELL_CMD_SUNDIALHUBSEARCH 1071
+#define GSHELL_CMD_SUNDIALHUBINTENT 1072
+#define GSHELL_CMD_SUNDIALHUBSECURITY 1073
+#define GSHELL_CMD_SUNDIALHUBDEMO 1074
+#define GSHELL_CMD_SUNDIALHUBCHECK 1075
+#define GSHELL_CMD_SUNDIALHUBRESET 1076
+#define GSHELL_CMD_SUNDIALHUBNEXT 1077
+#define GSHELL_CMD_CONTROLSECTORSTATUS 1078
+#define GSHELL_CMD_CONTROLSECTOROPEN 1079
+#define GSHELL_CMD_CONTROLSECTORALLOW 1080
+#define GSHELL_CMD_CONTROLSECTORBLOCK 1081
+#define GSHELL_CMD_CONTROLSECTORASK 1082
+#define GSHELL_CMD_CONTROLSECTORTEMP 1083
+#define GSHELL_CMD_CONTROLSECTORFILE 1084
+#define GSHELL_CMD_CONTROLSECTORNET 1085
+#define GSHELL_CMD_CONTROLSECTORAI 1086
+#define GSHELL_CMD_CONTROLSECTORAPP 1087
+#define GSHELL_CMD_CONTROLSECTORRULE 1088
+#define GSHELL_CMD_CONTROLSECTORAUDIT 1089
+#define GSHELL_CMD_CONTROLSECTORPERM 1090
+#define GSHELL_CMD_CONTROLSECTORINTENT 1091
+#define GSHELL_CMD_CONTROLSECTORDEMO 1092
+#define GSHELL_CMD_CONTROLSECTORCHECK 1093
+#define GSHELL_CMD_CONTROLSECTORRESET 1094
+#define GSHELL_CMD_CONTROLSECTORNEXT 1095
+#define GSHELL_CMD_PERMREQSTATUS 1096
+#define GSHELL_CMD_PERMREQOPEN 1097
+#define GSHELL_CMD_PERMREQSOURCE 1098
+#define GSHELL_CMD_PERMREQTARGET 1099
+#define GSHELL_CMD_PERMREQFILE 1100
+#define GSHELL_CMD_PERMREQNET 1101
+#define GSHELL_CMD_PERMREQAI 1102
+#define GSHELL_CMD_PERMREQAPP 1103
+#define GSHELL_CMD_PERMREQASK 1104
+#define GSHELL_CMD_PERMREQALLOW 1105
+#define GSHELL_CMD_PERMREQBLOCK 1106
+#define GSHELL_CMD_PERMREQTEMP 1107
+#define GSHELL_CMD_PERMREQRULE 1108
+#define GSHELL_CMD_PERMREQAUDIT 1109
+#define GSHELL_CMD_PERMREQVOICE 1110
+#define GSHELL_CMD_PERMREQSEARCH 1111
+#define GSHELL_CMD_PERMREQDEMO 1112
+#define GSHELL_CMD_PERMREQCHECK 1113
+#define GSHELL_CMD_PERMREQRESET 1114
+#define GSHELL_CMD_PERMREQNEXT 1115
+#define GSHELL_CMD_AUDITFLOWSTATUS 1116
+#define GSHELL_CMD_AUDITFLOWOPEN 1117
+#define GSHELL_CMD_AUDITFLOWSOURCE 1118
+#define GSHELL_CMD_AUDITFLOWEVENT 1119
+#define GSHELL_CMD_AUDITFLOWTIMELINE 1120
+#define GSHELL_CMD_AUDITFLOWLAST 1121
+#define GSHELL_CMD_AUDITFLOWFILE 1122
+#define GSHELL_CMD_AUDITFLOWNET 1123
+#define GSHELL_CMD_AUDITFLOWAI 1124
+#define GSHELL_CMD_AUDITFLOWAPP 1125
+#define GSHELL_CMD_AUDITFLOWALLOW 1126
+#define GSHELL_CMD_AUDITFLOWBLOCK 1127
+#define GSHELL_CMD_AUDITFLOWTEMP 1128
+#define GSHELL_CMD_AUDITFLOWRULE 1129
+#define GSHELL_CMD_AUDITFLOWSEARCH 1130
+#define GSHELL_CMD_AUDITFLOWVOICE 1131
+#define GSHELL_CMD_AUDITFLOWDEMO 1132
+#define GSHELL_CMD_AUDITFLOWCHECK 1133
+#define GSHELL_CMD_AUDITFLOWRESET 1134
+#define GSHELL_CMD_AUDITFLOWNEXT 1135
+#define GSHELL_CMD_VOICEINTENTSTATUS 1136
+#define GSHELL_CMD_VOICEINTENTLISTEN 1137
+#define GSHELL_CMD_VOICEINTENTHEARD 1138
+#define GSHELL_CMD_VOICEINTENTTEXT 1139
+#define GSHELL_CMD_VOICEINTENTPARSE 1140
+#define GSHELL_CMD_VOICEINTENTCOMMAND 1141
+#define GSHELL_CMD_VOICEINTENTASK 1142
+#define GSHELL_CMD_VOICEINTENTALLOW 1143
+#define GSHELL_CMD_VOICEINTENTBLOCK 1144
+#define GSHELL_CMD_VOICEINTENTCONFIRM 1145
+#define GSHELL_CMD_VOICEINTENTREPLY 1146
+#define GSHELL_CMD_VOICEINTENTSPEAK 1147
+#define GSHELL_CMD_VOICEINTENTSEARCH 1148
+#define GSHELL_CMD_VOICEINTENTAUDIT 1149
+#define GSHELL_CMD_VOICEINTENTPOLICY 1150
+#define GSHELL_CMD_VOICEINTENTDEMO 1151
+#define GSHELL_CMD_VOICEINTENTCHECK 1152
+#define GSHELL_CMD_VOICEINTENTRESET 1153
+#define GSHELL_CMD_VOICEINTENTNEXT 1154
+#define GSHELL_CMD_SUNCTLFINALSTATUS 1155
+#define GSHELL_CMD_SUNCTLFINALHUB 1156
+#define GSHELL_CMD_SUNCTLFINALACTIONS 1157
+#define GSHELL_CMD_SUNCTLFINALPERM 1158
+#define GSHELL_CMD_SUNCTLFINALAUDIT 1159
+#define GSHELL_CMD_SUNCTLFINALVOICE 1160
+#define GSHELL_CMD_SUNCTLFINALSEARCH 1161
+#define GSHELL_CMD_SUNCTLFINALAI 1162
+#define GSHELL_CMD_SUNCTLFINALFILE 1163
+#define GSHELL_CMD_SUNCTLFINALNET 1164
+#define GSHELL_CMD_SUNCTLFINALAPP 1165
+#define GSHELL_CMD_SUNCTLFINALRULE 1166
+#define GSHELL_CMD_SUNCTLFINALDEMO 1167
+#define GSHELL_CMD_SUNCTLFINALCHECK 1168
+#define GSHELL_CMD_SUNCTLFINALRESET 1169
+#define GSHELL_CMD_SUNCTLFINALCLOSEOUT 1170
+#define GSHELL_CMD_SUNCTLFINALROADMAP 1171
+#define GSHELL_CMD_SUNCTLFINALNEXT 1172
+#define GSHELL_CMD_SELFDEVSTATUS 1173
+#define GSHELL_CMD_SELFDEVBOOT 1174
+#define GSHELL_CMD_SELFDEVKERNEL 1175
+#define GSHELL_CMD_SELFDEVGSHELL 1176
+#define GSHELL_CMD_SELFDEVDESKTOP 1177
+#define GSHELL_CMD_SELFDEVSUNDIAL 1178
+#define GSHELL_CMD_SELFDEVAPP 1179
+#define GSHELL_CMD_SELFDEVCONTROL 1180
+#define GSHELL_CMD_SELFDEVPOLICY 1181
+#define GSHELL_CMD_SELFDEVRULE 1182
+#define GSHELL_CMD_SELFDEVAUDIT 1183
+#define GSHELL_CMD_SELFDEVVOICE 1184
+#define GSHELL_CMD_SELFDEVSEARCH 1185
+#define GSHELL_CMD_SELFDEVAI 1186
+#define GSHELL_CMD_SELFDEVFILE 1187
+#define GSHELL_CMD_SELFDEVNET 1188
+#define GSHELL_CMD_SELFDEVDEMO 1189
+#define GSHELL_CMD_SELFDEVCHECK 1190
+#define GSHELL_CMD_SELFDEVCLOSEOUT 1191
+#define GSHELL_CMD_SELFDEVLINUXPLAN 1192
+#define GSHELL_CMD_SELFDEVROADMAP 1193
+#define GSHELL_CMD_SELFDEVNEXT 1194
+
+#define GSHELL_CMD_LINUXPLANSTATUS 1195
+#define GSHELL_CMD_LINUXBASE 1196
+#define GSHELL_CMD_LINUXKERNEL 1197
+#define GSHELL_CMD_LINUXDRIVER 1198
+#define GSHELL_CMD_LINUXFS 1199
+#define GSHELL_CMD_LINUXNET 1200
+#define GSHELL_CMD_LINUXINPUT 1201
+#define GSHELL_CMD_LINUXDISPLAY 1202
+#define GSHELL_CMD_LINUXPROCESS 1203
+#define GSHELL_CMD_LINUXAPP 1204
+#define GSHELL_CMD_LINUXPOLICY 1205
+#define GSHELL_CMD_LINUXSANDBOX 1206
+#define GSHELL_CMD_LINUXAUDIT 1207
+#define GSHELL_CMD_LINUXVOICE 1208
+#define GSHELL_CMD_LINUXAI 1209
+#define GSHELL_CMD_LINUXSUNDIAL 1210
+#define GSHELL_CMD_LINUXDESKTOP 1211
+#define GSHELL_CMD_LINUXDEMO 1212
+#define GSHELL_CMD_LINUXCHECK 1213
+#define GSHELL_CMD_LINUXRESET 1214
+#define GSHELL_CMD_LINUXROADMAP 1215
+#define GSHELL_CMD_LINUXNEXT 1216
+
+#define GSHELL_CMD_LINUXBASESTATUS 1217
+#define GSHELL_CMD_LINUXBASEDEBIAN 1218
+#define GSHELL_CMD_LINUXBASEARCH 1219
+#define GSHELL_CMD_LINUXBASEALPINE 1220
+#define GSHELL_CMD_LINUXBASEBUILDROOT 1221
+#define GSHELL_CMD_LINUXBASEUBUNTU 1222
+#define GSHELL_CMD_LINUXBASEFEDORA 1223
+#define GSHELL_CMD_LINUXBASESTABILITY 1224
+#define GSHELL_CMD_LINUXBASESIZE 1225
+#define GSHELL_CMD_LINUXBASEPKG 1226
+#define GSHELL_CMD_LINUXBASEUI 1227
+#define GSHELL_CMD_LINUXBASECONTROL 1228
+#define GSHELL_CMD_LINUXBASESECURITY 1229
+#define GSHELL_CMD_LINUXBASEDEV 1230
+#define GSHELL_CMD_LINUXBASEMATRIX 1231
+#define GSHELL_CMD_LINUXBASERANK 1232
+#define GSHELL_CMD_LINUXBASECHOICE 1233
+#define GSHELL_CMD_LINUXBASEDEMO 1234
+#define GSHELL_CMD_LINUXBASECHECK 1235
+#define GSHELL_CMD_LINUXBASERESET 1236
+#define GSHELL_CMD_LINUXBASEROADMAP 1237
+#define GSHELL_CMD_LINUXBASENEXT 1238
+
+#define GSHELL_CMD_LINUXDISPSTATUS 1239
+#define GSHELL_CMD_LINUXDISPSDL 1240
+#define GSHELL_CMD_LINUXDISPWAYLAND 1241
+#define GSHELL_CMD_LINUXDISPX11 1242
+#define GSHELL_CMD_LINUXDISPQT 1243
+#define GSHELL_CMD_LINUXDISPELECTRON 1244
+#define GSHELL_CMD_LINUXDISPGTK 1245
+#define GSHELL_CMD_LINUXDISPFB 1246
+#define GSHELL_CMD_LINUXDISPOPENGL 1247
+#define GSHELL_CMD_LINUXDISPRENDER 1248
+#define GSHELL_CMD_LINUXDISPINPUT 1249
+#define GSHELL_CMD_LINUXDISPPERF 1250
+#define GSHELL_CMD_LINUXDISPUX 1251
+#define GSHELL_CMD_LINUXDISPRISK 1252
+#define GSHELL_CMD_LINUXDISPMATRIX 1253
+#define GSHELL_CMD_LINUXDISPRANK 1254
+#define GSHELL_CMD_LINUXDISPCHOICE 1255
+#define GSHELL_CMD_LINUXDISPDEMO 1256
+#define GSHELL_CMD_LINUXDISPCHECK 1257
+#define GSHELL_CMD_LINUXDISPRESET 1258
+#define GSHELL_CMD_LINUXDISPROADMAP 1259
+#define GSHELL_CMD_LINUXDISPNEXT 1260
+
+#define GSHELL_CMD_LINUXINPUTSTATUS 1261
+#define GSHELL_CMD_LINUXINPUTEVDEV 1262
+#define GSHELL_CMD_LINUXINPUTLIBINPUT 1263
+#define GSHELL_CMD_LINUXINPUTSDL 1264
+#define GSHELL_CMD_LINUXINPUTPIPEWIRE 1265
+#define GSHELL_CMD_LINUXINPUTALSA 1266
+#define GSHELL_CMD_LINUXINPUTKEYBOARD 1267
+#define GSHELL_CMD_LINUXINPUTMOUSE 1268
+#define GSHELL_CMD_LINUXINPUTTOUCH 1269
+#define GSHELL_CMD_LINUXINPUTVOICE 1270
+#define GSHELL_CMD_LINUXINPUTROUTE 1271
+#define GSHELL_CMD_LINUXINPUTFOCUS 1272
+#define GSHELL_CMD_LINUXINPUTSUNDIAL 1273
+#define GSHELL_CMD_LINUXINPUTSECURITY 1274
+#define GSHELL_CMD_LINUXINPUTMATRIX 1275
+#define GSHELL_CMD_LINUXINPUTRANK 1276
+#define GSHELL_CMD_LINUXINPUTCHOICE 1277
+#define GSHELL_CMD_LINUXINPUTDEMO 1278
+#define GSHELL_CMD_LINUXINPUTCHECK 1279
+#define GSHELL_CMD_LINUXINPUTRESET 1280
+#define GSHELL_CMD_LINUXINPUTROADMAP 1281
+#define GSHELL_CMD_LINUXINPUTNEXT 1282
+
+#define GSHELL_CMD_LINUXMAPSTATUS 1283
+#define GSHELL_CMD_LINUXMAPAPPREG 1284
+#define GSHELL_CMD_LINUXMAPDESKTOPFILE 1285
+#define GSHELL_CMD_LINUXMAPPROCESS 1286
+#define GSHELL_CMD_LINUXMAPPID 1287
+#define GSHELL_CMD_LINUXMAPWINDOW 1288
+#define GSHELL_CMD_LINUXMAPFOREGROUND 1289
+#define GSHELL_CMD_LINUXMAPBACKGROUND 1290
+#define GSHELL_CMD_LINUXMAPRUNNING 1291
+#define GSHELL_CMD_LINUXMAPICONLIT 1292
+#define GSHELL_CMD_LINUXMAPSECTOR 1293
+#define GSHELL_CMD_LINUXMAPLAUNCH 1294
+#define GSHELL_CMD_LINUXMAPCLOSE 1295
+#define GSHELL_CMD_LINUXMAPSTATE 1296
+#define GSHELL_CMD_LINUXMAPAUDIT 1297
+#define GSHELL_CMD_LINUXMAPMATRIX 1298
+#define GSHELL_CMD_LINUXMAPRANK 1299
+#define GSHELL_CMD_LINUXMAPCHOICE 1300
+#define GSHELL_CMD_LINUXMAPDEMO 1301
+#define GSHELL_CMD_LINUXMAPCHECK 1302
+#define GSHELL_CMD_LINUXMAPRESET 1303
+#define GSHELL_CMD_LINUXMAPROADMAP 1304
+#define GSHELL_CMD_LINUXMAPNEXT 1305
+
+#define GSHELL_CMD_LINUXPERMSTATUS 1306
+#define GSHELL_CMD_LINUXPERMNAMESPACE 1307
+#define GSHELL_CMD_LINUXPERMBWRAP 1308
+#define GSHELL_CMD_LINUXPERMAPPARMOR 1309
+#define GSHELL_CMD_LINUXPERMSECCOMP 1310
+#define GSHELL_CMD_LINUXPERMEBPF 1311
+#define GSHELL_CMD_LINUXPERMAUDITD 1312
+#define GSHELL_CMD_LINUXPERMFILE 1313
+#define GSHELL_CMD_LINUXPERMNET 1314
+#define GSHELL_CMD_LINUXPERMPROC 1315
+#define GSHELL_CMD_LINUXPERMDEVICE 1316
+#define GSHELL_CMD_LINUXPERMAI 1317
+#define GSHELL_CMD_LINUXPERMVOICE 1318
+#define GSHELL_CMD_LINUXPERMRULE 1319
+#define GSHELL_CMD_LINUXPERMREQUEST 1320
+#define GSHELL_CMD_LINUXPERMDECISION 1321
+#define GSHELL_CMD_LINUXPERMMATRIX 1322
+#define GSHELL_CMD_LINUXPERMRANK 1323
+#define GSHELL_CMD_LINUXPERMCHOICE 1324
+#define GSHELL_CMD_LINUXPERMDEMO 1325
+#define GSHELL_CMD_LINUXPERMCHECK 1326
+#define GSHELL_CMD_LINUXPERMRESET 1327
+#define GSHELL_CMD_LINUXPERMROADMAP 1328
+#define GSHELL_CMD_LINUXPERMNEXT 1329
+
+#define GSHELL_CMD_LINUXFINALSTATUS 1330
+#define GSHELL_CMD_LINUXFINALBASE 1331
+#define GSHELL_CMD_LINUXFINALDISPLAY 1332
+#define GSHELL_CMD_LINUXFINALINPUT 1333
+#define GSHELL_CMD_LINUXFINALMAP 1334
+#define GSHELL_CMD_LINUXFINALPERM 1335
+#define GSHELL_CMD_LINUXFINALSANDBOX 1336
+#define GSHELL_CMD_LINUXFINALAUDIT 1337
+#define GSHELL_CMD_LINUXFINALVOICE 1338
+#define GSHELL_CMD_LINUXFINALAI 1339
+#define GSHELL_CMD_LINUXFINALSUNDIAL 1340
+#define GSHELL_CMD_LINUXFINALDESKTOP 1341
+#define GSHELL_CMD_LINUXFINALRISK 1342
+#define GSHELL_CMD_LINUXFINALCHOICE 1343
+#define GSHELL_CMD_LINUXFINALDEMO 1344
+#define GSHELL_CMD_LINUXFINALCHECK 1345
+#define GSHELL_CMD_LINUXFINALCLOSEOUT 1346
+#define GSHELL_CMD_LINUXFINALROADMAP 1347
+#define GSHELL_CMD_LINUXFINALNEXT 1348
+
+#define GSHELL_CMD_LINUXSHELLSTATUS 1349
+#define GSHELL_CMD_LINUXSHELLBASE 1350
+#define GSHELL_CMD_LINUXSHELLPROCESS 1351
+#define GSHELL_CMD_LINUXSHELLSDL 1352
+#define GSHELL_CMD_LINUXSHELLWINDOW 1353
+#define GSHELL_CMD_LINUXSHELLRENDER 1354
+#define GSHELL_CMD_LINUXSHELLINPUT 1355
+#define GSHELL_CMD_LINUXSHELLSUNDIAL 1356
+#define GSHELL_CMD_LINUXSHELLDESKTOP 1357
+#define GSHELL_CMD_LINUXSHELLAPPREG 1358
+#define GSHELL_CMD_LINUXSHELLLAUNCH 1359
+#define GSHELL_CMD_LINUXSHELLRUNTIME 1360
+#define GSHELL_CMD_LINUXSHELLCONFIG 1361
+#define GSHELL_CMD_LINUXSHELLSESSION 1362
+#define GSHELL_CMD_LINUXSHELLPOLICY 1363
+#define GSHELL_CMD_LINUXSHELLAUDIT 1364
+#define GSHELL_CMD_LINUXSHELLVOICE 1365
+#define GSHELL_CMD_LINUXSHELLAI 1366
+#define GSHELL_CMD_LINUXSHELLMATRIX 1367
+#define GSHELL_CMD_LINUXSHELLCHOICE 1368
+#define GSHELL_CMD_LINUXSHELLDEMO 1369
+#define GSHELL_CMD_LINUXSHELLCHECK 1370
+#define GSHELL_CMD_LINUXSHELLRESET 1371
+#define GSHELL_CMD_LINUXSHELLROADMAP 1372
+#define GSHELL_CMD_LINUXSHELLNEXT 1373
+
+#define GSHELL_CMD_LINUXPORTSTATUS 1374
+#define GSHELL_CMD_LINUXPORTGSHELL 1375
+#define GSHELL_CMD_LINUXPORTDESKTOP 1376
+#define GSHELL_CMD_LINUXPORTWINDOW 1377
+#define GSHELL_CMD_LINUXPORTCANVAS 1378
+#define GSHELL_CMD_LINUXPORTSURFACE 1379
+#define GSHELL_CMD_LINUXPORTFOCUS 1380
+#define GSHELL_CMD_LINUXPORTSTACK 1381
+#define GSHELL_CMD_LINUXPORTLAYOUT 1382
+#define GSHELL_CMD_LINUXPORTDRAG 1383
+#define GSHELL_CMD_LINUXPORTRESIZE 1384
+#define GSHELL_CMD_LINUXPORTMINIMIZE 1385
+#define GSHELL_CMD_LINUXPORTRESTORE 1386
+#define GSHELL_CMD_LINUXPORTLAUNCHER 1387
+#define GSHELL_CMD_LINUXPORTSUNDIAL 1388
+#define GSHELL_CMD_LINUXPORTINPUT 1389
+#define GSHELL_CMD_LINUXPORTRENDER 1390
+#define GSHELL_CMD_LINUXPORTAPPSTATE 1391
+#define GSHELL_CMD_LINUXPORTSESSION 1392
+#define GSHELL_CMD_LINUXPORTPOLICY 1393
+#define GSHELL_CMD_LINUXPORTAUDIT 1394
+#define GSHELL_CMD_LINUXPORTMATRIX 1395
+#define GSHELL_CMD_LINUXPORTCHOICE 1396
+#define GSHELL_CMD_LINUXPORTDEMO 1397
+#define GSHELL_CMD_LINUXPORTCHECK 1398
+#define GSHELL_CMD_LINUXPORTRESET 1399
+#define GSHELL_CMD_LINUXPORTROADMAP 1400
+#define GSHELL_CMD_LINUXPORTNEXT 1401
+
 #define GSHELL_CMD_UNKNOWN     999
 
 static unsigned int gshell_input_layer_enabled = 1;
@@ -1677,6 +2165,279 @@ static const char* gshell_uifeedback_target = "none";
 static const char* gshell_uifeedback_effect = "none";
 static const char* gshell_uifeedback_last = "none";
 
+static unsigned int gshell_clickclose_bridge_ready = 0;
+static unsigned int gshell_clickclose_target_ready = 0;
+static unsigned int gshell_clickclose_action_ready = 0;
+static unsigned int gshell_clickclose_drag_ready = 0;
+static unsigned int gshell_clickclose_feedback_ready = 0;
+static unsigned int gshell_clickclose_visual_ready = 0;
+static unsigned int gshell_clickclose_input_ready = 0;
+static unsigned int gshell_clickclose_safe_ready = 0;
+static unsigned int gshell_clickclose_regression_ready = 0;
+static unsigned int gshell_clickclose_layout_ready = 0;
+static unsigned int gshell_clickclose_sundial_plan_ready = 0;
+static unsigned int gshell_clickclose_demo_ready = 0;
+static unsigned int gshell_clickclose_closeout_ready = 0;
+static unsigned int gshell_clickclose_final_ready = 0;
+static unsigned int gshell_clickclose_roadmap_ready = 0;
+static unsigned int gshell_clickclose_events = 0;
+static const char* gshell_clickclose_state = "idle";
+static const char* gshell_clickclose_phase = "1.7.x";
+static const char* gshell_clickclose_target = "click-ui";
+static const char* gshell_clickclose_last = "none";
+
+static unsigned int gshell_desktopops_scene_ready = 0;
+static unsigned int gshell_desktopops_wall_ready = 0;
+static unsigned int gshell_desktopops_clean_ready = 0;
+static unsigned int gshell_desktopops_sundial_show_ready = 0;
+static unsigned int gshell_desktopops_sundial_hide_ready = 0;
+static unsigned int gshell_desktopops_appgrid_ready = 0;
+static unsigned int gshell_desktopops_appfloat_ready = 0;
+static unsigned int gshell_desktopops_running_ready = 0;
+static unsigned int gshell_desktopops_inactive_ready = 0;
+static unsigned int gshell_desktopops_drag_icon_ready = 0;
+static unsigned int gshell_desktopops_menu_ready = 0;
+static unsigned int gshell_desktopops_search_ready = 0;
+static unsigned int gshell_desktopops_voice_ready = 0;
+static unsigned int gshell_desktopops_nettime_ready = 0;
+static unsigned int gshell_desktopops_state_ready = 0;
+static unsigned int gshell_desktopops_demo_ready = 0;
+static unsigned int gshell_desktopops_events = 0;
+static const char* gshell_desktopops_state = "idle";
+static const char* gshell_desktopops_scene = "desktop";
+static const char* gshell_desktopops_sundial = "visible";
+static const char* gshell_desktopops_last = "none";
+
+static unsigned int gshell_sundial_core_ready = 0;
+static unsigned int gshell_sundial_rings_ready = 0;
+static unsigned int gshell_sundial_sectors_ready = 0;
+static unsigned int gshell_sundial_apps_ready = 0;
+static unsigned int gshell_sundial_running_ready = 0;
+static unsigned int gshell_sundial_dim_ready = 0;
+static unsigned int gshell_sundial_float_ready = 0;
+static unsigned int gshell_sundial_drag_ready = 0;
+static unsigned int gshell_sundial_show_ready = 0;
+static unsigned int gshell_sundial_hide_ready = 0;
+static unsigned int gshell_sundial_search_ready = 0;
+static unsigned int gshell_sundial_voice_ready = 0;
+static unsigned int gshell_sundial_nettime_ready = 0;
+static unsigned int gshell_sundial_state_ready = 0;
+static unsigned int gshell_sundial_demo_ready = 0;
+static unsigned int gshell_sundial_events = 0;
+static const char* gshell_sundial_state = "idle";
+static const char* gshell_sundial_mode = "visible";
+static const char* gshell_sundial_sector = "apps";
+static const char* gshell_sundial_last = "none";
+
+static unsigned int gshell_sectorfloat_select_ready = 0;
+static unsigned int gshell_sectorfloat_expand_ready = 0;
+static unsigned int gshell_sectorfloat_apps_ready = 0;
+static unsigned int gshell_sectorfloat_runlit_ready = 0;
+static unsigned int gshell_sectorfloat_dim_ready = 0;
+static unsigned int gshell_sectorfloat_scale_ready = 0;
+static unsigned int gshell_sectorfloat_density_ready = 0;
+static unsigned int gshell_sectorfloat_page_ready = 0;
+static unsigned int gshell_sectorfloat_overflow_ready = 0;
+static unsigned int gshell_sectorfloat_drag_ready = 0;
+static unsigned int gshell_sectorfloat_drop_ready = 0;
+static unsigned int gshell_sectorfloat_move_ready = 0;
+static unsigned int gshell_sectorfloat_category_ready = 0;
+static unsigned int gshell_sectorfloat_search_ready = 0;
+static unsigned int gshell_sectorfloat_voice_ready = 0;
+static unsigned int gshell_sectorfloat_demo_ready = 0;
+static unsigned int gshell_sectorfloat_events = 0;
+static const char* gshell_sectorfloat_state = "idle";
+static const char* gshell_sectorfloat_sector = "apps";
+static const char* gshell_sectorfloat_icons = "compact";
+static const char* gshell_sectorfloat_last = "none";
+
+static unsigned int gshell_sundialvis_core_ready = 0;
+static unsigned int gshell_sundialvis_rings_ready = 0;
+static unsigned int gshell_sundialvis_sectors_ready = 0;
+static unsigned int gshell_sundialvis_icons_ready = 0;
+static unsigned int gshell_sundialvis_runlit_ready = 0;
+static unsigned int gshell_sundialvis_dim_ready = 0;
+static unsigned int gshell_sundialvis_float_ready = 0;
+static unsigned int gshell_sundialvis_drag_ready = 0;
+static unsigned int gshell_sundialvis_show_ready = 0;
+static unsigned int gshell_sundialvis_hide_ready = 0;
+static unsigned int gshell_sundialvis_nettime_ready = 0;
+static unsigned int gshell_sundialvis_search_ready = 0;
+static unsigned int gshell_sundialvis_voice_ready = 0;
+static unsigned int gshell_sundialvis_density_ready = 0;
+static unsigned int gshell_sundialvis_demo_ready = 0;
+static unsigned int gshell_sundialvis_events = 0;
+static const char* gshell_sundialvis_state = "idle";
+static const char* gshell_sundialvis_mode = "visible";
+static const char* gshell_sundialvis_focus = "apps";
+static const char* gshell_sundialvis_last = "none";
+
+static unsigned int gshell_sundialmenu_desktop_ready = 0;
+static unsigned int gshell_sundialmenu_open_ready = 0;
+static unsigned int gshell_sundialmenu_show_ready = 0;
+static unsigned int gshell_sundialmenu_hide_ready = 0;
+static unsigned int gshell_sundialmenu_toggle_ready = 0;
+static unsigned int gshell_sundialmenu_lock_ready = 0;
+static unsigned int gshell_sundialmenu_unlock_ready = 0;
+static unsigned int gshell_sundialmenu_opacity_ready = 0;
+static unsigned int gshell_sundialmenu_compact_ready = 0;
+static unsigned int gshell_sundialmenu_full_ready = 0;
+static unsigned int gshell_sundialmenu_edge_ready = 0;
+static unsigned int gshell_sundialmenu_autohide_ready = 0;
+static unsigned int gshell_sundialmenu_search_ready = 0;
+static unsigned int gshell_sundialmenu_voice_ready = 0;
+static unsigned int gshell_sundialmenu_clean_ready = 0;
+static unsigned int gshell_sundialmenu_state_ready = 0;
+static unsigned int gshell_sundialmenu_demo_ready = 0;
+static unsigned int gshell_sundialmenu_events = 0;
+static const char* gshell_sundialmenu_state = "idle";
+static const char* gshell_sundialmenu_mode = "full";
+static const char* gshell_sundialmenu_sundial = "visible";
+static const char* gshell_sundialmenu_last = "none";
+
+static unsigned int gshell_sundialfinal_desktop_ready = 0;
+static unsigned int gshell_sundialfinal_visual_ready = 0;
+static unsigned int gshell_sundialfinal_sector_ready = 0;
+static unsigned int gshell_sundialfinal_menu_ready = 0;
+static unsigned int gshell_sundialfinal_search_ready = 0;
+static unsigned int gshell_sundialfinal_voice_ready = 0;
+static unsigned int gshell_sundialfinal_nettime_ready = 0;
+static unsigned int gshell_sundialfinal_clean_ready = 0;
+static unsigned int gshell_sundialfinal_ux_ready = 0;
+static unsigned int gshell_sundialfinal_demo_ready = 0;
+static unsigned int gshell_sundialfinal_closeout_ready = 0;
+static unsigned int gshell_sundialfinal_roadmap_ready = 0;
+static unsigned int gshell_sundialfinal_events = 0;
+static const char* gshell_sundialfinal_state = "idle";
+static const char* gshell_sundialfinal_phase = "1.8.x";
+static const char* gshell_sundialfinal_target = "sundial-desktop";
+static const char* gshell_sundialfinal_last = "none";
+
+static unsigned int gshell_sundialhub_core_ready = 0;
+static unsigned int gshell_sundialhub_control_ready = 0;
+static unsigned int gshell_sundialhub_perms_ready = 0;
+static unsigned int gshell_sundialhub_rules_ready = 0;
+static unsigned int gshell_sundialhub_audit_ready = 0;
+static unsigned int gshell_sundialhub_app_behavior_ready = 0;
+static unsigned int gshell_sundialhub_network_ready = 0;
+static unsigned int gshell_sundialhub_file_ready = 0;
+static unsigned int gshell_sundialhub_ai_ready = 0;
+static unsigned int gshell_sundialhub_voice_ready = 0;
+static unsigned int gshell_sundialhub_search_ready = 0;
+static unsigned int gshell_sundialhub_intent_ready = 0;
+static unsigned int gshell_sundialhub_security_ready = 0;
+static unsigned int gshell_sundialhub_demo_ready = 0;
+static unsigned int gshell_sundialhub_events = 0;
+static const char* gshell_sundialhub_state = "idle";
+static const char* gshell_sundialhub_focus = "control";
+static const char* gshell_sundialhub_last = "none";
+
+static unsigned int gshell_controlsector_open_ready = 0;
+static unsigned int gshell_controlsector_allow_ready = 0;
+static unsigned int gshell_controlsector_block_ready = 0;
+static unsigned int gshell_controlsector_ask_ready = 0;
+static unsigned int gshell_controlsector_temp_ready = 0;
+static unsigned int gshell_controlsector_file_ready = 0;
+static unsigned int gshell_controlsector_net_ready = 0;
+static unsigned int gshell_controlsector_ai_ready = 0;
+static unsigned int gshell_controlsector_app_ready = 0;
+static unsigned int gshell_controlsector_rule_ready = 0;
+static unsigned int gshell_controlsector_audit_ready = 0;
+static unsigned int gshell_controlsector_perm_ready = 0;
+static unsigned int gshell_controlsector_intent_ready = 0;
+static unsigned int gshell_controlsector_demo_ready = 0;
+static unsigned int gshell_controlsector_events = 0;
+static const char* gshell_controlsector_state = "idle";
+static const char* gshell_controlsector_policy = "ask";
+static const char* gshell_controlsector_target = "control";
+static const char* gshell_controlsector_last = "none";
+
+static unsigned int gshell_permreq_open_ready = 0;
+static unsigned int gshell_permreq_source_ready = 0;
+static unsigned int gshell_permreq_target_ready = 0;
+static unsigned int gshell_permreq_file_ready = 0;
+static unsigned int gshell_permreq_net_ready = 0;
+static unsigned int gshell_permreq_ai_ready = 0;
+static unsigned int gshell_permreq_app_ready = 0;
+static unsigned int gshell_permreq_ask_ready = 0;
+static unsigned int gshell_permreq_allow_ready = 0;
+static unsigned int gshell_permreq_block_ready = 0;
+static unsigned int gshell_permreq_temp_ready = 0;
+static unsigned int gshell_permreq_rule_ready = 0;
+static unsigned int gshell_permreq_audit_ready = 0;
+static unsigned int gshell_permreq_voice_ready = 0;
+static unsigned int gshell_permreq_search_ready = 0;
+static unsigned int gshell_permreq_demo_ready = 0;
+static unsigned int gshell_permreq_events = 0;
+static const char* gshell_permreq_state = "idle";
+static const char* gshell_permreq_policy = "ask";
+static const char* gshell_permreq_source = "app";
+static const char* gshell_permreq_target = "resource";
+static const char* gshell_permreq_last = "none";
+
+static unsigned int gshell_auditflow_open_ready = 0;
+static unsigned int gshell_auditflow_source_ready = 0;
+static unsigned int gshell_auditflow_event_ready = 0;
+static unsigned int gshell_auditflow_timeline_ready = 0;
+static unsigned int gshell_auditflow_last_ready = 0;
+static unsigned int gshell_auditflow_file_ready = 0;
+static unsigned int gshell_auditflow_net_ready = 0;
+static unsigned int gshell_auditflow_ai_ready = 0;
+static unsigned int gshell_auditflow_app_ready = 0;
+static unsigned int gshell_auditflow_allow_ready = 0;
+static unsigned int gshell_auditflow_block_ready = 0;
+static unsigned int gshell_auditflow_temp_ready = 0;
+static unsigned int gshell_auditflow_rule_ready = 0;
+static unsigned int gshell_auditflow_search_ready = 0;
+static unsigned int gshell_auditflow_voice_ready = 0;
+static unsigned int gshell_auditflow_demo_ready = 0;
+static unsigned int gshell_auditflow_events = 0;
+static const char* gshell_auditflow_state = "idle";
+static const char* gshell_auditflow_source = "demo.app";
+static const char* gshell_auditflow_event = "none";
+static const char* gshell_auditflow_last = "none";
+
+static unsigned int gshell_voiceintent_listen_ready = 0;
+static unsigned int gshell_voiceintent_heard_ready = 0;
+static unsigned int gshell_voiceintent_text_ready = 0;
+static unsigned int gshell_voiceintent_parse_ready = 0;
+static unsigned int gshell_voiceintent_command_ready = 0;
+static unsigned int gshell_voiceintent_ask_ready = 0;
+static unsigned int gshell_voiceintent_allow_ready = 0;
+static unsigned int gshell_voiceintent_block_ready = 0;
+static unsigned int gshell_voiceintent_confirm_ready = 0;
+static unsigned int gshell_voiceintent_reply_ready = 0;
+static unsigned int gshell_voiceintent_speak_ready = 0;
+static unsigned int gshell_voiceintent_search_ready = 0;
+static unsigned int gshell_voiceintent_audit_ready = 0;
+static unsigned int gshell_voiceintent_policy_ready = 0;
+static unsigned int gshell_voiceintent_demo_ready = 0;
+static unsigned int gshell_voiceintent_events = 0;
+static const char* gshell_voiceintent_state = "idle";
+static const char* gshell_voiceintent_text = "none";
+static const char* gshell_voiceintent_intent = "none";
+static const char* gshell_voiceintent_last = "none";
+
+static unsigned int gshell_sunctlfinal_hub_ready = 0;
+static unsigned int gshell_sunctlfinal_actions_ready = 0;
+static unsigned int gshell_sunctlfinal_perm_ready = 0;
+static unsigned int gshell_sunctlfinal_audit_ready = 0;
+static unsigned int gshell_sunctlfinal_voice_ready = 0;
+static unsigned int gshell_sunctlfinal_search_ready = 0;
+static unsigned int gshell_sunctlfinal_ai_ready = 0;
+static unsigned int gshell_sunctlfinal_file_ready = 0;
+static unsigned int gshell_sunctlfinal_net_ready = 0;
+static unsigned int gshell_sunctlfinal_app_ready = 0;
+static unsigned int gshell_sunctlfinal_rule_ready = 0;
+static unsigned int gshell_sunctlfinal_demo_ready = 0;
+static unsigned int gshell_sunctlfinal_closeout_ready = 0;
+static unsigned int gshell_sunctlfinal_roadmap_ready = 0;
+static unsigned int gshell_sunctlfinal_events = 0;
+static const char* gshell_sunctlfinal_state = "idle";
+static const char* gshell_sunctlfinal_phase = "1.9.x";
+static const char* gshell_sunctlfinal_target = "sundial-control";
+static const char* gshell_sunctlfinal_last = "none";
+
 static unsigned int gshell_flow_prepared = 0;
 static unsigned int gshell_flow_demos = 0;
 static unsigned int gshell_flow_checks = 0;
@@ -1724,6 +2485,267 @@ static unsigned int gshell_launch_approved = 0;
 static unsigned int gshell_launch_attempts = 0;
 static const char* gshell_launch_state = "idle";
 static const char* gshell_launch_last_result = "none";
+
+static unsigned int gshell_selfdev_boot_ready = 0;
+static unsigned int gshell_selfdev_kernel_ready = 0;
+static unsigned int gshell_selfdev_gshell_ready = 0;
+static unsigned int gshell_selfdev_desktop_ready = 0;
+static unsigned int gshell_selfdev_sundial_ready = 0;
+static unsigned int gshell_selfdev_app_ready = 0;
+static unsigned int gshell_selfdev_control_ready = 0;
+static unsigned int gshell_selfdev_policy_ready = 0;
+static unsigned int gshell_selfdev_rule_ready = 0;
+static unsigned int gshell_selfdev_audit_ready = 0;
+static unsigned int gshell_selfdev_voice_ready = 0;
+static unsigned int gshell_selfdev_search_ready = 0;
+static unsigned int gshell_selfdev_ai_ready = 0;
+static unsigned int gshell_selfdev_file_ready = 0;
+static unsigned int gshell_selfdev_net_ready = 0;
+static unsigned int gshell_selfdev_demo_ready = 0;
+static unsigned int gshell_selfdev_check_ready = 0;
+static unsigned int gshell_selfdev_closeout_ready = 0;
+static unsigned int gshell_selfdev_linux_plan_ready = 0;
+static unsigned int gshell_selfdev_roadmap_ready = 0;
+static unsigned int gshell_selfdev_events = 0;
+static const char* gshell_selfdev_state = "idle";
+static const char* gshell_selfdev_phase = "2.0.0";
+static const char* gshell_selfdev_target = "self-developed-prototype";
+static const char* gshell_selfdev_last = "none";
+
+static unsigned int gshell_linuxplan_base_ready = 0;
+static unsigned int gshell_linuxplan_kernel_ready = 0;
+static unsigned int gshell_linuxplan_driver_ready = 0;
+static unsigned int gshell_linuxplan_fs_ready = 0;
+static unsigned int gshell_linuxplan_net_ready = 0;
+static unsigned int gshell_linuxplan_input_ready = 0;
+static unsigned int gshell_linuxplan_display_ready = 0;
+static unsigned int gshell_linuxplan_process_ready = 0;
+static unsigned int gshell_linuxplan_app_ready = 0;
+static unsigned int gshell_linuxplan_policy_ready = 0;
+static unsigned int gshell_linuxplan_sandbox_ready = 0;
+static unsigned int gshell_linuxplan_audit_ready = 0;
+static unsigned int gshell_linuxplan_voice_ready = 0;
+static unsigned int gshell_linuxplan_ai_ready = 0;
+static unsigned int gshell_linuxplan_sundial_ready = 0;
+static unsigned int gshell_linuxplan_desktop_ready = 0;
+static unsigned int gshell_linuxplan_demo_ready = 0;
+static unsigned int gshell_linuxplan_check_ready = 0;
+static unsigned int gshell_linuxplan_roadmap_ready = 0;
+static unsigned int gshell_linuxplan_events = 0;
+static const char* gshell_linuxplan_state = "idle";
+static const char* gshell_linuxplan_base = "undecided";
+static const char* gshell_linuxplan_target = "linux-backed";
+static const char* gshell_linuxplan_last = "none";
+
+static unsigned int gshell_linuxbase_debian_ready = 0;
+static unsigned int gshell_linuxbase_arch_ready = 0;
+static unsigned int gshell_linuxbase_alpine_ready = 0;
+static unsigned int gshell_linuxbase_buildroot_ready = 0;
+static unsigned int gshell_linuxbase_ubuntu_ready = 0;
+static unsigned int gshell_linuxbase_fedora_ready = 0;
+static unsigned int gshell_linuxbase_stability_ready = 0;
+static unsigned int gshell_linuxbase_size_ready = 0;
+static unsigned int gshell_linuxbase_pkg_ready = 0;
+static unsigned int gshell_linuxbase_ui_ready = 0;
+static unsigned int gshell_linuxbase_control_ready = 0;
+static unsigned int gshell_linuxbase_security_ready = 0;
+static unsigned int gshell_linuxbase_dev_ready = 0;
+static unsigned int gshell_linuxbase_matrix_ready = 0;
+static unsigned int gshell_linuxbase_rank_ready = 0;
+static unsigned int gshell_linuxbase_choice_ready = 0;
+static unsigned int gshell_linuxbase_demo_ready = 0;
+static unsigned int gshell_linuxbase_check_ready = 0;
+static unsigned int gshell_linuxbase_roadmap_ready = 0;
+static unsigned int gshell_linuxbase_events = 0;
+static const char* gshell_linuxbase_state = "idle";
+static const char* gshell_linuxbase_choice = "undecided";
+static const char* gshell_linuxbase_reason = "none";
+static const char* gshell_linuxbase_last = "none";
+
+static unsigned int gshell_linuxdisp_sdl_ready = 0;
+static unsigned int gshell_linuxdisp_wayland_ready = 0;
+static unsigned int gshell_linuxdisp_x11_ready = 0;
+static unsigned int gshell_linuxdisp_qt_ready = 0;
+static unsigned int gshell_linuxdisp_electron_ready = 0;
+static unsigned int gshell_linuxdisp_gtk_ready = 0;
+static unsigned int gshell_linuxdisp_fb_ready = 0;
+static unsigned int gshell_linuxdisp_opengl_ready = 0;
+static unsigned int gshell_linuxdisp_render_ready = 0;
+static unsigned int gshell_linuxdisp_input_ready = 0;
+static unsigned int gshell_linuxdisp_perf_ready = 0;
+static unsigned int gshell_linuxdisp_ux_ready = 0;
+static unsigned int gshell_linuxdisp_risk_ready = 0;
+static unsigned int gshell_linuxdisp_matrix_ready = 0;
+static unsigned int gshell_linuxdisp_rank_ready = 0;
+static unsigned int gshell_linuxdisp_choice_ready = 0;
+static unsigned int gshell_linuxdisp_demo_ready = 0;
+static unsigned int gshell_linuxdisp_check_ready = 0;
+static unsigned int gshell_linuxdisp_roadmap_ready = 0;
+static unsigned int gshell_linuxdisp_events = 0;
+static const char* gshell_linuxdisp_state = "idle";
+static const char* gshell_linuxdisp_choice = "undecided";
+static const char* gshell_linuxdisp_reason = "none";
+static const char* gshell_linuxdisp_last = "none";
+
+static unsigned int gshell_linuxinput_evdev_ready = 0;
+static unsigned int gshell_linuxinput_libinput_ready = 0;
+static unsigned int gshell_linuxinput_sdl_ready = 0;
+static unsigned int gshell_linuxinput_pipewire_ready = 0;
+static unsigned int gshell_linuxinput_alsa_ready = 0;
+static unsigned int gshell_linuxinput_keyboard_ready = 0;
+static unsigned int gshell_linuxinput_mouse_ready = 0;
+static unsigned int gshell_linuxinput_touch_ready = 0;
+static unsigned int gshell_linuxinput_voice_ready = 0;
+static unsigned int gshell_linuxinput_route_ready = 0;
+static unsigned int gshell_linuxinput_focus_ready = 0;
+static unsigned int gshell_linuxinput_sundial_ready = 0;
+static unsigned int gshell_linuxinput_security_ready = 0;
+static unsigned int gshell_linuxinput_matrix_ready = 0;
+static unsigned int gshell_linuxinput_rank_ready = 0;
+static unsigned int gshell_linuxinput_choice_ready = 0;
+static unsigned int gshell_linuxinput_demo_ready = 0;
+static unsigned int gshell_linuxinput_check_ready = 0;
+static unsigned int gshell_linuxinput_roadmap_ready = 0;
+static unsigned int gshell_linuxinput_events = 0;
+static const char* gshell_linuxinput_state = "idle";
+static const char* gshell_linuxinput_choice = "undecided";
+static const char* gshell_linuxinput_reason = "none";
+static const char* gshell_linuxinput_last = "none";
+
+static unsigned int gshell_linuxmap_appreg_ready = 0;
+static unsigned int gshell_linuxmap_desktopfile_ready = 0;
+static unsigned int gshell_linuxmap_process_ready = 0;
+static unsigned int gshell_linuxmap_pid_ready = 0;
+static unsigned int gshell_linuxmap_window_ready = 0;
+static unsigned int gshell_linuxmap_foreground_ready = 0;
+static unsigned int gshell_linuxmap_background_ready = 0;
+static unsigned int gshell_linuxmap_running_ready = 0;
+static unsigned int gshell_linuxmap_iconlit_ready = 0;
+static unsigned int gshell_linuxmap_sector_ready = 0;
+static unsigned int gshell_linuxmap_launch_ready = 0;
+static unsigned int gshell_linuxmap_close_ready = 0;
+static unsigned int gshell_linuxmap_state_ready = 0;
+static unsigned int gshell_linuxmap_audit_ready = 0;
+static unsigned int gshell_linuxmap_matrix_ready = 0;
+static unsigned int gshell_linuxmap_rank_ready = 0;
+static unsigned int gshell_linuxmap_choice_ready = 0;
+static unsigned int gshell_linuxmap_demo_ready = 0;
+static unsigned int gshell_linuxmap_check_ready = 0;
+static unsigned int gshell_linuxmap_roadmap_ready = 0;
+static unsigned int gshell_linuxmap_events = 0;
+static const char* gshell_linuxmap_state = "idle";
+static const char* gshell_linuxmap_choice = "undecided";
+static const char* gshell_linuxmap_target = "linux-app-process";
+static const char* gshell_linuxmap_last = "none";
+
+static unsigned int gshell_linuxperm_namespace_ready = 0;
+static unsigned int gshell_linuxperm_bwrap_ready = 0;
+static unsigned int gshell_linuxperm_apparmor_ready = 0;
+static unsigned int gshell_linuxperm_seccomp_ready = 0;
+static unsigned int gshell_linuxperm_ebpf_ready = 0;
+static unsigned int gshell_linuxperm_auditd_ready = 0;
+static unsigned int gshell_linuxperm_file_ready = 0;
+static unsigned int gshell_linuxperm_net_ready = 0;
+static unsigned int gshell_linuxperm_proc_ready = 0;
+static unsigned int gshell_linuxperm_device_ready = 0;
+static unsigned int gshell_linuxperm_ai_ready = 0;
+static unsigned int gshell_linuxperm_voice_ready = 0;
+static unsigned int gshell_linuxperm_rule_ready = 0;
+static unsigned int gshell_linuxperm_request_ready = 0;
+static unsigned int gshell_linuxperm_decision_ready = 0;
+static unsigned int gshell_linuxperm_matrix_ready = 0;
+static unsigned int gshell_linuxperm_rank_ready = 0;
+static unsigned int gshell_linuxperm_choice_ready = 0;
+static unsigned int gshell_linuxperm_demo_ready = 0;
+static unsigned int gshell_linuxperm_check_ready = 0;
+static unsigned int gshell_linuxperm_roadmap_ready = 0;
+static unsigned int gshell_linuxperm_events = 0;
+static const char* gshell_linuxperm_state = "idle";
+static const char* gshell_linuxperm_choice = "undecided";
+static const char* gshell_linuxperm_target = "linux-permission-backend";
+static const char* gshell_linuxperm_last = "none";
+
+static unsigned int gshell_linuxfinal_base_ready = 0;
+static unsigned int gshell_linuxfinal_display_ready = 0;
+static unsigned int gshell_linuxfinal_input_ready = 0;
+static unsigned int gshell_linuxfinal_map_ready = 0;
+static unsigned int gshell_linuxfinal_perm_ready = 0;
+static unsigned int gshell_linuxfinal_sandbox_ready = 0;
+static unsigned int gshell_linuxfinal_audit_ready = 0;
+static unsigned int gshell_linuxfinal_voice_ready = 0;
+static unsigned int gshell_linuxfinal_ai_ready = 0;
+static unsigned int gshell_linuxfinal_sundial_ready = 0;
+static unsigned int gshell_linuxfinal_desktop_ready = 0;
+static unsigned int gshell_linuxfinal_risk_ready = 0;
+static unsigned int gshell_linuxfinal_choice_ready = 0;
+static unsigned int gshell_linuxfinal_demo_ready = 0;
+static unsigned int gshell_linuxfinal_check_ready = 0;
+static unsigned int gshell_linuxfinal_closeout_ready = 0;
+static unsigned int gshell_linuxfinal_roadmap_ready = 0;
+static unsigned int gshell_linuxfinal_events = 0;
+static const char* gshell_linuxfinal_state = "idle";
+static const char* gshell_linuxfinal_choice = "undecided";
+static const char* gshell_linuxfinal_target = "linux-research";
+static const char* gshell_linuxfinal_last = "none";
+
+static unsigned int gshell_linuxshell_base_ready = 0;
+static unsigned int gshell_linuxshell_process_ready = 0;
+static unsigned int gshell_linuxshell_sdl_ready = 0;
+static unsigned int gshell_linuxshell_window_ready = 0;
+static unsigned int gshell_linuxshell_render_ready = 0;
+static unsigned int gshell_linuxshell_input_ready = 0;
+static unsigned int gshell_linuxshell_sundial_ready = 0;
+static unsigned int gshell_linuxshell_desktop_ready = 0;
+static unsigned int gshell_linuxshell_appreg_ready = 0;
+static unsigned int gshell_linuxshell_launch_ready = 0;
+static unsigned int gshell_linuxshell_runtime_ready = 0;
+static unsigned int gshell_linuxshell_config_ready = 0;
+static unsigned int gshell_linuxshell_session_ready = 0;
+static unsigned int gshell_linuxshell_policy_ready = 0;
+static unsigned int gshell_linuxshell_audit_ready = 0;
+static unsigned int gshell_linuxshell_voice_ready = 0;
+static unsigned int gshell_linuxshell_ai_ready = 0;
+static unsigned int gshell_linuxshell_matrix_ready = 0;
+static unsigned int gshell_linuxshell_choice_ready = 0;
+static unsigned int gshell_linuxshell_demo_ready = 0;
+static unsigned int gshell_linuxshell_check_ready = 0;
+static unsigned int gshell_linuxshell_roadmap_ready = 0;
+static unsigned int gshell_linuxshell_events = 0;
+static const char* gshell_linuxshell_state = "idle";
+static const char* gshell_linuxshell_choice = "undecided";
+static const char* gshell_linuxshell_target = "minimal-linux-shell";
+static const char* gshell_linuxshell_last = "none";
+
+static unsigned int gshell_linuxport_gshell_ready = 0;
+static unsigned int gshell_linuxport_desktop_ready = 0;
+static unsigned int gshell_linuxport_window_ready = 0;
+static unsigned int gshell_linuxport_canvas_ready = 0;
+static unsigned int gshell_linuxport_surface_ready = 0;
+static unsigned int gshell_linuxport_focus_ready = 0;
+static unsigned int gshell_linuxport_stack_ready = 0;
+static unsigned int gshell_linuxport_layout_ready = 0;
+static unsigned int gshell_linuxport_drag_ready = 0;
+static unsigned int gshell_linuxport_resize_ready = 0;
+static unsigned int gshell_linuxport_minimize_ready = 0;
+static unsigned int gshell_linuxport_restore_ready = 0;
+static unsigned int gshell_linuxport_launcher_ready = 0;
+static unsigned int gshell_linuxport_sundial_ready = 0;
+static unsigned int gshell_linuxport_input_ready = 0;
+static unsigned int gshell_linuxport_render_ready = 0;
+static unsigned int gshell_linuxport_appstate_ready = 0;
+static unsigned int gshell_linuxport_session_ready = 0;
+static unsigned int gshell_linuxport_policy_ready = 0;
+static unsigned int gshell_linuxport_audit_ready = 0;
+static unsigned int gshell_linuxport_matrix_ready = 0;
+static unsigned int gshell_linuxport_choice_ready = 0;
+static unsigned int gshell_linuxport_demo_ready = 0;
+static unsigned int gshell_linuxport_check_ready = 0;
+static unsigned int gshell_linuxport_roadmap_ready = 0;
+static unsigned int gshell_linuxport_events = 0;
+static const char* gshell_linuxport_state = "idle";
+static const char* gshell_linuxport_choice = "undecided";
+static const char* gshell_linuxport_target = "desktop-window-port";
+static const char* gshell_linuxport_last = "none";
 
 typedef struct GShellCommandRegistryEntry {
     const char* name;
@@ -2649,12 +3671,500 @@ static const GShellCommandRegistryEntry gshell_command_registry[] = {
     { "uifeedbackcheck", GSHELL_CMD_UIFEEDBACKCHECK, "UIFEEDBACKSTATUS", "UI FEEDBACK CHECK OK" },
     { "uifeedbackreset", GSHELL_CMD_UIFEEDBACKRESET, "UIFEEDBACKSTATUS", "UI FEEDBACK RESET OK" },
     { "uifeedbacknext", GSHELL_CMD_UIFEEDBACKNEXT, "UIFEEDBACKSTATUS", "UI FEEDBACK NEXT OK" },
+    { "clickclosestatus", GSHELL_CMD_CLICKCLOSESTATUS, "CLICKCLOSESTATUS", "CLICK CLOSE STATUS OK" },
+    { "clickclosebridgesum", GSHELL_CMD_CLICKCLOSEBRIDGESUM, "CLICKCLOSESTATUS", "CLICK CLOSE BRIDGE SUMMARY OK" },
+    { "clickclosetargetsum", GSHELL_CMD_CLICKCLOSETARGETSUM, "CLICKCLOSESTATUS", "CLICK CLOSE TARGET SUMMARY OK" },
+    { "clickcloseactionsum", GSHELL_CMD_CLICKCLOSEACTIONSUM, "CLICKCLOSESTATUS", "CLICK CLOSE ACTION SUMMARY OK" },
+    { "clickclosedragsum", GSHELL_CMD_CLICKCLOSEDRAGSUM, "CLICKCLOSESTATUS", "CLICK CLOSE DRAG SUMMARY OK" },
+    { "clickclosefeedbacksum", GSHELL_CMD_CLICKCLOSEFEEDBACKSUM, "CLICKCLOSESTATUS", "CLICK CLOSE FEEDBACK SUMMARY OK" },
+    { "clickclosevisualsum", GSHELL_CMD_CLICKCLOSEVISUALSUM, "CLICKCLOSESTATUS", "CLICK CLOSE VISUAL SUMMARY OK" },
+    { "clickcloseinputsum", GSHELL_CMD_CLICKCLOSEINPUTSUM, "CLICKCLOSESTATUS", "CLICK CLOSE INPUT SUMMARY OK" },
+    { "clickclosesafesum", GSHELL_CMD_CLICKCLOSESAFESUM, "CLICKCLOSESTATUS", "CLICK CLOSE SAFE SUMMARY OK" },
+    { "clickcloseregresssum", GSHELL_CMD_CLICKCLOSEREGRESSSUM, "CLICKCLOSESTATUS", "CLICK CLOSE REGRESSION SUMMARY OK" },
+    { "clickcloselayoutsum", GSHELL_CMD_CLICKCLOSELAYOUTSUM, "CLICKCLOSESTATUS", "CLICK CLOSE LAYOUT SUMMARY OK" },
+    { "clickclosesundialplan", GSHELL_CMD_CLICKCLOSESUNDIALPLAN, "CLICKCLOSESTATUS", "CLICK CLOSE SUNDIAL PLAN OK" },
+    { "clickclosedemoall", GSHELL_CMD_CLICKCLOSEDEMOALL, "CLICKCLOSESTATUS", "CLICK CLOSE DEMO ALL OK" },
+    { "clickclosefinalcheck", GSHELL_CMD_CLICKCLOSEFINALCHECK, "CLICKCLOSESTATUS", "CLICK CLOSE FINAL CHECK OK" },
+    { "clickclosereset", GSHELL_CMD_CLICKCLOSERESET, "CLICKCLOSESTATUS", "CLICK CLOSE RESET OK" },
+    { "clickcloseout", GSHELL_CMD_CLICKCLOSEOUT, "CLICKCLOSESTATUS", "CLICK CLOSEOUT OK" },
+    { "clickcloseready", GSHELL_CMD_CLICKCLOSEREADY, "CLICKCLOSESTATUS", "CLICK CLOSE READY OK" },
+    { "clickclosenextphase", GSHELL_CMD_CLICKCLOSENEXTPHASE, "CLICKCLOSESTATUS", "CLICK CLOSE NEXT PHASE OK" },
+    { "clickcloseroadmap", GSHELL_CMD_CLICKCLOSEROADMAP, "CLICKCLOSESTATUS", "CLICK CLOSE ROADMAP OK" },
+    { "clickclosenext", GSHELL_CMD_CLICKCLOSENEXT, "CLICKCLOSESTATUS", "CLICK CLOSE NEXT OK" },
+    { "desktopopsstatus", GSHELL_CMD_DESKTOPOPSSTATUS, "DESKTOPOPSSTATUS", "DESKTOP OPS STATUS OK" },
+    { "desktopopsscene", GSHELL_CMD_DESKTOPOPSSCENE, "DESKTOPOPSSTATUS", "DESKTOP OPS SCENE OK" },
+    { "desktopopswall", GSHELL_CMD_DESKTOPOPSWALL, "DESKTOPOPSSTATUS", "DESKTOP OPS WALL OK" },
+    { "desktopopsclean", GSHELL_CMD_DESKTOPOPSCLEAN, "DESKTOPOPSSTATUS", "DESKTOP OPS CLEAN OK" },
+    { "desktopopsshowsundial", GSHELL_CMD_DESKTOPOPSSHOWSUNDIAL, "DESKTOPOPSSTATUS", "DESKTOP OPS SHOW SUNDIAL OK" },
+    { "desktopopshidesundial", GSHELL_CMD_DESKTOPOPSHIDESUNDIAL, "DESKTOPOPSSTATUS", "DESKTOP OPS HIDE SUNDIAL OK" },
+    { "desktopopsappgrid", GSHELL_CMD_DESKTOPOPSAPPGRID, "DESKTOPOPSSTATUS", "DESKTOP OPS APP GRID OK" },
+    { "desktopopsappfloat", GSHELL_CMD_DESKTOPOPSAPPFLOAT, "DESKTOPOPSSTATUS", "DESKTOP OPS APP FLOAT OK" },
+    { "desktopopsrunning", GSHELL_CMD_DESKTOPOPSRUNNING, "DESKTOPOPSSTATUS", "DESKTOP OPS RUNNING OK" },
+    { "desktopopsinactive", GSHELL_CMD_DESKTOPOPSINACTIVE, "DESKTOPOPSSTATUS", "DESKTOP OPS INACTIVE OK" },
+    { "desktopopsdragicon", GSHELL_CMD_DESKTOPOPSDRAGICON, "DESKTOPOPSSTATUS", "DESKTOP OPS DRAG ICON OK" },
+    { "desktopopsmenu", GSHELL_CMD_DESKTOPOPSMENU, "DESKTOPOPSSTATUS", "DESKTOP OPS MENU OK" },
+    { "desktopopssearch", GSHELL_CMD_DESKTOPOPSSEARCH, "DESKTOPOPSSTATUS", "DESKTOP OPS SEARCH OK" },
+    { "desktopopsvoice", GSHELL_CMD_DESKTOPOPSVOICE, "DESKTOPOPSSTATUS", "DESKTOP OPS VOICE OK" },
+    { "desktopopsnettime", GSHELL_CMD_DESKTOPOPSNETTIME, "DESKTOPOPSSTATUS", "DESKTOP OPS NET TIME OK" },
+    { "desktopopsstate", GSHELL_CMD_DESKTOPOPSSTATE, "DESKTOPOPSSTATUS", "DESKTOP OPS STATE OK" },
+    { "desktopopsdemo", GSHELL_CMD_DESKTOPOPSDEMO, "DESKTOPOPSSTATUS", "DESKTOP OPS DEMO OK" },
+    { "desktopopscheck", GSHELL_CMD_DESKTOPOPSCHECK, "DESKTOPOPSSTATUS", "DESKTOP OPS CHECK OK" },
+    { "desktopopsreset", GSHELL_CMD_DESKTOPOPSRESET, "DESKTOPOPSSTATUS", "DESKTOP OPS RESET OK" },
+    { "desktopopsnext", GSHELL_CMD_DESKTOPOPSNEXT, "DESKTOPOPSSTATUS", "DESKTOP OPS NEXT OK" },
+    { "sundialstatus", GSHELL_CMD_SUNDIALSTATUS, "SUNDIALSTATUS", "SUNDIAL STATUS OK" },
+    { "sundialcore", GSHELL_CMD_SUNDIALCORE, "SUNDIALSTATUS", "SUNDIAL CORE OK" },
+    { "sundialrings", GSHELL_CMD_SUNDIALRINGS, "SUNDIALSTATUS", "SUNDIAL RINGS OK" },
+    { "sundialsectors", GSHELL_CMD_SUNDIALSECTORS, "SUNDIALSTATUS", "SUNDIAL SECTORS OK" },
+    { "sundialapps", GSHELL_CMD_SUNDIALAPPS, "SUNDIALSTATUS", "SUNDIAL APPS OK" },
+    { "sundialrunning", GSHELL_CMD_SUNDIALRUNNING, "SUNDIALSTATUS", "SUNDIAL RUNNING OK" },
+    { "sundialdim", GSHELL_CMD_SUNDIALDIM, "SUNDIALSTATUS", "SUNDIAL DIM OK" },
+    { "sundialfloat", GSHELL_CMD_SUNDIALFLOAT, "SUNDIALSTATUS", "SUNDIAL FLOAT OK" },
+    { "sundialdrag", GSHELL_CMD_SUNDIALDRAG, "SUNDIALSTATUS", "SUNDIAL DRAG OK" },
+    { "sundialshow", GSHELL_CMD_SUNDIALSHOW, "SUNDIALSTATUS", "SUNDIAL SHOW OK" },
+    { "sundialhide", GSHELL_CMD_SUNDIALHIDE, "SUNDIALSTATUS", "SUNDIAL HIDE OK" },
+    { "sundialsearch", GSHELL_CMD_SUNDIALSEARCH, "SUNDIALSTATUS", "SUNDIAL SEARCH OK" },
+    { "sundialvoice", GSHELL_CMD_SUNDIALVOICE, "SUNDIALSTATUS", "SUNDIAL VOICE OK" },
+    { "sundialnettime", GSHELL_CMD_SUNDIALNETTIME, "SUNDIALSTATUS", "SUNDIAL NET TIME OK" },
+    { "sundialstate", GSHELL_CMD_SUNDIALSTATE, "SUNDIALSTATUS", "SUNDIAL STATE OK" },
+    { "sundialdemo", GSHELL_CMD_SUNDIALDEMO, "SUNDIALSTATUS", "SUNDIAL DEMO OK" },
+    { "sundialcheck", GSHELL_CMD_SUNDIALCHECK, "SUNDIALSTATUS", "SUNDIAL CHECK OK" },
+    { "sundialreset", GSHELL_CMD_SUNDIALRESET, "SUNDIALSTATUS", "SUNDIAL RESET OK" },
+    { "sundialnext", GSHELL_CMD_SUNDIALNEXT, "SUNDIALSTATUS", "SUNDIAL NEXT OK" },
+    { "sectorfloatstatus", GSHELL_CMD_SECTORFLOATSTATUS, "SECTORFLOATSTATUS", "SECTOR FLOAT STATUS OK" },
+    { "sectorselect", GSHELL_CMD_SECTORSELECT, "SECTORFLOATSTATUS", "SECTOR SELECT OK" },
+    { "sectorexpand", GSHELL_CMD_SECTOREXPAND, "SECTORFLOATSTATUS", "SECTOR EXPAND OK" },
+    { "sectorfloatapps", GSHELL_CMD_SECTORFLOATAPPS, "SECTORFLOATSTATUS", "SECTOR FLOAT APPS OK" },
+    { "sectorrunlit", GSHELL_CMD_SECTORRUNLIT, "SECTORFLOATSTATUS", "SECTOR RUN LIT OK" },
+    { "sectordimapps", GSHELL_CMD_SECTORDIMAPPS, "SECTORFLOATSTATUS", "SECTOR DIM APPS OK" },
+    { "sectorscale", GSHELL_CMD_SECTORSCALE, "SECTORFLOATSTATUS", "SECTOR SCALE OK" },
+    { "sectordensity", GSHELL_CMD_SECTORDENSITY, "SECTORFLOATSTATUS", "SECTOR DENSITY OK" },
+    { "sectorpage", GSHELL_CMD_SECTORPAGE, "SECTORFLOATSTATUS", "SECTOR PAGE OK" },
+    { "sectoroverflow", GSHELL_CMD_SECTOROVERFLOW, "SECTORFLOATSTATUS", "SECTOR OVERFLOW OK" },
+    { "sectordragicon", GSHELL_CMD_SECTORDRAGICON, "SECTORFLOATSTATUS", "SECTOR DRAG ICON OK" },
+    { "sectordropicon", GSHELL_CMD_SECTORDROPICON, "SECTORFLOATSTATUS", "SECTOR DROP ICON OK" },
+    { "sectormoveapp", GSHELL_CMD_SECTORMOVEAPP, "SECTORFLOATSTATUS", "SECTOR MOVE APP OK" },
+    { "sectorcategory", GSHELL_CMD_SECTORCATEGORY, "SECTORFLOATSTATUS", "SECTOR CATEGORY OK" },
+    { "sectorsearch", GSHELL_CMD_SECTORSEARCH, "SECTORFLOATSTATUS", "SECTOR SEARCH OK" },
+    { "sectorvoice", GSHELL_CMD_SECTORVOICE, "SECTORFLOATSTATUS", "SECTOR VOICE OK" },
+    { "sectordemo", GSHELL_CMD_SECTORDEMO, "SECTORFLOATSTATUS", "SECTOR DEMO OK" },
+    { "sectorcheck", GSHELL_CMD_SECTORCHECK, "SECTORFLOATSTATUS", "SECTOR CHECK OK" },
+    { "sectorreset", GSHELL_CMD_SECTORRESET, "SECTORFLOATSTATUS", "SECTOR RESET OK" },
+    { "sectornext", GSHELL_CMD_SECTORNEXT, "SECTORFLOATSTATUS", "SECTOR NEXT OK" },
+    { "sundialvisstatus", GSHELL_CMD_SUNDIALVISSTATUS, "SUNDIALVISSTATUS", "SUNDIAL VIS STATUS OK" },
+    { "sundialviscore", GSHELL_CMD_SUNDIALVISCORE, "SUNDIALVISSTATUS", "SUNDIAL VIS CORE OK" },
+    { "sundialvisrings", GSHELL_CMD_SUNDIALVISRINGS, "SUNDIALVISSTATUS", "SUNDIAL VIS RINGS OK" },
+    { "sundialvissectors", GSHELL_CMD_SUNDIALVISSECTORS, "SUNDIALVISSTATUS", "SUNDIAL VIS SECTORS OK" },
+    { "sundialvisicons", GSHELL_CMD_SUNDIALVISICONS, "SUNDIALVISSTATUS", "SUNDIAL VIS ICONS OK" },
+    { "sundialvisrunlit", GSHELL_CMD_SUNDIALVISRUNLIT, "SUNDIALVISSTATUS", "SUNDIAL VIS RUN LIT OK" },
+    { "sundialvisdim", GSHELL_CMD_SUNDIALVISDIM, "SUNDIALVISSTATUS", "SUNDIAL VIS DIM OK" },
+    { "sundialvisfloat", GSHELL_CMD_SUNDIALVISFLOAT, "SUNDIALVISSTATUS", "SUNDIAL VIS FLOAT OK" },
+    { "sundialvisdrag", GSHELL_CMD_SUNDIALVISDRAG, "SUNDIALVISSTATUS", "SUNDIAL VIS DRAG OK" },
+    { "sundialvisshow", GSHELL_CMD_SUNDIALVISSHOW, "SUNDIALVISSTATUS", "SUNDIAL VIS SHOW OK" },
+    { "sundialvishide", GSHELL_CMD_SUNDIALVISHIDE, "SUNDIALVISSTATUS", "SUNDIAL VIS HIDE OK" },
+    { "sundialvisnettime", GSHELL_CMD_SUNDIALVISNETTIME, "SUNDIALVISSTATUS", "SUNDIAL VIS NET TIME OK" },
+    { "sundialvissearch", GSHELL_CMD_SUNDIALVISSEARCH, "SUNDIALVISSTATUS", "SUNDIAL VIS SEARCH OK" },
+    { "sundialvisvoice", GSHELL_CMD_SUNDIALVISVOICE, "SUNDIALVISSTATUS", "SUNDIAL VIS VOICE OK" },
+    { "sundialvisdensity", GSHELL_CMD_SUNDIALVISDENSITY, "SUNDIALVISSTATUS", "SUNDIAL VIS DENSITY OK" },
+    { "sundialvisdemo", GSHELL_CMD_SUNDIALVISDEMO, "SUNDIALVISSTATUS", "SUNDIAL VIS DEMO OK" },
+    { "sundialvischeck", GSHELL_CMD_SUNDIALVISCHECK, "SUNDIALVISSTATUS", "SUNDIAL VIS CHECK OK" },
+    { "sundialvisreset", GSHELL_CMD_SUNDIALVISRESET, "SUNDIALVISSTATUS", "SUNDIAL VIS RESET OK" },
+    { "sundialvisnext", GSHELL_CMD_SUNDIALVISNEXT, "SUNDIALVISSTATUS", "SUNDIAL VIS NEXT OK" },
+    { "sundialmenustatus", GSHELL_CMD_SUNDIALMENUSTATUS, "SUNDIALMENUSTATUS", "SUNDIAL MENU STATUS OK" },
+    { "sundialmenudesktop", GSHELL_CMD_SUNDIALMENUDESKTOP, "SUNDIALMENUSTATUS", "SUNDIAL MENU DESKTOP OK" },
+    { "sundialmenuopen", GSHELL_CMD_SUNDIALMENUOPEN, "SUNDIALMENUSTATUS", "SUNDIAL MENU OPEN OK" },
+    { "sundialmenushow", GSHELL_CMD_SUNDIALMENUSHOW, "SUNDIALMENUSTATUS", "SUNDIAL MENU SHOW OK" },
+    { "sundialmenuhide", GSHELL_CMD_SUNDIALMENUHIDE, "SUNDIALMENUSTATUS", "SUNDIAL MENU HIDE OK" },
+    { "sundialmenutoggle", GSHELL_CMD_SUNDIALMENUTOGGLE, "SUNDIALMENUSTATUS", "SUNDIAL MENU TOGGLE OK" },
+    { "sundialmenulock", GSHELL_CMD_SUNDIALMENULOCK, "SUNDIALMENUSTATUS", "SUNDIAL MENU LOCK OK" },
+    { "sundialmenuunlock", GSHELL_CMD_SUNDIALMENUUNLOCK, "SUNDIALMENUSTATUS", "SUNDIAL MENU UNLOCK OK" },
+    { "sundialmenuopacity", GSHELL_CMD_SUNDIALMENUOPACITY, "SUNDIALMENUSTATUS", "SUNDIAL MENU OPACITY OK" },
+    { "sundialmenucompact", GSHELL_CMD_SUNDIALMENUCOMPACT, "SUNDIALMENUSTATUS", "SUNDIAL MENU COMPACT OK" },
+    { "sundialmenufull", GSHELL_CMD_SUNDIALMENUFULL, "SUNDIALMENUSTATUS", "SUNDIAL MENU FULL OK" },
+    { "sundialmenuedge", GSHELL_CMD_SUNDIALMENUEDGE, "SUNDIALMENUSTATUS", "SUNDIAL MENU EDGE OK" },
+    { "sundialmenuautohide", GSHELL_CMD_SUNDIALMENUAUTOHIDE, "SUNDIALMENUSTATUS", "SUNDIAL MENU AUTOHIDE OK" },
+    { "sundialmenusearch", GSHELL_CMD_SUNDIALMENUSEARCH, "SUNDIALMENUSTATUS", "SUNDIAL MENU SEARCH OK" },
+    { "sundialmenuvoice", GSHELL_CMD_SUNDIALMENUVOICE, "SUNDIALMENUSTATUS", "SUNDIAL MENU VOICE OK" },
+    { "sundialmenuclean", GSHELL_CMD_SUNDIALMENUCLEAN, "SUNDIALMENUSTATUS", "SUNDIAL MENU CLEAN OK" },
+    { "sundialmenustate", GSHELL_CMD_SUNDIALMENUSTATE, "SUNDIALMENUSTATUS", "SUNDIAL MENU STATE OK" },
+    { "sundialmenudemo", GSHELL_CMD_SUNDIALMENUDEMO, "SUNDIALMENUSTATUS", "SUNDIAL MENU DEMO OK" },
+    { "sundialmenucheck", GSHELL_CMD_SUNDIALMENUCHECK, "SUNDIALMENUSTATUS", "SUNDIAL MENU CHECK OK" },
+    { "sundialmenureset", GSHELL_CMD_SUNDIALMENURESET, "SUNDIALMENUSTATUS", "SUNDIAL MENU RESET OK" },
+    { "sundialmenunext", GSHELL_CMD_SUNDIALMENUNEXT, "SUNDIALMENUSTATUS", "SUNDIAL MENU NEXT OK" },
+    { "sundialfinalstatus", GSHELL_CMD_SUNDIALFINALSTATUS, "SUNDIALFINALSTATUS", "SUNDIAL FINAL STATUS OK" },
+    { "sundialfinaldesktop", GSHELL_CMD_SUNDIALFINALDESKTOP, "SUNDIALFINALSTATUS", "SUNDIAL FINAL DESKTOP OK" },
+    { "sundialfinalvisual", GSHELL_CMD_SUNDIALFINALVISUAL, "SUNDIALFINALSTATUS", "SUNDIAL FINAL VISUAL OK" },
+    { "sundialfinalsector", GSHELL_CMD_SUNDIALFINALSECTOR, "SUNDIALFINALSTATUS", "SUNDIAL FINAL SECTOR OK" },
+    { "sundialfinalmenu", GSHELL_CMD_SUNDIALFINALMENU, "SUNDIALFINALSTATUS", "SUNDIAL FINAL MENU OK" },
+    { "sundialfinalsearch", GSHELL_CMD_SUNDIALFINALSEARCH, "SUNDIALFINALSTATUS", "SUNDIAL FINAL SEARCH OK" },
+    { "sundialfinalvoice", GSHELL_CMD_SUNDIALFINALVOICE, "SUNDIALFINALSTATUS", "SUNDIAL FINAL VOICE OK" },
+    { "sundialfinalnettime", GSHELL_CMD_SUNDIALFINALNETTIME, "SUNDIALFINALSTATUS", "SUNDIAL FINAL NET TIME OK" },
+    { "sundialfinalclean", GSHELL_CMD_SUNDIALFINALCLEAN, "SUNDIALFINALSTATUS", "SUNDIAL FINAL CLEAN OK" },
+    { "sundialfinalux", GSHELL_CMD_SUNDIALFINALUX, "SUNDIALFINALSTATUS", "SUNDIAL FINAL UX OK" },
+    { "sundialfinaldemo", GSHELL_CMD_SUNDIALFINALDEMO, "SUNDIALFINALSTATUS", "SUNDIAL FINAL DEMO OK" },
+    { "sundialfinalcheck", GSHELL_CMD_SUNDIALFINALCHECK, "SUNDIALFINALSTATUS", "SUNDIAL FINAL CHECK OK" },
+    { "sundialfinalreset", GSHELL_CMD_SUNDIALFINALRESET, "SUNDIALFINALSTATUS", "SUNDIAL FINAL RESET OK" },
+    { "sundialfinalcloseout", GSHELL_CMD_SUNDIALFINALCLOSEOUT, "SUNDIALFINALSTATUS", "SUNDIAL FINAL CLOSEOUT OK" },
+    { "sundialfinalnextphase", GSHELL_CMD_SUNDIALFINALNEXTPHASE, "SUNDIALFINALSTATUS", "SUNDIAL FINAL NEXT PHASE OK" },
+    { "sundialfinalroadmap", GSHELL_CMD_SUNDIALFINALROADMAP, "SUNDIALFINALSTATUS", "SUNDIAL FINAL ROADMAP OK" },
+    { "sundialfinalnext", GSHELL_CMD_SUNDIALFINALNEXT, "SUNDIALFINALSTATUS", "SUNDIAL FINAL NEXT OK" },
+    { "sundialhubstatus", GSHELL_CMD_SUNDIALHUBSTATUS, "SUNDIALHUBSTATUS", "SUNDIAL HUB STATUS OK" },
+    { "sundialhubcore", GSHELL_CMD_SUNDIALHUBCORE, "SUNDIALHUBSTATUS", "SUNDIAL HUB CORE OK" },
+    { "sundialhubcontrol", GSHELL_CMD_SUNDIALHUBCONTROL, "SUNDIALHUBSTATUS", "SUNDIAL HUB CONTROL OK" },
+    { "sundialhubperms", GSHELL_CMD_SUNDIALHUBPERMS, "SUNDIALHUBSTATUS", "SUNDIAL HUB PERMS OK" },
+    { "sundialhubrules", GSHELL_CMD_SUNDIALHUBRULES, "SUNDIALHUBSTATUS", "SUNDIAL HUB RULES OK" },
+    { "sundialhubaudit", GSHELL_CMD_SUNDIALHUBAUDIT, "SUNDIALHUBSTATUS", "SUNDIAL HUB AUDIT OK" },
+    { "sundialhubappbehavior", GSHELL_CMD_SUNDIALHUBAPPBEHAVIOR, "SUNDIALHUBSTATUS", "SUNDIAL HUB APP BEHAVIOR OK" },
+    { "sundialhubnetwork", GSHELL_CMD_SUNDIALHUBNETWORK, "SUNDIALHUBSTATUS", "SUNDIAL HUB NETWORK OK" },
+    { "sundialhubfile", GSHELL_CMD_SUNDIALHUBFILE, "SUNDIALHUBSTATUS", "SUNDIAL HUB FILE OK" },
+    { "sundialhubai", GSHELL_CMD_SUNDIALHUBAI, "SUNDIALHUBSTATUS", "SUNDIAL HUB AI OK" },
+    { "sundialhubvoice", GSHELL_CMD_SUNDIALHUBVOICE, "SUNDIALHUBSTATUS", "SUNDIAL HUB VOICE OK" },
+    { "sundialhubsearch", GSHELL_CMD_SUNDIALHUBSEARCH, "SUNDIALHUBSTATUS", "SUNDIAL HUB SEARCH OK" },
+    { "sundialhubintent", GSHELL_CMD_SUNDIALHUBINTENT, "SUNDIALHUBSTATUS", "SUNDIAL HUB INTENT OK" },
+    { "sundialhubsecurity", GSHELL_CMD_SUNDIALHUBSECURITY, "SUNDIALHUBSTATUS", "SUNDIAL HUB SECURITY OK" },
+    { "sundialhubdemo", GSHELL_CMD_SUNDIALHUBDEMO, "SUNDIALHUBSTATUS", "SUNDIAL HUB DEMO OK" },
+    { "sundialhubcheck", GSHELL_CMD_SUNDIALHUBCHECK, "SUNDIALHUBSTATUS", "SUNDIAL HUB CHECK OK" },
+    { "sundialhubreset", GSHELL_CMD_SUNDIALHUBRESET, "SUNDIALHUBSTATUS", "SUNDIAL HUB RESET OK" },
+    { "sundialhubnext", GSHELL_CMD_SUNDIALHUBNEXT, "SUNDIALHUBSTATUS", "SUNDIAL HUB NEXT OK" },
+    { "controlsectorstatus", GSHELL_CMD_CONTROLSECTORSTATUS, "CONTROLSECTORSTATUS", "CONTROL SECTOR STATUS OK" },
+    { "controlsectoropen", GSHELL_CMD_CONTROLSECTOROPEN, "CONTROLSECTORSTATUS", "CONTROL SECTOR OPEN OK" },
+    { "controlsectorallow", GSHELL_CMD_CONTROLSECTORALLOW, "CONTROLSECTORSTATUS", "CONTROL SECTOR ALLOW OK" },
+    { "controlsectorblock", GSHELL_CMD_CONTROLSECTORBLOCK, "CONTROLSECTORSTATUS", "CONTROL SECTOR BLOCK OK" },
+    { "controlsectorask", GSHELL_CMD_CONTROLSECTORASK, "CONTROLSECTORSTATUS", "CONTROL SECTOR ASK OK" },
+    { "controlsectortemp", GSHELL_CMD_CONTROLSECTORTEMP, "CONTROLSECTORSTATUS", "CONTROL SECTOR TEMP OK" },
+    { "controlsectorfile", GSHELL_CMD_CONTROLSECTORFILE, "CONTROLSECTORSTATUS", "CONTROL SECTOR FILE OK" },
+    { "controlsectornet", GSHELL_CMD_CONTROLSECTORNET, "CONTROLSECTORSTATUS", "CONTROL SECTOR NET OK" },
+    { "controlsectorai", GSHELL_CMD_CONTROLSECTORAI, "CONTROLSECTORSTATUS", "CONTROL SECTOR AI OK" },
+    { "controlsectorapp", GSHELL_CMD_CONTROLSECTORAPP, "CONTROLSECTORSTATUS", "CONTROL SECTOR APP OK" },
+    { "controlsectorrule", GSHELL_CMD_CONTROLSECTORRULE, "CONTROLSECTORSTATUS", "CONTROL SECTOR RULE OK" },
+    { "controlsectoraudit", GSHELL_CMD_CONTROLSECTORAUDIT, "CONTROLSECTORSTATUS", "CONTROL SECTOR AUDIT OK" },
+    { "controlsectorperm", GSHELL_CMD_CONTROLSECTORPERM, "CONTROLSECTORSTATUS", "CONTROL SECTOR PERM OK" },
+    { "controlsectorintent", GSHELL_CMD_CONTROLSECTORINTENT, "CONTROLSECTORSTATUS", "CONTROL SECTOR INTENT OK" },
+    { "controlsectordemo", GSHELL_CMD_CONTROLSECTORDEMO, "CONTROLSECTORSTATUS", "CONTROL SECTOR DEMO OK" },
+    { "controlsectorcheck", GSHELL_CMD_CONTROLSECTORCHECK, "CONTROLSECTORSTATUS", "CONTROL SECTOR CHECK OK" },
+    { "controlsectorreset", GSHELL_CMD_CONTROLSECTORRESET, "CONTROLSECTORSTATUS", "CONTROL SECTOR RESET OK" },
+    { "controlsectornext", GSHELL_CMD_CONTROLSECTORNEXT, "CONTROLSECTORSTATUS", "CONTROL SECTOR NEXT OK" },
+    { "permreqstatus", GSHELL_CMD_PERMREQSTATUS, "PERMREQSTATUS", "PERMISSION REQUEST STATUS OK" },
+    { "permreqopen", GSHELL_CMD_PERMREQOPEN, "PERMREQSTATUS", "PERMISSION REQUEST OPEN OK" },
+    { "permreqsource", GSHELL_CMD_PERMREQSOURCE, "PERMREQSTATUS", "PERMISSION REQUEST SOURCE OK" },
+    { "permreqtarget", GSHELL_CMD_PERMREQTARGET, "PERMREQSTATUS", "PERMISSION REQUEST TARGET OK" },
+    { "permreqfile", GSHELL_CMD_PERMREQFILE, "PERMREQSTATUS", "PERMISSION REQUEST FILE OK" },
+    { "permreqnet", GSHELL_CMD_PERMREQNET, "PERMREQSTATUS", "PERMISSION REQUEST NET OK" },
+    { "permreqai", GSHELL_CMD_PERMREQAI, "PERMREQSTATUS", "PERMISSION REQUEST AI OK" },
+    { "permreqapp", GSHELL_CMD_PERMREQAPP, "PERMREQSTATUS", "PERMISSION REQUEST APP OK" },
+    { "permreqask", GSHELL_CMD_PERMREQASK, "PERMREQSTATUS", "PERMISSION REQUEST ASK OK" },
+    { "permreqallow", GSHELL_CMD_PERMREQALLOW, "PERMREQSTATUS", "PERMISSION REQUEST ALLOW OK" },
+    { "permreqblock", GSHELL_CMD_PERMREQBLOCK, "PERMREQSTATUS", "PERMISSION REQUEST BLOCK OK" },
+    { "permreqtemp", GSHELL_CMD_PERMREQTEMP, "PERMREQSTATUS", "PERMISSION REQUEST TEMP OK" },
+    { "permreqrule", GSHELL_CMD_PERMREQRULE, "PERMREQSTATUS", "PERMISSION REQUEST RULE OK" },
+    { "permreqaudit", GSHELL_CMD_PERMREQAUDIT, "PERMREQSTATUS", "PERMISSION REQUEST AUDIT OK" },
+    { "permreqvoice", GSHELL_CMD_PERMREQVOICE, "PERMREQSTATUS", "PERMISSION REQUEST VOICE OK" },
+    { "permreqsearch", GSHELL_CMD_PERMREQSEARCH, "PERMREQSTATUS", "PERMISSION REQUEST SEARCH OK" },
+    { "permreqdemo", GSHELL_CMD_PERMREQDEMO, "PERMREQSTATUS", "PERMISSION REQUEST DEMO OK" },
+    { "permreqcheck", GSHELL_CMD_PERMREQCHECK, "PERMREQSTATUS", "PERMISSION REQUEST CHECK OK" },
+    { "permreqreset", GSHELL_CMD_PERMREQRESET, "PERMREQSTATUS", "PERMISSION REQUEST RESET OK" },
+    { "permreqnext", GSHELL_CMD_PERMREQNEXT, "PERMREQSTATUS", "PERMISSION REQUEST NEXT OK" },
+    { "auditflowstatus", GSHELL_CMD_AUDITFLOWSTATUS, "AUDITFLOWSTATUS", "AUDIT FLOW STATUS OK" },
+    { "auditflowopen", GSHELL_CMD_AUDITFLOWOPEN, "AUDITFLOWSTATUS", "AUDIT FLOW OPEN OK" },
+    { "auditflowsource", GSHELL_CMD_AUDITFLOWSOURCE, "AUDITFLOWSTATUS", "AUDIT FLOW SOURCE OK" },
+    { "auditflowevent", GSHELL_CMD_AUDITFLOWEVENT, "AUDITFLOWSTATUS", "AUDIT FLOW EVENT OK" },
+    { "auditflowtimeline", GSHELL_CMD_AUDITFLOWTIMELINE, "AUDITFLOWSTATUS", "AUDIT FLOW TIMELINE OK" },
+    { "auditflowlast", GSHELL_CMD_AUDITFLOWLAST, "AUDITFLOWSTATUS", "AUDIT FLOW LAST OK" },
+    { "auditflowfile", GSHELL_CMD_AUDITFLOWFILE, "AUDITFLOWSTATUS", "AUDIT FLOW FILE OK" },
+    { "auditflownet", GSHELL_CMD_AUDITFLOWNET, "AUDITFLOWSTATUS", "AUDIT FLOW NET OK" },
+    { "auditflowai", GSHELL_CMD_AUDITFLOWAI, "AUDITFLOWSTATUS", "AUDIT FLOW AI OK" },
+    { "auditflowapp", GSHELL_CMD_AUDITFLOWAPP, "AUDITFLOWSTATUS", "AUDIT FLOW APP OK" },
+    { "auditflowallow", GSHELL_CMD_AUDITFLOWALLOW, "AUDITFLOWSTATUS", "AUDIT FLOW ALLOW OK" },
+    { "auditflowblock", GSHELL_CMD_AUDITFLOWBLOCK, "AUDITFLOWSTATUS", "AUDIT FLOW BLOCK OK" },
+    { "auditflowtemp", GSHELL_CMD_AUDITFLOWTEMP, "AUDITFLOWSTATUS", "AUDIT FLOW TEMP OK" },
+    { "auditflowrule", GSHELL_CMD_AUDITFLOWRULE, "AUDITFLOWSTATUS", "AUDIT FLOW RULE OK" },
+    { "auditflowsearch", GSHELL_CMD_AUDITFLOWSEARCH, "AUDITFLOWSTATUS", "AUDIT FLOW SEARCH OK" },
+    { "auditflowvoice", GSHELL_CMD_AUDITFLOWVOICE, "AUDITFLOWSTATUS", "AUDIT FLOW VOICE OK" },
+    { "auditflowdemo", GSHELL_CMD_AUDITFLOWDEMO, "AUDITFLOWSTATUS", "AUDIT FLOW DEMO OK" },
+    { "auditflowcheck", GSHELL_CMD_AUDITFLOWCHECK, "AUDITFLOWSTATUS", "AUDIT FLOW CHECK OK" },
+    { "auditflowreset", GSHELL_CMD_AUDITFLOWRESET, "AUDITFLOWSTATUS", "AUDIT FLOW RESET OK" },
+    { "auditflownext", GSHELL_CMD_AUDITFLOWNEXT, "AUDITFLOWSTATUS", "AUDIT FLOW NEXT OK" },
+    { "voiceintentstatus", GSHELL_CMD_VOICEINTENTSTATUS, "VOICEINTENTSTATUS", "VOICE INTENT STATUS OK" },
+    { "voiceintentlisten", GSHELL_CMD_VOICEINTENTLISTEN, "VOICEINTENTSTATUS", "VOICE INTENT LISTEN OK" },
+    { "voiceintentheard", GSHELL_CMD_VOICEINTENTHEARD, "VOICEINTENTSTATUS", "VOICE INTENT HEARD OK" },
+    { "voiceintenttext", GSHELL_CMD_VOICEINTENTTEXT, "VOICEINTENTSTATUS", "VOICE INTENT TEXT OK" },
+    { "voiceintentparse", GSHELL_CMD_VOICEINTENTPARSE, "VOICEINTENTSTATUS", "VOICE INTENT PARSE OK" },
+    { "voiceintentcommand", GSHELL_CMD_VOICEINTENTCOMMAND, "VOICEINTENTSTATUS", "VOICE INTENT COMMAND OK" },
+    { "voiceintentask", GSHELL_CMD_VOICEINTENTASK, "VOICEINTENTSTATUS", "VOICE INTENT ASK OK" },
+    { "voiceintentallow", GSHELL_CMD_VOICEINTENTALLOW, "VOICEINTENTSTATUS", "VOICE INTENT ALLOW OK" },
+    { "voiceintentblock", GSHELL_CMD_VOICEINTENTBLOCK, "VOICEINTENTSTATUS", "VOICE INTENT BLOCK OK" },
+    { "voiceintentconfirm", GSHELL_CMD_VOICEINTENTCONFIRM, "VOICEINTENTSTATUS", "VOICE INTENT CONFIRM OK" },
+    { "voiceintentreply", GSHELL_CMD_VOICEINTENTREPLY, "VOICEINTENTSTATUS", "VOICE INTENT REPLY OK" },
+    { "voiceintentspeak", GSHELL_CMD_VOICEINTENTSPEAK, "VOICEINTENTSTATUS", "VOICE INTENT SPEAK OK" },
+    { "voiceintentsearch", GSHELL_CMD_VOICEINTENTSEARCH, "VOICEINTENTSTATUS", "VOICE INTENT SEARCH OK" },
+    { "voiceintentaudit", GSHELL_CMD_VOICEINTENTAUDIT, "VOICEINTENTSTATUS", "VOICE INTENT AUDIT OK" },
+    { "voiceintentpolicy", GSHELL_CMD_VOICEINTENTPOLICY, "VOICEINTENTSTATUS", "VOICE INTENT POLICY OK" },
+    { "voiceintentdemo", GSHELL_CMD_VOICEINTENTDEMO, "VOICEINTENTSTATUS", "VOICE INTENT DEMO OK" },
+    { "voiceintentcheck", GSHELL_CMD_VOICEINTENTCHECK, "VOICEINTENTSTATUS", "VOICE INTENT CHECK OK" },
+    { "voiceintentreset", GSHELL_CMD_VOICEINTENTRESET, "VOICEINTENTSTATUS", "VOICE INTENT RESET OK" },
+    { "voiceintentnext", GSHELL_CMD_VOICEINTENTNEXT, "VOICEINTENTSTATUS", "VOICE INTENT NEXT OK" },
+    { "sunctlfinalstatus", GSHELL_CMD_SUNCTLFINALSTATUS, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL STATUS OK" },
+    { "sunctlfinalhub", GSHELL_CMD_SUNCTLFINALHUB, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL HUB OK" },
+    { "sunctlfinalactions", GSHELL_CMD_SUNCTLFINALACTIONS, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL ACTIONS OK" },
+    { "sunctlfinalperm", GSHELL_CMD_SUNCTLFINALPERM, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL PERM OK" },
+    { "sunctlfinalaudit", GSHELL_CMD_SUNCTLFINALAUDIT, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL AUDIT OK" },
+    { "sunctlfinalvoice", GSHELL_CMD_SUNCTLFINALVOICE, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL VOICE OK" },
+    { "sunctlfinalsearch", GSHELL_CMD_SUNCTLFINALSEARCH, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL SEARCH OK" },
+    { "sunctlfinalai", GSHELL_CMD_SUNCTLFINALAI, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL AI OK" },
+    { "sunctlfinalfile", GSHELL_CMD_SUNCTLFINALFILE, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL FILE OK" },
+    { "sunctlfinalnet", GSHELL_CMD_SUNCTLFINALNET, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL NET OK" },
+    { "sunctlfinalapp", GSHELL_CMD_SUNCTLFINALAPP, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL APP OK" },
+    { "sunctlfinalrule", GSHELL_CMD_SUNCTLFINALRULE, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL RULE OK" },
+    { "sunctlfinaldemo", GSHELL_CMD_SUNCTLFINALDEMO, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL DEMO OK" },
+    { "sunctlfinalcheck", GSHELL_CMD_SUNCTLFINALCHECK, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL CHECK OK" },
+    { "sunctlfinalreset", GSHELL_CMD_SUNCTLFINALRESET, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL RESET OK" },
+    { "sunctlfinalcloseout", GSHELL_CMD_SUNCTLFINALCLOSEOUT, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL CLOSEOUT OK" },
+    { "sunctlfinalroadmap", GSHELL_CMD_SUNCTLFINALROADMAP, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL ROADMAP OK" },
+    { "sunctlfinalnext", GSHELL_CMD_SUNCTLFINALNEXT, "SUNCTLFINALSTATUS", "SUN CONTROL FINAL NEXT OK" },
     { "help",        GSHELL_CMD_HELP,        "HELP",        "HELP OK" },
     { "history",     GSHELL_CMD_HISTORY,     "HISTORY",     "HISTORY OK" },
     { "histclear",   GSHELL_CMD_HISTCLEAR,   "HISTCLEAR",   "HIST CLEARED" },
     { "log",         GSHELL_CMD_LOG,         "LOG",         "LOG OK" },
     { "logclear",    GSHELL_CMD_LOGCLEAR,    "LOGCLEAR",    "LOG CLEARED" },
     { "clear",       GSHELL_CMD_CLEAR,       "CLEAR",       "CLEAR OK" },
+    { "selfdevstatus", GSHELL_CMD_SELFDEVSTATUS, "SELFDEVSTATUS", "SELF DEVELOPED STATUS OK" },
+    { "selfdevboot", GSHELL_CMD_SELFDEVBOOT, "SELFDEVSTATUS", "SELF DEVELOPED BOOT OK" },
+    { "selfdevkernel", GSHELL_CMD_SELFDEVKERNEL, "SELFDEVSTATUS", "SELF DEVELOPED KERNEL OK" },
+    { "selfdevgshell", GSHELL_CMD_SELFDEVGSHELL, "SELFDEVSTATUS", "SELF DEVELOPED GSHELL OK" },
+    { "selfdevdesktop", GSHELL_CMD_SELFDEVDESKTOP, "SELFDEVSTATUS", "SELF DEVELOPED DESKTOP OK" },
+    { "selfdevsundial", GSHELL_CMD_SELFDEVSUNDIAL, "SELFDEVSTATUS", "SELF DEVELOPED SUNDIAL OK" },
+    { "selfdevapp", GSHELL_CMD_SELFDEVAPP, "SELFDEVSTATUS", "SELF DEVELOPED APP OK" },
+    { "selfdevcontrol", GSHELL_CMD_SELFDEVCONTROL, "SELFDEVSTATUS", "SELF DEVELOPED CONTROL OK" },
+    { "selfdevpolicy", GSHELL_CMD_SELFDEVPOLICY, "SELFDEVSTATUS", "SELF DEVELOPED POLICY OK" },
+    { "selfdevrule", GSHELL_CMD_SELFDEVRULE, "SELFDEVSTATUS", "SELF DEVELOPED RULE OK" },
+    { "selfdevaudit", GSHELL_CMD_SELFDEVAUDIT, "SELFDEVSTATUS", "SELF DEVELOPED AUDIT OK" },
+    { "selfdevvoice", GSHELL_CMD_SELFDEVVOICE, "SELFDEVSTATUS", "SELF DEVELOPED VOICE OK" },
+    { "selfdevsearch", GSHELL_CMD_SELFDEVSEARCH, "SELFDEVSTATUS", "SELF DEVELOPED SEARCH OK" },
+    { "selfdevai", GSHELL_CMD_SELFDEVAI, "SELFDEVSTATUS", "SELF DEVELOPED AI OK" },
+    { "selfdevfile", GSHELL_CMD_SELFDEVFILE, "SELFDEVSTATUS", "SELF DEVELOPED FILE OK" },
+    { "selfdevnet", GSHELL_CMD_SELFDEVNET, "SELFDEVSTATUS", "SELF DEVELOPED NET OK" },
+    { "selfdevdemo", GSHELL_CMD_SELFDEVDEMO, "SELFDEVSTATUS", "SELF DEVELOPED DEMO OK" },
+    { "selfdevcheck", GSHELL_CMD_SELFDEVCHECK, "SELFDEVSTATUS", "SELF DEVELOPED CHECK OK" },
+    { "selfdevcloseout", GSHELL_CMD_SELFDEVCLOSEOUT, "SELFDEVSTATUS", "SELF DEVELOPED CLOSEOUT OK" },
+    { "selfdevlinuxplan", GSHELL_CMD_SELFDEVLINUXPLAN, "SELFDEVSTATUS", "SELF DEVELOPED LINUX PLAN OK" },
+    { "selfdevroadmap", GSHELL_CMD_SELFDEVROADMAP, "SELFDEVSTATUS", "SELF DEVELOPED ROADMAP OK" },
+    { "selfdevnext", GSHELL_CMD_SELFDEVNEXT, "SELFDEVSTATUS", "SELF DEVELOPED NEXT OK" },
+
+    { "linuxplanstatus", GSHELL_CMD_LINUXPLANSTATUS, "LINUXPLANSTATUS", "LINUX PLAN STATUS OK" },
+    { "linuxbase", GSHELL_CMD_LINUXBASE, "LINUXPLANSTATUS", "LINUX BASE PLAN OK" },
+    { "linuxkernel", GSHELL_CMD_LINUXKERNEL, "LINUXPLANSTATUS", "LINUX KERNEL PLAN OK" },
+    { "linuxdriver", GSHELL_CMD_LINUXDRIVER, "LINUXPLANSTATUS", "LINUX DRIVER PLAN OK" },
+    { "linuxfs", GSHELL_CMD_LINUXFS, "LINUXPLANSTATUS", "LINUX FILESYSTEM PLAN OK" },
+    { "linuxnet", GSHELL_CMD_LINUXNET, "LINUXPLANSTATUS", "LINUX NETWORK PLAN OK" },
+    { "linuxinput", GSHELL_CMD_LINUXINPUT, "LINUXPLANSTATUS", "LINUX INPUT PLAN OK" },
+    { "linuxdisplay", GSHELL_CMD_LINUXDISPLAY, "LINUXPLANSTATUS", "LINUX DISPLAY PLAN OK" },
+    { "linuxprocess", GSHELL_CMD_LINUXPROCESS, "LINUXPLANSTATUS", "LINUX PROCESS PLAN OK" },
+    { "linuxapp", GSHELL_CMD_LINUXAPP, "LINUXPLANSTATUS", "LINUX APP PLAN OK" },
+    { "linuxpolicy", GSHELL_CMD_LINUXPOLICY, "LINUXPLANSTATUS", "LINUX POLICY PLAN OK" },
+    { "linuxsandbox", GSHELL_CMD_LINUXSANDBOX, "LINUXPLANSTATUS", "LINUX SANDBOX PLAN OK" },
+    { "linuxaudit", GSHELL_CMD_LINUXAUDIT, "LINUXPLANSTATUS", "LINUX AUDIT PLAN OK" },
+    { "linuxvoice", GSHELL_CMD_LINUXVOICE, "LINUXPLANSTATUS", "LINUX VOICE PLAN OK" },
+    { "linuxai", GSHELL_CMD_LINUXAI, "LINUXPLANSTATUS", "LINUX AI PLAN OK" },
+    { "linuxsundial", GSHELL_CMD_LINUXSUNDIAL, "LINUXPLANSTATUS", "LINUX SUNDIAL PLAN OK" },
+    { "linuxdesktop", GSHELL_CMD_LINUXDESKTOP, "LINUXPLANSTATUS", "LINUX DESKTOP PLAN OK" },
+    { "linuxdemo", GSHELL_CMD_LINUXDEMO, "LINUXPLANSTATUS", "LINUX PLAN DEMO OK" },
+    { "linuxcheck", GSHELL_CMD_LINUXCHECK, "LINUXPLANSTATUS", "LINUX PLAN CHECK OK" },
+    { "linuxreset", GSHELL_CMD_LINUXRESET, "LINUXPLANSTATUS", "LINUX PLAN RESET OK" },
+    { "linuxroadmap", GSHELL_CMD_LINUXROADMAP, "LINUXPLANSTATUS", "LINUX PLAN ROADMAP OK" },
+    { "linuxnext", GSHELL_CMD_LINUXNEXT, "LINUXPLANSTATUS", "LINUX PLAN NEXT OK" },
+
+    { "linuxbasestatus", GSHELL_CMD_LINUXBASESTATUS, "LINUXBASESTATUS", "LINUX BASE STATUS OK" },
+    { "linuxbasedebian", GSHELL_CMD_LINUXBASEDEBIAN, "LINUXBASESTATUS", "LINUX BASE DEBIAN OK" },
+    { "linuxbasearch", GSHELL_CMD_LINUXBASEARCH, "LINUXBASESTATUS", "LINUX BASE ARCH OK" },
+    { "linuxbasealpine", GSHELL_CMD_LINUXBASEALPINE, "LINUXBASESTATUS", "LINUX BASE ALPINE OK" },
+    { "linuxbasebuildroot", GSHELL_CMD_LINUXBASEBUILDROOT, "LINUXBASESTATUS", "LINUX BASE BUILDROOT OK" },
+    { "linuxbaseubuntu", GSHELL_CMD_LINUXBASEUBUNTU, "LINUXBASESTATUS", "LINUX BASE UBUNTU OK" },
+    { "linuxbasefedora", GSHELL_CMD_LINUXBASEFEDORA, "LINUXBASESTATUS", "LINUX BASE FEDORA OK" },
+    { "linuxbasestability", GSHELL_CMD_LINUXBASESTABILITY, "LINUXBASESTATUS", "LINUX BASE STABILITY OK" },
+    { "linuxbasesize", GSHELL_CMD_LINUXBASESIZE, "LINUXBASESTATUS", "LINUX BASE SIZE OK" },
+    { "linuxbasepkg", GSHELL_CMD_LINUXBASEPKG, "LINUXBASESTATUS", "LINUX BASE PACKAGE OK" },
+    { "linuxbaseui", GSHELL_CMD_LINUXBASEUI, "LINUXBASESTATUS", "LINUX BASE UI OK" },
+    { "linuxbasecontrol", GSHELL_CMD_LINUXBASECONTROL, "LINUXBASESTATUS", "LINUX BASE CONTROL OK" },
+    { "linuxbasesecurity", GSHELL_CMD_LINUXBASESECURITY, "LINUXBASESTATUS", "LINUX BASE SECURITY OK" },
+    { "linuxbasedev", GSHELL_CMD_LINUXBASEDEV, "LINUXBASESTATUS", "LINUX BASE DEV OK" },
+    { "linuxbasematrix", GSHELL_CMD_LINUXBASEMATRIX, "LINUXBASESTATUS", "LINUX BASE MATRIX OK" },
+    { "linuxbaserank", GSHELL_CMD_LINUXBASERANK, "LINUXBASESTATUS", "LINUX BASE RANK OK" },
+    { "linuxbasechoice", GSHELL_CMD_LINUXBASECHOICE, "LINUXBASESTATUS", "LINUX BASE CHOICE OK" },
+    { "linuxbasedemo", GSHELL_CMD_LINUXBASEDEMO, "LINUXBASESTATUS", "LINUX BASE DEMO OK" },
+    { "linuxbasecheck", GSHELL_CMD_LINUXBASECHECK, "LINUXBASESTATUS", "LINUX BASE CHECK OK" },
+    { "linuxbasereset", GSHELL_CMD_LINUXBASERESET, "LINUXBASESTATUS", "LINUX BASE RESET OK" },
+    { "linuxbaseroadmap", GSHELL_CMD_LINUXBASEROADMAP, "LINUXBASESTATUS", "LINUX BASE ROADMAP OK" },
+    { "linuxbasenext", GSHELL_CMD_LINUXBASENEXT, "LINUXBASESTATUS", "LINUX BASE NEXT OK" },
+
+    { "linuxdispstatus", GSHELL_CMD_LINUXDISPSTATUS, "LINUXDISPSTATUS", "LINUX DISPLAY STATUS OK" },
+    { "linuxdispsdl", GSHELL_CMD_LINUXDISPSDL, "LINUXDISPSTATUS", "LINUX DISPLAY SDL OK" },
+    { "linuxdispwayland", GSHELL_CMD_LINUXDISPWAYLAND, "LINUXDISPSTATUS", "LINUX DISPLAY WAYLAND OK" },
+    { "linuxdispx11", GSHELL_CMD_LINUXDISPX11, "LINUXDISPSTATUS", "LINUX DISPLAY X11 OK" },
+    { "linuxdispqt", GSHELL_CMD_LINUXDISPQT, "LINUXDISPSTATUS", "LINUX DISPLAY QT OK" },
+    { "linuxdispelectron", GSHELL_CMD_LINUXDISPELECTRON, "LINUXDISPSTATUS", "LINUX DISPLAY ELECTRON OK" },
+    { "linuxdispgtk", GSHELL_CMD_LINUXDISPGTK, "LINUXDISPSTATUS", "LINUX DISPLAY GTK OK" },
+    { "linuxdispfb", GSHELL_CMD_LINUXDISPFB, "LINUXDISPSTATUS", "LINUX DISPLAY FRAMEBUFFER OK" },
+    { "linuxdispopengl", GSHELL_CMD_LINUXDISPOPENGL, "LINUXDISPSTATUS", "LINUX DISPLAY OPENGL OK" },
+    { "linuxdisprender", GSHELL_CMD_LINUXDISPRENDER, "LINUXDISPSTATUS", "LINUX DISPLAY RENDER OK" },
+    { "linuxdispinput", GSHELL_CMD_LINUXDISPINPUT, "LINUXDISPSTATUS", "LINUX DISPLAY INPUT OK" },
+    { "linuxdispperf", GSHELL_CMD_LINUXDISPPERF, "LINUXDISPSTATUS", "LINUX DISPLAY PERFORMANCE OK" },
+    { "linuxdispux", GSHELL_CMD_LINUXDISPUX, "LINUXDISPSTATUS", "LINUX DISPLAY UX OK" },
+    { "linuxdisprisk", GSHELL_CMD_LINUXDISPRISK, "LINUXDISPSTATUS", "LINUX DISPLAY RISK OK" },
+    { "linuxdispmatrix", GSHELL_CMD_LINUXDISPMATRIX, "LINUXDISPSTATUS", "LINUX DISPLAY MATRIX OK" },
+    { "linuxdisprank", GSHELL_CMD_LINUXDISPRANK, "LINUXDISPSTATUS", "LINUX DISPLAY RANK OK" },
+    { "linuxdispchoice", GSHELL_CMD_LINUXDISPCHOICE, "LINUXDISPSTATUS", "LINUX DISPLAY CHOICE OK" },
+    { "linuxdispdemo", GSHELL_CMD_LINUXDISPDEMO, "LINUXDISPSTATUS", "LINUX DISPLAY DEMO OK" },
+    { "linuxdispcheck", GSHELL_CMD_LINUXDISPCHECK, "LINUXDISPSTATUS", "LINUX DISPLAY CHECK OK" },
+    { "linuxdispreset", GSHELL_CMD_LINUXDISPRESET, "LINUXDISPSTATUS", "LINUX DISPLAY RESET OK" },
+    { "linuxdisproadmap", GSHELL_CMD_LINUXDISPROADMAP, "LINUXDISPSTATUS", "LINUX DISPLAY ROADMAP OK" },
+    { "linuxdispnext", GSHELL_CMD_LINUXDISPNEXT, "LINUXDISPSTATUS", "LINUX DISPLAY NEXT OK" },
+
+    { "linuxinputstatus", GSHELL_CMD_LINUXINPUTSTATUS, "LINUXINPUTSTATUS", "LINUX INPUT STATUS OK" },
+    { "linuxinputevdev", GSHELL_CMD_LINUXINPUTEVDEV, "LINUXINPUTSTATUS", "LINUX INPUT EVDEV OK" },
+    { "linuxinputlibinput", GSHELL_CMD_LINUXINPUTLIBINPUT, "LINUXINPUTSTATUS", "LINUX INPUT LIBINPUT OK" },
+    { "linuxinputsdl", GSHELL_CMD_LINUXINPUTSDL, "LINUXINPUTSTATUS", "LINUX INPUT SDL OK" },
+    { "linuxinputpipewire", GSHELL_CMD_LINUXINPUTPIPEWIRE, "LINUXINPUTSTATUS", "LINUX INPUT PIPEWIRE OK" },
+    { "linuxinputalsa", GSHELL_CMD_LINUXINPUTALSA, "LINUXINPUTSTATUS", "LINUX INPUT ALSA OK" },
+    { "linuxinputkeyboard", GSHELL_CMD_LINUXINPUTKEYBOARD, "LINUXINPUTSTATUS", "LINUX INPUT KEYBOARD OK" },
+    { "linuxinputmouse", GSHELL_CMD_LINUXINPUTMOUSE, "LINUXINPUTSTATUS", "LINUX INPUT MOUSE OK" },
+    { "linuxinputtouch", GSHELL_CMD_LINUXINPUTTOUCH, "LINUXINPUTSTATUS", "LINUX INPUT TOUCH OK" },
+    { "linuxinputvoice", GSHELL_CMD_LINUXINPUTVOICE, "LINUXINPUTSTATUS", "LINUX INPUT VOICE OK" },
+    { "linuxinputroute", GSHELL_CMD_LINUXINPUTROUTE, "LINUXINPUTSTATUS", "LINUX INPUT ROUTE OK" },
+    { "linuxinputfocus", GSHELL_CMD_LINUXINPUTFOCUS, "LINUXINPUTSTATUS", "LINUX INPUT FOCUS OK" },
+    { "linuxinputsundial", GSHELL_CMD_LINUXINPUTSUNDIAL, "LINUXINPUTSTATUS", "LINUX INPUT SUNDIAL OK" },
+    { "linuxinputsecurity", GSHELL_CMD_LINUXINPUTSECURITY, "LINUXINPUTSTATUS", "LINUX INPUT SECURITY OK" },
+    { "linuxinputmatrix", GSHELL_CMD_LINUXINPUTMATRIX, "LINUXINPUTSTATUS", "LINUX INPUT MATRIX OK" },
+    { "linuxinputrank", GSHELL_CMD_LINUXINPUTRANK, "LINUXINPUTSTATUS", "LINUX INPUT RANK OK" },
+    { "linuxinputchoice", GSHELL_CMD_LINUXINPUTCHOICE, "LINUXINPUTSTATUS", "LINUX INPUT CHOICE OK" },
+    { "linuxinputdemo", GSHELL_CMD_LINUXINPUTDEMO, "LINUXINPUTSTATUS", "LINUX INPUT DEMO OK" },
+    { "linuxinputcheck", GSHELL_CMD_LINUXINPUTCHECK, "LINUXINPUTSTATUS", "LINUX INPUT CHECK OK" },
+    { "linuxinputreset", GSHELL_CMD_LINUXINPUTRESET, "LINUXINPUTSTATUS", "LINUX INPUT RESET OK" },
+    { "linuxinputroadmap", GSHELL_CMD_LINUXINPUTROADMAP, "LINUXINPUTSTATUS", "LINUX INPUT ROADMAP OK" },
+    { "linuxinputnext", GSHELL_CMD_LINUXINPUTNEXT, "LINUXINPUTSTATUS", "LINUX INPUT NEXT OK" },
+
+    { "linuxmapstatus", GSHELL_CMD_LINUXMAPSTATUS, "LINUXMAPSTATUS", "LINUX MAP STATUS OK" },
+    { "linuxmapappreg", GSHELL_CMD_LINUXMAPAPPREG, "LINUXMAPSTATUS", "LINUX MAP APP REGISTRY OK" },
+    { "linuxmapdesktopfile", GSHELL_CMD_LINUXMAPDESKTOPFILE, "LINUXMAPSTATUS", "LINUX MAP DESKTOP FILE OK" },
+    { "linuxmapprocess", GSHELL_CMD_LINUXMAPPROCESS, "LINUXMAPSTATUS", "LINUX MAP PROCESS OK" },
+    { "linuxmappid", GSHELL_CMD_LINUXMAPPID, "LINUXMAPSTATUS", "LINUX MAP PID OK" },
+    { "linuxmapwindow", GSHELL_CMD_LINUXMAPWINDOW, "LINUXMAPSTATUS", "LINUX MAP WINDOW OK" },
+    { "linuxmapforeground", GSHELL_CMD_LINUXMAPFOREGROUND, "LINUXMAPSTATUS", "LINUX MAP FOREGROUND OK" },
+    { "linuxmapbackground", GSHELL_CMD_LINUXMAPBACKGROUND, "LINUXMAPSTATUS", "LINUX MAP BACKGROUND OK" },
+    { "linuxmaprunning", GSHELL_CMD_LINUXMAPRUNNING, "LINUXMAPSTATUS", "LINUX MAP RUNNING OK" },
+    { "linuxmapiconlit", GSHELL_CMD_LINUXMAPICONLIT, "LINUXMAPSTATUS", "LINUX MAP ICON LIT OK" },
+    { "linuxmapsector", GSHELL_CMD_LINUXMAPSECTOR, "LINUXMAPSTATUS", "LINUX MAP SECTOR OK" },
+    { "linuxmaplaunch", GSHELL_CMD_LINUXMAPLAUNCH, "LINUXMAPSTATUS", "LINUX MAP LAUNCH OK" },
+    { "linuxmapclose", GSHELL_CMD_LINUXMAPCLOSE, "LINUXMAPSTATUS", "LINUX MAP CLOSE OK" },
+    { "linuxmapstate", GSHELL_CMD_LINUXMAPSTATE, "LINUXMAPSTATUS", "LINUX MAP STATE OK" },
+    { "linuxmapaudit", GSHELL_CMD_LINUXMAPAUDIT, "LINUXMAPSTATUS", "LINUX MAP AUDIT OK" },
+    { "linuxmapmatrix", GSHELL_CMD_LINUXMAPMATRIX, "LINUXMAPSTATUS", "LINUX MAP MATRIX OK" },
+    { "linuxmaprank", GSHELL_CMD_LINUXMAPRANK, "LINUXMAPSTATUS", "LINUX MAP RANK OK" },
+    { "linuxmapchoice", GSHELL_CMD_LINUXMAPCHOICE, "LINUXMAPSTATUS", "LINUX MAP CHOICE OK" },
+    { "linuxmapdemo", GSHELL_CMD_LINUXMAPDEMO, "LINUXMAPSTATUS", "LINUX MAP DEMO OK" },
+    { "linuxmapcheck", GSHELL_CMD_LINUXMAPCHECK, "LINUXMAPSTATUS", "LINUX MAP CHECK OK" },
+    { "linuxmapreset", GSHELL_CMD_LINUXMAPRESET, "LINUXMAPSTATUS", "LINUX MAP RESET OK" },
+    { "linuxmaproadmap", GSHELL_CMD_LINUXMAPROADMAP, "LINUXMAPSTATUS", "LINUX MAP ROADMAP OK" },
+    { "linuxmapnext", GSHELL_CMD_LINUXMAPNEXT, "LINUXMAPSTATUS", "LINUX MAP NEXT OK" },
+
+    { "linuxpermstatus", GSHELL_CMD_LINUXPERMSTATUS, "LINUXPERMSTATUS", "LINUX PERMISSION STATUS OK" },
+    { "linuxpermnamespace", GSHELL_CMD_LINUXPERMNAMESPACE, "LINUXPERMSTATUS", "LINUX PERMISSION NAMESPACE OK" },
+    { "linuxpermbwrap", GSHELL_CMD_LINUXPERMBWRAP, "LINUXPERMSTATUS", "LINUX PERMISSION BUBBLEWRAP OK" },
+    { "linuxpermapparmor", GSHELL_CMD_LINUXPERMAPPARMOR, "LINUXPERMSTATUS", "LINUX PERMISSION APPARMOR OK" },
+    { "linuxpermseccomp", GSHELL_CMD_LINUXPERMSECCOMP, "LINUXPERMSTATUS", "LINUX PERMISSION SECCOMP OK" },
+    { "linuxpermebpf", GSHELL_CMD_LINUXPERMEBPF, "LINUXPERMSTATUS", "LINUX PERMISSION EBPF OK" },
+    { "linuxpermauditd", GSHELL_CMD_LINUXPERMAUDITD, "LINUXPERMSTATUS", "LINUX PERMISSION AUDITD OK" },
+    { "linuxpermfile", GSHELL_CMD_LINUXPERMFILE, "LINUXPERMSTATUS", "LINUX PERMISSION FILE OK" },
+    { "linuxpermnet", GSHELL_CMD_LINUXPERMNET, "LINUXPERMSTATUS", "LINUX PERMISSION NET OK" },
+    { "linuxpermproc", GSHELL_CMD_LINUXPERMPROC, "LINUXPERMSTATUS", "LINUX PERMISSION PROCESS OK" },
+    { "linuxpermdevice", GSHELL_CMD_LINUXPERMDEVICE, "LINUXPERMSTATUS", "LINUX PERMISSION DEVICE OK" },
+    { "linuxpermai", GSHELL_CMD_LINUXPERMAI, "LINUXPERMSTATUS", "LINUX PERMISSION AI OK" },
+    { "linuxpermvoice", GSHELL_CMD_LINUXPERMVOICE, "LINUXPERMSTATUS", "LINUX PERMISSION VOICE OK" },
+    { "linuxpermrule", GSHELL_CMD_LINUXPERMRULE, "LINUXPERMSTATUS", "LINUX PERMISSION RULE OK" },
+    { "linuxpermrequest", GSHELL_CMD_LINUXPERMREQUEST, "LINUXPERMSTATUS", "LINUX PERMISSION REQUEST OK" },
+    { "linuxpermdecision", GSHELL_CMD_LINUXPERMDECISION, "LINUXPERMSTATUS", "LINUX PERMISSION DECISION OK" },
+    { "linuxpermmatrix", GSHELL_CMD_LINUXPERMMATRIX, "LINUXPERMSTATUS", "LINUX PERMISSION MATRIX OK" },
+    { "linuxpermrank", GSHELL_CMD_LINUXPERMRANK, "LINUXPERMSTATUS", "LINUX PERMISSION RANK OK" },
+    { "linuxpermchoice", GSHELL_CMD_LINUXPERMCHOICE, "LINUXPERMSTATUS", "LINUX PERMISSION CHOICE OK" },
+    { "linuxpermdemo", GSHELL_CMD_LINUXPERMDEMO, "LINUXPERMSTATUS", "LINUX PERMISSION DEMO OK" },
+    { "linuxpermcheck", GSHELL_CMD_LINUXPERMCHECK, "LINUXPERMSTATUS", "LINUX PERMISSION CHECK OK" },
+    { "linuxpermreset", GSHELL_CMD_LINUXPERMRESET, "LINUXPERMSTATUS", "LINUX PERMISSION RESET OK" },
+    { "linuxpermroadmap", GSHELL_CMD_LINUXPERMROADMAP, "LINUXPERMSTATUS", "LINUX PERMISSION ROADMAP OK" },
+    { "linuxpermnext", GSHELL_CMD_LINUXPERMNEXT, "LINUXPERMSTATUS", "LINUX PERMISSION NEXT OK" },
+
+    { "linuxfinalstatus", GSHELL_CMD_LINUXFINALSTATUS, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL STATUS OK" },
+    { "linuxfinalbase", GSHELL_CMD_LINUXFINALBASE, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL BASE OK" },
+    { "linuxfinaldisplay", GSHELL_CMD_LINUXFINALDISPLAY, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL DISPLAY OK" },
+    { "linuxfinalinput", GSHELL_CMD_LINUXFINALINPUT, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL INPUT OK" },
+    { "linuxfinalmap", GSHELL_CMD_LINUXFINALMAP, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL MAP OK" },
+    { "linuxfinalperm", GSHELL_CMD_LINUXFINALPERM, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL PERMISSION OK" },
+    { "linuxfinalsandbox", GSHELL_CMD_LINUXFINALSANDBOX, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL SANDBOX OK" },
+    { "linuxfinalaudit", GSHELL_CMD_LINUXFINALAUDIT, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL AUDIT OK" },
+    { "linuxfinalvoice", GSHELL_CMD_LINUXFINALVOICE, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL VOICE OK" },
+    { "linuxfinalai", GSHELL_CMD_LINUXFINALAI, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL AI OK" },
+    { "linuxfinalsundial", GSHELL_CMD_LINUXFINALSUNDIAL, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL SUNDIAL OK" },
+    { "linuxfinaldesktop", GSHELL_CMD_LINUXFINALDESKTOP, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL DESKTOP OK" },
+    { "linuxfinalrisk", GSHELL_CMD_LINUXFINALRISK, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL RISK OK" },
+    { "linuxfinalchoice", GSHELL_CMD_LINUXFINALCHOICE, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL CHOICE OK" },
+    { "linuxfinaldemo", GSHELL_CMD_LINUXFINALDEMO, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL DEMO OK" },
+    { "linuxfinalcheck", GSHELL_CMD_LINUXFINALCHECK, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL CHECK OK" },
+    { "linuxfinalcloseout", GSHELL_CMD_LINUXFINALCLOSEOUT, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL CLOSEOUT OK" },
+    { "linuxfinalroadmap", GSHELL_CMD_LINUXFINALROADMAP, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL ROADMAP OK" },
+    { "linuxfinalnext", GSHELL_CMD_LINUXFINALNEXT, "LINUXFINALSTATUS", "LINUX RESEARCH FINAL NEXT OK" },
+
+    { "linuxshellstatus", GSHELL_CMD_LINUXSHELLSTATUS, "LINUXSHELLSTATUS", "LINUX SHELL STATUS OK" },
+    { "linuxshellbase", GSHELL_CMD_LINUXSHELLBASE, "LINUXSHELLSTATUS", "LINUX SHELL BASE OK" },
+    { "linuxshellprocess", GSHELL_CMD_LINUXSHELLPROCESS, "LINUXSHELLSTATUS", "LINUX SHELL PROCESS OK" },
+    { "linuxshellsdl", GSHELL_CMD_LINUXSHELLSDL, "LINUXSHELLSTATUS", "LINUX SHELL SDL OK" },
+    { "linuxshellwindow", GSHELL_CMD_LINUXSHELLWINDOW, "LINUXSHELLSTATUS", "LINUX SHELL WINDOW OK" },
+    { "linuxshellrender", GSHELL_CMD_LINUXSHELLRENDER, "LINUXSHELLSTATUS", "LINUX SHELL RENDER OK" },
+    { "linuxshellinput", GSHELL_CMD_LINUXSHELLINPUT, "LINUXSHELLSTATUS", "LINUX SHELL INPUT OK" },
+    { "linuxshellsundial", GSHELL_CMD_LINUXSHELLSUNDIAL, "LINUXSHELLSTATUS", "LINUX SHELL SUNDIAL OK" },
+    { "linuxshelldesktop", GSHELL_CMD_LINUXSHELLDESKTOP, "LINUXSHELLSTATUS", "LINUX SHELL DESKTOP OK" },
+    { "linuxshellappreg", GSHELL_CMD_LINUXSHELLAPPREG, "LINUXSHELLSTATUS", "LINUX SHELL APP REGISTRY OK" },
+    { "linuxshelllaunch", GSHELL_CMD_LINUXSHELLLAUNCH, "LINUXSHELLSTATUS", "LINUX SHELL LAUNCH OK" },
+    { "linuxshellruntime", GSHELL_CMD_LINUXSHELLRUNTIME, "LINUXSHELLSTATUS", "LINUX SHELL RUNTIME OK" },
+    { "linuxshellconfig", GSHELL_CMD_LINUXSHELLCONFIG, "LINUXSHELLSTATUS", "LINUX SHELL CONFIG OK" },
+    { "linuxshellsession", GSHELL_CMD_LINUXSHELLSESSION, "LINUXSHELLSTATUS", "LINUX SHELL SESSION OK" },
+    { "linuxshellpolicy", GSHELL_CMD_LINUXSHELLPOLICY, "LINUXSHELLSTATUS", "LINUX SHELL POLICY OK" },
+    { "linuxshellaudit", GSHELL_CMD_LINUXSHELLAUDIT, "LINUXSHELLSTATUS", "LINUX SHELL AUDIT OK" },
+    { "linuxshellvoice", GSHELL_CMD_LINUXSHELLVOICE, "LINUXSHELLSTATUS", "LINUX SHELL VOICE OK" },
+    { "linuxshellai", GSHELL_CMD_LINUXSHELLAI, "LINUXSHELLSTATUS", "LINUX SHELL AI OK" },
+    { "linuxshellmatrix", GSHELL_CMD_LINUXSHELLMATRIX, "LINUXSHELLSTATUS", "LINUX SHELL MATRIX OK" },
+    { "linuxshellchoice", GSHELL_CMD_LINUXSHELLCHOICE, "LINUXSHELLSTATUS", "LINUX SHELL CHOICE OK" },
+    { "linuxshelldemo", GSHELL_CMD_LINUXSHELLDEMO, "LINUXSHELLSTATUS", "LINUX SHELL DEMO OK" },
+    { "linuxshellcheck", GSHELL_CMD_LINUXSHELLCHECK, "LINUXSHELLSTATUS", "LINUX SHELL CHECK OK" },
+    { "linuxshellreset", GSHELL_CMD_LINUXSHELLRESET, "LINUXSHELLSTATUS", "LINUX SHELL RESET OK" },
+    { "linuxshellroadmap", GSHELL_CMD_LINUXSHELLROADMAP, "LINUXSHELLSTATUS", "LINUX SHELL ROADMAP OK" },
+    { "linuxshellnext", GSHELL_CMD_LINUXSHELLNEXT, "LINUXSHELLSTATUS", "LINUX SHELL NEXT OK" },
+
+    { "linuxportstatus", GSHELL_CMD_LINUXPORTSTATUS, "LINUXPORTSTATUS", "LINUX PORT STATUS OK" },
+    { "linuxportgshell", GSHELL_CMD_LINUXPORTGSHELL, "LINUXPORTSTATUS", "LINUX PORT GSHELL OK" },
+    { "linuxportdesktop", GSHELL_CMD_LINUXPORTDESKTOP, "LINUXPORTSTATUS", "LINUX PORT DESKTOP OK" },
+    { "linuxportwindow", GSHELL_CMD_LINUXPORTWINDOW, "LINUXPORTSTATUS", "LINUX PORT WINDOW OK" },
+    { "linuxportcanvas", GSHELL_CMD_LINUXPORTCANVAS, "LINUXPORTSTATUS", "LINUX PORT CANVAS OK" },
+    { "linuxportsurface", GSHELL_CMD_LINUXPORTSURFACE, "LINUXPORTSTATUS", "LINUX PORT SURFACE OK" },
+    { "linuxportfocus", GSHELL_CMD_LINUXPORTFOCUS, "LINUXPORTSTATUS", "LINUX PORT FOCUS OK" },
+    { "linuxportstack", GSHELL_CMD_LINUXPORTSTACK, "LINUXPORTSTATUS", "LINUX PORT STACK OK" },
+    { "linuxportlayout", GSHELL_CMD_LINUXPORTLAYOUT, "LINUXPORTSTATUS", "LINUX PORT LAYOUT OK" },
+    { "linuxportdrag", GSHELL_CMD_LINUXPORTDRAG, "LINUXPORTSTATUS", "LINUX PORT DRAG OK" },
+    { "linuxportresize", GSHELL_CMD_LINUXPORTRESIZE, "LINUXPORTSTATUS", "LINUX PORT RESIZE OK" },
+    { "linuxportminimize", GSHELL_CMD_LINUXPORTMINIMIZE, "LINUXPORTSTATUS", "LINUX PORT MINIMIZE OK" },
+    { "linuxportrestore", GSHELL_CMD_LINUXPORTRESTORE, "LINUXPORTSTATUS", "LINUX PORT RESTORE OK" },
+    { "linuxportlauncher", GSHELL_CMD_LINUXPORTLAUNCHER, "LINUXPORTSTATUS", "LINUX PORT LAUNCHER OK" },
+    { "linuxportsundial", GSHELL_CMD_LINUXPORTSUNDIAL, "LINUXPORTSTATUS", "LINUX PORT SUNDIAL OK" },
+    { "linuxportinput", GSHELL_CMD_LINUXPORTINPUT, "LINUXPORTSTATUS", "LINUX PORT INPUT OK" },
+    { "linuxportrender", GSHELL_CMD_LINUXPORTRENDER, "LINUXPORTSTATUS", "LINUX PORT RENDER OK" },
+    { "linuxportappstate", GSHELL_CMD_LINUXPORTAPPSTATE, "LINUXPORTSTATUS", "LINUX PORT APP STATE OK" },
+    { "linuxportsession", GSHELL_CMD_LINUXPORTSESSION, "LINUXPORTSTATUS", "LINUX PORT SESSION OK" },
+    { "linuxportpolicy", GSHELL_CMD_LINUXPORTPOLICY, "LINUXPORTSTATUS", "LINUX PORT POLICY OK" },
+    { "linuxportaudit", GSHELL_CMD_LINUXPORTAUDIT, "LINUXPORTSTATUS", "LINUX PORT AUDIT OK" },
+    { "linuxportmatrix", GSHELL_CMD_LINUXPORTMATRIX, "LINUXPORTSTATUS", "LINUX PORT MATRIX OK" },
+    { "linuxportchoice", GSHELL_CMD_LINUXPORTCHOICE, "LINUXPORTSTATUS", "LINUX PORT CHOICE OK" },
+    { "linuxportdemo", GSHELL_CMD_LINUXPORTDEMO, "LINUXPORTSTATUS", "LINUX PORT DEMO OK" },
+    { "linuxportcheck", GSHELL_CMD_LINUXPORTCHECK, "LINUXPORTSTATUS", "LINUX PORT CHECK OK" },
+    { "linuxportreset", GSHELL_CMD_LINUXPORTRESET, "LINUXPORTSTATUS", "LINUX PORT RESET OK" },
+    { "linuxportroadmap", GSHELL_CMD_LINUXPORTROADMAP, "LINUXPORTSTATUS", "LINUX PORT ROADMAP OK" },
+    { "linuxportnext", GSHELL_CMD_LINUXPORTNEXT, "LINUXPORTSTATUS", "LINUX PORT NEXT OK" },
+
     { "milestone",   GSHELL_CMD_MILESTONE,   "MILESTONE",   "MILESTONE OK" }
 };
 
@@ -16162,7 +17672,7 @@ static void gshell_dispatch_command(void) {
                 gshell_interact_close_events++;
                 gshell_command_name = "INTERACTDEMOALL";
                 gshell_command_result = "INTERACTION DEMO ALL OK";
-                gshell_input_status_text = "DEMO ALL";
+                gshell_input_status_text = "DEMOALL";
                 close_terminal_text = "INTERACTDEMOALL -> FULL 1.5 DESKTOP INTERACTION DEMO READY";
                 break;
 
@@ -18492,7 +20002,7 @@ static void gshell_dispatch_command(void) {
                 gshell_realinput_close_events++;
                 gshell_command_name = "REALINPUTDEMOALL";
                 gshell_command_result = "REAL INPUT DEMO ALL OK";
-                gshell_input_status_text = "DEMO ALL";
+                gshell_input_status_text = "DEMOALL";
                 close_terminal_text = "REALINPUTDEMOALL -> FULL 1.6 REAL INPUT STACK DEMO READY";
                 break;
 
@@ -20651,6 +22161,7492 @@ static void gshell_dispatch_command(void) {
         gshell_terminal_push(feedback_terminal_text);
         return;
     }
+
+    if (command_id >= GSHELL_CMD_CLICKCLOSESTATUS && command_id <= GSHELL_CMD_CLICKCLOSENEXT) {
+        const char* close_terminal_text = "CLICKCLOSESTATUS -> CLICKABLE UI CLOSEOUT READY";
+
+        gshell_command_view = "CLICKCLOSESTATUS";
+        gshell_input_status_text = "CLICKCLS";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CLICKCLOSESTATUS:
+                gshell_command_name = "CLICKCLOSESTATUS";
+                gshell_command_result = "CLICK CLOSE STATUS OK";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEBRIDGESUM:
+                gshell_clickclose_bridge_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_realptr_demo_ready = 1;
+                gshell_clickclose_state = "bridge-summary";
+                gshell_clickclose_phase = "click-ui";
+                gshell_clickclose_target = "pointer-route";
+                gshell_clickclose_last = "bridge-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEBRIDGESUM";
+                gshell_command_result = "CLICK CLOSE BRIDGE SUMMARY OK";
+                gshell_input_status_text = "BRIDGE";
+                close_terminal_text = "CLICKCLOSEBRIDGESUM -> CLICKABLE UI BRIDGE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSETARGETSUM:
+                gshell_clickclose_target_ready = 1;
+                gshell_desktarget_demo_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_desktarget_visual_ready = 1;
+                gshell_clickclose_state = "target-summary";
+                gshell_clickclose_phase = "desktop-target";
+                gshell_clickclose_target = "desktop-ui";
+                gshell_clickclose_last = "target-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSETARGETSUM";
+                gshell_command_result = "CLICK CLOSE TARGET SUMMARY OK";
+                gshell_input_status_text = "TARGET";
+                close_terminal_text = "CLICKCLOSETARGETSUM -> DESKTOP TARGET ACTIVATION SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEACTIONSUM:
+                gshell_clickclose_action_ready = 1;
+                gshell_clickaction_demo_ready = 1;
+                gshell_clickaction_route_ready = 1;
+                gshell_clickaction_bind_ready = 1;
+                gshell_clickclose_state = "action-summary";
+                gshell_clickclose_phase = "click-action";
+                gshell_clickclose_target = "action-flow";
+                gshell_clickclose_last = "action-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEACTIONSUM";
+                gshell_command_result = "CLICK CLOSE ACTION SUMMARY OK";
+                gshell_input_status_text = "ACTION";
+                close_terminal_text = "CLICKCLOSEACTIONSUM -> DESKTOP CLICK ACTION FLOW SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEDRAGSUM:
+                gshell_clickclose_drag_ready = 1;
+                gshell_deskdrag_demo_ready = 1;
+                gshell_deskdrag_route_ready = 1;
+                gshell_deskdrag_action_ready = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_state = "click-close-drag-summary";
+                gshell_clickclose_state = "drag-summary";
+                gshell_clickclose_phase = "window-drag";
+                gshell_clickclose_target = "demo.window";
+                gshell_clickclose_last = "drag-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEDRAGSUM";
+                gshell_command_result = "CLICK CLOSE DRAG SUMMARY OK";
+                gshell_input_status_text = "DRAG";
+                close_terminal_text = "CLICKCLOSEDRAGSUM -> WINDOW DRAG FLOW SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEFEEDBACKSUM:
+                gshell_clickclose_feedback_ready = 1;
+                gshell_uifeedback_demo_ready = 1;
+                gshell_uifeedback_hover_ready = 1;
+                gshell_uifeedback_select_ready = 1;
+                gshell_uifeedback_drag_ready = 1;
+                gshell_clickclose_state = "feedback-summary";
+                gshell_clickclose_phase = "ui-feedback";
+                gshell_clickclose_target = "visual-feedback";
+                gshell_clickclose_last = "feedback-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEFEEDBACKSUM";
+                gshell_command_result = "CLICK CLOSE FEEDBACK SUMMARY OK";
+                gshell_input_status_text = "FEEDBACK";
+                close_terminal_text = "CLICKCLOSEFEEDBACKSUM -> UI VISUAL FEEDBACK SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEVISUALSUM:
+                gshell_clickclose_visual_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_cursor_visual_route_ready = 1;
+                gshell_cursor_visual_action_ready = 1;
+                gshell_scene_window_ready = 1;
+                gshell_clickclose_state = "visual-summary";
+                gshell_clickclose_phase = "visual";
+                gshell_clickclose_target = "desktop-scene";
+                gshell_clickclose_last = "visual-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEVISUALSUM";
+                gshell_command_result = "CLICK CLOSE VISUAL SUMMARY OK";
+                gshell_input_status_text = "VISUAL";
+                close_terminal_text = "CLICKCLOSEVISUALSUM -> VISUAL CLICK FEEDBACK READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEINPUTSUM:
+                gshell_clickclose_input_ready = 1;
+                gshell_realinput_final_ready = 1;
+                gshell_realinput_closeout_ready = 1;
+                gshell_input_pointer_bridge_ready = 1;
+                gshell_input_route_bridge_ready = 1;
+                gshell_input_action_bridge_ready = 1;
+                gshell_clickclose_state = "input-summary";
+                gshell_clickclose_phase = "real-input";
+                gshell_clickclose_target = "click-ui";
+                gshell_clickclose_last = "input-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEINPUTSUM";
+                gshell_command_result = "CLICK CLOSE INPUT SUMMARY OK";
+                gshell_input_status_text = "INPUT";
+                close_terminal_text = "CLICKCLOSEINPUTSUM -> REAL INPUT PREP CONNECTED TO CLICKABLE UI";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSESAFESUM:
+                gshell_clickclose_safe_ready = 1;
+                gshell_realinput_close_safe_ready = 1;
+                gshell_clickaction_safe_ready = 1;
+                gshell_uifeedback_safe_ready = 1;
+                gshell_deskdrag_safe_ready = 1;
+                gshell_clickclose_state = "safe-summary";
+                gshell_clickclose_phase = "safe";
+                gshell_clickclose_target = "old-chain-safe";
+                gshell_clickclose_last = "safe-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSESAFESUM";
+                gshell_command_result = "CLICK CLOSE SAFE SUMMARY OK";
+                gshell_input_status_text = "SAFE";
+                close_terminal_text = "CLICKCLOSESAFESUM -> OLD INPUT AND COMMAND CHAINS REMAIN SAFE";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEREGRESSSUM:
+                gshell_clickclose_regression_ready = 1;
+                gshell_realinput_close_regression_ready = 1;
+                gshell_input_regression_ready = 1;
+                gshell_mouse_regression_ready = 1;
+                gshell_packet_regression_ready = 1;
+                gshell_clickclose_state = "regression-summary";
+                gshell_clickclose_phase = "regression";
+                gshell_clickclose_target = "gshell";
+                gshell_clickclose_last = "regression-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEREGRESSSUM";
+                gshell_command_result = "CLICK CLOSE REGRESSION SUMMARY OK";
+                gshell_input_status_text = "REGRESS";
+                close_terminal_text = "CLICKCLOSEREGRESSSUM -> 1.7 CLICKABLE UI DOES NOT BREAK OLD COMMANDS";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSELAYOUTSUM:
+                gshell_clickclose_layout_ready = 1;
+                gshell_clickclose_state = "layout-summary";
+                gshell_clickclose_phase = "layout";
+                gshell_clickclose_target = "gshell-panels";
+                gshell_clickclose_last = "layout-summary";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSELAYOUTSUM";
+                gshell_command_result = "CLICK CLOSE LAYOUT SUMMARY OK";
+                gshell_input_status_text = "LAYOUT";
+                close_terminal_text = "CLICKCLOSELAYOUTSUM -> GShell THREE PANEL LAYOUT KEPT";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSESUNDIALPLAN:
+                gshell_clickclose_sundial_plan_ready = 1;
+                gshell_clickclose_state = "sundial-plan";
+                gshell_clickclose_phase = "next-ux";
+                gshell_clickclose_target = "sundial-hub";
+                gshell_clickclose_last = "sundial-plan";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSESUNDIALPLAN";
+                gshell_command_result = "CLICK CLOSE SUNDIAL PLAN OK";
+                gshell_input_status_text = "SUNDIAL";
+                close_terminal_text = "CLICKCLOSESUNDIALPLAN -> NEXT UX CAN MOVE TOWARD SUNDIAL HUB";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEDEMOALL:
+                gshell_clickclose_bridge_ready = 1;
+                gshell_clickclose_target_ready = 1;
+                gshell_clickclose_action_ready = 1;
+                gshell_clickclose_drag_ready = 1;
+                gshell_clickclose_feedback_ready = 1;
+                gshell_clickclose_visual_ready = 1;
+                gshell_clickclose_input_ready = 1;
+                gshell_clickclose_safe_ready = 1;
+                gshell_clickclose_regression_ready = 1;
+                gshell_clickclose_layout_ready = 1;
+                gshell_clickclose_sundial_plan_ready = 1;
+                gshell_clickclose_demo_ready = 1;
+                gshell_clickui_demo_ready = 1;
+                gshell_desktarget_demo_ready = 1;
+                gshell_clickaction_demo_ready = 1;
+                gshell_deskdrag_demo_ready = 1;
+                gshell_uifeedback_demo_ready = 1;
+                gshell_realinput_closeout_ready = 1;
+                gshell_cursor_visual_visible = 1;
+                gshell_window_exists = 1;
+                gshell_window_focused = 1;
+                gshell_window_title = "demo.window";
+                gshell_window_state = "clickable-ui-closeout-demo";
+                gshell_scene_window_ready = 1;
+                gshell_taskbar_item_ready = 1;
+                gshell_taskbar_item = "demo.app";
+                gshell_card_selected = 1;
+                gshell_card_opened = 1;
+                gshell_clickclose_state = "demo-all";
+                gshell_clickclose_phase = "1.7-closeout";
+                gshell_clickclose_target = "desktop-operation-scene";
+                gshell_clickclose_last = "demo-all";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEDEMOALL";
+                gshell_command_result = "CLICK CLOSE DEMO ALL OK";
+                gshell_input_status_text = "DEMOALL";
+                close_terminal_text = "CLICKCLOSEDEMOALL -> FULL 1.7 CLICKABLE UI STACK READY";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEFINALCHECK: {
+                int ok = gshell_clickclose_bridge_ready &&
+                         gshell_clickclose_target_ready &&
+                         gshell_clickclose_action_ready &&
+                         gshell_clickclose_drag_ready &&
+                         gshell_clickclose_feedback_ready &&
+                         gshell_clickclose_visual_ready &&
+                         gshell_clickclose_input_ready &&
+                         gshell_clickclose_safe_ready &&
+                         gshell_clickclose_regression_ready &&
+                         gshell_clickclose_layout_ready &&
+                         gshell_clickclose_sundial_plan_ready;
+                gshell_clickclose_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CLICKCLOSEFINALCHECK";
+                gshell_command_result = ok ? "CLICK CLOSE FINAL CHECK OK" : "CLICK CLOSE FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "FINAL OK" : "FINAL WAIT";
+                close_terminal_text = ok ? "CLICKCLOSEFINALCHECK -> 1.7 CLICKABLE UI CLOSEOUT READY" : "CLICKCLOSEFINALCHECK -> RUN CLICKCLOSEDEMOALL";
+                break;
+            }
+
+            case GSHELL_CMD_CLICKCLOSERESET:
+                gshell_clickclose_bridge_ready = 0;
+                gshell_clickclose_target_ready = 0;
+                gshell_clickclose_action_ready = 0;
+                gshell_clickclose_drag_ready = 0;
+                gshell_clickclose_feedback_ready = 0;
+                gshell_clickclose_visual_ready = 0;
+                gshell_clickclose_input_ready = 0;
+                gshell_clickclose_safe_ready = 0;
+                gshell_clickclose_regression_ready = 0;
+                gshell_clickclose_layout_ready = 0;
+                gshell_clickclose_sundial_plan_ready = 0;
+                gshell_clickclose_demo_ready = 0;
+                gshell_clickclose_closeout_ready = 0;
+                gshell_clickclose_final_ready = 0;
+                gshell_clickclose_roadmap_ready = 0;
+                gshell_clickclose_events = 0;
+                gshell_clickclose_state = "idle";
+                gshell_clickclose_phase = "1.7.x";
+                gshell_clickclose_target = "click-ui";
+                gshell_clickclose_last = "reset";
+                gshell_command_name = "CLICKCLOSERESET";
+                gshell_command_result = "CLICK CLOSE RESET OK";
+                gshell_input_status_text = "RESET";
+                close_terminal_text = "CLICKCLOSERESET -> CLICKABLE UI CLOSEOUT STATE RESET";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEOUT:
+                gshell_clickclose_bridge_ready = 1;
+                gshell_clickclose_target_ready = 1;
+                gshell_clickclose_action_ready = 1;
+                gshell_clickclose_drag_ready = 1;
+                gshell_clickclose_feedback_ready = 1;
+                gshell_clickclose_visual_ready = 1;
+                gshell_clickclose_input_ready = 1;
+                gshell_clickclose_safe_ready = 1;
+                gshell_clickclose_regression_ready = 1;
+                gshell_clickclose_layout_ready = 1;
+                gshell_clickclose_sundial_plan_ready = 1;
+                gshell_clickclose_closeout_ready = 1;
+                gshell_clickclose_state = "closeout";
+                gshell_clickclose_phase = "dev-1.7.x";
+                gshell_clickclose_target = "dev-1.8.x";
+                gshell_clickclose_last = "closeout";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEOUT";
+                gshell_command_result = "CLICK CLOSEOUT OK";
+                gshell_input_status_text = "CLOSEOUT";
+                close_terminal_text = "CLICKCLOSEOUT -> 1.7.X CLICKABLE UI STAGE CLOSED";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEREADY:
+                gshell_clickclose_final_ready = 1;
+                gshell_clickclose_closeout_ready = 1;
+                gshell_clickclose_state = "final-ready";
+                gshell_clickclose_phase = "ready";
+                gshell_clickclose_target = "desktop-operation-scene";
+                gshell_clickclose_last = "ready";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEREADY";
+                gshell_command_result = "CLICK CLOSE READY OK";
+                gshell_input_status_text = "READY";
+                close_terminal_text = "CLICKCLOSEREADY -> READY FOR 1.8 DESKTOP OPERATION SCENE";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSENEXTPHASE:
+                gshell_clickclose_state = "next-phase";
+                gshell_clickclose_phase = "dev-1.8.x";
+                gshell_clickclose_target = "desktop-operation-scene";
+                gshell_clickclose_last = "next-phase";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSENEXTPHASE";
+                gshell_command_result = "CLICK CLOSE NEXT PHASE OK";
+                gshell_input_status_text = "NEXT";
+                close_terminal_text = "CLICKCLOSENEXTPHASE -> DEV-1.8.0 DESKTOP OPERATION SCENE";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSEROADMAP:
+                gshell_clickclose_roadmap_ready = 1;
+                gshell_clickclose_state = "roadmap";
+                gshell_clickclose_phase = "1.8-1.9";
+                gshell_clickclose_target = "desktop+sundial";
+                gshell_clickclose_last = "roadmap";
+                gshell_clickclose_events++;
+                gshell_command_name = "CLICKCLOSEROADMAP";
+                gshell_command_result = "CLICK CLOSE ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                close_terminal_text = "CLICKCLOSEROADMAP -> 1.8 DESKTOP SCENE, 1.9 SUNDIAL CONTROL HUB";
+                break;
+
+            case GSHELL_CMD_CLICKCLOSENEXT:
+                gshell_command_name = "CLICKCLOSENEXT";
+                gshell_command_result = "CLICK CLOSE NEXT OK";
+                gshell_input_status_text = "NEXT";
+                close_terminal_text = "CLICKCLOSENEXT -> 1.8.0 DESKTOP OPERATION SCENE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(close_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_DESKTOPOPSSTATUS && command_id <= GSHELL_CMD_DESKTOPOPSNEXT) {
+        const char* ops_terminal_text = "DESKTOPOPSSTATUS -> DESKTOP OPERATION SCENE READY";
+
+        gshell_command_view = "DESKTOPOPSSTATUS";
+        gshell_input_status_text = "DESKOPS";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_DESKTOPOPSSTATUS:
+                gshell_command_name = "DESKTOPOPSSTATUS";
+                gshell_command_result = "DESKTOP OPS STATUS OK";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSSCENE:
+                gshell_desktopops_scene_ready = 1;
+                gshell_desktopops_state = "scene";
+                gshell_desktopops_scene = "default";
+                gshell_desktopops_last = "scene";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSSCENE";
+                gshell_command_result = "DESKTOP OPS SCENE OK";
+                gshell_input_status_text = "SCENE";
+                ops_terminal_text = "DESKTOPOPSSCENE -> DEFAULT DESKTOP OPERATION SCENE READY";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSWALL:
+                gshell_desktopops_wall_ready = 1;
+                gshell_desktopops_state = "wall";
+                gshell_desktopops_scene = "clean-wall";
+                gshell_desktopops_last = "wall";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSWALL";
+                gshell_command_result = "DESKTOP OPS WALL OK";
+                gshell_input_status_text = "WALL";
+                ops_terminal_text = "DESKTOPOPSWALL -> DESKTOP WALL STATE READY";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSCLEAN:
+                gshell_desktopops_clean_ready = 1;
+                gshell_desktopops_state = "clean";
+                gshell_desktopops_scene = "no-taskbar";
+                gshell_desktopops_last = "clean";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSCLEAN";
+                gshell_command_result = "DESKTOP OPS CLEAN OK";
+                gshell_input_status_text = "CLEAN";
+                ops_terminal_text = "DESKTOPOPSCLEAN -> BOTTOM TASKBAR CAN BE FREED";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSSHOWSUNDIAL:
+                gshell_desktopops_sundial_show_ready = 1;
+                gshell_desktopops_sundial = "visible";
+                gshell_desktopops_state = "show-sundial";
+                gshell_desktopops_last = "show-sundial";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSSHOWSUNDIAL";
+                gshell_command_result = "DESKTOP OPS SHOW SUNDIAL OK";
+                gshell_input_status_text = "SHOW";
+                ops_terminal_text = "DESKTOPOPSSHOWSUNDIAL -> SUNDIAL HUB VISIBLE";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSHIDESUNDIAL:
+                gshell_desktopops_sundial_hide_ready = 1;
+                gshell_desktopops_sundial = "hidden";
+                gshell_desktopops_state = "hide-sundial";
+                gshell_desktopops_last = "hide-sundial";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSHIDESUNDIAL";
+                gshell_command_result = "DESKTOP OPS HIDE SUNDIAL OK";
+                gshell_input_status_text = "HIDE";
+                ops_terminal_text = "DESKTOPOPSHIDESUNDIAL -> SUNDIAL HUB HIDDEN, DESKTOP CLEAN";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSAPPGRID:
+                gshell_desktopops_appgrid_ready = 1;
+                gshell_desktopops_state = "app-grid";
+                gshell_desktopops_scene = "all-apps-on-sundial";
+                gshell_desktopops_last = "app-grid";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSAPPGRID";
+                gshell_command_result = "DESKTOP OPS APP GRID OK";
+                gshell_input_status_text = "APPGRID";
+                ops_terminal_text = "DESKTOPOPSAPPGRID -> ALL SOFTWARE LIVES ON SUNDIAL MODEL";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSAPPFLOAT:
+                gshell_desktopops_appfloat_ready = 1;
+                gshell_desktopops_state = "app-float";
+                gshell_desktopops_scene = "sector-floating";
+                gshell_desktopops_last = "app-float";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSAPPFLOAT";
+                gshell_command_result = "DESKTOP OPS APP FLOAT OK";
+                gshell_input_status_text = "FLOAT";
+                ops_terminal_text = "DESKTOPOPSAPPFLOAT -> CLICKED SECTOR FLOATS APP ICONS";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSRUNNING:
+                gshell_desktopops_running_ready = 1;
+                gshell_desktopops_state = "running-lit";
+                gshell_desktopops_last = "running";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSRUNNING";
+                gshell_command_result = "DESKTOP OPS RUNNING OK";
+                gshell_input_status_text = "RUNNING";
+                ops_terminal_text = "DESKTOPOPSRUNNING -> RUNNING APP ICONS ARE LIT";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSINACTIVE:
+                gshell_desktopops_inactive_ready = 1;
+                gshell_desktopops_state = "inactive-dim";
+                gshell_desktopops_last = "inactive";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSINACTIVE";
+                gshell_command_result = "DESKTOP OPS INACTIVE OK";
+                gshell_input_status_text = "DIM";
+                ops_terminal_text = "DESKTOPOPSINACTIVE -> INACTIVE APP ICONS ARE DIM";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSDRAGICON:
+                gshell_desktopops_drag_icon_ready = 1;
+                gshell_desktopops_state = "drag-icon";
+                gshell_desktopops_scene = "sector-reorder";
+                gshell_desktopops_last = "drag-icon";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSDRAGICON";
+                gshell_command_result = "DESKTOP OPS DRAG ICON OK";
+                gshell_input_status_text = "DRAGICON";
+                ops_terminal_text = "DESKTOPOPSDRAGICON -> APP ICONS CAN MOVE BETWEEN SECTORS";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSMENU:
+                gshell_desktopops_menu_ready = 1;
+                gshell_desktopops_state = "desktop-menu";
+                gshell_desktopops_last = "menu";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSMENU";
+                gshell_command_result = "DESKTOP OPS MENU OK";
+                gshell_input_status_text = "MENU";
+                ops_terminal_text = "DESKTOPOPSMENU -> RIGHT CLICK MENU CAN SHOW/HIDE SUNDIAL";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSSEARCH:
+                gshell_desktopops_search_ready = 1;
+                gshell_desktopops_state = "search";
+                gshell_desktopops_last = "search";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSSEARCH";
+                gshell_command_result = "DESKTOP OPS SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                ops_terminal_text = "DESKTOPOPSSEARCH -> TEXT SEARCH ENTRY RESERVED FOR SUNDIAL";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSVOICE:
+                gshell_desktopops_voice_ready = 1;
+                gshell_desktopops_state = "voice";
+                gshell_desktopops_last = "voice";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSVOICE";
+                gshell_command_result = "DESKTOP OPS VOICE OK";
+                gshell_input_status_text = "VOICE";
+                ops_terminal_text = "DESKTOPOPSVOICE -> VOICE INTENT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSNETTIME:
+                gshell_desktopops_nettime_ready = 1;
+                gshell_desktopops_state = "net-time";
+                gshell_desktopops_last = "net-time";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSNETTIME";
+                gshell_command_result = "DESKTOP OPS NET TIME OK";
+                gshell_input_status_text = "NETTIME";
+                ops_terminal_text = "DESKTOPOPSNETTIME -> NETWORK AND TIME MOVE INTO SUNDIAL MODEL";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSSTATE:
+                gshell_desktopops_state_ready = 1;
+                gshell_desktopops_state = "state";
+                gshell_desktopops_last = "state";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSSTATE";
+                gshell_command_result = "DESKTOP OPS STATE OK";
+                gshell_input_status_text = "STATE";
+                ops_terminal_text = "DESKTOPOPSSTATE -> DESKTOP OPERATION STATE READY";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSDEMO:
+                gshell_desktopops_scene_ready = 1;
+                gshell_desktopops_wall_ready = 1;
+                gshell_desktopops_clean_ready = 1;
+                gshell_desktopops_sundial_show_ready = 1;
+                gshell_desktopops_sundial_hide_ready = 1;
+                gshell_desktopops_appgrid_ready = 1;
+                gshell_desktopops_appfloat_ready = 1;
+                gshell_desktopops_running_ready = 1;
+                gshell_desktopops_inactive_ready = 1;
+                gshell_desktopops_drag_icon_ready = 1;
+                gshell_desktopops_menu_ready = 1;
+                gshell_desktopops_search_ready = 1;
+                gshell_desktopops_voice_ready = 1;
+                gshell_desktopops_nettime_ready = 1;
+                gshell_desktopops_state_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_desktopops_state = "demo";
+                gshell_desktopops_scene = "sundial-desktop";
+                gshell_desktopops_sundial = "toggle-ready";
+                gshell_desktopops_last = "demo";
+                gshell_desktopops_events++;
+                gshell_command_name = "DESKTOPOPSDEMO";
+                gshell_command_result = "DESKTOP OPS DEMO OK";
+                gshell_input_status_text = "DEMO";
+                ops_terminal_text = "DESKTOPOPSDEMO -> DEFAULT DESKTOP OPERATION SCENE READY";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSCHECK: {
+                int ok = gshell_desktopops_scene_ready &&
+                         gshell_desktopops_wall_ready &&
+                         gshell_desktopops_clean_ready &&
+                         gshell_desktopops_sundial_show_ready &&
+                         gshell_desktopops_sundial_hide_ready &&
+                         gshell_desktopops_appgrid_ready &&
+                         gshell_desktopops_appfloat_ready &&
+                         gshell_desktopops_running_ready &&
+                         gshell_desktopops_inactive_ready &&
+                         gshell_desktopops_drag_icon_ready &&
+                         gshell_desktopops_menu_ready &&
+                         gshell_desktopops_search_ready &&
+                         gshell_desktopops_voice_ready &&
+                         gshell_desktopops_nettime_ready &&
+                         gshell_desktopops_state_ready;
+                gshell_desktopops_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "DESKTOPOPSCHECK";
+                gshell_command_result = ok ? "DESKTOP OPS CHECK OK" : "DESKTOP OPS CHECK WAIT";
+                gshell_input_status_text = ok ? "OPSOK" : "OPSWAIT";
+                ops_terminal_text = ok ? "DESKTOPOPSCHECK -> DESKTOP OPERATION SCENE READY" : "DESKTOPOPSCHECK -> RUN DESKTOPOPSDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_DESKTOPOPSRESET:
+                gshell_desktopops_scene_ready = 0;
+                gshell_desktopops_wall_ready = 0;
+                gshell_desktopops_clean_ready = 0;
+                gshell_desktopops_sundial_show_ready = 0;
+                gshell_desktopops_sundial_hide_ready = 0;
+                gshell_desktopops_appgrid_ready = 0;
+                gshell_desktopops_appfloat_ready = 0;
+                gshell_desktopops_running_ready = 0;
+                gshell_desktopops_inactive_ready = 0;
+                gshell_desktopops_drag_icon_ready = 0;
+                gshell_desktopops_menu_ready = 0;
+                gshell_desktopops_search_ready = 0;
+                gshell_desktopops_voice_ready = 0;
+                gshell_desktopops_nettime_ready = 0;
+                gshell_desktopops_state_ready = 0;
+                gshell_desktopops_demo_ready = 0;
+                gshell_desktopops_events = 0;
+                gshell_desktopops_state = "idle";
+                gshell_desktopops_scene = "desktop";
+                gshell_desktopops_sundial = "visible";
+                gshell_desktopops_last = "reset";
+                gshell_command_name = "DESKTOPOPSRESET";
+                gshell_command_result = "DESKTOP OPS RESET OK";
+                gshell_input_status_text = "RESET";
+                ops_terminal_text = "DESKTOPOPSRESET -> DESKTOP OPERATION SCENE RESET";
+                break;
+
+            case GSHELL_CMD_DESKTOPOPSNEXT:
+                gshell_command_name = "DESKTOPOPSNEXT";
+                gshell_command_result = "DESKTOP OPS NEXT OK";
+                gshell_input_status_text = "NEXT";
+                ops_terminal_text = "DESKTOPOPSNEXT -> 1.8.1 SUNDIAL DESKTOP MOCK";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(ops_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNDIALSTATUS && command_id <= GSHELL_CMD_SUNDIALNEXT) {
+        const char* sundial_terminal_text = "SUNDIALSTATUS -> SUNDIAL DESKTOP MOCK READY";
+
+        gshell_command_view = "SUNDIALSTATUS";
+        gshell_input_status_text = "SUNDIAL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNDIALSTATUS:
+                gshell_command_name = "SUNDIALSTATUS";
+                gshell_command_result = "SUNDIAL STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNDIALCORE:
+                gshell_sundial_core_ready = 1;
+                gshell_sundial_state = "core";
+                gshell_sundial_mode = "visible";
+                gshell_sundial_sector = "control";
+                gshell_sundial_last = "core";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALCORE";
+                gshell_command_result = "SUNDIAL CORE OK";
+                gshell_input_status_text = "CORE";
+                sundial_terminal_text = "SUNDIALCORE -> SYSTEM CORE IN CENTER";
+                break;
+
+            case GSHELL_CMD_SUNDIALRINGS:
+                gshell_sundial_rings_ready = 1;
+                gshell_sundial_state = "rings";
+                gshell_sundial_sector = "multi-ring";
+                gshell_sundial_last = "rings";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALRINGS";
+                gshell_command_result = "SUNDIAL RINGS OK";
+                gshell_input_status_text = "RINGS";
+                sundial_terminal_text = "SUNDIALRINGS -> MULTI RING APP STRUCTURE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALSECTORS:
+                gshell_sundial_sectors_ready = 1;
+                gshell_sundial_state = "sectors";
+                gshell_sundial_sector = "file-net-ai-app";
+                gshell_sundial_last = "sectors";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALSECTORS";
+                gshell_command_result = "SUNDIAL SECTORS OK";
+                gshell_input_status_text = "SECTORS";
+                sundial_terminal_text = "SUNDIALSECTORS -> APP CATEGORIES LIVE IN SECTORS";
+                break;
+
+            case GSHELL_CMD_SUNDIALAPPS:
+                gshell_sundial_apps_ready = 1;
+                gshell_desktopops_appgrid_ready = 1;
+                gshell_sundial_state = "apps";
+                gshell_sundial_sector = "all-apps";
+                gshell_sundial_last = "apps";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALAPPS";
+                gshell_command_result = "SUNDIAL APPS OK";
+                gshell_input_status_text = "APPS";
+                sundial_terminal_text = "SUNDIALAPPS -> ALL SOFTWARE ICONS LIVE ON SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALRUNNING:
+                gshell_sundial_running_ready = 1;
+                gshell_desktopops_running_ready = 1;
+                gshell_sundial_state = "running-lit";
+                gshell_sundial_sector = "running";
+                gshell_sundial_last = "running";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALRUNNING";
+                gshell_command_result = "SUNDIAL RUNNING OK";
+                gshell_input_status_text = "RUNLIT";
+                sundial_terminal_text = "SUNDIALRUNNING -> RUNNING SOFTWARE ICONS LIGHT UP";
+                break;
+
+            case GSHELL_CMD_SUNDIALDIM:
+                gshell_sundial_dim_ready = 1;
+                gshell_desktopops_inactive_ready = 1;
+                gshell_sundial_state = "inactive-dim";
+                gshell_sundial_sector = "inactive";
+                gshell_sundial_last = "dim";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALDIM";
+                gshell_command_result = "SUNDIAL DIM OK";
+                gshell_input_status_text = "DIM";
+                sundial_terminal_text = "SUNDIALDIM -> INACTIVE SOFTWARE ICONS STAY DIM";
+                break;
+
+            case GSHELL_CMD_SUNDIALFLOAT:
+                gshell_sundial_float_ready = 1;
+                gshell_desktopops_appfloat_ready = 1;
+                gshell_sundial_state = "float";
+                gshell_sundial_sector = "selected";
+                gshell_sundial_last = "float";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALFLOAT";
+                gshell_command_result = "SUNDIAL FLOAT OK";
+                gshell_input_status_text = "FLOAT";
+                sundial_terminal_text = "SUNDIALFLOAT -> CLICKED SECTOR FLOATS APP ICONS";
+                break;
+
+            case GSHELL_CMD_SUNDIALDRAG:
+                gshell_sundial_drag_ready = 1;
+                gshell_desktopops_drag_icon_ready = 1;
+                gshell_sundial_state = "drag";
+                gshell_sundial_sector = "sector-move";
+                gshell_sundial_last = "drag";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALDRAG";
+                gshell_command_result = "SUNDIAL DRAG OK";
+                gshell_input_status_text = "DRAG";
+                sundial_terminal_text = "SUNDIALDRAG -> ICONS CAN MOVE BETWEEN SECTORS";
+                break;
+
+            case GSHELL_CMD_SUNDIALSHOW:
+                gshell_sundial_show_ready = 1;
+                gshell_desktopops_sundial_show_ready = 1;
+                gshell_sundial_state = "show";
+                gshell_sundial_mode = "visible";
+                gshell_sundial_last = "show";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALSHOW";
+                gshell_command_result = "SUNDIAL SHOW OK";
+                gshell_input_status_text = "SHOW";
+                sundial_terminal_text = "SUNDIALSHOW -> RIGHT CLICK CAN SHOW SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALHIDE:
+                gshell_sundial_hide_ready = 1;
+                gshell_desktopops_sundial_hide_ready = 1;
+                gshell_sundial_state = "hide";
+                gshell_sundial_mode = "hidden";
+                gshell_sundial_last = "hide";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALHIDE";
+                gshell_command_result = "SUNDIAL HIDE OK";
+                gshell_input_status_text = "HIDE";
+                sundial_terminal_text = "SUNDIALHIDE -> RIGHT CLICK CAN HIDE SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALSEARCH:
+                gshell_sundial_search_ready = 1;
+                gshell_desktopops_search_ready = 1;
+                gshell_sundial_state = "search";
+                gshell_sundial_sector = "search";
+                gshell_sundial_last = "search";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALSEARCH";
+                gshell_command_result = "SUNDIAL SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                sundial_terminal_text = "SUNDIALSEARCH -> TEXT SEARCH ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALVOICE:
+                gshell_sundial_voice_ready = 1;
+                gshell_desktopops_voice_ready = 1;
+                gshell_sundial_state = "voice";
+                gshell_sundial_sector = "voice";
+                gshell_sundial_last = "voice";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALVOICE";
+                gshell_command_result = "SUNDIAL VOICE OK";
+                gshell_input_status_text = "VOICE";
+                sundial_terminal_text = "SUNDIALVOICE -> VOICE INTENT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALNETTIME:
+                gshell_sundial_nettime_ready = 1;
+                gshell_desktopops_nettime_ready = 1;
+                gshell_sundial_state = "net-time";
+                gshell_sundial_sector = "status";
+                gshell_sundial_last = "net-time";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALNETTIME";
+                gshell_command_result = "SUNDIAL NET TIME OK";
+                gshell_input_status_text = "NETTIME";
+                sundial_terminal_text = "SUNDIALNETTIME -> NETWORK AND TIME LIVE ON SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALSTATE:
+                gshell_sundial_state_ready = 1;
+                gshell_desktopops_state_ready = 1;
+                gshell_sundial_state = "state";
+                gshell_sundial_sector = "system";
+                gshell_sundial_last = "state";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALSTATE";
+                gshell_command_result = "SUNDIAL STATE OK";
+                gshell_input_status_text = "STATE";
+                sundial_terminal_text = "SUNDIALSTATE -> SUNDIAL STATE MODEL READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALDEMO:
+                gshell_sundial_core_ready = 1;
+                gshell_sundial_rings_ready = 1;
+                gshell_sundial_sectors_ready = 1;
+                gshell_sundial_apps_ready = 1;
+                gshell_sundial_running_ready = 1;
+                gshell_sundial_dim_ready = 1;
+                gshell_sundial_float_ready = 1;
+                gshell_sundial_drag_ready = 1;
+                gshell_sundial_show_ready = 1;
+                gshell_sundial_hide_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_sundial_nettime_ready = 1;
+                gshell_sundial_state_ready = 1;
+                gshell_sundial_demo_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_desktopops_clean_ready = 1;
+                gshell_desktopops_appgrid_ready = 1;
+                gshell_desktopops_appfloat_ready = 1;
+                gshell_sundial_state = "demo";
+                gshell_sundial_mode = "visible";
+                gshell_sundial_sector = "apps";
+                gshell_sundial_last = "demo";
+                gshell_sundial_events++;
+                gshell_command_name = "SUNDIALDEMO";
+                gshell_command_result = "SUNDIAL DEMO OK";
+                gshell_input_status_text = "DEMO";
+                sundial_terminal_text = "SUNDIALDEMO -> SUNDIAL DESKTOP MOCK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALCHECK: {
+                int ok = gshell_sundial_core_ready &&
+                         gshell_sundial_rings_ready &&
+                         gshell_sundial_sectors_ready &&
+                         gshell_sundial_apps_ready &&
+                         gshell_sundial_running_ready &&
+                         gshell_sundial_dim_ready &&
+                         gshell_sundial_float_ready &&
+                         gshell_sundial_drag_ready &&
+                         gshell_sundial_show_ready &&
+                         gshell_sundial_hide_ready &&
+                         gshell_sundial_search_ready &&
+                         gshell_sundial_voice_ready &&
+                         gshell_sundial_nettime_ready &&
+                         gshell_sundial_state_ready;
+                gshell_sundial_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNDIALCHECK";
+                gshell_command_result = ok ? "SUNDIAL CHECK OK" : "SUNDIAL CHECK WAIT";
+                gshell_input_status_text = ok ? "SUNOK" : "SUNWAIT";
+                sundial_terminal_text = ok ? "SUNDIALCHECK -> SUNDIAL DESKTOP MOCK READY" : "SUNDIALCHECK -> RUN SUNDIALDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNDIALRESET:
+                gshell_sundial_core_ready = 0;
+                gshell_sundial_rings_ready = 0;
+                gshell_sundial_sectors_ready = 0;
+                gshell_sundial_apps_ready = 0;
+                gshell_sundial_running_ready = 0;
+                gshell_sundial_dim_ready = 0;
+                gshell_sundial_float_ready = 0;
+                gshell_sundial_drag_ready = 0;
+                gshell_sundial_show_ready = 0;
+                gshell_sundial_hide_ready = 0;
+                gshell_sundial_search_ready = 0;
+                gshell_sundial_voice_ready = 0;
+                gshell_sundial_nettime_ready = 0;
+                gshell_sundial_state_ready = 0;
+                gshell_sundial_demo_ready = 0;
+                gshell_sundial_events = 0;
+                gshell_sundial_state = "idle";
+                gshell_sundial_mode = "visible";
+                gshell_sundial_sector = "apps";
+                gshell_sundial_last = "reset";
+                gshell_command_name = "SUNDIALRESET";
+                gshell_command_result = "SUNDIAL RESET OK";
+                gshell_input_status_text = "RESET";
+                sundial_terminal_text = "SUNDIALRESET -> SUNDIAL DESKTOP MOCK RESET";
+                break;
+
+            case GSHELL_CMD_SUNDIALNEXT:
+                gshell_command_name = "SUNDIALNEXT";
+                gshell_command_result = "SUNDIAL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                sundial_terminal_text = "SUNDIALNEXT -> 1.8.2 SUNDIAL SECTOR FLOATING APPS";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(sundial_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SECTORFLOATSTATUS && command_id <= GSHELL_CMD_SECTORNEXT) {
+        const char* sector_terminal_text = "SECTORFLOATSTATUS -> SUNDIAL SECTOR FLOATING APPS READY";
+
+        gshell_command_view = "SECTORFLOATSTATUS";
+        gshell_input_status_text = "SECTOR";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SECTORFLOATSTATUS:
+                gshell_command_name = "SECTORFLOATSTATUS";
+                gshell_command_result = "SECTOR FLOAT STATUS OK";
+                break;
+
+            case GSHELL_CMD_SECTORSELECT:
+                gshell_sectorfloat_select_ready = 1;
+                gshell_sundial_sector = "apps";
+                gshell_sectorfloat_state = "selected";
+                gshell_sectorfloat_sector = "apps";
+                gshell_sectorfloat_last = "select";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORSELECT";
+                gshell_command_result = "SECTOR SELECT OK";
+                gshell_input_status_text = "SELECT";
+                sector_terminal_text = "SECTORSELECT -> SUNDIAL SECTOR SELECTED";
+                break;
+
+            case GSHELL_CMD_SECTOREXPAND:
+                gshell_sectorfloat_expand_ready = 1;
+                gshell_sundial_float_ready = 1;
+                gshell_sectorfloat_state = "expanded";
+                gshell_sectorfloat_icons = "fan";
+                gshell_sectorfloat_last = "expand";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTOREXPAND";
+                gshell_command_result = "SECTOR EXPAND OK";
+                gshell_input_status_text = "EXPAND";
+                sector_terminal_text = "SECTOREXPAND -> SELECTED SECTOR EXPANDS UPWARD";
+                break;
+
+            case GSHELL_CMD_SECTORFLOATAPPS:
+                gshell_sectorfloat_apps_ready = 1;
+                gshell_sundial_apps_ready = 1;
+                gshell_sundial_float_ready = 1;
+                gshell_sectorfloat_state = "floating-apps";
+                gshell_sectorfloat_icons = "floating";
+                gshell_sectorfloat_last = "float-apps";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORFLOATAPPS";
+                gshell_command_result = "SECTOR FLOAT APPS OK";
+                gshell_input_status_text = "FLOAT";
+                sector_terminal_text = "SECTORFLOATAPPS -> APPS FLOAT ABOVE CLICKED SECTOR";
+                break;
+
+            case GSHELL_CMD_SECTORRUNLIT:
+                gshell_sectorfloat_runlit_ready = 1;
+                gshell_sundial_running_ready = 1;
+                gshell_desktopops_running_ready = 1;
+                gshell_sectorfloat_state = "running-lit";
+                gshell_sectorfloat_last = "run-lit";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORRUNLIT";
+                gshell_command_result = "SECTOR RUN LIT OK";
+                gshell_input_status_text = "RUNLIT";
+                sector_terminal_text = "SECTORRUNLIT -> RUNNING ICONS LIGHT UP";
+                break;
+
+            case GSHELL_CMD_SECTORDIMAPPS:
+                gshell_sectorfloat_dim_ready = 1;
+                gshell_sundial_dim_ready = 1;
+                gshell_desktopops_inactive_ready = 1;
+                gshell_sectorfloat_state = "inactive-dim";
+                gshell_sectorfloat_last = "dim";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORDIMAPPS";
+                gshell_command_result = "SECTOR DIM APPS OK";
+                gshell_input_status_text = "DIM";
+                sector_terminal_text = "SECTORDIMAPPS -> INACTIVE ICONS STAY DIM";
+                break;
+
+            case GSHELL_CMD_SECTORSCALE:
+                gshell_sectorfloat_scale_ready = 1;
+                gshell_sectorfloat_state = "scale";
+                gshell_sectorfloat_icons = "auto-size";
+                gshell_sectorfloat_last = "scale";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORSCALE";
+                gshell_command_result = "SECTOR SCALE OK";
+                gshell_input_status_text = "SCALE";
+                sector_terminal_text = "SECTORSCALE -> MORE ICONS MEANS SMALLER ICON SIZE";
+                break;
+
+            case GSHELL_CMD_SECTORDENSITY:
+                gshell_sectorfloat_density_ready = 1;
+                gshell_sectorfloat_state = "density";
+                gshell_sectorfloat_icons = "dense";
+                gshell_sectorfloat_last = "density";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORDENSITY";
+                gshell_command_result = "SECTOR DENSITY OK";
+                gshell_input_status_text = "DENSITY";
+                sector_terminal_text = "SECTORDENSITY -> SECTOR DENSITY MODEL READY";
+                break;
+
+            case GSHELL_CMD_SECTORPAGE:
+                gshell_sectorfloat_page_ready = 1;
+                gshell_sectorfloat_state = "paged";
+                gshell_sectorfloat_icons = "page-ring";
+                gshell_sectorfloat_last = "page";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORPAGE";
+                gshell_command_result = "SECTOR PAGE OK";
+                gshell_input_status_text = "PAGE";
+                sector_terminal_text = "SECTORPAGE -> LARGE SECTORS CAN PAGE OR ROTATE";
+                break;
+
+            case GSHELL_CMD_SECTOROVERFLOW:
+                gshell_sectorfloat_overflow_ready = 1;
+                gshell_sectorfloat_state = "overflow";
+                gshell_sectorfloat_icons = "tiny";
+                gshell_sectorfloat_last = "overflow";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTOROVERFLOW";
+                gshell_command_result = "SECTOR OVERFLOW OK";
+                gshell_input_status_text = "OVERFLOW";
+                sector_terminal_text = "SECTOROVERFLOW -> SECTOR CAN HOLD MANY APPS";
+                break;
+
+            case GSHELL_CMD_SECTORDRAGICON:
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sundial_drag_ready = 1;
+                gshell_desktopops_drag_icon_ready = 1;
+                gshell_sectorfloat_state = "drag-icon";
+                gshell_sectorfloat_last = "drag-icon";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORDRAGICON";
+                gshell_command_result = "SECTOR DRAG ICON OK";
+                gshell_input_status_text = "DRAG";
+                sector_terminal_text = "SECTORDRAGICON -> ICON DRAG BETWEEN SECTORS STARTED";
+                break;
+
+            case GSHELL_CMD_SECTORDROPICON:
+                gshell_sectorfloat_drop_ready = 1;
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sectorfloat_state = "drop-icon";
+                gshell_sectorfloat_last = "drop-icon";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORDROPICON";
+                gshell_command_result = "SECTOR DROP ICON OK";
+                gshell_input_status_text = "DROP";
+                sector_terminal_text = "SECTORDROPICON -> ICON DROPPED INTO TARGET SECTOR";
+                break;
+
+            case GSHELL_CMD_SECTORMOVEAPP:
+                gshell_sectorfloat_move_ready = 1;
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sectorfloat_drop_ready = 1;
+                gshell_sectorfloat_state = "move-app";
+                gshell_sectorfloat_sector = "tools";
+                gshell_sectorfloat_last = "move-app";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORMOVEAPP";
+                gshell_command_result = "SECTOR MOVE APP OK";
+                gshell_input_status_text = "MOVE";
+                sector_terminal_text = "SECTORMOVEAPP -> APP MOVED BETWEEN SUNDIAL SECTORS";
+                break;
+
+            case GSHELL_CMD_SECTORCATEGORY:
+                gshell_sectorfloat_category_ready = 1;
+                gshell_sundial_sectors_ready = 1;
+                gshell_sectorfloat_state = "category";
+                gshell_sectorfloat_sector = "file/net/ai/app";
+                gshell_sectorfloat_last = "category";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORCATEGORY";
+                gshell_command_result = "SECTOR CATEGORY OK";
+                gshell_input_status_text = "CATEGORY";
+                sector_terminal_text = "SECTORCATEGORY -> APP SECTORS GROUP SOFTWARE";
+                break;
+
+            case GSHELL_CMD_SECTORSEARCH:
+                gshell_sectorfloat_search_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_desktopops_search_ready = 1;
+                gshell_sectorfloat_state = "search";
+                gshell_sectorfloat_sector = "search";
+                gshell_sectorfloat_last = "search";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORSEARCH";
+                gshell_command_result = "SECTOR SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                sector_terminal_text = "SECTORSEARCH -> SEARCH CAN HIGHLIGHT SECTOR ICONS";
+                break;
+
+            case GSHELL_CMD_SECTORVOICE:
+                gshell_sectorfloat_voice_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_desktopops_voice_ready = 1;
+                gshell_sectorfloat_state = "voice";
+                gshell_sectorfloat_sector = "voice";
+                gshell_sectorfloat_last = "voice";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORVOICE";
+                gshell_command_result = "SECTOR VOICE OK";
+                gshell_input_status_text = "VOICE";
+                sector_terminal_text = "SECTORVOICE -> VOICE CAN SELECT OR OPEN SECTORS";
+                break;
+
+            case GSHELL_CMD_SECTORDEMO:
+                gshell_sectorfloat_select_ready = 1;
+                gshell_sectorfloat_expand_ready = 1;
+                gshell_sectorfloat_apps_ready = 1;
+                gshell_sectorfloat_runlit_ready = 1;
+                gshell_sectorfloat_dim_ready = 1;
+                gshell_sectorfloat_scale_ready = 1;
+                gshell_sectorfloat_density_ready = 1;
+                gshell_sectorfloat_page_ready = 1;
+                gshell_sectorfloat_overflow_ready = 1;
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sectorfloat_drop_ready = 1;
+                gshell_sectorfloat_move_ready = 1;
+                gshell_sectorfloat_category_ready = 1;
+                gshell_sectorfloat_search_ready = 1;
+                gshell_sectorfloat_voice_ready = 1;
+                gshell_sectorfloat_demo_ready = 1;
+                gshell_sundial_demo_ready = 1;
+                gshell_sundial_float_ready = 1;
+                gshell_sundial_drag_ready = 1;
+                gshell_sundial_running_ready = 1;
+                gshell_sundial_dim_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_sectorfloat_state = "demo";
+                gshell_sectorfloat_sector = "apps";
+                gshell_sectorfloat_icons = "float-fan";
+                gshell_sectorfloat_last = "demo";
+                gshell_sectorfloat_events++;
+                gshell_command_name = "SECTORDEMO";
+                gshell_command_result = "SECTOR DEMO OK";
+                gshell_input_status_text = "DEMO";
+                sector_terminal_text = "SECTORDEMO -> SECTOR FLOATING APP MODEL READY";
+                break;
+
+            case GSHELL_CMD_SECTORCHECK: {
+                int ok = gshell_sectorfloat_select_ready &&
+                         gshell_sectorfloat_expand_ready &&
+                         gshell_sectorfloat_apps_ready &&
+                         gshell_sectorfloat_runlit_ready &&
+                         gshell_sectorfloat_dim_ready &&
+                         gshell_sectorfloat_scale_ready &&
+                         gshell_sectorfloat_density_ready &&
+                         gshell_sectorfloat_page_ready &&
+                         gshell_sectorfloat_overflow_ready &&
+                         gshell_sectorfloat_drag_ready &&
+                         gshell_sectorfloat_drop_ready &&
+                         gshell_sectorfloat_move_ready &&
+                         gshell_sectorfloat_category_ready &&
+                         gshell_sectorfloat_search_ready &&
+                         gshell_sectorfloat_voice_ready;
+                gshell_sectorfloat_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SECTORCHECK";
+                gshell_command_result = ok ? "SECTOR CHECK OK" : "SECTOR CHECK WAIT";
+                gshell_input_status_text = ok ? "SECTOROK" : "SECTWAIT";
+                sector_terminal_text = ok ? "SECTORCHECK -> SECTOR FLOATING APPS READY" : "SECTORCHECK -> RUN SECTORDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SECTORRESET:
+                gshell_sectorfloat_select_ready = 0;
+                gshell_sectorfloat_expand_ready = 0;
+                gshell_sectorfloat_apps_ready = 0;
+                gshell_sectorfloat_runlit_ready = 0;
+                gshell_sectorfloat_dim_ready = 0;
+                gshell_sectorfloat_scale_ready = 0;
+                gshell_sectorfloat_density_ready = 0;
+                gshell_sectorfloat_page_ready = 0;
+                gshell_sectorfloat_overflow_ready = 0;
+                gshell_sectorfloat_drag_ready = 0;
+                gshell_sectorfloat_drop_ready = 0;
+                gshell_sectorfloat_move_ready = 0;
+                gshell_sectorfloat_category_ready = 0;
+                gshell_sectorfloat_search_ready = 0;
+                gshell_sectorfloat_voice_ready = 0;
+                gshell_sectorfloat_demo_ready = 0;
+                gshell_sectorfloat_events = 0;
+                gshell_sectorfloat_state = "idle";
+                gshell_sectorfloat_sector = "apps";
+                gshell_sectorfloat_icons = "compact";
+                gshell_sectorfloat_last = "reset";
+                gshell_command_name = "SECTORRESET";
+                gshell_command_result = "SECTOR RESET OK";
+                gshell_input_status_text = "RESET";
+                sector_terminal_text = "SECTORRESET -> SECTOR FLOATING APPS RESET";
+                break;
+
+            case GSHELL_CMD_SECTORNEXT:
+                gshell_command_name = "SECTORNEXT";
+                gshell_command_result = "SECTOR NEXT OK";
+                gshell_input_status_text = "NEXT";
+                sector_terminal_text = "SECTORNEXT -> 1.8.3 SUNDIAL VISUAL SCENE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(sector_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNDIALVISSTATUS && command_id <= GSHELL_CMD_SUNDIALVISNEXT) {
+        const char* vis_terminal_text = "SUNDIALVISSTATUS -> SUNDIAL VISUAL SCENE READY";
+
+        gshell_command_view = "SUNDIALVISSTATUS";
+        gshell_input_status_text = "SUNVIS";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNDIALVISSTATUS:
+                gshell_command_name = "SUNDIALVISSTATUS";
+                gshell_command_result = "SUNDIAL VIS STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISCORE:
+                gshell_sundialvis_core_ready = 1;
+                gshell_sundial_core_ready = 1;
+                gshell_sundialvis_state = "core";
+                gshell_sundialvis_focus = "center";
+                gshell_sundialvis_last = "core";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISCORE";
+                gshell_command_result = "SUNDIAL VIS CORE OK";
+                gshell_input_status_text = "CORE";
+                vis_terminal_text = "SUNDIALVISCORE -> VISIBLE CORE MOCK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISRINGS:
+                gshell_sundialvis_rings_ready = 1;
+                gshell_sundial_rings_ready = 1;
+                gshell_sundialvis_state = "rings";
+                gshell_sundialvis_focus = "rings";
+                gshell_sundialvis_last = "rings";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISRINGS";
+                gshell_command_result = "SUNDIAL VIS RINGS OK";
+                gshell_input_status_text = "RINGS";
+                vis_terminal_text = "SUNDIALVISRINGS -> VISIBLE RING MOCK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISSECTORS:
+                gshell_sundialvis_sectors_ready = 1;
+                gshell_sundial_sectors_ready = 1;
+                gshell_sundialvis_state = "sectors";
+                gshell_sundialvis_focus = "apps-sector";
+                gshell_sundialvis_last = "sectors";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISSECTORS";
+                gshell_command_result = "SUNDIAL VIS SECTORS OK";
+                gshell_input_status_text = "SECTORS";
+                vis_terminal_text = "SUNDIALVISSECTORS -> VISIBLE SECTOR MOCK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISICONS:
+                gshell_sundialvis_icons_ready = 1;
+                gshell_sundial_apps_ready = 1;
+                gshell_sectorfloat_apps_ready = 1;
+                gshell_sundialvis_state = "icons";
+                gshell_sundialvis_focus = "all-icons";
+                gshell_sundialvis_last = "icons";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISICONS";
+                gshell_command_result = "SUNDIAL VIS ICONS OK";
+                gshell_input_status_text = "ICONS";
+                vis_terminal_text = "SUNDIALVISICONS -> APP ICON DOTS VISIBLE";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISRUNLIT:
+                gshell_sundialvis_runlit_ready = 1;
+                gshell_sundial_running_ready = 1;
+                gshell_sectorfloat_runlit_ready = 1;
+                gshell_sundialvis_state = "run-lit";
+                gshell_sundialvis_focus = "running";
+                gshell_sundialvis_last = "run-lit";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISRUNLIT";
+                gshell_command_result = "SUNDIAL VIS RUN LIT OK";
+                gshell_input_status_text = "RUNLIT";
+                vis_terminal_text = "SUNDIALVISRUNLIT -> RUNNING ICONS VISUALLY LIT";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISDIM:
+                gshell_sundialvis_dim_ready = 1;
+                gshell_sundial_dim_ready = 1;
+                gshell_sectorfloat_dim_ready = 1;
+                gshell_sundialvis_state = "dim";
+                gshell_sundialvis_focus = "inactive";
+                gshell_sundialvis_last = "dim";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISDIM";
+                gshell_command_result = "SUNDIAL VIS DIM OK";
+                gshell_input_status_text = "DIM";
+                vis_terminal_text = "SUNDIALVISDIM -> INACTIVE ICONS VISUALLY DIM";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISFLOAT:
+                gshell_sundialvis_float_ready = 1;
+                gshell_sundial_float_ready = 1;
+                gshell_sectorfloat_apps_ready = 1;
+                gshell_sundialvis_state = "floating";
+                gshell_sundialvis_focus = "float-fan";
+                gshell_sundialvis_last = "float";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISFLOAT";
+                gshell_command_result = "SUNDIAL VIS FLOAT OK";
+                gshell_input_status_text = "FLOAT";
+                vis_terminal_text = "SUNDIALVISFLOAT -> FLOATING APP FAN VISIBLE";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISDRAG:
+                gshell_sundialvis_drag_ready = 1;
+                gshell_sundial_drag_ready = 1;
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sectorfloat_drop_ready = 1;
+                gshell_sundialvis_state = "drag";
+                gshell_sundialvis_focus = "drag-path";
+                gshell_sundialvis_last = "drag";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISDRAG";
+                gshell_command_result = "SUNDIAL VIS DRAG OK";
+                gshell_input_status_text = "DRAG";
+                vis_terminal_text = "SUNDIALVISDRAG -> ICON DRAG PATH VISIBLE";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISSHOW:
+                gshell_sundialvis_show_ready = 1;
+                gshell_sundial_show_ready = 1;
+                gshell_sundialvis_mode = "visible";
+                gshell_sundialvis_state = "show";
+                gshell_sundialvis_last = "show";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISSHOW";
+                gshell_command_result = "SUNDIAL VIS SHOW OK";
+                gshell_input_status_text = "SHOW";
+                vis_terminal_text = "SUNDIALVISSHOW -> VISUAL SUNDIAL SHOWN";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISHIDE:
+                gshell_sundialvis_hide_ready = 1;
+                gshell_sundial_hide_ready = 1;
+                gshell_sundialvis_mode = "hidden";
+                gshell_sundialvis_state = "hide";
+                gshell_sundialvis_last = "hide";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISHIDE";
+                gshell_command_result = "SUNDIAL VIS HIDE OK";
+                gshell_input_status_text = "HIDE";
+                vis_terminal_text = "SUNDIALVISHIDE -> VISUAL SUNDIAL HIDDEN STATE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISNETTIME:
+                gshell_sundialvis_nettime_ready = 1;
+                gshell_sundial_nettime_ready = 1;
+                gshell_sundialvis_state = "net-time";
+                gshell_sundialvis_focus = "status-ring";
+                gshell_sundialvis_last = "net-time";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISNETTIME";
+                gshell_command_result = "SUNDIAL VIS NET TIME OK";
+                gshell_input_status_text = "NETTIME";
+                vis_terminal_text = "SUNDIALVISNETTIME -> NETWORK AND TIME VISUAL SLOT READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISSEARCH:
+                gshell_sundialvis_search_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_sundialvis_state = "search";
+                gshell_sundialvis_focus = "search";
+                gshell_sundialvis_last = "search";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISSEARCH";
+                gshell_command_result = "SUNDIAL VIS SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                vis_terminal_text = "SUNDIALVISSEARCH -> SEARCH VISUAL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISVOICE:
+                gshell_sundialvis_voice_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_sundialvis_state = "voice";
+                gshell_sundialvis_focus = "voice";
+                gshell_sundialvis_last = "voice";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISVOICE";
+                gshell_command_result = "SUNDIAL VIS VOICE OK";
+                gshell_input_status_text = "VOICE";
+                vis_terminal_text = "SUNDIALVISVOICE -> VOICE VISUAL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISDENSITY:
+                gshell_sundialvis_density_ready = 1;
+                gshell_sectorfloat_density_ready = 1;
+                gshell_sectorfloat_overflow_ready = 1;
+                gshell_sundialvis_state = "density";
+                gshell_sundialvis_focus = "many-icons";
+                gshell_sundialvis_last = "density";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISDENSITY";
+                gshell_command_result = "SUNDIAL VIS DENSITY OK";
+                gshell_input_status_text = "DENSITY";
+                vis_terminal_text = "SUNDIALVISDENSITY -> MANY SMALL ICONS MOCK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISDEMO:
+                gshell_sundialvis_core_ready = 1;
+                gshell_sundialvis_rings_ready = 1;
+                gshell_sundialvis_sectors_ready = 1;
+                gshell_sundialvis_icons_ready = 1;
+                gshell_sundialvis_runlit_ready = 1;
+                gshell_sundialvis_dim_ready = 1;
+                gshell_sundialvis_float_ready = 1;
+                gshell_sundialvis_drag_ready = 1;
+                gshell_sundialvis_show_ready = 1;
+                gshell_sundialvis_hide_ready = 1;
+                gshell_sundialvis_nettime_ready = 1;
+                gshell_sundialvis_search_ready = 1;
+                gshell_sundialvis_voice_ready = 1;
+                gshell_sundialvis_density_ready = 1;
+                gshell_sundialvis_demo_ready = 1;
+                gshell_sundial_demo_ready = 1;
+                gshell_sectorfloat_demo_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_sundialvis_state = "demo";
+                gshell_sundialvis_mode = "visible";
+                gshell_sundialvis_focus = "apps";
+                gshell_sundialvis_last = "demo";
+                gshell_sundialvis_events++;
+                gshell_command_name = "SUNDIALVISDEMO";
+                gshell_command_result = "SUNDIAL VIS DEMO OK";
+                gshell_input_status_text = "DEMO";
+                vis_terminal_text = "SUNDIALVISDEMO -> VISIBLE SUNDIAL DESKTOP SCENE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISCHECK: {
+                int ok = gshell_sundialvis_core_ready &&
+                         gshell_sundialvis_rings_ready &&
+                         gshell_sundialvis_sectors_ready &&
+                         gshell_sundialvis_icons_ready &&
+                         gshell_sundialvis_runlit_ready &&
+                         gshell_sundialvis_dim_ready &&
+                         gshell_sundialvis_float_ready &&
+                         gshell_sundialvis_drag_ready &&
+                         gshell_sundialvis_show_ready &&
+                         gshell_sundialvis_hide_ready &&
+                         gshell_sundialvis_nettime_ready &&
+                         gshell_sundialvis_search_ready &&
+                         gshell_sundialvis_voice_ready &&
+                         gshell_sundialvis_density_ready;
+                gshell_sundialvis_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNDIALVISCHECK";
+                gshell_command_result = ok ? "SUNDIAL VIS CHECK OK" : "SUNDIAL VIS CHECK WAIT";
+                gshell_input_status_text = ok ? "VISOK" : "VISWAIT";
+                vis_terminal_text = ok ? "SUNDIALVISCHECK -> SUNDIAL VISUAL SCENE READY" : "SUNDIALVISCHECK -> RUN SUNDIALVISDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNDIALVISRESET:
+                gshell_sundialvis_core_ready = 0;
+                gshell_sundialvis_rings_ready = 0;
+                gshell_sundialvis_sectors_ready = 0;
+                gshell_sundialvis_icons_ready = 0;
+                gshell_sundialvis_runlit_ready = 0;
+                gshell_sundialvis_dim_ready = 0;
+                gshell_sundialvis_float_ready = 0;
+                gshell_sundialvis_drag_ready = 0;
+                gshell_sundialvis_show_ready = 0;
+                gshell_sundialvis_hide_ready = 0;
+                gshell_sundialvis_nettime_ready = 0;
+                gshell_sundialvis_search_ready = 0;
+                gshell_sundialvis_voice_ready = 0;
+                gshell_sundialvis_density_ready = 0;
+                gshell_sundialvis_demo_ready = 0;
+                gshell_sundialvis_events = 0;
+                gshell_sundialvis_state = "idle";
+                gshell_sundialvis_mode = "visible";
+                gshell_sundialvis_focus = "apps";
+                gshell_sundialvis_last = "reset";
+                gshell_command_name = "SUNDIALVISRESET";
+                gshell_command_result = "SUNDIAL VIS RESET OK";
+                gshell_input_status_text = "RESET";
+                vis_terminal_text = "SUNDIALVISRESET -> SUNDIAL VISUAL SCENE RESET";
+                break;
+
+            case GSHELL_CMD_SUNDIALVISNEXT:
+                gshell_command_name = "SUNDIALVISNEXT";
+                gshell_command_result = "SUNDIAL VIS NEXT OK";
+                gshell_input_status_text = "NEXT";
+                vis_terminal_text = "SUNDIALVISNEXT -> 1.8.4 DESKTOP RIGHT CLICK SUNDIAL MENU";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(vis_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNDIALMENUSTATUS && command_id <= GSHELL_CMD_SUNDIALMENUNEXT) {
+        const char* menu_terminal_text = "SUNDIALMENUSTATUS -> DESKTOP RIGHT CLICK SUNDIAL MENU READY";
+
+        gshell_command_view = "SUNDIALMENUSTATUS";
+        gshell_input_status_text = "SUNMENU";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNDIALMENUSTATUS:
+                gshell_command_name = "SUNDIALMENUSTATUS";
+                gshell_command_result = "SUNDIAL MENU STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUDESKTOP:
+                gshell_sundialmenu_desktop_ready = 1;
+                gshell_sundialmenu_state = "desktop";
+                gshell_sundialmenu_last = "desktop";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUDESKTOP";
+                gshell_command_result = "SUNDIAL MENU DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                menu_terminal_text = "SUNDIALMENUDESKTOP -> DESKTOP RIGHT CLICK TARGET READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUOPEN:
+                gshell_sundialmenu_open_ready = 1;
+                gshell_sundialmenu_state = "menu-open";
+                gshell_sundialmenu_last = "menu-open";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUOPEN";
+                gshell_command_result = "SUNDIAL MENU OPEN OK";
+                gshell_input_status_text = "MENU";
+                menu_terminal_text = "SUNDIALMENUOPEN -> RIGHT CLICK MENU OPENED";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUSHOW:
+                gshell_sundialmenu_show_ready = 1;
+                gshell_sundial_show_ready = 1;
+                gshell_sundialvis_show_ready = 1;
+                gshell_sundialmenu_sundial = "visible";
+                gshell_sundialvis_mode = "visible";
+                gshell_sundial_mode = "visible";
+                gshell_sundialmenu_state = "show";
+                gshell_sundialmenu_last = "show";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUSHOW";
+                gshell_command_result = "SUNDIAL MENU SHOW OK";
+                gshell_input_status_text = "SHOW";
+                menu_terminal_text = "SUNDIALMENUSHOW -> MENU SHOWS SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUHIDE:
+                gshell_sundialmenu_hide_ready = 1;
+                gshell_sundial_hide_ready = 1;
+                gshell_sundialvis_hide_ready = 1;
+                gshell_sundialmenu_sundial = "hidden";
+                gshell_sundialvis_mode = "hidden";
+                gshell_sundial_mode = "hidden";
+                gshell_sundialmenu_state = "hide";
+                gshell_sundialmenu_last = "hide";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUHIDE";
+                gshell_command_result = "SUNDIAL MENU HIDE OK";
+                gshell_input_status_text = "HIDE";
+                menu_terminal_text = "SUNDIALMENUHIDE -> MENU HIDES SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUTOGGLE:
+                gshell_sundialmenu_toggle_ready = 1;
+                gshell_sundialmenu_sundial = "toggle-ready";
+                gshell_sundialmenu_state = "toggle";
+                gshell_sundialmenu_last = "toggle";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUTOGGLE";
+                gshell_command_result = "SUNDIAL MENU TOGGLE OK";
+                gshell_input_status_text = "TOGGLE";
+                menu_terminal_text = "SUNDIALMENUTOGGLE -> MENU CAN TOGGLE SUNDIAL VISIBILITY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENULOCK:
+                gshell_sundialmenu_lock_ready = 1;
+                gshell_sundialmenu_state = "locked";
+                gshell_sundialmenu_last = "lock";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENULOCK";
+                gshell_command_result = "SUNDIAL MENU LOCK OK";
+                gshell_input_status_text = "LOCK";
+                menu_terminal_text = "SUNDIALMENULOCK -> SUNDIAL POSITION LOCKED";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUUNLOCK:
+                gshell_sundialmenu_unlock_ready = 1;
+                gshell_sundialmenu_state = "unlocked";
+                gshell_sundialmenu_last = "unlock";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUUNLOCK";
+                gshell_command_result = "SUNDIAL MENU UNLOCK OK";
+                gshell_input_status_text = "UNLOCK";
+                menu_terminal_text = "SUNDIALMENUUNLOCK -> SUNDIAL POSITION UNLOCKED";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUOPACITY:
+                gshell_sundialmenu_opacity_ready = 1;
+                gshell_sundialmenu_state = "opacity";
+                gshell_sundialmenu_last = "opacity";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUOPACITY";
+                gshell_command_result = "SUNDIAL MENU OPACITY OK";
+                gshell_input_status_text = "OPACITY";
+                menu_terminal_text = "SUNDIALMENUOPACITY -> SUNDIAL TRANSPARENCY OPTION READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUCOMPACT:
+                gshell_sundialmenu_compact_ready = 1;
+                gshell_sundialmenu_mode = "compact";
+                gshell_sundialmenu_state = "compact";
+                gshell_sundialmenu_last = "compact";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUCOMPACT";
+                gshell_command_result = "SUNDIAL MENU COMPACT OK";
+                gshell_input_status_text = "COMPACT";
+                menu_terminal_text = "SUNDIALMENUCOMPACT -> COMPACT SUNDIAL MODE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUFULL:
+                gshell_sundialmenu_full_ready = 1;
+                gshell_sundialmenu_mode = "full";
+                gshell_sundialmenu_state = "full";
+                gshell_sundialmenu_last = "full";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUFULL";
+                gshell_command_result = "SUNDIAL MENU FULL OK";
+                gshell_input_status_text = "FULL";
+                menu_terminal_text = "SUNDIALMENUFULL -> FULL SUNDIAL MODE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUEDGE:
+                gshell_sundialmenu_edge_ready = 1;
+                gshell_sundialmenu_mode = "edge";
+                gshell_sundialmenu_state = "edge";
+                gshell_sundialmenu_last = "edge";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUEDGE";
+                gshell_command_result = "SUNDIAL MENU EDGE OK";
+                gshell_input_status_text = "EDGE";
+                menu_terminal_text = "SUNDIALMENUEDGE -> EDGE SUNDIAL MODE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUAUTOHIDE:
+                gshell_sundialmenu_autohide_ready = 1;
+                gshell_sundialmenu_mode = "auto-hide";
+                gshell_sundialmenu_state = "auto-hide";
+                gshell_sundialmenu_last = "auto-hide";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUAUTOHIDE";
+                gshell_command_result = "SUNDIAL MENU AUTOHIDE OK";
+                gshell_input_status_text = "AUTO";
+                menu_terminal_text = "SUNDIALMENUAUTOHIDE -> AUTO HIDE SUNDIAL MODE READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUSEARCH:
+                gshell_sundialmenu_search_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_sundialvis_search_ready = 1;
+                gshell_sundialmenu_state = "search";
+                gshell_sundialmenu_last = "search";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUSEARCH";
+                gshell_command_result = "SUNDIAL MENU SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                menu_terminal_text = "SUNDIALMENUSEARCH -> SEARCH ENTRY AVAILABLE FROM MENU";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUVOICE:
+                gshell_sundialmenu_voice_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_sundialvis_voice_ready = 1;
+                gshell_sundialmenu_state = "voice";
+                gshell_sundialmenu_last = "voice";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUVOICE";
+                gshell_command_result = "SUNDIAL MENU VOICE OK";
+                gshell_input_status_text = "VOICE";
+                menu_terminal_text = "SUNDIALMENUVOICE -> VOICE ENTRY AVAILABLE FROM MENU";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUCLEAN:
+                gshell_sundialmenu_clean_ready = 1;
+                gshell_desktopops_clean_ready = 1;
+                gshell_sundialmenu_state = "clean";
+                gshell_sundialmenu_last = "clean";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUCLEAN";
+                gshell_command_result = "SUNDIAL MENU CLEAN OK";
+                gshell_input_status_text = "CLEAN";
+                menu_terminal_text = "SUNDIALMENUCLEAN -> DESKTOP CAN BE CLEAN WITHOUT TASKBAR";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUSTATE:
+                gshell_sundialmenu_state_ready = 1;
+                gshell_sundialmenu_state = "state";
+                gshell_sundialmenu_last = "state";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUSTATE";
+                gshell_command_result = "SUNDIAL MENU STATE OK";
+                gshell_input_status_text = "STATE";
+                menu_terminal_text = "SUNDIALMENUSTATE -> SUNDIAL MENU STATE MODEL READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUDEMO:
+                gshell_sundialmenu_desktop_ready = 1;
+                gshell_sundialmenu_open_ready = 1;
+                gshell_sundialmenu_show_ready = 1;
+                gshell_sundialmenu_hide_ready = 1;
+                gshell_sundialmenu_toggle_ready = 1;
+                gshell_sundialmenu_lock_ready = 1;
+                gshell_sundialmenu_unlock_ready = 1;
+                gshell_sundialmenu_opacity_ready = 1;
+                gshell_sundialmenu_compact_ready = 1;
+                gshell_sundialmenu_full_ready = 1;
+                gshell_sundialmenu_edge_ready = 1;
+                gshell_sundialmenu_autohide_ready = 1;
+                gshell_sundialmenu_search_ready = 1;
+                gshell_sundialmenu_voice_ready = 1;
+                gshell_sundialmenu_clean_ready = 1;
+                gshell_sundialmenu_state_ready = 1;
+                gshell_sundialmenu_demo_ready = 1;
+                gshell_sundialvis_demo_ready = 1;
+                gshell_sundial_demo_ready = 1;
+                gshell_desktopops_menu_ready = 1;
+                gshell_sundialmenu_state = "demo";
+                gshell_sundialmenu_mode = "full";
+                gshell_sundialmenu_sundial = "toggle-ready";
+                gshell_sundialmenu_last = "demo";
+                gshell_sundialmenu_events++;
+                gshell_command_name = "SUNDIALMENUDEMO";
+                gshell_command_result = "SUNDIAL MENU DEMO OK";
+                gshell_input_status_text = "DEMO";
+                menu_terminal_text = "SUNDIALMENUDEMO -> RIGHT CLICK SUNDIAL MENU READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUCHECK: {
+                int ok = gshell_sundialmenu_desktop_ready &&
+                         gshell_sundialmenu_open_ready &&
+                         gshell_sundialmenu_show_ready &&
+                         gshell_sundialmenu_hide_ready &&
+                         gshell_sundialmenu_toggle_ready &&
+                         gshell_sundialmenu_lock_ready &&
+                         gshell_sundialmenu_unlock_ready &&
+                         gshell_sundialmenu_opacity_ready &&
+                         gshell_sundialmenu_compact_ready &&
+                         gshell_sundialmenu_full_ready &&
+                         gshell_sundialmenu_edge_ready &&
+                         gshell_sundialmenu_autohide_ready &&
+                         gshell_sundialmenu_search_ready &&
+                         gshell_sundialmenu_voice_ready &&
+                         gshell_sundialmenu_clean_ready &&
+                         gshell_sundialmenu_state_ready;
+                gshell_sundialmenu_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNDIALMENUCHECK";
+                gshell_command_result = ok ? "SUNDIAL MENU CHECK OK" : "SUNDIAL MENU CHECK WAIT";
+                gshell_input_status_text = ok ? "MENUOK" : "MENUWT";
+                menu_terminal_text = ok ? "SUNDIALMENUCHECK -> RIGHT CLICK SUNDIAL MENU READY" : "SUNDIALMENUCHECK -> RUN SUNDIALMENUDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNDIALMENURESET:
+                gshell_sundialmenu_desktop_ready = 0;
+                gshell_sundialmenu_open_ready = 0;
+                gshell_sundialmenu_show_ready = 0;
+                gshell_sundialmenu_hide_ready = 0;
+                gshell_sundialmenu_toggle_ready = 0;
+                gshell_sundialmenu_lock_ready = 0;
+                gshell_sundialmenu_unlock_ready = 0;
+                gshell_sundialmenu_opacity_ready = 0;
+                gshell_sundialmenu_compact_ready = 0;
+                gshell_sundialmenu_full_ready = 0;
+                gshell_sundialmenu_edge_ready = 0;
+                gshell_sundialmenu_autohide_ready = 0;
+                gshell_sundialmenu_search_ready = 0;
+                gshell_sundialmenu_voice_ready = 0;
+                gshell_sundialmenu_clean_ready = 0;
+                gshell_sundialmenu_state_ready = 0;
+                gshell_sundialmenu_demo_ready = 0;
+                gshell_sundialmenu_events = 0;
+                gshell_sundialmenu_state = "idle";
+                gshell_sundialmenu_mode = "full";
+                gshell_sundialmenu_sundial = "visible";
+                gshell_sundialmenu_last = "reset";
+                gshell_command_name = "SUNDIALMENURESET";
+                gshell_command_result = "SUNDIAL MENU RESET OK";
+                gshell_input_status_text = "RESET";
+                menu_terminal_text = "SUNDIALMENURESET -> SUNDIAL MENU STATE RESET";
+                break;
+
+            case GSHELL_CMD_SUNDIALMENUNEXT:
+                gshell_command_name = "SUNDIALMENUNEXT";
+                gshell_command_result = "SUNDIAL MENU NEXT OK";
+                gshell_input_status_text = "NEXT";
+                menu_terminal_text = "SUNDIALMENUNEXT -> 1.8.5 SUNDIAL DESKTOP CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(menu_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNDIALFINALSTATUS && command_id <= GSHELL_CMD_SUNDIALFINALNEXT) {
+        const char* final_terminal_text = "SUNDIALFINALSTATUS -> SUNDIAL DESKTOP CLOSEOUT READY";
+
+        gshell_command_view = "SUNDIALFINALSTATUS";
+        gshell_input_status_text = "SUNFINAL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNDIALFINALSTATUS:
+                gshell_command_name = "SUNDIALFINALSTATUS";
+                gshell_command_result = "SUNDIAL FINAL STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALDESKTOP:
+                gshell_sundialfinal_desktop_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_desktopops_clean_ready = 1;
+                gshell_sundialfinal_state = "desktop";
+                gshell_sundialfinal_phase = "desktop-ops";
+                gshell_sundialfinal_target = "clean-desktop";
+                gshell_sundialfinal_last = "desktop";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALDESKTOP";
+                gshell_command_result = "SUNDIAL FINAL DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                final_terminal_text = "SUNDIALFINALDESKTOP -> DESKTOP OPERATION SCENE SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALVISUAL:
+                gshell_sundialfinal_visual_ready = 1;
+                gshell_sundialvis_demo_ready = 1;
+                gshell_sundialvis_core_ready = 1;
+                gshell_sundialvis_rings_ready = 1;
+                gshell_sundialvis_sectors_ready = 1;
+                gshell_sundialvis_icons_ready = 1;
+                gshell_sundialfinal_state = "visual";
+                gshell_sundialfinal_phase = "sundial-visual";
+                gshell_sundialfinal_target = "visible-mock";
+                gshell_sundialfinal_last = "visual";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALVISUAL";
+                gshell_command_result = "SUNDIAL FINAL VISUAL OK";
+                gshell_input_status_text = "VISUAL";
+                final_terminal_text = "SUNDIALFINALVISUAL -> SUNDIAL VISUAL MOCK SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALSECTOR:
+                gshell_sundialfinal_sector_ready = 1;
+                gshell_sectorfloat_demo_ready = 1;
+                gshell_sectorfloat_select_ready = 1;
+                gshell_sectorfloat_expand_ready = 1;
+                gshell_sectorfloat_apps_ready = 1;
+                gshell_sectorfloat_runlit_ready = 1;
+                gshell_sectorfloat_dim_ready = 1;
+                gshell_sectorfloat_drag_ready = 1;
+                gshell_sundialfinal_state = "sector";
+                gshell_sundialfinal_phase = "sector-float";
+                gshell_sundialfinal_target = "floating-apps";
+                gshell_sundialfinal_last = "sector";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALSECTOR";
+                gshell_command_result = "SUNDIAL FINAL SECTOR OK";
+                gshell_input_status_text = "SECTOR";
+                final_terminal_text = "SUNDIALFINALSECTOR -> SECTOR FLOATING APPS SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALMENU:
+                gshell_sundialfinal_menu_ready = 1;
+                gshell_sundialmenu_demo_ready = 1;
+                gshell_sundialmenu_desktop_ready = 1;
+                gshell_sundialmenu_open_ready = 1;
+                gshell_sundialmenu_show_ready = 1;
+                gshell_sundialmenu_hide_ready = 1;
+                gshell_sundialmenu_toggle_ready = 1;
+                gshell_sundialfinal_state = "menu";
+                gshell_sundialfinal_phase = "right-click";
+                gshell_sundialfinal_target = "show-hide";
+                gshell_sundialfinal_last = "menu";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALMENU";
+                gshell_command_result = "SUNDIAL FINAL MENU OK";
+                gshell_input_status_text = "MENU";
+                final_terminal_text = "SUNDIALFINALMENU -> RIGHT CLICK SUNDIAL MENU SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALSEARCH:
+                gshell_sundialfinal_search_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_sundialvis_search_ready = 1;
+                gshell_sundialmenu_search_ready = 1;
+                gshell_sundialfinal_state = "search";
+                gshell_sundialfinal_phase = "entry";
+                gshell_sundialfinal_target = "text-search";
+                gshell_sundialfinal_last = "search";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALSEARCH";
+                gshell_command_result = "SUNDIAL FINAL SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                final_terminal_text = "SUNDIALFINALSEARCH -> SEARCH ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALVOICE:
+                gshell_sundialfinal_voice_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_sundialvis_voice_ready = 1;
+                gshell_sundialmenu_voice_ready = 1;
+                gshell_sundialfinal_state = "voice";
+                gshell_sundialfinal_phase = "entry";
+                gshell_sundialfinal_target = "voice-intent";
+                gshell_sundialfinal_last = "voice";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALVOICE";
+                gshell_command_result = "SUNDIAL FINAL VOICE OK";
+                gshell_input_status_text = "VOICE";
+                final_terminal_text = "SUNDIALFINALVOICE -> VOICE INTENT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALNETTIME:
+                gshell_sundialfinal_nettime_ready = 1;
+                gshell_sundial_nettime_ready = 1;
+                gshell_sundialvis_nettime_ready = 1;
+                gshell_desktopops_nettime_ready = 1;
+                gshell_sundialfinal_state = "net-time";
+                gshell_sundialfinal_phase = "status";
+                gshell_sundialfinal_target = "network-time";
+                gshell_sundialfinal_last = "net-time";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALNETTIME";
+                gshell_command_result = "SUNDIAL FINAL NET TIME OK";
+                gshell_input_status_text = "NETTIME";
+                final_terminal_text = "SUNDIALFINALNETTIME -> NETWORK AND TIME MOVED INTO SUNDIAL MODEL";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALCLEAN:
+                gshell_sundialfinal_clean_ready = 1;
+                gshell_desktopops_clean_ready = 1;
+                gshell_sundialmenu_clean_ready = 1;
+                gshell_sundialfinal_state = "clean";
+                gshell_sundialfinal_phase = "desktop";
+                gshell_sundialfinal_target = "no-taskbar";
+                gshell_sundialfinal_last = "clean";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALCLEAN";
+                gshell_command_result = "SUNDIAL FINAL CLEAN OK";
+                gshell_input_status_text = "CLEAN";
+                final_terminal_text = "SUNDIALFINALCLEAN -> BOTTOM TASKBAR CAN BE REMOVED FROM DESIGN";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALUX:
+                gshell_sundialfinal_ux_ready = 1;
+                gshell_sundialfinal_state = "ux";
+                gshell_sundialfinal_phase = "interaction";
+                gshell_sundialfinal_target = "sundial-hub";
+                gshell_sundialfinal_last = "ux";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALUX";
+                gshell_command_result = "SUNDIAL FINAL UX OK";
+                gshell_input_status_text = "UX";
+                final_terminal_text = "SUNDIALFINALUX -> SUNDIAL IS PRIMARY DESKTOP HUB";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALDEMO:
+                gshell_sundialfinal_desktop_ready = 1;
+                gshell_sundialfinal_visual_ready = 1;
+                gshell_sundialfinal_sector_ready = 1;
+                gshell_sundialfinal_menu_ready = 1;
+                gshell_sundialfinal_search_ready = 1;
+                gshell_sundialfinal_voice_ready = 1;
+                gshell_sundialfinal_nettime_ready = 1;
+                gshell_sundialfinal_clean_ready = 1;
+                gshell_sundialfinal_ux_ready = 1;
+                gshell_sundialfinal_demo_ready = 1;
+                gshell_desktopops_demo_ready = 1;
+                gshell_sundial_demo_ready = 1;
+                gshell_sectorfloat_demo_ready = 1;
+                gshell_sundialvis_demo_ready = 1;
+                gshell_sundialmenu_demo_ready = 1;
+                gshell_sundialfinal_state = "demo";
+                gshell_sundialfinal_phase = "1.8-closeout";
+                gshell_sundialfinal_target = "dev-1.9";
+                gshell_sundialfinal_last = "demo";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALDEMO";
+                gshell_command_result = "SUNDIAL FINAL DEMO OK";
+                gshell_input_status_text = "DEMO";
+                final_terminal_text = "SUNDIALFINALDEMO -> FULL 1.8 SUNDIAL DESKTOP STACK READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALCHECK: {
+                int ok = gshell_sundialfinal_desktop_ready &&
+                         gshell_sundialfinal_visual_ready &&
+                         gshell_sundialfinal_sector_ready &&
+                         gshell_sundialfinal_menu_ready &&
+                         gshell_sundialfinal_search_ready &&
+                         gshell_sundialfinal_voice_ready &&
+                         gshell_sundialfinal_nettime_ready &&
+                         gshell_sundialfinal_clean_ready &&
+                         gshell_sundialfinal_ux_ready;
+                gshell_sundialfinal_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNDIALFINALCHECK";
+                gshell_command_result = ok ? "SUNDIAL FINAL CHECK OK" : "SUNDIAL FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "FINALOK" : "FINALWT";
+                final_terminal_text = ok ? "SUNDIALFINALCHECK -> 1.8 SUNDIAL DESKTOP CLOSEOUT READY" : "SUNDIALFINALCHECK -> RUN SUNDIALFINALDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNDIALFINALRESET:
+                gshell_sundialfinal_desktop_ready = 0;
+                gshell_sundialfinal_visual_ready = 0;
+                gshell_sundialfinal_sector_ready = 0;
+                gshell_sundialfinal_menu_ready = 0;
+                gshell_sundialfinal_search_ready = 0;
+                gshell_sundialfinal_voice_ready = 0;
+                gshell_sundialfinal_nettime_ready = 0;
+                gshell_sundialfinal_clean_ready = 0;
+                gshell_sundialfinal_ux_ready = 0;
+                gshell_sundialfinal_demo_ready = 0;
+                gshell_sundialfinal_closeout_ready = 0;
+                gshell_sundialfinal_roadmap_ready = 0;
+                gshell_sundialfinal_events = 0;
+                gshell_sundialfinal_state = "idle";
+                gshell_sundialfinal_phase = "1.8.x";
+                gshell_sundialfinal_target = "sundial-desktop";
+                gshell_sundialfinal_last = "reset";
+                gshell_command_name = "SUNDIALFINALRESET";
+                gshell_command_result = "SUNDIAL FINAL RESET OK";
+                gshell_input_status_text = "RESET";
+                final_terminal_text = "SUNDIALFINALRESET -> SUNDIAL FINAL STATE RESET";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALCLOSEOUT:
+                gshell_sundialfinal_closeout_ready = 1;
+                gshell_sundialfinal_state = "closeout";
+                gshell_sundialfinal_phase = "dev-1.8.x";
+                gshell_sundialfinal_target = "dev-1.9.x";
+                gshell_sundialfinal_last = "closeout";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALCLOSEOUT";
+                gshell_command_result = "SUNDIAL FINAL CLOSEOUT OK";
+                gshell_input_status_text = "CLOSE";
+                final_terminal_text = "SUNDIALFINALCLOSEOUT -> DEV-1.8.X SUNDIAL DESKTOP STAGE CLOSED";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALNEXTPHASE:
+                gshell_sundialfinal_state = "next-phase";
+                gshell_sundialfinal_phase = "dev-1.9.x";
+                gshell_sundialfinal_target = "sundial-control-hub";
+                gshell_sundialfinal_last = "next-phase";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALNEXTPHASE";
+                gshell_command_result = "SUNDIAL FINAL NEXT PHASE OK";
+                gshell_input_status_text = "NEXTPH";
+                final_terminal_text = "SUNDIALFINALNEXTPHASE -> DEV-1.9.X SUNDIAL CONTROL HUB";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALROADMAP:
+                gshell_sundialfinal_roadmap_ready = 1;
+                gshell_sundialfinal_state = "roadmap";
+                gshell_sundialfinal_phase = "1.9-2.0";
+                gshell_sundialfinal_target = "control+linux-plan";
+                gshell_sundialfinal_last = "roadmap";
+                gshell_sundialfinal_events++;
+                gshell_command_name = "SUNDIALFINALROADMAP";
+                gshell_command_result = "SUNDIAL FINAL ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                final_terminal_text = "SUNDIALFINALROADMAP -> 1.9 CONTROL HUB, 2.0 SELF PROTOTYPE CLOSEOUT";
+                break;
+
+            case GSHELL_CMD_SUNDIALFINALNEXT:
+                gshell_command_name = "SUNDIALFINALNEXT";
+                gshell_command_result = "SUNDIAL FINAL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                final_terminal_text = "SUNDIALFINALNEXT -> 1.9.0 SUNDIAL CONTROL HUB";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(final_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNDIALHUBSTATUS && command_id <= GSHELL_CMD_SUNDIALHUBNEXT) {
+        const char* hub_terminal_text = "SUNDIALHUBSTATUS -> SUNDIAL CONTROL HUB READY";
+
+        gshell_command_view = "SUNDIALHUBSTATUS";
+        gshell_input_status_text = "SUNHUB";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNDIALHUBSTATUS:
+                gshell_command_name = "SUNDIALHUBSTATUS";
+                gshell_command_result = "SUNDIAL HUB STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBCORE:
+                gshell_sundialhub_core_ready = 1;
+                gshell_sundial_core_ready = 1;
+                gshell_sundialvis_core_ready = 1;
+                gshell_sundialhub_state = "core";
+                gshell_sundialhub_focus = "center";
+                gshell_sundialhub_last = "core";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBCORE";
+                gshell_command_result = "SUNDIAL HUB CORE OK";
+                gshell_input_status_text = "CORE";
+                hub_terminal_text = "SUNDIALHUBCORE -> SUNDIAL CORE IS SYSTEM CENTER";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBCONTROL:
+                gshell_sundialhub_control_ready = 1;
+                gshell_sundialhub_state = "control";
+                gshell_sundialhub_focus = "control";
+                gshell_sundialhub_last = "control";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBCONTROL";
+                gshell_command_result = "SUNDIAL HUB CONTROL OK";
+                gshell_input_status_text = "CONTROL";
+                hub_terminal_text = "SUNDIALHUBCONTROL -> USER CONTROL ENTRY ON SUNDIAL";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBPERMS:
+                gshell_sundialhub_perms_ready = 1;
+                gshell_sundialhub_state = "permissions";
+                gshell_sundialhub_focus = "permission";
+                gshell_sundialhub_last = "perms";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBPERMS";
+                gshell_command_result = "SUNDIAL HUB PERMS OK";
+                gshell_input_status_text = "PERMS";
+                hub_terminal_text = "SUNDIALHUBPERMS -> PERMISSION ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBRULES:
+                gshell_sundialhub_rules_ready = 1;
+                gshell_sundialhub_state = "rules";
+                gshell_sundialhub_focus = "rules";
+                gshell_sundialhub_last = "rules";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBRULES";
+                gshell_command_result = "SUNDIAL HUB RULES OK";
+                gshell_input_status_text = "RULES";
+                hub_terminal_text = "SUNDIALHUBRULES -> USER RULE ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBAUDIT:
+                gshell_sundialhub_audit_ready = 1;
+                gshell_sundialhub_state = "audit";
+                gshell_sundialhub_focus = "audit";
+                gshell_sundialhub_last = "audit";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBAUDIT";
+                gshell_command_result = "SUNDIAL HUB AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                hub_terminal_text = "SUNDIALHUBAUDIT -> AUDIT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBAPPBEHAVIOR:
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_sundialhub_state = "app-behavior";
+                gshell_sundialhub_focus = "app";
+                gshell_sundialhub_last = "app-behavior";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBAPPBEHAVIOR";
+                gshell_command_result = "SUNDIAL HUB APP BEHAVIOR OK";
+                gshell_input_status_text = "APPBEH";
+                hub_terminal_text = "SUNDIALHUBAPPBEHAVIOR -> APP BEHAVIOR VIEW RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBNETWORK:
+                gshell_sundialhub_network_ready = 1;
+                gshell_sundialhub_state = "network";
+                gshell_sundialhub_focus = "network";
+                gshell_sundialhub_last = "network";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBNETWORK";
+                gshell_command_result = "SUNDIAL HUB NETWORK OK";
+                gshell_input_status_text = "NETWORK";
+                hub_terminal_text = "SUNDIALHUBNETWORK -> NETWORK CONTROL ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBFILE:
+                gshell_sundialhub_file_ready = 1;
+                gshell_sundialhub_state = "file";
+                gshell_sundialhub_focus = "file";
+                gshell_sundialhub_last = "file";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBFILE";
+                gshell_command_result = "SUNDIAL HUB FILE OK";
+                gshell_input_status_text = "FILE";
+                hub_terminal_text = "SUNDIALHUBFILE -> FILE CONTROL ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBAI:
+                gshell_sundialhub_ai_ready = 1;
+                gshell_sundialhub_state = "ai";
+                gshell_sundialhub_focus = "ai";
+                gshell_sundialhub_last = "ai";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBAI";
+                gshell_command_result = "SUNDIAL HUB AI OK";
+                gshell_input_status_text = "AI";
+                hub_terminal_text = "SUNDIALHUBAI -> AI CONTROL ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBVOICE:
+                gshell_sundialhub_voice_ready = 1;
+                gshell_sundial_voice_ready = 1;
+                gshell_sundialvis_voice_ready = 1;
+                gshell_sundialhub_state = "voice";
+                gshell_sundialhub_focus = "voice";
+                gshell_sundialhub_last = "voice";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBVOICE";
+                gshell_command_result = "SUNDIAL HUB VOICE OK";
+                gshell_input_status_text = "VOICE";
+                hub_terminal_text = "SUNDIALHUBVOICE -> VOICE INTENT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBSEARCH:
+                gshell_sundialhub_search_ready = 1;
+                gshell_sundial_search_ready = 1;
+                gshell_sundialvis_search_ready = 1;
+                gshell_sundialhub_state = "search";
+                gshell_sundialhub_focus = "search";
+                gshell_sundialhub_last = "search";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBSEARCH";
+                gshell_command_result = "SUNDIAL HUB SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                hub_terminal_text = "SUNDIALHUBSEARCH -> TEXT SEARCH ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBINTENT:
+                gshell_sundialhub_intent_ready = 1;
+                gshell_sundialhub_state = "intent";
+                gshell_sundialhub_focus = "intent";
+                gshell_sundialhub_last = "intent";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBINTENT";
+                gshell_command_result = "SUNDIAL HUB INTENT OK";
+                gshell_input_status_text = "INTENT";
+                hub_terminal_text = "SUNDIALHUBINTENT -> INTENT ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBSECURITY:
+                gshell_sundialhub_security_ready = 1;
+                gshell_sundialhub_state = "security";
+                gshell_sundialhub_focus = "security";
+                gshell_sundialhub_last = "security";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBSECURITY";
+                gshell_command_result = "SUNDIAL HUB SECURITY OK";
+                gshell_input_status_text = "SECURITY";
+                hub_terminal_text = "SUNDIALHUBSECURITY -> SECURITY GATE ENTRY RESERVED";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBDEMO:
+                gshell_sundialhub_core_ready = 1;
+                gshell_sundialhub_control_ready = 1;
+                gshell_sundialhub_perms_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_sundialhub_voice_ready = 1;
+                gshell_sundialhub_search_ready = 1;
+                gshell_sundialhub_intent_ready = 1;
+                gshell_sundialhub_security_ready = 1;
+                gshell_sundialhub_demo_ready = 1;
+                gshell_sundialfinal_closeout_ready = 1;
+                gshell_sundialfinal_ux_ready = 1;
+                gshell_sundialhub_state = "demo";
+                gshell_sundialhub_focus = "control";
+                gshell_sundialhub_last = "demo";
+                gshell_sundialhub_events++;
+                gshell_command_name = "SUNDIALHUBDEMO";
+                gshell_command_result = "SUNDIAL HUB DEMO OK";
+                gshell_input_status_text = "DEMO";
+                hub_terminal_text = "SUNDIALHUBDEMO -> SUNDIAL CONTROL HUB READY";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBCHECK: {
+                int ok = gshell_sundialhub_core_ready &&
+                         gshell_sundialhub_control_ready &&
+                         gshell_sundialhub_perms_ready &&
+                         gshell_sundialhub_rules_ready &&
+                         gshell_sundialhub_audit_ready &&
+                         gshell_sundialhub_app_behavior_ready &&
+                         gshell_sundialhub_network_ready &&
+                         gshell_sundialhub_file_ready &&
+                         gshell_sundialhub_ai_ready &&
+                         gshell_sundialhub_voice_ready &&
+                         gshell_sundialhub_search_ready &&
+                         gshell_sundialhub_intent_ready &&
+                         gshell_sundialhub_security_ready;
+                gshell_sundialhub_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNDIALHUBCHECK";
+                gshell_command_result = ok ? "SUNDIAL HUB CHECK OK" : "SUNDIAL HUB CHECK WAIT";
+                gshell_input_status_text = ok ? "HUBOK" : "HUBWAIT";
+                hub_terminal_text = ok ? "SUNDIALHUBCHECK -> SUNDIAL CONTROL HUB READY" : "SUNDIALHUBCHECK -> RUN SUNDIALHUBDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNDIALHUBRESET:
+                gshell_sundialhub_core_ready = 0;
+                gshell_sundialhub_control_ready = 0;
+                gshell_sundialhub_perms_ready = 0;
+                gshell_sundialhub_rules_ready = 0;
+                gshell_sundialhub_audit_ready = 0;
+                gshell_sundialhub_app_behavior_ready = 0;
+                gshell_sundialhub_network_ready = 0;
+                gshell_sundialhub_file_ready = 0;
+                gshell_sundialhub_ai_ready = 0;
+                gshell_sundialhub_voice_ready = 0;
+                gshell_sundialhub_search_ready = 0;
+                gshell_sundialhub_intent_ready = 0;
+                gshell_sundialhub_security_ready = 0;
+                gshell_sundialhub_demo_ready = 0;
+                gshell_sundialhub_events = 0;
+                gshell_sundialhub_state = "idle";
+                gshell_sundialhub_focus = "control";
+                gshell_sundialhub_last = "reset";
+                gshell_command_name = "SUNDIALHUBRESET";
+                gshell_command_result = "SUNDIAL HUB RESET OK";
+                gshell_input_status_text = "RESET";
+                hub_terminal_text = "SUNDIALHUBRESET -> SUNDIAL CONTROL HUB RESET";
+                break;
+
+            case GSHELL_CMD_SUNDIALHUBNEXT:
+                gshell_command_name = "SUNDIALHUBNEXT";
+                gshell_command_result = "SUNDIAL HUB NEXT OK";
+                gshell_input_status_text = "NEXT";
+                hub_terminal_text = "SUNDIALHUBNEXT -> 1.9.1 CONTROL SECTOR ACTIONS";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(hub_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_CONTROLSECTORSTATUS && command_id <= GSHELL_CMD_CONTROLSECTORNEXT) {
+        const char* control_terminal_text = "CONTROLSECTORSTATUS -> CONTROL SECTOR ACTIONS READY";
+
+        gshell_command_view = "CONTROLSECTORSTATUS";
+        gshell_input_status_text = "CTRLSEC";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_CONTROLSECTORSTATUS:
+                gshell_command_name = "CONTROLSECTORSTATUS";
+                gshell_command_result = "CONTROL SECTOR STATUS OK";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTOROPEN:
+                gshell_controlsector_open_ready = 1;
+                gshell_sundialhub_control_ready = 1;
+                gshell_controlsector_state = "open";
+                gshell_controlsector_target = "control";
+                gshell_controlsector_last = "open";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTOROPEN";
+                gshell_command_result = "CONTROL SECTOR OPEN OK";
+                gshell_input_status_text = "OPEN";
+                control_terminal_text = "CONTROLSECTOROPEN -> CONTROL SECTOR OPENED";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORALLOW:
+                gshell_controlsector_allow_ready = 1;
+                gshell_controlsector_policy = "allow";
+                gshell_controlsector_state = "allow";
+                gshell_controlsector_last = "allow";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORALLOW";
+                gshell_command_result = "CONTROL SECTOR ALLOW OK";
+                gshell_input_status_text = "ALLOW";
+                control_terminal_text = "CONTROLSECTORALLOW -> SELECTED ACTION ALLOWED";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORBLOCK:
+                gshell_controlsector_block_ready = 1;
+                gshell_controlsector_policy = "block";
+                gshell_controlsector_state = "block";
+                gshell_controlsector_last = "block";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORBLOCK";
+                gshell_command_result = "CONTROL SECTOR BLOCK OK";
+                gshell_input_status_text = "BLOCK";
+                control_terminal_text = "CONTROLSECTORBLOCK -> SELECTED ACTION BLOCKED";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORASK:
+                gshell_controlsector_ask_ready = 1;
+                gshell_controlsector_policy = "ask";
+                gshell_controlsector_state = "ask";
+                gshell_controlsector_last = "ask";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORASK";
+                gshell_command_result = "CONTROL SECTOR ASK OK";
+                gshell_input_status_text = "ASK";
+                control_terminal_text = "CONTROLSECTORASK -> SELECTED ACTION REQUIRES CONFIRMATION";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORTEMP:
+                gshell_controlsector_temp_ready = 1;
+                gshell_controlsector_policy = "allow-once";
+                gshell_controlsector_state = "temporary";
+                gshell_controlsector_last = "temporary";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORTEMP";
+                gshell_command_result = "CONTROL SECTOR TEMP OK";
+                gshell_input_status_text = "TEMP";
+                control_terminal_text = "CONTROLSECTORTEMP -> TEMPORARY ALLOW ONCE MODEL READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORFILE:
+                gshell_controlsector_file_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_controlsector_state = "file-control";
+                gshell_controlsector_target = "file";
+                gshell_controlsector_last = "file";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORFILE";
+                gshell_command_result = "CONTROL SECTOR FILE OK";
+                gshell_input_status_text = "FILE";
+                control_terminal_text = "CONTROLSECTORFILE -> FILE ACCESS CONTROL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORNET:
+                gshell_controlsector_net_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_controlsector_state = "network-control";
+                gshell_controlsector_target = "network";
+                gshell_controlsector_last = "network";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORNET";
+                gshell_command_result = "CONTROL SECTOR NET OK";
+                gshell_input_status_text = "NET";
+                control_terminal_text = "CONTROLSECTORNET -> NETWORK ACCESS CONTROL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORAI:
+                gshell_controlsector_ai_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_controlsector_state = "ai-control";
+                gshell_controlsector_target = "ai";
+                gshell_controlsector_last = "ai";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORAI";
+                gshell_command_result = "CONTROL SECTOR AI OK";
+                gshell_input_status_text = "AI";
+                control_terminal_text = "CONTROLSECTORAI -> AI ACCESS CONTROL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORAPP:
+                gshell_controlsector_app_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_controlsector_state = "app-control";
+                gshell_controlsector_target = "app";
+                gshell_controlsector_last = "app";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORAPP";
+                gshell_command_result = "CONTROL SECTOR APP OK";
+                gshell_input_status_text = "APP";
+                control_terminal_text = "CONTROLSECTORAPP -> APP BEHAVIOR CONTROL ENTRY READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORRULE:
+                gshell_controlsector_rule_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_controlsector_state = "rule-link";
+                gshell_controlsector_target = "rule";
+                gshell_controlsector_last = "rule";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORRULE";
+                gshell_command_result = "CONTROL SECTOR RULE OK";
+                gshell_input_status_text = "RULE";
+                control_terminal_text = "CONTROLSECTORRULE -> USER RULE LINK READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORAUDIT:
+                gshell_controlsector_audit_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_controlsector_state = "audit-link";
+                gshell_controlsector_target = "audit";
+                gshell_controlsector_last = "audit";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORAUDIT";
+                gshell_command_result = "CONTROL SECTOR AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                control_terminal_text = "CONTROLSECTORAUDIT -> AUDIT LINK READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORPERM:
+                gshell_controlsector_perm_ready = 1;
+                gshell_sundialhub_perms_ready = 1;
+                gshell_controlsector_state = "permission-link";
+                gshell_controlsector_target = "permission";
+                gshell_controlsector_last = "permission";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORPERM";
+                gshell_command_result = "CONTROL SECTOR PERM OK";
+                gshell_input_status_text = "PERM";
+                control_terminal_text = "CONTROLSECTORPERM -> PERMISSION LINK READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORINTENT:
+                gshell_controlsector_intent_ready = 1;
+                gshell_sundialhub_intent_ready = 1;
+                gshell_controlsector_state = "intent-link";
+                gshell_controlsector_target = "intent";
+                gshell_controlsector_last = "intent";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORINTENT";
+                gshell_command_result = "CONTROL SECTOR INTENT OK";
+                gshell_input_status_text = "INTENT";
+                control_terminal_text = "CONTROLSECTORINTENT -> INTENT LINK READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORDEMO:
+                gshell_controlsector_open_ready = 1;
+                gshell_controlsector_allow_ready = 1;
+                gshell_controlsector_block_ready = 1;
+                gshell_controlsector_ask_ready = 1;
+                gshell_controlsector_temp_ready = 1;
+                gshell_controlsector_file_ready = 1;
+                gshell_controlsector_net_ready = 1;
+                gshell_controlsector_ai_ready = 1;
+                gshell_controlsector_app_ready = 1;
+                gshell_controlsector_rule_ready = 1;
+                gshell_controlsector_audit_ready = 1;
+                gshell_controlsector_perm_ready = 1;
+                gshell_controlsector_intent_ready = 1;
+                gshell_controlsector_demo_ready = 1;
+                gshell_sundialhub_demo_ready = 1;
+                gshell_sundialhub_control_ready = 1;
+                gshell_sundialhub_perms_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_sundialhub_intent_ready = 1;
+                gshell_controlsector_state = "demo";
+                gshell_controlsector_policy = "ask";
+                gshell_controlsector_target = "control";
+                gshell_controlsector_last = "demo";
+                gshell_controlsector_events++;
+                gshell_command_name = "CONTROLSECTORDEMO";
+                gshell_command_result = "CONTROL SECTOR DEMO OK";
+                gshell_input_status_text = "DEMO";
+                control_terminal_text = "CONTROLSECTORDEMO -> CONTROL SECTOR ACTIONS READY";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORCHECK: {
+                int ok = gshell_controlsector_open_ready &&
+                         gshell_controlsector_allow_ready &&
+                         gshell_controlsector_block_ready &&
+                         gshell_controlsector_ask_ready &&
+                         gshell_controlsector_temp_ready &&
+                         gshell_controlsector_file_ready &&
+                         gshell_controlsector_net_ready &&
+                         gshell_controlsector_ai_ready &&
+                         gshell_controlsector_app_ready &&
+                         gshell_controlsector_rule_ready &&
+                         gshell_controlsector_audit_ready &&
+                         gshell_controlsector_perm_ready &&
+                         gshell_controlsector_intent_ready;
+                gshell_controlsector_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "CONTROLSECTORCHECK";
+                gshell_command_result = ok ? "CONTROL SECTOR CHECK OK" : "CONTROL SECTOR CHECK WAIT";
+                gshell_input_status_text = ok ? "CTRLSECOK" : "CTRLWAIT";
+                control_terminal_text = ok ? "CONTROLSECTORCHECK -> CONTROL SECTOR ACTIONS READY" : "CONTROLSECTORCHECK -> RUN CONTROLSECTORDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_CONTROLSECTORRESET:
+                gshell_controlsector_open_ready = 0;
+                gshell_controlsector_allow_ready = 0;
+                gshell_controlsector_block_ready = 0;
+                gshell_controlsector_ask_ready = 0;
+                gshell_controlsector_temp_ready = 0;
+                gshell_controlsector_file_ready = 0;
+                gshell_controlsector_net_ready = 0;
+                gshell_controlsector_ai_ready = 0;
+                gshell_controlsector_app_ready = 0;
+                gshell_controlsector_rule_ready = 0;
+                gshell_controlsector_audit_ready = 0;
+                gshell_controlsector_perm_ready = 0;
+                gshell_controlsector_intent_ready = 0;
+                gshell_controlsector_demo_ready = 0;
+                gshell_controlsector_events = 0;
+                gshell_controlsector_state = "idle";
+                gshell_controlsector_policy = "ask";
+                gshell_controlsector_target = "control";
+                gshell_controlsector_last = "reset";
+                gshell_command_name = "CONTROLSECTORRESET";
+                gshell_command_result = "CONTROL SECTOR RESET OK";
+                gshell_input_status_text = "RESET";
+                control_terminal_text = "CONTROLSECTORRESET -> CONTROL SECTOR ACTIONS RESET";
+                break;
+
+            case GSHELL_CMD_CONTROLSECTORNEXT:
+                gshell_command_name = "CONTROLSECTORNEXT";
+                gshell_command_result = "CONTROL SECTOR NEXT OK";
+                gshell_input_status_text = "NEXT";
+                control_terminal_text = "CONTROLSECTORNEXT -> 1.9.2 PERMISSION REQUEST FLOW";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(control_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_PERMREQSTATUS && command_id <= GSHELL_CMD_PERMREQNEXT) {
+        const char* perm_terminal_text = "PERMREQSTATUS -> PERMISSION REQUEST FLOW READY";
+
+        gshell_command_view = "PERMREQSTATUS";
+        gshell_input_status_text = "PERMREQ";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_PERMREQSTATUS:
+                gshell_command_name = "PERMREQSTATUS";
+                gshell_command_result = "PERMISSION REQUEST STATUS OK";
+                break;
+
+            case GSHELL_CMD_PERMREQOPEN:
+                gshell_permreq_open_ready = 1;
+                gshell_sundialhub_perms_ready = 1;
+                gshell_controlsector_perm_ready = 1;
+                gshell_permreq_state = "open";
+                gshell_permreq_last = "open";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQOPEN";
+                gshell_command_result = "PERMISSION REQUEST OPEN OK";
+                gshell_input_status_text = "OPEN";
+                perm_terminal_text = "PERMREQOPEN -> PERMISSION REQUEST PANEL OPENED";
+                break;
+
+            case GSHELL_CMD_PERMREQSOURCE:
+                gshell_permreq_source_ready = 1;
+                gshell_permreq_source = "demo.app";
+                gshell_permreq_state = "source";
+                gshell_permreq_last = "source";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQSOURCE";
+                gshell_command_result = "PERMISSION REQUEST SOURCE OK";
+                gshell_input_status_text = "SOURCE";
+                perm_terminal_text = "PERMREQSOURCE -> REQUEST SOURCE APP READY";
+                break;
+
+            case GSHELL_CMD_PERMREQTARGET:
+                gshell_permreq_target_ready = 1;
+                gshell_permreq_target = "protected.resource";
+                gshell_permreq_state = "target";
+                gshell_permreq_last = "target";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQTARGET";
+                gshell_command_result = "PERMISSION REQUEST TARGET OK";
+                gshell_input_status_text = "TARGET";
+                perm_terminal_text = "PERMREQTARGET -> REQUEST TARGET RESOURCE READY";
+                break;
+
+            case GSHELL_CMD_PERMREQFILE:
+                gshell_permreq_file_ready = 1;
+                gshell_controlsector_file_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_permreq_target = "file";
+                gshell_permreq_state = "file-request";
+                gshell_permreq_last = "file";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQFILE";
+                gshell_command_result = "PERMISSION REQUEST FILE OK";
+                gshell_input_status_text = "FILE";
+                perm_terminal_text = "PERMREQFILE -> FILE ACCESS REQUEST MODEL READY";
+                break;
+
+            case GSHELL_CMD_PERMREQNET:
+                gshell_permreq_net_ready = 1;
+                gshell_controlsector_net_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_permreq_target = "network";
+                gshell_permreq_state = "network-request";
+                gshell_permreq_last = "network";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQNET";
+                gshell_command_result = "PERMISSION REQUEST NET OK";
+                gshell_input_status_text = "NET";
+                perm_terminal_text = "PERMREQNET -> NETWORK ACCESS REQUEST MODEL READY";
+                break;
+
+            case GSHELL_CMD_PERMREQAI:
+                gshell_permreq_ai_ready = 1;
+                gshell_controlsector_ai_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_permreq_target = "ai";
+                gshell_permreq_state = "ai-request";
+                gshell_permreq_last = "ai";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQAI";
+                gshell_command_result = "PERMISSION REQUEST AI OK";
+                gshell_input_status_text = "AI";
+                perm_terminal_text = "PERMREQAI -> AI ACCESS REQUEST MODEL READY";
+                break;
+
+            case GSHELL_CMD_PERMREQAPP:
+                gshell_permreq_app_ready = 1;
+                gshell_controlsector_app_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_permreq_target = "app-behavior";
+                gshell_permreq_state = "app-request";
+                gshell_permreq_last = "app";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQAPP";
+                gshell_command_result = "PERMISSION REQUEST APP OK";
+                gshell_input_status_text = "APP";
+                perm_terminal_text = "PERMREQAPP -> APP BEHAVIOR REQUEST MODEL READY";
+                break;
+
+            case GSHELL_CMD_PERMREQASK:
+                gshell_permreq_ask_ready = 1;
+                gshell_controlsector_ask_ready = 1;
+                gshell_permreq_policy = "ask";
+                gshell_permreq_state = "ask";
+                gshell_permreq_last = "ask";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQASK";
+                gshell_command_result = "PERMISSION REQUEST ASK OK";
+                gshell_input_status_text = "ASK";
+                perm_terminal_text = "PERMREQASK -> USER CONFIRMATION REQUIRED";
+                break;
+
+            case GSHELL_CMD_PERMREQALLOW:
+                gshell_permreq_allow_ready = 1;
+                gshell_controlsector_allow_ready = 1;
+                gshell_permreq_policy = "allow";
+                gshell_permreq_state = "allowed";
+                gshell_permreq_last = "allow";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQALLOW";
+                gshell_command_result = "PERMISSION REQUEST ALLOW OK";
+                gshell_input_status_text = "ALLOW";
+                perm_terminal_text = "PERMREQALLOW -> REQUEST ALLOWED";
+                break;
+
+            case GSHELL_CMD_PERMREQBLOCK:
+                gshell_permreq_block_ready = 1;
+                gshell_controlsector_block_ready = 1;
+                gshell_permreq_policy = "block";
+                gshell_permreq_state = "blocked";
+                gshell_permreq_last = "block";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQBLOCK";
+                gshell_command_result = "PERMISSION REQUEST BLOCK OK";
+                gshell_input_status_text = "BLOCK";
+                perm_terminal_text = "PERMREQBLOCK -> REQUEST BLOCKED";
+                break;
+
+            case GSHELL_CMD_PERMREQTEMP:
+                gshell_permreq_temp_ready = 1;
+                gshell_controlsector_temp_ready = 1;
+                gshell_permreq_policy = "allow-once";
+                gshell_permreq_state = "temporary";
+                gshell_permreq_last = "temporary";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQTEMP";
+                gshell_command_result = "PERMISSION REQUEST TEMP OK";
+                gshell_input_status_text = "TEMP";
+                perm_terminal_text = "PERMREQTEMP -> REQUEST TEMPORARILY ALLOWED";
+                break;
+
+            case GSHELL_CMD_PERMREQRULE:
+                gshell_permreq_rule_ready = 1;
+                gshell_controlsector_rule_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_permreq_state = "rule-link";
+                gshell_permreq_last = "rule";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQRULE";
+                gshell_command_result = "PERMISSION REQUEST RULE OK";
+                gshell_input_status_text = "RULE";
+                perm_terminal_text = "PERMREQRULE -> USER RULE LINK READY";
+                break;
+
+            case GSHELL_CMD_PERMREQAUDIT:
+                gshell_permreq_audit_ready = 1;
+                gshell_controlsector_audit_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_permreq_state = "audit-link";
+                gshell_permreq_last = "audit";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQAUDIT";
+                gshell_command_result = "PERMISSION REQUEST AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                perm_terminal_text = "PERMREQAUDIT -> AUDIT RECORD LINK READY";
+                break;
+
+            case GSHELL_CMD_PERMREQVOICE:
+                gshell_permreq_voice_ready = 1;
+                gshell_sundialhub_voice_ready = 1;
+                gshell_permreq_state = "voice-confirm";
+                gshell_permreq_last = "voice";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQVOICE";
+                gshell_command_result = "PERMISSION REQUEST VOICE OK";
+                gshell_input_status_text = "VOICE";
+                perm_terminal_text = "PERMREQVOICE -> VOICE CONFIRMATION ENTRY READY";
+                break;
+
+            case GSHELL_CMD_PERMREQSEARCH:
+                gshell_permreq_search_ready = 1;
+                gshell_sundialhub_search_ready = 1;
+                gshell_permreq_state = "search-link";
+                gshell_permreq_last = "search";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQSEARCH";
+                gshell_command_result = "PERMISSION REQUEST SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                perm_terminal_text = "PERMREQSEARCH -> SEARCH CAN LOCATE REQUEST CONTEXT";
+                break;
+
+            case GSHELL_CMD_PERMREQDEMO:
+                gshell_permreq_open_ready = 1;
+                gshell_permreq_source_ready = 1;
+                gshell_permreq_target_ready = 1;
+                gshell_permreq_file_ready = 1;
+                gshell_permreq_net_ready = 1;
+                gshell_permreq_ai_ready = 1;
+                gshell_permreq_app_ready = 1;
+                gshell_permreq_ask_ready = 1;
+                gshell_permreq_allow_ready = 1;
+                gshell_permreq_block_ready = 1;
+                gshell_permreq_temp_ready = 1;
+                gshell_permreq_rule_ready = 1;
+                gshell_permreq_audit_ready = 1;
+                gshell_permreq_voice_ready = 1;
+                gshell_permreq_search_ready = 1;
+                gshell_permreq_demo_ready = 1;
+                gshell_controlsector_demo_ready = 1;
+                gshell_sundialhub_perms_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_permreq_state = "demo";
+                gshell_permreq_policy = "ask";
+                gshell_permreq_source = "demo.app";
+                gshell_permreq_target = "file/network/ai";
+                gshell_permreq_last = "demo";
+                gshell_permreq_events++;
+                gshell_command_name = "PERMREQDEMO";
+                gshell_command_result = "PERMISSION REQUEST DEMO OK";
+                gshell_input_status_text = "DEMO";
+                perm_terminal_text = "PERMREQDEMO -> PERMISSION REQUEST FLOW READY";
+                break;
+
+            case GSHELL_CMD_PERMREQCHECK: {
+                int ok = gshell_permreq_open_ready &&
+                         gshell_permreq_source_ready &&
+                         gshell_permreq_target_ready &&
+                         gshell_permreq_file_ready &&
+                         gshell_permreq_net_ready &&
+                         gshell_permreq_ai_ready &&
+                         gshell_permreq_app_ready &&
+                         gshell_permreq_ask_ready &&
+                         gshell_permreq_allow_ready &&
+                         gshell_permreq_block_ready &&
+                         gshell_permreq_temp_ready &&
+                         gshell_permreq_rule_ready &&
+                         gshell_permreq_audit_ready &&
+                         gshell_permreq_voice_ready &&
+                         gshell_permreq_search_ready;
+                gshell_permreq_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "PERMREQCHECK";
+                gshell_command_result = ok ? "PERMISSION REQUEST CHECK OK" : "PERMISSION REQUEST CHECK WAIT";
+                gshell_input_status_text = ok ? "PERMOK" : "PERMWT";
+                perm_terminal_text = ok ? "PERMREQCHECK -> PERMISSION REQUEST FLOW READY" : "PERMREQCHECK -> RUN PERMREQDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_PERMREQRESET:
+                gshell_permreq_open_ready = 0;
+                gshell_permreq_source_ready = 0;
+                gshell_permreq_target_ready = 0;
+                gshell_permreq_file_ready = 0;
+                gshell_permreq_net_ready = 0;
+                gshell_permreq_ai_ready = 0;
+                gshell_permreq_app_ready = 0;
+                gshell_permreq_ask_ready = 0;
+                gshell_permreq_allow_ready = 0;
+                gshell_permreq_block_ready = 0;
+                gshell_permreq_temp_ready = 0;
+                gshell_permreq_rule_ready = 0;
+                gshell_permreq_audit_ready = 0;
+                gshell_permreq_voice_ready = 0;
+                gshell_permreq_search_ready = 0;
+                gshell_permreq_demo_ready = 0;
+                gshell_permreq_events = 0;
+                gshell_permreq_state = "idle";
+                gshell_permreq_policy = "ask";
+                gshell_permreq_source = "app";
+                gshell_permreq_target = "resource";
+                gshell_permreq_last = "reset";
+                gshell_command_name = "PERMREQRESET";
+                gshell_command_result = "PERMISSION REQUEST RESET OK";
+                gshell_input_status_text = "RESET";
+                perm_terminal_text = "PERMREQRESET -> PERMISSION REQUEST FLOW RESET";
+                break;
+
+            case GSHELL_CMD_PERMREQNEXT:
+                gshell_command_name = "PERMREQNEXT";
+                gshell_command_result = "PERMISSION REQUEST NEXT OK";
+                gshell_input_status_text = "NEXT";
+                perm_terminal_text = "PERMREQNEXT -> 1.9.3 AUDIT BEHAVIOR TIMELINE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(perm_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_AUDITFLOWSTATUS && command_id <= GSHELL_CMD_AUDITFLOWNEXT) {
+        const char* audit_terminal_text = "AUDITFLOWSTATUS -> AUDIT BEHAVIOR TIMELINE READY";
+
+        gshell_command_view = "AUDITFLOWSTATUS";
+        gshell_input_status_text = "AUDIT";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_AUDITFLOWSTATUS:
+                gshell_command_name = "AUDITFLOWSTATUS";
+                gshell_command_result = "AUDIT FLOW STATUS OK";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWOPEN:
+                gshell_auditflow_open_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_controlsector_audit_ready = 1;
+                gshell_permreq_audit_ready = 1;
+                gshell_auditflow_state = "open";
+                gshell_auditflow_event = "audit-open";
+                gshell_auditflow_last = "open";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWOPEN";
+                gshell_command_result = "AUDIT FLOW OPEN OK";
+                gshell_input_status_text = "OPEN";
+                audit_terminal_text = "AUDITFLOWOPEN -> AUDIT TIMELINE OPENED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWSOURCE:
+                gshell_auditflow_source_ready = 1;
+                gshell_permreq_source_ready = 1;
+                gshell_auditflow_source = "demo.app";
+                gshell_auditflow_state = "source";
+                gshell_auditflow_event = "source-ready";
+                gshell_auditflow_last = "source";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWSOURCE";
+                gshell_command_result = "AUDIT FLOW SOURCE OK";
+                gshell_input_status_text = "SOURCE";
+                audit_terminal_text = "AUDITFLOWSOURCE -> AUDIT SOURCE APP READY";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWEVENT:
+                gshell_auditflow_event_ready = 1;
+                gshell_auditflow_state = "event";
+                gshell_auditflow_event = "permission-request";
+                gshell_auditflow_last = "event";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWEVENT";
+                gshell_command_result = "AUDIT FLOW EVENT OK";
+                gshell_input_status_text = "EVENT";
+                audit_terminal_text = "AUDITFLOWEVENT -> AUDIT EVENT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWTIMELINE:
+                gshell_auditflow_timeline_ready = 1;
+                gshell_auditflow_state = "timeline";
+                gshell_auditflow_event = "timeline";
+                gshell_auditflow_last = "timeline";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWTIMELINE";
+                gshell_command_result = "AUDIT FLOW TIMELINE OK";
+                gshell_input_status_text = "TIMELINE";
+                audit_terminal_text = "AUDITFLOWTIMELINE -> BEHAVIOR TIMELINE READY";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWLAST:
+                gshell_auditflow_last_ready = 1;
+                gshell_auditflow_state = "last-event";
+                gshell_auditflow_event = "last";
+                gshell_auditflow_last = "last";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWLAST";
+                gshell_command_result = "AUDIT FLOW LAST OK";
+                gshell_input_status_text = "LAST";
+                audit_terminal_text = "AUDITFLOWLAST -> LAST AUDIT EVENT READY";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWFILE:
+                gshell_auditflow_file_ready = 1;
+                gshell_permreq_file_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_auditflow_state = "file-event";
+                gshell_auditflow_event = "file-access";
+                gshell_auditflow_last = "file";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWFILE";
+                gshell_command_result = "AUDIT FLOW FILE OK";
+                gshell_input_status_text = "FILE";
+                audit_terminal_text = "AUDITFLOWFILE -> FILE ACCESS EVENT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWNET:
+                gshell_auditflow_net_ready = 1;
+                gshell_permreq_net_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_auditflow_state = "network-event";
+                gshell_auditflow_event = "network-access";
+                gshell_auditflow_last = "network";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWNET";
+                gshell_command_result = "AUDIT FLOW NET OK";
+                gshell_input_status_text = "NET";
+                audit_terminal_text = "AUDITFLOWNET -> NETWORK ACCESS EVENT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWAI:
+                gshell_auditflow_ai_ready = 1;
+                gshell_permreq_ai_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_auditflow_state = "ai-event";
+                gshell_auditflow_event = "ai-access";
+                gshell_auditflow_last = "ai";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWAI";
+                gshell_command_result = "AUDIT FLOW AI OK";
+                gshell_input_status_text = "AI";
+                audit_terminal_text = "AUDITFLOWAI -> AI ACCESS EVENT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWAPP:
+                gshell_auditflow_app_ready = 1;
+                gshell_permreq_app_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_auditflow_state = "app-event";
+                gshell_auditflow_event = "app-behavior";
+                gshell_auditflow_last = "app";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWAPP";
+                gshell_command_result = "AUDIT FLOW APP OK";
+                gshell_input_status_text = "APP";
+                audit_terminal_text = "AUDITFLOWAPP -> APP BEHAVIOR EVENT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWALLOW:
+                gshell_auditflow_allow_ready = 1;
+                gshell_permreq_allow_ready = 1;
+                gshell_controlsector_allow_ready = 1;
+                gshell_auditflow_state = "allowed";
+                gshell_auditflow_event = "allow";
+                gshell_auditflow_last = "allow";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWALLOW";
+                gshell_command_result = "AUDIT FLOW ALLOW OK";
+                gshell_input_status_text = "ALLOW";
+                audit_terminal_text = "AUDITFLOWALLOW -> ALLOW DECISION RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWBLOCK:
+                gshell_auditflow_block_ready = 1;
+                gshell_permreq_block_ready = 1;
+                gshell_controlsector_block_ready = 1;
+                gshell_auditflow_state = "blocked";
+                gshell_auditflow_event = "block";
+                gshell_auditflow_last = "block";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWBLOCK";
+                gshell_command_result = "AUDIT FLOW BLOCK OK";
+                gshell_input_status_text = "BLOCK";
+                audit_terminal_text = "AUDITFLOWBLOCK -> BLOCK DECISION RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWTEMP:
+                gshell_auditflow_temp_ready = 1;
+                gshell_permreq_temp_ready = 1;
+                gshell_controlsector_temp_ready = 1;
+                gshell_auditflow_state = "temporary";
+                gshell_auditflow_event = "allow-once";
+                gshell_auditflow_last = "temporary";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWTEMP";
+                gshell_command_result = "AUDIT FLOW TEMP OK";
+                gshell_input_status_text = "TEMP";
+                audit_terminal_text = "AUDITFLOWTEMP -> TEMPORARY DECISION RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWRULE:
+                gshell_auditflow_rule_ready = 1;
+                gshell_permreq_rule_ready = 1;
+                gshell_controlsector_rule_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_auditflow_state = "rule-hit";
+                gshell_auditflow_event = "rule";
+                gshell_auditflow_last = "rule";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWRULE";
+                gshell_command_result = "AUDIT FLOW RULE OK";
+                gshell_input_status_text = "RULE";
+                audit_terminal_text = "AUDITFLOWRULE -> RULE HIT RECORDED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWSEARCH:
+                gshell_auditflow_search_ready = 1;
+                gshell_permreq_search_ready = 1;
+                gshell_sundialhub_search_ready = 1;
+                gshell_auditflow_state = "search";
+                gshell_auditflow_event = "search";
+                gshell_auditflow_last = "search";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWSEARCH";
+                gshell_command_result = "AUDIT FLOW SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                audit_terminal_text = "AUDITFLOWSEARCH -> SEARCH CAN LOCATE AUDIT EVENTS";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWVOICE:
+                gshell_auditflow_voice_ready = 1;
+                gshell_permreq_voice_ready = 1;
+                gshell_sundialhub_voice_ready = 1;
+                gshell_auditflow_state = "voice";
+                gshell_auditflow_event = "voice-confirm";
+                gshell_auditflow_last = "voice";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWVOICE";
+                gshell_command_result = "AUDIT FLOW VOICE OK";
+                gshell_input_status_text = "VOICE";
+                audit_terminal_text = "AUDITFLOWVOICE -> VOICE DECISION CAN BE AUDITED";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWDEMO:
+                gshell_auditflow_open_ready = 1;
+                gshell_auditflow_source_ready = 1;
+                gshell_auditflow_event_ready = 1;
+                gshell_auditflow_timeline_ready = 1;
+                gshell_auditflow_last_ready = 1;
+                gshell_auditflow_file_ready = 1;
+                gshell_auditflow_net_ready = 1;
+                gshell_auditflow_ai_ready = 1;
+                gshell_auditflow_app_ready = 1;
+                gshell_auditflow_allow_ready = 1;
+                gshell_auditflow_block_ready = 1;
+                gshell_auditflow_temp_ready = 1;
+                gshell_auditflow_rule_ready = 1;
+                gshell_auditflow_search_ready = 1;
+                gshell_auditflow_voice_ready = 1;
+                gshell_auditflow_demo_ready = 1;
+                gshell_permreq_demo_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_controlsector_audit_ready = 1;
+                gshell_auditflow_state = "demo";
+                gshell_auditflow_source = "demo.app";
+                gshell_auditflow_event = "permission-timeline";
+                gshell_auditflow_last = "demo";
+                gshell_auditflow_events++;
+                gshell_command_name = "AUDITFLOWDEMO";
+                gshell_command_result = "AUDIT FLOW DEMO OK";
+                gshell_input_status_text = "DEMO";
+                audit_terminal_text = "AUDITFLOWDEMO -> AUDIT BEHAVIOR TIMELINE READY";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWCHECK: {
+                int ok = gshell_auditflow_open_ready &&
+                         gshell_auditflow_source_ready &&
+                         gshell_auditflow_event_ready &&
+                         gshell_auditflow_timeline_ready &&
+                         gshell_auditflow_last_ready &&
+                         gshell_auditflow_file_ready &&
+                         gshell_auditflow_net_ready &&
+                         gshell_auditflow_ai_ready &&
+                         gshell_auditflow_app_ready &&
+                         gshell_auditflow_allow_ready &&
+                         gshell_auditflow_block_ready &&
+                         gshell_auditflow_temp_ready &&
+                         gshell_auditflow_rule_ready &&
+                         gshell_auditflow_search_ready &&
+                         gshell_auditflow_voice_ready;
+                gshell_auditflow_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "AUDITFLOWCHECK";
+                gshell_command_result = ok ? "AUDIT FLOW CHECK OK" : "AUDIT FLOW CHECK WAIT";
+                gshell_input_status_text = ok ? "AUDITOK" : "AUDITWT";
+                audit_terminal_text = ok ? "AUDITFLOWCHECK -> AUDIT BEHAVIOR TIMELINE READY" : "AUDITFLOWCHECK -> RUN AUDITFLOWDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_AUDITFLOWRESET:
+                gshell_auditflow_open_ready = 0;
+                gshell_auditflow_source_ready = 0;
+                gshell_auditflow_event_ready = 0;
+                gshell_auditflow_timeline_ready = 0;
+                gshell_auditflow_last_ready = 0;
+                gshell_auditflow_file_ready = 0;
+                gshell_auditflow_net_ready = 0;
+                gshell_auditflow_ai_ready = 0;
+                gshell_auditflow_app_ready = 0;
+                gshell_auditflow_allow_ready = 0;
+                gshell_auditflow_block_ready = 0;
+                gshell_auditflow_temp_ready = 0;
+                gshell_auditflow_rule_ready = 0;
+                gshell_auditflow_search_ready = 0;
+                gshell_auditflow_voice_ready = 0;
+                gshell_auditflow_demo_ready = 0;
+                gshell_auditflow_events = 0;
+                gshell_auditflow_state = "idle";
+                gshell_auditflow_source = "demo.app";
+                gshell_auditflow_event = "none";
+                gshell_auditflow_last = "reset";
+                gshell_command_name = "AUDITFLOWRESET";
+                gshell_command_result = "AUDIT FLOW RESET OK";
+                gshell_input_status_text = "RESET";
+                audit_terminal_text = "AUDITFLOWRESET -> AUDIT BEHAVIOR TIMELINE RESET";
+                break;
+
+            case GSHELL_CMD_AUDITFLOWNEXT:
+                gshell_command_name = "AUDITFLOWNEXT";
+                gshell_command_result = "AUDIT FLOW NEXT OK";
+                gshell_input_status_text = "NEXT";
+                audit_terminal_text = "AUDITFLOWNEXT -> 1.9.4 VOICE INTENT CONTROL MOCK";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(audit_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_VOICEINTENTSTATUS && command_id <= GSHELL_CMD_VOICEINTENTNEXT) {
+        const char* voice_terminal_text = "VOICEINTENTSTATUS -> VOICE INTENT CONTROL MOCK READY";
+
+        gshell_command_view = "VOICEINTENTSTATUS";
+        gshell_input_status_text = "VOICE";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_VOICEINTENTSTATUS:
+                gshell_command_name = "VOICEINTENTSTATUS";
+                gshell_command_result = "VOICE INTENT STATUS OK";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTLISTEN:
+                gshell_voiceintent_listen_ready = 1;
+                gshell_sundialhub_voice_ready = 1;
+                gshell_permreq_voice_ready = 1;
+                gshell_voiceintent_state = "listening";
+                gshell_voiceintent_last = "listen";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTLISTEN";
+                gshell_command_result = "VOICE INTENT LISTEN OK";
+                gshell_input_status_text = "LISTEN";
+                voice_terminal_text = "VOICEINTENTLISTEN -> VOICE LISTEN MOCK READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTHEARD:
+                gshell_voiceintent_heard_ready = 1;
+                gshell_voiceintent_state = "heard";
+                gshell_voiceintent_text = "allow once";
+                gshell_voiceintent_last = "heard";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTHEARD";
+                gshell_command_result = "VOICE INTENT HEARD OK";
+                gshell_input_status_text = "HEARD";
+                voice_terminal_text = "VOICEINTENTHEARD -> MOCK VOICE INPUT CAPTURED";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTTEXT:
+                gshell_voiceintent_text_ready = 1;
+                gshell_voiceintent_state = "text";
+                gshell_voiceintent_text = "open network control";
+                gshell_voiceintent_last = "text";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTTEXT";
+                gshell_command_result = "VOICE INTENT TEXT OK";
+                gshell_input_status_text = "TEXT";
+                voice_terminal_text = "VOICEINTENTTEXT -> VOICE TEXT READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTPARSE:
+                gshell_voiceintent_parse_ready = 1;
+                gshell_voiceintent_state = "parsed";
+                gshell_voiceintent_intent = "control.network";
+                gshell_voiceintent_last = "parse";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTPARSE";
+                gshell_command_result = "VOICE INTENT PARSE OK";
+                gshell_input_status_text = "PARSE";
+                voice_terminal_text = "VOICEINTENTPARSE -> VOICE TEXT PARSED INTO INTENT";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTCOMMAND:
+                gshell_voiceintent_command_ready = 1;
+                gshell_voiceintent_state = "command";
+                gshell_voiceintent_intent = "sundial.control.open";
+                gshell_controlsector_open_ready = 1;
+                gshell_voiceintent_last = "command";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTCOMMAND";
+                gshell_command_result = "VOICE INTENT COMMAND OK";
+                gshell_input_status_text = "COMMAND";
+                voice_terminal_text = "VOICEINTENTCOMMAND -> INTENT MAPPED TO CONTROL COMMAND";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTASK:
+                gshell_voiceintent_ask_ready = 1;
+                gshell_permreq_ask_ready = 1;
+                gshell_controlsector_ask_ready = 1;
+                gshell_voiceintent_state = "ask";
+                gshell_voiceintent_intent = "permission.ask";
+                gshell_voiceintent_last = "ask";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTASK";
+                gshell_command_result = "VOICE INTENT ASK OK";
+                gshell_input_status_text = "ASK";
+                voice_terminal_text = "VOICEINTENTASK -> VOICE ACTION REQUIRES USER CONFIRMATION";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTALLOW:
+                gshell_voiceintent_allow_ready = 1;
+                gshell_permreq_allow_ready = 1;
+                gshell_controlsector_allow_ready = 1;
+                gshell_auditflow_allow_ready = 1;
+                gshell_voiceintent_state = "allowed";
+                gshell_voiceintent_intent = "permission.allow";
+                gshell_voiceintent_last = "allow";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTALLOW";
+                gshell_command_result = "VOICE INTENT ALLOW OK";
+                gshell_input_status_text = "ALLOW";
+                voice_terminal_text = "VOICEINTENTALLOW -> VOICE ALLOW DECISION READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTBLOCK:
+                gshell_voiceintent_block_ready = 1;
+                gshell_permreq_block_ready = 1;
+                gshell_controlsector_block_ready = 1;
+                gshell_auditflow_block_ready = 1;
+                gshell_voiceintent_state = "blocked";
+                gshell_voiceintent_intent = "permission.block";
+                gshell_voiceintent_last = "block";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTBLOCK";
+                gshell_command_result = "VOICE INTENT BLOCK OK";
+                gshell_input_status_text = "BLOCK";
+                voice_terminal_text = "VOICEINTENTBLOCK -> VOICE BLOCK DECISION READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTCONFIRM:
+                gshell_voiceintent_confirm_ready = 1;
+                gshell_permreq_temp_ready = 1;
+                gshell_controlsector_temp_ready = 1;
+                gshell_voiceintent_state = "confirmed";
+                gshell_voiceintent_intent = "allow-once";
+                gshell_voiceintent_last = "confirm";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTCONFIRM";
+                gshell_command_result = "VOICE INTENT CONFIRM OK";
+                gshell_input_status_text = "CONFIRM";
+                voice_terminal_text = "VOICEINTENTCONFIRM -> VOICE CONFIRMATION READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTREPLY:
+                gshell_voiceintent_reply_ready = 1;
+                gshell_voiceintent_state = "reply";
+                gshell_voiceintent_text = "done";
+                gshell_voiceintent_last = "reply";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTREPLY";
+                gshell_command_result = "VOICE INTENT REPLY OK";
+                gshell_input_status_text = "REPLY";
+                voice_terminal_text = "VOICEINTENTREPLY -> SYSTEM REPLY TEXT READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTSPEAK:
+                gshell_voiceintent_speak_ready = 1;
+                gshell_voiceintent_state = "speak";
+                gshell_voiceintent_text = "operation complete";
+                gshell_voiceintent_last = "speak";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTSPEAK";
+                gshell_command_result = "VOICE INTENT SPEAK OK";
+                gshell_input_status_text = "SPEAK";
+                voice_terminal_text = "VOICEINTENTSPEAK -> TEXT TO SPEECH MOCK RESERVED";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTSEARCH:
+                gshell_voiceintent_search_ready = 1;
+                gshell_sundialhub_search_ready = 1;
+                gshell_permreq_search_ready = 1;
+                gshell_auditflow_search_ready = 1;
+                gshell_voiceintent_state = "search";
+                gshell_voiceintent_intent = "search";
+                gshell_voiceintent_last = "search";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTSEARCH";
+                gshell_command_result = "VOICE INTENT SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                voice_terminal_text = "VOICEINTENTSEARCH -> VOICE CAN TRIGGER SUNDIAL SEARCH";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTAUDIT:
+                gshell_voiceintent_audit_ready = 1;
+                gshell_sundialhub_audit_ready = 1;
+                gshell_auditflow_voice_ready = 1;
+                gshell_auditflow_event_ready = 1;
+                gshell_voiceintent_state = "audit";
+                gshell_voiceintent_intent = "audit.voice";
+                gshell_voiceintent_last = "audit";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTAUDIT";
+                gshell_command_result = "VOICE INTENT AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                voice_terminal_text = "VOICEINTENTAUDIT -> VOICE ACTION CAN BE AUDITED";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTPOLICY:
+                gshell_voiceintent_policy_ready = 1;
+                gshell_sundialhub_security_ready = 1;
+                gshell_controlsector_perm_ready = 1;
+                gshell_voiceintent_state = "policy";
+                gshell_voiceintent_intent = "policy.check";
+                gshell_voiceintent_last = "policy";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTPOLICY";
+                gshell_command_result = "VOICE INTENT POLICY OK";
+                gshell_input_status_text = "POLICY";
+                voice_terminal_text = "VOICEINTENTPOLICY -> VOICE ACTION PASSES POLICY GATE";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTDEMO:
+                gshell_voiceintent_listen_ready = 1;
+                gshell_voiceintent_heard_ready = 1;
+                gshell_voiceintent_text_ready = 1;
+                gshell_voiceintent_parse_ready = 1;
+                gshell_voiceintent_command_ready = 1;
+                gshell_voiceintent_ask_ready = 1;
+                gshell_voiceintent_allow_ready = 1;
+                gshell_voiceintent_block_ready = 1;
+                gshell_voiceintent_confirm_ready = 1;
+                gshell_voiceintent_reply_ready = 1;
+                gshell_voiceintent_speak_ready = 1;
+                gshell_voiceintent_search_ready = 1;
+                gshell_voiceintent_audit_ready = 1;
+                gshell_voiceintent_policy_ready = 1;
+                gshell_voiceintent_demo_ready = 1;
+                gshell_sundialhub_voice_ready = 1;
+                gshell_permreq_voice_ready = 1;
+                gshell_auditflow_voice_ready = 1;
+                gshell_voiceintent_state = "demo";
+                gshell_voiceintent_text = "allow once";
+                gshell_voiceintent_intent = "permission.allow.once";
+                gshell_voiceintent_last = "demo";
+                gshell_voiceintent_events++;
+                gshell_command_name = "VOICEINTENTDEMO";
+                gshell_command_result = "VOICE INTENT DEMO OK";
+                gshell_input_status_text = "DEMO";
+                voice_terminal_text = "VOICEINTENTDEMO -> VOICE INTENT CONTROL MOCK READY";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTCHECK: {
+                int ok = gshell_voiceintent_listen_ready &&
+                         gshell_voiceintent_heard_ready &&
+                         gshell_voiceintent_text_ready &&
+                         gshell_voiceintent_parse_ready &&
+                         gshell_voiceintent_command_ready &&
+                         gshell_voiceintent_ask_ready &&
+                         gshell_voiceintent_allow_ready &&
+                         gshell_voiceintent_block_ready &&
+                         gshell_voiceintent_confirm_ready &&
+                         gshell_voiceintent_reply_ready &&
+                         gshell_voiceintent_speak_ready &&
+                         gshell_voiceintent_search_ready &&
+                         gshell_voiceintent_audit_ready &&
+                         gshell_voiceintent_policy_ready;
+                gshell_voiceintent_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "VOICEINTENTCHECK";
+                gshell_command_result = ok ? "VOICE INTENT CHECK OK" : "VOICE INTENT CHECK WAIT";
+                gshell_input_status_text = ok ? "VOICEOK" : "VOICEWT";
+                voice_terminal_text = ok ? "VOICEINTENTCHECK -> VOICE INTENT CONTROL MOCK READY" : "VOICEINTENTCHECK -> RUN VOICEINTENTDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_VOICEINTENTRESET:
+                gshell_voiceintent_listen_ready = 0;
+                gshell_voiceintent_heard_ready = 0;
+                gshell_voiceintent_text_ready = 0;
+                gshell_voiceintent_parse_ready = 0;
+                gshell_voiceintent_command_ready = 0;
+                gshell_voiceintent_ask_ready = 0;
+                gshell_voiceintent_allow_ready = 0;
+                gshell_voiceintent_block_ready = 0;
+                gshell_voiceintent_confirm_ready = 0;
+                gshell_voiceintent_reply_ready = 0;
+                gshell_voiceintent_speak_ready = 0;
+                gshell_voiceintent_search_ready = 0;
+                gshell_voiceintent_audit_ready = 0;
+                gshell_voiceintent_policy_ready = 0;
+                gshell_voiceintent_demo_ready = 0;
+                gshell_voiceintent_events = 0;
+                gshell_voiceintent_state = "idle";
+                gshell_voiceintent_text = "none";
+                gshell_voiceintent_intent = "none";
+                gshell_voiceintent_last = "reset";
+                gshell_command_name = "VOICEINTENTRESET";
+                gshell_command_result = "VOICE INTENT RESET OK";
+                gshell_input_status_text = "RESET";
+                voice_terminal_text = "VOICEINTENTRESET -> VOICE INTENT CONTROL MOCK RESET";
+                break;
+
+            case GSHELL_CMD_VOICEINTENTNEXT:
+                gshell_command_name = "VOICEINTENTNEXT";
+                gshell_command_result = "VOICE INTENT NEXT OK";
+                gshell_input_status_text = "NEXT";
+                voice_terminal_text = "VOICEINTENTNEXT -> 1.9.5 SUNDIAL CONTROL CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(voice_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SUNCTLFINALSTATUS && command_id <= GSHELL_CMD_SUNCTLFINALNEXT) {
+        const char* sunctl_terminal_text = "SUNCTLFINALSTATUS -> SUNDIAL CONTROL CLOSEOUT READY";
+
+        gshell_command_view = "SUNCTLFINALSTATUS";
+        gshell_input_status_text = "SUNCTL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SUNCTLFINALSTATUS:
+                gshell_command_name = "SUNCTLFINALSTATUS";
+                gshell_command_result = "SUN CONTROL FINAL STATUS OK";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALHUB:
+                gshell_sunctlfinal_hub_ready = 1;
+                gshell_sundialhub_demo_ready = 1;
+                gshell_sundialhub_core_ready = 1;
+                gshell_sundialhub_control_ready = 1;
+                gshell_sunctlfinal_state = "hub";
+                gshell_sunctlfinal_phase = "sundial-hub";
+                gshell_sunctlfinal_target = "control-core";
+                gshell_sunctlfinal_last = "hub";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALHUB";
+                gshell_command_result = "SUN CONTROL FINAL HUB OK";
+                gshell_input_status_text = "HUB";
+                sunctl_terminal_text = "SUNCTLFINALHUB -> SUNDIAL CONTROL HUB SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALACTIONS:
+                gshell_sunctlfinal_actions_ready = 1;
+                gshell_controlsector_demo_ready = 1;
+                gshell_controlsector_open_ready = 1;
+                gshell_controlsector_allow_ready = 1;
+                gshell_controlsector_block_ready = 1;
+                gshell_controlsector_ask_ready = 1;
+                gshell_controlsector_temp_ready = 1;
+                gshell_sunctlfinal_state = "actions";
+                gshell_sunctlfinal_phase = "control-sector";
+                gshell_sunctlfinal_target = "allow-block-ask";
+                gshell_sunctlfinal_last = "actions";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALACTIONS";
+                gshell_command_result = "SUN CONTROL FINAL ACTIONS OK";
+                gshell_input_status_text = "ACTIONS";
+                sunctl_terminal_text = "SUNCTLFINALACTIONS -> CONTROL SECTOR ACTIONS SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALPERM:
+                gshell_sunctlfinal_perm_ready = 1;
+                gshell_permreq_demo_ready = 1;
+                gshell_permreq_open_ready = 1;
+                gshell_permreq_source_ready = 1;
+                gshell_permreq_target_ready = 1;
+                gshell_permreq_ask_ready = 1;
+                gshell_permreq_allow_ready = 1;
+                gshell_permreq_block_ready = 1;
+                gshell_permreq_temp_ready = 1;
+                gshell_sunctlfinal_state = "permission";
+                gshell_sunctlfinal_phase = "permission-flow";
+                gshell_sunctlfinal_target = "request";
+                gshell_sunctlfinal_last = "permission";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALPERM";
+                gshell_command_result = "SUN CONTROL FINAL PERM OK";
+                gshell_input_status_text = "PERM";
+                sunctl_terminal_text = "SUNCTLFINALPERM -> PERMISSION REQUEST FLOW SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALAUDIT:
+                gshell_sunctlfinal_audit_ready = 1;
+                gshell_auditflow_demo_ready = 1;
+                gshell_auditflow_open_ready = 1;
+                gshell_auditflow_timeline_ready = 1;
+                gshell_auditflow_last_ready = 1;
+                gshell_sunctlfinal_state = "audit";
+                gshell_sunctlfinal_phase = "audit-flow";
+                gshell_sunctlfinal_target = "timeline";
+                gshell_sunctlfinal_last = "audit";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALAUDIT";
+                gshell_command_result = "SUN CONTROL FINAL AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                sunctl_terminal_text = "SUNCTLFINALAUDIT -> AUDIT BEHAVIOR TIMELINE SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALVOICE:
+                gshell_sunctlfinal_voice_ready = 1;
+                gshell_voiceintent_demo_ready = 1;
+                gshell_voiceintent_listen_ready = 1;
+                gshell_voiceintent_parse_ready = 1;
+                gshell_voiceintent_command_ready = 1;
+                gshell_voiceintent_reply_ready = 1;
+                gshell_voiceintent_speak_ready = 1;
+                gshell_sunctlfinal_state = "voice";
+                gshell_sunctlfinal_phase = "voice-intent";
+                gshell_sunctlfinal_target = "listen-speak";
+                gshell_sunctlfinal_last = "voice";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALVOICE";
+                gshell_command_result = "SUN CONTROL FINAL VOICE OK";
+                gshell_input_status_text = "VOICE";
+                sunctl_terminal_text = "SUNCTLFINALVOICE -> VOICE INTENT CONTROL SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALSEARCH:
+                gshell_sunctlfinal_search_ready = 1;
+                gshell_sundialhub_search_ready = 1;
+                gshell_permreq_search_ready = 1;
+                gshell_auditflow_search_ready = 1;
+                gshell_voiceintent_search_ready = 1;
+                gshell_sunctlfinal_state = "search";
+                gshell_sunctlfinal_phase = "search-entry";
+                gshell_sunctlfinal_target = "sundial-search";
+                gshell_sunctlfinal_last = "search";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALSEARCH";
+                gshell_command_result = "SUN CONTROL FINAL SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                sunctl_terminal_text = "SUNCTLFINALSEARCH -> SEARCH ENTRY SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALAI:
+                gshell_sunctlfinal_ai_ready = 1;
+                gshell_sundialhub_ai_ready = 1;
+                gshell_controlsector_ai_ready = 1;
+                gshell_permreq_ai_ready = 1;
+                gshell_auditflow_ai_ready = 1;
+                gshell_sunctlfinal_state = "ai";
+                gshell_sunctlfinal_phase = "ai-control";
+                gshell_sunctlfinal_target = "ai-access";
+                gshell_sunctlfinal_last = "ai";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALAI";
+                gshell_command_result = "SUN CONTROL FINAL AI OK";
+                gshell_input_status_text = "AI";
+                sunctl_terminal_text = "SUNCTLFINALAI -> AI CONTROL ENTRY SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALFILE:
+                gshell_sunctlfinal_file_ready = 1;
+                gshell_sundialhub_file_ready = 1;
+                gshell_controlsector_file_ready = 1;
+                gshell_permreq_file_ready = 1;
+                gshell_auditflow_file_ready = 1;
+                gshell_sunctlfinal_state = "file";
+                gshell_sunctlfinal_phase = "file-control";
+                gshell_sunctlfinal_target = "file-access";
+                gshell_sunctlfinal_last = "file";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALFILE";
+                gshell_command_result = "SUN CONTROL FINAL FILE OK";
+                gshell_input_status_text = "FILE";
+                sunctl_terminal_text = "SUNCTLFINALFILE -> FILE CONTROL ENTRY SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALNET:
+                gshell_sunctlfinal_net_ready = 1;
+                gshell_sundialhub_network_ready = 1;
+                gshell_controlsector_net_ready = 1;
+                gshell_permreq_net_ready = 1;
+                gshell_auditflow_net_ready = 1;
+                gshell_sunctlfinal_state = "network";
+                gshell_sunctlfinal_phase = "network-control";
+                gshell_sunctlfinal_target = "network-access";
+                gshell_sunctlfinal_last = "network";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALNET";
+                gshell_command_result = "SUN CONTROL FINAL NET OK";
+                gshell_input_status_text = "NET";
+                sunctl_terminal_text = "SUNCTLFINALNET -> NETWORK CONTROL ENTRY SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALAPP:
+                gshell_sunctlfinal_app_ready = 1;
+                gshell_sundialhub_app_behavior_ready = 1;
+                gshell_controlsector_app_ready = 1;
+                gshell_permreq_app_ready = 1;
+                gshell_auditflow_app_ready = 1;
+                gshell_sunctlfinal_state = "app";
+                gshell_sunctlfinal_phase = "app-behavior";
+                gshell_sunctlfinal_target = "app-control";
+                gshell_sunctlfinal_last = "app";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALAPP";
+                gshell_command_result = "SUN CONTROL FINAL APP OK";
+                gshell_input_status_text = "APP";
+                sunctl_terminal_text = "SUNCTLFINALAPP -> APP BEHAVIOR CONTROL SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALRULE:
+                gshell_sunctlfinal_rule_ready = 1;
+                gshell_sundialhub_rules_ready = 1;
+                gshell_controlsector_rule_ready = 1;
+                gshell_permreq_rule_ready = 1;
+                gshell_auditflow_rule_ready = 1;
+                gshell_sunctlfinal_state = "rule";
+                gshell_sunctlfinal_phase = "rule-link";
+                gshell_sunctlfinal_target = "user-rule";
+                gshell_sunctlfinal_last = "rule";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALRULE";
+                gshell_command_result = "SUN CONTROL FINAL RULE OK";
+                gshell_input_status_text = "RULE";
+                sunctl_terminal_text = "SUNCTLFINALRULE -> USER RULE LINK SUMMARIZED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALDEMO:
+                gshell_sunctlfinal_hub_ready = 1;
+                gshell_sunctlfinal_actions_ready = 1;
+                gshell_sunctlfinal_perm_ready = 1;
+                gshell_sunctlfinal_audit_ready = 1;
+                gshell_sunctlfinal_voice_ready = 1;
+                gshell_sunctlfinal_search_ready = 1;
+                gshell_sunctlfinal_ai_ready = 1;
+                gshell_sunctlfinal_file_ready = 1;
+                gshell_sunctlfinal_net_ready = 1;
+                gshell_sunctlfinal_app_ready = 1;
+                gshell_sunctlfinal_rule_ready = 1;
+                gshell_sunctlfinal_demo_ready = 1;
+                gshell_sundialhub_demo_ready = 1;
+                gshell_controlsector_demo_ready = 1;
+                gshell_permreq_demo_ready = 1;
+                gshell_auditflow_demo_ready = 1;
+                gshell_voiceintent_demo_ready = 1;
+                gshell_sunctlfinal_state = "demo";
+                gshell_sunctlfinal_phase = "1.9-closeout";
+                gshell_sunctlfinal_target = "dev-2.0";
+                gshell_sunctlfinal_last = "demo";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALDEMO";
+                gshell_command_result = "SUN CONTROL FINAL DEMO OK";
+                gshell_input_status_text = "DEMO";
+                sunctl_terminal_text = "SUNCTLFINALDEMO -> FULL 1.9 SUNDIAL CONTROL STACK READY";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALCHECK: {
+                int ok = gshell_sunctlfinal_hub_ready &&
+                         gshell_sunctlfinal_actions_ready &&
+                         gshell_sunctlfinal_perm_ready &&
+                         gshell_sunctlfinal_audit_ready &&
+                         gshell_sunctlfinal_voice_ready &&
+                         gshell_sunctlfinal_search_ready &&
+                         gshell_sunctlfinal_ai_ready &&
+                         gshell_sunctlfinal_file_ready &&
+                         gshell_sunctlfinal_net_ready &&
+                         gshell_sunctlfinal_app_ready &&
+                         gshell_sunctlfinal_rule_ready;
+                gshell_sunctlfinal_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SUNCTLFINALCHECK";
+                gshell_command_result = ok ? "SUN CONTROL FINAL CHECK OK" : "SUN CONTROL FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "SUNOK" : "SUNWAIT";
+                sunctl_terminal_text = ok ? "SUNCTLFINALCHECK -> 1.9 SUNDIAL CONTROL CLOSEOUT READY" : "SUNCTLFINALCHECK -> RUN SUNCTLFINALDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SUNCTLFINALRESET:
+                gshell_sunctlfinal_hub_ready = 0;
+                gshell_sunctlfinal_actions_ready = 0;
+                gshell_sunctlfinal_perm_ready = 0;
+                gshell_sunctlfinal_audit_ready = 0;
+                gshell_sunctlfinal_voice_ready = 0;
+                gshell_sunctlfinal_search_ready = 0;
+                gshell_sunctlfinal_ai_ready = 0;
+                gshell_sunctlfinal_file_ready = 0;
+                gshell_sunctlfinal_net_ready = 0;
+                gshell_sunctlfinal_app_ready = 0;
+                gshell_sunctlfinal_rule_ready = 0;
+                gshell_sunctlfinal_demo_ready = 0;
+                gshell_sunctlfinal_closeout_ready = 0;
+                gshell_sunctlfinal_roadmap_ready = 0;
+                gshell_sunctlfinal_events = 0;
+                gshell_sunctlfinal_state = "idle";
+                gshell_sunctlfinal_phase = "1.9.x";
+                gshell_sunctlfinal_target = "sundial-control";
+                gshell_sunctlfinal_last = "reset";
+                gshell_command_name = "SUNCTLFINALRESET";
+                gshell_command_result = "SUN CONTROL FINAL RESET OK";
+                gshell_input_status_text = "RESET";
+                sunctl_terminal_text = "SUNCTLFINALRESET -> SUNDIAL CONTROL FINAL STATE RESET";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALCLOSEOUT:
+                gshell_sunctlfinal_closeout_ready = 1;
+                gshell_sunctlfinal_state = "closeout";
+                gshell_sunctlfinal_phase = "dev-1.9.x";
+                gshell_sunctlfinal_target = "dev-2.0";
+                gshell_sunctlfinal_last = "closeout";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALCLOSEOUT";
+                gshell_command_result = "SUN CONTROL FINAL CLOSEOUT OK";
+                gshell_input_status_text = "CLOSE";
+                sunctl_terminal_text = "SUNCTLFINALCLOSEOUT -> 1.9.X SUNDIAL CONTROL STAGE CLOSED";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALROADMAP:
+                gshell_sunctlfinal_roadmap_ready = 1;
+                gshell_sunctlfinal_state = "roadmap";
+                gshell_sunctlfinal_phase = "2.0";
+                gshell_sunctlfinal_target = "self-prototype-closeout";
+                gshell_sunctlfinal_last = "roadmap";
+                gshell_sunctlfinal_events++;
+                gshell_command_name = "SUNCTLFINALROADMAP";
+                gshell_command_result = "SUN CONTROL FINAL ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                sunctl_terminal_text = "SUNCTLFINALROADMAP -> NEXT BIG MODULE IS DEV-2.0 SELF PROTOTYPE CLOSEOUT";
+                break;
+
+            case GSHELL_CMD_SUNCTLFINALNEXT:
+                gshell_command_name = "SUNCTLFINALNEXT";
+                gshell_command_result = "SUN CONTROL FINAL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                sunctl_terminal_text = "SUNCTLFINALNEXT -> DEV-2.0.0 SELF-DEVELOPED PROTOTYPE CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(sunctl_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_SELFDEVSTATUS && command_id <= GSHELL_CMD_SELFDEVNEXT) {
+        const char* selfdev_terminal_text = "SELFDEVSTATUS -> SELF DEVELOPED PROTOTYPE CLOSEOUT READY";
+
+        gshell_command_view = "SELFDEVSTATUS";
+        gshell_input_status_text = "SELFDEV";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_SELFDEVSTATUS:
+                gshell_command_name = "SELFDEVSTATUS";
+                gshell_command_result = "SELF DEVELOPED STATUS OK";
+                break;
+
+            case GSHELL_CMD_SELFDEVBOOT:
+                gshell_selfdev_boot_ready = 1;
+                gshell_selfdev_state = "boot-summary";
+                gshell_selfdev_phase = "boot";
+                gshell_selfdev_target = "multiboot+gfxboot";
+                gshell_selfdev_last = "boot";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVBOOT";
+                gshell_command_result = "SELF DEVELOPED BOOT OK";
+                gshell_input_status_text = "BOOT";
+                selfdev_terminal_text = "SELFDEVBOOT -> BOOT AND GFXBOOT SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVKERNEL:
+                gshell_selfdev_kernel_ready = 1;
+                gshell_selfdev_state = "kernel-summary";
+                gshell_selfdev_phase = "kernel";
+                gshell_selfdev_target = "baremetal-core";
+                gshell_selfdev_last = "kernel";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVKERNEL";
+                gshell_command_result = "SELF DEVELOPED KERNEL OK";
+                gshell_input_status_text = "KERNEL";
+                selfdev_terminal_text = "SELFDEVKERNEL -> SELF DEVELOPED KERNEL CORE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVGSHELL:
+                gshell_selfdev_gshell_ready = 1;
+                gshell_selfdev_state = "gshell-summary";
+                gshell_selfdev_phase = "gshell";
+                gshell_selfdev_target = "graphical-shell";
+                gshell_selfdev_last = "gshell";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVGSHELL";
+                gshell_command_result = "SELF DEVELOPED GSHELL OK";
+                gshell_input_status_text = "GSHELL";
+                selfdev_terminal_text = "SELFDEVGSHELL -> GRAPHICAL SHELL SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVDESKTOP:
+                gshell_selfdev_desktop_ready = 1;
+                gshell_selfdev_state = "desktop-summary";
+                gshell_selfdev_phase = "desktop";
+                gshell_selfdev_target = "desktop-scene";
+                gshell_selfdev_last = "desktop";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVDESKTOP";
+                gshell_command_result = "SELF DEVELOPED DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                selfdev_terminal_text = "SELFDEVDESKTOP -> DESKTOP OPERATION SCENE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVSUNDIAL:
+                gshell_selfdev_sundial_ready = 1;
+                gshell_selfdev_state = "sundial-summary";
+                gshell_selfdev_phase = "sundial";
+                gshell_selfdev_target = "sundial-hub";
+                gshell_selfdev_last = "sundial";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVSUNDIAL";
+                gshell_command_result = "SELF DEVELOPED SUNDIAL OK";
+                gshell_input_status_text = "SUNDIAL";
+                selfdev_terminal_text = "SELFDEVSUNDIAL -> SUNDIAL DESKTOP AND CONTROL HUB SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVAPP:
+                gshell_selfdev_app_ready = 1;
+                gshell_selfdev_state = "app-summary";
+                gshell_selfdev_phase = "app";
+                gshell_selfdev_target = "app-shell";
+                gshell_selfdev_last = "app";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVAPP";
+                gshell_command_result = "SELF DEVELOPED APP OK";
+                gshell_input_status_text = "APP";
+                selfdev_terminal_text = "SELFDEVAPP -> APP SHELL AND APP MANAGEMENT SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVCONTROL:
+                gshell_selfdev_control_ready = 1;
+                gshell_selfdev_state = "control-summary";
+                gshell_selfdev_phase = "control";
+                gshell_selfdev_target = "user-control-layer";
+                gshell_selfdev_last = "control";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVCONTROL";
+                gshell_command_result = "SELF DEVELOPED CONTROL OK";
+                gshell_input_status_text = "CONTROL";
+                selfdev_terminal_text = "SELFDEVCONTROL -> USER CONTROL LAYER SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVPOLICY:
+                gshell_selfdev_policy_ready = 1;
+                gshell_selfdev_state = "policy-summary";
+                gshell_selfdev_phase = "policy";
+                gshell_selfdev_target = "permission-policy";
+                gshell_selfdev_last = "policy";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVPOLICY";
+                gshell_command_result = "SELF DEVELOPED POLICY OK";
+                gshell_input_status_text = "POLICY";
+                selfdev_terminal_text = "SELFDEVPOLICY -> POLICY AND PERMISSION GATE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVRULE:
+                gshell_selfdev_rule_ready = 1;
+                gshell_selfdev_state = "rule-summary";
+                gshell_selfdev_phase = "rule";
+                gshell_selfdev_target = "user-rule-table";
+                gshell_selfdev_last = "rule";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVRULE";
+                gshell_command_result = "SELF DEVELOPED RULE OK";
+                gshell_input_status_text = "RULE";
+                selfdev_terminal_text = "SELFDEVRULE -> USER RULE TABLE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVAUDIT:
+                gshell_selfdev_audit_ready = 1;
+                gshell_selfdev_state = "audit-summary";
+                gshell_selfdev_phase = "audit";
+                gshell_selfdev_target = "decision-log";
+                gshell_selfdev_last = "audit";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVAUDIT";
+                gshell_command_result = "SELF DEVELOPED AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                selfdev_terminal_text = "SELFDEVAUDIT -> AUDIT AND DECISION LOG SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVVOICE:
+                gshell_selfdev_voice_ready = 1;
+                gshell_selfdev_state = "voice-summary";
+                gshell_selfdev_phase = "voice";
+                gshell_selfdev_target = "voice-intent";
+                gshell_selfdev_last = "voice";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVVOICE";
+                gshell_command_result = "SELF DEVELOPED VOICE OK";
+                gshell_input_status_text = "VOICE";
+                selfdev_terminal_text = "SELFDEVVOICE -> VOICE INTENT MOCK SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVSEARCH:
+                gshell_selfdev_search_ready = 1;
+                gshell_selfdev_state = "search-summary";
+                gshell_selfdev_phase = "search";
+                gshell_selfdev_target = "sundial-search";
+                gshell_selfdev_last = "search";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVSEARCH";
+                gshell_command_result = "SELF DEVELOPED SEARCH OK";
+                gshell_input_status_text = "SEARCH";
+                selfdev_terminal_text = "SELFDEVSEARCH -> SEARCH ENTRY MODEL RESERVED";
+                break;
+
+            case GSHELL_CMD_SELFDEVAI:
+                gshell_selfdev_ai_ready = 1;
+                gshell_selfdev_state = "ai-summary";
+                gshell_selfdev_phase = "ai";
+                gshell_selfdev_target = "ai-control-entry";
+                gshell_selfdev_last = "ai";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVAI";
+                gshell_command_result = "SELF DEVELOPED AI OK";
+                gshell_input_status_text = "AI";
+                selfdev_terminal_text = "SELFDEVAI -> AI CONTROL ENTRY SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVFILE:
+                gshell_selfdev_file_ready = 1;
+                gshell_selfdev_state = "file-summary";
+                gshell_selfdev_phase = "file";
+                gshell_selfdev_target = "file-control";
+                gshell_selfdev_last = "file";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVFILE";
+                gshell_command_result = "SELF DEVELOPED FILE OK";
+                gshell_input_status_text = "FILE";
+                selfdev_terminal_text = "SELFDEVFILE -> FILE CONTROL ENTRY SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVNET:
+                gshell_selfdev_net_ready = 1;
+                gshell_selfdev_state = "net-summary";
+                gshell_selfdev_phase = "network";
+                gshell_selfdev_target = "network-control";
+                gshell_selfdev_last = "network";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVNET";
+                gshell_command_result = "SELF DEVELOPED NET OK";
+                gshell_input_status_text = "NET";
+                selfdev_terminal_text = "SELFDEVNET -> NETWORK CONTROL ENTRY SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVDEMO:
+                gshell_selfdev_boot_ready = 1;
+                gshell_selfdev_kernel_ready = 1;
+                gshell_selfdev_gshell_ready = 1;
+                gshell_selfdev_desktop_ready = 1;
+                gshell_selfdev_sundial_ready = 1;
+                gshell_selfdev_app_ready = 1;
+                gshell_selfdev_control_ready = 1;
+                gshell_selfdev_policy_ready = 1;
+                gshell_selfdev_rule_ready = 1;
+                gshell_selfdev_audit_ready = 1;
+                gshell_selfdev_voice_ready = 1;
+                gshell_selfdev_search_ready = 1;
+                gshell_selfdev_ai_ready = 1;
+                gshell_selfdev_file_ready = 1;
+                gshell_selfdev_net_ready = 1;
+                gshell_selfdev_demo_ready = 1;
+                gshell_selfdev_state = "demo";
+                gshell_selfdev_phase = "2.0-demo";
+                gshell_selfdev_target = "full-prototype";
+                gshell_selfdev_last = "demo";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVDEMO";
+                gshell_command_result = "SELF DEVELOPED DEMO OK";
+                gshell_input_status_text = "DEMO";
+                selfdev_terminal_text = "SELFDEVDEMO -> FULL SELF DEVELOPED PROTOTYPE SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_SELFDEVCHECK: {
+                int ok = gshell_selfdev_boot_ready &&
+                         gshell_selfdev_kernel_ready &&
+                         gshell_selfdev_gshell_ready &&
+                         gshell_selfdev_desktop_ready &&
+                         gshell_selfdev_sundial_ready &&
+                         gshell_selfdev_app_ready &&
+                         gshell_selfdev_control_ready &&
+                         gshell_selfdev_policy_ready &&
+                         gshell_selfdev_rule_ready &&
+                         gshell_selfdev_audit_ready &&
+                         gshell_selfdev_voice_ready &&
+                         gshell_selfdev_search_ready &&
+                         gshell_selfdev_ai_ready &&
+                         gshell_selfdev_file_ready &&
+                         gshell_selfdev_net_ready;
+                gshell_selfdev_check_ready = ok ? 1 : 0;
+                gshell_selfdev_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "SELFDEVCHECK";
+                gshell_command_result = ok ? "SELF DEVELOPED CHECK OK" : "SELF DEVELOPED CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                selfdev_terminal_text = ok ? "SELFDEVCHECK -> SELF DEVELOPED PROTOTYPE READY" : "SELFDEVCHECK -> RUN SELFDEVDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_SELFDEVCLOSEOUT:
+                gshell_selfdev_boot_ready = 1;
+                gshell_selfdev_kernel_ready = 1;
+                gshell_selfdev_gshell_ready = 1;
+                gshell_selfdev_desktop_ready = 1;
+                gshell_selfdev_sundial_ready = 1;
+                gshell_selfdev_app_ready = 1;
+                gshell_selfdev_control_ready = 1;
+                gshell_selfdev_policy_ready = 1;
+                gshell_selfdev_rule_ready = 1;
+                gshell_selfdev_audit_ready = 1;
+                gshell_selfdev_voice_ready = 1;
+                gshell_selfdev_search_ready = 1;
+                gshell_selfdev_ai_ready = 1;
+                gshell_selfdev_file_ready = 1;
+                gshell_selfdev_net_ready = 1;
+                gshell_selfdev_check_ready = 1;
+                gshell_selfdev_closeout_ready = 1;
+                gshell_selfdev_state = "closeout";
+                gshell_selfdev_phase = "dev-2.0.0";
+                gshell_selfdev_target = "linux-backed-roadmap";
+                gshell_selfdev_last = "closeout";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVCLOSEOUT";
+                gshell_command_result = "SELF DEVELOPED CLOSEOUT OK";
+                gshell_input_status_text = "CLOSEOUT";
+                selfdev_terminal_text = "SELFDEVCLOSEOUT -> 0.X TO 1.9.X SELF DEVELOPED ARCHITECTURE CLOSED";
+                break;
+
+            case GSHELL_CMD_SELFDEVLINUXPLAN:
+                gshell_selfdev_linux_plan_ready = 1;
+                gshell_selfdev_state = "linux-plan";
+                gshell_selfdev_phase = "2.1.x";
+                gshell_selfdev_target = "linux-backed-design";
+                gshell_selfdev_last = "linux-plan";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVLINUXPLAN";
+                gshell_command_result = "SELF DEVELOPED LINUX PLAN OK";
+                gshell_input_status_text = "LINUX PLAN";
+                selfdev_terminal_text = "SELFDEVLINUXPLAN -> NEXT STAGE CAN DESIGN LINUX BACKED ARCHITECTURE";
+                break;
+
+            case GSHELL_CMD_SELFDEVROADMAP:
+                gshell_selfdev_roadmap_ready = 1;
+                gshell_selfdev_state = "roadmap";
+                gshell_selfdev_phase = "2.1+";
+                gshell_selfdev_target = "linux-backed-lingjing";
+                gshell_selfdev_last = "roadmap";
+                gshell_selfdev_events++;
+                gshell_command_name = "SELFDEVROADMAP";
+                gshell_command_result = "SELF DEVELOPED ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                selfdev_terminal_text = "SELFDEVROADMAP -> 2.1 LINUX PLAN, 2.5 LINUX PROTOTYPE, 3.0 LINUX BASE";
+                break;
+
+            case GSHELL_CMD_SELFDEVNEXT:
+                gshell_command_name = "SELFDEVNEXT";
+                gshell_command_result = "SELF DEVELOPED NEXT OK";
+                gshell_input_status_text = "NEXT";
+                selfdev_terminal_text = "SELFDEVNEXT -> DEV-2.1.0 LINUX BACKED ARCHITECTURE RESEARCH ENTRY";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(selfdev_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXPLANSTATUS && command_id <= GSHELL_CMD_LINUXNEXT) {
+        const char* linux_terminal_text = "LINUXPLANSTATUS -> LINUX-BACKED ARCHITECTURE RESEARCH READY";
+
+        gshell_command_view = "LINUXPLANSTATUS";
+        gshell_input_status_text = "LINUX PLAN";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXPLANSTATUS:
+                gshell_command_name = "LINUXPLANSTATUS";
+                gshell_command_result = "LINUX PLAN STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXBASE:
+                gshell_linuxplan_base_ready = 1;
+                gshell_linuxplan_state = "base-plan";
+                gshell_linuxplan_base = "linux-base";
+                gshell_linuxplan_target = "debian/arch/buildroot";
+                gshell_linuxplan_last = "base";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXBASE";
+                gshell_command_result = "LINUX BASE PLAN OK";
+                gshell_input_status_text = "BASE";
+                linux_terminal_text = "LINUXBASE -> EVALUATE DEBIAN ARCH ALPINE BUILDROOT AS BASE";
+                break;
+
+            case GSHELL_CMD_LINUXKERNEL:
+                gshell_linuxplan_kernel_ready = 1;
+                gshell_linuxplan_state = "kernel-plan";
+                gshell_linuxplan_base = "linux-kernel";
+                gshell_linuxplan_target = "drivers+syscalls";
+                gshell_linuxplan_last = "kernel";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXKERNEL";
+                gshell_command_result = "LINUX KERNEL PLAN OK";
+                gshell_input_status_text = "KERNEL";
+                linux_terminal_text = "LINUXKERNEL -> LINUX PROVIDES HARDWARE KERNEL FOUNDATION";
+                break;
+
+            case GSHELL_CMD_LINUXDRIVER:
+                gshell_linuxplan_driver_ready = 1;
+                gshell_linuxplan_state = "driver-plan";
+                gshell_linuxplan_base = "linux-driver";
+                gshell_linuxplan_target = "hardware";
+                gshell_linuxplan_last = "driver";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXDRIVER";
+                gshell_command_result = "LINUX DRIVER PLAN OK";
+                gshell_input_status_text = "DRIVER";
+                linux_terminal_text = "LINUXDRIVER -> DRIVERS MOVE TO LINUX BASE";
+                break;
+
+            case GSHELL_CMD_LINUXFS:
+                gshell_linuxplan_fs_ready = 1;
+                gshell_linuxplan_state = "filesystem-plan";
+                gshell_linuxplan_base = "linux-fs";
+                gshell_linuxplan_target = "file-control";
+                gshell_linuxplan_last = "fs";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXFS";
+                gshell_command_result = "LINUX FILESYSTEM PLAN OK";
+                gshell_input_status_text = "FS";
+                linux_terminal_text = "LINUXFS -> LINUX PROVIDES FS, LINGJING CONTROLS ACCESS";
+                break;
+
+            case GSHELL_CMD_LINUXNET:
+                gshell_linuxplan_net_ready = 1;
+                gshell_linuxplan_state = "network-plan";
+                gshell_linuxplan_base = "linux-net";
+                gshell_linuxplan_target = "network-control";
+                gshell_linuxplan_last = "net";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXNET";
+                gshell_command_result = "LINUX NETWORK PLAN OK";
+                gshell_input_status_text = "NET";
+                linux_terminal_text = "LINUXNET -> LINUX PROVIDES NETWORK STACK, LINGJING CONTROLS POLICY";
+                break;
+
+            case GSHELL_CMD_LINUXINPUT:
+                gshell_linuxplan_input_ready = 1;
+                gshell_linuxplan_state = "input-plan";
+                gshell_linuxplan_base = "evdev/libinput";
+                gshell_linuxplan_target = "mouse+keyboard+voice";
+                gshell_linuxplan_last = "input";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXINPUT";
+                gshell_command_result = "LINUX INPUT PLAN OK";
+                gshell_input_status_text = "INPUT";
+                linux_terminal_text = "LINUXINPUT -> FUTURE INPUT CAN USE EVDEV LIBINPUT";
+                break;
+
+            case GSHELL_CMD_LINUXDISPLAY:
+                gshell_linuxplan_display_ready = 1;
+                gshell_linuxplan_state = "display-plan";
+                gshell_linuxplan_base = "wayland/x11/sdl";
+                gshell_linuxplan_target = "sundial-ui";
+                gshell_linuxplan_last = "display";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXDISPLAY";
+                gshell_command_result = "LINUX DISPLAY PLAN OK";
+                gshell_input_status_text = "DISPLAY";
+                linux_terminal_text = "LINUXDISPLAY -> CHOOSE DISPLAY STACK FOR SUNDIAL DESKTOP";
+                break;
+
+            case GSHELL_CMD_LINUXPROCESS:
+                gshell_linuxplan_process_ready = 1;
+                gshell_linuxplan_state = "process-plan";
+                gshell_linuxplan_base = "linux-process";
+                gshell_linuxplan_target = "app-monitor";
+                gshell_linuxplan_last = "process";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXPROCESS";
+                gshell_command_result = "LINUX PROCESS PLAN OK";
+                gshell_input_status_text = "PROC";
+                linux_terminal_text = "LINUXPROCESS -> MAP LINUX PROCESSES TO LINGJING APP STATE";
+                break;
+
+            case GSHELL_CMD_LINUXAPP:
+                gshell_linuxplan_app_ready = 1;
+                gshell_linuxplan_state = "app-plan";
+                gshell_linuxplan_base = "linux-apps";
+                gshell_linuxplan_target = "app-shell";
+                gshell_linuxplan_last = "app";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXAPP";
+                gshell_command_result = "LINUX APP PLAN OK";
+                gshell_input_status_text = "APP";
+                linux_terminal_text = "LINUXAPP -> LINGJING MANAGES LINUX APPS ABOVE BASE";
+                break;
+
+            case GSHELL_CMD_LINUXPOLICY:
+                gshell_linuxplan_policy_ready = 1;
+                gshell_linuxplan_state = "policy-plan";
+                gshell_linuxplan_base = "policy";
+                gshell_linuxplan_target = "file/net/ai/app";
+                gshell_linuxplan_last = "policy";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXPOLICY";
+                gshell_command_result = "LINUX POLICY PLAN OK";
+                gshell_input_status_text = "POLICY";
+                linux_terminal_text = "LINUXPOLICY -> LINGJING POLICY LAYER STAYS ABOVE LINUX";
+                break;
+
+            case GSHELL_CMD_LINUXSANDBOX:
+                gshell_linuxplan_sandbox_ready = 1;
+                gshell_linuxplan_state = "sandbox-plan";
+                gshell_linuxplan_base = "namespace/bwrap";
+                gshell_linuxplan_target = "app-sandbox";
+                gshell_linuxplan_last = "sandbox";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXSANDBOX";
+                gshell_command_result = "LINUX SANDBOX PLAN OK";
+                gshell_input_status_text = "SANDBOX";
+                linux_terminal_text = "LINUXSANDBOX -> STUDY NAMESPACE BUBBLEWRAP APPARMOR EBPF";
+                break;
+
+            case GSHELL_CMD_LINUXAUDIT:
+                gshell_linuxplan_audit_ready = 1;
+                gshell_linuxplan_state = "audit-plan";
+                gshell_linuxplan_base = "linux-events";
+                gshell_linuxplan_target = "audit-timeline";
+                gshell_linuxplan_last = "audit";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXAUDIT";
+                gshell_command_result = "LINUX AUDIT PLAN OK";
+                gshell_input_status_text = "AUDIT";
+                linux_terminal_text = "LINUXAUDIT -> MAP REAL APP BEHAVIOR TO AUDIT TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXVOICE:
+                gshell_linuxplan_voice_ready = 1;
+                gshell_linuxplan_state = "voice-plan";
+                gshell_linuxplan_base = "pipewire/alsa";
+                gshell_linuxplan_target = "voice-intent";
+                gshell_linuxplan_last = "voice";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXVOICE";
+                gshell_command_result = "LINUX VOICE PLAN OK";
+                gshell_input_status_text = "VOICE";
+                linux_terminal_text = "LINUXVOICE -> FUTURE VOICE USES PIPEWIRE ALSA ASR TTS";
+                break;
+
+            case GSHELL_CMD_LINUXAI:
+                gshell_linuxplan_ai_ready = 1;
+                gshell_linuxplan_state = "ai-plan";
+                gshell_linuxplan_base = "ai-service";
+                gshell_linuxplan_target = "intent-ai";
+                gshell_linuxplan_last = "ai";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXAI";
+                gshell_command_result = "LINUX AI PLAN OK";
+                gshell_input_status_text = "AI";
+                linux_terminal_text = "LINUXAI -> AI CONNECTS TO INTENT LAYER, NOT DIRECT SYSTEM POWER";
+                break;
+
+            case GSHELL_CMD_LINUXSUNDIAL:
+                gshell_linuxplan_sundial_ready = 1;
+                gshell_linuxplan_state = "sundial-plan";
+                gshell_linuxplan_base = "lingjing-ui";
+                gshell_linuxplan_target = "sundial-hub";
+                gshell_linuxplan_last = "sundial";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXSUNDIAL";
+                gshell_command_result = "LINUX SUNDIAL PLAN OK";
+                gshell_input_status_text = "SUNDIAL";
+                linux_terminal_text = "LINUXSUNDIAL -> SUNDIAL REMAINS LINGJING DESKTOP CORE";
+                break;
+
+            case GSHELL_CMD_LINUXDESKTOP:
+                gshell_linuxplan_desktop_ready = 1;
+                gshell_linuxplan_state = "desktop-plan";
+                gshell_linuxplan_base = "desktop-shell";
+                gshell_linuxplan_target = "taskbar-free";
+                gshell_linuxplan_last = "desktop";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXDESKTOP";
+                gshell_command_result = "LINUX DESKTOP PLAN OK";
+                gshell_input_status_text = "DESKTOP";
+                linux_terminal_text = "LINUXDESKTOP -> LINGJING DESKTOP RUNS ABOVE LINUX BASE";
+                break;
+
+            case GSHELL_CMD_LINUXDEMO:
+                gshell_linuxplan_base_ready = 1;
+                gshell_linuxplan_kernel_ready = 1;
+                gshell_linuxplan_driver_ready = 1;
+                gshell_linuxplan_fs_ready = 1;
+                gshell_linuxplan_net_ready = 1;
+                gshell_linuxplan_input_ready = 1;
+                gshell_linuxplan_display_ready = 1;
+                gshell_linuxplan_process_ready = 1;
+                gshell_linuxplan_app_ready = 1;
+                gshell_linuxplan_policy_ready = 1;
+                gshell_linuxplan_sandbox_ready = 1;
+                gshell_linuxplan_audit_ready = 1;
+                gshell_linuxplan_voice_ready = 1;
+                gshell_linuxplan_ai_ready = 1;
+                gshell_linuxplan_sundial_ready = 1;
+                gshell_linuxplan_desktop_ready = 1;
+                gshell_linuxplan_demo_ready = 1;
+                gshell_linuxplan_state = "demo";
+                gshell_linuxplan_base = "linux-backed";
+                gshell_linuxplan_target = "lingjing-layer";
+                gshell_linuxplan_last = "demo";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXDEMO";
+                gshell_command_result = "LINUX PLAN DEMO OK";
+                gshell_input_status_text = "DEMO";
+                linux_terminal_text = "LINUXDEMO -> FULL LINUX-BACKED ARCHITECTURE PLAN READY";
+                break;
+
+            case GSHELL_CMD_LINUXCHECK: {
+                int ok = gshell_linuxplan_base_ready &&
+                         gshell_linuxplan_kernel_ready &&
+                         gshell_linuxplan_driver_ready &&
+                         gshell_linuxplan_fs_ready &&
+                         gshell_linuxplan_net_ready &&
+                         gshell_linuxplan_input_ready &&
+                         gshell_linuxplan_display_ready &&
+                         gshell_linuxplan_process_ready &&
+                         gshell_linuxplan_app_ready &&
+                         gshell_linuxplan_policy_ready &&
+                         gshell_linuxplan_sandbox_ready &&
+                         gshell_linuxplan_audit_ready &&
+                         gshell_linuxplan_voice_ready &&
+                         gshell_linuxplan_ai_ready &&
+                         gshell_linuxplan_sundial_ready &&
+                         gshell_linuxplan_desktop_ready;
+                gshell_linuxplan_check_ready = ok ? 1 : 0;
+                gshell_linuxplan_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXCHECK";
+                gshell_command_result = ok ? "LINUX PLAN CHECK OK" : "LINUX PLAN CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                linux_terminal_text = ok ? "LINUXCHECK -> LINUX-BACKED RESEARCH ENTRY READY" : "LINUXCHECK -> RUN LINUXDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXRESET:
+                gshell_linuxplan_base_ready = 0;
+                gshell_linuxplan_kernel_ready = 0;
+                gshell_linuxplan_driver_ready = 0;
+                gshell_linuxplan_fs_ready = 0;
+                gshell_linuxplan_net_ready = 0;
+                gshell_linuxplan_input_ready = 0;
+                gshell_linuxplan_display_ready = 0;
+                gshell_linuxplan_process_ready = 0;
+                gshell_linuxplan_app_ready = 0;
+                gshell_linuxplan_policy_ready = 0;
+                gshell_linuxplan_sandbox_ready = 0;
+                gshell_linuxplan_audit_ready = 0;
+                gshell_linuxplan_voice_ready = 0;
+                gshell_linuxplan_ai_ready = 0;
+                gshell_linuxplan_sundial_ready = 0;
+                gshell_linuxplan_desktop_ready = 0;
+                gshell_linuxplan_demo_ready = 0;
+                gshell_linuxplan_check_ready = 0;
+                gshell_linuxplan_roadmap_ready = 0;
+                gshell_linuxplan_events = 0;
+                gshell_linuxplan_state = "idle";
+                gshell_linuxplan_base = "undecided";
+                gshell_linuxplan_target = "linux-backed";
+                gshell_linuxplan_last = "reset";
+                gshell_command_name = "LINUXRESET";
+                gshell_command_result = "LINUX PLAN RESET OK";
+                gshell_input_status_text = "RESET";
+                linux_terminal_text = "LINUXRESET -> LINUX PLAN STATE RESET";
+                break;
+
+            case GSHELL_CMD_LINUXROADMAP:
+                gshell_linuxplan_roadmap_ready = 1;
+                gshell_linuxplan_state = "roadmap";
+                gshell_linuxplan_base = "2.1-research";
+                gshell_linuxplan_target = "2.5-prototype";
+                gshell_linuxplan_last = "roadmap";
+                gshell_linuxplan_events++;
+                gshell_command_name = "LINUXROADMAP";
+                gshell_command_result = "LINUX PLAN ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                linux_terminal_text = "LINUXROADMAP -> 2.1 DESIGN, 2.2 UI PORT, 2.5 PROTOTYPE, 3.0 BASE";
+                break;
+
+            case GSHELL_CMD_LINUXNEXT:
+                gshell_command_name = "LINUXNEXT";
+                gshell_command_result = "LINUX PLAN NEXT OK";
+                gshell_input_status_text = "NEXT";
+                linux_terminal_text = "LINUXNEXT -> DEV-2.1.1 LINUX BASE SELECTION MATRIX";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(linux_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXBASESTATUS && command_id <= GSHELL_CMD_LINUXBASENEXT) {
+        const char* base_terminal_text = "LINUXBASESTATUS -> LINUX BASE SELECTION MATRIX READY";
+
+        gshell_command_view = "LINUXBASESTATUS";
+        gshell_input_status_text = "BASE MATRIX";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXBASESTATUS:
+                gshell_command_name = "LINUXBASESTATUS";
+                gshell_command_result = "LINUX BASE STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXBASEDEBIAN:
+                gshell_linuxbase_debian_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "debian";
+                gshell_linuxbase_reason = "stable-base";
+                gshell_linuxbase_last = "debian";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEDEBIAN";
+                gshell_command_result = "LINUX BASE DEBIAN OK";
+                gshell_input_status_text = "DEBIAN";
+                base_terminal_text = "LINUXBASEDEBIAN -> STABLE PACKAGE BASE CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASEARCH:
+                gshell_linuxbase_arch_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "arch";
+                gshell_linuxbase_reason = "rolling-flex";
+                gshell_linuxbase_last = "arch";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEARCH";
+                gshell_command_result = "LINUX BASE ARCH OK";
+                gshell_input_status_text = "ARCH";
+                base_terminal_text = "LINUXBASEARCH -> FLEXIBLE ROLLING BASE CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASEALPINE:
+                gshell_linuxbase_alpine_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "alpine";
+                gshell_linuxbase_reason = "small-secure";
+                gshell_linuxbase_last = "alpine";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEALPINE";
+                gshell_command_result = "LINUX BASE ALPINE OK";
+                gshell_input_status_text = "ALPINE";
+                base_terminal_text = "LINUXBASEALPINE -> SMALL SECURITY-FOCUSED BASE CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASEBUILDROOT:
+                gshell_linuxbase_buildroot_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "buildroot";
+                gshell_linuxbase_reason = "minimal-image";
+                gshell_linuxbase_last = "buildroot";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEBUILDROOT";
+                gshell_command_result = "LINUX BASE BUILDROOT OK";
+                gshell_input_status_text = "BUILDROOT";
+                base_terminal_text = "LINUXBASEBUILDROOT -> MINIMAL IMAGE BASE CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASEUBUNTU:
+                gshell_linuxbase_ubuntu_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "ubuntu";
+                gshell_linuxbase_reason = "desktop-ecosystem";
+                gshell_linuxbase_last = "ubuntu";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEUBUNTU";
+                gshell_command_result = "LINUX BASE UBUNTU OK";
+                gshell_input_status_text = "UBUNTU";
+                base_terminal_text = "LINUXBASEUBUNTU -> DESKTOP ECOSYSTEM BASE CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASEFEDORA:
+                gshell_linuxbase_fedora_ready = 1;
+                gshell_linuxbase_state = "candidate";
+                gshell_linuxbase_choice = "fedora";
+                gshell_linuxbase_reason = "modern-stack";
+                gshell_linuxbase_last = "fedora";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEFEDORA";
+                gshell_command_result = "LINUX BASE FEDORA OK";
+                gshell_input_status_text = "FEDORA";
+                base_terminal_text = "LINUXBASEFEDORA -> MODERN LINUX STACK CANDIDATE";
+                break;
+
+            case GSHELL_CMD_LINUXBASESTABILITY:
+                gshell_linuxbase_stability_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "debian/ubuntu";
+                gshell_linuxbase_reason = "stability";
+                gshell_linuxbase_last = "stability";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASESTABILITY";
+                gshell_command_result = "LINUX BASE STABILITY OK";
+                gshell_input_status_text = "STABLE";
+                base_terminal_text = "LINUXBASESTABILITY -> STABILITY FAVORS DEBIAN UBUNTU";
+                break;
+
+            case GSHELL_CMD_LINUXBASESIZE:
+                gshell_linuxbase_size_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "alpine/buildroot";
+                gshell_linuxbase_reason = "small-size";
+                gshell_linuxbase_last = "size";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASESIZE";
+                gshell_command_result = "LINUX BASE SIZE OK";
+                gshell_input_status_text = "SIZE";
+                base_terminal_text = "LINUXBASESIZE -> SIZE FAVORS ALPINE BUILDROOT";
+                break;
+
+            case GSHELL_CMD_LINUXBASEPKG:
+                gshell_linuxbase_pkg_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "debian/ubuntu/arch";
+                gshell_linuxbase_reason = "packages";
+                gshell_linuxbase_last = "package";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEPKG";
+                gshell_command_result = "LINUX BASE PACKAGE OK";
+                gshell_input_status_text = "PKG";
+                base_terminal_text = "LINUXBASEPKG -> PACKAGE ECOSYSTEM FAVORS DEBIAN UBUNTU ARCH";
+                break;
+
+            case GSHELL_CMD_LINUXBASEUI:
+                gshell_linuxbase_ui_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "debian/ubuntu/fedora";
+                gshell_linuxbase_reason = "desktop-ui";
+                gshell_linuxbase_last = "ui";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEUI";
+                gshell_command_result = "LINUX BASE UI OK";
+                gshell_input_status_text = "UI";
+                base_terminal_text = "LINUXBASEUI -> DESKTOP UI BASE FAVORS DEBIAN UBUNTU FEDORA";
+                break;
+
+            case GSHELL_CMD_LINUXBASECONTROL:
+                gshell_linuxbase_control_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "debian/arch/buildroot";
+                gshell_linuxbase_reason = "control";
+                gshell_linuxbase_last = "control";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASECONTROL";
+                gshell_command_result = "LINUX BASE CONTROL OK";
+                gshell_input_status_text = "CONTROL";
+                base_terminal_text = "LINUXBASECONTROL -> SYSTEM CONTROL FAVORS DEBIAN ARCH BUILDROOT";
+                break;
+
+            case GSHELL_CMD_LINUXBASESECURITY:
+                gshell_linuxbase_security_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "debian/alpine/fedora";
+                gshell_linuxbase_reason = "security";
+                gshell_linuxbase_last = "security";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASESECURITY";
+                gshell_command_result = "LINUX BASE SECURITY OK";
+                gshell_input_status_text = "SECURITY";
+                base_terminal_text = "LINUXBASESECURITY -> SECURITY FAVORS DEBIAN ALPINE FEDORA";
+                break;
+
+            case GSHELL_CMD_LINUXBASEDEV:
+                gshell_linuxbase_dev_ready = 1;
+                gshell_linuxbase_state = "matrix";
+                gshell_linuxbase_choice = "arch/debian";
+                gshell_linuxbase_reason = "developer";
+                gshell_linuxbase_last = "developer";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEDEV";
+                gshell_command_result = "LINUX BASE DEV OK";
+                gshell_input_status_text = "DEV";
+                base_terminal_text = "LINUXBASEDEV -> DEVELOPMENT FAVORS ARCH DEBIAN";
+                break;
+
+            case GSHELL_CMD_LINUXBASEMATRIX:
+                gshell_linuxbase_stability_ready = 1;
+                gshell_linuxbase_size_ready = 1;
+                gshell_linuxbase_pkg_ready = 1;
+                gshell_linuxbase_ui_ready = 1;
+                gshell_linuxbase_control_ready = 1;
+                gshell_linuxbase_security_ready = 1;
+                gshell_linuxbase_dev_ready = 1;
+                gshell_linuxbase_matrix_ready = 1;
+                gshell_linuxbase_state = "matrix-ready";
+                gshell_linuxbase_choice = "compare-all";
+                gshell_linuxbase_reason = "criteria";
+                gshell_linuxbase_last = "matrix";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEMATRIX";
+                gshell_command_result = "LINUX BASE MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                base_terminal_text = "LINUXBASEMATRIX -> BASE SELECTION CRITERIA MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXBASERANK:
+                gshell_linuxbase_rank_ready = 1;
+                gshell_linuxbase_state = "rank";
+                gshell_linuxbase_choice = "debian-first";
+                gshell_linuxbase_reason = "balanced";
+                gshell_linuxbase_last = "rank";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASERANK";
+                gshell_command_result = "LINUX BASE RANK OK";
+                gshell_input_status_text = "RANK";
+                base_terminal_text = "LINUXBASERANK -> EARLY RANK: DEBIAN, UBUNTU, ARCH, ALPINE, BUILDROOT";
+                break;
+
+            case GSHELL_CMD_LINUXBASECHOICE:
+                gshell_linuxbase_choice_ready = 1;
+                gshell_linuxbase_state = "choice";
+                gshell_linuxbase_choice = "debian";
+                gshell_linuxbase_reason = "stable+ecosystem";
+                gshell_linuxbase_last = "choice";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASECHOICE";
+                gshell_command_result = "LINUX BASE CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                base_terminal_text = "LINUXBASECHOICE -> RECOMMENDED FIRST BASE: DEBIAN";
+                break;
+
+            case GSHELL_CMD_LINUXBASEDEMO:
+                gshell_linuxbase_debian_ready = 1;
+                gshell_linuxbase_arch_ready = 1;
+                gshell_linuxbase_alpine_ready = 1;
+                gshell_linuxbase_buildroot_ready = 1;
+                gshell_linuxbase_ubuntu_ready = 1;
+                gshell_linuxbase_fedora_ready = 1;
+                gshell_linuxbase_stability_ready = 1;
+                gshell_linuxbase_size_ready = 1;
+                gshell_linuxbase_pkg_ready = 1;
+                gshell_linuxbase_ui_ready = 1;
+                gshell_linuxbase_control_ready = 1;
+                gshell_linuxbase_security_ready = 1;
+                gshell_linuxbase_dev_ready = 1;
+                gshell_linuxbase_matrix_ready = 1;
+                gshell_linuxbase_rank_ready = 1;
+                gshell_linuxbase_choice_ready = 1;
+                gshell_linuxbase_demo_ready = 1;
+                gshell_linuxbase_state = "demo";
+                gshell_linuxbase_choice = "debian";
+                gshell_linuxbase_reason = "first-linux-backed-prototype";
+                gshell_linuxbase_last = "demo";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEDEMO";
+                gshell_command_result = "LINUX BASE DEMO OK";
+                gshell_input_status_text = "DEMO";
+                base_terminal_text = "LINUXBASEDEMO -> FULL BASE SELECTION MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXBASECHECK: {
+                int ok = gshell_linuxbase_debian_ready &&
+                         gshell_linuxbase_arch_ready &&
+                         gshell_linuxbase_alpine_ready &&
+                         gshell_linuxbase_buildroot_ready &&
+                         gshell_linuxbase_ubuntu_ready &&
+                         gshell_linuxbase_fedora_ready &&
+                         gshell_linuxbase_matrix_ready &&
+                         gshell_linuxbase_rank_ready &&
+                         gshell_linuxbase_choice_ready;
+                gshell_linuxbase_check_ready = ok ? 1 : 0;
+                gshell_linuxbase_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXBASECHECK";
+                gshell_command_result = ok ? "LINUX BASE CHECK OK" : "LINUX BASE CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                base_terminal_text = ok ? "LINUXBASECHECK -> LINUX BASE SELECTION READY" : "LINUXBASECHECK -> RUN LINUXBASEDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXBASERESET:
+                gshell_linuxbase_debian_ready = 0;
+                gshell_linuxbase_arch_ready = 0;
+                gshell_linuxbase_alpine_ready = 0;
+                gshell_linuxbase_buildroot_ready = 0;
+                gshell_linuxbase_ubuntu_ready = 0;
+                gshell_linuxbase_fedora_ready = 0;
+                gshell_linuxbase_stability_ready = 0;
+                gshell_linuxbase_size_ready = 0;
+                gshell_linuxbase_pkg_ready = 0;
+                gshell_linuxbase_ui_ready = 0;
+                gshell_linuxbase_control_ready = 0;
+                gshell_linuxbase_security_ready = 0;
+                gshell_linuxbase_dev_ready = 0;
+                gshell_linuxbase_matrix_ready = 0;
+                gshell_linuxbase_rank_ready = 0;
+                gshell_linuxbase_choice_ready = 0;
+                gshell_linuxbase_demo_ready = 0;
+                gshell_linuxbase_check_ready = 0;
+                gshell_linuxbase_roadmap_ready = 0;
+                gshell_linuxbase_events = 0;
+                gshell_linuxbase_state = "idle";
+                gshell_linuxbase_choice = "undecided";
+                gshell_linuxbase_reason = "none";
+                gshell_linuxbase_last = "reset";
+                gshell_command_name = "LINUXBASERESET";
+                gshell_command_result = "LINUX BASE RESET OK";
+                gshell_input_status_text = "RESET";
+                base_terminal_text = "LINUXBASERESET -> LINUX BASE MATRIX RESET";
+                break;
+
+            case GSHELL_CMD_LINUXBASEROADMAP:
+                gshell_linuxbase_roadmap_ready = 1;
+                gshell_linuxbase_state = "roadmap";
+                gshell_linuxbase_choice = "debian";
+                gshell_linuxbase_reason = "2.1.2 display-stack";
+                gshell_linuxbase_last = "roadmap";
+                gshell_linuxbase_events++;
+                gshell_command_name = "LINUXBASEROADMAP";
+                gshell_command_result = "LINUX BASE ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                base_terminal_text = "LINUXBASEROADMAP -> NEXT DECIDE DISPLAY STACK: SDL, WAYLAND, X11, FRAMEBUFFER";
+                break;
+
+            case GSHELL_CMD_LINUXBASENEXT:
+                gshell_command_name = "LINUXBASENEXT";
+                gshell_command_result = "LINUX BASE NEXT OK";
+                gshell_input_status_text = "NEXT";
+                base_terminal_text = "LINUXBASENEXT -> DEV-2.1.2 LINUX DISPLAY STACK SELECTION";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(base_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXDISPSTATUS && command_id <= GSHELL_CMD_LINUXDISPNEXT) {
+        const char* disp_terminal_text = "LINUXDISPSTATUS -> LINUX DISPLAY STACK SELECTION READY";
+
+        gshell_command_view = "LINUXDISPSTATUS";
+        gshell_input_status_text = "DISP MATRIX";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXDISPSTATUS:
+                gshell_command_name = "LINUXDISPSTATUS";
+                gshell_command_result = "LINUX DISPLAY STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXDISPSDL:
+                gshell_linuxdisp_sdl_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "sdl";
+                gshell_linuxdisp_reason = "fast-prototype";
+                gshell_linuxdisp_last = "sdl";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPSDL";
+                gshell_command_result = "LINUX DISPLAY SDL OK";
+                gshell_input_status_text = "SDL";
+                disp_terminal_text = "LINUXDISPSDL -> SDL IS FIRST PROTOTYPE FRIENDLY";
+                break;
+
+            case GSHELL_CMD_LINUXDISPWAYLAND:
+                gshell_linuxdisp_wayland_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "wayland";
+                gshell_linuxdisp_reason = "modern-linux";
+                gshell_linuxdisp_last = "wayland";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPWAYLAND";
+                gshell_command_result = "LINUX DISPLAY WAYLAND OK";
+                gshell_input_status_text = "WAYLAND";
+                disp_terminal_text = "LINUXDISPWAYLAND -> MODERN DESKTOP PROTOCOL, LATER STAGE";
+                break;
+
+            case GSHELL_CMD_LINUXDISPX11:
+                gshell_linuxdisp_x11_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "x11";
+                gshell_linuxdisp_reason = "compatibility";
+                gshell_linuxdisp_last = "x11";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPX11";
+                gshell_command_result = "LINUX DISPLAY X11 OK";
+                gshell_input_status_text = "X11";
+                disp_terminal_text = "LINUXDISPX11 -> COMPATIBLE BUT OLD DISPLAY ROUTE";
+                break;
+
+            case GSHELL_CMD_LINUXDISPQT:
+                gshell_linuxdisp_qt_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "qt";
+                gshell_linuxdisp_reason = "mature-gui";
+                gshell_linuxdisp_last = "qt";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPQT";
+                gshell_command_result = "LINUX DISPLAY QT OK";
+                gshell_input_status_text = "QT";
+                disp_terminal_text = "LINUXDISPQT -> MATURE GUI FRAMEWORK BUT HEAVIER";
+                break;
+
+            case GSHELL_CMD_LINUXDISPELECTRON:
+                gshell_linuxdisp_electron_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "electron";
+                gshell_linuxdisp_reason = "fast-ui-heavy";
+                gshell_linuxdisp_last = "electron";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPELECTRON";
+                gshell_command_result = "LINUX DISPLAY ELECTRON OK";
+                gshell_input_status_text = "ELECTRON";
+                disp_terminal_text = "LINUXDISPELECTRON -> FAST UI BUT TOO HEAVY FOR CORE SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXDISPGTK:
+                gshell_linuxdisp_gtk_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "gtk";
+                gshell_linuxdisp_reason = "gnome-stack";
+                gshell_linuxdisp_last = "gtk";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPGTK";
+                gshell_command_result = "LINUX DISPLAY GTK OK";
+                gshell_input_status_text = "GTK";
+                disp_terminal_text = "LINUXDISPGTK -> GOOD APP TOOLKIT, NOT FIRST SUNDIAL CORE";
+                break;
+
+            case GSHELL_CMD_LINUXDISPFB:
+                gshell_linuxdisp_fb_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "framebuffer";
+                gshell_linuxdisp_reason = "baremetal-like";
+                gshell_linuxdisp_last = "framebuffer";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPFB";
+                gshell_command_result = "LINUX DISPLAY FRAMEBUFFER OK";
+                gshell_input_status_text = "FB";
+                disp_terminal_text = "LINUXDISPFB -> CLOSE TO CURRENT GFX BUT WEAK DESKTOP INTEGRATION";
+                break;
+
+            case GSHELL_CMD_LINUXDISPOPENGL:
+                gshell_linuxdisp_opengl_ready = 1;
+                gshell_linuxdisp_state = "candidate";
+                gshell_linuxdisp_choice = "opengl";
+                gshell_linuxdisp_reason = "sci-fi-render";
+                gshell_linuxdisp_last = "opengl";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPOPENGL";
+                gshell_command_result = "LINUX DISPLAY OPENGL OK";
+                gshell_input_status_text = "OPENGL";
+                disp_terminal_text = "LINUXDISPOPENGL -> GOOD FOR FUTURE SUNDIAL GLOW AND PARTICLES";
+                break;
+
+            case GSHELL_CMD_LINUXDISPRENDER:
+                gshell_linuxdisp_render_ready = 1;
+                gshell_linuxdisp_state = "matrix";
+                gshell_linuxdisp_choice = "sdl+opengl";
+                gshell_linuxdisp_reason = "render-path";
+                gshell_linuxdisp_last = "render";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPRENDER";
+                gshell_command_result = "LINUX DISPLAY RENDER OK";
+                gshell_input_status_text = "RENDER";
+                disp_terminal_text = "LINUXDISPRENDER -> FIRST RENDER PATH: SDL SOFTWARE, OPENGL LATER";
+                break;
+
+            case GSHELL_CMD_LINUXDISPINPUT:
+                gshell_linuxdisp_input_ready = 1;
+                gshell_linuxdisp_state = "matrix";
+                gshell_linuxdisp_choice = "sdl-input";
+                gshell_linuxdisp_reason = "input-simple";
+                gshell_linuxdisp_last = "input";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPINPUT";
+                gshell_command_result = "LINUX DISPLAY INPUT OK";
+                gshell_input_status_text = "INPUT";
+                disp_terminal_text = "LINUXDISPINPUT -> SDL CAN PROVIDE EARLY KEYBOARD MOUSE INPUT";
+                break;
+
+            case GSHELL_CMD_LINUXDISPPERF:
+                gshell_linuxdisp_perf_ready = 1;
+                gshell_linuxdisp_state = "matrix";
+                gshell_linuxdisp_choice = "sdl/opengl";
+                gshell_linuxdisp_reason = "performance";
+                gshell_linuxdisp_last = "performance";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPPERF";
+                gshell_command_result = "LINUX DISPLAY PERFORMANCE OK";
+                gshell_input_status_text = "PERF";
+                disp_terminal_text = "LINUXDISPPERF -> PERFORMANCE FAVORS SDL FIRST, OPENGL FOR EFFECTS";
+                break;
+
+            case GSHELL_CMD_LINUXDISPUX:
+                gshell_linuxdisp_ux_ready = 1;
+                gshell_linuxdisp_state = "matrix";
+                gshell_linuxdisp_choice = "sundial-ui";
+                gshell_linuxdisp_reason = "taskbar-free";
+                gshell_linuxdisp_last = "ux";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPUX";
+                gshell_command_result = "LINUX DISPLAY UX OK";
+                gshell_input_status_text = "UX";
+                disp_terminal_text = "LINUXDISPUX -> DISPLAY STACK MUST SERVE SUNDIAL DESKTOP UX";
+                break;
+
+            case GSHELL_CMD_LINUXDISPRISK:
+                gshell_linuxdisp_risk_ready = 1;
+                gshell_linuxdisp_state = "matrix";
+                gshell_linuxdisp_choice = "avoid-heavy";
+                gshell_linuxdisp_reason = "risk-control";
+                gshell_linuxdisp_last = "risk";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPRISK";
+                gshell_command_result = "LINUX DISPLAY RISK OK";
+                gshell_input_status_text = "RISK";
+                disp_terminal_text = "LINUXDISPRISK -> AVOID LOCKING CORE SHELL TO ELECTRON OR FULL WAYLAND TOO EARLY";
+                break;
+
+            case GSHELL_CMD_LINUXDISPMATRIX:
+                gshell_linuxdisp_sdl_ready = 1;
+                gshell_linuxdisp_wayland_ready = 1;
+                gshell_linuxdisp_x11_ready = 1;
+                gshell_linuxdisp_qt_ready = 1;
+                gshell_linuxdisp_electron_ready = 1;
+                gshell_linuxdisp_gtk_ready = 1;
+                gshell_linuxdisp_fb_ready = 1;
+                gshell_linuxdisp_opengl_ready = 1;
+                gshell_linuxdisp_render_ready = 1;
+                gshell_linuxdisp_input_ready = 1;
+                gshell_linuxdisp_perf_ready = 1;
+                gshell_linuxdisp_ux_ready = 1;
+                gshell_linuxdisp_risk_ready = 1;
+                gshell_linuxdisp_matrix_ready = 1;
+                gshell_linuxdisp_state = "matrix-ready";
+                gshell_linuxdisp_choice = "compare-all";
+                gshell_linuxdisp_reason = "display-criteria";
+                gshell_linuxdisp_last = "matrix";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPMATRIX";
+                gshell_command_result = "LINUX DISPLAY MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                disp_terminal_text = "LINUXDISPMATRIX -> DISPLAY STACK MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXDISPRANK:
+                gshell_linuxdisp_rank_ready = 1;
+                gshell_linuxdisp_state = "rank";
+                gshell_linuxdisp_choice = "sdl-first";
+                gshell_linuxdisp_reason = "prototype-speed";
+                gshell_linuxdisp_last = "rank";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPRANK";
+                gshell_command_result = "LINUX DISPLAY RANK OK";
+                gshell_input_status_text = "RANK";
+                disp_terminal_text = "LINUXDISPRANK -> EARLY RANK: SDL, SDL+OPENGL, QT, WAYLAND, X11, GTK, ELECTRON, FB";
+                break;
+
+            case GSHELL_CMD_LINUXDISPCHOICE:
+                gshell_linuxdisp_choice_ready = 1;
+                gshell_linuxdisp_state = "choice";
+                gshell_linuxdisp_choice = "sdl";
+                gshell_linuxdisp_reason = "first-prototype";
+                gshell_linuxdisp_last = "choice";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPCHOICE";
+                gshell_command_result = "LINUX DISPLAY CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                disp_terminal_text = "LINUXDISPCHOICE -> RECOMMENDED FIRST DISPLAY STACK: SDL, OPENGL LATER";
+                break;
+
+            case GSHELL_CMD_LINUXDISPDEMO:
+                gshell_linuxdisp_sdl_ready = 1;
+                gshell_linuxdisp_wayland_ready = 1;
+                gshell_linuxdisp_x11_ready = 1;
+                gshell_linuxdisp_qt_ready = 1;
+                gshell_linuxdisp_electron_ready = 1;
+                gshell_linuxdisp_gtk_ready = 1;
+                gshell_linuxdisp_fb_ready = 1;
+                gshell_linuxdisp_opengl_ready = 1;
+                gshell_linuxdisp_render_ready = 1;
+                gshell_linuxdisp_input_ready = 1;
+                gshell_linuxdisp_perf_ready = 1;
+                gshell_linuxdisp_ux_ready = 1;
+                gshell_linuxdisp_risk_ready = 1;
+                gshell_linuxdisp_matrix_ready = 1;
+                gshell_linuxdisp_rank_ready = 1;
+                gshell_linuxdisp_choice_ready = 1;
+                gshell_linuxdisp_demo_ready = 1;
+                gshell_linuxdisp_state = "demo";
+                gshell_linuxdisp_choice = "sdl";
+                gshell_linuxdisp_reason = "fast-first-linux-ui";
+                gshell_linuxdisp_last = "demo";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPDEMO";
+                gshell_command_result = "LINUX DISPLAY DEMO OK";
+                gshell_input_status_text = "DEMO";
+                disp_terminal_text = "LINUXDISPDEMO -> FULL DISPLAY STACK SELECTION READY";
+                break;
+
+            case GSHELL_CMD_LINUXDISPCHECK: {
+                int ok = gshell_linuxdisp_sdl_ready &&
+                         gshell_linuxdisp_wayland_ready &&
+                         gshell_linuxdisp_x11_ready &&
+                         gshell_linuxdisp_qt_ready &&
+                         gshell_linuxdisp_electron_ready &&
+                         gshell_linuxdisp_gtk_ready &&
+                         gshell_linuxdisp_fb_ready &&
+                         gshell_linuxdisp_opengl_ready &&
+                         gshell_linuxdisp_matrix_ready &&
+                         gshell_linuxdisp_rank_ready &&
+                         gshell_linuxdisp_choice_ready;
+                gshell_linuxdisp_check_ready = ok ? 1 : 0;
+                gshell_linuxdisp_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXDISPCHECK";
+                gshell_command_result = ok ? "LINUX DISPLAY CHECK OK" : "LINUX DISPLAY CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                disp_terminal_text = ok ? "LINUXDISPCHECK -> DISPLAY STACK SELECTION READY" : "LINUXDISPCHECK -> RUN LINUXDISPDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXDISPRESET:
+                gshell_linuxdisp_sdl_ready = 0;
+                gshell_linuxdisp_wayland_ready = 0;
+                gshell_linuxdisp_x11_ready = 0;
+                gshell_linuxdisp_qt_ready = 0;
+                gshell_linuxdisp_electron_ready = 0;
+                gshell_linuxdisp_gtk_ready = 0;
+                gshell_linuxdisp_fb_ready = 0;
+                gshell_linuxdisp_opengl_ready = 0;
+                gshell_linuxdisp_render_ready = 0;
+                gshell_linuxdisp_input_ready = 0;
+                gshell_linuxdisp_perf_ready = 0;
+                gshell_linuxdisp_ux_ready = 0;
+                gshell_linuxdisp_risk_ready = 0;
+                gshell_linuxdisp_matrix_ready = 0;
+                gshell_linuxdisp_rank_ready = 0;
+                gshell_linuxdisp_choice_ready = 0;
+                gshell_linuxdisp_demo_ready = 0;
+                gshell_linuxdisp_check_ready = 0;
+                gshell_linuxdisp_roadmap_ready = 0;
+                gshell_linuxdisp_events = 0;
+                gshell_linuxdisp_state = "idle";
+                gshell_linuxdisp_choice = "undecided";
+                gshell_linuxdisp_reason = "none";
+                gshell_linuxdisp_last = "reset";
+                gshell_command_name = "LINUXDISPRESET";
+                gshell_command_result = "LINUX DISPLAY RESET OK";
+                gshell_input_status_text = "RESET";
+                disp_terminal_text = "LINUXDISPRESET -> DISPLAY MATRIX RESET";
+                break;
+
+            case GSHELL_CMD_LINUXDISPROADMAP:
+                gshell_linuxdisp_roadmap_ready = 1;
+                gshell_linuxdisp_state = "roadmap";
+                gshell_linuxdisp_choice = "sdl";
+                gshell_linuxdisp_reason = "2.1.3-input-stack";
+                gshell_linuxdisp_last = "roadmap";
+                gshell_linuxdisp_events++;
+                gshell_command_name = "LINUXDISPROADMAP";
+                gshell_command_result = "LINUX DISPLAY ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                disp_terminal_text = "LINUXDISPROADMAP -> NEXT DECIDE INPUT STACK: EVDEV LIBINPUT SDL INPUT PIPEWIRE";
+                break;
+
+            case GSHELL_CMD_LINUXDISPNEXT:
+                gshell_command_name = "LINUXDISPNEXT";
+                gshell_command_result = "LINUX DISPLAY NEXT OK";
+                gshell_input_status_text = "NEXT";
+                disp_terminal_text = "LINUXDISPNEXT -> DEV-2.1.3 LINUX INPUT STACK SELECTION";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(disp_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXINPUTSTATUS && command_id <= GSHELL_CMD_LINUXINPUTNEXT) {
+        const char* input_terminal_text = "LINUXINPUTSTATUS -> LINUX INPUT STACK SELECTION READY";
+
+        gshell_command_view = "LINUXINPUTSTATUS";
+        gshell_input_status_text = "INPUT MATRIX";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXINPUTSTATUS:
+                gshell_command_name = "LINUXINPUTSTATUS";
+                gshell_command_result = "LINUX INPUT STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTEVDEV:
+                gshell_linuxinput_evdev_ready = 1;
+                gshell_linuxinput_state = "candidate";
+                gshell_linuxinput_choice = "evdev";
+                gshell_linuxinput_reason = "raw-linux-input";
+                gshell_linuxinput_last = "evdev";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTEVDEV";
+                gshell_command_result = "LINUX INPUT EVDEV OK";
+                gshell_input_status_text = "EVDEV";
+                input_terminal_text = "LINUXINPUTEVDEV -> RAW LINUX INPUT EVENT BASE";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTLIBINPUT:
+                gshell_linuxinput_libinput_ready = 1;
+                gshell_linuxinput_state = "candidate";
+                gshell_linuxinput_choice = "libinput";
+                gshell_linuxinput_reason = "desktop-pointer";
+                gshell_linuxinput_last = "libinput";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTLIBINPUT";
+                gshell_command_result = "LINUX INPUT LIBINPUT OK";
+                gshell_input_status_text = "LIBINPUT";
+                input_terminal_text = "LINUXINPUTLIBINPUT -> MODERN DESKTOP POINTER INPUT BASE";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTSDL:
+                gshell_linuxinput_sdl_ready = 1;
+                gshell_linuxinput_state = "candidate";
+                gshell_linuxinput_choice = "sdl-input";
+                gshell_linuxinput_reason = "first-prototype";
+                gshell_linuxinput_last = "sdl";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTSDL";
+                gshell_command_result = "LINUX INPUT SDL OK";
+                gshell_input_status_text = "SDL";
+                input_terminal_text = "LINUXINPUTSDL -> SDL INPUT FITS FIRST LINUX UI PROTOTYPE";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTPIPEWIRE:
+                gshell_linuxinput_pipewire_ready = 1;
+                gshell_linuxinput_state = "candidate";
+                gshell_linuxinput_choice = "pipewire";
+                gshell_linuxinput_reason = "voice-audio";
+                gshell_linuxinput_last = "pipewire";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTPIPEWIRE";
+                gshell_command_result = "LINUX INPUT PIPEWIRE OK";
+                gshell_input_status_text = "PIPEWIRE";
+                input_terminal_text = "LINUXINPUTPIPEWIRE -> FUTURE VOICE INPUT AUDIO STACK";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTALSA:
+                gshell_linuxinput_alsa_ready = 1;
+                gshell_linuxinput_state = "candidate";
+                gshell_linuxinput_choice = "alsa";
+                gshell_linuxinput_reason = "low-level-audio";
+                gshell_linuxinput_last = "alsa";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTALSA";
+                gshell_command_result = "LINUX INPUT ALSA OK";
+                gshell_input_status_text = "ALSA";
+                input_terminal_text = "LINUXINPUTALSA -> LOW LEVEL AUDIO FALLBACK FOR VOICE";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTKEYBOARD:
+                gshell_linuxinput_keyboard_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "keyboard";
+                gshell_linuxinput_reason = "text-command";
+                gshell_linuxinput_last = "keyboard";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTKEYBOARD";
+                gshell_command_result = "LINUX INPUT KEYBOARD OK";
+                gshell_input_status_text = "KEYBOARD";
+                input_terminal_text = "LINUXINPUTKEYBOARD -> KEYBOARD REMAINS TEXT COMMAND ENTRY";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTMOUSE:
+                gshell_linuxinput_mouse_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "mouse";
+                gshell_linuxinput_reason = "sundial-pointer";
+                gshell_linuxinput_last = "mouse";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTMOUSE";
+                gshell_command_result = "LINUX INPUT MOUSE OK";
+                gshell_input_status_text = "MOUSE";
+                input_terminal_text = "LINUXINPUTMOUSE -> MOUSE POINTER ROUTES INTO SUNDIAL UI";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTTOUCH:
+                gshell_linuxinput_touch_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "touch";
+                gshell_linuxinput_reason = "future-device";
+                gshell_linuxinput_last = "touch";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTTOUCH";
+                gshell_command_result = "LINUX INPUT TOUCH OK";
+                gshell_input_status_text = "TOUCH";
+                input_terminal_text = "LINUXINPUTTOUCH -> TOUCH CAN REUSE SUNDIAL HIT ROUTE LATER";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTVOICE:
+                gshell_linuxinput_voice_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "voice";
+                gshell_linuxinput_reason = "intent-entry";
+                gshell_linuxinput_last = "voice";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTVOICE";
+                gshell_command_result = "LINUX INPUT VOICE OK";
+                gshell_input_status_text = "VOICE";
+                input_terminal_text = "LINUXINPUTVOICE -> VOICE ENTERS INTENT LAYER, NOT DIRECT SYSTEM POWER";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTROUTE:
+                gshell_linuxinput_route_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "event-route";
+                gshell_linuxinput_reason = "click-hover-drag";
+                gshell_linuxinput_last = "route";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTROUTE";
+                gshell_command_result = "LINUX INPUT ROUTE OK";
+                gshell_input_status_text = "ROUTE";
+                input_terminal_text = "LINUXINPUTROUTE -> INPUT MUST ROUTE TO DESKTOP SUNDIAL APP POLICY";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTFOCUS:
+                gshell_linuxinput_focus_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "focus";
+                gshell_linuxinput_reason = "window-app-state";
+                gshell_linuxinput_last = "focus";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTFOCUS";
+                gshell_command_result = "LINUX INPUT FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                input_terminal_text = "LINUXINPUTFOCUS -> FOCUS LINKS POINTER TO ACTIVE APP STATE";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTSUNDIAL:
+                gshell_linuxinput_sundial_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "sundial";
+                gshell_linuxinput_reason = "main-control";
+                gshell_linuxinput_last = "sundial";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTSUNDIAL";
+                gshell_command_result = "LINUX INPUT SUNDIAL OK";
+                gshell_input_status_text = "SUNDIAL";
+                input_terminal_text = "LINUXINPUTSUNDIAL -> SUNDIAL IS THE MAIN INPUT TARGET";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTSECURITY:
+                gshell_linuxinput_security_ready = 1;
+                gshell_linuxinput_state = "matrix";
+                gshell_linuxinput_choice = "secure-input";
+                gshell_linuxinput_reason = "no-bypass";
+                gshell_linuxinput_last = "security";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTSECURITY";
+                gshell_command_result = "LINUX INPUT SECURITY OK";
+                gshell_input_status_text = "SECURITY";
+                input_terminal_text = "LINUXINPUTSECURITY -> VOICE AND AI CANNOT BYPASS USER CONTROL LAYER";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTMATRIX:
+                gshell_linuxinput_evdev_ready = 1;
+                gshell_linuxinput_libinput_ready = 1;
+                gshell_linuxinput_sdl_ready = 1;
+                gshell_linuxinput_pipewire_ready = 1;
+                gshell_linuxinput_alsa_ready = 1;
+                gshell_linuxinput_keyboard_ready = 1;
+                gshell_linuxinput_mouse_ready = 1;
+                gshell_linuxinput_touch_ready = 1;
+                gshell_linuxinput_voice_ready = 1;
+                gshell_linuxinput_route_ready = 1;
+                gshell_linuxinput_focus_ready = 1;
+                gshell_linuxinput_sundial_ready = 1;
+                gshell_linuxinput_security_ready = 1;
+                gshell_linuxinput_matrix_ready = 1;
+                gshell_linuxinput_state = "matrix-ready";
+                gshell_linuxinput_choice = "compare-all";
+                gshell_linuxinput_reason = "input-criteria";
+                gshell_linuxinput_last = "matrix";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTMATRIX";
+                gshell_command_result = "LINUX INPUT MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                input_terminal_text = "LINUXINPUTMATRIX -> INPUT STACK MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTRANK:
+                gshell_linuxinput_rank_ready = 1;
+                gshell_linuxinput_state = "rank";
+                gshell_linuxinput_choice = "sdl-first";
+                gshell_linuxinput_reason = "prototype-sync";
+                gshell_linuxinput_last = "rank";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTRANK";
+                gshell_command_result = "LINUX INPUT RANK OK";
+                gshell_input_status_text = "RANK";
+                input_terminal_text = "LINUXINPUTRANK -> EARLY RANK: SDL INPUT, EVDEV, LIBINPUT, PIPEWIRE, ALSA";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTCHOICE:
+                gshell_linuxinput_choice_ready = 1;
+                gshell_linuxinput_state = "choice";
+                gshell_linuxinput_choice = "sdl-input";
+                gshell_linuxinput_reason = "first-prototype";
+                gshell_linuxinput_last = "choice";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTCHOICE";
+                gshell_command_result = "LINUX INPUT CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                input_terminal_text = "LINUXINPUTCHOICE -> RECOMMENDED FIRST INPUT STACK: SDL INPUT, PIPEWIRE LATER";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTDEMO:
+                gshell_linuxinput_evdev_ready = 1;
+                gshell_linuxinput_libinput_ready = 1;
+                gshell_linuxinput_sdl_ready = 1;
+                gshell_linuxinput_pipewire_ready = 1;
+                gshell_linuxinput_alsa_ready = 1;
+                gshell_linuxinput_keyboard_ready = 1;
+                gshell_linuxinput_mouse_ready = 1;
+                gshell_linuxinput_touch_ready = 1;
+                gshell_linuxinput_voice_ready = 1;
+                gshell_linuxinput_route_ready = 1;
+                gshell_linuxinput_focus_ready = 1;
+                gshell_linuxinput_sundial_ready = 1;
+                gshell_linuxinput_security_ready = 1;
+                gshell_linuxinput_matrix_ready = 1;
+                gshell_linuxinput_rank_ready = 1;
+                gshell_linuxinput_choice_ready = 1;
+                gshell_linuxinput_demo_ready = 1;
+                gshell_linuxinput_state = "demo";
+                gshell_linuxinput_choice = "sdl-input";
+                gshell_linuxinput_reason = "first-linux-input";
+                gshell_linuxinput_last = "demo";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTDEMO";
+                gshell_command_result = "LINUX INPUT DEMO OK";
+                gshell_input_status_text = "DEMO";
+                input_terminal_text = "LINUXINPUTDEMO -> FULL INPUT STACK SELECTION READY";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTCHECK: {
+                int ok = gshell_linuxinput_evdev_ready &&
+                         gshell_linuxinput_libinput_ready &&
+                         gshell_linuxinput_sdl_ready &&
+                         gshell_linuxinput_pipewire_ready &&
+                         gshell_linuxinput_alsa_ready &&
+                         gshell_linuxinput_keyboard_ready &&
+                         gshell_linuxinput_mouse_ready &&
+                         gshell_linuxinput_voice_ready &&
+                         gshell_linuxinput_route_ready &&
+                         gshell_linuxinput_focus_ready &&
+                         gshell_linuxinput_sundial_ready &&
+                         gshell_linuxinput_security_ready &&
+                         gshell_linuxinput_matrix_ready &&
+                         gshell_linuxinput_rank_ready &&
+                         gshell_linuxinput_choice_ready;
+                gshell_linuxinput_check_ready = ok ? 1 : 0;
+                gshell_linuxinput_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXINPUTCHECK";
+                gshell_command_result = ok ? "LINUX INPUT CHECK OK" : "LINUX INPUT CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                input_terminal_text = ok ? "LINUXINPUTCHECK -> INPUT STACK SELECTION READY" : "LINUXINPUTCHECK -> RUN LINUXINPUTDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXINPUTRESET:
+                gshell_linuxinput_evdev_ready = 0;
+                gshell_linuxinput_libinput_ready = 0;
+                gshell_linuxinput_sdl_ready = 0;
+                gshell_linuxinput_pipewire_ready = 0;
+                gshell_linuxinput_alsa_ready = 0;
+                gshell_linuxinput_keyboard_ready = 0;
+                gshell_linuxinput_mouse_ready = 0;
+                gshell_linuxinput_touch_ready = 0;
+                gshell_linuxinput_voice_ready = 0;
+                gshell_linuxinput_route_ready = 0;
+                gshell_linuxinput_focus_ready = 0;
+                gshell_linuxinput_sundial_ready = 0;
+                gshell_linuxinput_security_ready = 0;
+                gshell_linuxinput_matrix_ready = 0;
+                gshell_linuxinput_rank_ready = 0;
+                gshell_linuxinput_choice_ready = 0;
+                gshell_linuxinput_demo_ready = 0;
+                gshell_linuxinput_check_ready = 0;
+                gshell_linuxinput_roadmap_ready = 0;
+                gshell_linuxinput_events = 0;
+                gshell_linuxinput_state = "idle";
+                gshell_linuxinput_choice = "undecided";
+                gshell_linuxinput_reason = "none";
+                gshell_linuxinput_last = "reset";
+                gshell_command_name = "LINUXINPUTRESET";
+                gshell_command_result = "LINUX INPUT RESET OK";
+                gshell_input_status_text = "RESET";
+                input_terminal_text = "LINUXINPUTRESET -> INPUT MATRIX RESET";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTROADMAP:
+                gshell_linuxinput_roadmap_ready = 1;
+                gshell_linuxinput_state = "roadmap";
+                gshell_linuxinput_choice = "sdl-input";
+                gshell_linuxinput_reason = "2.1.4-app-process";
+                gshell_linuxinput_last = "roadmap";
+                gshell_linuxinput_events++;
+                gshell_command_name = "LINUXINPUTROADMAP";
+                gshell_command_result = "LINUX INPUT ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                input_terminal_text = "LINUXINPUTROADMAP -> NEXT MAP LINUX APPS PROCESSES WINDOWS TO SUNDIAL";
+                break;
+
+            case GSHELL_CMD_LINUXINPUTNEXT:
+                gshell_command_name = "LINUXINPUTNEXT";
+                gshell_command_result = "LINUX INPUT NEXT OK";
+                gshell_input_status_text = "NEXT";
+                input_terminal_text = "LINUXINPUTNEXT -> DEV-2.1.4 LINUX APP PROCESS MAPPING";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(input_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXMAPSTATUS && command_id <= GSHELL_CMD_LINUXMAPNEXT) {
+        const char* map_terminal_text = "LINUXMAPSTATUS -> LINUX APP PROCESS MAPPING READY";
+
+        gshell_command_view = "LINUXMAPSTATUS";
+        gshell_input_status_text = "APP MAP";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXMAPSTATUS:
+                gshell_command_name = "LINUXMAPSTATUS";
+                gshell_command_result = "LINUX MAP STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXMAPAPPREG:
+                gshell_linuxmap_appreg_ready = 1;
+                gshell_linuxmap_state = "app-registry";
+                gshell_linuxmap_choice = ".desktop";
+                gshell_linuxmap_target = "app-index";
+                gshell_linuxmap_last = "app-registry";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPAPPREG";
+                gshell_command_result = "LINUX MAP APP REGISTRY OK";
+                gshell_input_status_text = "APP REG";
+                map_terminal_text = "LINUXMAPAPPREG -> MAP LINUX APP REGISTRY TO SUNDIAL ICONS";
+                break;
+
+            case GSHELL_CMD_LINUXMAPDESKTOPFILE:
+                gshell_linuxmap_desktopfile_ready = 1;
+                gshell_linuxmap_state = "desktop-file";
+                gshell_linuxmap_choice = ".desktop";
+                gshell_linuxmap_target = "launch-entry";
+                gshell_linuxmap_last = "desktop-file";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPDESKTOPFILE";
+                gshell_command_result = "LINUX MAP DESKTOP FILE OK";
+                gshell_input_status_text = "DESKTOP";
+                map_terminal_text = "LINUXMAPDESKTOPFILE -> USE .DESKTOP FILES AS APP ENTRY SOURCE";
+                break;
+
+            case GSHELL_CMD_LINUXMAPPROCESS:
+                gshell_linuxmap_process_ready = 1;
+                gshell_linuxmap_state = "process-map";
+                gshell_linuxmap_choice = "process";
+                gshell_linuxmap_target = "running-app";
+                gshell_linuxmap_last = "process";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPPROCESS";
+                gshell_command_result = "LINUX MAP PROCESS OK";
+                gshell_input_status_text = "PROCESS";
+                map_terminal_text = "LINUXMAPPROCESS -> MAP LINUX PROCESS TO LINGJING APP STATE";
+                break;
+
+            case GSHELL_CMD_LINUXMAPPID:
+                gshell_linuxmap_pid_ready = 1;
+                gshell_linuxmap_state = "pid-map";
+                gshell_linuxmap_choice = "pid";
+                gshell_linuxmap_target = "process-id";
+                gshell_linuxmap_last = "pid";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPPID";
+                gshell_command_result = "LINUX MAP PID OK";
+                gshell_input_status_text = "PID";
+                map_terminal_text = "LINUXMAPPID -> PID BECOMES APP RUNTIME ID";
+                break;
+
+            case GSHELL_CMD_LINUXMAPWINDOW:
+                gshell_linuxmap_window_ready = 1;
+                gshell_linuxmap_state = "window-map";
+                gshell_linuxmap_choice = "window";
+                gshell_linuxmap_target = "app-window";
+                gshell_linuxmap_last = "window";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPWINDOW";
+                gshell_command_result = "LINUX MAP WINDOW OK";
+                gshell_input_status_text = "WINDOW";
+                map_terminal_text = "LINUXMAPWINDOW -> MAP WINDOW STATE TO APP ICON STATE";
+                break;
+
+            case GSHELL_CMD_LINUXMAPFOREGROUND:
+                gshell_linuxmap_foreground_ready = 1;
+                gshell_linuxmap_state = "foreground";
+                gshell_linuxmap_choice = "active-window";
+                gshell_linuxmap_target = "front-app";
+                gshell_linuxmap_last = "foreground";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPFOREGROUND";
+                gshell_command_result = "LINUX MAP FOREGROUND OK";
+                gshell_input_status_text = "FRONT";
+                map_terminal_text = "LINUXMAPFOREGROUND -> FOREGROUND APP GETS STRONG SUNDIAL HIGHLIGHT";
+                break;
+
+            case GSHELL_CMD_LINUXMAPBACKGROUND:
+                gshell_linuxmap_background_ready = 1;
+                gshell_linuxmap_state = "background";
+                gshell_linuxmap_choice = "background";
+                gshell_linuxmap_target = "soft-lit";
+                gshell_linuxmap_last = "background";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPBACKGROUND";
+                gshell_command_result = "LINUX MAP BACKGROUND OK";
+                gshell_input_status_text = "BACK";
+                map_terminal_text = "LINUXMAPBACKGROUND -> BACKGROUND APPS STAY SOFT LIT";
+                break;
+
+            case GSHELL_CMD_LINUXMAPRUNNING:
+                gshell_linuxmap_running_ready = 1;
+                gshell_linuxmap_state = "running";
+                gshell_linuxmap_choice = "running-app";
+                gshell_linuxmap_target = "lit-icon";
+                gshell_linuxmap_last = "running";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPRUNNING";
+                gshell_command_result = "LINUX MAP RUNNING OK";
+                gshell_input_status_text = "RUNNING";
+                map_terminal_text = "LINUXMAPRUNNING -> RUNNING LINUX APPS LIGHT THEIR ICONS";
+                break;
+
+            case GSHELL_CMD_LINUXMAPICONLIT:
+                gshell_linuxmap_iconlit_ready = 1;
+                gshell_linuxmap_state = "icon-lit";
+                gshell_linuxmap_choice = "lit/dim";
+                gshell_linuxmap_target = "sundial-icon";
+                gshell_linuxmap_last = "icon-lit";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPICONLIT";
+                gshell_command_result = "LINUX MAP ICON LIT OK";
+                gshell_input_status_text = "ICON LIT";
+                map_terminal_text = "LINUXMAPICONLIT -> LIT MEANS RUNNING, DIM MEANS NOT RUNNING";
+                break;
+
+            case GSHELL_CMD_LINUXMAPSECTOR:
+                gshell_linuxmap_sector_ready = 1;
+                gshell_linuxmap_state = "sector-map";
+                gshell_linuxmap_choice = "category";
+                gshell_linuxmap_target = "sundial-sector";
+                gshell_linuxmap_last = "sector";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPSECTOR";
+                gshell_command_result = "LINUX MAP SECTOR OK";
+                gshell_input_status_text = "SECTOR";
+                map_terminal_text = "LINUXMAPSECTOR -> APP CATEGORY MAPS TO SUNDIAL SECTOR";
+                break;
+
+            case GSHELL_CMD_LINUXMAPLAUNCH:
+                gshell_linuxmap_launch_ready = 1;
+                gshell_linuxmap_state = "launch-map";
+                gshell_linuxmap_choice = "exec";
+                gshell_linuxmap_target = "app-launch";
+                gshell_linuxmap_last = "launch";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPLAUNCH";
+                gshell_command_result = "LINUX MAP LAUNCH OK";
+                gshell_input_status_text = "LAUNCH";
+                map_terminal_text = "LINUXMAPLAUNCH -> SUNDIAL LAUNCH MAPS TO LINUX EXEC ENTRY";
+                break;
+
+            case GSHELL_CMD_LINUXMAPCLOSE:
+                gshell_linuxmap_close_ready = 1;
+                gshell_linuxmap_state = "close-map";
+                gshell_linuxmap_choice = "close";
+                gshell_linuxmap_target = "app-exit";
+                gshell_linuxmap_last = "close";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPCLOSE";
+                gshell_command_result = "LINUX MAP CLOSE OK";
+                gshell_input_status_text = "CLOSE";
+                map_terminal_text = "LINUXMAPCLOSE -> APP CLOSE RETURNS ICON TO DIM STATE";
+                break;
+
+            case GSHELL_CMD_LINUXMAPSTATE:
+                gshell_linuxmap_state_ready = 1;
+                gshell_linuxmap_state = "state-map";
+                gshell_linuxmap_choice = "dim/lit/front/back";
+                gshell_linuxmap_target = "app-state";
+                gshell_linuxmap_last = "state";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPSTATE";
+                gshell_command_result = "LINUX MAP STATE OK";
+                gshell_input_status_text = "STATE";
+                map_terminal_text = "LINUXMAPSTATE -> APP STATE MODEL READY";
+                break;
+
+            case GSHELL_CMD_LINUXMAPAUDIT:
+                gshell_linuxmap_audit_ready = 1;
+                gshell_linuxmap_state = "audit-map";
+                gshell_linuxmap_choice = "events";
+                gshell_linuxmap_target = "audit-timeline";
+                gshell_linuxmap_last = "audit";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPAUDIT";
+                gshell_command_result = "LINUX MAP AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                map_terminal_text = "LINUXMAPAUDIT -> APP PROCESS EVENTS CAN ENTER AUDIT TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXMAPMATRIX:
+                gshell_linuxmap_appreg_ready = 1;
+                gshell_linuxmap_desktopfile_ready = 1;
+                gshell_linuxmap_process_ready = 1;
+                gshell_linuxmap_pid_ready = 1;
+                gshell_linuxmap_window_ready = 1;
+                gshell_linuxmap_foreground_ready = 1;
+                gshell_linuxmap_background_ready = 1;
+                gshell_linuxmap_running_ready = 1;
+                gshell_linuxmap_iconlit_ready = 1;
+                gshell_linuxmap_sector_ready = 1;
+                gshell_linuxmap_launch_ready = 1;
+                gshell_linuxmap_close_ready = 1;
+                gshell_linuxmap_state_ready = 1;
+                gshell_linuxmap_audit_ready = 1;
+                gshell_linuxmap_matrix_ready = 1;
+                gshell_linuxmap_state = "matrix-ready";
+                gshell_linuxmap_choice = "app+process+window";
+                gshell_linuxmap_target = "sundial-runtime";
+                gshell_linuxmap_last = "matrix";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPMATRIX";
+                gshell_command_result = "LINUX MAP MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                map_terminal_text = "LINUXMAPMATRIX -> APP PROCESS WINDOW MAPPING MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXMAPRANK:
+                gshell_linuxmap_rank_ready = 1;
+                gshell_linuxmap_state = "rank";
+                gshell_linuxmap_choice = ".desktop+process";
+                gshell_linuxmap_target = "first-prototype";
+                gshell_linuxmap_last = "rank";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPRANK";
+                gshell_command_result = "LINUX MAP RANK OK";
+                gshell_input_status_text = "RANK";
+                map_terminal_text = "LINUXMAPRANK -> FIRST MAP: DESKTOP FILES + PROCESS STATE + ICON LIGHT";
+                break;
+
+            case GSHELL_CMD_LINUXMAPCHOICE:
+                gshell_linuxmap_choice_ready = 1;
+                gshell_linuxmap_state = "choice";
+                gshell_linuxmap_choice = ".desktop+pid";
+                gshell_linuxmap_target = "sundial-icons";
+                gshell_linuxmap_last = "choice";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPCHOICE";
+                gshell_command_result = "LINUX MAP CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                map_terminal_text = "LINUXMAPCHOICE -> CHOICE: .DESKTOP INDEX + PID RUNTIME MAP";
+                break;
+
+            case GSHELL_CMD_LINUXMAPDEMO:
+                gshell_linuxmap_appreg_ready = 1;
+                gshell_linuxmap_desktopfile_ready = 1;
+                gshell_linuxmap_process_ready = 1;
+                gshell_linuxmap_pid_ready = 1;
+                gshell_linuxmap_window_ready = 1;
+                gshell_linuxmap_foreground_ready = 1;
+                gshell_linuxmap_background_ready = 1;
+                gshell_linuxmap_running_ready = 1;
+                gshell_linuxmap_iconlit_ready = 1;
+                gshell_linuxmap_sector_ready = 1;
+                gshell_linuxmap_launch_ready = 1;
+                gshell_linuxmap_close_ready = 1;
+                gshell_linuxmap_state_ready = 1;
+                gshell_linuxmap_audit_ready = 1;
+                gshell_linuxmap_matrix_ready = 1;
+                gshell_linuxmap_rank_ready = 1;
+                gshell_linuxmap_choice_ready = 1;
+                gshell_linuxmap_demo_ready = 1;
+                gshell_linuxmap_state = "demo";
+                gshell_linuxmap_choice = ".desktop+pid";
+                gshell_linuxmap_target = "linux-backed-sundial";
+                gshell_linuxmap_last = "demo";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPDEMO";
+                gshell_command_result = "LINUX MAP DEMO OK";
+                gshell_input_status_text = "DEMO";
+                map_terminal_text = "LINUXMAPDEMO -> FULL LINUX APP PROCESS MAPPING READY";
+                break;
+
+            case GSHELL_CMD_LINUXMAPCHECK: {
+                int ok = gshell_linuxmap_appreg_ready &&
+                         gshell_linuxmap_desktopfile_ready &&
+                         gshell_linuxmap_process_ready &&
+                         gshell_linuxmap_pid_ready &&
+                         gshell_linuxmap_window_ready &&
+                         gshell_linuxmap_foreground_ready &&
+                         gshell_linuxmap_background_ready &&
+                         gshell_linuxmap_running_ready &&
+                         gshell_linuxmap_iconlit_ready &&
+                         gshell_linuxmap_sector_ready &&
+                         gshell_linuxmap_launch_ready &&
+                         gshell_linuxmap_close_ready &&
+                         gshell_linuxmap_state_ready &&
+                         gshell_linuxmap_audit_ready &&
+                         gshell_linuxmap_matrix_ready &&
+                         gshell_linuxmap_rank_ready &&
+                         gshell_linuxmap_choice_ready;
+                gshell_linuxmap_check_ready = ok ? 1 : 0;
+                gshell_linuxmap_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXMAPCHECK";
+                gshell_command_result = ok ? "LINUX MAP CHECK OK" : "LINUX MAP CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                map_terminal_text = ok ? "LINUXMAPCHECK -> APP PROCESS MAPPING READY" : "LINUXMAPCHECK -> RUN LINUXMAPDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXMAPRESET:
+                gshell_linuxmap_appreg_ready = 0;
+                gshell_linuxmap_desktopfile_ready = 0;
+                gshell_linuxmap_process_ready = 0;
+                gshell_linuxmap_pid_ready = 0;
+                gshell_linuxmap_window_ready = 0;
+                gshell_linuxmap_foreground_ready = 0;
+                gshell_linuxmap_background_ready = 0;
+                gshell_linuxmap_running_ready = 0;
+                gshell_linuxmap_iconlit_ready = 0;
+                gshell_linuxmap_sector_ready = 0;
+                gshell_linuxmap_launch_ready = 0;
+                gshell_linuxmap_close_ready = 0;
+                gshell_linuxmap_state_ready = 0;
+                gshell_linuxmap_audit_ready = 0;
+                gshell_linuxmap_matrix_ready = 0;
+                gshell_linuxmap_rank_ready = 0;
+                gshell_linuxmap_choice_ready = 0;
+                gshell_linuxmap_demo_ready = 0;
+                gshell_linuxmap_check_ready = 0;
+                gshell_linuxmap_roadmap_ready = 0;
+                gshell_linuxmap_events = 0;
+                gshell_linuxmap_state = "idle";
+                gshell_linuxmap_choice = "undecided";
+                gshell_linuxmap_target = "linux-app-process";
+                gshell_linuxmap_last = "reset";
+                gshell_command_name = "LINUXMAPRESET";
+                gshell_command_result = "LINUX MAP RESET OK";
+                gshell_input_status_text = "RESET";
+                map_terminal_text = "LINUXMAPRESET -> APP PROCESS MAPPING RESET";
+                break;
+
+            case GSHELL_CMD_LINUXMAPROADMAP:
+                gshell_linuxmap_roadmap_ready = 1;
+                gshell_linuxmap_state = "roadmap";
+                gshell_linuxmap_choice = ".desktop+pid";
+                gshell_linuxmap_target = "2.1.5-permission-backend";
+                gshell_linuxmap_last = "roadmap";
+                gshell_linuxmap_events++;
+                gshell_command_name = "LINUXMAPROADMAP";
+                gshell_command_result = "LINUX MAP ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                map_terminal_text = "LINUXMAPROADMAP -> NEXT RESEARCH LINUX PERMISSION BACKEND";
+                break;
+
+            case GSHELL_CMD_LINUXMAPNEXT:
+                gshell_command_name = "LINUXMAPNEXT";
+                gshell_command_result = "LINUX MAP NEXT OK";
+                gshell_input_status_text = "NEXT";
+                map_terminal_text = "LINUXMAPNEXT -> DEV-2.1.5 LINUX PERMISSION BACKEND RESEARCH";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(map_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXPERMSTATUS && command_id <= GSHELL_CMD_LINUXPERMNEXT) {
+        const char* perm_terminal_text = "LINUXPERMSTATUS -> LINUX PERMISSION BACKEND RESEARCH READY";
+
+        gshell_command_view = "LINUXPERMSTATUS";
+        gshell_input_status_text = "PERM MATRIX";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXPERMSTATUS:
+                gshell_command_name = "LINUXPERMSTATUS";
+                gshell_command_result = "LINUX PERMISSION STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXPERMNAMESPACE:
+                gshell_linuxperm_namespace_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "namespace";
+                gshell_linuxperm_target = "isolation";
+                gshell_linuxperm_last = "namespace";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMNAMESPACE";
+                gshell_command_result = "LINUX PERMISSION NAMESPACE OK";
+                gshell_input_status_text = "NAMESPACE";
+                perm_terminal_text = "LINUXPERMNAMESPACE -> NAMESPACE CAN ISOLATE APP VIEW";
+                break;
+
+            case GSHELL_CMD_LINUXPERMBWRAP:
+                gshell_linuxperm_bwrap_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "bubblewrap";
+                gshell_linuxperm_target = "app-sandbox";
+                gshell_linuxperm_last = "bubblewrap";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMBWRAP";
+                gshell_command_result = "LINUX PERMISSION BUBBLEWRAP OK";
+                gshell_input_status_text = "BWRAP";
+                perm_terminal_text = "LINUXPERMBWRAP -> BUBBLEWRAP CAN PROVIDE FIRST APP SANDBOX";
+                break;
+
+            case GSHELL_CMD_LINUXPERMAPPARMOR:
+                gshell_linuxperm_apparmor_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "apparmor";
+                gshell_linuxperm_target = "profile-policy";
+                gshell_linuxperm_last = "apparmor";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMAPPARMOR";
+                gshell_command_result = "LINUX PERMISSION APPARMOR OK";
+                gshell_input_status_text = "APPARMOR";
+                perm_terminal_text = "LINUXPERMAPPARMOR -> APPARMOR CAN ENFORCE APP PROFILES";
+                break;
+
+            case GSHELL_CMD_LINUXPERMSECCOMP:
+                gshell_linuxperm_seccomp_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "seccomp";
+                gshell_linuxperm_target = "syscall-filter";
+                gshell_linuxperm_last = "seccomp";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMSECCOMP";
+                gshell_command_result = "LINUX PERMISSION SECCOMP OK";
+                gshell_input_status_text = "SECCOMP";
+                perm_terminal_text = "LINUXPERMSECCOMP -> SECCOMP CAN LIMIT SYSCALL SURFACE";
+                break;
+
+            case GSHELL_CMD_LINUXPERMEBPF:
+                gshell_linuxperm_ebpf_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "ebpf";
+                gshell_linuxperm_target = "observe-control";
+                gshell_linuxperm_last = "ebpf";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMEBPF";
+                gshell_command_result = "LINUX PERMISSION EBPF OK";
+                gshell_input_status_text = "EBPF";
+                perm_terminal_text = "LINUXPERMEBPF -> EBPF IS POWERFUL BUT LATER STAGE";
+                break;
+
+            case GSHELL_CMD_LINUXPERMAUDITD:
+                gshell_linuxperm_auditd_ready = 1;
+                gshell_linuxperm_state = "candidate";
+                gshell_linuxperm_choice = "auditd";
+                gshell_linuxperm_target = "audit-events";
+                gshell_linuxperm_last = "auditd";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMAUDITD";
+                gshell_command_result = "LINUX PERMISSION AUDITD OK";
+                gshell_input_status_text = "AUDITD";
+                perm_terminal_text = "LINUXPERMAUDITD -> AUDITD CAN FEED BEHAVIOR TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXPERMFILE:
+                gshell_linuxperm_file_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "file-policy";
+                gshell_linuxperm_target = "path-access";
+                gshell_linuxperm_last = "file";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMFILE";
+                gshell_command_result = "LINUX PERMISSION FILE OK";
+                gshell_input_status_text = "FILE";
+                perm_terminal_text = "LINUXPERMFILE -> FILE ACCESS MAPS TO USER RULES";
+                break;
+
+            case GSHELL_CMD_LINUXPERMNET:
+                gshell_linuxperm_net_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "network-policy";
+                gshell_linuxperm_target = "net-access";
+                gshell_linuxperm_last = "network";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMNET";
+                gshell_command_result = "LINUX PERMISSION NET OK";
+                gshell_input_status_text = "NET";
+                perm_terminal_text = "LINUXPERMNET -> NETWORK ACCESS MAPS TO USER RULES";
+                break;
+
+            case GSHELL_CMD_LINUXPERMPROC:
+                gshell_linuxperm_proc_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "process-policy";
+                gshell_linuxperm_target = "process-control";
+                gshell_linuxperm_last = "process";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMPROC";
+                gshell_command_result = "LINUX PERMISSION PROCESS OK";
+                gshell_input_status_text = "PROCESS";
+                perm_terminal_text = "LINUXPERMPROC -> PROCESS ACTIONS MAP TO APP CONTROL";
+                break;
+
+            case GSHELL_CMD_LINUXPERMDEVICE:
+                gshell_linuxperm_device_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "device-policy";
+                gshell_linuxperm_target = "camera-mic-usb";
+                gshell_linuxperm_last = "device";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMDEVICE";
+                gshell_command_result = "LINUX PERMISSION DEVICE OK";
+                gshell_input_status_text = "DEVICE";
+                perm_terminal_text = "LINUXPERMDEVICE -> DEVICE ACCESS NEEDS USER CONTROL LAYER";
+                break;
+
+            case GSHELL_CMD_LINUXPERMAI:
+                gshell_linuxperm_ai_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "ai-policy";
+                gshell_linuxperm_target = "ai-intent";
+                gshell_linuxperm_last = "ai";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMAI";
+                gshell_command_result = "LINUX PERMISSION AI OK";
+                gshell_input_status_text = "AI";
+                perm_terminal_text = "LINUXPERMAI -> AI MUST PASS USER POLICY BEFORE ACTION";
+                break;
+
+            case GSHELL_CMD_LINUXPERMVOICE:
+                gshell_linuxperm_voice_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "voice-policy";
+                gshell_linuxperm_target = "voice-intent";
+                gshell_linuxperm_last = "voice";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMVOICE";
+                gshell_command_result = "LINUX PERMISSION VOICE OK";
+                gshell_input_status_text = "VOICE";
+                perm_terminal_text = "LINUXPERMVOICE -> VOICE COMMANDS CANNOT BYPASS POLICY";
+                break;
+
+            case GSHELL_CMD_LINUXPERMRULE:
+                gshell_linuxperm_rule_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "user-rule";
+                gshell_linuxperm_target = "allow-ask-deny";
+                gshell_linuxperm_last = "rule";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMRULE";
+                gshell_command_result = "LINUX PERMISSION RULE OK";
+                gshell_input_status_text = "RULE";
+                perm_terminal_text = "LINUXPERMRULE -> USER RULE TABLE STAYS ABOVE LINUX BACKEND";
+                break;
+
+            case GSHELL_CMD_LINUXPERMREQUEST:
+                gshell_linuxperm_request_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "request-flow";
+                gshell_linuxperm_target = "sundial-prompt";
+                gshell_linuxperm_last = "request";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMREQUEST";
+                gshell_command_result = "LINUX PERMISSION REQUEST OK";
+                gshell_input_status_text = "REQUEST";
+                perm_terminal_text = "LINUXPERMREQUEST -> PERMISSION REQUEST FLOWS THROUGH SUNDIAL";
+                break;
+
+            case GSHELL_CMD_LINUXPERMDECISION:
+                gshell_linuxperm_decision_ready = 1;
+                gshell_linuxperm_state = "matrix";
+                gshell_linuxperm_choice = "decision-log";
+                gshell_linuxperm_target = "audit";
+                gshell_linuxperm_last = "decision";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMDECISION";
+                gshell_command_result = "LINUX PERMISSION DECISION OK";
+                gshell_input_status_text = "DECISION";
+                perm_terminal_text = "LINUXPERMDECISION -> ALL ALLOW DENY ASK DECISIONS ARE AUDITED";
+                break;
+
+            case GSHELL_CMD_LINUXPERMMATRIX:
+                gshell_linuxperm_namespace_ready = 1;
+                gshell_linuxperm_bwrap_ready = 1;
+                gshell_linuxperm_apparmor_ready = 1;
+                gshell_linuxperm_seccomp_ready = 1;
+                gshell_linuxperm_ebpf_ready = 1;
+                gshell_linuxperm_auditd_ready = 1;
+                gshell_linuxperm_file_ready = 1;
+                gshell_linuxperm_net_ready = 1;
+                gshell_linuxperm_proc_ready = 1;
+                gshell_linuxperm_device_ready = 1;
+                gshell_linuxperm_ai_ready = 1;
+                gshell_linuxperm_voice_ready = 1;
+                gshell_linuxperm_rule_ready = 1;
+                gshell_linuxperm_request_ready = 1;
+                gshell_linuxperm_decision_ready = 1;
+                gshell_linuxperm_matrix_ready = 1;
+                gshell_linuxperm_state = "matrix-ready";
+                gshell_linuxperm_choice = "compare-all";
+                gshell_linuxperm_target = "permission-backend";
+                gshell_linuxperm_last = "matrix";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMMATRIX";
+                gshell_command_result = "LINUX PERMISSION MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                perm_terminal_text = "LINUXPERMMATRIX -> PERMISSION BACKEND MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXPERMRANK:
+                gshell_linuxperm_rank_ready = 1;
+                gshell_linuxperm_state = "rank";
+                gshell_linuxperm_choice = "bwrap+rules";
+                gshell_linuxperm_target = "first-prototype";
+                gshell_linuxperm_last = "rank";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMRANK";
+                gshell_command_result = "LINUX PERMISSION RANK OK";
+                gshell_input_status_text = "RANK";
+                perm_terminal_text = "LINUXPERMRANK -> FIRST RANK: BUBBLEWRAP, APPARMOR, AUDITD, SECCOMP, EBPF";
+                break;
+
+            case GSHELL_CMD_LINUXPERMCHOICE:
+                gshell_linuxperm_choice_ready = 1;
+                gshell_linuxperm_state = "choice";
+                gshell_linuxperm_choice = "bwrap+audit";
+                gshell_linuxperm_target = "first-linux-prototype";
+                gshell_linuxperm_last = "choice";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMCHOICE";
+                gshell_command_result = "LINUX PERMISSION CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                perm_terminal_text = "LINUXPERMCHOICE -> FIRST CHOICE: BUBBLEWRAP SANDBOX + AUDIT TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXPERMDEMO:
+                gshell_linuxperm_namespace_ready = 1;
+                gshell_linuxperm_bwrap_ready = 1;
+                gshell_linuxperm_apparmor_ready = 1;
+                gshell_linuxperm_seccomp_ready = 1;
+                gshell_linuxperm_ebpf_ready = 1;
+                gshell_linuxperm_auditd_ready = 1;
+                gshell_linuxperm_file_ready = 1;
+                gshell_linuxperm_net_ready = 1;
+                gshell_linuxperm_proc_ready = 1;
+                gshell_linuxperm_device_ready = 1;
+                gshell_linuxperm_ai_ready = 1;
+                gshell_linuxperm_voice_ready = 1;
+                gshell_linuxperm_rule_ready = 1;
+                gshell_linuxperm_request_ready = 1;
+                gshell_linuxperm_decision_ready = 1;
+                gshell_linuxperm_matrix_ready = 1;
+                gshell_linuxperm_rank_ready = 1;
+                gshell_linuxperm_choice_ready = 1;
+                gshell_linuxperm_demo_ready = 1;
+                gshell_linuxperm_state = "demo";
+                gshell_linuxperm_choice = "bwrap+audit";
+                gshell_linuxperm_target = "lingjing-control-layer";
+                gshell_linuxperm_last = "demo";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMDEMO";
+                gshell_command_result = "LINUX PERMISSION DEMO OK";
+                gshell_input_status_text = "DEMO";
+                perm_terminal_text = "LINUXPERMDEMO -> FULL LINUX PERMISSION BACKEND RESEARCH READY";
+                break;
+
+            case GSHELL_CMD_LINUXPERMCHECK: {
+                int ok = gshell_linuxperm_namespace_ready &&
+                         gshell_linuxperm_bwrap_ready &&
+                         gshell_linuxperm_apparmor_ready &&
+                         gshell_linuxperm_seccomp_ready &&
+                         gshell_linuxperm_ebpf_ready &&
+                         gshell_linuxperm_auditd_ready &&
+                         gshell_linuxperm_file_ready &&
+                         gshell_linuxperm_net_ready &&
+                         gshell_linuxperm_proc_ready &&
+                         gshell_linuxperm_device_ready &&
+                         gshell_linuxperm_ai_ready &&
+                         gshell_linuxperm_voice_ready &&
+                         gshell_linuxperm_rule_ready &&
+                         gshell_linuxperm_request_ready &&
+                         gshell_linuxperm_decision_ready &&
+                         gshell_linuxperm_matrix_ready &&
+                         gshell_linuxperm_rank_ready &&
+                         gshell_linuxperm_choice_ready;
+                gshell_linuxperm_check_ready = ok ? 1 : 0;
+                gshell_linuxperm_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXPERMCHECK";
+                gshell_command_result = ok ? "LINUX PERMISSION CHECK OK" : "LINUX PERMISSION CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                perm_terminal_text = ok ? "LINUXPERMCHECK -> PERMISSION BACKEND RESEARCH READY" : "LINUXPERMCHECK -> RUN LINUXPERMDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXPERMRESET:
+                gshell_linuxperm_namespace_ready = 0;
+                gshell_linuxperm_bwrap_ready = 0;
+                gshell_linuxperm_apparmor_ready = 0;
+                gshell_linuxperm_seccomp_ready = 0;
+                gshell_linuxperm_ebpf_ready = 0;
+                gshell_linuxperm_auditd_ready = 0;
+                gshell_linuxperm_file_ready = 0;
+                gshell_linuxperm_net_ready = 0;
+                gshell_linuxperm_proc_ready = 0;
+                gshell_linuxperm_device_ready = 0;
+                gshell_linuxperm_ai_ready = 0;
+                gshell_linuxperm_voice_ready = 0;
+                gshell_linuxperm_rule_ready = 0;
+                gshell_linuxperm_request_ready = 0;
+                gshell_linuxperm_decision_ready = 0;
+                gshell_linuxperm_matrix_ready = 0;
+                gshell_linuxperm_rank_ready = 0;
+                gshell_linuxperm_choice_ready = 0;
+                gshell_linuxperm_demo_ready = 0;
+                gshell_linuxperm_check_ready = 0;
+                gshell_linuxperm_roadmap_ready = 0;
+                gshell_linuxperm_events = 0;
+                gshell_linuxperm_state = "idle";
+                gshell_linuxperm_choice = "undecided";
+                gshell_linuxperm_target = "linux-permission-backend";
+                gshell_linuxperm_last = "reset";
+                gshell_command_name = "LINUXPERMRESET";
+                gshell_command_result = "LINUX PERMISSION RESET OK";
+                gshell_input_status_text = "RESET";
+                perm_terminal_text = "LINUXPERMRESET -> PERMISSION BACKEND MATRIX RESET";
+                break;
+
+            case GSHELL_CMD_LINUXPERMROADMAP:
+                gshell_linuxperm_roadmap_ready = 1;
+                gshell_linuxperm_state = "roadmap";
+                gshell_linuxperm_choice = "bwrap+audit";
+                gshell_linuxperm_target = "2.1.6-research-closeout";
+                gshell_linuxperm_last = "roadmap";
+                gshell_linuxperm_events++;
+                gshell_command_name = "LINUXPERMROADMAP";
+                gshell_command_result = "LINUX PERMISSION ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                perm_terminal_text = "LINUXPERMROADMAP -> NEXT CLOSE OUT 2.1 LINUX RESEARCH STAGE";
+                break;
+
+            case GSHELL_CMD_LINUXPERMNEXT:
+                gshell_command_name = "LINUXPERMNEXT";
+                gshell_command_result = "LINUX PERMISSION NEXT OK";
+                gshell_input_status_text = "NEXT";
+                perm_terminal_text = "LINUXPERMNEXT -> DEV-2.1.6 LINUX RESEARCH CLOSEOUT";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(perm_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXFINALSTATUS && command_id <= GSHELL_CMD_LINUXFINALNEXT) {
+        const char* final_terminal_text = "LINUXFINALSTATUS -> 2.1 LINUX RESEARCH CLOSEOUT READY";
+
+        gshell_command_view = "LINUXFINALSTATUS";
+        gshell_input_status_text = "LINUX FINAL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXFINALSTATUS:
+                gshell_command_name = "LINUXFINALSTATUS";
+                gshell_command_result = "LINUX RESEARCH FINAL STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXFINALBASE:
+                gshell_linuxfinal_base_ready = 1;
+                gshell_linuxfinal_state = "base-final";
+                gshell_linuxfinal_choice = "debian-first";
+                gshell_linuxfinal_target = "linux-base";
+                gshell_linuxfinal_last = "base";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALBASE";
+                gshell_command_result = "LINUX RESEARCH FINAL BASE OK";
+                gshell_input_status_text = "BASE";
+                final_terminal_text = "LINUXFINALBASE -> BASE RESEARCH CLOSED: DEBIAN FIRST";
+                break;
+
+            case GSHELL_CMD_LINUXFINALDISPLAY:
+                gshell_linuxfinal_display_ready = 1;
+                gshell_linuxfinal_state = "display-final";
+                gshell_linuxfinal_choice = "sdl-first";
+                gshell_linuxfinal_target = "display-stack";
+                gshell_linuxfinal_last = "display";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALDISPLAY";
+                gshell_command_result = "LINUX RESEARCH FINAL DISPLAY OK";
+                gshell_input_status_text = "DISPLAY";
+                final_terminal_text = "LINUXFINALDISPLAY -> DISPLAY RESEARCH CLOSED: SDL FIRST, OPENGL LATER";
+                break;
+
+            case GSHELL_CMD_LINUXFINALINPUT:
+                gshell_linuxfinal_input_ready = 1;
+                gshell_linuxfinal_state = "input-final";
+                gshell_linuxfinal_choice = "sdl-input";
+                gshell_linuxfinal_target = "input-stack";
+                gshell_linuxfinal_last = "input";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALINPUT";
+                gshell_command_result = "LINUX RESEARCH FINAL INPUT OK";
+                gshell_input_status_text = "INPUT";
+                final_terminal_text = "LINUXFINALINPUT -> INPUT RESEARCH CLOSED: SDL INPUT FIRST, PIPEWIRE LATER";
+                break;
+
+            case GSHELL_CMD_LINUXFINALMAP:
+                gshell_linuxfinal_map_ready = 1;
+                gshell_linuxfinal_state = "app-map-final";
+                gshell_linuxfinal_choice = ".desktop+pid";
+                gshell_linuxfinal_target = "app-process-map";
+                gshell_linuxfinal_last = "app-map";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALMAP";
+                gshell_command_result = "LINUX RESEARCH FINAL MAP OK";
+                gshell_input_status_text = "APP MAP";
+                final_terminal_text = "LINUXFINALMAP -> APP MAP CLOSED: DESKTOP FILES + PID RUNTIME";
+                break;
+
+            case GSHELL_CMD_LINUXFINALPERM:
+                gshell_linuxfinal_perm_ready = 1;
+                gshell_linuxfinal_state = "permission-final";
+                gshell_linuxfinal_choice = "bwrap+audit";
+                gshell_linuxfinal_target = "permission-backend";
+                gshell_linuxfinal_last = "permission";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALPERM";
+                gshell_command_result = "LINUX RESEARCH FINAL PERMISSION OK";
+                gshell_input_status_text = "PERM";
+                final_terminal_text = "LINUXFINALPERM -> PERMISSION RESEARCH CLOSED: BWRAP + AUDIT FIRST";
+                break;
+
+            case GSHELL_CMD_LINUXFINALSANDBOX:
+                gshell_linuxfinal_sandbox_ready = 1;
+                gshell_linuxfinal_state = "sandbox-final";
+                gshell_linuxfinal_choice = "bubblewrap";
+                gshell_linuxfinal_target = "app-sandbox";
+                gshell_linuxfinal_last = "sandbox";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALSANDBOX";
+                gshell_command_result = "LINUX RESEARCH FINAL SANDBOX OK";
+                gshell_input_status_text = "SANDBOX";
+                final_terminal_text = "LINUXFINALSANDBOX -> FIRST SANDBOX ROUTE: BUBBLEWRAP";
+                break;
+
+            case GSHELL_CMD_LINUXFINALAUDIT:
+                gshell_linuxfinal_audit_ready = 1;
+                gshell_linuxfinal_state = "audit-final";
+                gshell_linuxfinal_choice = "audit-timeline";
+                gshell_linuxfinal_target = "behavior-log";
+                gshell_linuxfinal_last = "audit";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALAUDIT";
+                gshell_command_result = "LINUX RESEARCH FINAL AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                final_terminal_text = "LINUXFINALAUDIT -> AUDIT TIMELINE STAYS AS CORE LINGJING LAYER";
+                break;
+
+            case GSHELL_CMD_LINUXFINALVOICE:
+                gshell_linuxfinal_voice_ready = 1;
+                gshell_linuxfinal_state = "voice-final";
+                gshell_linuxfinal_choice = "pipewire-later";
+                gshell_linuxfinal_target = "voice-intent";
+                gshell_linuxfinal_last = "voice";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALVOICE";
+                gshell_command_result = "LINUX RESEARCH FINAL VOICE OK";
+                gshell_input_status_text = "VOICE";
+                final_terminal_text = "LINUXFINALVOICE -> VOICE IS FUTURE INTENT ENTRY, NOT DIRECT POWER";
+                break;
+
+            case GSHELL_CMD_LINUXFINALAI:
+                gshell_linuxfinal_ai_ready = 1;
+                gshell_linuxfinal_state = "ai-final";
+                gshell_linuxfinal_choice = "policy-gated";
+                gshell_linuxfinal_target = "ai-intent";
+                gshell_linuxfinal_last = "ai";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALAI";
+                gshell_command_result = "LINUX RESEARCH FINAL AI OK";
+                gshell_input_status_text = "AI";
+                final_terminal_text = "LINUXFINALAI -> AI MUST PASS USER CONTROL AND POLICY LAYER";
+                break;
+
+            case GSHELL_CMD_LINUXFINALSUNDIAL:
+                gshell_linuxfinal_sundial_ready = 1;
+                gshell_linuxfinal_state = "sundial-final";
+                gshell_linuxfinal_choice = "core-hub";
+                gshell_linuxfinal_target = "sundial-ui";
+                gshell_linuxfinal_last = "sundial";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALSUNDIAL";
+                gshell_command_result = "LINUX RESEARCH FINAL SUNDIAL OK";
+                gshell_input_status_text = "SUNDIAL";
+                final_terminal_text = "LINUXFINALSUNDIAL -> SUNDIAL REMAINS LINGJING DESKTOP CORE";
+                break;
+
+            case GSHELL_CMD_LINUXFINALDESKTOP:
+                gshell_linuxfinal_desktop_ready = 1;
+                gshell_linuxfinal_state = "desktop-final";
+                gshell_linuxfinal_choice = "taskbar-free";
+                gshell_linuxfinal_target = "desktop-shell";
+                gshell_linuxfinal_last = "desktop";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALDESKTOP";
+                gshell_command_result = "LINUX RESEARCH FINAL DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                final_terminal_text = "LINUXFINALDESKTOP -> DESKTOP DIRECTION: TASKBAR-FREE SUNDIAL SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXFINALRISK:
+                gshell_linuxfinal_risk_ready = 1;
+                gshell_linuxfinal_state = "risk-final";
+                gshell_linuxfinal_choice = "do-not-rush";
+                gshell_linuxfinal_target = "prototype-risk";
+                gshell_linuxfinal_last = "risk";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALRISK";
+                gshell_command_result = "LINUX RESEARCH FINAL RISK OK";
+                gshell_input_status_text = "RISK";
+                final_terminal_text = "LINUXFINALRISK -> RISK: DO NOT TURN LINGJING INTO A NORMAL APP";
+                break;
+
+            case GSHELL_CMD_LINUXFINALCHOICE:
+                gshell_linuxfinal_choice_ready = 1;
+                gshell_linuxfinal_state = "choice";
+                gshell_linuxfinal_choice = "debian+sdl";
+                gshell_linuxfinal_target = "first-linux-prototype";
+                gshell_linuxfinal_last = "choice";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALCHOICE";
+                gshell_command_result = "LINUX RESEARCH FINAL CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                final_terminal_text = "LINUXFINALCHOICE -> FIRST ROUTE: DEBIAN + SDL + SUNDIAL SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXFINALDEMO:
+                gshell_linuxfinal_base_ready = 1;
+                gshell_linuxfinal_display_ready = 1;
+                gshell_linuxfinal_input_ready = 1;
+                gshell_linuxfinal_map_ready = 1;
+                gshell_linuxfinal_perm_ready = 1;
+                gshell_linuxfinal_sandbox_ready = 1;
+                gshell_linuxfinal_audit_ready = 1;
+                gshell_linuxfinal_voice_ready = 1;
+                gshell_linuxfinal_ai_ready = 1;
+                gshell_linuxfinal_sundial_ready = 1;
+                gshell_linuxfinal_desktop_ready = 1;
+                gshell_linuxfinal_risk_ready = 1;
+                gshell_linuxfinal_choice_ready = 1;
+                gshell_linuxfinal_demo_ready = 1;
+                gshell_linuxfinal_state = "demo";
+                gshell_linuxfinal_choice = "debian+sdl";
+                gshell_linuxfinal_target = "linux-backed-research";
+                gshell_linuxfinal_last = "demo";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALDEMO";
+                gshell_command_result = "LINUX RESEARCH FINAL DEMO OK";
+                gshell_input_status_text = "DEMO";
+                final_terminal_text = "LINUXFINALDEMO -> FULL 2.1 LINUX RESEARCH SUMMARY READY";
+                break;
+
+            case GSHELL_CMD_LINUXFINALCHECK: {
+                int ok = gshell_linuxfinal_base_ready &&
+                         gshell_linuxfinal_display_ready &&
+                         gshell_linuxfinal_input_ready &&
+                         gshell_linuxfinal_map_ready &&
+                         gshell_linuxfinal_perm_ready &&
+                         gshell_linuxfinal_sandbox_ready &&
+                         gshell_linuxfinal_audit_ready &&
+                         gshell_linuxfinal_voice_ready &&
+                         gshell_linuxfinal_ai_ready &&
+                         gshell_linuxfinal_sundial_ready &&
+                         gshell_linuxfinal_desktop_ready &&
+                         gshell_linuxfinal_risk_ready &&
+                         gshell_linuxfinal_choice_ready;
+                gshell_linuxfinal_check_ready = ok ? 1 : 0;
+                gshell_linuxfinal_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXFINALCHECK";
+                gshell_command_result = ok ? "LINUX RESEARCH FINAL CHECK OK" : "LINUX RESEARCH FINAL CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                final_terminal_text = ok ? "LINUXFINALCHECK -> 2.1 LINUX RESEARCH CLOSEOUT READY" : "LINUXFINALCHECK -> RUN LINUXFINALDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXFINALCLOSEOUT:
+                gshell_linuxfinal_base_ready = 1;
+                gshell_linuxfinal_display_ready = 1;
+                gshell_linuxfinal_input_ready = 1;
+                gshell_linuxfinal_map_ready = 1;
+                gshell_linuxfinal_perm_ready = 1;
+                gshell_linuxfinal_sandbox_ready = 1;
+                gshell_linuxfinal_audit_ready = 1;
+                gshell_linuxfinal_voice_ready = 1;
+                gshell_linuxfinal_ai_ready = 1;
+                gshell_linuxfinal_sundial_ready = 1;
+                gshell_linuxfinal_desktop_ready = 1;
+                gshell_linuxfinal_risk_ready = 1;
+                gshell_linuxfinal_choice_ready = 1;
+                gshell_linuxfinal_check_ready = 1;
+                gshell_linuxfinal_closeout_ready = 1;
+                gshell_linuxfinal_state = "closeout";
+                gshell_linuxfinal_choice = "debian+sdl";
+                gshell_linuxfinal_target = "dev-2.2.x";
+                gshell_linuxfinal_last = "closeout";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALCLOSEOUT";
+                gshell_command_result = "LINUX RESEARCH FINAL CLOSEOUT OK";
+                gshell_input_status_text = "CLOSEOUT";
+                final_terminal_text = "LINUXFINALCLOSEOUT -> 2.1.X LINUX RESEARCH STAGE CLOSED";
+                break;
+
+            case GSHELL_CMD_LINUXFINALROADMAP:
+                gshell_linuxfinal_roadmap_ready = 1;
+                gshell_linuxfinal_state = "roadmap";
+                gshell_linuxfinal_choice = "debian+sdl";
+                gshell_linuxfinal_target = "minimal-linux-shell";
+                gshell_linuxfinal_last = "roadmap";
+                gshell_linuxfinal_events++;
+                gshell_command_name = "LINUXFINALROADMAP";
+                gshell_command_result = "LINUX RESEARCH FINAL ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                final_terminal_text = "LINUXFINALROADMAP -> NEXT 2.2 MINIMAL LINUX SHELL PROTOTYPE PLAN";
+                break;
+
+            case GSHELL_CMD_LINUXFINALNEXT:
+                gshell_command_name = "LINUXFINALNEXT";
+                gshell_command_result = "LINUX RESEARCH FINAL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                final_terminal_text = "LINUXFINALNEXT -> DEV-2.2.0 MINIMAL LINUX SHELL PROTOTYPE PLAN";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(final_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXSHELLSTATUS && command_id <= GSHELL_CMD_LINUXSHELLNEXT) {
+        const char* shell_terminal_text = "LINUXSHELLSTATUS -> MINIMAL LINUX SHELL PROTOTYPE PLAN READY";
+
+        gshell_command_view = "LINUXSHELLSTATUS";
+        gshell_input_status_text = "LX SHELL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXSHELLSTATUS:
+                gshell_command_name = "LINUXSHELLSTATUS";
+                gshell_command_result = "LINUX SHELL STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLBASE:
+                gshell_linuxshell_base_ready = 1;
+                gshell_linuxshell_state = "base-plan";
+                gshell_linuxshell_choice = "debian";
+                gshell_linuxshell_target = "linux-base";
+                gshell_linuxshell_last = "base";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLBASE";
+                gshell_command_result = "LINUX SHELL BASE OK";
+                gshell_input_status_text = "BASE";
+                shell_terminal_text = "LINUXSHELLBASE -> FIRST BASE: DEBIAN MINIMAL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLPROCESS:
+                gshell_linuxshell_process_ready = 1;
+                gshell_linuxshell_state = "process-plan";
+                gshell_linuxshell_choice = "lingjing-shell-process";
+                gshell_linuxshell_target = "user-space-shell";
+                gshell_linuxshell_last = "process";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLPROCESS";
+                gshell_command_result = "LINUX SHELL PROCESS OK";
+                gshell_input_status_text = "PROCESS";
+                shell_terminal_text = "LINUXSHELLPROCESS -> LINGJING SHELL RUNS AS MAIN USER SPACE PROCESS";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLSDL:
+                gshell_linuxshell_sdl_ready = 1;
+                gshell_linuxshell_state = "sdl-plan";
+                gshell_linuxshell_choice = "sdl";
+                gshell_linuxshell_target = "window-render-input";
+                gshell_linuxshell_last = "sdl";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLSDL";
+                gshell_command_result = "LINUX SHELL SDL OK";
+                gshell_input_status_text = "SDL";
+                shell_terminal_text = "LINUXSHELLSDL -> FIRST UI SHELL USES SDL WINDOW";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLWINDOW:
+                gshell_linuxshell_window_ready = 1;
+                gshell_linuxshell_state = "window-plan";
+                gshell_linuxshell_choice = "single-shell-window";
+                gshell_linuxshell_target = "desktop-canvas";
+                gshell_linuxshell_last = "window";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLWINDOW";
+                gshell_command_result = "LINUX SHELL WINDOW OK";
+                gshell_input_status_text = "WINDOW";
+                shell_terminal_text = "LINUXSHELLWINDOW -> FIRST PROTOTYPE CAN BE ONE FULLSCREEN SHELL WINDOW";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLRENDER:
+                gshell_linuxshell_render_ready = 1;
+                gshell_linuxshell_state = "render-plan";
+                gshell_linuxshell_choice = "sdl-software";
+                gshell_linuxshell_target = "sundial-render";
+                gshell_linuxshell_last = "render";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLRENDER";
+                gshell_command_result = "LINUX SHELL RENDER OK";
+                gshell_input_status_text = "RENDER";
+                shell_terminal_text = "LINUXSHELLRENDER -> FIRST RENDER: SDL SOFTWARE, OPENGL LATER";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLINPUT:
+                gshell_linuxshell_input_ready = 1;
+                gshell_linuxshell_state = "input-plan";
+                gshell_linuxshell_choice = "sdl-input";
+                gshell_linuxshell_target = "keyboard-mouse";
+                gshell_linuxshell_last = "input";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLINPUT";
+                gshell_command_result = "LINUX SHELL INPUT OK";
+                gshell_input_status_text = "INPUT";
+                shell_terminal_text = "LINUXSHELLINPUT -> SDL INPUT FEEDS LINGJING ROUTER";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLSUNDIAL:
+                gshell_linuxshell_sundial_ready = 1;
+                gshell_linuxshell_state = "sundial-plan";
+                gshell_linuxshell_choice = "sundial-core";
+                gshell_linuxshell_target = "main-desktop-hub";
+                gshell_linuxshell_last = "sundial";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLSUNDIAL";
+                gshell_command_result = "LINUX SHELL SUNDIAL OK";
+                gshell_input_status_text = "SUNDIAL";
+                shell_terminal_text = "LINUXSHELLSUNDIAL -> SUNDIAL IS DEFAULT SHELL CENTER";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLDESKTOP:
+                gshell_linuxshell_desktop_ready = 1;
+                gshell_linuxshell_state = "desktop-plan";
+                gshell_linuxshell_choice = "taskbar-free";
+                gshell_linuxshell_target = "desktop-scene";
+                gshell_linuxshell_last = "desktop";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLDESKTOP";
+                gshell_command_result = "LINUX SHELL DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                shell_terminal_text = "LINUXSHELLDESKTOP -> DESKTOP USES TASKBAR-FREE SUNDIAL MODEL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLAPPREG:
+                gshell_linuxshell_appreg_ready = 1;
+                gshell_linuxshell_state = "app-reg-plan";
+                gshell_linuxshell_choice = ".desktop-index";
+                gshell_linuxshell_target = "app-icons";
+                gshell_linuxshell_last = "app-reg";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLAPPREG";
+                gshell_command_result = "LINUX SHELL APP REGISTRY OK";
+                gshell_input_status_text = "APP REG";
+                shell_terminal_text = "LINUXSHELLAPPREG -> READ LINUX DESKTOP ENTRIES INTO SUNDIAL ICON REGISTRY";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLLAUNCH:
+                gshell_linuxshell_launch_ready = 1;
+                gshell_linuxshell_state = "launch-plan";
+                gshell_linuxshell_choice = "exec-entry";
+                gshell_linuxshell_target = "app-launch";
+                gshell_linuxshell_last = "launch";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLLAUNCH";
+                gshell_command_result = "LINUX SHELL LAUNCH OK";
+                gshell_input_status_text = "LAUNCH";
+                shell_terminal_text = "LINUXSHELLLAUNCH -> SUNDIAL ICON CAN MAP TO LINUX EXEC ENTRY";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLRUNTIME:
+                gshell_linuxshell_runtime_ready = 1;
+                gshell_linuxshell_state = "runtime-plan";
+                gshell_linuxshell_choice = "pid-state";
+                gshell_linuxshell_target = "icon-lit";
+                gshell_linuxshell_last = "runtime";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLRUNTIME";
+                gshell_command_result = "LINUX SHELL RUNTIME OK";
+                gshell_input_status_text = "RUNTIME";
+                shell_terminal_text = "LINUXSHELLRUNTIME -> PID RUNTIME STATE LIGHTS SUNDIAL ICONS";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLCONFIG:
+                gshell_linuxshell_config_ready = 1;
+                gshell_linuxshell_state = "config-plan";
+                gshell_linuxshell_choice = "~/.config/lingjing";
+                gshell_linuxshell_target = "user-config";
+                gshell_linuxshell_last = "config";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLCONFIG";
+                gshell_command_result = "LINUX SHELL CONFIG OK";
+                gshell_input_status_text = "CONFIG";
+                shell_terminal_text = "LINUXSHELLCONFIG -> USER CONFIG PATH: ~/.CONFIG/LINGJING";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLSESSION:
+                gshell_linuxshell_session_ready = 1;
+                gshell_linuxshell_state = "session-plan";
+                gshell_linuxshell_choice = "lingjing-session";
+                gshell_linuxshell_target = "login-entry";
+                gshell_linuxshell_last = "session";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLSESSION";
+                gshell_command_result = "LINUX SHELL SESSION OK";
+                gshell_input_status_text = "SESSION";
+                shell_terminal_text = "LINUXSHELLSESSION -> FUTURE LOGIN SESSION ENTERS LINGJING SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLPOLICY:
+                gshell_linuxshell_policy_ready = 1;
+                gshell_linuxshell_state = "policy-plan";
+                gshell_linuxshell_choice = "policy-gate";
+                gshell_linuxshell_target = "file-net-app-ai";
+                gshell_linuxshell_last = "policy";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLPOLICY";
+                gshell_command_result = "LINUX SHELL POLICY OK";
+                gshell_input_status_text = "POLICY";
+                shell_terminal_text = "LINUXSHELLPOLICY -> LINGJING POLICY STAYS ABOVE LINUX APP ACTIONS";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLAUDIT:
+                gshell_linuxshell_audit_ready = 1;
+                gshell_linuxshell_state = "audit-plan";
+                gshell_linuxshell_choice = "audit-timeline";
+                gshell_linuxshell_target = "behavior-log";
+                gshell_linuxshell_last = "audit";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLAUDIT";
+                gshell_command_result = "LINUX SHELL AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                shell_terminal_text = "LINUXSHELLAUDIT -> SHELL EVENTS FEED AUDIT TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLVOICE:
+                gshell_linuxshell_voice_ready = 1;
+                gshell_linuxshell_state = "voice-plan";
+                gshell_linuxshell_choice = "pipewire-later";
+                gshell_linuxshell_target = "voice-intent";
+                gshell_linuxshell_last = "voice";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLVOICE";
+                gshell_command_result = "LINUX SHELL VOICE OK";
+                gshell_input_status_text = "VOICE";
+                shell_terminal_text = "LINUXSHELLVOICE -> VOICE IS FUTURE INTENT ENTRY";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLAI:
+                gshell_linuxshell_ai_ready = 1;
+                gshell_linuxshell_state = "ai-plan";
+                gshell_linuxshell_choice = "policy-gated-ai";
+                gshell_linuxshell_target = "intent-assistant";
+                gshell_linuxshell_last = "ai";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLAI";
+                gshell_command_result = "LINUX SHELL AI OK";
+                gshell_input_status_text = "AI";
+                shell_terminal_text = "LINUXSHELLAI -> AI CAN ASSIST BUT NOT BYPASS USER CONTROL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLMATRIX:
+                gshell_linuxshell_base_ready = 1;
+                gshell_linuxshell_process_ready = 1;
+                gshell_linuxshell_sdl_ready = 1;
+                gshell_linuxshell_window_ready = 1;
+                gshell_linuxshell_render_ready = 1;
+                gshell_linuxshell_input_ready = 1;
+                gshell_linuxshell_sundial_ready = 1;
+                gshell_linuxshell_desktop_ready = 1;
+                gshell_linuxshell_appreg_ready = 1;
+                gshell_linuxshell_launch_ready = 1;
+                gshell_linuxshell_runtime_ready = 1;
+                gshell_linuxshell_config_ready = 1;
+                gshell_linuxshell_session_ready = 1;
+                gshell_linuxshell_policy_ready = 1;
+                gshell_linuxshell_audit_ready = 1;
+                gshell_linuxshell_voice_ready = 1;
+                gshell_linuxshell_ai_ready = 1;
+                gshell_linuxshell_matrix_ready = 1;
+                gshell_linuxshell_state = "matrix-ready";
+                gshell_linuxshell_choice = "debian+sdl";
+                gshell_linuxshell_target = "minimal-shell-plan";
+                gshell_linuxshell_last = "matrix";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLMATRIX";
+                gshell_command_result = "LINUX SHELL MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                shell_terminal_text = "LINUXSHELLMATRIX -> MINIMAL LINUX SHELL PLAN MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLCHOICE:
+                gshell_linuxshell_choice_ready = 1;
+                gshell_linuxshell_state = "choice";
+                gshell_linuxshell_choice = "debian+sdl-shell";
+                gshell_linuxshell_target = "first-prototype";
+                gshell_linuxshell_last = "choice";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLCHOICE";
+                gshell_command_result = "LINUX SHELL CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                shell_terminal_text = "LINUXSHELLCHOICE -> FIRST PROTOTYPE CHOICE: DEBIAN + SDL SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLDEMO:
+                gshell_linuxshell_base_ready = 1;
+                gshell_linuxshell_process_ready = 1;
+                gshell_linuxshell_sdl_ready = 1;
+                gshell_linuxshell_window_ready = 1;
+                gshell_linuxshell_render_ready = 1;
+                gshell_linuxshell_input_ready = 1;
+                gshell_linuxshell_sundial_ready = 1;
+                gshell_linuxshell_desktop_ready = 1;
+                gshell_linuxshell_appreg_ready = 1;
+                gshell_linuxshell_launch_ready = 1;
+                gshell_linuxshell_runtime_ready = 1;
+                gshell_linuxshell_config_ready = 1;
+                gshell_linuxshell_session_ready = 1;
+                gshell_linuxshell_policy_ready = 1;
+                gshell_linuxshell_audit_ready = 1;
+                gshell_linuxshell_voice_ready = 1;
+                gshell_linuxshell_ai_ready = 1;
+                gshell_linuxshell_matrix_ready = 1;
+                gshell_linuxshell_choice_ready = 1;
+                gshell_linuxshell_demo_ready = 1;
+                gshell_linuxshell_state = "demo";
+                gshell_linuxshell_choice = "debian+sdl-shell";
+                gshell_linuxshell_target = "minimal-linux-shell";
+                gshell_linuxshell_last = "demo";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLDEMO";
+                gshell_command_result = "LINUX SHELL DEMO OK";
+                gshell_input_status_text = "DEMO";
+                shell_terminal_text = "LINUXSHELLDEMO -> FULL MINIMAL LINUX SHELL PROTOTYPE PLAN READY";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLCHECK: {
+                int ok = gshell_linuxshell_base_ready &&
+                         gshell_linuxshell_process_ready &&
+                         gshell_linuxshell_sdl_ready &&
+                         gshell_linuxshell_window_ready &&
+                         gshell_linuxshell_render_ready &&
+                         gshell_linuxshell_input_ready &&
+                         gshell_linuxshell_sundial_ready &&
+                         gshell_linuxshell_desktop_ready &&
+                         gshell_linuxshell_appreg_ready &&
+                         gshell_linuxshell_launch_ready &&
+                         gshell_linuxshell_runtime_ready &&
+                         gshell_linuxshell_config_ready &&
+                         gshell_linuxshell_session_ready &&
+                         gshell_linuxshell_policy_ready &&
+                         gshell_linuxshell_audit_ready &&
+                         gshell_linuxshell_matrix_ready &&
+                         gshell_linuxshell_choice_ready;
+                gshell_linuxshell_check_ready = ok ? 1 : 0;
+                gshell_linuxshell_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXSHELLCHECK";
+                gshell_command_result = ok ? "LINUX SHELL CHECK OK" : "LINUX SHELL CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                shell_terminal_text = ok ? "LINUXSHELLCHECK -> MINIMAL LINUX SHELL PLAN READY" : "LINUXSHELLCHECK -> RUN LINUXSHELLDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXSHELLRESET:
+                gshell_linuxshell_base_ready = 0;
+                gshell_linuxshell_process_ready = 0;
+                gshell_linuxshell_sdl_ready = 0;
+                gshell_linuxshell_window_ready = 0;
+                gshell_linuxshell_render_ready = 0;
+                gshell_linuxshell_input_ready = 0;
+                gshell_linuxshell_sundial_ready = 0;
+                gshell_linuxshell_desktop_ready = 0;
+                gshell_linuxshell_appreg_ready = 0;
+                gshell_linuxshell_launch_ready = 0;
+                gshell_linuxshell_runtime_ready = 0;
+                gshell_linuxshell_config_ready = 0;
+                gshell_linuxshell_session_ready = 0;
+                gshell_linuxshell_policy_ready = 0;
+                gshell_linuxshell_audit_ready = 0;
+                gshell_linuxshell_voice_ready = 0;
+                gshell_linuxshell_ai_ready = 0;
+                gshell_linuxshell_matrix_ready = 0;
+                gshell_linuxshell_choice_ready = 0;
+                gshell_linuxshell_demo_ready = 0;
+                gshell_linuxshell_check_ready = 0;
+                gshell_linuxshell_roadmap_ready = 0;
+                gshell_linuxshell_events = 0;
+                gshell_linuxshell_state = "idle";
+                gshell_linuxshell_choice = "undecided";
+                gshell_linuxshell_target = "minimal-linux-shell";
+                gshell_linuxshell_last = "reset";
+                gshell_command_name = "LINUXSHELLRESET";
+                gshell_command_result = "LINUX SHELL RESET OK";
+                gshell_input_status_text = "RESET";
+                shell_terminal_text = "LINUXSHELLRESET -> MINIMAL LINUX SHELL PLAN RESET";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLROADMAP:
+                gshell_linuxshell_roadmap_ready = 1;
+                gshell_linuxshell_state = "roadmap";
+                gshell_linuxshell_choice = "debian+sdl-shell";
+                gshell_linuxshell_target = "2.2.1-desktop-shell-port";
+                gshell_linuxshell_last = "roadmap";
+                gshell_linuxshell_events++;
+                gshell_command_name = "LINUXSHELLROADMAP";
+                gshell_command_result = "LINUX SHELL ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                shell_terminal_text = "LINUXSHELLROADMAP -> NEXT PORT DESKTOP WINDOW SHELL MODEL";
+                break;
+
+            case GSHELL_CMD_LINUXSHELLNEXT:
+                gshell_command_name = "LINUXSHELLNEXT";
+                gshell_command_result = "LINUX SHELL NEXT OK";
+                gshell_input_status_text = "NEXT";
+                shell_terminal_text = "LINUXSHELLNEXT -> DEV-2.2.1 DESKTOP WINDOW SHELL PORT MODEL";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(shell_terminal_text);
+        return;
+    }
+
+    if (command_id >= GSHELL_CMD_LINUXPORTSTATUS && command_id <= GSHELL_CMD_LINUXPORTNEXT) {
+        const char* port_terminal_text = "LINUXPORTSTATUS -> DESKTOP WINDOW SHELL PORT MODEL READY";
+
+        gshell_command_view = "LINUXPORTSTATUS";
+        gshell_input_status_text = "PORT MODEL";
+        gshell_parser_status_text = "REGISTRY";
+
+        switch (command_id) {
+            case GSHELL_CMD_LINUXPORTSTATUS:
+                gshell_command_name = "LINUXPORTSTATUS";
+                gshell_command_result = "LINUX PORT STATUS OK";
+                break;
+
+            case GSHELL_CMD_LINUXPORTGSHELL:
+                gshell_linuxport_gshell_ready = 1;
+                gshell_linuxport_state = "gshell-port";
+                gshell_linuxport_choice = "gshell-model";
+                gshell_linuxport_target = "linux-shell-process";
+                gshell_linuxport_last = "gshell";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTGSHELL";
+                gshell_command_result = "LINUX PORT GSHELL OK";
+                gshell_input_status_text = "GSHELL";
+                port_terminal_text = "LINUXPORTGSHELL -> GSHELL MODEL MAPS TO LINUX SHELL PROCESS";
+                break;
+
+            case GSHELL_CMD_LINUXPORTDESKTOP:
+                gshell_linuxport_desktop_ready = 1;
+                gshell_linuxport_state = "desktop-port";
+                gshell_linuxport_choice = "desktop-scene";
+                gshell_linuxport_target = "root-shell-view";
+                gshell_linuxport_last = "desktop";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTDESKTOP";
+                gshell_command_result = "LINUX PORT DESKTOP OK";
+                gshell_input_status_text = "DESKTOP";
+                port_terminal_text = "LINUXPORTDESKTOP -> DESKTOP SCENE MAPS TO ROOT SHELL VIEW";
+                break;
+
+            case GSHELL_CMD_LINUXPORTWINDOW:
+                gshell_linuxport_window_ready = 1;
+                gshell_linuxport_state = "window-port";
+                gshell_linuxport_choice = "window-model";
+                gshell_linuxport_target = "app-window-state";
+                gshell_linuxport_last = "window";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTWINDOW";
+                gshell_command_result = "LINUX PORT WINDOW OK";
+                gshell_input_status_text = "WINDOW";
+                port_terminal_text = "LINUXPORTWINDOW -> WINDOW MODEL MAPS TO APP WINDOW STATE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTCANVAS:
+                gshell_linuxport_canvas_ready = 1;
+                gshell_linuxport_state = "canvas-port";
+                gshell_linuxport_choice = "sdl-canvas";
+                gshell_linuxport_target = "main-render-area";
+                gshell_linuxport_last = "canvas";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTCANVAS";
+                gshell_command_result = "LINUX PORT CANVAS OK";
+                gshell_input_status_text = "CANVAS";
+                port_terminal_text = "LINUXPORTCANVAS -> SDL CANVAS BECOMES MAIN RENDER AREA";
+                break;
+
+            case GSHELL_CMD_LINUXPORTSURFACE:
+                gshell_linuxport_surface_ready = 1;
+                gshell_linuxport_state = "surface-port";
+                gshell_linuxport_choice = "app-surface";
+                gshell_linuxport_target = "window-surface";
+                gshell_linuxport_last = "surface";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTSURFACE";
+                gshell_command_result = "LINUX PORT SURFACE OK";
+                gshell_input_status_text = "SURFACE";
+                port_terminal_text = "LINUXPORTSURFACE -> APP SURFACE IS FUTURE WINDOW CONTENT SLOT";
+                break;
+
+            case GSHELL_CMD_LINUXPORTFOCUS:
+                gshell_linuxport_focus_ready = 1;
+                gshell_linuxport_state = "focus-port";
+                gshell_linuxport_choice = "focus-route";
+                gshell_linuxport_target = "active-app";
+                gshell_linuxport_last = "focus";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTFOCUS";
+                gshell_command_result = "LINUX PORT FOCUS OK";
+                gshell_input_status_text = "FOCUS";
+                port_terminal_text = "LINUXPORTFOCUS -> FOCUS MODEL MAPS TO ACTIVE APP AND SUNDIAL HIGHLIGHT";
+                break;
+
+            case GSHELL_CMD_LINUXPORTSTACK:
+                gshell_linuxport_stack_ready = 1;
+                gshell_linuxport_state = "stack-port";
+                gshell_linuxport_choice = "z-order";
+                gshell_linuxport_target = "window-stack";
+                gshell_linuxport_last = "stack";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTSTACK";
+                gshell_command_result = "LINUX PORT STACK OK";
+                gshell_input_status_text = "STACK";
+                port_terminal_text = "LINUXPORTSTACK -> WINDOW STACK MAPS TO Z ORDER MODEL";
+                break;
+
+            case GSHELL_CMD_LINUXPORTLAYOUT:
+                gshell_linuxport_layout_ready = 1;
+                gshell_linuxport_state = "layout-port";
+                gshell_linuxport_choice = "layout-state";
+                gshell_linuxport_target = "window-layout";
+                gshell_linuxport_last = "layout";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTLAYOUT";
+                gshell_command_result = "LINUX PORT LAYOUT OK";
+                gshell_input_status_text = "LAYOUT";
+                port_terminal_text = "LINUXPORTLAYOUT -> WINDOW LAYOUT MODEL CAN PORT TO LINUX SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXPORTDRAG:
+                gshell_linuxport_drag_ready = 1;
+                gshell_linuxport_state = "drag-port";
+                gshell_linuxport_choice = "drag-route";
+                gshell_linuxport_target = "window-drag";
+                gshell_linuxport_last = "drag";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTDRAG";
+                gshell_command_result = "LINUX PORT DRAG OK";
+                gshell_input_status_text = "DRAG";
+                port_terminal_text = "LINUXPORTDRAG -> DRAG ROUTE MAPS TO WINDOW AND ICON MOVE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTRESIZE:
+                gshell_linuxport_resize_ready = 1;
+                gshell_linuxport_state = "resize-port";
+                gshell_linuxport_choice = "resize-route";
+                gshell_linuxport_target = "window-resize";
+                gshell_linuxport_last = "resize";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTRESIZE";
+                gshell_command_result = "LINUX PORT RESIZE OK";
+                gshell_input_status_text = "RESIZE";
+                port_terminal_text = "LINUXPORTRESIZE -> RESIZE MODEL RESERVED FOR FUTURE WINDOWS";
+                break;
+
+            case GSHELL_CMD_LINUXPORTMINIMIZE:
+                gshell_linuxport_minimize_ready = 1;
+                gshell_linuxport_state = "minimize-port";
+                gshell_linuxport_choice = "dim-state";
+                gshell_linuxport_target = "sundial-icon";
+                gshell_linuxport_last = "minimize";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTMINIMIZE";
+                gshell_command_result = "LINUX PORT MINIMIZE OK";
+                gshell_input_status_text = "MIN";
+                port_terminal_text = "LINUXPORTMINIMIZE -> MINIMIZED APP RETURNS TO SUNDIAL ICON STATE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTRESTORE:
+                gshell_linuxport_restore_ready = 1;
+                gshell_linuxport_state = "restore-port";
+                gshell_linuxport_choice = "restore-state";
+                gshell_linuxport_target = "active-window";
+                gshell_linuxport_last = "restore";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTRESTORE";
+                gshell_command_result = "LINUX PORT RESTORE OK";
+                gshell_input_status_text = "RESTORE";
+                port_terminal_text = "LINUXPORTRESTORE -> RESTORE APP RETURNS WINDOW TO ACTIVE STATE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTLAUNCHER:
+                gshell_linuxport_launcher_ready = 1;
+                gshell_linuxport_state = "launcher-port";
+                gshell_linuxport_choice = "app-registry";
+                gshell_linuxport_target = "sundial-sector";
+                gshell_linuxport_last = "launcher";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTLAUNCHER";
+                gshell_command_result = "LINUX PORT LAUNCHER OK";
+                gshell_input_status_text = "LAUNCHER";
+                port_terminal_text = "LINUXPORTLAUNCHER -> LAUNCHER MODEL MERGES INTO SUNDIAL APP SECTORS";
+                break;
+
+            case GSHELL_CMD_LINUXPORTSUNDIAL:
+                gshell_linuxport_sundial_ready = 1;
+                gshell_linuxport_state = "sundial-port";
+                gshell_linuxport_choice = "main-hub";
+                gshell_linuxport_target = "taskbar-free";
+                gshell_linuxport_last = "sundial";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTSUNDIAL";
+                gshell_command_result = "LINUX PORT SUNDIAL OK";
+                gshell_input_status_text = "SUNDIAL";
+                port_terminal_text = "LINUXPORTSUNDIAL -> SUNDIAL REPLACES TASKBAR AS MAIN HUB";
+                break;
+
+            case GSHELL_CMD_LINUXPORTINPUT:
+                gshell_linuxport_input_ready = 1;
+                gshell_linuxport_state = "input-port";
+                gshell_linuxport_choice = "sdl-input";
+                gshell_linuxport_target = "event-router";
+                gshell_linuxport_last = "input";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTINPUT";
+                gshell_command_result = "LINUX PORT INPUT OK";
+                gshell_input_status_text = "INPUT";
+                port_terminal_text = "LINUXPORTINPUT -> SDL INPUT FEEDS EXISTING ROUTE MODEL";
+                break;
+
+            case GSHELL_CMD_LINUXPORTRENDER:
+                gshell_linuxport_render_ready = 1;
+                gshell_linuxport_state = "render-port";
+                gshell_linuxport_choice = "software-first";
+                gshell_linuxport_target = "sdl-render";
+                gshell_linuxport_last = "render";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTRENDER";
+                gshell_command_result = "LINUX PORT RENDER OK";
+                gshell_input_status_text = "RENDER";
+                port_terminal_text = "LINUXPORTRENDER -> RENDER STARTS SOFTWARE, OPENGL LATER";
+                break;
+
+            case GSHELL_CMD_LINUXPORTAPPSTATE:
+                gshell_linuxport_appstate_ready = 1;
+                gshell_linuxport_state = "app-state-port";
+                gshell_linuxport_choice = "dim-lit-active";
+                gshell_linuxport_target = "sundial-icon";
+                gshell_linuxport_last = "app-state";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTAPPSTATE";
+                gshell_command_result = "LINUX PORT APP STATE OK";
+                gshell_input_status_text = "APPSTATE";
+                port_terminal_text = "LINUXPORTAPPSTATE -> APP STATES MAP TO DIM LIT ACTIVE ICONS";
+                break;
+
+            case GSHELL_CMD_LINUXPORTSESSION:
+                gshell_linuxport_session_ready = 1;
+                gshell_linuxport_state = "session-port";
+                gshell_linuxport_choice = "lingjing-session";
+                gshell_linuxport_target = "login-shell";
+                gshell_linuxport_last = "session";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTSESSION";
+                gshell_command_result = "LINUX PORT SESSION OK";
+                gshell_input_status_text = "SESSION";
+                port_terminal_text = "LINUXPORTSESSION -> FUTURE LOGIN SESSION ENTERS LINGJING SHELL";
+                break;
+
+            case GSHELL_CMD_LINUXPORTPOLICY:
+                gshell_linuxport_policy_ready = 1;
+                gshell_linuxport_state = "policy-port";
+                gshell_linuxport_choice = "control-gate";
+                gshell_linuxport_target = "app-action";
+                gshell_linuxport_last = "policy";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTPOLICY";
+                gshell_command_result = "LINUX PORT POLICY OK";
+                gshell_input_status_text = "POLICY";
+                port_terminal_text = "LINUXPORTPOLICY -> APP ACTIONS PASS LINGJING CONTROL GATE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTAUDIT:
+                gshell_linuxport_audit_ready = 1;
+                gshell_linuxport_state = "audit-port";
+                gshell_linuxport_choice = "timeline";
+                gshell_linuxport_target = "behavior-log";
+                gshell_linuxport_last = "audit";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTAUDIT";
+                gshell_command_result = "LINUX PORT AUDIT OK";
+                gshell_input_status_text = "AUDIT";
+                port_terminal_text = "LINUXPORTAUDIT -> WINDOW AND APP ACTIONS FEED AUDIT TIMELINE";
+                break;
+
+            case GSHELL_CMD_LINUXPORTMATRIX:
+                gshell_linuxport_gshell_ready = 1;
+                gshell_linuxport_desktop_ready = 1;
+                gshell_linuxport_window_ready = 1;
+                gshell_linuxport_canvas_ready = 1;
+                gshell_linuxport_surface_ready = 1;
+                gshell_linuxport_focus_ready = 1;
+                gshell_linuxport_stack_ready = 1;
+                gshell_linuxport_layout_ready = 1;
+                gshell_linuxport_drag_ready = 1;
+                gshell_linuxport_resize_ready = 1;
+                gshell_linuxport_minimize_ready = 1;
+                gshell_linuxport_restore_ready = 1;
+                gshell_linuxport_launcher_ready = 1;
+                gshell_linuxport_sundial_ready = 1;
+                gshell_linuxport_input_ready = 1;
+                gshell_linuxport_render_ready = 1;
+                gshell_linuxport_appstate_ready = 1;
+                gshell_linuxport_session_ready = 1;
+                gshell_linuxport_policy_ready = 1;
+                gshell_linuxport_audit_ready = 1;
+                gshell_linuxport_matrix_ready = 1;
+                gshell_linuxport_state = "matrix-ready";
+                gshell_linuxport_choice = "desktop-window-shell";
+                gshell_linuxport_target = "linux-port-model";
+                gshell_linuxport_last = "matrix";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTMATRIX";
+                gshell_command_result = "LINUX PORT MATRIX OK";
+                gshell_input_status_text = "MATRIX";
+                port_terminal_text = "LINUXPORTMATRIX -> DESKTOP WINDOW SHELL PORT MATRIX READY";
+                break;
+
+            case GSHELL_CMD_LINUXPORTCHOICE:
+                gshell_linuxport_choice_ready = 1;
+                gshell_linuxport_state = "choice";
+                gshell_linuxport_choice = "sdl-fullscreen-shell";
+                gshell_linuxport_target = "first-port";
+                gshell_linuxport_last = "choice";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTCHOICE";
+                gshell_command_result = "LINUX PORT CHOICE OK";
+                gshell_input_status_text = "CHOICE";
+                port_terminal_text = "LINUXPORTCHOICE -> FIRST PORT: FULLSCREEN SDL SHELL WITH SUNDIAL HUB";
+                break;
+
+            case GSHELL_CMD_LINUXPORTDEMO:
+                gshell_linuxport_gshell_ready = 1;
+                gshell_linuxport_desktop_ready = 1;
+                gshell_linuxport_window_ready = 1;
+                gshell_linuxport_canvas_ready = 1;
+                gshell_linuxport_surface_ready = 1;
+                gshell_linuxport_focus_ready = 1;
+                gshell_linuxport_stack_ready = 1;
+                gshell_linuxport_layout_ready = 1;
+                gshell_linuxport_drag_ready = 1;
+                gshell_linuxport_resize_ready = 1;
+                gshell_linuxport_minimize_ready = 1;
+                gshell_linuxport_restore_ready = 1;
+                gshell_linuxport_launcher_ready = 1;
+                gshell_linuxport_sundial_ready = 1;
+                gshell_linuxport_input_ready = 1;
+                gshell_linuxport_render_ready = 1;
+                gshell_linuxport_appstate_ready = 1;
+                gshell_linuxport_session_ready = 1;
+                gshell_linuxport_policy_ready = 1;
+                gshell_linuxport_audit_ready = 1;
+                gshell_linuxport_matrix_ready = 1;
+                gshell_linuxport_choice_ready = 1;
+                gshell_linuxport_demo_ready = 1;
+                gshell_linuxport_state = "demo";
+                gshell_linuxport_choice = "sdl-fullscreen-shell";
+                gshell_linuxport_target = "desktop-window-shell-port";
+                gshell_linuxport_last = "demo";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTDEMO";
+                gshell_command_result = "LINUX PORT DEMO OK";
+                gshell_input_status_text = "DEMO";
+                port_terminal_text = "LINUXPORTDEMO -> FULL DESKTOP WINDOW SHELL PORT MODEL READY";
+                break;
+
+            case GSHELL_CMD_LINUXPORTCHECK: {
+                int ok = gshell_linuxport_gshell_ready &&
+                         gshell_linuxport_desktop_ready &&
+                         gshell_linuxport_window_ready &&
+                         gshell_linuxport_canvas_ready &&
+                         gshell_linuxport_surface_ready &&
+                         gshell_linuxport_focus_ready &&
+                         gshell_linuxport_stack_ready &&
+                         gshell_linuxport_layout_ready &&
+                         gshell_linuxport_drag_ready &&
+                         gshell_linuxport_resize_ready &&
+                         gshell_linuxport_minimize_ready &&
+                         gshell_linuxport_restore_ready &&
+                         gshell_linuxport_launcher_ready &&
+                         gshell_linuxport_sundial_ready &&
+                         gshell_linuxport_input_ready &&
+                         gshell_linuxport_render_ready &&
+                         gshell_linuxport_appstate_ready &&
+                         gshell_linuxport_session_ready &&
+                         gshell_linuxport_policy_ready &&
+                         gshell_linuxport_audit_ready &&
+                         gshell_linuxport_matrix_ready &&
+                         gshell_linuxport_choice_ready;
+                gshell_linuxport_check_ready = ok ? 1 : 0;
+                gshell_linuxport_last = ok ? "check-ok" : "check-wait";
+                gshell_command_name = "LINUXPORTCHECK";
+                gshell_command_result = ok ? "LINUX PORT CHECK OK" : "LINUX PORT CHECK WAIT";
+                gshell_input_status_text = ok ? "CHECK OK" : "CHECK WAIT";
+                port_terminal_text = ok ? "LINUXPORTCHECK -> DESKTOP WINDOW SHELL PORT MODEL READY" : "LINUXPORTCHECK -> RUN LINUXPORTDEMO";
+                break;
+            }
+
+            case GSHELL_CMD_LINUXPORTRESET:
+                gshell_linuxport_gshell_ready = 0;
+                gshell_linuxport_desktop_ready = 0;
+                gshell_linuxport_window_ready = 0;
+                gshell_linuxport_canvas_ready = 0;
+                gshell_linuxport_surface_ready = 0;
+                gshell_linuxport_focus_ready = 0;
+                gshell_linuxport_stack_ready = 0;
+                gshell_linuxport_layout_ready = 0;
+                gshell_linuxport_drag_ready = 0;
+                gshell_linuxport_resize_ready = 0;
+                gshell_linuxport_minimize_ready = 0;
+                gshell_linuxport_restore_ready = 0;
+                gshell_linuxport_launcher_ready = 0;
+                gshell_linuxport_sundial_ready = 0;
+                gshell_linuxport_input_ready = 0;
+                gshell_linuxport_render_ready = 0;
+                gshell_linuxport_appstate_ready = 0;
+                gshell_linuxport_session_ready = 0;
+                gshell_linuxport_policy_ready = 0;
+                gshell_linuxport_audit_ready = 0;
+                gshell_linuxport_matrix_ready = 0;
+                gshell_linuxport_choice_ready = 0;
+                gshell_linuxport_demo_ready = 0;
+                gshell_linuxport_check_ready = 0;
+                gshell_linuxport_roadmap_ready = 0;
+                gshell_linuxport_events = 0;
+                gshell_linuxport_state = "idle";
+                gshell_linuxport_choice = "undecided";
+                gshell_linuxport_target = "desktop-window-port";
+                gshell_linuxport_last = "reset";
+                gshell_command_name = "LINUXPORTRESET";
+                gshell_command_result = "LINUX PORT RESET OK";
+                gshell_input_status_text = "RESET";
+                port_terminal_text = "LINUXPORTRESET -> DESKTOP WINDOW PORT MODEL RESET";
+                break;
+
+            case GSHELL_CMD_LINUXPORTROADMAP:
+                gshell_linuxport_roadmap_ready = 1;
+                gshell_linuxport_state = "roadmap";
+                gshell_linuxport_choice = "sdl-shell";
+                gshell_linuxport_target = "2.2.2-sundial-render";
+                gshell_linuxport_last = "roadmap";
+                gshell_linuxport_events++;
+                gshell_command_name = "LINUXPORTROADMAP";
+                gshell_command_result = "LINUX PORT ROADMAP OK";
+                gshell_input_status_text = "ROADMAP";
+                port_terminal_text = "LINUXPORTROADMAP -> NEXT SUNDIAL UI RENDER PROTOTYPE MODEL";
+                break;
+
+            case GSHELL_CMD_LINUXPORTNEXT:
+                gshell_command_name = "LINUXPORTNEXT";
+                gshell_command_result = "LINUX PORT NEXT OK";
+                gshell_input_status_text = "NEXT";
+                port_terminal_text = "LINUXPORTNEXT -> DEV-2.2.2 SUNDIAL UI RENDER PROTOTYPE";
+                break;
+        }
+
+        gshell_history_push(gshell_command_normalized, gshell_command_view);
+        gshell_result_log_push(gshell_command_normalized, gshell_command_result);
+        gshell_terminal_push(port_terminal_text);
+        return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -25224,6 +34220,1092 @@ static void gshell_draw_command_view_uifeedbackstatus(unsigned int x, unsigned i
     graphics_text(x + 126, y + 280, gshell_uifeedback_last);
 }
 
+static void gshell_draw_command_view_clickclosestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 120;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FFDD);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FFDD);
+    graphics_rect(x, y, 4, h, 0x0000FFDD);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FFDD);
+
+    graphics_text(label_x, y + 14, "CLICK UI CLOSEOUT");
+
+    graphics_text(label_x, y + 38,  "ST");
+    graphics_text(value_x, y + 38,  gshell_clickclose_state);
+
+    graphics_text(label_x, y + 60,  "PH");
+    graphics_text(value_x, y + 60,  gshell_clickclose_phase);
+
+    graphics_text(label_x, y + 82,  "TGT");
+    graphics_text(value_x, y + 82,  gshell_clickclose_target);
+
+    graphics_text(label_x, y + 104, "BR/TGT");
+    graphics_text(value_x, y + 104, (gshell_clickclose_bridge_ready && gshell_clickclose_target_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "ACT/DRG");
+    graphics_text(value_x, y + 126, (gshell_clickclose_action_ready && gshell_clickclose_drag_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "FDBK/VIS");
+    graphics_text(value_x, y + 148, (gshell_clickclose_feedback_ready && gshell_clickclose_visual_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "INPUT");
+    graphics_text(value_x, y + 170, gshell_clickclose_input_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "SAFE/REG");
+    graphics_text(value_x, y + 192, (gshell_clickclose_safe_ready && gshell_clickclose_regression_ready) ? "ok" : "wait");
+
+    graphics_text(label_x, y + 214, "LAYOUT");
+    graphics_text(value_x, y + 214, gshell_clickclose_layout_ready ? "ok" : "wait");
+
+    graphics_text(label_x, y + 236, "SUNDIAL");
+    graphics_text(value_x, y + 236, gshell_clickclose_sundial_plan_ready ? "planned" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_clickclose_events);
+
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_clickclose_last);
+}
+
+static void gshell_draw_command_view_desktopopsstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000EEFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000EEFF);
+    graphics_rect(x, y, 4, h, 0x0000EEFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000EEFF);
+
+    graphics_text(label_x, y + 14, "DESKTOP OPS SCENE");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_desktopops_state);
+
+    graphics_text(label_x, y + 60,  "SCENE");
+    graphics_text(value_x, y + 60,  gshell_desktopops_scene);
+
+    graphics_text(label_x, y + 82,  "SUNDIAL");
+    graphics_text(value_x, y + 82,  gshell_desktopops_sundial);
+
+    graphics_text(label_x, y + 104, "WALL/CLEAN");
+    graphics_text(value_x, y + 104, (gshell_desktopops_wall_ready && gshell_desktopops_clean_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "SHOW/HIDE");
+    graphics_text(value_x, y + 126, (gshell_desktopops_sundial_show_ready && gshell_desktopops_sundial_hide_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "APP/FLOAT");
+    graphics_text(value_x, y + 148, (gshell_desktopops_appgrid_ready && gshell_desktopops_appfloat_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "RUN/DIM");
+    graphics_text(value_x, y + 170, (gshell_desktopops_running_ready && gshell_desktopops_inactive_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "DRAG/MENU");
+    graphics_text(value_x, y + 192, (gshell_desktopops_drag_icon_ready && gshell_desktopops_menu_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "SEARCH/VOI");
+    graphics_text(value_x, y + 214, (gshell_desktopops_search_ready && gshell_desktopops_voice_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "NET/TIME");
+    graphics_text(value_x, y + 236, gshell_desktopops_nettime_ready ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_desktopops_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_desktopops_last);
+}
+
+static void gshell_draw_command_view_sundialstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDAA);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDAA);
+    graphics_rect(x, y, 4, h, 0x0000DDAA);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDAA);
+
+    graphics_text(label_x, y + 14, "SUNDIAL DESKTOP");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sundial_state);
+
+    graphics_text(label_x, y + 60,  "MODE");
+    graphics_text(value_x, y + 60,  gshell_sundial_mode);
+
+    graphics_text(label_x, y + 82,  "SECTOR");
+    graphics_text(value_x, y + 82,  gshell_sundial_sector);
+
+    graphics_text(label_x, y + 104, "CORE/RING");
+    graphics_text(value_x, y + 104, (gshell_sundial_core_ready && gshell_sundial_rings_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "SEC/APPS");
+    graphics_text(value_x, y + 126, (gshell_sundial_sectors_ready && gshell_sundial_apps_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "RUN/DIM");
+    graphics_text(value_x, y + 148, (gshell_sundial_running_ready && gshell_sundial_dim_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "FLOAT/DRG");
+    graphics_text(value_x, y + 170, (gshell_sundial_float_ready && gshell_sundial_drag_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "SHOW/HIDE");
+    graphics_text(value_x, y + 192, (gshell_sundial_show_ready && gshell_sundial_hide_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "SEARCH/VOI");
+    graphics_text(value_x, y + 214, (gshell_sundial_search_ready && gshell_sundial_voice_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "NET/TIME");
+    graphics_text(value_x, y + 236, gshell_sundial_nettime_ready ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sundial_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sundial_last);
+}
+
+static void gshell_draw_command_view_sectorfloatstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCAA);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCAA);
+    graphics_rect(x, y, 4, h, 0x0000CCAA);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCAA);
+
+    graphics_text(label_x, y + 14, "SECTOR FLOAT APPS");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sectorfloat_state);
+
+    graphics_text(label_x, y + 60,  "SECTOR");
+    graphics_text(value_x, y + 60,  gshell_sectorfloat_sector);
+
+    graphics_text(label_x, y + 82,  "ICONS");
+    graphics_text(value_x, y + 82,  gshell_sectorfloat_icons);
+
+    graphics_text(label_x, y + 104, "SEL/EXP");
+    graphics_text(value_x, y + 104, (gshell_sectorfloat_select_ready && gshell_sectorfloat_expand_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "APPS/FLO");
+    graphics_text(value_x, y + 126, gshell_sectorfloat_apps_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "RUN/DIM");
+    graphics_text(value_x, y + 148, (gshell_sectorfloat_runlit_ready && gshell_sectorfloat_dim_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "SIZE/DEN");
+    graphics_text(value_x, y + 170, (gshell_sectorfloat_scale_ready && gshell_sectorfloat_density_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "PAGE/OVF");
+    graphics_text(value_x, y + 192, (gshell_sectorfloat_page_ready && gshell_sectorfloat_overflow_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "DRAG/DROP");
+    graphics_text(value_x, y + 214, (gshell_sectorfloat_drag_ready && gshell_sectorfloat_drop_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "SEARCH/VOI");
+    graphics_text(value_x, y + 236, (gshell_sectorfloat_search_ready && gshell_sectorfloat_voice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sectorfloat_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sectorfloat_last);
+}
+
+static void gshell_draw_command_view_sundialvisstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int cx = x + (inner_w / 2);
+    unsigned int cy = y + 150;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDAA);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDAA);
+    graphics_rect(x, y, 4, h, 0x0000DDAA);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDAA);
+
+    graphics_text(x + 14, y + 14, "SUNDIAL VISUAL");
+
+    if (gshell_text_equal(gshell_sundialvis_mode, "hidden")) {
+        graphics_text(x + 22, y + 82, "SUNDIAL HIDDEN");
+        graphics_text(x + 22, y + 126, "RIGHT CLICK SHOW");
+        graphics_text(x + 22, y + 170, "DESKTOP CLEAN");
+        return;
+    }
+
+    graphics_rect(cx - 84, cy - 84, 168, 4, 0x00005566);
+    graphics_rect(cx - 84, cy + 80, 168, 4, 0x00005566);
+    graphics_rect(cx - 84, cy - 84, 4, 168, 0x00005566);
+    graphics_rect(cx + 80, cy - 84, 4, 168, 0x00005566);
+
+    graphics_rect(cx - 58, cy - 58, 116, 4, 0x000088AA);
+    graphics_rect(cx - 58, cy + 54, 116, 4, 0x000088AA);
+    graphics_rect(cx - 58, cy - 58, 4, 116, 0x000088AA);
+    graphics_rect(cx + 54, cy - 58, 4, 116, 0x000088AA);
+
+    graphics_rect(cx - 22, cy - 22, 44, 44, 0x00003366);
+    graphics_rect(cx - 16, cy - 16, 32, 32, 0x0000AADD);
+    graphics_text(cx - 18, cy - 6, "LJ");
+
+    graphics_rect(cx - 2, cy - 84, 4, 168, 0x00004488);
+    graphics_rect(cx - 84, cy - 2, 168, 4, 0x00004488);
+
+    graphics_rect(cx - 58, cy - 58, 8, 8, 0x000088AA);
+    graphics_rect(cx + 50, cy - 58, 8, 8, 0x000088AA);
+    graphics_rect(cx - 58, cy + 50, 8, 8, 0x000088AA);
+    graphics_rect(cx + 50, cy + 50, 8, 8, 0x000088AA);
+
+    graphics_rect(cx - 68, cy - 68, 10, 10, gshell_sundialvis_runlit_ready ? 0x0000CCFF : 0x00002233);
+    graphics_rect(cx - 34, cy - 76, 8, 8, gshell_sundialvis_dim_ready ? 0x00003344 : 0x0000AACC);
+    graphics_rect(cx + 28, cy - 76, 8, 8, 0x00003344);
+    graphics_rect(cx + 60, cy - 68, 10, 10, gshell_sundialvis_runlit_ready ? 0x0000CCFF : 0x00002233);
+
+    graphics_rect(cx - 76, cy - 18, 8, 8, 0x00003344);
+    graphics_rect(cx + 68, cy - 18, 8, 8, gshell_sundialvis_runlit_ready ? 0x0000CCFF : 0x00003344);
+    graphics_rect(cx - 76, cy + 24, 8, 8, 0x00003344);
+    graphics_rect(cx + 68, cy + 24, 8, 8, 0x00003344);
+
+    graphics_rect(cx - 64, cy + 62, 8, 8, 0x00003344);
+    graphics_rect(cx - 28, cy + 70, 8, 8, gshell_sundialvis_runlit_ready ? 0x0000CCFF : 0x00003344);
+    graphics_rect(cx + 22, cy + 70, 8, 8, 0x00003344);
+    graphics_rect(cx + 58, cy + 62, 8, 8, 0x00003344);
+
+    if (gshell_sundialvis_float_ready) {
+        graphics_rect(cx - 66, y + 36, 132, 4, 0x0000DDAA);
+        graphics_rect(cx - 66, y + 36, 4, 40, 0x0000DDAA);
+        graphics_rect(cx + 62, y + 36, 4, 40, 0x0000DDAA);
+        graphics_rect(cx - 48, y + 48, 12, 12, 0x00003344);
+        graphics_rect(cx - 22, y + 44, 14, 14, 0x0000CCFF);
+        graphics_rect(cx + 8, y + 44, 14, 14, 0x00003344);
+        graphics_rect(cx + 36, y + 48, 12, 12, 0x0000CCFF);
+    }
+
+    if (gshell_sundialvis_drag_ready) {
+        graphics_rect(cx - 70, cy + 98, 140, 3, 0x0000CCFF);
+        graphics_rect(cx - 76, cy + 92, 14, 14, 0x0000CCFF);
+        graphics_rect(cx + 62, cy + 92, 14, 14, 0x0000AA77);
+    }
+
+    graphics_text(x + 14, y + 250, "MODE");
+    graphics_text(x + 74, y + 250, gshell_sundialvis_mode);
+    graphics_text(x + 14, y + 272, "FOCUS");
+    graphics_text(x + 74, y + 272, gshell_sundialvis_focus);
+}
+
+static void gshell_draw_command_view_sundialmenustatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000BBFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000BBFF);
+    graphics_rect(x, y, 4, h, 0x0000BBFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000BBFF);
+
+    graphics_text(label_x, y + 14, "SUNDIAL MENU");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sundialmenu_state);
+
+    graphics_text(label_x, y + 60,  "MODE");
+    graphics_text(value_x, y + 60,  gshell_sundialmenu_mode);
+
+    graphics_text(label_x, y + 82,  "SUNDIAL");
+    graphics_text(value_x, y + 82,  gshell_sundialmenu_sundial);
+
+    graphics_text(label_x, y + 104, "DESK/MENU");
+    graphics_text(value_x, y + 104, (gshell_sundialmenu_desktop_ready && gshell_sundialmenu_open_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "SHOW/HIDE");
+    graphics_text(value_x, y + 126, (gshell_sundialmenu_show_ready && gshell_sundialmenu_hide_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "LOCK/UNLK");
+    graphics_text(value_x, y + 148, (gshell_sundialmenu_lock_ready && gshell_sundialmenu_unlock_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "MODE OPT");
+    graphics_text(value_x, y + 170, (gshell_sundialmenu_compact_ready && gshell_sundialmenu_full_ready && gshell_sundialmenu_edge_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "AUTO/OPC");
+    graphics_text(value_x, y + 192, (gshell_sundialmenu_autohide_ready && gshell_sundialmenu_opacity_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "SRC/VOICE");
+    graphics_text(value_x, y + 214, (gshell_sundialmenu_search_ready && gshell_sundialmenu_voice_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "CLEAN");
+    graphics_text(value_x, y + 236, gshell_sundialmenu_clean_ready ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sundialmenu_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sundialmenu_last);
+}
+
+static void gshell_draw_command_view_sundialfinalstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(label_x, y + 14, "SUNDIAL CLOSEOUT");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sundialfinal_state);
+
+    graphics_text(label_x, y + 60,  "PHASE");
+    graphics_text(value_x, y + 60,  gshell_sundialfinal_phase);
+
+    graphics_text(label_x, y + 82,  "TARGET");
+    graphics_text(value_x, y + 82,  gshell_sundialfinal_target);
+
+    graphics_text(label_x, y + 104, "DESK/VIS");
+    graphics_text(value_x, y + 104, (gshell_sundialfinal_desktop_ready && gshell_sundialfinal_visual_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "SECTOR");
+    graphics_text(value_x, y + 126, gshell_sundialfinal_sector_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "MENU");
+    graphics_text(value_x, y + 148, gshell_sundialfinal_menu_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "SRC/VOICE");
+    graphics_text(value_x, y + 170, (gshell_sundialfinal_search_ready && gshell_sundialfinal_voice_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "NET/TIME");
+    graphics_text(value_x, y + 192, gshell_sundialfinal_nettime_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "CLEAN/UX");
+    graphics_text(value_x, y + 214, (gshell_sundialfinal_clean_ready && gshell_sundialfinal_ux_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "CLOSE");
+    graphics_text(value_x, y + 236, gshell_sundialfinal_closeout_ready ? "yes" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sundialfinal_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sundialfinal_last);
+}
+
+static void gshell_draw_command_view_sundialhubstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(label_x, y + 14, "SUNDIAL HUB");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sundialhub_state);
+
+    graphics_text(label_x, y + 60,  "FOCUS");
+    graphics_text(value_x, y + 60,  gshell_sundialhub_focus);
+
+    graphics_text(label_x, y + 82,  "CORE/CTRL");
+    graphics_text(value_x, y + 82,  (gshell_sundialhub_core_ready && gshell_sundialhub_control_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 104, "PERM/RULE");
+    graphics_text(value_x, y + 104, (gshell_sundialhub_perms_ready && gshell_sundialhub_rules_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "AUDIT/APP");
+    graphics_text(value_x, y + 126, (gshell_sundialhub_audit_ready && gshell_sundialhub_app_behavior_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "NET/FILE");
+    graphics_text(value_x, y + 148, (gshell_sundialhub_network_ready && gshell_sundialhub_file_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "AI/VOICE");
+    graphics_text(value_x, y + 170, (gshell_sundialhub_ai_ready && gshell_sundialhub_voice_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "SEARCH");
+    graphics_text(value_x, y + 192, gshell_sundialhub_search_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "INTENT/SEC");
+    graphics_text(value_x, y + 214, (gshell_sundialhub_intent_ready && gshell_sundialhub_security_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "RESULT");
+    graphics_text(value_x, y + 236, gshell_sundialhub_demo_ready ? "hub-ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sundialhub_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sundialhub_last);
+}
+
+static void gshell_draw_command_view_controlsectorstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y, 4, h, 0x0000CCFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCFF);
+
+    graphics_text(label_x, y + 14, "CONTROL SECTOR");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_controlsector_state);
+
+    graphics_text(label_x, y + 60,  "POLICY");
+    graphics_text(value_x, y + 60,  gshell_controlsector_policy);
+
+    graphics_text(label_x, y + 82,  "TARGET");
+    graphics_text(value_x, y + 82,  gshell_controlsector_target);
+
+    graphics_text(label_x, y + 104, "OPEN");
+    graphics_text(value_x, y + 104, gshell_controlsector_open_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "ALLOW/BLK");
+    graphics_text(value_x, y + 126, (gshell_controlsector_allow_ready && gshell_controlsector_block_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "ASK/TEMP");
+    graphics_text(value_x, y + 148, (gshell_controlsector_ask_ready && gshell_controlsector_temp_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "FILE/NET");
+    graphics_text(value_x, y + 170, (gshell_controlsector_file_ready && gshell_controlsector_net_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "AI/APP");
+    graphics_text(value_x, y + 192, (gshell_controlsector_ai_ready && gshell_controlsector_app_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "RULE/AUD");
+    graphics_text(value_x, y + 214, (gshell_controlsector_rule_ready && gshell_controlsector_audit_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "PERM/INT");
+    graphics_text(value_x, y + 236, (gshell_controlsector_perm_ready && gshell_controlsector_intent_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_controlsector_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_controlsector_last);
+}
+
+static void gshell_draw_command_view_permreqstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y, 4, h, 0x0000DDFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDFF);
+
+    graphics_text(label_x, y + 14, "PERMISSION REQ");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_permreq_state);
+
+    graphics_text(label_x, y + 60,  "POLICY");
+    graphics_text(value_x, y + 60,  gshell_permreq_policy);
+
+    graphics_text(label_x, y + 82,  "SRC");
+    graphics_text(value_x, y + 82,  gshell_permreq_source);
+
+    graphics_text(label_x, y + 104, "TARGET");
+    graphics_text(value_x, y + 104, gshell_permreq_target);
+
+    graphics_text(label_x, y + 126, "FILE/NET");
+    graphics_text(value_x, y + 126, (gshell_permreq_file_ready && gshell_permreq_net_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "AI/APP");
+    graphics_text(value_x, y + 148, (gshell_permreq_ai_ready && gshell_permreq_app_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "ASK/ALLOW");
+    graphics_text(value_x, y + 170, (gshell_permreq_ask_ready && gshell_permreq_allow_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "BLK/TEMP");
+    graphics_text(value_x, y + 192, (gshell_permreq_block_ready && gshell_permreq_temp_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "RULE/AUD");
+    graphics_text(value_x, y + 214, (gshell_permreq_rule_ready && gshell_permreq_audit_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "VOICE/SRC");
+    graphics_text(value_x, y + 236, (gshell_permreq_voice_ready && gshell_permreq_search_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_permreq_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_permreq_last);
+}
+
+static void gshell_draw_command_view_auditflowstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCAA);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCAA);
+    graphics_rect(x, y, 4, h, 0x0000CCAA);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCAA);
+
+    graphics_text(label_x, y + 14, "AUDIT TIMELINE");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_auditflow_state);
+
+    graphics_text(label_x, y + 60,  "SOURCE");
+    graphics_text(value_x, y + 60,  gshell_auditflow_source);
+
+    graphics_text(label_x, y + 82,  "EVENT");
+    graphics_text(value_x, y + 82,  gshell_auditflow_event);
+
+    graphics_text(label_x, y + 104, "OPEN/SRC");
+    graphics_text(value_x, y + 104, (gshell_auditflow_open_ready && gshell_auditflow_source_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "EV/TIME");
+    graphics_text(value_x, y + 126, (gshell_auditflow_event_ready && gshell_auditflow_timeline_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "FILE/NET");
+    graphics_text(value_x, y + 148, (gshell_auditflow_file_ready && gshell_auditflow_net_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "AI/APP");
+    graphics_text(value_x, y + 170, (gshell_auditflow_ai_ready && gshell_auditflow_app_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "ALLOW/BLK");
+    graphics_text(value_x, y + 192, (gshell_auditflow_allow_ready && gshell_auditflow_block_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "TEMP/RULE");
+    graphics_text(value_x, y + 214, (gshell_auditflow_temp_ready && gshell_auditflow_rule_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "SRC/VOICE");
+    graphics_text(value_x, y + 236, (gshell_auditflow_search_ready && gshell_auditflow_voice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_auditflow_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_auditflow_last);
+}
+
+static void gshell_draw_command_view_voiceintentstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDEE);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDEE);
+    graphics_rect(x, y, 4, h, 0x0000DDEE);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDEE);
+
+    graphics_text(label_x, y + 14, "VOICE INTENT");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_voiceintent_state);
+
+    graphics_text(label_x, y + 60,  "TEXT");
+    graphics_text(value_x, y + 60,  gshell_voiceintent_text);
+
+    graphics_text(label_x, y + 82,  "INTENT");
+    graphics_text(value_x, y + 82,  gshell_voiceintent_intent);
+
+    graphics_text(label_x, y + 104, "LISTEN");
+    graphics_text(value_x, y + 104, gshell_voiceintent_listen_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "TEXT/PARSE");
+    graphics_text(value_x, y + 126, (gshell_voiceintent_text_ready && gshell_voiceintent_parse_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "COMMAND");
+    graphics_text(value_x, y + 148, gshell_voiceintent_command_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "ASK/ALLOW");
+    graphics_text(value_x, y + 170, (gshell_voiceintent_ask_ready && gshell_voiceintent_allow_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "BLK/CONF");
+    graphics_text(value_x, y + 192, (gshell_voiceintent_block_ready && gshell_voiceintent_confirm_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "REPLY/SPK");
+    graphics_text(value_x, y + 214, (gshell_voiceintent_reply_ready && gshell_voiceintent_speak_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "SRC/AUD");
+    graphics_text(value_x, y + 236, (gshell_voiceintent_search_ready && gshell_voiceintent_audit_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_voiceintent_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_voiceintent_last);
+}
+
+static void gshell_draw_command_view_sunctlfinalstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 12) ? (w - 12) : w;
+    unsigned int label_x = x + 14;
+    unsigned int value_x = x + 122;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(label_x, y + 14, "SUN CONTROL FINAL");
+
+    graphics_text(label_x, y + 38,  "STATE");
+    graphics_text(value_x, y + 38,  gshell_sunctlfinal_state);
+
+    graphics_text(label_x, y + 60,  "PHASE");
+    graphics_text(value_x, y + 60,  gshell_sunctlfinal_phase);
+
+    graphics_text(label_x, y + 82,  "TARGET");
+    graphics_text(value_x, y + 82,  gshell_sunctlfinal_target);
+
+    graphics_text(label_x, y + 104, "HUB/ACTION");
+    graphics_text(value_x, y + 104, (gshell_sunctlfinal_hub_ready && gshell_sunctlfinal_actions_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 126, "PERM/AUD");
+    graphics_text(value_x, y + 126, (gshell_sunctlfinal_perm_ready && gshell_sunctlfinal_audit_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 148, "VOICE/SRC");
+    graphics_text(value_x, y + 148, (gshell_sunctlfinal_voice_ready && gshell_sunctlfinal_search_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 170, "AI/FILE");
+    graphics_text(value_x, y + 170, (gshell_sunctlfinal_ai_ready && gshell_sunctlfinal_file_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 192, "NET/APP");
+    graphics_text(value_x, y + 192, (gshell_sunctlfinal_net_ready && gshell_sunctlfinal_app_ready) ? "ready" : "wait");
+
+    graphics_text(label_x, y + 214, "RULE");
+    graphics_text(value_x, y + 214, gshell_sunctlfinal_rule_ready ? "ready" : "wait");
+
+    graphics_text(label_x, y + 236, "CLOSE");
+    graphics_text(value_x, y + 236, gshell_sunctlfinal_closeout_ready ? "yes" : "wait");
+
+    gshell_draw_value_uint(label_x, y + 258, "EV", gshell_sunctlfinal_events);
+    graphics_text(label_x, y + 280, "LAST");
+    graphics_text(value_x, y + 280, gshell_sunctlfinal_last);
+}
+
+static void gshell_draw_command_view_selfdevstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000AAFF);
+    graphics_rect(x, y, 4, h, 0x0000AAFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000AAFF);
+
+    graphics_text(x + 16, y + 14, "SELFDEV 2.0 CLOSE");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_selfdev_state);
+    graphics_text(x + 16, y + 60, "PHASE");
+    graphics_text(x + 126, y + 60, gshell_selfdev_phase);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_selfdev_target);
+
+    graphics_text(x + 16, y + 104, "BOOT/KERN");
+    graphics_text(x + 126, y + 104, (gshell_selfdev_boot_ready && gshell_selfdev_kernel_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "GSHELL/DESK");
+    graphics_text(x + 126, y + 126, (gshell_selfdev_gshell_ready && gshell_selfdev_desktop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "SUN/APP");
+    graphics_text(x + 126, y + 148, (gshell_selfdev_sundial_ready && gshell_selfdev_app_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "CTL/POL");
+    graphics_text(x + 126, y + 170, (gshell_selfdev_control_ready && gshell_selfdev_policy_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "RULE/AUD");
+    graphics_text(x + 126, y + 192, (gshell_selfdev_rule_ready && gshell_selfdev_audit_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "VOICE/AI");
+    graphics_text(x + 126, y + 214, (gshell_selfdev_voice_ready && gshell_selfdev_ai_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "FILE/NET");
+    graphics_text(x + 126, y + 236, (gshell_selfdev_file_ready && gshell_selfdev_net_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_selfdev_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_selfdev_last);
+}
+
+static void gshell_draw_command_view_linuxplanstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDFF);
+    graphics_rect(x, y, 4, h, 0x0000DDFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDFF);
+
+    graphics_text(x + 16, y + 14, "LINUX BACKED PLAN");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxplan_state);
+    graphics_text(x + 16, y + 60, "BASE");
+    graphics_text(x + 126, y + 60, gshell_linuxplan_base);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxplan_target);
+
+    graphics_text(x + 16, y + 104, "KERN/DRV");
+    graphics_text(x + 126, y + 104, (gshell_linuxplan_kernel_ready && gshell_linuxplan_driver_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "FS/NET");
+    graphics_text(x + 126, y + 126, (gshell_linuxplan_fs_ready && gshell_linuxplan_net_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "IN/DISP");
+    graphics_text(x + 126, y + 148, (gshell_linuxplan_input_ready && gshell_linuxplan_display_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "PROC/APP");
+    graphics_text(x + 126, y + 170, (gshell_linuxplan_process_ready && gshell_linuxplan_app_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "POL/SAND");
+    graphics_text(x + 126, y + 192, (gshell_linuxplan_policy_ready && gshell_linuxplan_sandbox_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "VOICE/AI");
+    graphics_text(x + 126, y + 214, (gshell_linuxplan_voice_ready && gshell_linuxplan_ai_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "SUN/DESK");
+    graphics_text(x + 126, y + 236, (gshell_linuxplan_sundial_ready && gshell_linuxplan_desktop_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxplan_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxplan_last);
+}
+
+static void gshell_draw_command_view_linuxbasestatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FFCC);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FFCC);
+    graphics_rect(x, y, 4, h, 0x0000FFCC);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FFCC);
+
+    graphics_text(x + 16, y + 14, "LINUX BASE MATRIX");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxbase_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxbase_choice);
+    graphics_text(x + 16, y + 82, "REASON");
+    graphics_text(x + 126, y + 82, gshell_linuxbase_reason);
+
+    graphics_text(x + 16, y + 104, "DEB/ARCH");
+    graphics_text(x + 126, y + 104, (gshell_linuxbase_debian_ready && gshell_linuxbase_arch_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "ALP/BUILD");
+    graphics_text(x + 126, y + 126, (gshell_linuxbase_alpine_ready && gshell_linuxbase_buildroot_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "UBU/FED");
+    graphics_text(x + 126, y + 148, (gshell_linuxbase_ubuntu_ready && gshell_linuxbase_fedora_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "STAB/SIZE");
+    graphics_text(x + 126, y + 170, (gshell_linuxbase_stability_ready && gshell_linuxbase_size_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "PKG/UI");
+    graphics_text(x + 126, y + 192, (gshell_linuxbase_pkg_ready && gshell_linuxbase_ui_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "CTL/SEC");
+    graphics_text(x + 126, y + 214, (gshell_linuxbase_control_ready && gshell_linuxbase_security_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "RANK/CHO");
+    graphics_text(x + 126, y + 236, (gshell_linuxbase_rank_ready && gshell_linuxbase_choice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxbase_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxbase_last);
+}
+
+static void gshell_draw_command_view_linuxdispstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCFF);
+    graphics_rect(x, y, 4, h, 0x0000CCFF);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCFF);
+
+    graphics_text(x + 16, y + 14, "LINUX DISPLAY STACK");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxdisp_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxdisp_choice);
+    graphics_text(x + 16, y + 82, "REASON");
+    graphics_text(x + 126, y + 82, gshell_linuxdisp_reason);
+
+    graphics_text(x + 16, y + 104, "SDL/WAY");
+    graphics_text(x + 126, y + 104, (gshell_linuxdisp_sdl_ready && gshell_linuxdisp_wayland_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "X11/QT");
+    graphics_text(x + 126, y + 126, (gshell_linuxdisp_x11_ready && gshell_linuxdisp_qt_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "EL/GTK");
+    graphics_text(x + 126, y + 148, (gshell_linuxdisp_electron_ready && gshell_linuxdisp_gtk_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "FB/OGL");
+    graphics_text(x + 126, y + 170, (gshell_linuxdisp_fb_ready && gshell_linuxdisp_opengl_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "RENDER");
+    graphics_text(x + 126, y + 192, gshell_linuxdisp_render_ready ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "PERF/UX");
+    graphics_text(x + 126, y + 214, (gshell_linuxdisp_perf_ready && gshell_linuxdisp_ux_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "RANK/CHO");
+    graphics_text(x + 126, y + 236, (gshell_linuxdisp_rank_ready && gshell_linuxdisp_choice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxdisp_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxdisp_last);
+}
+
+static void gshell_draw_command_view_linuxinputstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FF99);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FF99);
+    graphics_rect(x, y, 4, h, 0x0000FF99);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FF99);
+
+    graphics_text(x + 16, y + 14, "LINUX INPUT STACK");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxinput_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxinput_choice);
+    graphics_text(x + 16, y + 82, "REASON");
+    graphics_text(x + 126, y + 82, gshell_linuxinput_reason);
+
+    graphics_text(x + 16, y + 104, "EVD/LIB");
+    graphics_text(x + 126, y + 104, (gshell_linuxinput_evdev_ready && gshell_linuxinput_libinput_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "SDL/AUD");
+    graphics_text(x + 126, y + 126, (gshell_linuxinput_sdl_ready && gshell_linuxinput_pipewire_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "KEY/MOUSE");
+    graphics_text(x + 126, y + 148, (gshell_linuxinput_keyboard_ready && gshell_linuxinput_mouse_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "TOUCH/VOI");
+    graphics_text(x + 126, y + 170, (gshell_linuxinput_touch_ready && gshell_linuxinput_voice_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "ROUTE");
+    graphics_text(x + 126, y + 192, gshell_linuxinput_route_ready ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "FOCUS/SUN");
+    graphics_text(x + 126, y + 214, (gshell_linuxinput_focus_ready && gshell_linuxinput_sundial_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "RANK/CHO");
+    graphics_text(x + 126, y + 236, (gshell_linuxinput_rank_ready && gshell_linuxinput_choice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxinput_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxinput_last);
+}
+
+static void gshell_draw_command_view_linuxmapstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FFBB);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FFBB);
+    graphics_rect(x, y, 4, h, 0x0000FFBB);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FFBB);
+
+    graphics_text(x + 16, y + 14, "LINUX APP MAP");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxmap_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxmap_choice);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxmap_target);
+
+    graphics_text(x + 16, y + 104, "APP/DESK");
+    graphics_text(x + 126, y + 104, (gshell_linuxmap_appreg_ready && gshell_linuxmap_desktopfile_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "PROC/PID");
+    graphics_text(x + 126, y + 126, (gshell_linuxmap_process_ready && gshell_linuxmap_pid_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "WIN/FONT");
+    graphics_text(x + 126, y + 148, (gshell_linuxmap_window_ready && gshell_linuxmap_foreground_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "BACK/RUN");
+    graphics_text(x + 126, y + 170, (gshell_linuxmap_background_ready && gshell_linuxmap_running_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "ICON/SEC");
+    graphics_text(x + 126, y + 192, (gshell_linuxmap_iconlit_ready && gshell_linuxmap_sector_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "LAU/CLO");
+    graphics_text(x + 126, y + 214, (gshell_linuxmap_launch_ready && gshell_linuxmap_close_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "RANK/CHO");
+    graphics_text(x + 126, y + 236, (gshell_linuxmap_rank_ready && gshell_linuxmap_choice_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxmap_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxmap_last);
+}
+
+static void gshell_draw_command_view_linuxpermstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DD99);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DD99);
+    graphics_rect(x, y, 4, h, 0x0000DD99);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DD99);
+
+    graphics_text(x + 16, y + 14, "LINUX PERM BACKEND");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxperm_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxperm_choice);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxperm_target);
+
+    graphics_text(x + 16, y + 104, "NS/BWRAP");
+    graphics_text(x + 126, y + 104, (gshell_linuxperm_namespace_ready && gshell_linuxperm_bwrap_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "AA/SECC");
+    graphics_text(x + 126, y + 126, (gshell_linuxperm_apparmor_ready && gshell_linuxperm_seccomp_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "EBPF/AUD");
+    graphics_text(x + 126, y + 148, (gshell_linuxperm_ebpf_ready && gshell_linuxperm_auditd_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "FILE/NET");
+    graphics_text(x + 126, y + 170, (gshell_linuxperm_file_ready && gshell_linuxperm_net_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "PROC/DEV");
+    graphics_text(x + 126, y + 192, (gshell_linuxperm_proc_ready && gshell_linuxperm_device_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "AI/VOICE");
+    graphics_text(x + 126, y + 214, (gshell_linuxperm_ai_ready && gshell_linuxperm_voice_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "RULE/REQ");
+    graphics_text(x + 126, y + 236, (gshell_linuxperm_rule_ready && gshell_linuxperm_request_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxperm_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxperm_last);
+}
+
+static void gshell_draw_command_view_linuxfinalstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000FFDD);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000FFDD);
+    graphics_rect(x, y, 4, h, 0x0000FFDD);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000FFDD);
+
+    graphics_text(x + 16, y + 14, "LINUX RESEARCH FINAL");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxfinal_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxfinal_choice);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxfinal_target);
+
+    graphics_text(x + 16, y + 104, "BASE/DISP");
+    graphics_text(x + 126, y + 104, (gshell_linuxfinal_base_ready && gshell_linuxfinal_display_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "INPUT/MAP");
+    graphics_text(x + 126, y + 126, (gshell_linuxfinal_input_ready && gshell_linuxfinal_map_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "PERM/SAND");
+    graphics_text(x + 126, y + 148, (gshell_linuxfinal_perm_ready && gshell_linuxfinal_sandbox_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "AUD/VOICE");
+    graphics_text(x + 126, y + 170, (gshell_linuxfinal_audit_ready && gshell_linuxfinal_voice_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "AI/SUN");
+    graphics_text(x + 126, y + 192, (gshell_linuxfinal_ai_ready && gshell_linuxfinal_sundial_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "DESK/RISK");
+    graphics_text(x + 126, y + 214, (gshell_linuxfinal_desktop_ready && gshell_linuxfinal_risk_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "CHOICE");
+    graphics_text(x + 126, y + 236, gshell_linuxfinal_choice_ready ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxfinal_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxfinal_last);
+}
+
+static void gshell_draw_command_view_linuxshellstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000CCDD);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000CCDD);
+    graphics_rect(x, y, 4, h, 0x0000CCDD);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000CCDD);
+
+    graphics_text(x + 16, y + 14, "MIN LINUX SHELL");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxshell_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxshell_choice);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxshell_target);
+
+    graphics_text(x + 16, y + 104, "BASE/PROC");
+    graphics_text(x + 126, y + 104, (gshell_linuxshell_base_ready && gshell_linuxshell_process_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "SDL/WIN");
+    graphics_text(x + 126, y + 126, (gshell_linuxshell_sdl_ready && gshell_linuxshell_window_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "REN/INPUT");
+    graphics_text(x + 126, y + 148, (gshell_linuxshell_render_ready && gshell_linuxshell_input_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "SUN/DESK");
+    graphics_text(x + 126, y + 170, (gshell_linuxshell_sundial_ready && gshell_linuxshell_desktop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "APP/LAU");
+    graphics_text(x + 126, y + 192, (gshell_linuxshell_appreg_ready && gshell_linuxshell_launch_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "RUN/CONF");
+    graphics_text(x + 126, y + 214, (gshell_linuxshell_runtime_ready && gshell_linuxshell_config_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "POL/AUD");
+    graphics_text(x + 126, y + 236, (gshell_linuxshell_policy_ready && gshell_linuxshell_audit_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxshell_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxshell_last);
+}
+
+static void gshell_draw_command_view_linuxportstatus(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    unsigned int inner_w = (w > 18) ? (w - 18) : w;
+
+    graphics_rect(x, y, inner_w, h, 0x00000000);
+    graphics_rect(x, y, inner_w, 4, 0x0000DDEE);
+    graphics_rect(x, y + h - 4, inner_w, 4, 0x0000DDEE);
+    graphics_rect(x, y, 4, h, 0x0000DDEE);
+    graphics_rect(x + inner_w - 4, y, 4, h, 0x0000DDEE);
+
+    graphics_text(x + 16, y + 14, "LINUX DESK PORT");
+    graphics_text(x + 16, y + 38, "STATE");
+    graphics_text(x + 126, y + 38, gshell_linuxport_state);
+    graphics_text(x + 16, y + 60, "CHOICE");
+    graphics_text(x + 126, y + 60, gshell_linuxport_choice);
+    graphics_text(x + 16, y + 82, "TARGET");
+    graphics_text(x + 126, y + 82, gshell_linuxport_target);
+
+    graphics_text(x + 16, y + 104, "GSH/DESK");
+    graphics_text(x + 126, y + 104, (gshell_linuxport_gshell_ready && gshell_linuxport_desktop_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 126, "WIN/CAN");
+    graphics_text(x + 126, y + 126, (gshell_linuxport_window_ready && gshell_linuxport_canvas_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 148, "SUR/FOC");
+    graphics_text(x + 126, y + 148, (gshell_linuxport_surface_ready && gshell_linuxport_focus_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 170, "STK/LAY");
+    graphics_text(x + 126, y + 170, (gshell_linuxport_stack_ready && gshell_linuxport_layout_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 192, "DRG/RES");
+    graphics_text(x + 126, y + 192, (gshell_linuxport_drag_ready && gshell_linuxport_resize_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 214, "SUN/APP");
+    graphics_text(x + 126, y + 214, (gshell_linuxport_sundial_ready && gshell_linuxport_appstate_ready) ? "ready" : "wait");
+
+    graphics_text(x + 16, y + 236, "POL/AUD");
+    graphics_text(x + 126, y + 236, (gshell_linuxport_policy_ready && gshell_linuxport_audit_ready) ? "ready" : "wait");
+
+    gshell_draw_value_uint(x + 16, y + 258, "EV", gshell_linuxport_events);
+    graphics_text(x + 16, y + 280, "LAST");
+    graphics_text(x + 126, y + 280, gshell_linuxport_last);
+}
+
 static void gshell_draw_command_view_clear(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
     graphics_rect(x, y, w, h, 0x00000000);
     graphics_rect(x, y, w, 4, 0x00004477);
@@ -25405,6 +35487,78 @@ static void gshell_draw_command_view_help(unsigned int x, unsigned int y, unsign
 }
 
 static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned int w, unsigned int h) {
+    if (gshell_text_equal(gshell_command_view, "SUNCTLFINALSTATUS")) {
+        gshell_draw_command_view_sunctlfinalstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "VOICEINTENTSTATUS")) {
+        gshell_draw_command_view_voiceintentstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "AUDITFLOWSTATUS")) {
+        gshell_draw_command_view_auditflowstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "PERMREQSTATUS")) {
+        gshell_draw_command_view_permreqstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "CONTROLSECTORSTATUS")) {
+        gshell_draw_command_view_controlsectorstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SUNDIALHUBSTATUS")) {
+        gshell_draw_command_view_sundialhubstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SUNDIALFINALSTATUS")) {
+        gshell_draw_command_view_sundialfinalstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SUNDIALMENUSTATUS")) {
+        gshell_draw_command_view_sundialmenustatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SUNDIALVISSTATUS")) {
+        gshell_draw_command_view_sundialvisstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SECTORFLOATSTATUS")) {
+        gshell_draw_command_view_sectorfloatstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "SUNDIALSTATUS")) {
+        gshell_draw_command_view_sundialstatus(x, y, w, h);
+        return;
+    }
+
+
+    if (gshell_text_equal(gshell_command_view, "DESKTOPOPSSTATUS")) {
+        gshell_draw_command_view_desktopopsstatus(x, y, w, h);
+        return;
+    }
+
+
     if (gshell_text_equal(gshell_command_view, "DASH")) {
         gshell_draw_command_view_dash(x, y, w, h);
         return;
@@ -26120,6 +36274,66 @@ static void gshell_draw_command_view(unsigned int x, unsigned int y, unsigned in
         return;
     }
 
+    if (gshell_text_equal(gshell_command_view, "CTUS")) {
+        gshell_draw_command_view_clickclosestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "CLICKCLOSESTATUS")) {
+        gshell_draw_command_view_clickclosestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "SELFDEVSTATUS")) {
+        gshell_draw_command_view_selfdevstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXPLANSTATUS")) {
+        gshell_draw_command_view_linuxplanstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXBASESTATUS")) {
+        gshell_draw_command_view_linuxbasestatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXDISPSTATUS")) {
+        gshell_draw_command_view_linuxdispstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXINPUTSTATUS")) {
+        gshell_draw_command_view_linuxinputstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXMAPSTATUS")) {
+        gshell_draw_command_view_linuxmapstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXPERMSTATUS")) {
+        gshell_draw_command_view_linuxpermstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXFINALSTATUS")) {
+        gshell_draw_command_view_linuxfinalstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXSHELLSTATUS")) {
+        gshell_draw_command_view_linuxshellstatus(x, y, w, h);
+        return;
+    }
+
+    if (gshell_text_equal(gshell_command_view, "LINUXPORTSTATUS")) {
+        gshell_draw_command_view_linuxportstatus(x, y, w, h);
+        return;
+    }
+
     if (gshell_text_equal(gshell_command_view, "CLEAR")) {
         gshell_draw_command_view_clear(x, y, w, h);
         return;
@@ -26279,6 +36493,7 @@ static void gshell_draw_input_zone(unsigned int width, unsigned int height) {
     graphics_text(620, status_y, "VIEW");
 
     const char* gshell_status_view_text = gshell_command_view;
+
     if (gshell_text_equal(gshell_command_view, "ACTIONBINDSTATUS")) {
         gshell_status_view_text = "ACTIONBIND";
     } else if (gshell_text_equal(gshell_command_view, "MENUSHORTSTATUS")) {
@@ -26287,7 +36502,7 @@ static void gshell_draw_input_zone(unsigned int width, unsigned int height) {
         gshell_status_view_text = "WINFLOW";
     } else if (gshell_text_equal(gshell_command_view, "INTERACTCLOSESTATUS")) {
         gshell_status_view_text = "CLOSEOUT";
-    } else if (gshell_text_equal(gshell_command_view, "INPUTPREPSTATUS")) {
+    } else if (gshell_text_equal(gshell_command_view, "INPUTSTATUS")) {
         gshell_status_view_text = "INPUTPREP";
     } else if (gshell_text_equal(gshell_command_view, "MOUSEDRVSTATUS")) {
         gshell_status_view_text = "MOUSEDRV";
@@ -26311,9 +36526,65 @@ static void gshell_draw_input_zone(unsigned int width, unsigned int height) {
         gshell_status_view_text = "DRAGFLOW";
     } else if (gshell_text_equal(gshell_command_view, "UIFEEDBACKSTATUS")) {
         gshell_status_view_text = "UIFEED";
+    } else if (gshell_text_equal(gshell_command_view, "CLICKCLOSESTATUS")) {
+        gshell_status_view_text = "CLKCLS";
+    } else if (gshell_text_equal(gshell_command_view, "DESKTOPOPSSTATUS")) {
+        gshell_status_view_text = "DESKOPS";
+    } else if (gshell_text_equal(gshell_command_view, "SUNDIALSTATUS")) {
+        gshell_status_view_text = "SUNDIAL";
+    } else if (gshell_text_equal(gshell_command_view, "SECTORFLOATSTATUS")) {
+        gshell_status_view_text = "SECTOR";
+    } else if (gshell_text_equal(gshell_command_view, "SUNDIALVISSTATUS")) {
+        gshell_status_view_text = "SUNVIS";
+    } else if (gshell_text_equal(gshell_command_view, "SUNDIALMENUSTATUS")) {
+        gshell_status_view_text = "SUNMENU";
+    } else if (gshell_text_equal(gshell_command_view, "SUNDIALFINALSTATUS")) {
+        gshell_status_view_text = "SUNFIN";
+    } else if (gshell_text_equal(gshell_command_view, "SUNDIALHUBSTATUS")) {
+        gshell_status_view_text = "SUNHUB";
+    } else if (gshell_text_equal(gshell_command_view, "CONTROLSECTORSTATUS")) {
+        gshell_status_view_text = "CTRLSEC";
+    } else if (gshell_text_equal(gshell_command_view, "PERMREQSTATUS")) {
+        gshell_status_view_text = "PERMREQ";
+    } else if (gshell_text_equal(gshell_command_view, "AUDITFLOWSTATUS")) {
+        gshell_status_view_text = "AUDIT";
+    } else if (gshell_text_equal(gshell_command_view, "VOICEINTENTSTATUS")) {
+        gshell_status_view_text = "VOICE";
+    } else if (gshell_text_equal(gshell_command_view, "SUNCTLFINALSTATUS")) {
+        gshell_status_view_text = "SUNCTL";
     }
 
-    graphics_text(width - 96, status_y, gshell_status_view_text);
+    if (gshell_text_equal(gshell_command_view, "SELFDEVSTATUS")) {
+        gshell_status_view_text = "SELFDEV";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXPLANSTATUS")) {
+        gshell_status_view_text = "LINUX";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXBASESTATUS")) {
+        gshell_status_view_text = "LXBASE";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXDISPSTATUS")) {
+        gshell_status_view_text = "LXDISP";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXINPUTSTATUS")) {
+        gshell_status_view_text = "LXINPT";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXMAPSTATUS")) {
+        gshell_status_view_text = "LXMAP";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXPERMSTATUS")) {
+        gshell_status_view_text = "LXPERM";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXFINALSTATUS")) {
+        gshell_status_view_text = "LXFINAL";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXSHELLSTATUS")) {
+        gshell_status_view_text = "LXSHEL";
+    }
+    if (gshell_text_equal(gshell_command_view, "LINUXPORTSTATUS")) {
+        gshell_status_view_text = "LXPORT";
+    }
+    graphics_text(width - 128, status_y, gshell_status_view_text);
 }
 
 void gshell_graphics_dashboard(void) {
@@ -26385,7 +36656,7 @@ void gshell_graphics_dashboard(void) {
 
     graphics_text(54, 54, "LINGJING OS");
     graphics_text(250, 54, LINGJING_VERSION);
-    graphics_text(390, 54, "UI FEED");
+    graphics_text(390, 54, "SUN CTL");
 
     graphics_rect(36, 116, 254, 300, 0x00112233);
     graphics_rect(36, 116, 254, 4, 0x0000AAFF);
@@ -26412,14 +36683,14 @@ void gshell_graphics_dashboard(void) {
     graphics_rect(758, 116, 4, 300, 0x00FFAA00);
 
     graphics_text(606, 136, "COMMANDS");
-    graphics_text(606, 164, "FEEDSTAT");
-    graphics_text(606, 188, "HOVER");
-    graphics_text(606, 212, "SELECT");
-    graphics_text(606, 236, "ACTIVE");
-    graphics_text(606, 260, "FOCUS");
-    graphics_text(606, 284, "DRAGFX");
-    graphics_text(606, 308, "FEEDDEMO");
-    graphics_text(606, 332, "FEEDCHECK");
+    graphics_text(606, 164, "SUNSTAT");
+    graphics_text(606, 188, "HUB");
+    graphics_text(606, 212, "ACTIONS");
+    graphics_text(606, 236, "PERM");
+    graphics_text(606, 260, "AUDIT");
+    graphics_text(606, 284, "VOICE");
+    graphics_text(606, 308, "SUNDEMO");
+    graphics_text(606, 332, "SUNCHECK");
 
     gshell_draw_history_panel(606, 368);
 
